@@ -23,18 +23,6 @@ For the design side ("how do I structure review policies?"), see [Review & Merge
 **Agents panel → Merge Requests** shows every pending review request waiting on you.
 
 </TabItem>
-<TabItem value="cli" label="CLI">
-
-```bash
-codebolt review list                       # all pending
-codebolt review list --status approved     # filter
-codebolt review show <id>                  # full diff + LLM verdict
-codebolt review approve <id>
-codebolt review reject <id> --comment "..."
-codebolt review request-changes <id> --comment "..."
-```
-
-</TabItem>
 <TabItem value="api" label="HTTP API">
 
 ```http
@@ -134,12 +122,7 @@ Requests older than a configurable window (default 7 days) are marked stale and 
 
 ## Audit trail
 
-Every review decision is in the event log: who approved / rejected, when, what they saw, what comments they made. Query for compliance:
-
-```bash
-codebolt events query 'type == review.decision and target.path ~~ "infra/.*"' \
-  --since "30 days ago" --json
-```
+Every review decision is part of the runtime audit trail: who approved or rejected, when, what they saw, and what comments they made. Use the review and observability surfaces your build exposes for compliance exports.
 
 ## Integration with external review systems
 

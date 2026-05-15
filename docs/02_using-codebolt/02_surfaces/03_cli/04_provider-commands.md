@@ -1,128 +1,59 @@
 ---
 sidebar_position: 4
 title: Provider Commands
-description: Configure LLM providers from the CLI.
+description: The current CLI exposes LLM inspection and configuration under `codebolt command llm`, plus provider extension authoring under `codebolt action provider`.
 ---
 
-# `codebolt provider` commands
+# Provider Commands
 
-Configure LLM providers from the CLI.
+The current CLI does not use the older end-user provider-management command family.
 
-## Listing
+Provider-related work is split into:
 
-```bash
-codebolt provider list
-codebolt provider list --json
-codebolt provider list --status    # include health
-```
+- `codebolt command llm ...` for server-backed LLM inspection and configuration
+- `codebolt action provider ...` for building provider extensions
 
-## Adding
+## Inspect providers and models
 
-### OpenAI-family providers
+When a Codebolt server is running, use:
 
 ```bash
-codebolt provider add openai --key sk-...
-codebolt provider add anthropic --key sk-ant-...
-codebolt provider add google --key ...
+codebolt command llm providers
+codebolt command llm models
+codebolt command llm get-models --provider openai
+codebolt command llm local-models
+codebolt command llm embedding-providers
+codebolt command llm pricing
 ```
 
-### Custom HTTP (OpenAI-compatible)
+## Configure defaults and keys
+
+The current configuration commands are:
 
 ```bash
-codebolt provider add custom \
-  --name my-provider \
-  --base-url https://my-endpoint.example.com/v1 \
-  --key any-string
+codebolt command llm set-default --provider openai --model gpt-5
+codebolt command llm update-key --provider openai --key "$OPENAI_API_KEY"
 ```
 
-### Ollama (local)
+Use `--json` when you need structured output.
+
+## Build and publish provider extensions
+
+For provider extension authors:
 
 ```bash
-codebolt provider add ollama
+codebolt action provider create --name my-provider
+codebolt action provider publish --path ./my-provider
+codebolt action provider list
 ```
 
-Auto-detects localhost:11434 and lists installed models.
+## Current limitation
 
-### Azure OpenAI
+The current `packages/cli` implementation does not expose the older end-user provider setup, fallback, usage, and reload subcommands from previous drafts.
 
-```bash
-codebolt provider add azure \
-  --endpoint https://my-resource.openai.azure.com \
-  --key ... \
-  --deployment gpt-4-deployment \
-  --api-version 2024-08-01-preview
-```
-
-## Testing
-
-```bash
-codebolt provider test openai
-codebolt provider test anthropic --model claude-sonnet-4-6
-```
-
-Runs a small test completion. Shows latency and cost.
-
-## Removing
-
-```bash
-codebolt provider remove openai
-```
-
-Removes the stored key and config. Agents using this provider fall back to their next option.
-
-## Listing available models
-
-```bash
-codebolt provider models openai
-codebolt provider models ollama
-```
-
-Shows every model the provider offers, with its context window and tool support.
-
-## Setting defaults
-
-```bash
-codebolt provider set-default openai
-codebolt provider set-default openai --model gpt-5
-```
-
-Sets the default provider/model for new tabs.
-
-## Usage and cost
-
-```bash
-codebolt provider usage
-codebolt provider usage --since "7 days ago"
-codebolt provider usage --by agent
-codebolt provider usage --by model
-```
-
-Per-provider usage breakdown. Pipes the event log through aggregation.
-
-## Fallback chains
-
-```bash
-codebolt provider fallback add openai --fallback anthropic
-codebolt provider fallback show
-codebolt provider fallback remove openai
-```
-
-Configures fallback-on-error behaviour.
-
-## Environment variables
-
-For CI / headless use, providers can be configured via env vars instead of explicit `add`:
-
-```bash
-export OPENAI_API_KEY=sk-...
-export ANTHROPIC_API_KEY=sk-ant-...
-codebolt provider reload     # picks up env vars
-```
-
-`reload` reads env vars for known providers and auto-configures them.
+Most provider setup for end users happens through the desktop settings UI, or through launch-time flags such as `--provider`, `--model`, `--api-key`, and `--api-url`.
 
 ## See also
 
 - [LLM Providers](../../08_integrations/01_llm-providers.md)
 - [Local Models](../../08_integrations/02_local-models.md)
-- [CLI Overview](./01_overview.md)

@@ -14,15 +14,15 @@ A triage page for the most frequent things that go wrong. If your issue isn't he
 The local server failed to start or is unreachable.
 
 1. **Settings → Logs** — look for errors in the server log. Most common: port in use, database lock, corrupted config.
-2. **Restart the server:** `codebolt app restart` or quit and relaunch the app.
-3. **Port in use:** another instance of the server is running. Kill it (`codebolt app stop` or OS process list) and retry.
-4. **Database lock:** the DB didn't shut down cleanly. `codebolt app doctor` will detect this and offer to repair.
+2. **Restart the server:** quit and relaunch the app, or restart the server process you started manually.
+3. **Port in use:** another instance of the server is running. Stop that process from your OS process manager and retry.
+4. **Database lock:** the DB didn't shut down cleanly. Check logs and use the repair or diagnostic surface your build exposes.
 
 ### "Unable to connect to server" (CLI)
 The CLI can't reach where the server *should* be.
 
-1. `codebolt app status` — is the server actually running?
-2. `codebolt config get server` — is the CLI pointing at the right URL?
+1. `codebolt command system health` — is the server actually reachable?
+2. Check that you are connecting to the expected host and port.
 3. If it's pointing at a remote server, check your network and credentials.
 
 ## Chat issues
@@ -65,13 +65,7 @@ Three possible causes:
 ## Agent / run issues
 
 ### "Run failed with no clear reason"
-Get the trace:
-
-```bash
-codebolt agent trace <run_id>
-```
-
-Look at the last phase before failure. The terminal state will be one of `failed`, `killed`, `rejected` — each has a structured reason. If the reason is vague, check the server logs around the same timestamp.
+Use the run-detail or observability surface your build exposes and inspect the last recorded phase or step before failure. If the reason is vague, check the server logs around the same timestamp.
 
 ### "Hit budget limit"
 Agent's `max_tool_calls`, `max_tokens`, `max_wall_time_seconds`, or `max_cost_usd` was exceeded. Either:
@@ -84,7 +78,7 @@ Agent's `max_tool_calls`, `max_tokens`, `max_wall_time_seconds`, or `max_cost_us
 1. Is the trigger configured correctly? Check `.codebolt/agents/<name>/agent.yaml`.
 2. Is the server running when the trigger should fire? Cron triggers need the server up.
 3. For webhook triggers, is the URL reachable? Check the webhook receiver.
-4. For file-change triggers, does the glob actually match? Test with `codebolt agent trigger-test <name>`.
+4. For file-change triggers, confirm that the glob actually matches the files you expect.
 
 ## Provider / LLM issues
 
@@ -108,7 +102,7 @@ See [Local models → troubleshooting](../08_integrations/02_local-models.md).
 ### "Tool not found"
 The agent's `tools.allow` doesn't include it, or the MCP server providing it isn't running.
 
-1. `codebolt tool list` — is the server running?
+1. Check the MCP server or Tools management surface — is the server running?
 2. If running, check the agent's allowlist in its yaml.
 
 ### "MCP server keeps crashing"
@@ -132,13 +126,7 @@ Within the same project:
 - Is there a context rule that's excluding it? Check `.codebolt/context-rules/`.
 
 ### "The knowledge graph has stale entries"
-Re-index the project:
-
-```bash
-codebolt project reindex
-```
-
-Does a full rebuild of the codemap, codebase index, and KG. Can take a minute on large projects.
+Re-index the project through the product surface your build exposes. This performs a full rebuild of the codemap, codebase index, and knowledge graph.
 
 ### "Vector search returns irrelevant results"
 1. **Embeddings are stale** — reindex.
@@ -155,13 +143,7 @@ Shadow git isn't initialised or is corrupted.
 3. If still broken, close and reopen the project.
 
 ### "I lost work after a rollback"
-You probably rolled back past a point you wanted to keep. Look for later checkpoints:
-
-```bash
-codebolt project checkpoints
-```
-
-Any checkpoint after the rollback is still there (rollbacks don't delete; they move the pointer). You can roll *forward* by rolling back to one of those later checkpoints.
+You probably rolled back past a point you wanted to keep. Check the checkpoints UI for later snapshots. Rollbacks move the pointer; they do not necessarily delete later checkpoints immediately.
 
 If the checkpoint you want was pruned (older than 30 days, unpinned), it's genuinely gone.
 
@@ -188,7 +170,7 @@ Local models, vector DB, and knowledge graph all use memory. Rough breakdown in 
 
 ## When nothing above helps
 
-1. **Run `codebolt app doctor`** — a diagnostic that checks for common misconfigurations and corrupted state.
+1. Run the diagnostic or repair surface that your build exposes.
 2. **Collect logs** via [Logs and diagnostics](./02_logs-and-diagnostics.md).
 3. **File a bug** using the template in [Reporting bugs](./03_reporting-bugs.md).
 4. **Ask in the community** — someone else has probably hit the same issue.

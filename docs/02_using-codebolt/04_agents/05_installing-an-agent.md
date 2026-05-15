@@ -18,15 +18,12 @@ Adding an agent from the marketplace, a private registry, or a local file. Same 
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-**Settings → Marketplace → Agents** → browse → click an agent → **Install**. You're prompted if new permissions are required.
+Open the **Agents** panel and switch to **Marketplace**, or open **Select your Agent** and switch to **Marketplace**. Click an agent to open its details, then choose **Install**.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt agent install marketplace/my-agent
-codebolt agent install marketplace/my-agent@1.2.0
-```
+The current `packages/cli` implementation does not expose an end-user `agent install` command. Use the desktop UI for marketplace installs, or add a project-local agent under `.codebolt/agents/` when you are working directly in the filesystem.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -55,18 +52,7 @@ Under the hood: download, verify signature, check compatibility, install files, 
 
 ## From a private registry
 
-If your org runs a private registry:
-
-```bash
-codebolt agent install org/my-agent --registry https://codebolt.my-org.com
-```
-
-Or configure the registry once:
-
-```bash
-codebolt config add-registry https://codebolt.my-org.com --token <token>
-codebolt agent install org/my-agent    # now uses the private registry automatically
-```
+If your org runs a private registry, configure and install through the UI surface that is wired to that registry.
 
 Private registries take precedence over the public marketplace when there's a name collision.
 
@@ -74,9 +60,9 @@ Private registries take precedence over the public marketplace when there's a na
 
 For agents under development, or agents committed to a project repo:
 
-```bash
-codebolt agent install ./path/to/agent-directory
-```
+Place the agent in the appropriate local agents directory or add it through the product UI.
+
+In the current desktop UI, local imports live under **Agents** → **My Agents** → **Add Agent**.
 
 This adds the local agent to your workspace without publishing it anywhere. Useful for:
 
@@ -86,11 +72,7 @@ This adds the local agent to your workspace without publishing it anywhere. Usef
 
 ## From a URL
 
-```bash
-codebolt agent install https://example.com/my-agent-1.0.0.tar.gz
-```
-
-Downloads, verifies checksum (if provided), installs. Use when the agent isn't on a registry but is hosted somewhere you trust.
+If you are distributing an unpacked agent directly, treat it like a local agent rather than relying on a CLI install command.
 
 ## What installation does
 
@@ -98,13 +80,13 @@ Downloads, verifies checksum (if provided), installs. Use when the agent isn't o
 2. **Validate** the manifest (`agent.yaml`).
 3. **Install dependencies** if it's a framework agent (runs `npm install` inside its directory).
 4. **Check compatibility** with your Codebolt version.
-5. **Register** the agent with the server so it appears in `agent list`.
-6. **Optionally add to portfolio** (if you opt in during install).
+5. **Register** the agent with the server so it appears in installed-agent surfaces.
+6. **Optionally make it available in the active workspace**.
 
 ## Install scopes
 
 - **Workspace** (default) — agent is available in the current workspace only.
-- **User** — available in every workspace. Promote from workspace with `codebolt agent promote <name>`.
+- **User** — available in every workspace.
 - **Project-local** — agent lives in `.codebolt/agents/` and is committed to git; everyone who opens the project gets it.
 
 For a team-shared agent, commit it to the project. For something you use across all your own work, promote to user scope.
@@ -124,35 +106,25 @@ You can install everything at once or pause and handle dependencies manually.
 
 ## Checking install state
 
-```bash
-codebolt agent list
-```
-
-Shows every installed agent with its source and version. `--verbose` adds install date, dependencies, and path.
+The current CLI exposes inspection commands through `codebolt command agents`, for example:
 
 ```bash
-codebolt agent show my-agent --status
+codebolt command agents list
+codebolt command agents local
+codebolt command agents config <name>
 ```
-
-Shows whether the agent is healthy, whether its dependencies are satisfied, and whether there's an update available.
 
 ## Updating
 
 <Tabs groupId="surface">
 <TabItem value="cli" label="CLI" default>
 
-```bash
-codebolt agent update my-agent            # latest
-codebolt agent update my-agent@1.3.0      # specific version
-codebolt agent update-all                 # all non-breaking
-```
-
-`update-all` skips any update that would cross a major version — those require explicit opt-in.
+The current CLI does not expose `agent update` or `agent update-all`. Use the desktop UI for agent updates.
 
 </TabItem>
 <TabItem value="desktop" label="Desktop">
 
-Agents panel → row context menu → **Update**. Bulk update via Settings → Agents → **Update All**.
+The current `packages/ui` agent marketplace components do not expose a clear desktop update action. Document a specific update flow only for builds that ship one.
 
 </TabItem>
 <TabItem value="api" label="HTTP API">
@@ -178,14 +150,12 @@ await codebolt.agents.update('my-agent', { version: '1.3.0' });
 <Tabs groupId="surface">
 <TabItem value="cli" label="CLI" default>
 
-```bash
-codebolt agent uninstall my-agent
-```
+The current CLI does not expose `agent uninstall`. Use the desktop UI to remove an installed agent.
 
 </TabItem>
 <TabItem value="desktop" label="Desktop">
 
-Agents panel → row context menu → **Uninstall**. Confirmation dialog.
+The current `packages/ui` agent marketplace components do not expose a clear desktop uninstall action.
 
 </TabItem>
 <TabItem value="api" label="HTTP API">
@@ -210,13 +180,7 @@ Removes the files, removes from portfolio, removes from the agent list. Does not
 - Memory the agent wrote (still in persistent memory).
 - Checkpoints taken during its runs.
 
-To purge everything:
-
-```bash
-codebolt agent purge my-agent --delete-data
-```
-
-Irreversible.
+Purging agent data is an administrative cleanup step handled through the product UI and runtime internals, not the current CLI command set.
 
 ## Install troubleshooting
 

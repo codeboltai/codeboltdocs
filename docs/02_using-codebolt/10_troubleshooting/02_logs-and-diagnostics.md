@@ -18,9 +18,9 @@ Codebolt writes several streams of diagnostic output:
 | Source | What | Where |
 |---|---|---|
 | **Server logs** | Main server output | `~/.codebolt/logs/server.log`, or stdout (headless) |
-| **Agent logs** | Per-run, per-agent | Event log (`codebolt agent trace`) |
+| **Agent logs** | Per-run, per-agent | Product observability surfaces and deployment-specific tracing |
 | **Plugin logs** | Per MCP server / capability | `~/.codebolt/logs/plugins/<name>.log` |
-| **System events** | DB, heartbeat, lifecycle | Event log (`codebolt events query 'type ~ "system.*"'`) |
+| **System events** | DB, heartbeat, lifecycle | Product observability surfaces and server-side logging |
 | **Guardrail decisions** | Every verdict | Event log |
 | **Audit trail** | Security-relevant actions | Event log + optional SIEM sink |
 
@@ -34,14 +34,7 @@ Codebolt writes several streams of diagnostic output:
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt app logs                         # last 100 lines
-codebolt app logs --tail 500
-codebolt app logs --follow                # live tail
-codebolt app logs --level warn            # warn and above
-codebolt app logs --filter agentService   # specific component
-codebolt app logs --since "1 hour ago"
-```
+The current CLI does not expose the older log-viewing commands from previous drafts. Read raw log files directly or use the desktop log viewer.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -81,11 +74,7 @@ Codebolt emits five levels:
 - **WARN** — something's off but not broken.
 - **ERROR** — something broke.
 
-Change the level for all components:
-
-```bash
-codebolt app logs --level debug
-```
+Change the level through logging configuration or the runtime surface your build exposes rather than the removed CLI examples from older drafts.
 
 Or for specific components in `codebolt-server.yaml`:
 
@@ -118,21 +107,13 @@ For "how do I fix it" — usually the error message itself tells you (ENOENT = f
 
 ## The run trace
 
-For anything related to an agent run, the trace is more useful than raw logs:
-
-```bash
-codebolt agent trace <run-id>
-```
-
-Shows the phase-by-phase execution with structured data. Logs emitted by the agent during the run show up here, correlated with the phase they belong to.
+For anything related to an agent run, use the run-detail and observability surfaces your build exposes. The current CLI does not expose the older dedicated run-trace command from previous drafts.
 
 ## Running diagnostics
 
-```bash
-codebolt app doctor
-```
+The current CLI does not expose the older diagnostic command from previous drafts. Equivalent diagnostics depend on the desktop or self-hosted surface you are using.
 
-Checks for known misconfigurations and broken state. Reports:
+Typical diagnostics still include:
 
 - Database connectivity and schema version
 - Disk space
@@ -147,11 +128,7 @@ Safe to run any time — it's read-only by default. Add `--fix` to auto-repair c
 
 ## Collecting diagnostics for a bug report
 
-```bash
-codebolt app report > diagnostic.txt
-```
-
-Creates a redacted report containing:
+Use the desktop diagnostic export or collect the relevant logs and environment details manually. Useful report contents still include:
 
 - Codebolt version (server, CLI, protocol)
 - OS and hardware info
@@ -164,35 +141,9 @@ Creates a redacted report containing:
 
 Attach this to bug reports. It's designed to be safe to share — secrets are stripped. Review before sending if you're paranoid.
 
-## Event log queries for debugging
+## Event log and observability
 
-The event log is the authoritative source for anything that happened in the past. Useful queries:
-
-### Find recent errors
-
-```bash
-codebolt events query 'level == "error"' --since "1 hour ago"
-```
-
-### Find all failed runs today
-
-```bash
-codebolt events query 'type == run.ended and status == "failed"' --since "today"
-```
-
-### What was happening at time T?
-
-```bash
-codebolt events query 'timestamp > "2026-04-06 14:30:00" and timestamp < "2026-04-06 14:31:00"'
-```
-
-### Every time a specific tool was called
-
-```bash
-codebolt events query 'type == tool.call and tool == "codebolt_fs.write_file"' --since "today"
-```
-
-See [Query the event log](../../03_guides/07_advanced/query-the-event-log.md) for the full query language.
+In current builds, use the observability and logging surfaces exposed by your product or deployment rather than the removed event-query CLI examples from older drafts.
 
 ## Log rotation and retention
 

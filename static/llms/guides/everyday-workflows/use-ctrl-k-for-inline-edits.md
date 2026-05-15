@@ -97,12 +97,6 @@ Continue typing
 
 No mouse, no context switches. Fast.
 
-## Model selection for Ctrl+K
-
-**Settings → Chat → Inline edit model** lets you pick a separate model for Ctrl+K. Usually you want a fast mid-tier model here — the interaction is about speed, not maximum quality.
-
-A common setup: flagship for chat, fast for Ctrl+K. Each optimised for its use case.
-
 ## Checkpoints and Ctrl+K
 
 Every accepted inline edit creates a checkpoint. You can:

@@ -56,14 +56,14 @@ Everything you need to build and publish a plugin:
 - [SDK and Lifecycle](../../04_build-on-codebolt/05_plugins/02_sdk-and-lifecycle.md) — lifecycle hooks, environment variables, start triggers
 - [Major Functionalities](../../04_build-on-codebolt/05_plugins/03_functionalities.md) — filesystem, chat, LLM, knowledge, UI, and storage modules
 - [Dynamic Panel Plugins](../../04_build-on-codebolt/05_plugins/05_dynamic-panel-plugins.md) — building custom UI panels
-- [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md) — pre-publish checklist, local dev loop, `codebolt plugin publish`
+- [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md) — pre-publish checklist, local dev loop, `codebolt action plugin publish`
 
 ## Publishing to the marketplace
 
 When your plugin is ready:
 
 ```bash
-codebolt plugin publish --path ./my-plugin
+codebolt action plugin publish --path ./my-plugin
 ```
 
 After publishing, it appears in the [Plugin Marketplace](./03_plugin-marketplace.md) and can be installed by others. See the [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md) guide for the full checklist.

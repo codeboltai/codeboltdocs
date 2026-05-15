@@ -8,7 +8,7 @@ description: From a user's point of view, an agent is the "who" that handles you
 
 From a user's point of view, an agent is the "who" that handles your chat. When you type a message, an agent receives it, reads the code, decides what to do, calls tools, and reports back. Different agents are good at different things.
 
-This page is the user's view. For the framework view — defining agents in code with `@codebolt/agent` and calling them from your own application via `@codebolt/client-sdk`, comparable to LangChain or Mastra — see [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md). If you want to *build* an agent, see [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). If you want to understand how agents work internally, see [Agent Subsystem (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md).
+For agent development, see [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md) and [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). For runtime internals, see [Agent Subsystem](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md).
 
 ## Mental model
 
@@ -64,7 +64,7 @@ The default set that ships with Codebolt:
 | **debugger** | Runs and inspects | ✓ | ✓ | Tracking down a failing test or bug |
 | **explainer** | Reads and narrates | ✓ | ✗ | "What does this code do?", onboarding |
 
-The exact lineup may change in newer versions — check `codebolt agent list` for what's installed.
+The exact lineup may change in newer versions — check `codebolt command agents list` for what's installed on the current server.
 
 ## Picking an agent for a task
 

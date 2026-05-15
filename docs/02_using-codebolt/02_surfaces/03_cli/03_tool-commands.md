@@ -1,142 +1,43 @@
 ---
 sidebar_position: 3
 title: Tool Commands
-description: Manage MCP servers and tools from the CLI. User-level reference; for the full flag list see Reference → CLI.
+description: The current CLI exposes tool extension authoring commands, but not the older end-user MCP lifecycle command set.
 ---
 
-# `codebolt tool` commands
+# Tool Commands
 
-Manage MCP servers and tools from the CLI. User-level reference; for the full flag list see [Reference → CLI](../../../05_reference/01_overview.md).
+The current CLI does not expose the older end-user runtime tool-management command family.
 
-## Listing and inspecting
+Today, tool-related CLI work is split into:
 
-### `codebolt tool list`
+- `codebolt action tool ...` for creating and publishing tool extensions
+- desktop or TUI surfaces for installing and managing MCP servers at runtime
 
-List installed tools (MCP servers and capability-provided tools).
+## Build and publish tool extensions
 
-```bash
-codebolt tool list
-codebolt tool list --json
-codebolt tool list --status        # include running / stopped status
-```
-
-### `codebolt tool show <server>`
-
-Show details for a specific server: config, tools provided, resource usage.
+The implemented tool authoring commands are:
 
 ```bash
-codebolt tool show my-server
+codebolt action tool create --name my-tool
+codebolt action tool publish --path ./my-tool
+codebolt action tool list
 ```
 
-### `codebolt tool describe <tool>`
+These commands are for extension builders, not for operating installed MCP servers in a workspace.
 
-Show a specific tool's schema and description.
+## Runtime tool management
 
-```bash
-codebolt tool describe codebolt_fs.read_file
-codebolt tool describe my-server.search
-```
+The current `packages/cli` code does not expose dedicated runtime commands for:
 
-Useful when debugging "why isn't the LLM picking my tool" — read the description.
+- installing an MCP server
+- uninstalling an MCP server
+- starting or stopping a server
+- tailing MCP server logs
+- directly invoking a tool from the CLI
 
-## Installing and removing
-
-### `codebolt tool install`
-
-```bash
-codebolt tool install marketplace/my-mcp-server
-codebolt tool install marketplace/my-mcp-server@2.1.0
-codebolt tool install https://example.com/my-mcp.tar.gz
-codebolt tool install ./local-directory
-```
-
-### `codebolt tool uninstall`
-
-```bash
-codebolt tool uninstall my-server
-```
-
-## Lifecycle
-
-### `codebolt tool start` / `stop` / `restart`
-
-```bash
-codebolt tool start my-server
-codebolt tool stop my-server
-codebolt tool restart my-server
-```
-
-Servers auto-start on boot; these are for debugging.
-
-### `codebolt tool logs`
-
-```bash
-codebolt tool logs my-server
-codebolt tool logs my-server --tail 100
-codebolt tool logs my-server --follow
-```
-
-### `codebolt tool status`
-
-```bash
-codebolt tool status my-server
-```
-
-Quick health check — running, responsive, last tool call time.
-
-## Direct tool invocation
-
-### `codebolt tool call`
-
-Run a tool directly from the CLI, outside an agent run.
-
-```bash
-codebolt tool call codebolt_fs.read_file --args '{"path": "README.md"}'
-codebolt tool call my-server.search --args '{"query": "error handling"}'
-```
-
-Useful for:
-- **Testing a new tool** — verify it works before wiring it into an agent.
-- **One-off data gathering** — quick ad-hoc queries.
-- **Debugging** — confirm the tool returns what you expect.
-
-## Updating
-
-```bash
-codebolt tool update my-server                    # to latest
-codebolt tool update my-server@2.2.0              # specific version
-codebolt tool update-all                          # all non-breaking updates
-```
-
-## Examples
-
-### Find tools that match a query
-
-```bash
-codebolt tool search "git"
-```
-
-Lists installed tools whose description mentions git.
-
-### Export a tool config
-
-```bash
-codebolt tool export > tools.yaml
-```
-
-Dumps the merged `.codebolt/mcp-servers.yaml` for backup or transfer.
-
-### Import a tool config
-
-```bash
-codebolt tool import < tools.yaml
-```
-
-Loads and reconciles the config with what's currently installed.
+Use the desktop or TUI product surfaces for runtime MCP installation and management.
 
 ## See also
 
-- [Tools & MCP Overview](../../05_tools-and-mcp/01_overview.md)
-- [Installing MCP Servers](../../05_tools-and-mcp/02_installing-mcp-servers.md)
-- [Managing MCP Servers](../../05_tools-and-mcp/03_managing-mcp-servers.md)
-- [MCP Tools (for builders)](../../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md)
+- [Installing MCP Servers](../../04b_agent-extensions/06_installing-mcp-servers.md)
+- [Managing MCP Servers](../../04b_agent-extensions/07_managing-mcp-servers.md)

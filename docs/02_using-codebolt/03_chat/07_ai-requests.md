@@ -23,11 +23,7 @@ The underlying data is the event log (`type == llm.chat`). Every surface is just
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt events query "type == llm.chat" --since "1 hour ago"
-codebolt events query "type == llm.chat and agent == 'reviewer'" --since "today"
-codebolt provider usage --since "7 days ago" --by agent
-```
+The current CLI does not expose the older reporting command families from previous drafts. Use the desktop AI Requests view for usage and request inspection.
 
 </TabItem>
 <TabItem value="api" label="HTTP API">
@@ -101,9 +97,7 @@ Patterns to watch for:
 <Tabs groupId="surface">
 <TabItem value="cli" label="CLI" default>
 
-```bash
-codebolt events query "type == llm.chat" --json > llm-calls.json
-```
+The current CLI does not expose a dedicated AI Requests export command.
 
 </TabItem>
 <TabItem value="desktop" label="Desktop">
@@ -125,7 +119,7 @@ Full data for all LLM calls (subject to retention). Pipe into your analytics too
 
 ## Relationship to the event log
 
-AI Requests is a filtered view of the event log where `type == llm.chat`. The event log is authoritative; AI Requests is the convenience UI. Anything in AI Requests is also queryable via `codebolt events query`.
+AI Requests is the user-facing surface for inspecting LLM request activity. In current builds, rely on that UI rather than the removed event-query CLI examples from older drafts.
 
 ## See also
 

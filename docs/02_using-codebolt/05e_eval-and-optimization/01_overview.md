@@ -4,6 +4,8 @@ title: Eval & Optimization Overview
 description: Codebolt's Eval & Optimization system lets you scientifically measure agent quality and automatically improve it
 ---
 
+import EvalOptimizationOverview from '@site/src/components/diagrams/EvalOptimizationOverview';
+
 # Eval & Optimization
 
 Codebolt's Eval & Optimization system lets you scientifically measure agent quality and automatically improve it. You define what "good" looks like, run agents against test tasks, score their outputs, and optionally let an optimizer agent iterate on the agent's code, prompts, or config until the score improves.
@@ -12,24 +14,7 @@ Open via: **Bottom bar → Agents → Eval**
 
 ## How it works
 
-```
-Define Tasks
-    │  instructions, evaluators, environment
-    ▼
-Create a Run
-    │  select subjects (agents to test)
-    ▼
-Execute
-    │  subjects run tasks in their environment
-    ▼
-Score
-    │  evaluators produce weighted scores
-    ▼
-Optimize (optional)
-    │  optimizer agent modifies subject code/prompts
-    │  re-evaluates, keeps improvements
-    └─ repeats up to maxIterations
-```
+<EvalOptimizationOverview />
 
 ## Core concepts
 

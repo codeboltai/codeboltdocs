@@ -4,9 +4,6 @@ title: Checkpoints and Rollback
 description: "How it works under the hood: shadow git + the event log. See Checkpoint and rollback (internals) for the full story. This page is the user's view."
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Checkpoints and Rollback
 
 ![Checkpoints and Rollback](/productImages/chat/checkpoint_roleback.gif)
@@ -24,7 +21,7 @@ Automatically:
 - After each successful tool call that changed state.
 - At user-visible boundaries (you sent a message, the agent finished).
 
-You can also create an explicit checkpoint with `/checkpoint` or Ctrl+S.
+The current GUI chat panel creates checkpoints through chat activity and file-changing operations. Older drafts of this page mentioned explicit slash commands and keyboard shortcuts for checkpoints, but those are not the current GUI interaction surface.
 
 Each checkpoint captures:
 - The state of every file in the workspace at that moment.
@@ -50,43 +47,11 @@ Click any checkpoint to inspect, rollback, or branch from it.
 
 ## Three things you can do with a checkpoint
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
+In the GUI chat flow, checkpoint actions are exposed through the visible checkpoint UI and chat-rendered restore widgets:
 
-Click any checkpoint dot in the strip → context menu offers **Rollback**, **Replay (read-only)**, and **Branch into new tab**.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-```bash
-codebolt checkpoint list <thread-id>
-codebolt checkpoint rollback <checkpoint-id>
-codebolt checkpoint replay <checkpoint-id>     # opens read-only inspector
-codebolt checkpoint branch <checkpoint-id> --new-thread
-```
-
-</TabItem>
-<TabItem value="chat" label="Slash command">
-
-In the composer:
-
-```
-/rollback                    # to last checkpoint
-/rollback <checkpoint-id>    # to a specific one
-/checkpoint                  # create explicit checkpoint
-```
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-POST /api/checkpoints/:id/rollback
-POST /api/checkpoints/:id/replay
-POST /api/checkpoints/:id/branch
-```
-
-</TabItem>
-</Tabs>
+- **Rollback** — restore the workspace to that checkpoint
+- **Replay (inspect)** — inspect the state from that point
+- **Branch** — start a new thread from that state when the UI offers it
 
 ### Rollback
 Restore the workspace to the state at that checkpoint. Every file reverts. Real git is untouched. The current thread is cut off at that point — turns after the checkpoint are marked as "rolled back" but not deleted.
@@ -125,7 +90,7 @@ By default, rollback reverts every file in the workspace. But you can rollback j
 
 - **Right-click a file → rollback to checkpoint** — this file only.
 - **Right-click a directory → rollback to checkpoint** — subtree only.
-- **`/rollback src/auth/`** — path-scoped rollback.
+- path-scoped restore when the relevant UI exposes it.
 
 Partial rollback leaves everything else where it is. Useful when the agent got 90% right and you just want to undo one bad file.
 

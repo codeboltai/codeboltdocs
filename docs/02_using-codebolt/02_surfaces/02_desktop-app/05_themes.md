@@ -67,13 +67,7 @@ The full list of variables is under [Reference → Theme schema](../../../05_ref
 
 ## Publishing a theme
 
-Themes publish to the marketplace the same way agents do:
-
-```bash
-codebolt theme publish ./my-theme.json
-```
-
-Requires a `theme.yaml` manifest with name, version, author, and optional screenshots.
+Publish themes through the marketplace or extension workflow that your build exposes. Earlier drafts referenced a standalone theme publish command, but that is not part of the current CLI.
 
 ## See also
 

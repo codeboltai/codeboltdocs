@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Installing Plugins
 
-Plugins can be installed from the marketplace, from a local directory, or via the CLI. Once installed they appear in the **Plugins panel** where you can start, stop, reload, and configure them.
+Plugins can be installed from the marketplace or from a local directory. Once installed they appear in the **Plugins panel** where you can start, stop, reload, and configure them.
 
 ## From the marketplace
 
@@ -20,22 +20,6 @@ Plugins can be installed from the marketplace, from a local directory, or via th
 3. Search or browse by category (LLM Providers, Chat Gateways, Execution, UI).
 4. Click a plugin card to see its description, required configuration, and reviews.
 5. Click **Install**. Codebolt downloads the plugin into `~/.codebolt/plugins/` and starts it automatically if it has a `startup` trigger.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-```bash
-# Search for plugins
-codebolt plugin search <query>
-
-# Install a plugin globally
-codebolt plugin install <plugin-name>
-
-# Install into the current project only
-codebolt plugin install <plugin-name> --project
-```
-
-The plugin is downloaded from the registry and placed in the correct directory. On next server start (or immediately if the server is running) it will be discovered and loaded.
 
 </TabItem>
 </Tabs>
@@ -86,13 +70,7 @@ The **Plugins panel** shows all discovered plugins with their status:
 
 ## Scoping a plugin to one project
 
-By default, installing a plugin puts it in `~/.codebolt/plugins/` where it's active globally. To scope it to a single project:
-
-```bash
-codebolt plugin install <plugin-name> --project
-```
-
-Or move the plugin folder manually:
+By default, installing a plugin puts it in `~/.codebolt/plugins/` where it's active globally. To scope it to a single project, move the plugin folder manually:
 
 ```bash
 mv ~/.codebolt/plugins/my-plugin ./.codeboltPlugins/my-plugin
@@ -108,17 +86,6 @@ Project-scoped plugins override global plugins of the same name.
 In the Plugins panel, plugins with available updates show an **Update** badge. Click it to update. Or update all at once: **Plugins panel → ⋯ menu → Update all**.
 
 </TabItem>
-<TabItem value="cli" label="CLI">
-
-```bash
-# Update a specific plugin
-codebolt plugin update <plugin-name>
-
-# Update all installed plugins
-codebolt plugin update --all
-```
-
-</TabItem>
 </Tabs>
 
 ## Uninstalling
@@ -127,13 +94,6 @@ codebolt plugin update --all
 <TabItem value="desktop" label="Desktop App" default>
 
 Plugins panel → plugin card → **⋯ menu → Uninstall**. This stops the process and removes the plugin directory.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-```bash
-codebolt plugin uninstall <plugin-name>
-```
 
 </TabItem>
 </Tabs>

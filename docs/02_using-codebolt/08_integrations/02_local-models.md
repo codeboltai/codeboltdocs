@@ -68,10 +68,7 @@ ollama pull deepseek-coder:33b   # larger but good
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt provider add ollama --url http://localhost:11434
-codebolt provider test ollama
-```
+Use the desktop settings UI to add Ollama as a provider. The current CLI does not expose the older Ollama-specific provider setup flow from previous drafts.
 
 </TabItem>
 <TabItem value="config" label="Config file">
@@ -133,7 +130,7 @@ Ollama supports embedding models too:
 ollama pull nomic-embed-text
 ```
 
-Then in Settings → Providers → Embeddings, point at your Ollama instance and pick the embedding model.
+Then in the provider settings UI, point embeddings at your Ollama instance and pick the embedding model.
 
 Local embeddings are lower-quality than the best remote ones (Voyage, OpenAI text-embedding-3-large), but for most codebase search it's fine. The big win is that your code never leaves your machine.
 
@@ -165,7 +162,7 @@ Local models have token budgets too, but the limiter is your hardware:
 
 A common setup: local by default, remote as a fallback for hard tasks.
 
-In Settings → Providers → Fallback:
+In the provider settings UI:
 
 ```
 Provider: ollama (primary)

@@ -108,11 +108,11 @@ codebolt command llm providers
 Use the CLI when you want:
 
 - shell-native workflows
-- scripting and CI
+- simple scripting and CI
 - remote command execution
 - server administration and command-style inspection
 
-Use the TUI when you want an interactive terminal interface instead of plain command output. Use Headless mode when you want no interactive UI at all.
+Use the TUI when you want an interactive terminal interface instead of plain command output. Use Headless mode when you want server-only startup or one-shot prompts without launching the TUI.
 
 ## See also
 

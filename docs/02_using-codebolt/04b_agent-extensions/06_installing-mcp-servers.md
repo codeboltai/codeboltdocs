@@ -20,15 +20,12 @@ The same install action across surfaces:
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-**Settings → Marketplace → Tools**. Search, read the description, click **Install**. A confirmation dialog summarizes the tools the server will provide and any new permissions it requires.
+Use the MCP server or Tools install surface exposed by your build. Read the description, review permissions, then install.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt tool install marketplace/<name>
-codebolt tool install marketplace/<name>@2.1.0   # pinned version
-```
+The current CLI does not expose the older runtime tool-install commands from previous drafts.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -105,7 +102,7 @@ servers:
 
 Save the file. Codebolt watches the file and starts any new servers automatically.
 
-To verify: **Settings → Tools** should show the new server within a few seconds, with state `running` and a list of provided tools.
+To verify: the MCP server or Tools management surface should show the new server within a few seconds, with state `running` and a list of provided tools.
 
 ### Field reference
 
@@ -126,13 +123,13 @@ To verify: **Settings → Tools** should show the new server within a few second
 
 Capabilities can ship MCP servers. When you install a capability, its MCP servers are installed automatically as part of the bundle.
 
-You see them in **Settings → Tools** but they're marked as "provided by capability X" — uninstalling them requires uninstalling the capability.
+You see them in the MCP server or Tools management surface, marked as being provided by the capability bundle.
 
 ## Verifying an install
 
 After any install:
 
-1. **Settings → Tools** — the server should show `running`.
+1. The MCP server or Tools management surface should show `running`.
 2. Expand the server — you should see a list of tools with descriptions.
 3. **Test a tool** — click any tool and pick "Test". Enter sample arguments. You should get a structured response.
 
@@ -182,7 +179,7 @@ tools:
 Or use the agent picker to switch to an agent with a broader allowlist.
 
 ### "The server keeps restarting"
-Check the logs in **Settings → Tools → my-server → logs**. Usually a crash loop from a missing dependency, a port conflict, or a config error.
+Check the server logs in the MCP management UI. Usually this is a crash loop from a missing dependency, a port conflict, or a config error.
 
 ### "Every new shell has to re-set the env var"
 Put it in your shell profile (`.zshrc`, `.bashrc`) or use a secrets manager that your shell loads automatically.
@@ -198,14 +195,12 @@ MCP servers can be slow — that's a property of the server, not Codebolt. Agent
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-**Settings → Tools → Uninstall** on the server row. Confirm in the dialog.
+Use the uninstall action in the MCP server or Tools management UI.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt tool uninstall <name>
-```
+The current CLI does not expose the older runtime tool-uninstall command from previous drafts.
 
 </TabItem>
 <TabItem value="api" label="HTTP API">

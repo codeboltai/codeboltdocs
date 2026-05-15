@@ -13,15 +13,12 @@ How to report Codebolt bugs effectively. A good bug report gets fixed quickly; a
 
 ## Generating a diagnostic report
 
-The single most useful thing you can attach is a `codebolt app report` — a redacted bundle containing version info, OS info, recent logs, doctor output, and recent failures.
+The single most useful thing you can attach is a diagnostic report from the product surface your build exposes.
 
 <Tabs groupId="surface">
 <TabItem value="cli" label="CLI" default>
 
-```bash
-codebolt app report > diagnostic.txt
-codebolt app report --since "1 hour ago" > diagnostic.txt
-```
+The current CLI does not expose the older diagnostic report command from previous drafts. Collect version info, server-health output, and relevant log excerpts manually if you are working from the terminal only.
 
 </TabItem>
 <TabItem value="desktop" label="Desktop">
@@ -76,10 +73,10 @@ What actually happened.
 3. Observe Z
 
 ## Environment
-(attach output of `codebolt app report`)
+(attach the diagnostic report or equivalent environment details)
 
 ## Logs
-(relevant excerpt from `codebolt app logs` around the failure time)
+(relevant server or product log excerpts around the failure time)
 
 ## Run ID (if agent-related)
 run_xyz — include the trace if helpful
@@ -98,27 +95,13 @@ Spend five extra minutes reproducing the bug cleanly before you file.
 
 ## Collecting a diagnostic report
 
-```bash
-codebolt app report > diagnostic.txt
-```
-
-Attach this to the bug. It includes version info, config summary, recent logs, and doctor output. Secrets are redacted.
+Attach the diagnostic report or equivalent manual bundle. Include version info, config summary, recent logs, and any repair or diagnostic output you have available.
 
 ## Attaching a trace
 
 For bugs in agent runs, attach the run trace:
 
-```bash
-codebolt agent trace <run-id> --json > trace.json
-```
-
-Or a sanitised version:
-
-```bash
-codebolt agent trace <run-id> --json --redact > trace-redacted.json
-```
-
-The `--redact` flag strips file paths and prompts that might contain sensitive data.
+Attach the run trace or run-detail export from the product surface your build exposes. If you need to sanitize it, redact prompts, file paths, and private identifiers before sending.
 
 ## Minimising the reproduction
 

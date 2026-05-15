@@ -1,186 +1,84 @@
 ---
 sidebar_position: 7
 title: Headless Mode
-description: Run Codebolt without any UI — no GUI, no TUI. Just the server, accepting CLI commands. The setup for CI runners, background services, automation.
+description: Run Codebolt without launching the TUI, using server-only mode and one-shot prompt execution.
 ---
 
 # Headless Mode
 
-Run Codebolt without any UI — no GUI, no TUI. Just the server, accepting CLI commands. The setup for CI runners, background services, automation.
+Headless use in the current CLI means:
 
-## Starting headless
+- start the server without the TUI using `codebolt --server`
+- optionally send one-shot prompts with `codebolt --prompt ...`
+- inspect the running server with `codebolt command ...`
 
-```bash
-codebolt app start --headless
-```
-
-Starts the server without opening any UI. The CLI can still connect and issue commands.
-
-For daemonised operation:
+## Start server-only mode
 
 ```bash
-codebolt app start --headless --daemon
+codebolt --server
+codebolt --server --project /path/to/project
+codebolt --server --port 3457
 ```
 
-Runs detached, survives terminal close. Use with `systemd` / `launchd` for a proper background service — see [Self-hosting → Running the server](../../04_build-on-codebolt/10_self-hosting/02_running-the-server.md).
+This starts the Codebolt server without launching the interactive terminal UI.
 
-## Typical headless workflow
+## Run a one-shot prompt
 
 ```bash
-# Start the server
-codebolt app start --headless --daemon
-
-# Configure a provider from env
-codebolt provider add anthropic --key "$ANTHROPIC_API_KEY"
-
-# Open a project
-codebolt project open /path/to/project
-
-# Run an agent
-codebolt agent start reviewer --task "review the diff" --json > review.json
-
-# Check status
-cat review.json | jq '.status'
-
-# Shut down
-codebolt app stop
+codebolt --prompt "Explain this codebase"
+codebolt --prompt "Review the project" --agent generalist
+codebolt --prompt "Summarize the repo" --project /path/to/project
 ```
 
-All of this happens without any display. Perfect for CI jobs.
-
-## CI integration
-
-GitHub Actions example:
-
-```yaml
-- name: Install Codebolt CLI
-  run: npm install -g codebolt
-
-- name: Start server
-  run: codebolt app start --headless --daemon
-
-- name: Configure provider
-  env:
-    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-  run: codebolt provider add anthropic --key "$ANTHROPIC_API_KEY"
-
-- name: Run reviewer
-  run: |
-    codebolt project open "$GITHUB_WORKSPACE"
-    codebolt agent start reviewer --task "review the PR diff" --json > review.json
-
-- name: Fail on blockers
-  run: |
-    if jq -e '.comments[] | select(.severity == "blocker")' review.json > /dev/null; then
-      exit 1
-    fi
-
-- name: Stop server
-  if: always()
-  run: codebolt app stop
-```
-
-Same pattern works for GitLab CI, CircleCI, Jenkins, or any other runner.
-
-## Docker for ephemeral runs
-
-For fully disposable CI runs, use the official Docker image:
+You can also configure provider settings at launch time:
 
 ```bash
-docker run --rm \
-  -v "$(pwd):/workspace" \
-  -e ANTHROPIC_API_KEY \
-  codebolt/cli:latest \
-  agent start reviewer --task "review the diff" --project /workspace
+codebolt --prompt "Summarize the repo" \
+  --provider openai \
+  --model gpt-5 \
+  --api-key "$OPENAI_API_KEY"
 ```
 
-The image starts a headless server, runs the command, exits. No persistence between runs.
+## Inspect a running headless server
 
-For scripted multi-step work, start a long-lived container:
+The current server-backed inspection surface is `codebolt command ...`:
 
 ```bash
-docker run -d --name codebolt -v "$(pwd):/workspace" -e ANTHROPIC_API_KEY codebolt/cli:latest app start --headless
-docker exec codebolt codebolt project open /workspace
-docker exec codebolt codebolt agent start reviewer --task "..." > result.json
-docker stop codebolt
+codebolt command system health
+codebolt command agents list
+codebolt command agents running
+codebolt command threads list
+codebolt command projects info
 ```
 
-## Systemd service
+Use `--json` with `codebolt command ...` when you need structured output.
 
-For a persistent headless instance on a server:
+## CI and automation
 
-```ini
-# /etc/systemd/system/codebolt.service
-[Unit]
-Description=Codebolt Server
-After=network.target
+The current CLI is best suited to simple automation patterns such as:
 
-[Service]
-Type=simple
-User=codebolt
-Environment="ANTHROPIC_API_KEY=..."
-ExecStart=/usr/local/bin/codebolt app start --headless --foreground
-Restart=on-failure
+1. start a server process with `codebolt --server`
+2. run one or more `codebolt --prompt ...` commands
+3. query supporting state with `codebolt command ...`
+4. stop the process through your shell or process manager
 
-[Install]
-WantedBy=multi-user.target
-```
+Example:
 
 ```bash
-sudo systemctl enable --now codebolt
+codebolt --server --project "$GITHUB_WORKSPACE"
+codebolt --prompt "Review the current repository" --agent generalist
+codebolt command agents running --json
 ```
 
-For self-hosted team use, see [Self-hosting → Running the server](../../04_build-on-codebolt/10_self-hosting/02_running-the-server.md) for the production-grade version.
+## Important limitations
 
-## Passing credentials
+- The current CLI does not expose the older `codebolt app ...` management commands.
+- The current CLI does not expose a stable JSON output mode for `codebolt --prompt ...`.
+- The current CLI does not expose old `codebolt provider ...` or `codebolt project ...` helper commands.
 
-Never pass secrets as command-line arguments — they'd show up in process listings and logs. Use environment variables:
-
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...
-codebolt provider add anthropic --key "$ANTHROPIC_API_KEY"
-```
-
-Or use `codebolt provider reload` which picks up env vars for known providers.
-
-## Output parsing
-
-In headless mode, use `--json` consistently:
-
-```bash
-codebolt agent start my-agent --task "..." --json | jq '.output'
-```
-
-JSON output is stable across versions; text output is not and may change.
-
-## Long-running headless sessions
-
-For sessions that run many agents over time (e.g. a nightly batch job):
-
-```bash
-#!/bin/bash
-set -euo pipefail
-
-codebolt app start --headless --daemon
-trap 'codebolt app stop' EXIT
-
-for project in /repos/*/; do
-  codebolt project open "$project"
-  codebolt agent start reviewer --task "nightly review" --json > "/reports/$(basename $project).json"
-done
-```
-
-The `trap` ensures the server stops cleanly even if the script fails.
-
-## Headless limitations
-
-- **Nothing that needs human input.** Interactive commands (sign-in flows, dialogs) don't work. Configure everything non-interactively.
-- **No UI extensions.** Capabilities that provide UI panels won't load anything visible, but their non-UI pieces (tools, hooks, agents) still work.
-- **No desktop notifications.** Use hook-based notifications to external systems instead.
+For richer automation and observability, rely on desktop/server APIs, the TUI, or the self-hosted runtime surfaces that your build exposes.
 
 ## See also
 
 - [CLI Overview](./03_cli/01_overview.md)
-- [TUI Overview](./04_tui/01_overview.md)
-- [Self-Hosting → Running the server](../../04_build-on-codebolt/10_self-hosting/02_running-the-server.md)
-- [Code review with an agent](../../03_guides/03_everyday-workflows/code-review-with-an-agent.md) — CI-integrated example
+- [Agent Commands](./03_cli/02_agent-commands.md)

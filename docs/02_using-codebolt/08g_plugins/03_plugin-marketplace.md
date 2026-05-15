@@ -60,7 +60,7 @@ Private registries are useful for internal tooling — execution plugins that co
 If you've built a plugin and want to share it:
 
 ```bash
-codebolt plugin publish --path ./my-plugin
+codebolt action plugin publish --path ./my-plugin
 ```
 
 Before publishing, make sure your plugin passes the pre-publish checklist — see [Building Plugins](./04_building-plugins.md) for the full workflow. Once published, it appears in the marketplace and can be installed by anyone with access to your registry (public or private).

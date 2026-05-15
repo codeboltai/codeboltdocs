@@ -33,17 +33,6 @@ An individual can be a member of multiple teams and have their own personal work
 **Settings → Teams → Create team.** Name the team, invite initial members by email, pick a billing plan (hosted) or pick from existing identity-provider groups (self-hosted).
 
 </TabItem>
-<TabItem value="cli" label="Admin CLI">
-
-```bash
-codebolt admin team create --name "Platform Team" --admins alice@my-org.com
-codebolt admin team list
-codebolt admin team add-member <team-id> bob@my-org.com --role member
-```
-
-The admin CLI requires an admin token; on self-hosted instances, run on the server itself or with `--server` and an admin-scoped token.
-
-</TabItem>
 <TabItem value="oidc" label="OIDC sync">
 
 On self-hosted with OIDC/SAML, teams are typically mapped from identity-provider groups automatically. Configure in `codebolt-server.yaml`:
@@ -75,14 +64,6 @@ POST /api/teams
 <TabItem value="desktop" label="Desktop" default>
 
 **Settings → Teams → Members → Invite.** Enter email addresses. Invitees receive an invite link.
-
-</TabItem>
-<TabItem value="cli" label="Admin CLI">
-
-```bash
-codebolt admin team add-member <team-id> bob@my-org.com --role member
-codebolt admin team remove-member <team-id> bob@my-org.com
-```
 
 </TabItem>
 <TabItem value="oidc" label="OIDC sync">

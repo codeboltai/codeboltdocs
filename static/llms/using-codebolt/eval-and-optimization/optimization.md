@@ -1,3 +1,5 @@
+import OptimizationLoop from '@site/src/components/diagrams/OptimizationLoop';
+
 # Optimization
 
 > When optimization is enabled on a task, Codebolt runs an automatic improvement loop after the baseline eval
@@ -8,22 +10,7 @@ When optimization is enabled on a task, Codebolt runs an automatic improvement l
 
 ## How the loop works
 
-```
-Baseline eval
-    │  produces initial score
-    ▼
-Iteration 1
-  ├─ Modifying  → optimizer agent changes subject
-  ├─ Evaluating → re-run task on modified subject
-  ├─ Scoring    → evaluators produce new score
-  └─ Decision   → keep or discard (strategy-dependent)
-    │
-    ▼
-Iteration 2 …
-    │
-    ▼
-Best modified agent saved to .codebolt/agents/
-```
+<OptimizationLoop />
 
 ## Configuring optimization on a task
 

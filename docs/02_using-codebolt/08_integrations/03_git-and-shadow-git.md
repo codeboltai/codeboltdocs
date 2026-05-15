@@ -106,14 +106,7 @@ Best practice: don't switch branches with a running agent. Let it finish first.
 
 When you're merging a branch with agent-authored changes, the agent's shadow git history is not brought along — only the real git commits you made. Shadow git is local state only.
 
-If you want to preserve the agent's decision history, query the event log:
-
-```bash
-codebolt events query 'type == agent.decision and project == "my-project"' \
-  --since "2 days ago" --format markdown > agent-decisions.md
-```
-
-Attach that to your PR as context for human reviewers.
+If you want to preserve the agent's decision history, export it from the observability surface your build exposes and attach that summary to your PR as context for human reviewers.
 
 ## Git submodules
 

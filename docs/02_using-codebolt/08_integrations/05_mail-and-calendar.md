@@ -32,18 +32,6 @@ Codebolt has first-class integrations for email and calendar. Agents can read in
 **Settings → Integrations → Mail** (and **Calendar**). Click **Connect**, choose the provider, OAuth flow opens in a browser, you authorize, the account appears in the list.
 
 </TabItem>
-<TabItem value="cli" label="CLI">
-
-```bash
-codebolt integration add mail --provider gmail
-codebolt integration add calendar --provider google
-codebolt integration list
-codebolt integration remove mail:my@email.com
-```
-
-The first command opens a browser for OAuth (or prints a device code on headless machines).
-
-</TabItem>
 <TabItem value="config" label="Config file">
 
 For IMAP/SMTP or self-hosted CalDAV, you can configure directly:
@@ -145,7 +133,7 @@ Mail providers have send limits (Gmail: ~500/day for free accounts, more for Wor
 
 - Don't run mail-sending agents in tight loops.
 - Batch sends where possible.
-- Monitor provider quotas via `codebolt provider usage`.
+- Monitor provider quotas through the provider and usage surfaces your build exposes.
 
 ## See also
 

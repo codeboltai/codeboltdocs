@@ -4,16 +4,13 @@ title: Tabs and History
 description: Each chat tab is a separate conversation with its own agent, model, and message history
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Tabs and History
 
 Each chat tab is a separate conversation with its own agent, model, and message history. History persists across restarts — closing a tab is a decision to lose it, not an accident.
 
 ## Tabs
 
-Create a tab: **Ctrl+N** or `+` in the tab bar.
+Create a tab from the **New Chat** control in the header, or reopen an existing thread from the history popover.
 
 Each tab has:
 - A bound agent (picker at the top)
@@ -26,16 +23,15 @@ Tabs are independent — a tool call in tab A doesn't affect tab B. You can have
 
 ## Tab management
 
-| Action | Shortcut |
-|---|---|
-| New tab | Ctrl+N |
-| Close tab | Ctrl+W |
-| Next tab | Ctrl+Tab |
-| Previous tab | Ctrl+Shift+Tab |
-| Rename tab | double-click tab title |
-| Pin tab | right-click → Pin |
+In the current GUI chat panel, tab management is primarily exposed through visible controls:
 
-Pinned tabs can't be closed with Ctrl+W — protects important conversations from accidental close.
+- **New Chat** creates a new thread tab
+- the thread strip lets you switch active threads
+- close controls on tabs remove them from the current panel
+- the history popover reopens older threads
+- the running-thread dropdown helps you jump between active threads
+
+Older versions of this page documented a larger keyboard shortcut set for tab management, but that is not what the current GUI chat panel exposes.
 
 ## History
 
@@ -75,35 +71,7 @@ Two levels of delete:
 - **Archive a thread** — removes it from the main list but keeps the data. Recoverable.
 - **Delete a thread** — removes the data permanently. Not recoverable.
 
-For compliance reasons, the event log entries referenced by a deleted thread remain (append-only) but lose their chat metadata. If strict deletion is required, use the admin tool: `codebolt admin purge-thread <id>`.
-
-## Exporting
-
-<Tabs groupId="surface">
-<TabItem value="cli" label="CLI" default>
-
-```bash
-codebolt chat export <thread-id> --format markdown > thread.md
-codebolt chat export <thread-id> --format json > thread.json
-```
-
-</TabItem>
-<TabItem value="desktop" label="Desktop">
-
-Settings → History → row context menu → **Export → Markdown** or **Export → JSON**.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/threads/:threadId/export?format=markdown
-GET /api/threads/:threadId/export?format=json
-```
-
-</TabItem>
-</Tabs>
-
-Markdown is human-readable; JSON preserves full structure including tool calls and checkpoints.
+For compliance reasons, the event log entries referenced by a deleted thread remain append-only but lose their chat metadata. If strict deletion is required, use the administrative deletion surface exposed by your deployment.
 
 ## See also
 

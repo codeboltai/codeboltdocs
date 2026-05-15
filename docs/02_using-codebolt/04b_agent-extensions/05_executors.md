@@ -4,6 +4,8 @@ title: Executors
 description: Executors are the runtime environments that run capabilities
 ---
 
+import ExecutorArchitecture from '@site/src/components/diagrams/ExecutorArchitecture';
+
 # Executors
 
 ![Executors](/productImages/agent_extensions/executor.png)
@@ -16,19 +18,7 @@ Open via: **Agents dropdown → Capabilities → Executors tab**
 
 A capability file defines *what* to do and *what inputs/outputs* it has. An executor defines *how* to actually run it — which language runtime, which entry point handler, and how to pass data in and out.
 
-```
-Agent invokes capability
-        │
-        ▼
-Capability Manager
-  looks up capability type → finds matching executor
-        │
-        ▼
-Executor runs the entryPoint script
-        │
-        ▼
-Result returned to agent
-```
+<ExecutorArchitecture />
 
 ## Where executors live
 

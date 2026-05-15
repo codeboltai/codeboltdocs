@@ -33,13 +33,7 @@ Everything Codebolt does is recorded in the event log, so usage is always querya
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt provider usage --since "7 days ago"
-codebolt provider usage --by agent --since "1 month ago"
-codebolt provider usage --by model --json | jq
-codebolt events query "type == llm.chat" --since "today" --json | \
-  jq '[.[] | .cost_usd] | add'
-```
+The current CLI does not expose the older aggregate `provider usage` or `events query` reporting commands. Use the desktop usage surfaces for end-user usage and billing inspection.
 
 </TabItem>
 <TabItem value="api" label="HTTP API">
@@ -145,12 +139,7 @@ Wires a Slack alert (or email, or anything) to the daily spend threshold.
 
 For organisations that chargeback by project, event log data can feed a chargeback report:
 
-```bash
-codebolt events query 'type == llm.chat' --since "last month" --json | \
-  jq 'group_by(.project) | map({project: .[0].project, tokens: [.[] | .tokens] | add, cost: [.[] | .cost_usd] | add})'
-```
-
-Group by project, sum tokens and cost. Export and import into your chargeback tool of choice.
+Use the usage exports or observability surfaces exposed by your build to group token and cost data by project. Older reporting examples from previous drafts are not part of the current `packages/cli` implementation.
 
 ## See also
 

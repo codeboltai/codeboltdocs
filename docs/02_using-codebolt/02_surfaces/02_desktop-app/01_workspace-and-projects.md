@@ -35,7 +35,7 @@ Indexing takes seconds to a minute depending on project size. You can start chat
 Three ways:
 
 - **From the project panel** — click "Open project" and pick a folder.
-- **From the command line** — `codebolt open /path/to/project`.
+- **From the command line** — `cd /path/to/project && codebolt`.
 - **Drag-and-drop** — drop a folder onto the app.
 
 Projects remember their last state: open files, active chat tab, checkpoints. Reopening a project should feel like resuming, not starting fresh.

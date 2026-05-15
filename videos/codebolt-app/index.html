@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg: #f5f0eb;
+        --bg-soft: #faf8f5;
+        --ink: #302a25;
+        --muted: #5f554d;
+        --accent: #bd6338;
+        --accent-soft: #e7b79b;
+        --sage: #798968;
+        --lavender: #eceaf6;
+        --line: #e1d6cc;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+        color: var(--ink);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+
+      .scene {
+        position: absolute;
+        top: 0; left: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          linear-gradient(115deg, rgba(236,234,246,0.54) 0%, rgba(236,234,246,0) 38%),
+          linear-gradient(24deg, rgba(236,234,246,0) 0%, rgba(231,183,155,0.18) 78%, rgba(231,183,155,0) 100%),
+          var(--bg);
+      }
+
+      /* Scene 1 visible by default; 2+ hidden */
+      #scene1 { z-index: 1; }
+      #scene2 { z-index: 2; opacity: 0; }
+      #scene3 { z-index: 3; opacity: 0; }
+      #scene4 { z-index: 4; opacity: 0; }
+      #scene5 { z-index: 5; opacity: 0; }
+      #scene6 { z-index: 6; opacity: 0; }
+      #scene7 { z-index: 7; opacity: 0; }
+
+      .scene-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 112px 132px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        box-sizing: border-box;
+      }
+
+      /* --- Editor video --- */
+      .editor-clip {
+        position: absolute;
+        top: 0; left: 0;
+        width: 1920px;
+        height: 1080px;
+        object-fit: cover;
+        z-index: 2;
+      }
+
+      /* --- Typography --- */
+      .eyebrow {
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      .display {
+        font-family: "Iowan Old Style", "Source Serif 4", Georgia, serif;
+        font-size: 148px;
+        font-weight: 500;
+        line-height: 0.97;
+        letter-spacing: -0.03em;
+        max-width: 1340px;
+        color: var(--ink);
+      }
+
+      .display.large {
+        font-size: 188px;
+        line-height: 0.92;
+      }
+
+      .subcopy {
+        max-width: 900px;
+        color: var(--muted);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 36px;
+        line-height: 1.34;
+        font-weight: 400;
+      }
+
+      .accent { color: var(--accent); }
+      .sage { color: var(--sage); }
+
+      /* --- Structural elements --- */
+      .rule {
+        width: 120px;
+        height: 2px;
+        background: var(--accent);
+        transform-origin: left center;
+      }
+
+      .hairline {
+        position: absolute;
+        height: 1px;
+        background: rgba(189,99,56,0.22);
+        transform-origin: center;
+      }
+
+      .mark {
+        position: absolute;
+        color: rgba(189,99,56,0.18);
+        font-family: "Iowan Old Style", "Source Serif 4", Georgia, serif;
+        font-size: 310px;
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      /* --- Floating notes --- */
+      .floating-note {
+        position: absolute;
+        color: var(--muted);
+        font-size: 24px;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+      }
+      .floating-note strong {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      /* --- Ghost type (background decor) --- */
+      .ghost-type {
+        position: absolute;
+        color: rgba(48,42,37,0.06);
+        font-family: "Iowan Old Style", "Source Serif 4", Georgia, serif;
+        font-size: 220px;
+        line-height: 1;
+        pointer-events: none;
+      }
+      .ghost-type.accent-ghost {
+        color: rgba(189,99,56,0.08);
+      }
+      .ghost-type.sage-ghost {
+        color: rgba(121,137,104,0.08);
+      }
+
+      /* --- Surface map (Scene 3) --- */
+      .surface-map {
+        position: relative;
+        width: 100%;
+        height: 520px;
+        margin-top: 20px;
+      }
+
+      .surface {
+        position: absolute;
+        width: 360px;
+      }
+
+      .surface .label {
+        color: var(--accent);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .surface .name {
+        margin-top: 10px;
+        font-family: "Iowan Old Style", "Source Serif 4", Georgia, serif;
+        font-size: 64px;
+        line-height: 0.95;
+        color: var(--ink);
+      }
+
+      .surface .desc {
+        margin-top: 16px;
+        color: var(--muted);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 24px;
+        line-height: 1.32;
+      }
+
+      /* --- Grid items (Scene 4) --- */
+      .free-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px 88px;
+        width: 1280px;
+        margin-top: 24px;
+      }
+
+      .free-item {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        column-gap: 24px;
+        align-items: start;
+      }
+
+      .num {
+        color: var(--sage);
+        font-weight: 700;
+        font-size: 22px;
+        letter-spacing: 0.12em;
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .free-item h3 {
+        font-family: "Iowan Old Style", "Source Serif 4", Georgia, serif;
+        font-weight: 500;
+        font-size: 50px;
+        line-height: 1;
+        color: var(--ink);
+      }
+
+      .free-item p {
+        grid-column: 2;
+        margin-top: 12px;
+        color: var(--muted);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 24px;
+        line-height: 1.35;
+      }
+
+      /* --- Scale line (Scene 5) --- */
+      .scale-line {
+        position: relative;
+        width: 1420px;
+        height: 230px;
+        margin-top: 56px;
+      }
+
+      .scale-line::before {
+        content: "";
+        position: absolute;
+        left: 0; right: 0;
+        top: 100px;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(189,99,56,1), rgba(121,137,104,1), rgba(231,183,155,1));
+      }
+
+      .scale-point {
+        position: absolute;
+        top: 66px;
+        width: 230px;
+      }
+
+      .scale-point::before {
+        content: "";
+        display: block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-bottom: 22px;
+      }
+
+      .scale-point h3 {
+        font-family: "Iowan Old Style", "Source Serif 4", Georgia, serif;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 1;
+        color: var(--ink);
+      }
+
+      .scale-point p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 22px;
+        line-height: 1.25;
+      }
+
+      /* --- Word cloud (Scene 6) --- */
+      .word-cloud {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .word {
+        position: absolute;
+        font-family: "Iowan Old Style", "Source Serif 4", Georgia, serif;
+        color: rgba(48,42,37,0.14);
+        font-size: 80px;
+        line-height: 1;
+      }
+      .word.accent-word { color: rgba(189,99,56,0.18); }
+      .word.sage-word { color: rgba(121,137,104,0.18); }
+
+      /* --- CTA (Scene 7) --- */
+      .cta {
+        align-items: center;
+        text-align: center;
+      }
+
+      .cta .display {
+        max-width: 1260px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .text-action {
+        display: inline-block;
+        margin-top: 12px;
+        padding-bottom: 10px;
+        color: var(--accent);
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        border-bottom: 2px solid rgba(189,99,56,0.5);
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      /* --- Decorative glow --- */
+      .glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+      }
+
+      .glow-1 {
+        width: 600px; height: 600px;
+        background: rgba(236,234,246,0.4);
+        top: -120px; left: -100px;
+      }
+
+      .glow-2 {
+        width: 500px; height: 500px;
+        background: rgba(231,183,155,0.2);
+        bottom: -80px; right: -60px;
+      }
+
+      .glow-3 {
+        width: 400px; height: 400px;
+        background: rgba(121,137,104,0.12);
+        top: 200px; right: 100px;
+      }
+
+      /* --- Registration marks --- */
+      .reg-mark {
+        position: absolute;
+        font-family: "SF Mono", "Fira Code", "Courier New", monospace;
+        font-size: 13px;
+        color: rgba(95,85,77,0.25);
+        letter-spacing: 0.05em;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="90"
+      data-width="1920"
+      data-height="1080"
+    >
+
+      <!-- ========== SCENE 1: TITLE CARD ========== -->
+      <div id="scene1" class="scene">
+        <div class="glow glow-1" data-layout-ignore></div>
+        <div class="glow glow-2" data-layout-ignore></div>
+        <div class="hairline" style="top: 188px; left: 0; width: 100%;"></div>
+        <div class="hairline" style="bottom: 180px; left: 260px; width: 920px;"></div>
+        <div class="mark" style="right: 112px; top: 174px;">*</div>
+        <div class="ghost-type" style="right: 80px; bottom: 60px; font-size: 160px; opacity: 0.04;">codebolt</div>
+        <div class="reg-mark" style="left: 132px; bottom: 48px;">1920 x 1080 / 01</div>
+        <div class="scene-content">
+          <div id="s1-label" class="eyebrow">Codebolt</div>
+          <div id="s1-rule" class="rule"></div>
+          <h1 id="s1-title" class="display large">Build with agents that feel <span class="accent">quietly capable.</span></h1>
+          <p id="s1-sub" class="subcopy">A warm, agent-native workspace for software, automation, and the next layer of product work.</p>
+        </div>
+        <div id="s1-note1" class="floating-note" style="right: 180px; bottom: 190px;"><strong>01</strong> editor</div>
+        <div id="s1-note2" class="floating-note" style="right: 380px; bottom: 132px;"><strong>02</strong> cli</div>
+      </div>
+
+      <!-- ========== SCENE 2: EDITOR DEMO VIDEO ========== -->
+      <video
+        id="editor-demo-video"
+        class="editor-clip"
+        data-start="5"
+        data-duration="45"
+        data-track-index="2"
+        data-has-audio="false"
+        src="editor.mp4"
+        muted
+        playsinline
+      ></video>
+      <audio
+        id="editor-demo-audio"
+        data-start="5"
+        data-duration="45"
+        data-track-index="3"
+        src="editor.mp4"
+        data-volume="1"
+      ></audio>
+
+      <!-- ========== SCENE 3: FOUR SURFACES ========== -->
+      <div id="scene3" class="scene">
+        <div class="glow glow-1" data-layout-ignore></div>
+        <div class="glow glow-3" data-layout-ignore></div>
+        <div class="hairline" style="top: 232px; left: 112px; width: 680px;"></div>
+        <div class="mark" style="right: 140px; top: 160px; font-size: 240px;">*</div>
+        <div class="reg-mark" style="right: 132px; bottom: 48px;">03 / surfaces</div>
+        <div class="ghost-type accent-ghost" style="left: -30px; top: 60px; font-size: 180px;">engine</div>
+        <div class="scene-content" style="justify-content: flex-start;">
+          <div id="s3-label" class="eyebrow">After the editor</div>
+          <div id="s3-rule" class="rule"></div>
+          <h2 id="s3-title" class="display">Four surfaces. One working memory.</h2>
+          <p id="s3-sub" class="subcopy">Codebolt keeps the agent close to the code, the shell, the browser, and the decisions that matter.</p>
+          <div class="surface-map">
+            <div id="surface-cli" class="surface" style="left: 0; top: 30px;">
+              <div class="label">terminal</div>
+              <div class="name">CLI</div>
+              <div class="desc">Fast local control for developers who live in command lines.</div>
+            </div>
+            <div id="surface-editor" class="surface" style="left: 520px; top: 150px;">
+              <div class="label">workspace</div>
+              <div class="name">Editor</div>
+              <div class="desc">A calmer place to inspect, revise, and steer the agent.</div>
+            </div>
+            <div id="surface-cloud" class="surface" style="right: 140px; top: 20px;">
+              <div class="label">browser</div>
+              <div class="name">Cloud</div>
+              <div class="desc">Shared sandboxes and always-available execution.</div>
+            </div>
+            <div id="surface-sdk" class="surface" style="right: 430px; bottom: 0;">
+              <div class="label">builders</div>
+              <div class="name">SDK</div>
+              <div class="desc">Embed the engine, plugins, tools, and custom agent flows.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SCENE 4: AGENT ENGINE ========== -->
+      <div id="scene4" class="scene">
+        <div class="glow glow-2" data-layout-ignore></div>
+        <div class="mark" style="left: 120px; bottom: 72px;">*</div>
+        <div class="ghost-type sage-ghost" style="right: 60px; bottom: -20px; font-size: 200px;">675+</div>
+        <div class="reg-mark" style="left: 132px; bottom: 48px;">04 / engine</div>
+        <div class="scene-content">
+          <div id="s4-label" class="eyebrow">Agent-native software</div>
+          <div id="s4-rule" class="rule"></div>
+          <h2 id="s4-title" class="display">Not a chat box. A system for getting work done.</h2>
+          <div class="free-list">
+            <div id="s4-item1" class="free-item">
+              <div class="num">01</div>
+              <h3>Build</h3>
+              <p>Use agents for software, docs, research, video, and internal operations.</p>
+            </div>
+            <div id="s4-item2" class="free-item">
+              <div class="num">02</div>
+              <h3>Adapt</h3>
+              <p>Custom tools, plugins, prompts, and memories shape the workflow around you.</p>
+            </div>
+            <div id="s4-item3" class="free-item">
+              <div class="num">03</div>
+              <h3>Run</h3>
+              <p>Schedules, hooks, and persistent context move work forward without ceremony.</p>
+            </div>
+            <div id="s4-item4" class="free-item">
+              <div class="num">04</div>
+              <h3>Improve</h3>
+              <p>Every repeatable task becomes a better harness for the next one.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SCENE 5: SCALE SPECTRUM ========== -->
+      <div id="scene5" class="scene">
+        <div class="glow glow-1" data-layout-ignore></div>
+        <div class="glow glow-3" data-layout-ignore></div>
+        <div class="hairline" style="bottom: 200px; left: 132px; width: 1656px;"></div>
+        <div class="ghost-type accent-ghost" style="left: 100px; top: -30px; font-size: 160px;">scale</div>
+        <div class="reg-mark" style="right: 132px; bottom: 48px;">05 / spectrum</div>
+        <div class="scene-content">
+          <div id="s5-label" class="eyebrow">Scale without the noise</div>
+          <div id="s5-rule" class="rule"></div>
+          <h2 id="s5-title" class="display">From one careful agent to a coordinated company.</h2>
+          <div class="scale-line">
+            <div id="scale-1" class="scale-point" style="left: 0;">
+              <h3>CLI</h3>
+              <p>single agent</p>
+            </div>
+            <div id="scale-2" class="scale-point" style="left: 292px;">
+              <h3>Editor</h3>
+              <p>guided workspace</p>
+            </div>
+            <div id="scale-3" class="scale-point" style="left: 584px;">
+              <h3>24/7</h3>
+              <p>persistent agent</p>
+            </div>
+            <div id="scale-4" class="scale-point" style="left: 876px;">
+              <h3>Teams</h3>
+              <p>coordinated work</p>
+            </div>
+            <div id="scale-5" class="scale-point" style="left: 1168px;">
+              <h3>Company</h3>
+              <p>autonomous loops</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SCENE 6: ENGINE PILLARS ========== -->
+      <div id="scene6" class="scene">
+        <div class="glow glow-2" data-layout-ignore></div>
+        <div class="glow glow-1" data-layout-ignore></div>
+        <div class="word-cloud">
+          <div class="word accent-word" style="right: 150px; top: 150px;">context</div>
+          <div class="word" style="left: 980px; bottom: 165px;">memory</div>
+          <div class="word sage-word" style="right: 330px; bottom: 310px;">tools</div>
+          <div class="word" style="left: 180px; top: 120px;">stigmergy</div>
+          <div class="word sage-word" style="left: 600px; bottom: 80px;">deliberation</div>
+        </div>
+        <div class="reg-mark" style="right: 132px; bottom: 48px;">06 / pillars</div>
+        <div class="scene-content">
+          <div id="s6-label" class="eyebrow">What makes it powerful</div>
+          <div id="s6-rule" class="rule"></div>
+          <h2 id="s6-title" class="display">The <span class="accent">self-improving</span>, <span class="sage">hyper-scaling</span> agent engine.</h2>
+          <p id="s6-sub" class="subcopy">Three-tier memory compounds knowledge. Eval tasks optimize behavior. Context assembly decides what each agent sees. The longer you run it, the smarter it gets.</p>
+        </div>
+      </div>
+
+      <!-- ========== SCENE 7: CALL TO ACTION ========== -->
+      <div id="scene7" class="scene">
+        <div class="glow glow-1" data-layout-ignore></div>
+        <div class="glow glow-2" data-layout-ignore></div>
+        <div class="hairline" style="top: 238px; left: 260px; width: 1400px;"></div>
+        <div class="hairline" style="bottom: 238px; left: 260px; width: 1400px;"></div>
+        <div class="mark" style="right: 140px; top: 200px; font-size: 200px;">*</div>
+        <div class="reg-mark" style="left: 132px; bottom: 48px;">07 / cta</div>
+        <div class="ghost-type accent-ghost" style="left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 240px;">engine</div>
+        <div class="scene-content cta">
+          <div id="s7-label" class="eyebrow">Codebolt</div>
+          <h2 id="s7-title" class="display">One engine. Start simple. Scale without limits.</h2>
+          <p id="s7-sub" class="subcopy">codebolt.ai</p>
+          <div id="s7-action" class="text-action">Download Codebolt</div>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      /* ---- Timing constants ---- */
+      var S1_END = 5;
+      var VIDEO_END = 50;
+      var S3 = 50;
+      var S4 = 58;
+      var S5 = 66;
+      var S6 = 74;
+      var S7 = 82;
+      var TOTAL = 90;
+
+      /* Transition config — calm editorial mood */
+      var TX_DUR = 0.7;
+      var TX_BLUR = 20;
+
+      /* ============================================================
+       * SCENE 1: TITLE CARD (0s – 5s)
+       * ============================================================ */
+      tl.fromTo("#s1-label",
+        { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 0.25);
+      tl.fromTo("#s1-rule",
+        { scaleX: 0 }, { scaleX: 1, duration: 0.75, ease: "power3.out" }, 0.45);
+      tl.fromTo("#s1-title",
+        { y: 42, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, 0.6);
+      tl.fromTo("#s1-sub",
+        { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.75, ease: "power2.out" }, 1.08);
+      tl.fromTo("#s1-note1, #s1-note2",
+        { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.16, ease: "power2.out" }, 1.35);
+      tl.fromTo("#scene1 .mark",
+        { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power2.out" }, 0.9);
+      tl.fromTo("#scene1 .ghost-type",
+        { opacity: 0 }, { opacity: 0.04, duration: 1.5, ease: "power1.out" }, 0.5);
+      tl.fromTo("#scene1 .reg-mark",
+        { opacity: 0 }, { opacity: 0.25, duration: 0.5, ease: "power2.out" }, 1.5);
+
+      /* Scene 1 glow breathe */
+      tl.to("#scene1 .glow-1", { scale: 1.06, duration: 2.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.5);
+      tl.to("#scene1 .glow-2", { scale: 1.04, duration: 3, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.8);
+
+      /* ---- Transition: Scene 1 → Video ---- */
+      tl.to("#scene1", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, S1_END - 0.3);
+      tl.set("#scene1", { visibility: "hidden" }, S1_END + 0.2);
+
+      /* ============================================================
+       * SCENE 2: EDITOR DEMO VIDEO (5s – 50s)
+       * Plays via data attributes.
+       * ============================================================ */
+
+      /* ---- Transition: Video → Scene 3 ---- */
+      tl.to("#editor-demo-video", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, VIDEO_END - 0.5);
+
+      /* ============================================================
+       * SCENE 3: FOUR SURFACES (50s – 58s)
+       * ============================================================ */
+      tl.fromTo("#scene3",
+        { filter: "blur(" + TX_BLUR + "px)", scale: 0.97, opacity: 0 },
+        { filter: "blur(0px)", scale: 1, opacity: 1, duration: TX_DUR, ease: "power1.out" },
+        S3
+      );
+      tl.fromTo("#s3-label",
+        { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" }, S3 + 0.3);
+      tl.fromTo("#s3-rule",
+        { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power3.out" }, S3 + 0.46);
+      tl.fromTo("#s3-title",
+        { y: 38, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, S3 + 0.58);
+      tl.fromTo("#s3-sub",
+        { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, S3 + 1.1);
+      tl.fromTo(".surface",
+        { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.16, ease: "power2.out" }, S3 + 1.4);
+      tl.fromTo("#scene3 .mark",
+        { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power2.out" }, S3 + 0.8);
+      tl.fromTo("#scene3 .ghost-type",
+        { opacity: 0 }, { opacity: 0.08, duration: 1.5, ease: "power1.out" }, S3 + 0.5);
+      tl.fromTo("#scene3 .reg-mark",
+        { opacity: 0 }, { opacity: 0.25, duration: 0.5, ease: "power2.out" }, S3 + 1.8);
+      tl.to("#scene3 .glow-1", { scale: 1.05, duration: 3.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, S3 + 0.5);
+
+      /* ---- Transition: Scene 3 → Scene 4 ---- */
+      tl.to("#scene3", { filter: "blur(" + TX_BLUR + "px)", scale: 1.03, opacity: 0, duration: TX_DUR, ease: "power1.in" }, S4 - TX_DUR);
+      tl.set("#scene3", { visibility: "hidden" }, S4);
+
+      /* ============================================================
+       * SCENE 4: AGENT ENGINE (58s – 66s)
+       * ============================================================ */
+      tl.fromTo("#scene4",
+        { filter: "blur(" + TX_BLUR + "px)", scale: 0.97, opacity: 0 },
+        { filter: "blur(0px)", scale: 1, opacity: 1, duration: TX_DUR, ease: "power1.out" },
+        S4 - TX_DUR + 0.15
+      );
+      tl.fromTo("#s4-label",
+        { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" }, S4 + 0.2);
+      tl.fromTo("#s4-rule",
+        { scaleX: 0 }, { scaleX: 1, duration: 0.65, ease: "power3.out" }, S4 + 0.35);
+      tl.fromTo("#s4-title",
+        { y: 32, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, S4 + 0.45);
+      tl.fromTo(".free-item",
+        { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, stagger: 0.14, ease: "power2.out" }, S4 + 1.05);
+      tl.fromTo("#scene4 .mark",
+        { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.9, ease: "power2.out" }, S4 + 0.7);
+      tl.fromTo("#scene4 .ghost-type",
+        { opacity: 0 }, { opacity: 0.08, duration: 1.5, ease: "power1.out" }, S4 + 0.4);
+      tl.fromTo("#scene4 .reg-mark",
+        { opacity: 0 }, { opacity: 0.25, duration: 0.5, ease: "power2.out" }, S4 + 1.6);
+      tl.to("#scene4 .glow-2", { scale: 1.06, duration: 3, ease: "sine.inOut", yoyo: true, repeat: 1 }, S4 + 0.5);
+
+      /* ---- Transition: Scene 4 → Scene 5 ---- */
+      tl.to("#scene4", { filter: "blur(" + TX_BLUR + "px)", scale: 1.03, opacity: 0, duration: TX_DUR, ease: "power1.in" }, S5 - TX_DUR);
+      tl.set("#scene4", { visibility: "hidden" }, S5);
+
+      /* ============================================================
+       * SCENE 5: SCALE SPECTRUM (66s – 74s)
+       * ============================================================ */
+      tl.fromTo("#scene5",
+        { filter: "blur(" + TX_BLUR + "px)", scale: 0.97, opacity: 0 },
+        { filter: "blur(0px)", scale: 1, opacity: 1, duration: TX_DUR, ease: "power1.out" },
+        S5 - TX_DUR + 0.15
+      );
+      tl.fromTo("#s5-label",
+        { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" }, S5 + 0.2);
+      tl.fromTo("#s5-rule",
+        { scaleX: 0 }, { scaleX: 1, duration: 0.65, ease: "power3.out" }, S5 + 0.35);
+      tl.fromTo("#s5-title",
+        { y: 32, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, S5 + 0.45);
+      tl.fromTo(".scale-line",
+        { scaleX: 0.92, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.8, ease: "power2.out" }, S5 + 0.95);
+      tl.fromTo(".scale-point",
+        { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, stagger: 0.1, ease: "power2.out" }, S5 + 1.18);
+      tl.fromTo("#scene5 .ghost-type",
+        { opacity: 0 }, { opacity: 0.08, duration: 1.5, ease: "power1.out" }, S5 + 0.4);
+      tl.fromTo("#scene5 .reg-mark",
+        { opacity: 0 }, { opacity: 0.25, duration: 0.5, ease: "power2.out" }, S5 + 1.6);
+      tl.to("#scene5 .glow-1", { scale: 1.05, duration: 3.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, S5 + 0.5);
+      tl.to("#scene5 .glow-3", { scale: 1.08, duration: 4, ease: "sine.inOut", yoyo: true, repeat: 1 }, S5 + 0.8);
+
+      /* ---- Transition: Scene 5 → Scene 6 ---- */
+      tl.to("#scene5", { filter: "blur(" + TX_BLUR + "px)", scale: 1.03, opacity: 0, duration: TX_DUR, ease: "power1.in" }, S6 - TX_DUR);
+      tl.set("#scene5", { visibility: "hidden" }, S6);
+
+      /* ============================================================
+       * SCENE 6: ENGINE PILLARS (74s – 82s)
+       * ============================================================ */
+      tl.fromTo("#scene6",
+        { filter: "blur(" + TX_BLUR + "px)", scale: 0.97, opacity: 0 },
+        { filter: "blur(0px)", scale: 1, opacity: 1, duration: TX_DUR, ease: "power1.out" },
+        S6 - TX_DUR + 0.15
+      );
+      tl.fromTo("#s6-label",
+        { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" }, S6 + 0.2);
+      tl.fromTo("#s6-rule",
+        { scaleX: 0 }, { scaleX: 1, duration: 0.65, ease: "power3.out" }, S6 + 0.35);
+      tl.fromTo("#s6-title",
+        { y: 32, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, S6 + 0.48);
+      tl.fromTo("#s6-sub",
+        { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: "power2.out" }, S6 + 1.0);
+      tl.fromTo("#scene6 .word",
+        { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.16, ease: "power2.out" }, S6 + 1.2);
+      tl.fromTo("#scene6 .reg-mark",
+        { opacity: 0 }, { opacity: 0.25, duration: 0.5, ease: "power2.out" }, S6 + 1.8);
+      tl.to("#scene6 .glow-2", { scale: 1.04, duration: 3, ease: "sine.inOut", yoyo: true, repeat: 1 }, S6 + 0.5);
+
+      /* ---- Transition: Scene 6 → Scene 7 ---- */
+      tl.to("#scene6", { filter: "blur(" + TX_BLUR + "px)", scale: 1.03, opacity: 0, duration: TX_DUR, ease: "power1.in" }, S7 - TX_DUR);
+      tl.set("#scene6", { visibility: "hidden" }, S7);
+
+      /* ============================================================
+       * SCENE 7: CALL TO ACTION (82s – 90s)
+       * Final scene — exit animation allowed.
+       * ============================================================ */
+      tl.fromTo("#scene7",
+        { filter: "blur(" + TX_BLUR + "px)", scale: 0.97, opacity: 0 },
+        { filter: "blur(0px)", scale: 1, opacity: 1, duration: TX_DUR, ease: "power1.out", overwrite: "auto" },
+        S7 - TX_DUR + 0.15
+      );
+      tl.fromTo("#s7-label",
+        { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power2.out" }, S7 + 0.2);
+      tl.fromTo("#s7-title",
+        { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out" }, S7 + 0.45);
+      tl.fromTo("#s7-sub",
+        { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, ease: "power2.out" }, S7 + 0.95);
+      tl.fromTo("#s7-action",
+        { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, ease: "power2.out" }, S7 + 1.18);
+      tl.fromTo("#scene7 .mark",
+        { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "power2.out" }, S7 + 0.6);
+      tl.fromTo("#scene7 .ghost-type",
+        { opacity: 0 }, { opacity: 0.08, duration: 1.5, ease: "power1.out" }, S7 + 0.4);
+      tl.fromTo("#scene7 .reg-mark",
+        { opacity: 0 }, { opacity: 0.25, duration: 0.5, ease: "power2.out" }, S7 + 1.5);
+      tl.to("#scene7 .glow-1", { scale: 1.04, duration: 4, ease: "sine.inOut", yoyo: true, repeat: 1 }, S7 + 0.5);
+
+      /* ---- Final fade to black ---- */
+      tl.to("#scene7", { opacity: 0, duration: 0.8, ease: "power2.inOut" }, TOTAL - 1);
+      tl.set("#scene7", { visibility: "hidden" }, TOTAL);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

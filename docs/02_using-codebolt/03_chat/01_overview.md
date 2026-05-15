@@ -107,49 +107,33 @@ Checkpoints are cheap. Don't be afraid to let the agent try things; you can alwa
 
 See [Checkpoints and rollback](./04_checkpoints-and-rollback.md).
 
-## Inline edit (Ctrl+K)
+## Mentions and action popovers
 
-For single-file edits where you don't want to open a chat, select code and press Ctrl+K. A small inline prompt opens, you type the edit, and it applies directly. No chat thread created. Still checkpointed.
+The current GUI composer is richer than a plain text box:
 
-See [Inline edit and Ctrl+K](./05_inline-edit-and-ctrl-k.md).
+- `@` opens a picker for files, folders, and docs
+- `/` opens action suggestions based on available agent actions
+- `#` opens a picker for agents and docs
+- file and image drag-and-drop are supported
 
-## Slash commands
-
-In the composer, `/` opens a command menu:
-
-- `/help` — command reference
-- `/clear` — clear the current thread
-- `/model <name>` — switch models
-- `/agent <name>` — switch agents
-- `/checkpoint` — create an explicit checkpoint
-- `/rollback` — rollback to the last checkpoint
-- `/compact` — manually compact the conversation
-- `/explain` — explain what the agent just did
-- `/retry` — re-run the last turn with different randomness
-
-Custom agents and extensions can add their own slash commands.
+Earlier versions of these docs described a fixed slash-command set in the GUI chat panel. The current UI exposes popovers and action suggestions, not that hard-coded command list.
 
 ## Keyboard shortcuts
 
-Most common:
+The current GUI chat panel has a smaller confirmed shortcut set than earlier docs claimed:
 
 | Shortcut | Action |
 |---|---|
-| Ctrl/Cmd+Enter | Send message |
-| Ctrl/Cmd+K | Inline edit |
-| Ctrl/Cmd+N | New chat tab |
-| Ctrl/Cmd+W | Close chat tab |
-| Ctrl/Cmd+Tab | Next tab |
-| Ctrl/Cmd+, | Settings |
-| Esc | Stop the current agent turn |
+| Enter | Send message |
+| Shift+Enter | Insert a new line |
+| Ctrl/Cmd+X | Stop the current agent turn |
 
-See the full list in Settings → Keyboard Shortcuts.
+New chat creation, history access, restart, and most thread navigation are currently exposed through the header controls rather than through the chat-specific shortcut list documented in older drafts.
 
 ## See also
 
 - [Tabs and history](./02_tabs-and-history.md)
 - [Context and @-mentions](./03_context-and-at-mentions.md)
 - [Checkpoints and rollback](./04_checkpoints-and-rollback.md)
-- [Inline edit and Ctrl+K](./05_inline-edit-and-ctrl-k.md)
 - [Model selection](./06_model-selection.md)
 - [Chat message end-to-end (internals)](../../04_build-on-codebolt/09_internals/04_data-flow-walkthroughs/chat-message-end-to-end.md)

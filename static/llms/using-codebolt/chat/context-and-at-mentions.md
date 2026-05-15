@@ -36,22 +36,51 @@ Automatic context assembly is good, but it can miss things:
 
 For these, use `@`-mentions.
 
-## The `@` menu
+## Chat box triggers
 
-Typing `@` in the composer opens a fuzzy picker. You can mention:
+The current GUI composer supports several structured triggers, not just `@`.
 
-| Prefix | Picks | Example |
-|---|---|---|
-| `@` | Files in the project | `@src/auth/session.ts` |
-| `@#` | Symbols (functions, classes, exports) | `@#getUser` |
-| `@:` | Directories | `@:src/auth/` |
-| `@>` | Terminal output | `@>last` (the last command output) |
-| `@$` | Environment / status | `@$git` (current git status) |
-| `@?` | Chat turns | `@?3` (the 3rd turn back) |
-| `@!` | External URLs | `@!https://example.com/docs` |
-| `@~` | Memory entries | `@~decisions` (search persistent memory) |
+### `@` for project context
 
-Mentions render as chips in your message. The agent receives them as structured context entries, not just text — it knows which file each mention points at.
+Typing `@` opens a picker centered on:
+
+| Trigger | Picks |
+|---|---|
+| `@` | Files |
+| `@` | Folders |
+| `@` | Docs |
+
+These are the main context-injection picks for project material.
+
+### Other triggers besides `@`
+
+The same chat box also supports other structured inputs:
+
+| Trigger | Purpose |
+|---|---|
+| `/` | Agent action suggestions |
+| `#` | Agents and docs |
+| `$` | MCP tools when MCP input is enabled |
+
+In practice:
+
+- use `@` when you want to point at project files, folders, or docs
+- use `/` when you want to insert an available action
+- use `#` when you want to refer to an agent or a doc source
+- use `$` when you want to reference an MCP tool
+
+Mentions and picks render as chips or structured input items rather than plain pasted text.
+
+### Other context-rich input
+
+The chat input also captures other non-text context:
+
+- dragged or pasted images
+- dropped files
+- detected links in the editor content
+- copied code selections from Monaco with file/line context
+
+Those are not `@` mentions, but they still become structured inputs that can influence what the agent sees.
 
 ## How mentions work under the hood
 
@@ -109,15 +138,15 @@ Every LLM has a context window. Codebolt's assembler fits your prompt under a ta
 3. **Summarise long tool outputs**.
 4. **Hard-truncate** as a last resort, with an explicit `[... N tokens omitted ...]` marker.
 
-If compression happens, you'll see a subtle marker in the chat. You can turn compression off for a specific turn with `/no-compact`, but doing so just makes the next failure mode "prompt too large, turn rejected".
+If compression happens, you'll see a subtle marker in the chat. The exact control surface for compaction depends on the current UI; older slash-command examples in this page should not be read as the current GUI contract.
 
 ## Long conversations
 
 After ~20-30 turns in one thread, you'll usually see compression kick in. Three strategies for long conversations:
 
 1. **Let compression do its work.** For most threads this is fine.
-2. **`/compact`** — explicitly compact the conversation and keep going. You'll lose fine detail but keep the narrative.
-3. **Start a new tab** — copy the important decisions into a memory note, start fresh. Cleanest for a long-running project.
+2. **Start a new tab** — copy the important decisions into a memory note, start fresh. Cleanest for a long-running project.
+3. **Use the thread UI to branch or reopen related work** instead of forcing everything into one long transcript.
 
 Agents also have a `LoopDetectionModifier` that catches repetitive behaviour, so a compressed thread usually degrades gracefully rather than suddenly.
 

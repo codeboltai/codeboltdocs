@@ -153,33 +153,33 @@ If you already have the desktop app installed, the CLI is already there — no s
 <Step title="Authenticate">
 
 ```bash
-codebolt login
+codebolt
 ```
 
-Opens a browser for sign-in. The token is stored locally and picked up automatically on every subsequent run.
+Start Codebolt and complete any account or provider setup that your build prompts for.
 
 For **CI / headless** environments, set the environment variable instead:
 
 ```bash
 export CODEBOLT_AUTH_TOKEN=YOUR_TOKEN
-codebolt run --agent AGENT_ID
+codebolt --server
 ```
 
-This skips the login flow entirely and bootstraps a user automatically.
+The current CLI does not expose the older login or interactive run flows from earlier drafts.
 
 </Step>
 
 <Step title="Configure an AI provider">
 
 ```bash
-codebolt config set-provider
+codebolt command llm providers
 ```
 
-An interactive prompt walks you through selecting a provider and entering your API key or local URL. You can also set values directly:
+Use the desktop settings UI for end-user provider setup, or update a key through the running server:
 
 ```bash
-codebolt config set CODEBOLT_LLM_PROVIDER openai
-codebolt config set OPENAI_API_KEY sk-...
+codebolt command llm update-key --provider openai --key sk-...
+codebolt command llm set-default --provider openai --model gpt-5
 ```
 
 </Step>
@@ -188,30 +188,20 @@ codebolt config set OPENAI_API_KEY sk-...
 
 ```bash
 cd /path/to/your-project
-codebolt run
+codebolt
 ```
 
-This starts the server, loads the default agent, and opens an interactive chat session. To specify an agent:
+This starts the server and launches the TUI. For one-shot prompt execution:
 
 ```bash
-codebolt run --agent AGENT_ID
+codebolt --prompt "Explain this project" --agent AGENT_ID
 ```
 
 </Step>
 
 <Step title="Review and roll back">
 
-Every change is checkpointed automatically. To roll back all changes from the last run:
-
-```bash
-codebolt rollback
-```
-
-To list available checkpoints:
-
-```bash
-codebolt checkpoints list
-```
+Review changes with normal project tooling such as `git diff`. Checkpoint and rollback flows are currently product-surface features rather than a documented standalone CLI command set.
 
 </Step>
 
@@ -239,20 +229,20 @@ brew install codebolt/tap/cli
 <Step title="Authenticate">
 
 ```bash
-codebolt login
+codebolt
 ```
 
-Opens a browser for sign-in. The token is saved locally. For headless/CI use, set `CODEBOLT_AUTH_TOKEN` instead.
+Start Codebolt and complete any account or provider setup that your build prompts for. For headless or CI use, set `CODEBOLT_AUTH_TOKEN` instead.
 
 </Step>
 
 <Step title="Configure an AI provider">
 
 ```bash
-codebolt config set-provider
+codebolt command llm providers
 ```
 
-Follow the interactive prompt to select a provider and enter your credentials.
+Use the desktop settings UI for end-user provider setup, or update keys through the running server.
 
 </Step>
 
@@ -260,7 +250,7 @@ Follow the interactive prompt to select a provider and enter your credentials.
 
 ```bash
 cd /path/to/your-project
-codebolt tui
+codebolt
 ```
 
 The full-screen TUI opens with panels for chat, file tree, diff view, and terminal output.

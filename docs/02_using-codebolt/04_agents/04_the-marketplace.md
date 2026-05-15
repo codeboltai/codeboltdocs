@@ -30,17 +30,19 @@ All three install through the same UI. From your point of view, installing an ag
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-**Settings → Marketplace** opens the browser. Search box, filter sidebar, sort dropdown.
+Open the **Agents** panel and switch to the **Marketplace** tab. The same marketplace tab is also available from the **Select your Agent** dialog.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
 ```bash
-codebolt marketplace search <query>
-codebolt marketplace search <query> --kind agent --language typescript
-codebolt marketplace show <name>           # full details
-codebolt marketplace top --kind agent      # most popular
+codebolt command agents featured
+codebolt command agents recommended
+codebolt command agents list
+codebolt command agents config <name>
 ```
+
+The current CLI does not expose a dedicated `marketplace` command family. In practice, the available agent discovery commands are the `featured`, `recommended`, `list`, and `config` commands under `codebolt command agents`.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -58,20 +60,14 @@ GET /api/marketplace/items/:name
 </TabItem>
 </Tabs>
 
-You can:
+In the current desktop UI, the marketplace is an in-app agent browser rather than a separate browser page. You can:
 
-- **Search** by name, tag, or description.
-- **Filter** by kind (agents / tools / capabilities), language, category.
-- **Sort** by popularity, rating, recently updated, newest.
+- Browse marketplace agents in a list.
+- Open an agent to view its description and install state.
+- Install directly from the card or from the detail view.
+- Switch between **Installed**, **Marketplace**, and **My Agents** in the Agents surface.
 
-Each entry shows:
-
-- Name, description, author, version.
-- Install count and rating.
-- Categories and tags.
-- Screenshots and a README.
-- The full manifest — tools it needs, limits, required providers.
-- Changelog and version history.
+The current `packages/ui` marketplace components do not expose the old browser-style search box, filter sidebar, or sort dropdown described in earlier drafts.
 
 **Read the README before installing.** It should tell you what the agent is for, what tools it needs, what its blast radius is (read-only? write-capable? shell access?).
 
@@ -86,7 +82,7 @@ Under the hood, regardless of surface:
 3. If dependencies are needed, you're prompted to install them too.
 4. The agent is added to your portfolio and appears in the agent picker.
 
-Installation is per-workspace by default. You can promote an agent to user-wide from **Settings → Agents → Promote to user scope** or `codebolt agent promote <name> --user`.
+Installation is per-workspace by default. Use the settings UI when you need to change the effective scope.
 
 ## Trust model
 
@@ -108,35 +104,18 @@ This catches obvious problems. It **does not** catch:
 
 Your workspace has an **agent portfolio** — the curated set of agents actually available in that workspace. Installing doesn't automatically add to the portfolio; you add explicitly. This lets you install several agents to try, decide which are keepers, and remove the rest without them cluttering your picker.
 
-**Settings → Agents → Portfolio** shows:
-- Installed agents.
-- Which are active in this workspace (in the portfolio).
-- A ranking of agents by reputation score (if enabled — see [Stigmergy and Reputation](../../04_build-on-codebolt/08_multi-agent-orchestration/05_stigmergy-and-reputation.md)).
+In the current desktop UI, installed agents show up under the **Installed** and **My Agents** tabs, and per-agent portfolio data is available from the agent profile panel.
 
 Teams that self-host often constrain what the portfolio can contain: "only approved agents from our internal registry". See [Self-hosting](../../04_build-on-codebolt/10_self-hosting/01_overview.md).
 
-## Updating
-
-Marketplace agents publish versions. Your installed copy is pinned to whatever version you installed.
-
-- **Check for updates** — Settings → Agents → Check updates.
-- **Update one** — pick the new version in the details panel.
-- **Update all** — bulk update; skips any with breaking major-version changes.
-
-**Major version updates are never automatic.** A breaking change (different inputs, different tool allowlist, different semantics) requires an explicit decision on your part.
-
-Deprecated versions are still available but marked — you'll see a warning if you're running one.
-
 ## Publishing your own
 
-Anyone can publish. See [Build on Codebolt → Publishing](../../04_build-on-codebolt/02_creating-agents/10_publishing.md) for the full workflow.
+To publish an agent, see [Build on Codebolt → Publishing](../../04_build-on-codebolt/02_creating-agents/10_publishing.md).
 
 Quick version:
 
 ```bash
-codebolt agent lint my-agent
-codebolt agent test-all my-agent
-codebolt agent publish my-agent
+codebolt action agent publish --path ./my-agent
 ```
 
 The first publish of a name reserves it. Subsequent publishes must be from the same account.
@@ -151,22 +130,6 @@ Organizations can host their own marketplace. A private registry:
 - Can mirror approved public marketplace entries.
 
 Configure a private registry in **Settings → Registries**. Private registries take precedence over the public marketplace for the same name. See [Self-hosting → Registries](../../04_build-on-codebolt/10_self-hosting/01_overview.md).
-
-## Removing
-
-```bash
-codebolt agent uninstall <name>
-```
-
-Or in the UI: Settings → Agents → Uninstall.
-
-Uninstalling removes the agent from the portfolio and deletes its files. It does **not** delete:
-
-- Historical runs from that agent (still queryable via event log).
-- Memory the agent wrote (persistent memory, knowledge graph entries).
-- Checkpoints taken during its runs.
-
-To purge everything, use **Settings → Agents → Purge data** — irreversible.
 
 ## See also
 

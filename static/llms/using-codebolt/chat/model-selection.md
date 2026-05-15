@@ -21,81 +21,26 @@ Most of the time, defaults do the right thing. You only reach for the model pick
 
 ## Picking a model
 
-## Picking between remote providers
+Codebolt currently exposes model selection in two places:
 
-The three major remote providers have different strengths. Rough guide (expect this to shift as providers update their models):
+- **In chat**: use the model picker in the chat input toolbar to change the active provider and model.
+- **In Settings**: open the LLM settings to choose the default application LLM and the default embedding model.
 
-| Provider | Strong at | Use for |
-|---|---|---|
-| **Claude (Anthropic)** | Long-context reasoning, code generation, following detailed instructions | Complex refactors, planning, code review |
-| **GPT (OpenAI)** | Fast iteration, broad world knowledge, well-trodden defaults | General-purpose agents, chat-shaped tasks |
-| **Gemini (Google)** | Very long context, multimodal | Large-file analysis, mixed text+image |
+In Settings, the app lets you:
 
-Within a provider, pick based on effort:
-
-- **Flagship models** (Opus, GPT-5, Gemini Ultra) — slow, expensive, best reasoning. Use for planning and high-stakes tasks.
-- **Mid-tier** (Sonnet, GPT-4 class, Gemini Pro) — the workhorses. Default for most agents.
-- **Fast/cheap** (Haiku, GPT-4 mini, Gemini Flash) — high-volume tasks where quality tolerance is known.
-
-Rule of thumb: **start with mid-tier**. Switch up if the agent is getting things wrong; switch down if cost is hurting and quality is acceptable.
-
-## Picking between remote and local
-
-Local models (via Ollama, llama.cpp, or another local runner) trade off differently:
-
-| Dimension | Remote | Local |
-|---|---|---|
-| Quality | Higher (flagship models are better than anything you can run locally) | Lower |
-| Latency | ~200-2000ms per call, network-dependent | Depends on hardware; first-call warmup is slow |
-| Cost | Per-token | Fixed (hardware + power) |
-| Privacy | Your prompts + code go to the provider | Nothing leaves your machine |
-| Offline | No | Yes |
-
-Use local when privacy or offline is a hard requirement, or when cost at volume dominates. Use remote when quality matters more than the other factors (which, for coding, is usually).
-
-See [Local models](../08_integrations/02_local-models.md) for setup.
-
-## Picking per agent
-
-Different agents in the same tab can want different models. You can't switch mid-agent-call, but you can:
-
-- **Set a different default per agent** in each agent's manifest.
-- **Use a flow** that routes stages to different models — e.g. flagship for planning, mid-tier for execution, different family for review. See [Pipeline](../../04_build-on-codebolt/08_multi-agent-orchestration/03_patterns/pipeline.md).
-- **Override in the tab** when you want to experiment.
-
-A common setup:
-- **Planner agent** → flagship (Opus, GPT-5 class)
-- **Coder agent** → mid-tier (Sonnet class)
-- **Reviewer agent** → different family from the coder (for independence)
-- **Summariser / utility agents** → fast/cheap
-
-## Temperature and other knobs
-
-Most of the time, the model default temperature is right. The picker lets you tweak:
-
-- **Temperature** — 0.0 is deterministic-ish, 1.0 is creative. For coding, lower is usually better (0.2 is a common default).
-- **Max tokens** — cap on response length. Usually leave at the agent default.
-- **Top-p** — alternative to temperature; usually don't touch.
-
-These are per-tab overrides. The next tab starts fresh.
-
-## Mid-thread model switches
-
-Valid use cases:
-
-- **Starting with a cheap model, escalating** when the cheap one gets stuck. "Run through this with Haiku first; if it can't figure it out, switch to Sonnet."
-- **Switching to a long-context model** when the conversation is about to compress. "This got big — move to a model with more context."
-- **Switching providers for independence** during a debate or review. "I want a different family to check this."
-
-The thread carries over. The new model sees the same history and tool schemas.
+- add and configure providers
+- search the available models for the selected provider
+- set a default chat model
+- set a default embedding provider and embedding model
+- download supported local embedding models when the provider offers them
 
 ## When the model picker is greyed out
 
 Reasons:
 
-- **Agent constraints.** The current agent's manifest restricts models, and no allowed model has a configured provider. Either configure a provider for an allowed model or pick a different agent.
-- **Mid-turn.** You can't change model while a turn is in progress. Wait for it to finish or stop it (Esc).
-- **No providers configured.** Go to Settings → Providers.
+- **No providers configured.** Open the LLM settings and add a provider first.
+- **The current view has not loaded provider data yet.** Wait for the picker to populate, then try again.
+- **A turn is already in progress.** Finish or stop the current request before changing models.
 
 ## What the LLM actually receives
 

@@ -77,12 +77,7 @@ When you (or an agent) run a command, Codebolt checks the environment state firs
 
 ## Manual operations
 
-```bash
-codebolt project env list                  # show environments
-codebolt project env setup <name>          # run setup
-codebolt project env restart <name>        # kill and re-create
-codebolt project env shell <name>          # open a shell in the environment
-```
+Use the environment management surface your build exposes for listing, setting up, restarting, or entering environments. Older project-environment CLI examples from previous drafts are not part of the current `packages/cli` implementation.
 
 ## Container environments
 

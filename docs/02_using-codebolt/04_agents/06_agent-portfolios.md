@@ -25,16 +25,12 @@ Two reasons:
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-**Settings → Agents → Portfolio.** Shows every installed agent, which are in the portfolio (checkmarked), reputation score, last-used timestamp.
+Open an agent's profile from the **Agents** panel or an agent picker to inspect portfolio-style data such as reputation, conversations, testimonials, karma, and talents. The current desktop UI does not expose a dedicated **Settings → Agents → Portfolio** screen.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt agent portfolio list
-codebolt agent portfolio list --workspace        # current workspace only
-codebolt agent portfolio list --user             # user scope
-```
+The current CLI does not expose `agent portfolio` commands. Portfolio management is currently a UI-driven concept.
 
 </TabItem>
 <TabItem value="api" label="HTTP API">
@@ -52,16 +48,12 @@ GET /api/portfolio?scope=workspace
 <Tabs groupId="surface">
 <TabItem value="cli" label="CLI" default>
 
-```bash
-codebolt agent portfolio add my-agent
-codebolt agent portfolio remove my-agent
-codebolt agent portfolio pin my-agent
-```
+The current CLI does not expose add, remove, or pin operations for portfolios.
 
 </TabItem>
 <TabItem value="desktop" label="Desktop">
 
-Settings → Agents → Portfolio → toggle the checkmark on the row. Right-click → **Pin** to keep an agent at the top of pickers.
+Pinning is available from agent pickers. The current `packages/ui` code does not expose a dedicated desktop portfolio editor, so use the config file or the product surface shipped in your build when you need explicit portfolio editing.
 
 </TabItem>
 <TabItem value="config" label="Config file">
@@ -115,7 +107,7 @@ Pinning an agent keeps it at the top of pickers and command palettes. Use for ag
 
 ## Default portfolio for new workspaces
 
-**Settings → Agents → Default portfolio** sets what gets auto-added when you create a new workspace. Usually the core built-ins plus any personal favorites.
+Default portfolio behavior is a workspace/runtime concern. Document an exact desktop path only if your build exposes one.
 
 ## Reputation (optional)
 
@@ -130,8 +122,6 @@ Reputation surfaces in the portfolio as a numeric score, and in pickers as an or
 
 See [Stigmergy and Reputation](../../04_build-on-codebolt/08_multi-agent-orchestration/05_stigmergy-and-reputation.md) for the mechanism.
 
-Turn it off in **Settings → Agents → Reputation tracking** if you don't want it.
-
 ## Per-scope portfolios
 
 Portfolios can exist at multiple scopes:
@@ -144,12 +134,7 @@ The active portfolio is the union of these, with overrides following the same pr
 
 ## Exporting and sharing
 
-```bash
-codebolt agent portfolio export > my-portfolio.yaml
-codebolt agent portfolio import < their-portfolio.yaml
-```
-
-Great for onboarding a new team member: export your carefully-curated portfolio, share the file, they import it and get the same set.
+The practical sharing mechanism today is the portfolio file itself. Commit `.codebolt/portfolio.yaml` to the repository when you want teammates to use the same curated set.
 
 ## See also
 

@@ -64,13 +64,13 @@ This means you can roll back to any point in an agent's work, not just to the la
 
 ## Conflict resolution
 
-When a merge or pull produces conflicts, the Git panel flags the affected files. Click a conflicted file to open the three-way merge view:
+When a merge or pull produces conflicts, the Git panel creates a dedicated **Merge Changes** section above the regular **Changes** list. Each conflicted file appears there first, matching the VS Code source control flow.
 
-- **Left** — your version
-- **Center** — the merged result (editable)
-- **Right** — the incoming version
+Click a conflicted file to open it directly in the editor with inline conflict controls such as **Accept Current Change**, **Accept Incoming Change**, **Accept Both Changes**, and **Compare Changes**. After resolving the file, stage it from the Git panel and complete your commit or merge.
 
-Edit the center pane to resolve, then click **Mark as Resolved** and complete the merge.
+![Git Panel Conflict Resolution](/productImages/editor/gitpanel-conflict-resolution.png)
+
+You can also right-click a conflicted file in **Merge Changes** to open the Git context menu and use actions like **Open File**, **Accept All Current**, **Accept All Incoming**, **Stage Changes**, **Reveal in Finder**, and **Reveal in Explorer View**.
 
 ## Stashing
 

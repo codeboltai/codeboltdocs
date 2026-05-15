@@ -78,13 +78,7 @@ Some families have legacy aliases (`codebolt_basic.*`, `codebolt.*`). The canoni
 
 ## Tool descriptions
 
-Every tool has a description the LLM reads to decide when to call it. You can see them with:
-
-```bash
-codebolt tool describe codebolt_fs.read_file
-```
-
-For custom agents, you can override these descriptions to steer behaviour — see [Unified Agent → Overriding tool descriptions](../../04_build-on-codebolt/02_creating-agents/06_patterns/unified-agent.md#overriding-tool-descriptions).
+Every tool has a description the LLM reads to decide when to call it. For custom agents, you can override these descriptions to steer behaviour — see [Unified Agent → Overriding tool descriptions](../../04_build-on-codebolt/02_creating-agents/06_patterns/unified-agent.md#overriding-tool-descriptions).
 
 ## Allowlisting
 

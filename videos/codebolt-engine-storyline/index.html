@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #F5F0EB;
+        color: #302A25;
+      }
+
+      body {
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-weight: 400;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 82% 18%, rgba(201, 106, 58, 0.18), rgba(245, 240, 235, 0) 28%),
+          radial-gradient(circle at 10% 88%, rgba(236, 234, 246, 0.95), rgba(245, 240, 235, 0) 28%),
+          #F5F0EB;
+      }
+
+      #root::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 30;
+        opacity: 0.28;
+        background-image:
+          linear-gradient(rgba(48, 42, 37, 0.04) 1px, rgba(245, 240, 235, 0) 1px),
+          linear-gradient(90deg, rgba(48, 42, 37, 0.03) 1px, rgba(245, 240, 235, 0) 1px);
+        background-size: 72px 72px;
+      }
+
+      .clip {
+        position: absolute;
+      }
+
+      .scene {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #F5F0EB;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 3;
+      }
+
+      #s1 {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .scene-content {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 104px 128px 96px;
+        gap: 34px;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .scene-content.top {
+        justify-content: flex-start;
+        padding-top: 118px;
+      }
+
+      .scene-content.split {
+        display: grid;
+        grid-template-columns: 1.04fr 0.96fr;
+        align-items: center;
+        gap: 78px;
+      }
+
+      .opening-grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        align-items: center;
+        gap: 88px;
+      }
+
+      .opening-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .display.opening-title {
+        max-width: 760px;
+        font-size: 112px;
+      }
+
+      .eyebrow {
+        font-size: 23px;
+        line-height: 1;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #5F554D;
+        font-weight: 650;
+      }
+
+      .display {
+        font-family: "Iowan Old Style", "New York", Georgia, serif;
+        font-size: 126px;
+        line-height: 0.93;
+        letter-spacing: -0.035em;
+        font-weight: 500;
+        max-width: 1480px;
+        color: #302A25;
+      }
+
+      .display.hero {
+        font-size: 158px;
+        max-width: 1660px;
+      }
+
+      .display.tight {
+        max-width: 1220px;
+      }
+
+      .accent {
+        color: #C96A3A;
+      }
+
+      .sage {
+        color: #798968;
+      }
+
+      .muted {
+        color: #5F554D;
+      }
+
+      .subcopy {
+        max-width: 1020px;
+        color: #5F554D;
+        font-size: 36px;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      .smallcopy {
+        color: #5F554D;
+        font-size: 28px;
+        line-height: 1.35;
+        max-width: 720px;
+      }
+
+      .ghost-word {
+        position: absolute;
+        font-family: "Iowan Old Style", "New York", Georgia, serif;
+        font-size: 220px;
+        line-height: 1;
+        color: #DED2C8;
+        opacity: 0.42;
+        letter-spacing: -0.04em;
+        white-space: nowrap;
+        z-index: 0;
+      }
+
+      .ghost-word::before {
+        content: attr(data-word);
+      }
+
+      .mark {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        background: #C96A3A;
+        box-shadow: 0 22px 46px rgba(167, 95, 63, 0.2);
+      }
+
+      .pin {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        color: #302A25;
+        font-size: 30px;
+        line-height: 1;
+        font-weight: 500;
+      }
+
+      .pin::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        border-radius: 999px;
+        background: #C96A3A;
+      }
+
+      .line {
+        height: 2px;
+        background: #C8A79A;
+        transform-origin: left center;
+      }
+
+      .vertical-line {
+        width: 2px;
+        background: #C8A79A;
+        transform-origin: top center;
+      }
+
+      .rail {
+        position: absolute;
+        height: 2px;
+        background: #C8A79A;
+        transform-origin: left center;
+      }
+
+      .rail.sage-rail {
+        background: #798968;
+      }
+
+      .route {
+        position: absolute;
+        height: 2px;
+        background: #DED2C8;
+        transform-origin: left center;
+      }
+
+      .mono {
+        font-family: "SFMono-Regular", "SF Mono", Consolas, monospace;
+        font-variant-ligatures: none;
+      }
+
+      .code-line {
+        font-family: "SFMono-Regular", "SF Mono", Consolas, monospace;
+        font-size: 34px;
+        line-height: 1.4;
+        color: #302A25;
+      }
+
+      .code-line .cursor {
+        display: inline-block;
+        width: 18px;
+        height: 40px;
+        margin-left: 8px;
+        vertical-align: -7px;
+        background: #C96A3A;
+      }
+
+      .code-window {
+        position: relative;
+        width: 800px;
+        min-height: 520px;
+        border-radius: 18px;
+        background: rgba(250, 248, 245, 0.88);
+        border: 2px solid #C8A79A;
+        box-shadow: 0 38px 90px rgba(167, 95, 63, 0.16);
+        overflow: hidden;
+      }
+
+      .code-window::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(201, 106, 58, 0.08), rgba(245, 240, 235, 0) 34%),
+          linear-gradient(rgba(222, 210, 200, 0.42) 1px, rgba(250, 248, 245, 0) 1px);
+        background-size: 100% 100%, 100% 46px;
+        pointer-events: none;
+      }
+
+      .code-titlebar {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 64px;
+        padding: 0 24px;
+        gap: 14px;
+        border-bottom: 2px solid #DED2C8;
+        color: #5F554D;
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 650;
+      }
+
+      .window-dot {
+        width: 13px;
+        height: 13px;
+        border-radius: 999px;
+        background: #C8A79A;
+      }
+
+      .window-dot.active {
+        background: #C96A3A;
+      }
+
+      .file-label {
+        margin-left: 10px;
+      }
+
+      .code-body {
+        position: relative;
+        padding: 34px 36px 36px;
+      }
+
+      .typed-row {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        align-items: baseline;
+        min-height: 50px;
+        column-gap: 22px;
+        font-family: "SFMono-Regular", "SF Mono", Consolas, monospace;
+        font-size: 27px;
+        line-height: 1.35;
+        color: #302A25;
+        white-space: nowrap;
+      }
+
+      .line-no {
+        color: #8B8178;
+        font-size: 22px;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .typed-text {
+        display: inline-block;
+        overflow: hidden;
+        max-width: 100%;
+        will-change: clip-path;
+      }
+
+      .code-key {
+        color: #BD6338;
+      }
+
+      .code-soft {
+        color: #5F554D;
+      }
+
+      .typing-cursor {
+        display: inline-block;
+        width: 16px;
+        height: 30px;
+        margin-left: 8px;
+        vertical-align: -5px;
+        background: #C96A3A;
+      }
+
+      .type-cloud {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 22px 34px;
+        max-width: 1180px;
+      }
+
+      .type-chip {
+        color: #5F554D;
+        font-size: 36px;
+        line-height: 1;
+        letter-spacing: -0.015em;
+      }
+
+      .type-chip.big {
+        font-family: "Iowan Old Style", "New York", Georgia, serif;
+        color: #C96A3A;
+        font-size: 70px;
+        letter-spacing: -0.04em;
+      }
+
+      .surface-map {
+        position: relative;
+        width: 100%;
+        height: 520px;
+      }
+
+      .surface-lines {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .route-line {
+        stroke: #C8A79A;
+        stroke-width: 3;
+        stroke-linecap: round;
+        opacity: 0.82;
+        vector-effect: non-scaling-stroke;
+      }
+
+      .route-line.active {
+        stroke: #C96A3A;
+        opacity: 0.92;
+      }
+
+      .route-node {
+        fill: #C8A79A;
+        opacity: 0.85;
+      }
+
+      .route-node.active {
+        fill: #C96A3A;
+        opacity: 0.95;
+      }
+
+      .surface {
+        position: absolute;
+        font-family: "Iowan Old Style", "New York", Georgia, serif;
+        font-size: 92px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: #302A25;
+        z-index: 2;
+      }
+
+      .surface small {
+        display: block;
+        margin-top: 12px;
+        font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+        font-size: 24px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #8B8178;
+      }
+
+      .engine-core {
+        position: absolute;
+        left: 765px;
+        top: 194px;
+        width: 252px;
+        height: 252px;
+        border-radius: 999px;
+        z-index: 3;
+      }
+
+      .engine-core::before,
+      .engine-core::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+      }
+
+      .engine-core::before {
+        background: #C96A3A;
+        box-shadow: 0 42px 90px rgba(167, 95, 63, 0.24);
+      }
+
+      .engine-core::after {
+        inset: 34px;
+        border: 3px solid #FAF8F5;
+        opacity: 0.8;
+      }
+
+      .floating-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .check-line {
+        display: flex;
+        gap: 18px;
+        align-items: baseline;
+        color: #5F554D;
+        font-size: 32px;
+        line-height: 1.25;
+      }
+
+      .check-line::before {
+        content: "";
+        flex: 0 0 18px;
+        width: 18px;
+        height: 18px;
+        margin-top: 10px;
+        border-radius: 5px;
+        background: #798968;
+      }
+
+      .struck {
+        text-decoration: line-through;
+        text-decoration-color: #798968;
+        text-decoration-thickness: 3px;
+      }
+
+      .proof-line {
+        display: flex;
+        align-items: baseline;
+        gap: 22px;
+        font-size: 42px;
+        color: #5F554D;
+      }
+
+      .proof-number {
+        font-family: "Iowan Old Style", "New York", Georgia, serif;
+        font-size: 96px;
+        line-height: 0.9;
+        color: #C96A3A;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .progression {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 58px;
+      }
+
+      .progression::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 36px;
+        height: 2px;
+        background: #C8A79A;
+      }
+
+      .stage {
+        position: relative;
+        width: 260px;
+      }
+
+      .stage::before {
+        content: "";
+        display: block;
+        width: 22px;
+        height: 22px;
+        margin-bottom: 30px;
+        border-radius: 999px;
+        background: #C96A3A;
+      }
+
+      .stage-title {
+        font-family: "Iowan Old Style", "New York", Georgia, serif;
+        font-size: 52px;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .stage-caption {
+        margin-top: 12px;
+        color: #5F554D;
+        font-size: 23px;
+        line-height: 1.25;
+      }
+
+      .constellation {
+        position: relative;
+        width: 780px;
+        height: 640px;
+      }
+
+      .agent-links {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .agent-link {
+        stroke: #798968;
+        stroke-width: 3;
+        stroke-linecap: round;
+        opacity: 0.82;
+        vector-effect: non-scaling-stroke;
+      }
+
+      .agent-link.owner-link {
+        stroke: #C96A3A;
+        opacity: 0.88;
+      }
+
+      .agent-dot {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 132px;
+        height: 132px;
+        border-radius: 999px;
+        color: #302A25;
+        font-size: 24px;
+        line-height: 1;
+        text-align: center;
+        z-index: 2;
+      }
+
+      .agent-dot::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        background: rgba(250, 248, 245, 0.7);
+        box-shadow: 0 32px 74px rgba(167, 95, 63, 0.14);
+      }
+
+      .agent-dot span {
+        position: relative;
+      }
+
+      .agent-dot.owner::before {
+        background: rgba(201, 106, 58, 0.24);
+      }
+
+      .placeholder-field {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 34% 48%, rgba(236, 234, 246, 0.98), rgba(245, 240, 235, 0) 30%),
+          radial-gradient(circle at 72% 38%, rgba(201, 106, 58, 0.16), rgba(245, 240, 235, 0) 28%),
+          #F5F0EB;
+      }
+
+      .placeholder-field::before {
+        content: "";
+        position: absolute;
+        left: 128px;
+        right: 128px;
+        top: 132px;
+        bottom: 132px;
+        background:
+          linear-gradient(#C96A3A, #C96A3A) left top / 96px 3px no-repeat,
+          linear-gradient(#C96A3A, #C96A3A) left top / 3px 96px no-repeat,
+          linear-gradient(#C96A3A, #C96A3A) right top / 96px 3px no-repeat,
+          linear-gradient(#C96A3A, #C96A3A) right top / 3px 96px no-repeat,
+          linear-gradient(#C96A3A, #C96A3A) left bottom / 96px 3px no-repeat,
+          linear-gradient(#C96A3A, #C96A3A) left bottom / 3px 96px no-repeat,
+          linear-gradient(#C96A3A, #C96A3A) right bottom / 96px 3px no-repeat,
+          linear-gradient(#C96A3A, #C96A3A) right bottom / 3px 96px no-repeat;
+        opacity: 0.74;
+      }
+
+      .placeholder-orbit {
+        position: absolute;
+        left: 640px;
+        top: 246px;
+        width: 650px;
+        height: 650px;
+        border-radius: 999px;
+      }
+
+      .placeholder-orbit::before,
+      .placeholder-orbit::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+      }
+
+      .placeholder-orbit::before {
+        inset: 0;
+        border: 3px solid #DED2C8;
+      }
+
+      .placeholder-orbit::after {
+        inset: 126px;
+        border: 3px solid #C8A79A;
+      }
+
+      .annotation {
+        position: absolute;
+        color: #302A25;
+        font-size: 28px;
+        line-height: 1;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 650;
+      }
+
+      .annotation::after {
+        content: "";
+        display: block;
+        width: 190px;
+        height: 2px;
+        margin-top: 16px;
+        background: #C96A3A;
+        transform-origin: left center;
+      }
+
+      .placeholder-title {
+        position: absolute;
+        left: 182px;
+        top: 210px;
+        max-width: 900px;
+        font-family: "Iowan Old Style", "New York", Georgia, serif;
+        font-size: 116px;
+        line-height: 0.94;
+        letter-spacing: -0.04em;
+        color: #302A25;
+      }
+
+      .placeholder-note {
+        position: absolute;
+        right: 170px;
+        bottom: 206px;
+        max-width: 610px;
+        color: #5F554D;
+        font-size: 34px;
+        line-height: 1.25;
+      }
+
+      .placeholder-label {
+        position: absolute;
+        left: 186px;
+        bottom: 210px;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #8B8178;
+      }
+
+      .veil {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        pointer-events: none;
+        background:
+          linear-gradient(96deg, rgba(245, 240, 235, 0) 0%, rgba(250, 248, 245, 0.96) 38%, rgba(201, 106, 58, 0.16) 52%, rgba(245, 240, 235, 0) 100%),
+          #F5F0EB;
+        transform-origin: left center;
+      }
+
+      .veil::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        left: 54%;
+        background: #C96A3A;
+        opacity: 0.68;
+      }
+
+      .underline-action {
+        display: inline-block;
+        position: relative;
+        width: max-content;
+        margin-top: 16px;
+        color: #C96A3A;
+        font-size: 34px;
+        line-height: 1.2;
+        font-weight: 650;
+      }
+
+      .underline-action::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 3px;
+        background: #C96A3A;
+        transform-origin: left center;
+      }
+
+      .footer-meta {
+        position: absolute;
+        left: 128px;
+        bottom: 78px;
+        color: #8B8178;
+        font-size: 21px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="85"
+      data-width="1920"
+      data-height="1080"
+    >
+      <section id="s1" class="clip scene" data-start="0" data-duration="5" data-track-index="1">
+        <div class="ghost-word enter bg-float" data-word="editor" data-layout-ignore data-layout-allow-overflow aria-hidden="true" style="right: -70px; top: 96px;"></div>
+        <div class="mark enter" style="right: 276px; bottom: 182px;"></div>
+        <div class="rail enter" style="left: 116px; bottom: 194px; width: 720px;"></div>
+        <div class="scene-content opening-grid">
+          <div class="opening-copy">
+            <div class="eyebrow enter">Codebolt</div>
+            <h1 class="display opening-title enter">Start like a code editor. <span class="accent">Scale</span> like an engine.</h1>
+            <p class="subcopy enter">Familiar coding surface. Engine underneath. Agents, plugins, memory, and orchestration ready to compound.</p>
+            <div class="type-cloud enter">
+              <span class="type-chip">Editor</span>
+              <span class="type-chip">CLI</span>
+              <span class="type-chip">Agent</span>
+              <span class="type-chip big">Engine</span>
+            </div>
+          </div>
+          <div class="code-window enter">
+            <div class="code-titlebar">
+              <span class="window-dot active"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="file-label">agent.ts</span>
+            </div>
+            <div class="code-body">
+              <div class="typed-row"><span class="line-no">01</span><span class="typed-text"><span class="code-key">import</span> &#123; agent, memory &#125; <span class="code-key">from</span> "codebolt";</span></div>
+              <div class="typed-row"><span class="line-no">02</span><span class="typed-text"><span class="code-key">const</span> workspace = agent.open(".");</span></div>
+              <div class="typed-row"><span class="line-no">03</span><span class="typed-text"><span class="code-soft">await</span> workspace.read("src/app.ts");</span></div>
+              <div class="typed-row"><span class="line-no">04</span><span class="typed-text">memory.keep("project conventions");</span></div>
+              <div class="typed-row"><span class="line-no">05</span><span class="typed-text">agent.run("ship the change")<span class="typing-cursor"></span></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s2" class="clip scene" data-start="5" data-duration="5" data-track-index="2">
+        <div class="ghost-word enter bg-float" data-word="engine" data-layout-ignore data-layout-allow-overflow aria-hidden="true" style="left: -90px; bottom: 54px;"></div>
+        <div class="scene-content split">
+          <div>
+            <div class="eyebrow enter">Position</div>
+            <h2 class="display tight enter">Not another agent. The <span class="accent">engine</span> that runs them.</h2>
+          </div>
+          <div class="floating-stack">
+            <div class="pin enter">agent</div>
+            <div class="pin enter">assistant</div>
+            <div class="pin enter">editor</div>
+            <div class="pin enter">orchestrator</div>
+            <div class="line enter" style="width: 440px;"></div>
+            <p class="smallcopy enter">One engine. Every scale.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="s3" class="clip scene" data-start="10" data-duration="6" data-track-index="1">
+        <div class="scene-content top">
+          <div class="eyebrow enter">Surfaces</div>
+          <h2 class="display enter">One engine, every surface.</h2>
+          <div class="surface-map">
+            <svg class="surface-lines" viewBox="0 0 1664 520" aria-hidden="true">
+              <line class="route-line active" x1="842" y1="264" x2="285" y2="120"></line>
+              <line class="route-line" x1="940" y1="266" x2="1268" y2="150"></line>
+              <line class="route-line" x1="840" y1="376" x2="498" y2="386"></line>
+              <line class="route-line active" x1="942" y1="376" x2="1218" y2="382"></line>
+              <circle class="route-node active" cx="285" cy="120" r="7"></circle>
+              <circle class="route-node" cx="1268" cy="150" r="7"></circle>
+              <circle class="route-node" cx="498" cy="386" r="7"></circle>
+              <circle class="route-node active" cx="1218" cy="382" r="7"></circle>
+            </svg>
+            <div class="surface enter" style="left: 54px; top: 42px;">CLI<small>terminal</small></div>
+            <div class="surface enter" style="right: 80px; top: 30px;">Editor<small>desktop IDE</small></div>
+            <div class="surface enter" style="left: 170px; bottom: 44px;">Cloud<small>browser workspace</small></div>
+            <div class="surface enter" style="right: 162px; bottom: 52px;">SDK<small>inside products</small></div>
+            <div class="engine-core enter"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s4" class="clip scene" data-start="16" data-duration="5" data-track-index="2">
+        <div class="ghost-word enter bg-float" data-word="cli" data-layout-ignore data-layout-allow-overflow aria-hidden="true" style="right: -118px; top: 70px;"></div>
+        <div class="scene-content split">
+          <div>
+            <div class="eyebrow enter">Start Small</div>
+            <h2 class="display enter">Start like a coding CLI.</h2>
+            <p class="subcopy enter">The terminal flow is familiar. The infrastructure mode is already waiting.</p>
+          </div>
+          <div class="floating-stack">
+            <div class="code-line enter">$ npm i -g codebolt<span class="cursor"></span></div>
+            <div class="code-line enter">$ codebolt plan</div>
+            <div class="code-line enter muted">read files -> edit -> test -> git commit</div>
+            <div class="line enter" style="width: 560px;"></div>
+            <div class="code-line enter accent">headless: ci / docker / cloud vm</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s5" class="clip scene" data-start="21" data-duration="12" data-track-index="1">
+        <div class="placeholder-field enter"></div>
+        <div class="placeholder-orbit enter"></div>
+        <h2 class="placeholder-title enter">Insert new product footage here.</h2>
+        <p class="placeholder-note enter">Reserved for the updated editor, cloud, or engine demo clip. Drop the final video into this beat and keep the annotations minimal.</p>
+        <div class="placeholder-label enter">Scene 5 footage placeholder / 12 seconds</div>
+        <div class="annotation enter" style="right: 164px; top: 154px;">new video layer</div>
+        <div class="annotation enter" style="left: 188px; bottom: 310px;">no current footage used</div>
+      </section>
+
+      <section id="s6" class="clip scene" data-start="33" data-duration="6" data-track-index="2">
+        <div class="ghost-word enter bg-float" data-word="programs" data-layout-ignore data-layout-allow-overflow aria-hidden="true" style="left: -132px; top: 84px;"></div>
+        <div class="scene-content split">
+          <div>
+            <div class="eyebrow enter">Agent SDK</div>
+            <h2 class="display enter">Agents are programs, not prompts.</h2>
+            <p class="subcopy enter">Remix, compose, or write them with SDK modules and tools.</p>
+          </div>
+          <div class="floating-stack">
+            <div class="check-line enter">local agents</div>
+            <div class="check-line enter">marketplace agents</div>
+            <div class="check-line enter">flow agents</div>
+            <div class="check-line enter">remote agents</div>
+            <div class="code-line enter accent">agent.use(file, git, browser, memory)</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s7" class="clip scene" data-start="39" data-duration="6" data-track-index="1">
+        <div class="scene-content top">
+          <div class="eyebrow enter">Open Layers</div>
+          <h2 class="display enter">Extend the engine itself.</h2>
+          <div class="progression">
+            <div class="stage enter">
+              <div class="stage-title">Agent SDK</div>
+              <div class="stage-caption">agents connect through engine tools</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">Plugin SDK</div>
+              <div class="stage-caption">custom UI, panels, events</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">Client SDK</div>
+              <div class="stage-caption">REST and WebSocket control</div>
+            </div>
+          </div>
+          <div class="type-cloud enter">
+            <span class="type-chip accent">72 REST modules</span>
+            <span class="type-chip">33 WebSocket modules</span>
+            <span class="type-chip">multiplexed events</span>
+            <span class="type-chip">HTTP actions</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="s8" class="clip scene" data-start="45" data-duration="6" data-track-index="2">
+        <div class="scene-content split">
+          <div>
+            <div class="eyebrow enter">Memory</div>
+            <h2 class="display enter">Memory makes agents compound.</h2>
+            <p class="subcopy enter">Context is assembled before the agent acts.</p>
+          </div>
+          <div class="floating-stack">
+            <div class="proof-line enter"><span class="sage">episodic</span><span>what happened</span></div>
+            <div class="proof-line enter"><span class="sage">persistent</span><span>what matters</span></div>
+            <div class="proof-line enter"><span class="sage">assembly</span><span>what to send now</span></div>
+            <div class="line enter" style="width: 620px;"></div>
+            <div class="code-line enter accent">vector db + graph + codebase index</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s9" class="clip scene" data-start="51" data-duration="6" data-track-index="1">
+        <div class="ghost-word enter bg-float" data-word="loop" data-layout-ignore data-layout-allow-overflow aria-hidden="true" style="right: -210px; bottom: 38px;"></div>
+        <div class="scene-content split">
+          <div>
+            <div class="eyebrow enter">Optimization</div>
+            <h2 class="display enter">Self-improving by design.</h2>
+            <p class="subcopy enter">Evaluate, adjust prompts and tools, track drift, keep the winner.</p>
+          </div>
+          <div class="floating-stack">
+            <div class="check-line enter struck">task -> score</div>
+            <div class="check-line enter struck">optimizer -> update</div>
+            <div class="check-line enter">rerun -> compare</div>
+            <div class="check-line enter">winner kept</div>
+            <div class="code-line enter muted">narrative versioning as flight recorder</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s10" class="clip scene" data-start="57" data-duration="6" data-track-index="2">
+        <div class="scene-content split">
+          <div>
+            <div class="eyebrow enter">Coordination</div>
+            <h2 class="display enter">Coordination, not collision.</h2>
+            <p class="subcopy enter">Agents share state, ownership, deliberation, and review paths.</p>
+          </div>
+          <div class="constellation">
+            <svg class="agent-links enter" viewBox="0 0 780 640" aria-hidden="true">
+              <line class="agent-link owner-link" x1="378" y1="302" x2="96" y2="160"></line>
+              <line class="agent-link" x1="378" y1="302" x2="646" y2="208"></line>
+              <line class="agent-link" x1="378" y1="302" x2="162" y2="488"></line>
+              <line class="agent-link owner-link" x1="378" y1="302" x2="598" y2="514"></line>
+            </svg>
+            <div class="agent-dot owner enter" style="left: 312px; top: 236px;"><span>parent</span></div>
+            <div class="agent-dot enter" style="left: 30px; top: 94px;"><span>review</span></div>
+            <div class="agent-dot enter" style="right: 68px; top: 142px;"><span>tests</span></div>
+            <div class="agent-dot enter" style="left: 96px; bottom: 86px;"><span>docs</span></div>
+            <div class="agent-dot enter" style="right: 116px; bottom: 60px;"><span>impl</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s11" class="clip scene" data-start="63" data-duration="6" data-track-index="1">
+        <div class="scene-content top">
+          <div class="eyebrow enter">Environments</div>
+          <h2 class="display enter">Scale across environments.</h2>
+          <div class="progression">
+            <div class="stage enter">
+              <div class="stage-title">Laptop</div>
+              <div class="stage-caption">local heartbeat</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">Docker GPU</div>
+              <div class="stage-caption">proxy execution</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">Cloud Cluster</div>
+              <div class="stage-caption">provider registry</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">Git Bundle</div>
+              <div class="stage-caption">state transfer</div>
+            </div>
+          </div>
+          <div class="type-cloud enter">
+            <span class="type-chip">chain</span>
+            <span class="type-chip">fan-out</span>
+            <span class="type-chip">peer-to-peer</span>
+            <span class="type-chip accent">hierarchical</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="s12" class="clip scene" data-start="69" data-duration="6" data-track-index="2">
+        <div class="scene-content top">
+          <div class="eyebrow enter">Arc</div>
+          <h2 class="display enter">From tool to autonomous company.</h2>
+          <div class="progression">
+            <div class="stage enter">
+              <div class="stage-title">CLI</div>
+              <div class="stage-caption">one agent</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">Editor</div>
+              <div class="stage-caption">real workspace</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">24/7 Agent</div>
+              <div class="stage-caption">always on</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title">Orchestration</div>
+              <div class="stage-caption">teams of agents</div>
+            </div>
+            <div class="stage enter">
+              <div class="stage-title accent">Company</div>
+              <div class="stage-caption">domains as plugins</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s13" class="clip scene" data-start="75" data-duration="5" data-track-index="1">
+        <div class="scene-content split">
+          <div>
+            <div class="eyebrow enter">Proof</div>
+            <h2 class="display enter">Built from scratch.</h2>
+            <p class="subcopy enter">Not forked. Not wrapped. Built for the agent era.</p>
+          </div>
+          <div class="floating-stack">
+            <div class="proof-line enter"><span class="proof-number">73</span><span>controllers</span></div>
+            <div class="proof-line enter"><span class="proof-number">134</span><span>services</span></div>
+            <div class="proof-line enter"><span class="proof-number">3</span><span>communication channels</span></div>
+            <div class="proof-line enter"><span class="proof-number">675+</span><span>tools</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s14" class="clip scene" data-start="80" data-duration="5" data-track-index="2">
+        <div class="ghost-word enter bg-float" data-word="codebolt" data-layout-ignore data-layout-allow-overflow aria-hidden="true" style="right: -86px; top: 96px;"></div>
+        <div class="rail sage-rail enter" style="left: 128px; top: 122px; width: 640px;"></div>
+        <div class="scene-content">
+          <div class="eyebrow enter">Codebolt</div>
+          <h2 class="display hero enter">The engine that scales with your ambition.</h2>
+          <div class="underline-action enter">Download Codebolt</div>
+        </div>
+        <div class="footer-meta enter">engine for agent-native software</div>
+      </section>
+
+      <div id="tr1" class="clip veil" data-start="4.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr2" class="clip veil" data-start="9.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr3" class="clip veil" data-start="15.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr4" class="clip veil" data-start="20.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr5" class="clip veil" data-start="32.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr6" class="clip veil" data-start="38.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr7" class="clip veil" data-start="44.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr8" class="clip veil" data-start="50.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr9" class="clip veil" data-start="56.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr10" class="clip veil" data-start="62.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr11" class="clip veil" data-start="68.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr12" class="clip veil" data-start="74.68" data-duration="0.64" data-track-index="8"></div>
+      <div id="tr13" class="clip veil" data-start="79.68" data-duration="0.64" data-track-index="8"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true, defaults: { ease: "power2.out" } });
+
+      const sceneStarts = {
+        s1: 0,
+        s2: 5,
+        s3: 10,
+        s4: 16,
+        s5: 21,
+        s6: 33,
+        s7: 39,
+        s8: 45,
+        s9: 51,
+        s10: 57,
+        s11: 63,
+        s12: 69,
+        s13: 75,
+        s14: 80,
+      };
+
+      const orderedScenes = [
+        ["#s1", 0],
+        ["#s2", 5],
+        ["#s3", 10],
+        ["#s4", 16],
+        ["#s5", 21],
+        ["#s6", 33],
+        ["#s7", 39],
+        ["#s8", 45],
+        ["#s9", 51],
+        ["#s10", 57],
+        ["#s11", 63],
+        ["#s12", 69],
+        ["#s13", 75],
+        ["#s14", 80],
+      ];
+
+      orderedScenes.forEach(([selector, start], index) => {
+        tl.set(selector, { visibility: "visible", opacity: 1 }, start);
+        if (index < orderedScenes.length - 1) {
+          const nextStart = orderedScenes[index + 1][1];
+          tl.set(selector, { visibility: "hidden", opacity: 0 }, nextStart + 0.34);
+        }
+      });
+
+      function enter(selector, start) {
+        const nodes = gsap.utils.toArray(selector + " .enter");
+        nodes.forEach((node, index) => {
+          const cycle = index % 5;
+          const fromVars = [
+            { opacity: 0, y: 54 },
+            { opacity: 0, x: -52 },
+            { opacity: 0, x: 58 },
+            { opacity: 0, scale: 0.92 },
+            { opacity: 0, y: -34 },
+          ][cycle];
+          const toVars = {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            scale: 1,
+            duration: [0.72, 0.56, 0.64, 0.82, 0.48][cycle],
+            ease: ["power3.out", "circ.out", "expo.out", "sine.out", "back.out(1.18)"][cycle],
+          };
+          tl.fromTo(node, fromVars, toVars, start + 0.18 + index * 0.055);
+        });
+      }
+
+      Object.entries(sceneStarts).forEach(([id, start]) => enter("#" + id, start));
+
+      gsap.utils.toArray(".veil").forEach((veil) => {
+        const start = Number(veil.dataset.start);
+        tl.fromTo(
+          veil,
+          { opacity: 0, xPercent: -104, filter: "blur(10px)" },
+          { opacity: 1, xPercent: 0, filter: "blur(0px)", duration: 0.28, ease: "power2.inOut" },
+          start,
+        );
+        tl.to(
+          veil,
+          { opacity: 0, xPercent: 104, filter: "blur(14px)", duration: 0.34, ease: "sine.inOut" },
+          start + 0.29,
+        );
+      });
+
+      tl.fromTo(".bg-float", { rotation: -0.6 }, { rotation: 0.6, duration: 4.6, ease: "sine.inOut", stagger: 0.12 }, 0.18);
+      tl.fromTo(
+        "#s1 .typed-text",
+        { clipPath: "inset(0 100% 0 0)" },
+        { clipPath: "inset(0 0% 0 0)", duration: 0.42, ease: "steps(18)", stagger: 0.28 },
+        1.0,
+      );
+      tl.fromTo("#s1 .typing-cursor", { opacity: 0 }, { opacity: 1, duration: 0.16, repeat: 7, yoyo: true, ease: "none" }, 2.7);
+      gsap.utils.toArray("#s3 .route-line").forEach((line, index) => {
+        const length = line.getTotalLength();
+        tl.fromTo(
+          line,
+          { strokeDasharray: length, strokeDashoffset: length, opacity: 0 },
+          { strokeDashoffset: 0, opacity: index % 3 === 0 ? 0.92 : 0.82, duration: 0.95, ease: "power2.out" },
+          10.75 + index * 0.08,
+        );
+      });
+      tl.fromTo("#s3 .route-node", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.42, ease: "back.out(1.4)", stagger: 0.08 }, 11.08);
+      tl.fromTo("#s3 .engine-core", { scale: 0.88 }, { scale: 1.05, duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 10.8);
+      tl.fromTo("#s5 .placeholder-orbit", { rotation: -10 }, { rotation: 10, duration: 10.5, ease: "sine.inOut" }, 21.6);
+      gsap.utils.toArray("#s10 .agent-link").forEach((line, index) => {
+        const length = line.getTotalLength();
+        tl.fromTo(
+          line,
+          { strokeDasharray: length, strokeDashoffset: length, opacity: 0 },
+          { strokeDashoffset: 0, opacity: index % 3 === 0 ? 0.88 : 0.82, duration: 0.82, ease: "power2.out" },
+          58.05 + index * 0.08,
+        );
+      });
+      tl.to("#s14 .enter", { opacity: 0, y: -22, duration: 0.7, ease: "power2.in" }, 84.15);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -10,18 +10,7 @@ import { Accordion, AccordionItem } from '@site/src/components/Accordion';
 
 Anything you build for Codebolt can be published to the marketplace — agents, plugins, skills, MCPs, and more. Once published, your item is discoverable and installable from the desktop app, CLI, and TUI.
 
-Publishing happens from the **cloud portal** or the **CLI**. Every entity type follows the same pattern:
-
-```bash
-# Create a new entity from a template
-codebolt action <entity> create --name my-item --path ./my-item
-
-# Publish to the registry
-codebolt action <entity> publish --path ./my-item
-
-# List what you've published
-codebolt action <entity> list
-```
+Publishing happens from the **cloud portal** or the **CLI**. Each extension type has matching `create`, `publish`, and `list` subcommands under `codebolt action`.
 
 ---
 

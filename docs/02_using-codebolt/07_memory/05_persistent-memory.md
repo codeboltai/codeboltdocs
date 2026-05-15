@@ -190,13 +190,7 @@ pipeline:
 
 ### Testing a pipeline
 
-Run a pipeline in isolation from the CLI:
-
-```sh
-codebolt memory pipeline run recent-decisions --query "how do we handle authentication?"
-```
-
-This prints the formatted output without assembling a full context, making it easy to verify the retrieval quality before relying on it in a live agent.
+Test a pipeline through the memory and observability surfaces your build exposes before relying on it in a live agent.
 
 ### Viewing pipeline execution
 

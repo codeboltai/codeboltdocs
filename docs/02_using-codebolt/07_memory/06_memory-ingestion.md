@@ -208,13 +208,7 @@ routes:
 
 ## Running ingestion manually
 
-Trigger a pipeline from the CLI without waiting for a lifecycle event:
-
-```sh
-codebolt memory ingest task-completion-ingestion --input "path/to/conversation.txt"
-```
-
-Useful for backfilling existing notes, importing external knowledge, or testing a new pipeline before relying on it in production.
+Trigger ingestion through the memory or ingestion surfaces your build exposes when you need backfills, imports, or pipeline testing.
 
 ## Monitoring ingestion
 

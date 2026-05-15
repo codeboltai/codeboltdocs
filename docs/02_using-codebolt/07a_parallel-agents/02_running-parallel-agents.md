@@ -43,9 +43,7 @@ A flow is a graph where nodes are agents and edges are data connections. The flo
 <Tabs groupId="surface">
 <TabItem value="cli" label="CLI" default>
 
-```bash
-codebolt flow run my-pipeline --input '{"task": "..."}'
-```
+The current CLI does not expose the older flow-execution commands from previous drafts.
 
 </TabItem>
 <TabItem value="desktop" label="Desktop">
@@ -69,9 +67,7 @@ POST /api/flows/:name/run
 
 A swarm is a group of agents that share a common goal, communicate through a shared memory space, and divide work dynamically without a fixed graph. Agents in a swarm pick up tasks from a shared queue rather than being explicitly assigned them.
 
-```bash
-codebolt swarm start --agents researcher,writer,reviewer --task "..."
-```
+The current CLI does not expose the older swarm command family from previous drafts. Use the desktop orchestration surfaces that your build provides.
 
 **Use this when:** the work is large, exploratory, or hard to decompose upfront. See [Running a swarm](../07_multi-agent-usage/02_running-a-swarm.md).
 
@@ -112,12 +108,5 @@ If you hit concurrency limits, new runs queue until a slot opens. See [Self-host
 Stop individual runs from the Running Agent panel, or from the chat tab. To stop all runs in a swarm:
 
 ```bash
-codebolt swarm stop <swarm_id>
-```
-
-To stop a specific run:
-
-```bash
-codebolt agent stop <run_id>   # graceful
-codebolt agent kill <run_id>   # force
+codebolt command agents stop --id <agentId>
 ```

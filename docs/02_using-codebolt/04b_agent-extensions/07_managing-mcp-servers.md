@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 # Managing MCP Servers
 
-Once MCP servers are installed, there are five ways to manage them — desktop app, CLI, TUI, HTTP API, and the Plugin SDK. The mental model is the same across all of them: a server is a supervised process with a lifecycle (start → running → stopped / crashed), a config file, logs, and resource limits. Pick your surface and the commands follow.
+Once MCP servers are installed, the mental model is the same across surfaces: a server is a supervised process with a lifecycle, config, logs, and resource limits.
 
 :::tip Pilot page
 This page is the pilot for our **feature-first + tabbed surfaces** pattern. The conceptual explanation is shared; the surface-specific commands live in tabs. If this reads well to you, the rest of *Using Codebolt* will follow the same shape.
@@ -33,17 +33,12 @@ Every installed MCP server has:
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-**Settings → Tools → MCP Servers.** Click a server to see its state. Per-server controls appear inline: **Start**, **Stop**, **Restart**. The state pill updates within a second of the action.
+Use the MCP server or Tools management surface exposed by your build to inspect state and control the server lifecycle.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt tool start <name>
-codebolt tool stop <name>
-codebolt tool restart <name>
-codebolt tool list          # show all servers + state
-```
+The current CLI does not expose the older runtime tool lifecycle commands from previous drafts.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -104,17 +99,12 @@ Everything a server writes to **stderr** is captured as logs. (Stdout is reserve
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-Tools panel → click a server → **Logs** tab. Supports tail, follow-mode, text filter, and download-as-file.
+Use the logs view in the MCP server or Tools management UI.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt tool logs <name>
-codebolt tool logs <name> --tail 100
-codebolt tool logs <name> --follow
-codebolt tool logs <name> --since "1h ago"
-```
+The current CLI does not expose the older runtime tool log commands from previous drafts.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -150,15 +140,12 @@ for await (const line of codebolt.tools.logStream('my-server')) {
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-Tools panel → select server → **Update** button. If the server is registry-managed and a newer version is available, the button is enabled; otherwise it's greyed out.
+Use the update action in the MCP server or Tools management UI when your build exposes one.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-codebolt tool update <name>
-codebolt tool update <name>@2.0.0
-```
+The current CLI does not expose the older runtime tool update commands from previous drafts.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -196,19 +183,12 @@ Two very different operations:
 <Tabs groupId="surface">
 <TabItem value="desktop" label="Desktop" default>
 
-Tools panel → server context menu → **Disable** (toggle) or **Uninstall** (confirmation dialog).
+Use the disable or uninstall actions in the MCP server or Tools management UI when your build exposes them.
 
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-```bash
-# disable
-codebolt tool disable <name>
-codebolt tool enable <name>
-
-# uninstall
-codebolt tool uninstall <name>
-```
+The current CLI does not expose the older runtime tool disable, enable, or uninstall commands from previous drafts.
 
 </TabItem>
 <TabItem value="tui" label="TUI">
@@ -258,7 +238,7 @@ servers:
     health_check_timeout_seconds: 5
 ```
 
-State (`healthy` / `unhealthy`) shows up in the Tools panel pill, the `codebolt tool list` output, the TUI list column, the `GET /api/tools` response, and the SDK's `tools.list()` return — same data, rendered per surface.
+State (`healthy` / `unhealthy`) appears in the management surface your build exposes, as well as API and SDK responses where available.
 
 ## Resource limits
 
@@ -303,11 +283,7 @@ The same 5-step flowchart, regardless of surface:
 <Tabs groupId="surface">
 <TabItem value="cli" label="CLI" default>
 
-```bash
-codebolt tool list                              # 1
-codebolt tool logs <name> --tail 50             # 2
-codebolt tool call <server>.<tool> --args '{}'  # 3
-```
+The current CLI does not expose the older direct MCP runtime debugging commands. Use the management UI and any deployment-specific APIs your build exposes.
 
 </TabItem>
 <TabItem value="desktop" label="Desktop">
@@ -330,21 +306,12 @@ POST /api/tools/:server/:tool/call  { "args": {} }
 
 ## Auditing which servers are doing what
 
-The event log has every tool call. One query, any surface:
-
-```bash
-codebolt events query "type == tool.call" --since "1 day ago" --json | \
-  jq -r '.tool | split(".")[0]' | sort | uniq -c | sort -rn
-```
-
-Shows tool-call counts grouped by server. Useful for spotting **unused servers** (candidates to uninstall) and **heavy users** (candidates to investigate for cost or correctness).
-
-The same query works through the HTTP API (`POST /api/events/query`) and the SDK (`codebolt.events.query(...)`), so you can build dashboards on top of it from wherever.
+Audit tool usage through the observability surfaces exposed by your build or self-hosted deployment. Older event-query CLI examples are not part of the current `packages/cli` implementation.
 
 ## See also
 
 - [Agent Extensions Overview](./01_overview.md)
 - [Installing MCP Servers](./06_installing-mcp-servers.md)
 - [Agent Tools](../05a_tools-and-mcp/01_overview.md)
-- [CLI reference](../02_surfaces/03_cli/01_overview.md) — exhaustive list of `codebolt tool` commands
+- [CLI reference](../02_surfaces/03_cli/01_overview.md) — current CLI surface overview
 - [MCP & Tools (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/02_mcp-and-tools.md)

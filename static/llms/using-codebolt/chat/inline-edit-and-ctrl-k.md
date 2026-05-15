@@ -43,12 +43,6 @@ The fastest way to make an LLM-assisted change: select some code, press **Ctrl+K
 
 Ctrl+K uses a special lightweight agent optimised for the inline workflow. It's fast but narrow — if you need more, switch to chat.
 
-## Model selection for Ctrl+K
-
-**Settings → Chat → Inline edit model** sets which model Ctrl+K uses. Usually you want a fast mid-tier model here — the interaction is about iteration speed, not maximum quality.
-
-A common setup: flagship model for chat (quality when you need it), fast model for Ctrl+K (speed for inline work).
-
 ## Multi-line selections
 
 Ctrl+K handles multi-line selections well. Select an entire function, a code block, or even a whole file section — the inline edit will rewrite the whole selection.
