@@ -15,6 +15,9 @@ cbapicategory:
   - name: sendManualInterrupt
     link: /docs/api/apiaccess/terminal/sendManualInterrupt
     description: "Sends a manual interrupt signal (Ctrl+C) to stop a running command or process in the terminal."
+  - name: tui
+    link: /docs/api/apiaccess/terminal/tui
+    description: Runs, attaches to, reads, and controls terminal UI sessions through a headless xterm mirror. Supports visible Terminal panels, background PTYs, existing terminal attachment, screen snapshots, waits, typing, key presses, mouse wheel input, and cleanup.
 
 ---
 # terminal
@@ -30,6 +33,7 @@ The `terminal` module provides comprehensive command-line interface capabilities
 - **Stream Execution**: Monitor real-time output with `executeCommandWithStream()`
 - **Error-Based Execution**: Run commands until error with `executeCommandRunUntilError()`
 - **Process Control**: Interrupt running commands with `sendManualInterrupt()`
+- **TUI Control**: Drive interactive terminal applications with `terminal.tui.*`
 
 ### Output Handling
 - **Standard Output**: Capture command stdout for processing
