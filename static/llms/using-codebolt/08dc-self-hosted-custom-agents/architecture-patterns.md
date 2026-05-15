@@ -4,6 +4,8 @@
 
 The goal of this page is not to present one "correct" architecture. It is to give customers a set of practical patterns they can adapt.
 
+The diagram below is a compact reference model for the patterns that follow.
+
 ## Pattern 1: Personal agent on a local machine
 
 **Shape:** one user, one runtime, local context, optional UI.
@@ -178,3 +180,4 @@ The best architecture usually depends on four decisions:
 - [Custom Agentic Application](../08da_custom-agentic-application/01_overview.md)
 - [Autonomous Companies](../08db_autonomous-companies/01_overview.md)
 - [Cloud](../08f_cloud/01_overview.md)
+- [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md)

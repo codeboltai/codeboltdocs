@@ -39,6 +39,9 @@ cbapicategory:
   - name: click
     link: /docs/api/apiaccess/browser/click
     description: Clicks on a specific element using its element ID or selector. Triggers native click events and JavaScript handlers.
+  - name: advanced interactions and diagnostics
+    link: /docs/api/apiaccess/browser/advancedActions
+    description: Documents locator-based actions, element queries, assertions, storage, cookies, network logging, tracing, profiling, recording, clipboard, uploads, downloads, and tab utilities.
   - name: enter
     link: /docs/api/apiaccess/browser/enter
     description: Simulates pressing the Enter key on the current page. Useful for form submissions and triggering actions.
@@ -103,10 +106,18 @@ The Browser API provides comprehensive web automation capabilities for CodeboltJ
 
 ### User Interaction
 - **Clicking**: Click elements with `click()`
+- **Locator Queries**: Find elements with `find()`, read values with `get()`, and check state with `is()`
 - **Typing**: Input text with `type()`
 - **Searching**: Perform searches with `search()`
 - **Key Presses**: Simulate Enter key with `enter()`
 - **Scrolling**: Scroll pages with `scroll()`
+- **Form Controls**: Use `focus()`, `press()`, `check()`, `uncheck()`, and `select()` for precise form automation
+
+### Diagnostics and Browser State
+- **Storage and Cookies**: Read and mutate `localStorage`, `sessionStorage`, and browser cookies
+- **Network Inspection**: Start network capture, read requests, generate HAR output, and clear captured entries
+- **Debug Artifacts**: Capture console output, page errors, traces, profiler data, and page recordings
+- **Tabs and Files**: Manage tabs, upload files, download files, and use the system clipboard
 
 ### Visual Capture
 - **Screenshots**: Capture page visuals with `screenshot()`

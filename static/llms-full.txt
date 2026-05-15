@@ -1045,7 +1045,7 @@ All panels are accessible from the **Bottom Bar**. Click the panel count badge (
 
 From a user's point of view, an agent is the "who" that handles your chat. When you type a message, an agent receives it, reads the code, decides what to do, calls tools, and reports back. Different agents are good at different things.
 
-This page is the user's view. If you want to *build* an agent, see [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). If you want to understand how agents work internally, see [Agent Subsystem (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md).
+This page is the user's view. For the framework view — defining agents in code with `@codebolt/agent` and calling them from your own application via `@codebolt/client-sdk`, comparable to LangChain or Mastra — see [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md). If you want to *build* an agent, see [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). If you want to understand how agents work internally, see [Agent Subsystem (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md).
 
 ## Mental model
 
@@ -1160,6 +1160,7 @@ See [Agent Debug](../05c_agent-observability/02_agent-debug.md).
 
 ## See also
 
+- [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md) — the LangChain / Mastra / Vercel-AI-SDK comparison
 - [Running agents](./03_running-agents.md)
 - [Built-in agents](./02_built-in-agents.md)
 - [The marketplace](./04_the-marketplace.md)
@@ -2127,6 +2128,25 @@ In other words: **Codebolt can be the infrastructure layer for the agentic world
 | [Architecture Patterns](./04_architecture-patterns.md) | Repeatable architecture shapes for personal, team, embedded, and multi-agent deployments |
 | [Implementation Anchors](./05_implementation-anchors.md) | How the platform packages map to these architectures, including server, SDK, plugin, gateway, and sandbox examples |
 
+## How this connects to the deeper infrastructure docs
+
+This section is the **customer-facing architecture layer**.
+
+It explains how to think about Codebolt as agent infrastructure:
+
+- what business problems it can solve
+- what architectural shapes it can take
+- how buyers and solution teams should frame the platform
+
+The deeper implementation and operations material lives in [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md), including:
+
+- [Running the Server](../../04_build-on-codebolt/11_agent-infrastructure/02_running-the-server.md)
+- [Database](../../04_build-on-codebolt/11_agent-infrastructure/03_database.md)
+- [Storage Backends](../../04_build-on-codebolt/11_agent-infrastructure/04_storage-backends.md)
+- [Scaling and Workers](../../04_build-on-codebolt/11_agent-infrastructure/05_scaling-and-workers.md)
+- [Security Hardening](../../04_build-on-codebolt/11_agent-infrastructure/06_security-hardening.md)
+- [Remote Execution](../../04_build-on-codebolt/11_agent-infrastructure/09_remote-execution.md)
+
 ## Why this framing helps
 
 If customers only think of Codebolt as a coding editor, they will underuse it.
@@ -2151,6 +2171,7 @@ That leads to much better architecture decisions, especially for companies that 
 - [Custom Agentic Application](../08da_custom-agentic-application/01_overview.md)
 - [Autonomous Companies](../08db_autonomous-companies/01_overview.md)
 - [Cloud](../08f_cloud/01_overview.md)
+- [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md)
 
 ---
 
@@ -5949,6 +5970,8 @@ If you're a single user, you're already self-hosting — the desktop app runs th
 
 Don't self-host for a team of 1-3 people unless you need it. The overhead is real. The break-even is somewhere around "enough users that shared memory and central policy are paying for themselves".
 
+If you want the business-facing and solution-architecture view of the same topic, see [Self Hosted Agent Infrastructure](../../02_using-codebolt/08dc_self-hosted-custom-agents/01_overview.md) in the Using Codebolt docs.
+
 ## What's in this section
 
 - **[Running the server](./02_running-the-server.md)** — process management, env vars, ports, first-boot.
@@ -6011,6 +6034,7 @@ Auth is the boundary; everything else is defence in depth. A self-hosted server 
 
 ## See also
 
+- [Self Hosted Agent Infrastructure](../../02_using-codebolt/08dc_self-hosted-custom-agents/01_overview.md) for business-facing deployment patterns and use-case framing
 - [Architecture Overview](../09_internals/01_architecture-overview.md) — understand the system before hosting it
 - [Process Model](../09_internals/02_process-model.md) — what runs where
 - [Persistence & Event Log](../09_internals/03_subsystems/12_persistence-and-eventlog.md) — the storage floor

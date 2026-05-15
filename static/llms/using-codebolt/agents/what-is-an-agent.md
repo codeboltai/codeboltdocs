@@ -4,7 +4,7 @@
 
 From a user's point of view, an agent is the "who" that handles your chat. When you type a message, an agent receives it, reads the code, decides what to do, calls tools, and reports back. Different agents are good at different things.
 
-This page is the user's view. If you want to *build* an agent, see [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). If you want to understand how agents work internally, see [Agent Subsystem (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md).
+This page is the user's view. For the framework view — defining agents in code with `@codebolt/agent` and calling them from your own application via `@codebolt/client-sdk`, comparable to LangChain or Mastra — see [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md). If you want to *build* an agent, see [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). If you want to understand how agents work internally, see [Agent Subsystem (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md).
 
 ## Mental model
 
@@ -119,6 +119,7 @@ See [Agent Debug](../05c_agent-observability/02_agent-debug.md).
 
 ## See also
 
+- [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md) — the LangChain / Mastra / Vercel-AI-SDK comparison
 - [Running agents](./03_running-agents.md)
 - [Built-in agents](./02_built-in-agents.md)
 - [The marketplace](./04_the-marketplace.md)

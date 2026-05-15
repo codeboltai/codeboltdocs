@@ -23,6 +23,8 @@ If you're a single user, you're already self-hosting — the desktop app runs th
 
 Don't self-host for a team of 1-3 people unless you need it. The overhead is real. The break-even is somewhere around "enough users that shared memory and central policy are paying for themselves".
 
+If you want the business-facing and solution-architecture view of the same topic, see [Self Hosted Agent Infrastructure](../../02_using-codebolt/08dc_self-hosted-custom-agents/01_overview.md) in the Using Codebolt docs.
+
 ## What's in this section
 
 - **[Running the server](./02_running-the-server.md)** — process management, env vars, ports, first-boot.
@@ -85,7 +87,7 @@ Auth is the boundary; everything else is defence in depth. A self-hosted server 
 
 ## See also
 
-- Self Hosted Agent Infrastructure in the Using Codebolt docs for business-facing deployment patterns and use-case framing
+- [Self Hosted Agent Infrastructure](../../02_using-codebolt/08dc_self-hosted-custom-agents/01_overview.md) for business-facing deployment patterns and use-case framing
 - [Architecture Overview](../09_internals/01_architecture-overview.md) — understand the system before hosting it
 - [Process Model](../09_internals/02_process-model.md) — what runs where
 - [Persistence & Event Log](../09_internals/03_subsystems/12_persistence-and-eventlog.md) — the storage floor

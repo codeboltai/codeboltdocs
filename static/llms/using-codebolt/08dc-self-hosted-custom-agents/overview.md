@@ -54,6 +54,25 @@ In other words: **Codebolt can be the infrastructure layer for the agentic world
 | [Architecture Patterns](./04_architecture-patterns.md) | Repeatable architecture shapes for personal, team, embedded, and multi-agent deployments |
 | [Implementation Anchors](./05_implementation-anchors.md) | How the platform packages map to these architectures, including server, SDK, plugin, gateway, and sandbox examples |
 
+## How this connects to the deeper infrastructure docs
+
+This section is the **customer-facing architecture layer**.
+
+It explains how to think about Codebolt as agent infrastructure:
+
+- what business problems it can solve
+- what architectural shapes it can take
+- how buyers and solution teams should frame the platform
+
+The deeper implementation and operations material lives in [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md), including:
+
+- [Running the Server](../../04_build-on-codebolt/11_agent-infrastructure/02_running-the-server.md)
+- [Database](../../04_build-on-codebolt/11_agent-infrastructure/03_database.md)
+- [Storage Backends](../../04_build-on-codebolt/11_agent-infrastructure/04_storage-backends.md)
+- [Scaling and Workers](../../04_build-on-codebolt/11_agent-infrastructure/05_scaling-and-workers.md)
+- [Security Hardening](../../04_build-on-codebolt/11_agent-infrastructure/06_security-hardening.md)
+- [Remote Execution](../../04_build-on-codebolt/11_agent-infrastructure/09_remote-execution.md)
+
 ## Why this framing helps
 
 If customers only think of Codebolt as a coding editor, they will underuse it.
@@ -78,3 +97,4 @@ That leads to much better architecture decisions, especially for companies that 
 - [Custom Agentic Application](../08da_custom-agentic-application/01_overview.md)
 - [Autonomous Companies](../08db_autonomous-companies/01_overview.md)
 - [Cloud](../08f_cloud/01_overview.md)
+- [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md)
