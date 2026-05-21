@@ -125,6 +125,22 @@ plugin.onRawMessage((message) => {
 });
 ```
 
+### Listening to dynamic agent events
+
+Plugins can subscribe to named events emitted by agents. Use this for application-level observers, external notifications, dashboards, or integrations that need to react when an agent reaches a domain-specific point.
+
+```ts
+import plugin from '@codebolt/plugin-sdk';
+
+plugin.onStart(async () => {
+  await plugin.agentEvents.onAgentEvent('test.failed', async (event) => {
+    console.log('Agent event:', event.payload?.name, event.payload?.data);
+  });
+});
+```
+
+Agents emit these events with `codebolt.agentEvents.emit(...)`. See [Dynamic Agent Events](../02_creating-agents/08_dynamic-agent-events.md).
+
 ### Environment variables
 
 When CodeBolt spawns a plugin process, these env vars are set:
@@ -586,6 +602,7 @@ Every plugin (regardless of type) has access to these modules:
 | `plugin.browser` | Browser automation |
 | **System** | |
 | `plugin.hook` | Hook into application events |
+| `plugin.agentEvents` | Listen for dynamic events emitted by agents |
 | `plugin.narrative` | Narrative context |
 | `plugin.eventLog` | Event logging |
 | `plugin.debug` | Debug utilities |

@@ -18,8 +18,9 @@ Open via: **Agents dropdown → Hooks**
 | **Git** | `gitCommit`, `gitPush` |
 | **Thread** | `threadCreated`, `threadCompleted` |
 | **Agent** | `agentStarted`, `agentCompleted` |
+| **Event** | `dynamicAgentEvent` |
 
-File triggers support **glob patterns** to match specific paths (e.g., `src/**/*.ts`). Git triggers support **branch filters**. Thread and agent triggers support filtering by creator (`user` / `agent` / `any`) and agent type (`main` / `sub` / `any`).
+File triggers support **glob patterns** to match specific paths (e.g., `src/**/*.ts`). Git triggers support **branch filters**. Thread and agent triggers support filtering by creator (`user` / `agent` / `any`) and agent type (`main` / `sub` / `any`). Dynamic agent event triggers can filter by `eventName`.
 
 ## Actions
 
@@ -106,6 +107,18 @@ then: { type: runCommand, command: "black ." }
 ```yaml
 when: { type: agentCompleted, agentTypeFilter: main }
 then: { type: runAgent, agentId: reviewer, runInSameThread: true }
+```
+
+**React to a custom agent event**
+```yaml
+when:
+  type: dynamicAgentEvent
+  eventName: plan.ready
+then:
+  type: runAgent
+  agentId: reviewer
+  instruction: "Review the plan emitted by the agent."
+  runInSameThread: true
 ```
 
 **Update docs on commit**

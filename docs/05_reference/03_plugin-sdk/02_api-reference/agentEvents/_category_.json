@@ -1,0 +1,10 @@
+{
+  "label": "agentEvents",
+  "position": 12,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "doc",
+    "id": "reference/plugin-sdk/api-reference/agentEvents/index"
+  }
+}

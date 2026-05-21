@@ -138,6 +138,7 @@ Agents are programs; test them like programs.
 - **Agent Debug Panel** — real-time logs for all running agents, with full history. See [Testing and debugging](./09_testing-and-debugging.md).
 - **Unit tests** — processors and tools are plain objects with a `modify` or `execute` method. Test them directly.
 - **Console logging** — everything your agent writes to stdout/stderr is captured and shown in the debug panel.
+- **Dynamic agent events** — emit named runtime events that hooks, plugins, and context assembly rules can react to. See [Dynamic Agent Events](./08_dynamic-agent-events.md).
 
 ## Publishing
 
@@ -150,6 +151,7 @@ When you're ready, your agent can be:
 
 - [Quickstart](./02_quickstart.md) — walk through level 0 and level 1 in ~15 min
 - [Agent Extensions](../03_agent-extensions/01_overview.md) — what any agent can consume
+- [Dynamic Agent Events](./08_dynamic-agent-events.md) — publish named events from an agent
 - [Auto-Optimize Agents](./10_auto-optimize-agents.md) — improve quality systematically
 - [Agent Subsystem internals](../09_internals/03_subsystems/01_agent-subsystem.md) — what happens under the hood
 - [Multi-Agent Orchestration](../08_multi-agent-orchestration/01_overview.md) — multi-agent patterns
