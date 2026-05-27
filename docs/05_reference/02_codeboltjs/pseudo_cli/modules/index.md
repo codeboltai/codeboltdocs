@@ -49,6 +49,7 @@ These pages are generated from `packages/codeboltjs/src/tools/pseudo-cli/command
 | [`reqplan`](./reqplan.md) | 5 | [SDK docs](../../10_api-access/requirementPlan/index.md) |
 | [`parse`](./parse.md) | 5 | [SDK docs](../../10_api-access/outputparsers/index.md) |
 | [`eventqueue`](./eventqueue.md) | 6 | Not available |
+| [`agentExecutionPhase`](./agent-execution-phase.md) | 3 | [SDK docs](../../10_api-access/agentExecutionPhase/index.md) |
 | [`deliberation`](./deliberation.md) | 7 | [SDK docs](../../10_api-access/agentDeliberation/index.md) |
 | [`portfolio`](./portfolio.md) | 5 | [SDK docs](../../10_api-access/agentPortfolio/index.md) |
 | [`actionblock`](./actionblock.md) | 3 | [SDK docs](../../10_api-access/actionBlock/index.md) |

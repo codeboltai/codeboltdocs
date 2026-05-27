@@ -53,6 +53,7 @@ Use this page as the index and use the per-module pages for the actual command r
 | [`reqplan`](./modules/reqplan.md) | 5 | [SDK docs](../10_api-access/requirementPlan/index.md) |
 | [`parse`](./modules/parse.md) | 5 | [SDK docs](../10_api-access/outputparsers/index.md) |
 | [`eventqueue`](./modules/eventqueue.md) | 6 | Not available |
+| [`agentExecutionPhase`](./modules/agent-execution-phase.md) | 3 | [SDK docs](../10_api-access/agentExecutionPhase/index.md) |
 | [`deliberation`](./modules/deliberation.md) | 7 | [SDK docs](../10_api-access/agentDeliberation/index.md) |
 | [`portfolio`](./modules/portfolio.md) | 5 | [SDK docs](../10_api-access/agentPortfolio/index.md) |
 | [`actionblock`](./modules/actionblock.md) | 3 | [SDK docs](../10_api-access/actionBlock/index.md) |
