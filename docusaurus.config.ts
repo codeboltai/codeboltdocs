@@ -156,7 +156,7 @@ const config: Config = {
               if (sidebarItem.type === 'category' && label) {
                 result.push({
                   type: 'html',
-                  value: `<div class="sidebar-section-rule"></div>`,
+                  value: `<div class="sidebar-section-label">${label}</div>`,
                   defaultStyle: false,
                 } as any);
               }

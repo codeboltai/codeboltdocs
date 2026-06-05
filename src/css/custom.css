@@ -464,11 +464,11 @@ div[class*="searchResults"] {
   color: var(--cb-muted) !important;
   font-weight: 500;
   padding: 0.5rem 0.5rem 0.35rem !important;
-  margin-top: 1rem;
+  margin-top: 0.1rem;
 }
 
 .theme-doc-sidebar-item-category-level-1:first-child > .menu__list-item-collapsible > .menu__link {
-  margin-top: 0;
+  margin-top: 0.04rem;
 }
 
 /* Sidebar item sizing — nested levels */
@@ -588,8 +588,8 @@ div[class*="searchResults"] {
 /* ── Category separator line between groups ── */
 .menu > .menu__list > .menu__list-item--collapsible + .menu__list-item--collapsible {
   border-top: 1px solid var(--cb-border);
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
+  margin-top: 0.16rem;
+  padding-top: 0.08rem;
 }
 
 [data-theme='dark'] .menu > .menu__list > .menu__list-item--collapsible + .menu__list-item--collapsible {
@@ -1849,13 +1849,42 @@ html:has(.navbar-sidebar--show) .navbar [class*="searchBar"] {
    SIDEBAR SECTION LABELS
    ═══════════════════════════════════════════ */
 
-.sidebar-section-rule {
-  margin: 1rem 0.75rem 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+.sidebar-section-label {
+  margin: 0.08rem 0.75rem 0.06rem;
+  padding: 0.22rem 0.45rem 0.14rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.1;
+  display: block;
+  border-left: 2px solid var(--ifm-color-primary);
+  background: var(--ifm-background-surface-color);
 }
 
-[data-theme='dark'] .sidebar-section-rule {
-  border-top-color: rgba(255, 255, 255, 0.08);
+.sidebar-section-label + .menu__list-item--collapsible,
+.sidebar-section-label + .menu__list-item--collapsible + .menu__list-item--collapsible {
+  margin-top: 0.06rem;
+}
+
+.theme-doc-sidebar-container .sidebar-section-label {
+  margin-top: 0.04rem;
+  margin-bottom: 0.08rem;
+}
+
+.theme-doc-sidebar-container .sidebar-section-label + .menu__list-item--collapsible > .menu__link {
+  margin-top: 0.02rem;
+}
+
+[data-theme='light'] .sidebar-section-label {
+  color: var(--ifm-color-emphasis-800);
+}
+
+[data-theme='dark'] .sidebar-section-label {
+  color: var(--ifm-color-emphasis-100);
+  border-left-color: var(--ifm-color-primary);
+  background: var(--ifm-background-surface-color);
 }
 
 /* ═══════════════════════════════════════════

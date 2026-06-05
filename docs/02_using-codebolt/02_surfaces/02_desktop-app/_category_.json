@@ -2,5 +2,8 @@
   "label": "Desktop App",
   "position": 2,
   "collapsible": true,
-  "collapsed": true
+  "collapsed": true,
+  "customProps": {
+    "sectionLabel": "Editor"
+  }
 }

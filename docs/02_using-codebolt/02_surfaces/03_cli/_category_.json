@@ -2,5 +2,8 @@
   "label": "CLI",
   "position": 3,
   "collapsible": true,
-  "collapsed": false
+  "collapsed": false,
+  "customProps": {
+    "sectionLabel": "CLI"
+  }
 }

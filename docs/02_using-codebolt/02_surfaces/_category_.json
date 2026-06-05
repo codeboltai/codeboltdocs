@@ -2,5 +2,8 @@
   "label": "Clients",
   "position": 2.7,
   "collapsible": true,
-  "collapsed": true
+  "collapsed": true,
+  "customProps": {
+    "sectionLabel": "Workspace"
+  }
 }

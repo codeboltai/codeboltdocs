@@ -1,9 +1,6 @@
 {
-  "label": "Editor Interface",
+  "label": "Chat",
   "position": 3,
   "collapsible": true,
-  "collapsed": true,
-  "customProps": {
-    "sectionLabel": "Workspace"
-  }
+  "collapsed": true
 }
