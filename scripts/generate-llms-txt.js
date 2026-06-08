@@ -1,12 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const { createHash } = require('crypto');
 
 const SITE_URL = 'https://docs.codebolt.ai';
 const ROOT = path.resolve(__dirname, '..');
 const DOCS_DIR = path.join(ROOT, 'docs');
-const STATIC_DIR = path.join(ROOT, 'static');
-const LLMS_DIR = path.join(STATIC_DIR, 'llms');
+const LLM_TEMP_DIR = path.join(ROOT, '.llmtemp');
+const LLM_JSONL_PATH = path.join(LLM_TEMP_DIR, 'llm.jsonl');
+const LLM_MANIFEST_PATH = path.join(LLM_TEMP_DIR, 'llm-manifest.json');
+const LLM_ROOT = 'llms';
 
 const SECTION_CONFIG = [
   { prefix: '1_index.md', heading: 'Start Here', order: 0 },
@@ -29,6 +32,10 @@ const EXCLUDE_SUBSTRINGS = [
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
+}
+
+function createDigest(text) {
+  return createHash('sha256').update(text, 'utf8').digest('hex');
 }
 
 function walk(dirPath) {
@@ -170,7 +177,7 @@ function toLlmsPath(relativePath) {
     .filter(Boolean)
     .map(slugSegment);
   const fileName = `${slugSegment(parsed.base)}.md`;
-  return path.posix.join('llms', ...dirParts, fileName);
+  return path.posix.join(...dirParts, fileName);
 }
 
 function removeDuplicateTopHeading(title, body) {
@@ -208,8 +215,8 @@ function main() {
     .filter(({ relativePath }) => shouldInclude(relativePath))
     .sort((a, b) => a.relativePath.localeCompare(b.relativePath));
 
-  fs.rmSync(LLMS_DIR, { recursive: true, force: true });
-  ensureDir(LLMS_DIR);
+  fs.rmSync(LLM_TEMP_DIR, { recursive: true, force: true });
+  ensureDir(LLM_TEMP_DIR);
 
   const docs = sourceFiles.map(({ fullPath, relativePath }) => {
     const raw = fs.readFileSync(fullPath, 'utf8');
@@ -225,25 +232,22 @@ function main() {
       body: bodyWithoutTitle,
     });
 
-    const absoluteOutput = path.join(STATIC_DIR, llmsPath);
-    ensureDir(path.dirname(absoluteOutput));
-    fs.writeFileSync(absoluteOutput, markdown, 'utf8');
-
     return {
       relativePath: relativePath.replace(/\\/g, '/'),
       section: sectionFor(relativePath),
       title,
       description,
       llmsPath: llmsPath.replace(/\\/g, '/'),
-      url: `${SITE_URL}/${llmsPath.replace(/\\/g, '/')}`,
+      url: `${SITE_URL}/${LLM_ROOT}/${llmsPath.replace(/\\/g, '/')}`,
       markdown,
+      digest: createDigest(markdown),
       curated: isCuratedForIndex(relativePath),
     };
   });
 
   const curatedDocs = docs.filter((doc) => doc.curated);
 
-  const grouped = curatedDocs.reduce((map, doc) => {
+  const grouped = docs.reduce((map, doc) => {
     const key = doc.section.heading;
     if (!map.has(key)) {
       map.set(key, []);
@@ -258,51 +262,41 @@ function main() {
     return sectionA - sectionB;
   });
 
-  const llmsLines = [
-    '# CodeBolt Documentation',
-    '',
-    '> Product documentation for CodeBolt, an AI-native coding environment with multi-agent orchestration, MCP tooling, and extensible agent architecture.',
-    '',
-    'This file provides a curated index of the most important documentation. Each link points to a clean markdown mirror suitable for LLM retrieval. For exhaustive API/type details see the Reference section overviews.',
-    '',
-  ];
+  const serialized = docs
+    .map((doc) =>
+      JSON.stringify({
+        ...doc,
+        relativePath: doc.relativePath,
+        section: doc.section,
+      }),
+    )
+    .join('\n');
+  fs.writeFileSync(LLM_JSONL_PATH, `${serialized}\n`, 'utf8');
 
-  for (const [heading, sectionDocs] of orderedSections) {
-    llmsLines.push(`## ${heading}`, '');
-    for (const doc of sectionDocs) {
-      const description = doc.description ? `: ${doc.description}` : '';
-      llmsLines.push(`- [${doc.title}](${doc.url})${description}`);
-    }
-    llmsLines.push('');
-  }
-
-  const llmsTxt = `${llmsLines.join('\n').trim()}\n`;
-  fs.writeFileSync(path.join(STATIC_DIR, 'llms.txt'), llmsTxt, 'utf8');
-
-  const llmsFullLines = [
-    '# CodeBolt Documentation',
-    '',
-    '> Product documentation for CodeBolt, an AI-native coding environment with multi-agent orchestration, MCP tooling, and extensible agent architecture.',
-    '',
-    'This file contains the full content of all curated documentation pages. For a link-only index see [llms.txt](./llms.txt).',
-    '',
-    '---',
-    '',
-  ];
-
-  for (const [heading, sectionDocs] of orderedSections) {
-    llmsFullLines.push(`## ${heading}`, '');
-    for (const doc of sectionDocs) {
-      llmsFullLines.push(doc.markdown.trim(), '');
-      llmsFullLines.push('---', '');
-    }
-  }
-
-  const llmsFullTxt = `${llmsFullLines.join('\n').trim()}\n`;
-  fs.writeFileSync(path.join(STATIC_DIR, 'llms-full.txt'), llmsFullTxt, 'utf8');
+  fs.writeFileSync(
+    LLM_MANIFEST_PATH,
+    JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        sourceCount: docs.length,
+        curatedCount: curatedDocs.length,
+        sections: orderedSections.map(([heading, sectionDocs]) => ({
+          heading,
+          count: sectionDocs.length,
+          order: sectionDocs[0]?.section?.order ?? 99,
+          files: sectionDocs.map((doc) => ({ path: doc.llmsPath, title: doc.title })),
+        })),
+        file: path.relative(ROOT, LLM_JSONL_PATH).replace(/\\/g, '/'),
+        urlPrefix: `${SITE_URL}/${LLM_ROOT}`,
+      },
+      null,
+      2,
+    ),
+    'utf8',
+  );
 
   console.log(
-    `Generated llms.txt (${curatedDocs.length} curated entries), llms-full.txt, and ${docs.length} markdown mirrors in static/llms/.`,
+    `Generated .llmtemp/llm.jsonl (${docs.length} pages, ${curatedDocs.length} curated) for LLM use.`,
   );
 }
 

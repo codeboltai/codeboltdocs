@@ -1850,16 +1850,46 @@ html:has(.navbar-sidebar--show) .navbar [class*="searchBar"] {
    ═══════════════════════════════════════════ */
 
 .sidebar-section-label {
-  margin: 0.08rem 0.75rem 0.06rem;
-  padding: 0.22rem 0.45rem 0.14rem;
+  margin: 0 0.55rem 0.12rem;
+  padding: 0.34rem 0 0.24rem;
   color: var(--ifm-color-emphasis-700);
-  font-size: 0.7rem;
-  letter-spacing: 0.07em;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1.1;
   display: block;
-  border-left: 2px solid var(--ifm-color-primary);
+  text-align: left;
+  position: relative;
+}
+
+  .theme-doc-sidebar-container .theme-doc-sidebar-item-html .sidebar-section-label {
+    margin-top: 0.85rem;
+  }
+
+  .theme-doc-sidebar-container .theme-doc-sidebar-item-html:first-of-type .sidebar-section-label {
+    margin-top: 0;
+  }
+
+.sidebar-section-label::before {
+  content: '';
+  position: absolute;
+  left: 0.55rem;
+  right: 0.55rem;
+  top: 60%;
+  height: 1px;
+  background: var(--cb-border);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sidebar-section-label span {
+  position: relative;
+  z-index: 1;
+  padding: 0 0.52rem;
+  display: inline-block;
   background: var(--ifm-background-surface-color);
 }
 
@@ -1869,8 +1899,9 @@ html:has(.navbar-sidebar--show) .navbar [class*="searchBar"] {
 }
 
 .theme-doc-sidebar-container .sidebar-section-label {
-  margin-top: 0.04rem;
-  margin-bottom: 0.08rem;
+  margin: 0 0.55rem 0.08rem;
+  width: auto;
+  box-sizing: border-box;
 }
 
 .theme-doc-sidebar-container .sidebar-section-label + .menu__list-item--collapsible > .menu__link {
@@ -1882,8 +1913,19 @@ html:has(.navbar-sidebar--show) .navbar [class*="searchBar"] {
 }
 
 [data-theme='dark'] .sidebar-section-label {
-  color: var(--ifm-color-emphasis-100);
-  border-left-color: var(--ifm-color-primary);
+  color: #fff;
+}
+
+[data-theme='dark'] .sidebar-section-label::before {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme='light'] .sidebar-section-label::before {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+[data-theme='dark'] .sidebar-section-label span,
+[data-theme='light'] .sidebar-section-label span {
   background: var(--ifm-background-surface-color);
 }
 
