@@ -20,11 +20,15 @@ data:
 ---
 # executeCommandRunUntilError
 
+:::caution Legacy API
+Prefer `executeCommand()` with `executionMode: 'background'` or `executionMode: 'auto'` for new agent-facing command execution. Use this method only when maintaining older code that expects the promise to resolve only after an error.
+:::
+
 ```typescript
 codebolt.terminal.executeCommandRunUntilError(command: string, executeInMain: boolean): Promise<CommandError>
 ```
 
-Executes a given command and keeps running until an error occurs. This method is designed for long-running processes that should continue executing until they encounter an error condition. It listens for WebSocket messages and resolves the promise when an error is encountered. 
+Executes a command and keeps running until an error occurs. This API is kept for compatibility with older agents. For new code, prefer `executeCommand(command, { executionMode: 'background' })` plus `listCommands()`, `readCommandOutput()`, and `stopCommand()` so the caller receives a process id and can manage the background command explicitly.
 ### Parameters
 
 - **`command`** (string): The command to be executed and monitored for errors (e.g., "npm run dev", "npm start", "python server.py").
@@ -70,7 +74,18 @@ const runDevServer = async () => {
     }
 };
 
-// Usage
+// Preferred for new code
+const server = await codebolt.terminal.executeCommand('npm run dev', {
+    executionMode: 'background'
+});
+
+if (server.type === 'commandRunning') {
+    const output = await codebolt.terminal.readCommandOutput(server.processId, { lines: 100 });
+    console.log(output.output);
+    await codebolt.terminal.stopCommand(server.processId);
+}
+
+// Legacy usage
 await runDevServer();
 
 // Example 2: Run in main terminal

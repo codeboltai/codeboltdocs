@@ -20,11 +20,15 @@ data:
 ---
 # executeCommandWithStream
 
+:::info Streaming-only API
+`executeCommandWithStream()` is useful for custom progress displays, log followers, and UI surfaces that need event-by-event terminal output. It should not be the default way to start background servers or watchers; use `executeCommand()` background mode for that.
+:::
+
 ```typescript
 codebolt.terminal.executeCommandWithStream(command: string, executeInMain: boolean): EventEmitter
 ```
 
-Executes a given command and streams the output in real-time via EventEmitter. This method is ideal for long-running commands where you need to monitor output as it happens, such as build processes, server starts, or file operations with progress updates. 
+Executes a command and streams output in real time via EventEmitter. Use this only when the caller needs incremental output events. For normal short commands and most long-running processes, prefer `executeCommand()` with `executionMode: 'auto'` or `executionMode: 'background'`.
 ### Parameters
 
 - **`command`** (string): The command to be executed with streaming output (e.g., "npm run build", "npm start", "git clone \<url\>").

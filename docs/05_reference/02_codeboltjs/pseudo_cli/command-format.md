@@ -61,6 +61,10 @@ codebolt git clone --url "https://github.com/example/repo.git" --path "./repo"
 
 ```text
 codebolt terminal exec --command "npm run build"
+codebolt terminal exec --command "npm run dev" --mode background
+codebolt terminal list
+codebolt terminal output --process-id 1234 --lines 100
+codebolt terminal stop --process-id 1234
 ```
 
 Pseudo CLI itself does not interpret shell syntax like pipes or redirects. If you need actual shell behavior, pass the full shell command as the `--command` value to `terminal exec`.

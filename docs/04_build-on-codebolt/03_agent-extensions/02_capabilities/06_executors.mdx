@@ -365,9 +365,16 @@ const result = await codebolt.terminal.executeCommand('npm test');
 const build = await codebolt.terminal.executeCommand('npm run build');
 
 // Long-running commands
-await codebolt.terminal.executeCommandRunUntilError('npm run dev');
+const devServer = await codebolt.terminal.executeCommand('npm run dev', {
+  executionMode: 'background'
+});
 
-// Interrupt
+if (devServer.type === 'commandRunning') {
+  const output = await codebolt.terminal.readCommandOutput(devServer.processId, { lines: 100 });
+  await codebolt.terminal.stopCommand(devServer.processId);
+}
+
+// Interrupt the active foreground terminal command
 await codebolt.terminal.sendManualInterrupt();
 ```
 
@@ -387,7 +394,7 @@ await codebolt.sideExecution.startWithActionBlock('my-action-block', params);
 | Module | Examples |
 |--------|---------|
 | `codebolt.fs` | `readFile`, `createFile`, `updateFile`, `deleteFile`, `searchFiles`, `grepSearch` |
-| `codebolt.terminal` | `executeCommand`, `executeCommandRunUntilError`, `sendManualInterrupt` |
+| `codebolt.terminal` | `executeCommand`, `listCommands`, `readCommandOutput`, `stopCommand`, `sendManualInterrupt` |
 | `codebolt.project` | `getProjectPath`, `getProjectFiles` |
 | `codebolt.chat` | `sendMessage`, `waitForReply` |
 | `codebolt.browser` | `openUrl`, `screenshot`, `click` |

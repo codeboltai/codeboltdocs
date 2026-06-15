@@ -5,13 +5,22 @@ cbapicategory:
     description: "EventEmitter for terminal events and real-time output handling."
   - name: executeCommand
     link: /docs/api/apiaccess/terminal/executeCommand
-    description: Executes a given command in the terminal and returns the result. Listens for WebSocket messages indicating output, error, or finish state and resolves the promise accordingly.
+    description: Executes a command with automatic yield behavior. Short commands return completion output; long-running commands can return a background process id instead of blocking.
+  - name: listCommands
+    link: /docs/api/apiaccess/terminal/executeCommand#background-command-management
+    description: Lists active background commands started by terminal execution.
+  - name: readCommandOutput
+    link: /docs/api/apiaccess/terminal/executeCommand#background-command-management
+    description: Reads recent output from a background command by process id.
+  - name: stopCommand
+    link: /docs/api/apiaccess/terminal/executeCommand#background-command-management
+    description: Stops a background command by process id.
   - name: executeCommandRunUntilError
     link: /docs/api/apiaccess/terminal/executeCommandRunUntilError
-    description: Executes a command and keeps running until an error occurs. Useful for continuous processes that should stop on first failure.
+    description: Legacy compatibility API. Prefer executeCommand with background mode plus listCommands, readCommandOutput, and stopCommand for long-running processes.
   - name: executeCommandWithStream
     link: /docs/api/apiaccess/terminal/executeCommandWithStream
-    description: "Executes a command and streams output in real-time via EventEmitter. Ideal for long-running commands where you need to monitor output as it happens."
+    description: "Streams incremental terminal events via EventEmitter. Use only when the caller needs live output events; otherwise prefer executeCommand."
   - name: sendManualInterrupt
     link: /docs/api/apiaccess/terminal/sendManualInterrupt
     description: "Sends a manual interrupt signal (Ctrl+C) to stop a running command or process in the terminal."
@@ -29,10 +38,12 @@ The `terminal` module provides comprehensive command-line interface capabilities
 ## Key Features
 
 ### Command Execution
-- **Basic Execution**: Run shell commands with `executeCommand()`
-- **Stream Execution**: Monitor real-time output with `executeCommandWithStream()`
-- **Error-Based Execution**: Run commands until error with `executeCommandRunUntilError()`
-- **Process Control**: Interrupt running commands with `sendManualInterrupt()`
+- **Default Execution**: Run shell commands with `executeCommand()`
+- **Automatic Yielding**: Short commands return their final output; long-running commands can yield as `commandRunning`
+- **Background Control**: List, read output from, and stop background commands with `listCommands()`, `readCommandOutput()`, and `stopCommand()`
+- **Stream Execution**: Monitor incremental output with `executeCommandWithStream()` only when live events are required
+- **Legacy Compatibility**: `executeCommandRunUntilError()` and `executeCommandRunUntilInterrupt()` remain for older callers
+- **Process Control**: Interrupt the active foreground command with `sendManualInterrupt()`
 - **TUI Control**: Drive interactive terminal applications with `terminal.tui.*`
 
 ### Output Handling
@@ -80,25 +91,34 @@ try {
 }
 ```
 
-### Streaming Command Output
+### Long-Running Commands
 
 ```js
-// Execute command with real-time output streaming
-const streamEmitter = codebolt.terminal.executeCommandWithStream('npm run build');
-
-streamEmitter.on('commandOutput', (data) => {
-    console.log('📡 Build output:', data.output);
+const result = await codebolt.terminal.executeCommand('npm run dev', {
+    executionMode: 'auto',
+    yieldMs: 3000
 });
 
-streamEmitter.on('commandError', (error) => {
-    console.error('❌ Build error:', error.error);
-});
+if (result.type === 'commandRunning') {
+    console.log('Server is running in the background:', result.processId);
 
-streamEmitter.on('commandFinish', (finish) => {
-    console.log('✅ Build completed');
-    console.log('Exit code:', finish.exitCode);
+    const output = await codebolt.terminal.readCommandOutput(result.processId, { lines: 100 });
+    console.log(output.output);
+
+    // Later, when the server is no longer needed:
+    await codebolt.terminal.stopCommand(result.processId);
+}
+```
+
+Use `executionMode: 'background'` when the caller already knows the command is a persistent process:
+
+```js
+const server = await codebolt.terminal.executeCommand('npm run dev', {
+    executionMode: 'background'
 });
 ```
+
+Use `executeCommandWithStream()` only when your caller needs incremental output events rather than a completion or background-process response.
 
 ## Common Workflows
 
@@ -137,29 +157,21 @@ if (gitStatus.stdout.trim()) {
 
 ### Build Process Workflow
 ```js
-// Run build with streaming output
-const buildEmitter = codebolt.terminal.executeCommandWithStream('npm run build');
-
-let buildProgress = 0;
-
-buildEmitter.on('commandOutput', (data) => {
-    console.log(data.output);
-
-    // Parse build progress
-    const progressMatch = data.output.match(/(\d+)%/);
-    if (progressMatch) {
-        buildProgress = parseInt(progressMatch[1]);
-        console.log(`📊 Build progress: ${buildProgress}%`);
-    }
+// Run build and wait for completion unless it exceeds the yield window
+const buildResult = await codebolt.terminal.executeCommand('npm run build', {
+    executionMode: 'auto',
+    yieldMs: 3000
 });
 
-buildEmitter.on('commandFinish', (finish) => {
-    if (finish.exitCode === 0) {
-        console.log('✅ Build successful');
-    } else {
-        console.error('❌ Build failed');
-    }
-});
+if (buildResult.type === 'commandFinish') {
+    console.log('✅ Build successful');
+} else if (buildResult.type === 'commandRunning') {
+    console.log('Build is still running:', buildResult.processId);
+    const latest = await codebolt.terminal.readCommandOutput(buildResult.processId, { lines: 100 });
+    console.log(latest.output);
+} else {
+    console.error('❌ Build failed:', buildResult.error);
+}
 ```
 
 ### Testing Workflow
@@ -230,26 +242,21 @@ console.log('Git history:', gitLog.stdout);
 
 ### Integration with Browser Module
 ```js
-// Start development server
-const serverEmitter = codebolt.terminal.executeCommandWithStream('npm start');
-
-let serverReady = false;
-
-serverEmitter.on('commandOutput', (data) => {
-    console.log(data.output);
-
-    // Detect when server is ready
-    if (data.output.includes('Server running') || data.output.includes('localhost')) {
-        serverReady = true;
-
-        // Open browser to test
-        setTimeout(async () => {
-            await codebolt.browser.newPage();
-            await codebolt.browser.goToPage('http://localhost:3000');
-            console.log('✅ Browser opened to test server');
-        }, 1000);
-    }
+// Start development server as a background command
+const server = await codebolt.terminal.executeCommand('npm start', {
+    executionMode: 'background'
 });
+
+if (server.type === 'commandRunning') {
+    const output = await codebolt.terminal.readCommandOutput(server.processId, { lines: 100 });
+    console.log(output.output);
+
+    await codebolt.browser.newPage();
+    await codebolt.browser.goToPage('http://localhost:3000');
+
+    // Stop it when the browser workflow is finished.
+    await codebolt.terminal.stopCommand(server.processId);
+}
 ```
 
 ## Advanced Usage Patterns
@@ -551,28 +558,32 @@ if (result.exitCode !== 0) {
 
 ### Pitfall 3: Not Handling Long-Running Commands
 ```js
-// ❌ Bad: No timeout for long-running command
-await codebolt.terminal.executeCommand('npm run build');
+// ❌ Bad: Force a persistent process to behave like a foreground command
+await codebolt.terminal.executeCommand('npm run dev', { executionMode: 'foreground' });
 
-// ✅ Good: Use streaming or timeout
-const emitter = codebolt.terminal.executeCommandWithStream('npm run build');
-// Or
-await executeWithTimeout('npm run build', 60000);
+// ✅ Good: Let Codebolt yield automatically, or declare it as background
+const devServer = await codebolt.terminal.executeCommand('npm run dev', {
+    executionMode: 'background'
+});
+
+if (devServer.type === 'commandRunning') {
+    const output = await codebolt.terminal.readCommandOutput(devServer.processId, { lines: 100 });
+    console.log(output.output);
+}
 ```
 
 ### Pitfall 4: Not Cleaning Up Processes
 ```js
-// ❌ Bad: Leaves processes running
-const server = codebolt.terminal.executeCommandWithStream('npm start');
-// Forget about it...
+// ❌ Bad: Leaves background commands running
+await codebolt.terminal.executeCommand('npm start', { executionMode: 'background' });
 
-// ✅ Good: Clean up properly
-const server = codebolt.terminal.executeCommandWithStream('npm start');
+// ✅ Good: keep the process id and stop it when done
+const server = await codebolt.terminal.executeCommand('npm start', {
+    executionMode: 'background'
+});
 
-// Later, when done:
-await codebolt.terminal.sendManualInterrupt();
-if (server.cleanup) {
-    server.cleanup();
+if (server.type === 'commandRunning') {
+    await codebolt.terminal.stopCommand(server.processId);
 }
 ```
 
@@ -588,17 +599,22 @@ if (result.exitCode === 0) {
 }
 ```
 
-### 2. Use Streaming for Long Commands
+### 2. Use Background Mode for Persistent Commands
+```js
+const server = await codebolt.terminal.executeCommand('npm run dev', {
+    executionMode: 'background'
+});
+
+if (server.type === 'commandRunning') {
+    console.log('Process ID:', server.processId);
+}
+```
+
+Use `executeCommandWithStream()` only when you need live output events in the current caller.
+
 ```js
 const emitter = codebolt.terminal.executeCommandWithStream('npm run build');
-
-emitter.on('commandOutput', (data) => {
-    console.log(data.output);
-});
-
-emitter.on('commandFinish', (finish) => {
-    console.log('✅ Build completed');
-});
+emitter.on('commandOutput', (data) => console.log(data.output));
 ```
 
 ### 3. Implement Proper Error Handling
@@ -635,15 +651,22 @@ try {
 
 ### 5. Use Appropriate Command Type
 ```js
-// Use executeCommand for simple commands
+// Use executeCommand for normal commands
 await codebolt.terminal.executeCommand('ls -la');
 
-// Use executeCommandWithStream for long-running commands
-const emitter = codebolt.terminal.executeCommandWithStream('npm run build');
+// Use auto mode for commands that might be short or long
+await codebolt.terminal.executeCommand('npm test', { executionMode: 'auto' });
 
-// Use executeCommandRunUntilError for continuous monitoring
-await codebolt.terminal.executeCommandRunUntilError('npm run watch');
+// Use background mode when you already know it is persistent
+const watch = await codebolt.terminal.executeCommand('npm run watch', {
+    executionMode: 'background'
+});
+
+// Use streaming only when incremental events are required
+const emitter = codebolt.terminal.executeCommandWithStream('npm run build');
 ```
+
+`executeCommandRunUntilError()` and `executeCommandRunUntilInterrupt()` are compatibility APIs. Prefer `executeCommand()` plus `listCommands()`, `readCommandOutput()`, and `stopCommand()` for new agent-facing command flows.
 
 ## Troubleshooting
 
@@ -656,7 +679,7 @@ await codebolt.terminal.executeCommandRunUntilError('npm run watch');
 - **Solution**: Check file permissions or use appropriate sudo privileges
 
 **Issue**: Command hangs indefinitely
-- **Solution**: Implement timeouts and use `sendManualInterrupt()`
+- **Solution**: Use `executionMode: 'auto'` or `executionMode: 'background'`, then manage the process with `listCommands()`, `readCommandOutput()`, and `stopCommand()`
 
 **Issue**: Output not captured
 - **Solution**: Check if command outputs to stderr instead of stdout

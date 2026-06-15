@@ -435,24 +435,24 @@ codebolt.browser.close();
 ### Integration with Terminal Module
 ```js
 // Start local server and test with browser
-const serverEmitter = codebolt.terminal.executeCommandWithStream('npm start');
-
-// Wait for server to be ready
-serverEmitter.on('commandOutput', (data) => {
-    if (data.output.includes('Server running')) {
-        // Open browser to test
-        setTimeout(async () => {
-            await codebolt.browser.newPage();
-            await codebolt.browser.goToPage('http://localhost:3000');
-
-            // Take screenshot for verification
-            await codebolt.browser.screenshot();
-            console.log('✅ Server tested with screenshot');
-
-            codebolt.browser.close();
-        }, 1000);
-    }
+const server = await codebolt.terminal.executeCommand('npm start', {
+    executionMode: 'background'
 });
+
+if (server.type === 'commandRunning') {
+    const output = await codebolt.terminal.readCommandOutput(server.processId, { lines: 100 });
+    console.log(output.output);
+
+    await codebolt.browser.newPage();
+    await codebolt.browser.goToPage('http://localhost:3000');
+
+    // Take screenshot for verification
+    await codebolt.browser.screenshot();
+    console.log('✅ Server tested with screenshot');
+
+    codebolt.browser.close();
+    await codebolt.terminal.stopCommand(server.processId);
+}
 ```
 
 ### Integration with Git Module
