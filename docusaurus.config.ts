@@ -159,10 +159,16 @@ const config: Config = {
             const desktopAppChildItems = sidebarItems.filter(
               (sidebarItem) => sidebarItem.type === 'category' && desktopAppChildLabels.has(sidebarItem.label),
             );
+            const cliInterfaceItem = sidebarItems.find(
+              (sidebarItem) => sidebarItem.type === 'category' && sidebarItem.label === 'CLI Interface',
+            );
 
             const result: typeof sidebarItems = [];
             for (const sidebarItem of sidebarItems) {
-              if (sidebarItem.type === 'category' && desktopAppChildLabels.has(sidebarItem.label)) {
+              if (
+                sidebarItem.type === 'category'
+                && (desktopAppChildLabels.has(sidebarItem.label) || sidebarItem.label === 'CLI Interface')
+              ) {
                 continue;
               }
 
@@ -176,6 +182,13 @@ const config: Config = {
 
                 if (label === 'Platforms' && sidebarItem.label === 'Clients') {
                   const flattenedPlatformItems = sidebarItem.items.map((platformItem) => {
+                    if (platformItem.type === 'category' && platformItem.label === 'TUI Mode' && cliInterfaceItem) {
+                      return {
+                        ...platformItem,
+                        items: [...platformItem.items, cliInterfaceItem],
+                      };
+                    }
+
                     if (platformItem.type !== 'category' || platformItem.label !== 'Desktop App') {
                       return platformItem;
                     }
