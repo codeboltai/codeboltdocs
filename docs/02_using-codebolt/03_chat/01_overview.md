@@ -12,30 +12,8 @@ The chat panel is the primary way most people interact with Codebolt. You pick a
 
 ## Anatomy of the chat panel
 
-```
-┌──────────────────────────────────────────────┐
-│ [tab] [tab] [+]                              │  ← tabs (multiple conversations)
-├──────────────────────────────────────────────┤
-│ agent: generalist ▾    model: claude-sonnet-4│  ← agent + model picker
-├──────────────────────────────────────────────┤
-│                                              │
-│   user: rename getUser to fetchUser         │
-│                                              │
-│   ↳ reading src/auth/session.ts              │  ← tool calls inline
-│   ↳ reading src/api/users.ts                 │
-│   ↳ writing src/auth/session.ts              │
-│                                              │
-│   assistant: Done. 3 files changed.          │
-│   [diff preview]                             │
-│                                              │
-├──────────────────────────────────────────────┤
-│ [checkpoint: 2s ago]  [rollback]  [details]  │  ← checkpoint controls
-├──────────────────────────────────────────────┤
-│ > type a message...                    [send]│  ← composer
-└──────────────────────────────────────────────┘
-```
+The chat image above shows the current interface. These are the main areas you will use most often:
 
-Main areas:
 - **Tabs** — each tab is a thread with its own history, agent, and model.
 - **Agent + model pickers** — change either at any point; subsequent turns use the new values.
 - **Message stream** — user and assistant messages, with tool calls rendered inline.

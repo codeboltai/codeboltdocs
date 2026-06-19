@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-19T08:44:41.863Z",
-  "sourceCount": 374,
-  "curatedCount": 65,
+  "generatedAt": "2026-06-19T12:51:02.645Z",
+  "sourceCount": 378,
+  "curatedCount": 69,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 174,
+      "count": 178,
       "order": 1,
       "files": [
         {
@@ -33,26 +33,42 @@
         },
         {
           "path": "using-codebolt/surfaces/overview.md",
-          "title": "Clients Overview"
+          "title": "Platform Overview"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/quickstart.md",
           "title": "Quickstart"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects.md",
+          "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects/overview.md",
+          "title": "Workspace and Projects Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects/workspace-and-projects.md",
           "title": "Workspace and Projects"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout.md",
+          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout/overview.md",
+          "title": "Panels and Layout Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout/panels-and-layout.md",
           "title": "Panels and Layout"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/settings-and-profiles.md",
+          "path": "using-codebolt/surfaces/desktop-app/settings-and-profiles/overview.md",
+          "title": "Settings and Profiles Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings-and-profiles/settings-and-profiles.md",
           "title": "Settings and Profiles"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/environments.md",
+          "path": "using-codebolt/surfaces/desktop-app/environments/overview.md",
+          "title": "Environments Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/environments/environments.md",
           "title": "Environments"
         },
         {
