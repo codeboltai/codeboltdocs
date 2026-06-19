@@ -150,8 +150,22 @@ const config: Config = {
             const sidebarItems = await defaultSidebarItemsGenerator({ item, ...args });
             if (item.dirName !== '02_using-codebolt') return sidebarItems;
 
+            const desktopAppChildLabels = new Set([
+              'Chat',
+              'Code Editor Features',
+              'Application & Account',
+              'Code Observability',
+            ]);
+            const desktopAppChildItems = sidebarItems.filter(
+              (sidebarItem) => sidebarItem.type === 'category' && desktopAppChildLabels.has(sidebarItem.label),
+            );
+
             const result: typeof sidebarItems = [];
             for (const sidebarItem of sidebarItems) {
+              if (sidebarItem.type === 'category' && desktopAppChildLabels.has(sidebarItem.label)) {
+                continue;
+              }
+
               const label = (sidebarItem as any).customProps?.sectionLabel;
               if (sidebarItem.type === 'category' && label) {
                 result.push({
@@ -159,6 +173,22 @@ const config: Config = {
                   value: `<div class="sidebar-section-label"><span>${label}</span></div>`,
                   defaultStyle: false,
                 } as any);
+
+                if (label === 'Platforms' && sidebarItem.label === 'Clients') {
+                  const flattenedPlatformItems = sidebarItem.items.map((platformItem) => {
+                    if (platformItem.type !== 'category' || platformItem.label !== 'Desktop App') {
+                      return platformItem;
+                    }
+
+                    return {
+                      ...platformItem,
+                      items: [...platformItem.items, ...desktopAppChildItems],
+                    };
+                  });
+
+                  result.push(...flattenedPlatformItems);
+                  continue;
+                }
               }
               result.push(sidebarItem);
             }

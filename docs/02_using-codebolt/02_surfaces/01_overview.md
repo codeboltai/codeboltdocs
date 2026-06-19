@@ -1,10 +1,10 @@
 ---
 sidebar_position: 1
-title: Clients Overview
+title: Platform Overview
 description: Codebolt is the same agent runtime no matter how you talk to it
 ---
 
-# Clients
+# Platform Overview
 
 Codebolt is the same agent runtime no matter how you talk to it. The **client** is the part you actually install and use — and you have four to pick from depending on what you're doing.
 
