@@ -1,0 +1,1540 @@
+{
+  "generatedAt": "2026-06-19T07:58:19.801Z",
+  "sourceCount": 374,
+  "curatedCount": 65,
+  "sections": [
+    {
+      "heading": "Start Here",
+      "count": 1,
+      "order": 0,
+      "files": [
+        {
+          "path": "index.md",
+          "title": "Index"
+        }
+      ]
+    },
+    {
+      "heading": "Using Codebolt",
+      "count": 174,
+      "order": 1,
+      "files": [
+        {
+          "path": "using-codebolt/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/what-is-codebolt.md",
+          "title": "What is Codebolt"
+        },
+        {
+          "path": "using-codebolt/quickstart.md",
+          "title": "Quickstart"
+        },
+        {
+          "path": "using-codebolt/surfaces/overview.md",
+          "title": "Clients Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/quickstart.md",
+          "title": "Quickstart"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects.md",
+          "title": "Workspace and Projects"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout.md",
+          "title": "Panels and Layout"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings-and-profiles.md",
+          "title": "Settings and Profiles"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/environments.md",
+          "title": "Environments"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/themes.md",
+          "title": "Themes"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/quickstart.md",
+          "title": "Quickstart"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/overview.md",
+          "title": "CLI Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/agent-commands.md",
+          "title": "Agent Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/tool-commands.md",
+          "title": "Tool Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/provider-commands.md",
+          "title": "Provider Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/app-commands.md",
+          "title": "App Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/tui/quickstart.md",
+          "title": "Quickstart"
+        },
+        {
+          "path": "using-codebolt/surfaces/tui/overview.md",
+          "title": "TUI Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/tui/navigation-and-keybindings.md",
+          "title": "Navigation and Keybindings"
+        },
+        {
+          "path": "using-codebolt/surfaces/tui/tabs-and-panels.md",
+          "title": "Tabs, Panels, and Layout Modes"
+        },
+        {
+          "path": "using-codebolt/surfaces/tui/onboarding-and-settings.md",
+          "title": "Onboarding and Settings"
+        },
+        {
+          "path": "using-codebolt/surfaces/tui/remote-and-requirements.md",
+          "title": "Remote Use, Direct gotui, and Requirements"
+        },
+        {
+          "path": "using-codebolt/surfaces/headless.md",
+          "title": "Headless Mode"
+        },
+        {
+          "path": "using-codebolt/chat/overview.md",
+          "title": "Chat Overview"
+        },
+        {
+          "path": "using-codebolt/chat/tabs-and-history.md",
+          "title": "Tabs and History"
+        },
+        {
+          "path": "using-codebolt/chat/context-and-at-mentions.md",
+          "title": "Context and @-mentions"
+        },
+        {
+          "path": "using-codebolt/chat/checkpoints-and-rollback.md",
+          "title": "Checkpoints and Rollback"
+        },
+        {
+          "path": "using-codebolt/chat/inline-edit-and-ctrl-k.md",
+          "title": "Inline Edit and Ctrl+K"
+        },
+        {
+          "path": "using-codebolt/chat/model-selection.md",
+          "title": "Model Selection"
+        },
+        {
+          "path": "using-codebolt/chat/ai-requests.md",
+          "title": "AI Requests"
+        },
+        {
+          "path": "using-codebolt/installation.md",
+          "title": "Installation & Setup"
+        },
+        {
+          "path": "using-codebolt/code-and-terminal/overview.md",
+          "title": "Code & Terminal Overview"
+        },
+        {
+          "path": "using-codebolt/code-and-terminal/code-editor.md",
+          "title": "Code Editor"
+        },
+        {
+          "path": "using-codebolt/code-and-terminal/terminal.md",
+          "title": "Terminal"
+        },
+        {
+          "path": "using-codebolt/code-and-terminal/git-panel.md",
+          "title": "Git Panel"
+        },
+        {
+          "path": "using-codebolt/code-and-terminal/preview-browser.md",
+          "title": "Preview & Browser"
+        },
+        {
+          "path": "using-codebolt/agents/what-is-an-agent.md",
+          "title": "What is an Agent"
+        },
+        {
+          "path": "using-codebolt/agents/codebolt-as-agent-framework.md",
+          "title": "Codebolt as an Agent Framework"
+        },
+        {
+          "path": "using-codebolt/agents/built-in-agents.md",
+          "title": "Built-in Agents"
+        },
+        {
+          "path": "using-codebolt/agents/running-agents.md",
+          "title": "Running Agents"
+        },
+        {
+          "path": "using-codebolt/agents/the-marketplace.md",
+          "title": "The Marketplace"
+        },
+        {
+          "path": "using-codebolt/agents/installing-an-agent.md",
+          "title": "Installing an Agent"
+        },
+        {
+          "path": "using-codebolt/agents/agent-portfolios.md",
+          "title": "Agent Portfolios"
+        },
+        {
+          "path": "using-codebolt/agents/thread-panel.md",
+          "title": "Thread Panel"
+        },
+        {
+          "path": "using-codebolt/agent-extensions/overview.md",
+          "title": "Agent Extensions Overview"
+        },
+        {
+          "path": "using-codebolt/agent-extensions/capabilities.md",
+          "title": "Capabilities"
+        },
+        {
+          "path": "using-codebolt/agent-extensions/skills.md",
+          "title": "Skills"
+        },
+        {
+          "path": "using-codebolt/agent-extensions/action-blocks.md",
+          "title": "Action Blocks"
+        },
+        {
+          "path": "using-codebolt/agent-extensions/executors.md",
+          "title": "Executors"
+        },
+        {
+          "path": "using-codebolt/agent-extensions/installing-mcp-servers.md",
+          "title": "Installing MCP Servers"
+        },
+        {
+          "path": "using-codebolt/agent-extensions/managing-mcp-servers.md",
+          "title": "Managing MCP Servers"
+        },
+        {
+          "path": "using-codebolt/tools-and-mcp/overview.md",
+          "title": "Agent Tools Overview"
+        },
+        {
+          "path": "using-codebolt/tools-and-mcp/built-in-tools.md",
+          "title": "Built-in Tools"
+        },
+        {
+          "path": "using-codebolt/guardrails-and-settings/guardrails.md",
+          "title": "Guardrails"
+        },
+        {
+          "path": "using-codebolt/guardrails-and-settings/app-and-project-settings.md",
+          "title": "App & Project Settings"
+        },
+        {
+          "path": "using-codebolt/guardrails-and-settings/routing-gateway.md",
+          "title": "Routing Gateway"
+        },
+        {
+          "path": "using-codebolt/agent-observability/overview.md",
+          "title": "Agent Observability Overview"
+        },
+        {
+          "path": "using-codebolt/agent-observability/agent-debug.md",
+          "title": "Agent Debug"
+        },
+        {
+          "path": "using-codebolt/agent-observability/ai-debug-and-console.md",
+          "title": "AI Debug & Console"
+        },
+        {
+          "path": "using-codebolt/eval-and-optimization/overview.md",
+          "title": "Eval & Optimization Overview"
+        },
+        {
+          "path": "using-codebolt/eval-and-optimization/eval-tasks.md",
+          "title": "Eval Tasks"
+        },
+        {
+          "path": "using-codebolt/eval-and-optimization/evaluators.md",
+          "title": "Evaluators"
+        },
+        {
+          "path": "using-codebolt/eval-and-optimization/running-evals.md",
+          "title": "Running Evals"
+        },
+        {
+          "path": "using-codebolt/eval-and-optimization/optimization.md",
+          "title": "Optimization"
+        },
+        {
+          "path": "using-codebolt/planning/overview.md",
+          "title": "Planning"
+        },
+        {
+          "path": "using-codebolt/planning/roadmap.md",
+          "title": "Roadmap"
+        },
+        {
+          "path": "using-codebolt/planning/specs.md",
+          "title": "Specs"
+        },
+        {
+          "path": "using-codebolt/planning/ui-flow.md",
+          "title": "UI Flow"
+        },
+        {
+          "path": "using-codebolt/planning/requirement-plan.md",
+          "title": "Requirement Plan"
+        },
+        {
+          "path": "using-codebolt/planning/action-plan.md",
+          "title": "Action Plan"
+        },
+        {
+          "path": "using-codebolt/planning/tasks.md",
+          "title": "Tasks"
+        },
+        {
+          "path": "using-codebolt/memory/overview.md",
+          "title": "Memory & Context Overview"
+        },
+        {
+          "path": "using-codebolt/memory/memory-layers.md",
+          "title": "Memory Layers"
+        },
+        {
+          "path": "using-codebolt/memory/context-assembly.md",
+          "title": "Context Assembly"
+        },
+        {
+          "path": "using-codebolt/memory/context-rules.md",
+          "title": "Context Rules"
+        },
+        {
+          "path": "using-codebolt/memory/persistent-memory.md",
+          "title": "Persistent Memory"
+        },
+        {
+          "path": "using-codebolt/memory/memory-ingestion.md",
+          "title": "Memory Ingestion"
+        },
+        {
+          "path": "using-codebolt/memory/event-log.md",
+          "title": "Event Log"
+        },
+        {
+          "path": "using-codebolt/multi-agent-usage/overview.md",
+          "title": "Multi-Agent Usage Overview"
+        },
+        {
+          "path": "using-codebolt/multi-agent-usage/running-a-swarm.md",
+          "title": "Running a Swarm"
+        },
+        {
+          "path": "using-codebolt/multi-agent-usage/reading-a-flow.md",
+          "title": "Reading a Flow"
+        },
+        {
+          "path": "using-codebolt/multi-agent-usage/review-and-merge.md",
+          "title": "Review and Merge"
+        },
+        {
+          "path": "using-codebolt/multi-agent-usage/observability-and-tracing.md",
+          "title": "Observability and Tracing"
+        },
+        {
+          "path": "using-codebolt/parallel-agents/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/parallel-agents/running-parallel-agents.md",
+          "title": "Running Parallel Agents"
+        },
+        {
+          "path": "using-codebolt/parallel-agents/chat-canvas.md",
+          "title": "Chat Canvas"
+        },
+        {
+          "path": "using-codebolt/parallel-agents/background-agent.md",
+          "title": "Background Agent"
+        },
+        {
+          "path": "using-codebolt/parallel-agents/sub-agent.md",
+          "title": "Sub Agent"
+        },
+        {
+          "path": "using-codebolt/agent-coordination/overview.md",
+          "title": "Coordination Overview"
+        },
+        {
+          "path": "using-codebolt/agent-coordination/jobs.md",
+          "title": "Jobs"
+        },
+        {
+          "path": "using-codebolt/agent-coordination/mail-inbox.md",
+          "title": "Mail & Inbox"
+        },
+        {
+          "path": "using-codebolt/agent-coordination/agent-deliberation.md",
+          "title": "Agent Deliberation"
+        },
+        {
+          "path": "using-codebolt/agent-coordination/swarm-management.md",
+          "title": "Swarm Management"
+        },
+        {
+          "path": "using-codebolt/agent-coordination/orchestrator-management.md",
+          "title": "Orchestrator Management"
+        },
+        {
+          "path": "using-codebolt/stigmergic-coordination/overview.md",
+          "title": "Stigmergic Coordination Overview"
+        },
+        {
+          "path": "using-codebolt/stigmergic-coordination/pheromones.md",
+          "title": "Pheromones"
+        },
+        {
+          "path": "using-codebolt/stigmergic-coordination/locks-and-unlock-requests.md",
+          "title": "Locks & Unlock Requests"
+        },
+        {
+          "path": "using-codebolt/stigmergic-coordination/file-update-intents.md",
+          "title": "File Update Intents"
+        },
+        {
+          "path": "using-codebolt/plugins/overview.md",
+          "title": "What are Plugins"
+        },
+        {
+          "path": "using-codebolt/plugins/installing-plugins.md",
+          "title": "Installing Plugins"
+        },
+        {
+          "path": "using-codebolt/plugins/plugin-marketplace.md",
+          "title": "Plugin Marketplace"
+        },
+        {
+          "path": "using-codebolt/plugins/building-plugins.md",
+          "title": "Building Plugins"
+        },
+        {
+          "path": "using-codebolt/integrations/llm-providers.md",
+          "title": "LLM Providers"
+        },
+        {
+          "path": "using-codebolt/integrations/local-models.md",
+          "title": "Local Models"
+        },
+        {
+          "path": "using-codebolt/integrations/git-and-shadow-git.md",
+          "title": "Git and Shadow Git"
+        },
+        {
+          "path": "using-codebolt/integrations/browser-control.md",
+          "title": "Browser Control"
+        },
+        {
+          "path": "using-codebolt/integrations/mail-and-calendar.md",
+          "title": "Mail and Calendar"
+        },
+        {
+          "path": "using-codebolt/integrations/chat-widget.md",
+          "title": "Chat Widget"
+        },
+        {
+          "path": "using-codebolt/integrations/plugin-debug.md",
+          "title": "Plugin Debug"
+        },
+        {
+          "path": "using-codebolt/environments/overview.md",
+          "title": "Environments Overview"
+        },
+        {
+          "path": "using-codebolt/environments/configuring-environments.md",
+          "title": "Configuring Environments"
+        },
+        {
+          "path": "using-codebolt/environments/environment-providers.md",
+          "title": "Environment Providers"
+        },
+        {
+          "path": "using-codebolt/environments/environment-debug.md",
+          "title": "Environment Debug"
+        },
+        {
+          "path": "using-codebolt/auto-interactivity/overview.md",
+          "title": "Automation Overview"
+        },
+        {
+          "path": "using-codebolt/auto-interactivity/webhooks.md",
+          "title": "Webhooks"
+        },
+        {
+          "path": "using-codebolt/auto-interactivity/calendar-events.md",
+          "title": "Calendar & Scheduled Events"
+        },
+        {
+          "path": "using-codebolt/auto-interactivity/hooks.md",
+          "title": "Hooks"
+        },
+        {
+          "path": "using-codebolt/08da-custom-agentic-application/overview.md",
+          "title": "Custom Agentic Application Overview"
+        },
+        {
+          "path": "using-codebolt/08da-custom-agentic-application/level-1-inside-codebolt.md",
+          "title": "Level 1 Inside Codebolt"
+        },
+        {
+          "path": "using-codebolt/08da-custom-agentic-application/level-2-separate-app-local-server.md",
+          "title": "Level 2 Separate App with Local Server"
+        },
+        {
+          "path": "using-codebolt/08da-custom-agentic-application/level-3-hosted-runtimes.md",
+          "title": "Level 3 Hosted Runtimes"
+        },
+        {
+          "path": "using-codebolt/08da-custom-agentic-application/choosing-the-right-architecture.md",
+          "title": "Choosing the Right Architecture"
+        },
+        {
+          "path": "using-codebolt/08db-autonomous-companies/overview.md",
+          "title": "Autonomous Companies Overview"
+        },
+        {
+          "path": "using-codebolt/08db-autonomous-companies/virtual-employees.md",
+          "title": "Virtual Employees"
+        },
+        {
+          "path": "using-codebolt/08db-autonomous-companies/goals-and-task-systems.md",
+          "title": "Goals and Task Systems"
+        },
+        {
+          "path": "using-codebolt/08db-autonomous-companies/communication-and-channels.md",
+          "title": "Communication and Channels"
+        },
+        {
+          "path": "using-codebolt/08db-autonomous-companies/monitoring-and-automation.md",
+          "title": "Monitoring and Automation"
+        },
+        {
+          "path": "using-codebolt/08db-autonomous-companies/coordination-models.md",
+          "title": "Coordination Models"
+        },
+        {
+          "path": "using-codebolt/08db-autonomous-companies/reference-architecture.md",
+          "title": "Reference Architecture"
+        },
+        {
+          "path": "using-codebolt/08dc-self-hosted-custom-agents/overview.md",
+          "title": "Self Hosted Agent Infrastructure Overview"
+        },
+        {
+          "path": "using-codebolt/08dc-self-hosted-custom-agents/deployment-modes-and-topologies.md",
+          "title": "Deployment Modes and Topologies"
+        },
+        {
+          "path": "using-codebolt/08dc-self-hosted-custom-agents/business-and-customer-use-cases.md",
+          "title": "Business and Customer Use Cases"
+        },
+        {
+          "path": "using-codebolt/08dc-self-hosted-custom-agents/architecture-patterns.md",
+          "title": "Architecture Patterns"
+        },
+        {
+          "path": "using-codebolt/08dc-self-hosted-custom-agents/implementation-anchors.md",
+          "title": "Implementation Anchors"
+        },
+        {
+          "path": "using-codebolt/external-integrations/overview.md",
+          "title": "External Integrations Overview"
+        },
+        {
+          "path": "using-codebolt/external-integrations/routing-gateway.md",
+          "title": "Routing Gateway"
+        },
+        {
+          "path": "using-codebolt/external-integrations/chat-platforms.md",
+          "title": "Chat Platforms"
+        },
+        {
+          "path": "using-codebolt/external-integrations/project-tools.md",
+          "title": "Project Tools"
+        },
+        {
+          "path": "using-codebolt/external-integrations/building-a-channel-plugin.md",
+          "title": "Building a Channel Plugin"
+        },
+        {
+          "path": "using-codebolt/cloud/overview.md",
+          "title": "Cloud Overview"
+        },
+        {
+          "path": "using-codebolt/cloud/cloud-portal.md",
+          "title": "Cloud Portal"
+        },
+        {
+          "path": "using-codebolt/cloud/remote-chat.md",
+          "title": "Remote Chat"
+        },
+        {
+          "path": "using-codebolt/cloud/runtimes-and-providers.md",
+          "title": "Runtimes & Providers"
+        },
+        {
+          "path": "using-codebolt/cloud/marketplace-publishing.md",
+          "title": "Marketplace Publishing"
+        },
+        {
+          "path": "using-codebolt/plugins/overview.md",
+          "title": "What are Plugins"
+        },
+        {
+          "path": "using-codebolt/plugins/installing-plugins.md",
+          "title": "Installing Plugins"
+        },
+        {
+          "path": "using-codebolt/plugins/plugin-marketplace.md",
+          "title": "Plugin Marketplace"
+        },
+        {
+          "path": "using-codebolt/plugins/building-plugins.md",
+          "title": "Building Plugins"
+        },
+        {
+          "path": "using-codebolt/account/authentication-and-authorization.md",
+          "title": "Authentication & Authorization"
+        },
+        {
+          "path": "using-codebolt/account/teams.md",
+          "title": "Teams"
+        },
+        {
+          "path": "using-codebolt/account/usage-and-billing.md",
+          "title": "Usage and Billing"
+        },
+        {
+          "path": "using-codebolt/account/workspace.md",
+          "title": "Workspace"
+        },
+        {
+          "path": "using-codebolt/account/application-layout.md",
+          "title": "Application Layout"
+        },
+        {
+          "path": "using-codebolt/account/settings-overview.md",
+          "title": "Settings Overview"
+        },
+        {
+          "path": "using-codebolt/account/llm-settings.md",
+          "title": "LLM Settings"
+        },
+        {
+          "path": "using-codebolt/account/agent-settings.md",
+          "title": "Agent Settings"
+        },
+        {
+          "path": "using-codebolt/account/environment-services.md",
+          "title": "Environment & Services"
+        },
+        {
+          "path": "using-codebolt/account/language-servers.md",
+          "title": "Language Servers"
+        },
+        {
+          "path": "using-codebolt/account/mcp-servers.md",
+          "title": "MCP Servers"
+        },
+        {
+          "path": "using-codebolt/account/appearance.md",
+          "title": "Appearance & Global Settings"
+        },
+        {
+          "path": "using-codebolt/account/problems.md",
+          "title": "Problems"
+        },
+        {
+          "path": "using-codebolt/code-observability/overview.md",
+          "title": "Code Observability Overview"
+        },
+        {
+          "path": "using-codebolt/code-observability/codemap.md",
+          "title": "Codemap"
+        },
+        {
+          "path": "using-codebolt/code-observability/narrative-graph.md",
+          "title": "Narrative Graph"
+        },
+        {
+          "path": "using-codebolt/cli-interface/overview.md",
+          "title": "CLI Interface"
+        },
+        {
+          "path": "using-codebolt/cli-interface/conversations-and-tabs.md",
+          "title": "Conversations and Tabs"
+        },
+        {
+          "path": "using-codebolt/cli-interface/chat-and-commands.md",
+          "title": "Chat and Commands"
+        },
+        {
+          "path": "using-codebolt/cli-interface/logs-and-connection.md",
+          "title": "Logs and Connection"
+        },
+        {
+          "path": "using-codebolt/cli-interface/files-and-git.md",
+          "title": "Files and Git"
+        },
+        {
+          "path": "using-codebolt/cli-interface/onboarding-and-settings.md",
+          "title": "Onboarding and Settings"
+        },
+        {
+          "path": "using-codebolt/cli-interface/keybindings-and-layout.md",
+          "title": "Keybindings and Layout"
+        },
+        {
+          "path": "using-codebolt/troubleshooting/common-issues.md",
+          "title": "Common Issues"
+        },
+        {
+          "path": "using-codebolt/troubleshooting/logs-and-diagnostics.md",
+          "title": "Logs and Diagnostics"
+        },
+        {
+          "path": "using-codebolt/troubleshooting/reporting-bugs.md",
+          "title": "Reporting Bugs"
+        }
+      ]
+    },
+    {
+      "heading": "Concepts",
+      "count": 17,
+      "order": 2,
+      "files": [
+        {
+          "path": "concepts/overview.md",
+          "title": "Concepts Overview"
+        },
+        {
+          "path": "concepts/foundation/architecture.md",
+          "title": "Architecture"
+        },
+        {
+          "path": "concepts/the-agent/agents.md",
+          "title": "Agents"
+        },
+        {
+          "path": "concepts/the-agent/tools-and-mcp.md",
+          "title": "Tools and MCP"
+        },
+        {
+          "path": "concepts/the-agent/capabilities.md",
+          "title": "Capabilities"
+        },
+        {
+          "path": "concepts/the-agent/execution-phase.md",
+          "title": "Execution Phase"
+        },
+        {
+          "path": "concepts/runtime/hooks-and-processors.md",
+          "title": "Hooks and Processors"
+        },
+        {
+          "path": "concepts/runtime/context-and-memory.md",
+          "title": "Context and Memory"
+        },
+        {
+          "path": "concepts/persistence/shadow-git-and-checkpoints.md",
+          "title": "Shadow Git and Checkpoints"
+        },
+        {
+          "path": "concepts/persistence/event-log.md",
+          "title": "Event Log"
+        },
+        {
+          "path": "concepts/quality/guardrails.md",
+          "title": "Guardrails"
+        },
+        {
+          "path": "concepts/quality/evals-and-optimization.md",
+          "title": "Evals and Optimization"
+        },
+        {
+          "path": "concepts/multi-agent/multi-agent-patterns.md",
+          "title": "Multi-Agent Patterns"
+        },
+        {
+          "path": "concepts/multi-agent/orchestration-flows.md",
+          "title": "Orchestration Flows"
+        },
+        {
+          "path": "concepts/multi-agent/dispute-resolution.md",
+          "title": "Dispute Resolution"
+        },
+        {
+          "path": "concepts/multi-agent/stigmergy-swarm.md",
+          "title": "Stigmergy Swarm"
+        },
+        {
+          "path": "concepts/planning/planning-system.md",
+          "title": "The Planning System"
+        }
+      ]
+    },
+    {
+      "heading": "Guides",
+      "count": 24,
+      "order": 3,
+      "files": [
+        {
+          "path": "guides/overview.md",
+          "title": "Guides Overview"
+        },
+        {
+          "path": "guides/first-steps/build-your-first-agent.md",
+          "title": "Build your first agent"
+        },
+        {
+          "path": "guides/first-steps/build-your-first-custom-ui.md",
+          "title": "Build your first custom UI"
+        },
+        {
+          "path": "guides/first-steps/connect-a-local-model.md",
+          "title": "Connect a local model"
+        },
+        {
+          "path": "guides/first-steps/publish-an-agent-to-the-marketplace.md",
+          "title": "Publish an Agent to the Marketplace"
+        },
+        {
+          "path": "guides/first-steps/set-up-git-integration.md",
+          "title": "Set Up Git Integration"
+        },
+        {
+          "path": "guides/everyday-workflows/bulk-refactor-with-checkpoints.md",
+          "title": "Bulk Refactor with Checkpoints"
+        },
+        {
+          "path": "guides/everyday-workflows/code-review-with-an-agent.md",
+          "title": "Code review with an agent"
+        },
+        {
+          "path": "guides/everyday-workflows/debug-a-hung-agent.md",
+          "title": "Debug a Hung Agent"
+        },
+        {
+          "path": "guides/everyday-workflows/use-ctrl-k-for-inline-edits.md",
+          "title": "Use Ctrl+K for Inline Edits"
+        },
+        {
+          "path": "guides/everyday-workflows/write-tests-from-a-spec.md",
+          "title": "Write Tests from a Spec"
+        },
+        {
+          "path": "guides/mcp-and-tools/build-your-first-mcp-server.md",
+          "title": "Build Your First MCP Server"
+        },
+        {
+          "path": "guides/mcp-and-tools/install-a-third-party-mcp-server.md",
+          "title": "Install a Third-Party MCP Server"
+        },
+        {
+          "path": "guides/mcp-and-tools/write-a-simple-hook.md",
+          "title": "Write a Simple Hook"
+        },
+        {
+          "path": "guides/multi-agent/build-a-code-review-swarm.md",
+          "title": "Build a Code-Review Swarm"
+        },
+        {
+          "path": "guides/multi-agent/build-a-plan-execute-review-flow.md",
+          "title": "Build a plan-execute-review flow"
+        },
+        {
+          "path": "guides/multi-agent/design-a-debate-pattern.md",
+          "title": "Design a Debate Pattern"
+        },
+        {
+          "path": "guides/providers-and-models/byo-provider.md",
+          "title": "Bring Your Own Provider"
+        },
+        {
+          "path": "guides/providers-and-models/use-anthropic.md",
+          "title": "Use Anthropic"
+        },
+        {
+          "path": "guides/providers-and-models/use-ollama-locally.md",
+          "title": "Use Ollama Locally"
+        },
+        {
+          "path": "guides/providers-and-models/use-openai.md",
+          "title": "Use OpenAI"
+        },
+        {
+          "path": "guides/advanced/query-the-event-log.md",
+          "title": "Query the Event Log"
+        },
+        {
+          "path": "guides/advanced/replay-an-agent-run.md",
+          "title": "Replay an Agent Run"
+        },
+        {
+          "path": "guides/advanced/self-host-for-a-team.md",
+          "title": "Self-Host for a Team"
+        }
+      ]
+    },
+    {
+      "heading": "Build on Codebolt",
+      "count": 158,
+      "order": 4,
+      "files": [
+        {
+          "path": "build-on-codebolt/overview.md",
+          "title": "Build on Codebolt"
+        },
+        {
+          "path": "build-on-codebolt/architecture-for-builders.md",
+          "title": "Architecture for Builders"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/overview.md",
+          "title": "Creating Agents"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/quickstart.md",
+          "title": "Custom Agent Quickstart"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-types/level-0-raw-websocket.md",
+          "title": "Level 0 — Raw WebSocket"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-types/level-1-codeboltjs.md",
+          "title": "Level 1 — Using Codeboltjs"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-types/level-2-framework.md",
+          "title": "Level 2 — Using Agent Framework"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-types/level-3-remix.md",
+          "title": "Level 3 — Remix Agents"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-types/level-4-flow-visual.md",
+          "title": "Level 4 — Flow Visual Agent Builder"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/third-party-agents.md",
+          "title": "Third-Party Agents"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-anatomy/agent-yaml.md",
+          "title": "codeboltagent.yaml"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-anatomy/context.md",
+          "title": "Context"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/agent-anatomy/lifecycle.md",
+          "title": "Lifecycle"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/patterns/overview.md",
+          "title": "Patterns Overview"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/patterns/processor-pattern.md",
+          "title": "Processor Pattern"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/patterns/unified-agent.md",
+          "title": "CodeboltAgent"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/processors/what-are-processors.md",
+          "title": "What are Processors"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/processors/processor-types.md",
+          "title": "Processor Types"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/processors/built-in-processors.md",
+          "title": "Built-in Processors"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/processors/writing-a-custom-processor.md",
+          "title": "Writing a Custom Processor"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/dynamic-agent-events.md",
+          "title": "Dynamic Agent Events"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/testing-and-debugging.md",
+          "title": "Testing & Debugging"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/auto-optimize-agents.md",
+          "title": "Auto-Optimize Agents"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/publishing.md",
+          "title": "Publishing"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/overview.md",
+          "title": "Agent Extensions Overview"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/capabilities/overview.md",
+          "title": "Capabilities"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/capabilities/structure-and-schema.md",
+          "title": "Structure and Schema"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/capabilities/activation.md",
+          "title": "Execution Flow"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/capabilities/bundling-skills-and-tools.md",
+          "title": "API Reference"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/capabilities/publishing.md",
+          "title": "Marketplace and Publishing"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/capabilities/executors.md",
+          "title": "Capability Executors"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/skills/overview.md",
+          "title": "Skills"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/skills/creating-a-skill.md",
+          "title": "Creating A Skill"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/skills/handler-types.md",
+          "title": "Handler Types"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/skills/testing-and-debugging.md",
+          "title": "Testing And Debugging"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/skills/publishing.md",
+          "title": "Publishing"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/mcp-tools/overview.md",
+          "title": "MCP Tools Overview"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/mcp-tools/quickstart-local-mcp.md",
+          "title": "Quickstart — Local MCP Server"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/mcp-tools/tool-schema.md",
+          "title": "Tool Schema"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/mcp-tools/custom-tools.md",
+          "title": "Custom Tools"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/mcp-tools/error-handling.md",
+          "title": "Error Handling"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/mcp-tools/packaging.md",
+          "title": "Packaging"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/action-blocks/overview.md",
+          "title": "Action Blocks"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/action-blocks/block-schema.md",
+          "title": "Block Schema"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/action-blocks/authoring.md",
+          "title": "Authoring"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/action-blocks/publishing.md",
+          "title": "Publishing"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/side-execution.md",
+          "title": "Side Execution"
+        },
+        {
+          "path": "build-on-codebolt/agent-extensions/subagents.md",
+          "title": "Subagents"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/overview.md",
+          "title": "Custom Interfaces Overview"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/client-sdk.md",
+          "title": "Client SDK"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/existing-uis.md",
+          "title": "Existing UIs"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/chat-widget.md",
+          "title": "Chat Widget"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/dynamic-panels.md",
+          "title": "Dynamic Panels"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/build-your-first-custom-ui.md",
+          "title": "Build Your First Custom UI"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/custom-ui.md",
+          "title": "Custom UI"
+        },
+        {
+          "path": "build-on-codebolt/custom-uis/build-your-first-dynamic-panel.md",
+          "title": "Build Your First Dynamic Panel"
+        },
+        {
+          "path": "build-on-codebolt/custom-agentic-applications/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "build-on-codebolt/custom-agentic-applications/application-shapes.md",
+          "title": "Application Shapes"
+        },
+        {
+          "path": "build-on-codebolt/custom-agentic-applications/standalone-server-connected-apps.md",
+          "title": "Standalone Server-Connected Apps"
+        },
+        {
+          "path": "build-on-codebolt/custom-agentic-applications/plugin-backed-uis.md",
+          "title": "Plugin-Backed UIs"
+        },
+        {
+          "path": "build-on-codebolt/plugins/overview.md",
+          "title": "Plugins Overview"
+        },
+        {
+          "path": "build-on-codebolt/plugins/sdk-and-lifecycle.md",
+          "title": "Plugin SDK and Lifecycle"
+        },
+        {
+          "path": "build-on-codebolt/plugins/functionalities.md",
+          "title": "Major Plugin Functionalities"
+        },
+        {
+          "path": "build-on-codebolt/plugins/chat-gateway/overview.md",
+          "title": "Chat Gateway Overview"
+        },
+        {
+          "path": "build-on-codebolt/plugins/chat-gateway/routing-and-persistence.md",
+          "title": "Routing and Persistence"
+        },
+        {
+          "path": "build-on-codebolt/plugins/chat-gateway/custom-channel-plugins.md",
+          "title": "Custom Channel Plugins"
+        },
+        {
+          "path": "build-on-codebolt/plugins/chat-gateway/persistent-agent-characters.md",
+          "title": "Persistent Agent Characters"
+        },
+        {
+          "path": "build-on-codebolt/plugins/dynamic-panel-plugins.md",
+          "title": "Dynamic Panel Plugins"
+        },
+        {
+          "path": "build-on-codebolt/plugins/custom-ai-providers/overview.md",
+          "title": "Custom AI Providers"
+        },
+        {
+          "path": "build-on-codebolt/plugins/custom-ai-providers/custom-llm-provider.md",
+          "title": "Custom LLM Provider"
+        },
+        {
+          "path": "build-on-codebolt/plugins/custom-ai-providers/custom-embedding-provider.md",
+          "title": "Custom Embedding Provider"
+        },
+        {
+          "path": "build-on-codebolt/plugins/proxy-execution-gateway/overview.md",
+          "title": "Proxy Execution Gateway"
+        },
+        {
+          "path": "build-on-codebolt/plugins/proxy-execution-gateway/plugins-socket-interface.md",
+          "title": "Direct Plugin Socket Interface"
+        },
+        {
+          "path": "build-on-codebolt/plugins/packaging-and-publishing.md",
+          "title": "Packaging and Publishing Plugins"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/overview.md",
+          "title": "Extending Codebolt"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/custom-llm-providers.md",
+          "title": "Custom LLM Providers"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/build-your-first-llm-provider.md",
+          "title": "Build Your First LLM Provider"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/ui-extensions.md",
+          "title": "UI Extensions"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/build-your-first-ui-extension.md",
+          "title": "Build Your First UI Extension"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/themes.md",
+          "title": "Themes"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/custom-commands.md",
+          "title": "Custom Commands"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/execution-backends.md",
+          "title": "Custom Execution Backends"
+        },
+        {
+          "path": "build-on-codebolt/extending-codebolt/build-your-first-execution-backend.md",
+          "title": "Build Your First Execution Backend"
+        },
+        {
+          "path": "build-on-codebolt/eval-and-optimization/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "build-on-codebolt/eval-and-optimization/replay-and-traces.md",
+          "title": "Creating Experiments"
+        },
+        {
+          "path": "build-on-codebolt/eval-and-optimization/writing-evals.md",
+          "title": "Evaluators"
+        },
+        {
+          "path": "build-on-codebolt/eval-and-optimization/optimization-loop.md",
+          "title": "Optimization Loop"
+        },
+        {
+          "path": "build-on-codebolt/eval-and-optimization/metrics-and-scoring.md",
+          "title": "Running Evals and Results"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/runtime-memory-apis.md",
+          "title": "Runtime Memory APIs"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/vector-db.md",
+          "title": "Vector DB"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/knowledge.md",
+          "title": "Knowledge"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/knowledge-graph.md",
+          "title": "Knowledge Graph"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/persistent-memory.md",
+          "title": "Persistent Memory"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/kv-store.md",
+          "title": "KV Store"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/memory-ingestion.md",
+          "title": "Memory Ingestion"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/context-assembly.md",
+          "title": "Context Assembly"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/hooks-and-action-blocks.md",
+          "title": "Hooks and Action Blocks"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/memory-evaluation.md",
+          "title": "Memory Evaluation"
+        },
+        {
+          "path": "build-on-codebolt/memory-management/optimization-patterns.md",
+          "title": "Optimization Patterns"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/overview.md",
+          "title": "Multi-Agent Orchestration"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/multi-agent-orchestration-management.md",
+          "title": "Multi-Agent Orchestration Management"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/when-multi-agent.md",
+          "title": "When to use multi-agent"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/patterns/debate.md",
+          "title": "Debate"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/patterns/manager-worker.md",
+          "title": "Manager-Worker"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/patterns/map-reduce.md",
+          "title": "Map-Reduce"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/patterns/pipeline.md",
+          "title": "Pipeline"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/patterns/plan-execute-review.md",
+          "title": "Plan-Execute-Review"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/agent-flows.md",
+          "title": "Agent Flows"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/stigmergy-and-reputation.md",
+          "title": "Stigmergy and Reputation"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/drift-detection.md",
+          "title": "Drift Detection"
+        },
+        {
+          "path": "build-on-codebolt/multi-agent-orchestration/review-and-merge-design.md",
+          "title": "Review & Merge Design"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/overview.md",
+          "title": "Multi-Environment Orchestration"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/remote-environments/overview.md",
+          "title": "Remote Environments"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/remote-environments/provider-architecture.md",
+          "title": "Provider Architecture"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/remote-environments/execution-chaining.md",
+          "title": "Execution Chaining"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/remote-environments/environment-lifecycle.md",
+          "title": "Environment Lifecycle"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/remote-environments/environment-creation-and-management.md",
+          "title": "Environment Creation And Management"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/remote-environments/communication-flow.md",
+          "title": "Communication Flow"
+        },
+        {
+          "path": "build-on-codebolt/multi-environment-orchestration/creating-a-custom-provider.md",
+          "title": "Creating a Custom Provider"
+        },
+        {
+          "path": "build-on-codebolt/internals/architecture-overview.md",
+          "title": "Architecture Overview"
+        },
+        {
+          "path": "build-on-codebolt/internals/process-model.md",
+          "title": "Process Model"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/agent-subsystem.md",
+          "title": "Agent Subsystem"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/mcp-and-tools.md",
+          "title": "MCP & Tools"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/llm-and-inference.md",
+          "title": "LLM & Inference"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/memory.md",
+          "title": "Memory"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/knowledge-and-vector.md",
+          "title": "Knowledge & Vector"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/narrative-engine.md",
+          "title": "Narrative Engine"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/context-assembly.md",
+          "title": "Context Assembly"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/planning-hierarchy.md",
+          "title": "Planning Hierarchy"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/guardrails-and-eval.md",
+          "title": "Guardrails & Eval"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/project-and-workspace.md",
+          "title": "Project & Workspace"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/communication.md",
+          "title": "Communication"
+        },
+        {
+          "path": "build-on-codebolt/internals/subsystems/persistence-and-eventlog.md",
+          "title": "Persistence & Event Log"
+        },
+        {
+          "path": "build-on-codebolt/internals/data-flow-walkthroughs/agent-run-end-to-end.md",
+          "title": "Agent run end-to-end"
+        },
+        {
+          "path": "build-on-codebolt/internals/data-flow-walkthroughs/chat-message-end-to-end.md",
+          "title": "Chat message end-to-end"
+        },
+        {
+          "path": "build-on-codebolt/internals/data-flow-walkthroughs/checkpoint-and-rollback.md",
+          "title": "Checkpoint and rollback"
+        },
+        {
+          "path": "build-on-codebolt/internals/data-flow-walkthroughs/tool-call-end-to-end.md",
+          "title": "Tool call end-to-end"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/overview.md",
+          "title": "Building Integrations"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/chat-integrations/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/chat-integrations/gateway.md",
+          "title": "Gateway"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/chat-integrations/websocket.md",
+          "title": "WebSocket Protocol"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/chat-integrations/discord.md",
+          "title": "Discord"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/chat-integrations/slack.md",
+          "title": "Slack"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/chat-integrations/telegram.md",
+          "title": "Telegram"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/cicd-integration.md",
+          "title": "CI/CD Integration"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/project-tool-integration.md",
+          "title": "Project Tool Integration"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/ide-integration.md",
+          "title": "IDE Integration"
+        },
+        {
+          "path": "build-on-codebolt/building-integrations/api-gateway.md",
+          "title": "API Gateway"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/overview.md",
+          "title": "Self-Hosting Overview"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/running-the-server.md",
+          "title": "Running the Server"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/database.md",
+          "title": "Database"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/storage-backends.md",
+          "title": "Storage Backends"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/scaling-and-workers.md",
+          "title": "Scaling and Workers"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/security-hardening.md",
+          "title": "Security Hardening"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/backup-and-restore.md",
+          "title": "Backup and Restore"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/upgrade-guide.md",
+          "title": "Upgrade Guide"
+        },
+        {
+          "path": "build-on-codebolt/agent-infrastructure/remote-execution.md",
+          "title": "Remote Execution"
+        }
+      ]
+    }
+  ],
+  "file": ".llmtemp/llm.jsonl",
+  "urlPrefix": "https://docs.codebolt.ai/llms"
+}

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 
@@ -27,7 +28,7 @@ function generateZodSchema(functions) {
 function processMarkdownFiles(directory) {
   const files = fs.readdirSync(directory);
 
-  files.forEach(file => {
+  files.forEach(file => {
     if (path.extname(file) === '.md') {
       const filePath = path.join(directory, file);
       const content = fs.readFileSync(filePath, 'utf8');

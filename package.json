@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "npx docusaurus",
     "start": "cross-env NODE_OPTIONS=--max-old-space-size=8192 npx docusaurus start --no-open --host 0.0.0.0",
-    "build": "npm run generate:llms && npx docusaurus build && npm run postbuild:llm",
+    "build": "npm run generate:llms && cross-env NODE_OPTIONS=--max-old-space-size=8192 npx docusaurus build && npm run postbuild:llm",
     "build:cf": "npm run generate:llms && cross-env NODE_OPTIONS=--max-old-space-size=8192 npx docusaurus build && npm run postbuild:llm",
     "build:no-types": "npm run generate:llms && npx docusaurus build && npm run postbuild:llm",
     "swizzle": "npx docusaurus swizzle",
