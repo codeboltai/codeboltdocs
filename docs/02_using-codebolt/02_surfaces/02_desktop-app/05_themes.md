@@ -71,5 +71,5 @@ Publish themes through the marketplace or extension workflow that your build exp
 
 ## See also
 
-- [Settings and Profiles](./03_settings-and-profiles.md)
-- [Panels and layout](./02_panels-and-layout.md)
+- [Settings and Profiles](./03_settings-and-profiles/02_settings-and-profiles.md)
+- [Panels and layout](./02_panels-and-layout/02_panels-and-layout.md)
