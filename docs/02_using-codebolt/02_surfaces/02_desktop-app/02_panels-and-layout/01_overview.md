@@ -11,7 +11,7 @@ The desktop app is organized around panels for files, editing, terminal output, 
 
 ## In this section
 
-- [Panels and Layout](./02_panels-and-layout.md) — main panels, resizing, command palette, layout presets, themes, and shortcuts
+- [Using Panels](./02_using-panels.md) — main panels, resizing, command palette, layout presets, themes, and shortcuts
 
 ## Related sections
 
