@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T12:51:02.645Z",
+  "generatedAt": "2026-06-22T05:58:40.816Z",
   "sourceCount": 378,
   "curatedCount": 69,
   "sections": [
@@ -52,7 +52,7 @@
           "title": "Panels and Layout Overview"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout/panels-and-layout.md",
+          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout/using-panels.md",
           "title": "Panels and Layout"
         },
         {

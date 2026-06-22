@@ -1,71 +1,135 @@
 ---
 sidebar_position: 2
 title: Configuring Environments
-description: The Environments panel is the central place to create, edit, and switch between execution environments for your project.
+description: Create, inspect, start, stop, and organize execution environments from the Environments panel.
 ---
 
 # Configuring Environments
 
+The **Environments** panel is where you inspect and control the execution contexts available to a project. It shows local environments, cloud runtimes, runner-backed environments, and child environments in one tree.
 
-
-The Environments panel is the central place to create, edit, and switch between execution environments for your project.
-
-Open via: **Execution dropdown → Environment**
+Open it from the environment or execution area in Codebolt. The panel loads the current environment list from the backend and then stays updated through runtime sync events.
 
 ## Creating an environment
 
-1. Open **Execution → Environment**
-2. Click **+ New Environment**
-3. Enter a name (e.g., `dev`, `ci`, `staging`)
-4. Choose the **environment type** — Local, Remote SSH, Docker, E2B, Daytona, or Git Worktree
-5. Add environment variables (key/value pairs)
-6. Set the working directory if different from the project root
-7. Click **Save**
+1. Open the **Environments** panel.
+2. Click **New Environment**.
+3. Enter a name.
+4. Choose a provider.
+5. Fill in provider-specific configuration.
+6. Review or override the proposed path if available.
+7. Save the environment.
 
-## Environment variables
+When you save, Codebolt validates the provider, merges provider defaults with your config, normalizes the launch config, stores the environment, and usually starts the provider automatically.
 
-Variables set here are injected into every agent process that uses this environment. They are stored encrypted at rest and never appear in conversation history or event logs.
+## Choosing a provider
 
-Common variables to configure:
+The provider controls what kind of runtime Codebolt creates or attaches to.
 
-| Variable | Example |
+| Provider shape | What happens |
 |---|---|
-| `NODE_ENV` | `development` |
-| `DATABASE_URL` | `postgresql://localhost:5432/mydb` |
-| `PORT` | `3000` |
-| `API_KEY` | `sk-...` |
+| Local or worktree provider | Codebolt starts a local provider process and runs work against a local path or worktree. |
+| Cloud runtime provider | Codebolt creates a cloud runtime and stores it as a `cloudprovider` environment with runtime metadata. |
+| Runner provider | Codebolt creates work on a connected runner node. |
+| Existing cloud runtime | Codebolt can display it as a virtual cloud environment and hydrate it on demand. |
 
-Secrets are shown as `●●●●●●` in the UI. Click the eye icon to reveal a value temporarily.
+Cloud runtime provider IDs currently include values such as `e2b-remote`, `sprites-remote`, `runloop-remote`, `modal-remote`, and `daytona-remote`. Runner node providers use IDs shaped like `runner-node:<nodeId>`.
 
-## Selecting the active environment
+## Config fields that matter
 
-The active environment for a project is shown in the **Environment** indicator in the bottom bar. Click it to switch environments. The change takes effect for the next agent run — runs already in progress continue with their original environment.
+Different providers expose different UI fields, but the normalized environment config commonly includes:
 
-## Per-task environment overrides
+| Field | Purpose |
+|---|---|
+| `providerId` | The provider that Codebolt should use locally. Cloud runtime environments use `cloudprovider`. |
+| `runtimeProviderId` | The actual cloud runtime provider, such as `e2b-remote` or `runloop-remote`. |
+| `runtimeId` / `cloudRuntimeId` | Runtime identity returned by the cloud or remote provider. |
+| `runtimeType` | Runtime category, for example `cloud` or `runner`. |
+| `workspaceId` / `workspaceType` | Cloud workspace scope. Team workspaces are normalized as `team:<id>`. |
+| `requestedPath` | User-requested path. |
+| `resolvedPath` | Resolved path after provider/default logic. |
+| `environmentPath` / `workspacePath` | Working path used by providers and UI. |
+| `pathSource` | Whether the path came from the user, provider, existing runtime, or default fallback. |
+| `instanceOrigin` | `manual_started`, `cloud_started`, `runner_started`, or `child_environment`. |
+| `syncMode` | `none`, `git`, or `workspace_sync`. |
+| `mergeStrategy` | `none`, `git`, or `workspace_sync`. |
+| `parentRuntimeId` | Runtime ID of the parent environment for child environments. |
+| `parentEnvironmentId` | Codebolt environment ID of the parent environment. |
+| `parentProjectPath` | Parent working path used to resolve child environment placement. |
 
-Individual tasks in the **Tasks** panel can override the project-level environment:
+## Path behavior
 
-1. Open a task → **Environment** tab
-2. Select a different environment or set task-specific variable overrides
-3. Save the task
+Before an environment is created, Codebolt can calculate a prospective path.
 
-Use per-task overrides when a specific task needs different credentials or a fresh isolated container without changing the project-level default.
+For local worktree-style environments, the path is usually under the active project:
 
-## Variable precedence
+```text
+<project>/.codebolt/worktree/<environment-name>
+<project>/.codebolt/environments/<environment-name>
+```
 
-When an agent runs, environment variables are resolved in this order (highest priority first):
+For cloud environments, Codebolt asks the cloud runtime service for a proposed path. If the provider cannot answer, Codebolt falls back to a path like:
 
-1. **Task-level override** — set on an individual task
-2. **Project environment** — configured in the Environments panel
-3. **System environment** — your OS environment variables
-4. **Codebolt defaults** — built-in fallback values
+```text
+/home/user/<project-or-environment-name>
+```
 
-The [Environment Debug panel](./04_environment-debug.md) shows the fully resolved variable set with the source of each value, so you can verify what an agent will actually see before running it.
+If you explicitly set a path, `pathSource` becomes `user_override`.
 
-## Comparing environments
+## Starting, stopping, and restarting
 
-To compare two environments (e.g., `dev` vs `staging`), open **Environment Debug** and use the **Environment** dropdown to switch between them without leaving the debug view.
+The Environments panel can start, stop, and restart environments.
 
-## Editing and deleting environments
+| Action | What Codebolt does |
+|---|---|
+| Start | Optimistically marks the row as `starting`, calls the backend start route, then refetches authoritative state. |
+| Stop | Marks the row as `stopping`, calls the backend stop route, then refetches state. |
+| Restart | Marks the row as `restarting`, then performs backend restart behavior. |
+| Refresh providers | Asks connected providers, especially `cloudprovider`, to refresh runtime/environment data. |
+| Archive | Hides or de-emphasizes environments that should no longer appear in active workflows. |
 
-Click the **…** menu next to an environment name to edit or delete it. Deleting an environment removes its configuration but does not affect completed runs that used it.
+For a normal local provider, starting means spawning the provider process. For a cloud-backed environment, starting usually means sending a lazy `startRuntime` request through `cloudprovider`.
+
+## Parent and child environments
+
+Child environments let Codebolt create isolated work under an existing parent runtime. A child environment records:
+
+- `instanceOrigin: child_environment`
+- `parentRuntimeId`
+- `parentEnvironmentId`
+- `parentProjectPath`
+
+The UI uses those fields to nest the child under the correct parent. This is useful when a cloud runtime or runner starts additional isolated workspaces.
+
+## Cloud workspace scope
+
+Cloud environments require an auth token from the signed-in Codebolt session or environment variables. Codebolt resolves the workspace scope from the request, selected workspace config, or token-derived personal workspace.
+
+Workspace IDs are normalized:
+
+| Input | Normalized meaning |
+|---|---|
+| `team:<id>` | Team workspace |
+| `<id>` | Team workspace, normalized to `team:<id>` |
+| no workspace | Personal workspace derived from the auth token |
+
+If a request tries to use a workspace that does not match the selected workspace, Codebolt rejects the sync to avoid cross-workspace leakage.
+
+## Live updates
+
+The UI listens for:
+
+| Event | Meaning |
+|---|---|
+| `environmentRuntimeSync` | Provider sent new or updated environment/runtime rows. |
+| `environmentRuntimeStatusUpdate` | Provider sent a state update for one environment/runtime. |
+
+When an event includes full environment records, the UI upserts them into the store. When it includes only an ID and state, the UI patches the existing row. If the event is incomplete, the UI refetches the environment list.
+
+## Practical guidance
+
+- Use a local environment for direct work on the active project.
+- Use a local worktree or child environment when you want isolation without cloud infrastructure.
+- Use a cloud runtime when you want remote execution, parallel runs, or a clean sandbox.
+- Use a runner environment when work should run on infrastructure you control but still be coordinated through Codebolt Cloud.
+- Use `git` sync for cloud runtimes unless the provider explicitly supports another mode.

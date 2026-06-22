@@ -1,136 +1,198 @@
 ---
 sidebar_position: 3
 title: Environment Providers
-description: An environment provider is what Codebolt uses to create and manage a remote execution environment
+description: Providers are the adapters that create, attach to, start, stop, and communicate with environment runtimes.
 ---
 
 # Environment Providers
 
-![Environment Providers](/productImages/environments/providers.png)
+An **environment provider** is the adapter between Codebolt and the place where work actually runs. Codebolt owns the environment record and lifecycle state; the provider owns the runtime-specific details.
 
-An **environment provider** is what Codebolt uses to create and manage a remote execution environment. When you choose a non-local environment type, Codebolt delegates environment setup, startup, and teardown to the appropriate provider.
+Providers can be local packages, installed provider packages, or built-in providers such as `cloudprovider`.
 
-## How providers work
+## Provider responsibilities
 
-When you run an agent with a provider-backed environment:
+A provider is responsible for:
 
-1. Codebolt instructs the provider to create or attach to an environment
-2. The provider starts the Codebolt runtime inside that environment
-3. The remote runtime connects back to Codebolt over WebSocket
-4. The agent loop runs inside the remote environment
-5. Codebolt receives all events, tool outputs, and logs locally
+- Creating or attaching to the runtime.
+- Returning runtime identity and path metadata.
+- Starting and stopping the runtime or bridge process.
+- Forwarding agent messages into the runtime.
+- Forwarding logs, status, file operations, thread events, and runtime events back to Codebolt.
+- Reporting provider readiness with `providerStartResponse`.
 
-Your local Codebolt server remains the control plane throughout — the provider manages the remote side.
+Codebolt stays the control plane. It stores environment records, tracks lifecycle state, drives UI updates, and routes provider messages.
 
-## Available providers
+## Provider metadata
 
-### Local
+Providers are described by `providers.yaml` or `codeboltprovider.yaml`. A provider can declare:
 
-The default. The agent runs directly on your machine using your installed tools, shell, and environment. No provider configuration required.
-
-**Use when**: developing and testing agents locally.
-
-### Remote SSH server
-
-Runs the agent on a remote machine you control over SSH.
-
-**Configuration:**
-
-| Field | Description |
+| Field | Purpose |
 |---|---|
-| **Host** | IP address or hostname of the remote machine |
-| **Port** | SSH port (default: 22) |
-| **User** | SSH username |
-| **Auth** | Path to SSH private key or password |
-| **Remote working directory** | Absolute path on the remote machine |
+| `name` / `unique_id` | Provider identity. |
+| `entrypoint` | JavaScript file Codebolt starts for the provider. |
+| `runtime` | Runtime used to execute the provider package, usually `node`. |
+| `capabilities` | Optional provider features such as lazy runtimes, remote directory, thread attach, or cloud control. |
+| `config` | Provider-level defaults. |
+| `createConfigSchema` | UI schema for environment creation fields. |
+| `syncPolicy` | Supported sync modes and defaults. |
 
-Codebolt streams command output from the remote host back to your local Terminal panel in real time.
+When starting a provider, Codebolt merges configuration in this order:
 
-**Use when**: you need to run agents in a staging server, a cloud VM, or any machine you can reach over SSH.
+1. Provider YAML defaults.
+2. Installed-provider configuration.
+3. Environment-specific configuration.
 
-### Docker
+The merged result is passed to the provider as `ENVIRONMENT_CONFIG`.
 
-Runs the agent inside a Docker container. The container can be on your local machine or a remote Docker host.
+## Local provider process lifecycle
 
-**Configuration:**
+For a normal provider-backed environment, Codebolt:
 
-| Field | Description |
+1. Resolves the provider path.
+2. Reads provider metadata and entrypoint.
+3. Builds a clean process environment.
+4. Adds identifiers such as `environmentId`, `providerId`, and `ENVIRONMENT_CONFIG`.
+5. Starts the provider child process.
+6. Captures stdout and stderr for provider debug.
+7. Waits for `providerStartResponse`.
+8. Marks the environment `running`.
+
+If the provider exits before it becomes ready, startup fails and the lifecycle state becomes `error` or `stopped` depending on the failure path.
+
+## Provider messages
+
+Provider communication is WebSocket/message based. Common message families include:
+
+| Message | Purpose |
 |---|---|
-| **Image** | Docker image to use (e.g., `node:20-alpine`) |
-| **Docker host** | Leave blank for local Docker; set to a remote Docker socket for remote hosts |
-| **Volumes** | Additional volume mounts (the project directory is mounted automatically) |
-| **Port mappings** | Ports to expose from the container |
-| **Environment variables** | Added on top of the environment's variable set |
+| `providerStart` / `providerStartResponse` | Start handshake and readiness signal. |
+| `providerStop` / `providerStopResponse` | Graceful shutdown. |
+| `providerAgentStart` | Send a user/agent message into the environment runtime. |
+| `providerLazyRequest` / `providerLazyResponse` | On-demand runtime, environment, and thread operations. |
+| `providerCreateEnvironment` / `providerCreateEnvironmentResponse` | Create a child environment under a remote parent. |
+| `providerReadFile`, `providerWriteFile`, `providerGetTreeChildren` | Remote filesystem operations. |
+| `providerGetDiffFiles`, `providerMergeAsPatch`, `providerSendPR` | Review, merge, and PR workflows. |
 
-A fresh container is created for each agent run and torn down when the run completes (unless you configure persistence).
+## The built-in cloudprovider
 
-**Use when**: you need full dependency isolation, a specific OS environment, or reproducible builds.
+`cloudprovider` is a special provider that bridges local Codebolt to Codebolt Cloud runtimes.
 
-### E2B
+It declares capabilities for:
 
-[E2B](https://e2b.dev) provides cloud sandboxes — lightweight, fast-starting VMs for running code safely.
+- Lazy runtime listing and hydration.
+- Lazy environment listing.
+- Lazy thread listing and messages.
+- Remote directory operations.
+- Thread attach.
+- Cloud runtime control.
 
-**Configuration:**
+Its defaults include:
 
-| Field | Description |
+| Setting | Default |
 |---|---|
-| **API key** | Your E2B API key |
-| **Sandbox template** | The E2B template to use (defaults to the Codebolt base template) |
-| **Region** | Preferred region for sandbox creation |
-| **Timeout** | Maximum sandbox lifetime in seconds |
+| `cloudHttpUrl` | `https://codebolt-wrangler-ws.arrowai.workers.dev` |
+| `cloudWsUrl` | `wss://codebolt-wrangler-ws.arrowai.workers.dev` |
+| `workspaceType` | `personal` |
+| `runtimeProviderId` | `e2b-remote` |
+| `defaultSyncMode` | `git` |
 
-E2B sandboxes start in seconds. Codebolt persists the sandbox ID across reconnects, so a running sandbox survives a Codebolt restart.
+The provider exposes creation fields for workspace ID, workspace type, runtime provider, and optional existing runtime ID.
 
-**Use when**: you need ephemeral isolated environments that start quickly, or want to run many parallel agent tasks without managing infrastructure.
+## How cloudprovider works
 
-### Daytona
+On start, `cloudprovider`:
 
-[Daytona](https://daytona.io) provides managed cloud development workspaces with full persistence and team sharing.
+1. Reads `ENVIRONMENT_CONFIG`.
+2. Resolves the Codebolt auth token.
+3. If `syncOnly` is enabled, starts only the cloud sync bridge.
+4. If no runtime ID exists, creates a runtime through the cloud HTTP API.
+5. If a runtime ID exists, attaches to that runtime.
+6. Opens a WebSocket to the cloud worker proxy.
+7. Registers as the local app bridge.
+8. Requests a connections snapshot.
+9. Forwards runtime, thread, and status events back into Codebolt.
 
-**Configuration:**
+```text
+Codebolt server
+  -> cloudprovider process
+  -> Cloud HTTP API for create/list/stop
+  -> Cloud WebSocket proxy for live events and forwarding
+  -> Remote runtime
+```
 
-| Field | Description |
+## Cloud runtime operations
+
+`cloudprovider` handles lazy actions:
+
+| Action | What it does |
 |---|---|
-| **API key** | Your Daytona API key |
-| **Server URL** | Your Daytona server endpoint |
-| **Workspace** | Workspace name to create or attach to |
-| **Project** | The project inside the workspace |
+| `listRuntimes` | Lists cloud runtimes and runner nodes. |
+| `getRuntime` | Hydrates a specific runtime from the cloud directory. |
+| `startRuntime` / `createRuntime` | Creates a new cloud runtime. |
+| `stopRuntime` | Stops a cloud runtime. |
+| `restartRuntime` | Stops and recreates a runtime. |
+| `listEnvironments` | Returns cached cloud environment rows from connection snapshots. |
+| `listThreads` | Lists cloud threads. |
+| `getThreadMessages` | Loads messages for a cloud thread. |
+| `attachThread` | Subscribes local Codebolt to live thread events. |
+| `sendThreadMessage` | Sends a message to a cloud runtime thread. |
 
-Daytona workspaces persist between runs, making them suitable for long-running or collaborative agent tasks.
+## Cloud runtime providers
 
-**Use when**: you need persistent remote environments shared across a team, or long-running environments that accumulate state across multiple agent sessions.
+When the user chooses a cloud runtime provider such as `e2b-remote`, Codebolt normalizes the environment so the local provider becomes `cloudprovider`, while the actual runtime provider remains in `runtimeProviderId`.
 
-### Git Worktree
+Example:
 
-Creates a separate [Git worktree](https://git-scm.com/docs/git-worktree) of your project in a temporary directory. The agent runs in the worktree, keeping changes isolated from your main working tree.
+```json
+{
+  "providerId": "cloudprovider",
+  "runtimeProviderId": "e2b-remote",
+  "runtimeType": "cloud",
+  "syncMode": "git"
+}
+```
 
-**Configuration:**
+This lets Codebolt use one local bridge for multiple cloud runtime backends.
 
-| Field | Description |
-|---|---|
-| **Branch** | Branch to check out in the worktree (created if it doesn't exist) |
-| **Base path** | Where to create the worktree directory (defaults to a system temp path) |
+## Runner providers
 
-When the agent run completes, the worktree can be merged back or discarded. No network connection required — this is a purely local provider.
+Runner nodes are discovered through the cloudprovider runtime list. They appear as providers with IDs like:
 
-**Use when**: you want to run experiments or refactoring agents on a separate branch without affecting your current working tree, or when running two agents on the same project in parallel.
+```text
+runner-node:<nodeId>
+```
 
-## Switching providers
+When you create an environment with a runner provider, Codebolt records `instanceOrigin: runner_started`, stores node metadata, and groups resulting child environments under **User Runner Environments** in the UI.
 
-Environments are configured per-project. To change which provider an environment uses:
+## Virtual cloud environments
 
-1. Open **Execution → Environment**
-2. Select the environment
-3. Change the **Type** field
-4. Fill in the new provider's configuration
-5. Save
+Codebolt can display cloud runtimes that were not originally saved as local environment records. These are **virtual cloud environments**.
 
-The next agent run will use the new provider.
+They use IDs shaped like:
 
-## Provider status
+```text
+cloud:<runtimeId>
+```
 
-The active environment's provider connection status appears in the **Plugin Debug** panel (**Debug Tools → Plugin Debug**). If a provider shows `disconnected` or `error`, check its error message there before re-running an agent.
+They are hydrated on demand through `cloudprovider` lazy requests. This lets the UI show currently available cloud runtimes without requiring every runtime to be pre-saved in the local environment file.
 
-## Building a custom provider
+## Stopping providers
 
-If you need an execution environment not covered by the built-in providers, you can build a custom provider using the `@codebolt/provider` base package. See [Multi-Environment Orchestration](../../04_build-on-codebolt/08a_multi-environment-orchestration/01_overview.md) in the Build on Codebolt section.
+For normal providers, Codebolt sends `providerStop`, waits for a response, sends `SIGTERM`, and force-kills after a short timeout if needed.
+
+For virtual cloud environments, Codebolt asks `cloudprovider` to stop the runtime. For cloud-backed environments, runtime stop is routed through cloudprovider or the cloud API depending on the environment shape.
+
+## Building custom providers
+
+A custom provider should implement the lifecycle and message contract that Codebolt expects:
+
+- Accept `ENVIRONMENT_CONFIG`.
+- Connect back to the Codebolt server.
+- Respond to `providerStart`.
+- Emit `providerStartResponse` when ready.
+- Handle `providerStop`.
+- Implement file, diff, merge, and agent-start operations if the environment supports them.
+- Return enough runtime metadata for Codebolt to update environment state and paths.
+
+For most remote execution integrations, the provider should be treated as a bridge and control adapter, not the runtime itself.
