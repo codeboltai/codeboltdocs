@@ -21,4 +21,4 @@ Core Concepts explains the mental model you need to use Codebolt effectively. Be
 ## Where to go next
 
 - For deeper background, see **[Concepts](../02_concepts/01_overview.md)**.
-- To start using Codebolt, pick a client: **[Desktop App](../02c_desktop.md)** · **[CLI](../02d_cli.md)** · **[TUI](../02e_tui.md)**.
+- To start using Codebolt, pick a client: **[Desktop App](../02f_platforms/01_desktop.md)** · **[CLI](../02f_platforms/02_cli.md)** · **[TUI](../02f_platforms/03_tui.md)**.
