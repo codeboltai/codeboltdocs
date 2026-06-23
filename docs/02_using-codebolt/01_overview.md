@@ -18,10 +18,9 @@ For step-by-step walkthroughs see [Guides & Tutorials](../03_guides/01_overview.
 
 New to Codebolt? Start with what it is, get it installed, and run your first agent.
 
-<DocCardGrid columns={3} items={[
+<DocCardGrid columns={2} items={[
   { label: 'Intro', title: 'What is Codebolt', description: 'The core idea, what makes it different, and what you can do with it.', href: './01b_what-is-codebolt' },
-  { label: 'QS', title: 'Quickstart', description: 'Install, sign in, open a project, and run your first agent in ~10 minutes.', href: './02_quickstart' },
-  { label: 'Install', title: 'Installation & Setup', description: 'Desktop app, CLI, onboarding wizard, and first-run checklist.', href: './03_installation' },
+  { label: 'Start', title: 'Get Started', description: 'Pick your client — desktop app, CLI, or TUI — and install, configure, and run your first agent.', href: './02_quickstart' },
 ]} />
 
 <p class="uc-section-label">Workspace</p>

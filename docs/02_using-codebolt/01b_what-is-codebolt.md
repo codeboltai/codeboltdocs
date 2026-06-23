@@ -51,7 +51,6 @@ So you don't build the wrong mental model:
 
 ## Where to next
 
-- **Want to try it now?** → [Quickstart](./02_quickstart.md) (~10 min)
-- **Need detailed install options?** → [Installation](./03_installation/01_overview.md)
+- **Want to try it now?** → [Get Started](./02_quickstart.md) (~5–10 min per client)
 - **Want to understand how it works first?** → [Architecture Overview](../04_build-on-codebolt/08_internals/01_architecture-overview.md)
 - **Already running it, want to do something specific?** → [Guides & Tutorials](../03_guides/01_overview.md)

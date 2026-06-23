@@ -12,7 +12,7 @@ Task-oriented walkthroughs. Each guide answers a specific "how do I do X?" with 
 
 Find the guide closest to your goal and follow the steps. Guides assume:
 
-- You've finished [Quickstart](../01_getting-started/02_quickstart.md) and [first-run checklist](../01_getting-started/04_first-run-checklist.md).
+- You've finished [Get Started](../02_using-codebolt/02_quickstart.md) — install, sign in, and run your first agent.
 - You have a provider configured and a project open.
 - You're comfortable reading code — most guides show small config/code snippets.
 
