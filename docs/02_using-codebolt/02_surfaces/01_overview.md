@@ -12,9 +12,9 @@ Codebolt is the same agent runtime no matter how you talk to it. The **client** 
 
 | Client | Best for | Trade-off |
 |---|---|---|
-| **[Desktop app](./02_desktop-app/00_get-started.md)** | Daily coding work, multi-panel context, visual diffs, rich chat | Heaviest install, single machine |
-| **[CLI](./03_cli/01_overview.md)** | Scripting, CI, one-off commands, remote SSH | Command-driven, less visual |
-| **[TUI](./04_tui/01_overview.md)** | Terminal-only environments where you still want an interactive UI | Narrower surface model than the desktop app |
+| **[Desktop app](./02_desktop-app/00_desktop-app-overview.md)** | Daily coding work, multi-panel context, visual diffs, rich chat | Heaviest install, single machine |
+| **[CLI](./03_cli/00_cli-overview.md)** | Scripting, CI, one-off commands, remote SSH | Command-driven, less visual |
+| **[TUI](./04_tui/00_tui-overview.md)** | Terminal-only environments where you still want an interactive UI | Narrower surface model than the desktop app |
 | **[Headless](./05_headless.md)** | Servers, automation, agent execution without any UI | No interactive chat |
 
 The same project, the same agents, the same memory — only the client differs.
@@ -40,6 +40,6 @@ The pages under **Clients** are **reference catalogs** for each client — what 
 ## See also
 
 - [Get Started](../02_quickstart.md)
-- [Desktop App — Get Started](./02_desktop-app/00_get-started.md)
-- [CLI — Get Started](./03_cli/00_get-started.md)
-- [TUI — Get Started](./04_tui/00_get-started.md)
+- [Desktop App](./02_desktop-app/00_desktop-app-overview.md)
+- [CLI](./03_cli/00_cli-overview.md)
+- [TUI](./04_tui/00_tui-overview.md)

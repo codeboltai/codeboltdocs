@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-22T05:58:40.816Z",
-  "sourceCount": 378,
-  "curatedCount": 69,
+  "generatedAt": "2026-06-23T12:28:05.702Z",
+  "sourceCount": 380,
+  "curatedCount": 65,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 178,
+      "count": 180,
       "order": 1,
       "files": [
         {
@@ -29,15 +29,19 @@
         },
         {
           "path": "using-codebolt/quickstart.md",
-          "title": "Quickstart"
+          "title": "Get Started"
         },
         {
           "path": "using-codebolt/surfaces/overview.md",
           "title": "Platform Overview"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/quickstart.md",
-          "title": "Quickstart"
+          "path": "using-codebolt/surfaces/desktop-app/desktop-app-overview.md",
+          "title": "Desktop App"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/get-started.md",
+          "title": "Get Started"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects/overview.md",
@@ -76,8 +80,12 @@
           "title": "Themes"
         },
         {
-          "path": "using-codebolt/surfaces/cli/quickstart.md",
-          "title": "Quickstart"
+          "path": "using-codebolt/surfaces/cli/cli-overview.md",
+          "title": "CLI"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/get-started.md",
+          "title": "Get Started"
         },
         {
           "path": "using-codebolt/surfaces/cli/overview.md",
@@ -100,8 +108,12 @@
           "title": "App Commands"
         },
         {
-          "path": "using-codebolt/surfaces/tui/quickstart.md",
-          "title": "Quickstart"
+          "path": "using-codebolt/surfaces/tui/get-started.md",
+          "title": "Get Started"
+        },
+        {
+          "path": "using-codebolt/surfaces/tui/tui-overview.md",
+          "title": "TUI"
         },
         {
           "path": "using-codebolt/surfaces/tui/overview.md",
@@ -154,10 +166,6 @@
         {
           "path": "using-codebolt/chat/ai-requests.md",
           "title": "AI Requests"
-        },
-        {
-          "path": "using-codebolt/installation.md",
-          "title": "Installation & Setup"
         },
         {
           "path": "using-codebolt/code-and-terminal/overview.md",
