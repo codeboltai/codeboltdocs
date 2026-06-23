@@ -52,13 +52,29 @@ Roadmap feature             ← human decides what to build
 
 Every artifact is a plain file in the project, so agents automatically read them as context — the same way a human consults a spec before coding. The `codeboltjs` SDK exposes every artifact via a typed API, so agents can also **write** them.
 
-![Roadmap](/productImages/planning/roadmap.png)
+### Roadmap
 
-![Specs](/productImages/planning/specs.png)
+The **Roadmap** is the strategic view — phases, features, and an ideation tab for suggestions not yet accepted. This view shows phases representing milestones and the features committed within each:
 
-![Action plan](/productImages/planning/action_plan.png)
+![Roadmap — phases and features that show product intent, prioritization, and what's planned](/productImages/planning/roadmap.png)
 
-![Tasks](/productImages/planning/tasks.png)
+### Specs
+
+A **Spec** is a rich Markdown document capturing interface contracts, edge cases, and design decisions. Agents read it before acting so they share the author's mental model. This view shows a spec with its structured sections:
+
+![Specs — behavioral specification documents that agents read before implementing a feature](/productImages/planning/specs.png)
+
+### Action Plan
+
+An **Action Plan** is the executable dependency graph an agent builds before non-trivial work — tasks with dependencies, parallel groups, and conditionals. This view shows the graph with task statuses updating as the agent works:
+
+![Action plan — the executable dependency graph an agent builds and updates as it works](/productImages/planning/action_plan.png)
+
+### Tasks
+
+**Tasks** are the live operational layer — individual work items with status, priority, and assignment that change constantly as work happens. This view shows the task list, the answer to "what's happening right now?":
+
+![Tasks — the live operational backlog showing current status, priority, and assignment](/productImages/planning/tasks.png)
 
 → **Read the full concept page: [The Planning System](../../02_concepts/08_planning/01_planning-system.md)**
 

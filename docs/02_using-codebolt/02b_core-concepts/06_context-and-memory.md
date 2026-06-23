@@ -30,15 +30,27 @@ Codebolt's memory is **layered**, with each layer serving a different purpose:
 
 Context assembly is a pipeline (see [Hooks and Processors](./05_hooks-and-processors.md)). On every LLM call, processors pull from the layers above, then compact, redact, rerank, and de-loop the result before it reaches the model.
 
-![Context assembly engine](/productImages/memorycontext/contextAssemblyEngine.png)
+### What the assembly engine looks like
 
-![Vector memory](/productImages/memorycontext/vector_meory.png)
+The context assembly engine shows the live pipeline of memory layers being pulled, filtered, and compacted into the final context window before it reaches the LLM:
 
-![Knowledge graph](/productImages/memorycontext/knowledgegraph.png)
+![Context assembly engine — the pipeline that pulls from memory layers and compacts context for each LLM call](/productImages/memorycontext/contextAssemblyEngine.png)
+
+### Vector store
+
+The **vector store** lets the agent do semantic search over documents, code, and past runs. This view shows the indexed chunks and how the agent retrieves the most relevant ones for the current query:
+
+![Vector memory — indexed chunks retrieved by semantic similarity for the current query](/productImages/memorycontext/vector_meory.png)
+
+### Knowledge graph
+
+The **knowledge graph** holds structured entity and relationship data about the project (functions, modules, dependencies). This view shows the graph the agent can traverse to understand how parts of the codebase connect:
+
+![Knowledge graph — entities and relationships the agent traverses to understand the codebase](/productImages/memorycontext/knowledgegraph.png)
 
 → **Read the full concept page: [Context and Memory](../../02_concepts/04_runtime/02_context-and-memory.md)**
 
 ## See also
 
 - [Hooks and Processors](./05_hooks-and-processors.md)
-- [Event Log](./07_event-log.md)
+- [Event Log](./07_persistence.md)

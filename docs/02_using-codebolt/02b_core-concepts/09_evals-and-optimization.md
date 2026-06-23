@@ -23,11 +23,23 @@ Evals produce scores; the optimization loop turns those scores into improvements
 
 <OptimizationLoop />
 
-![Running an eval](/productImages/evalandoptimization/running_eval.png)
+### Running an eval
 
-![Evaluators](/productImages/evalandoptimization/evaluators.png)
+An **eval run** takes a batch of completed agent runs and scores each one. This view shows a run in progress — each row is a completed run being scored against the configured evaluators, with pass/fail status as results come in:
 
-![Optimization](/productImages/evalandoptimization/optimization.png)
+![Running an eval — each row is a completed run being scored against the configured evaluators](/productImages/evalandoptimization/running_eval.png)
+
+### Evaluators
+
+**Evaluators** are the individual checks that assert whether the agent behaved correctly — deterministic checks (does the test pass? were files in scope?) or LLM-as-judge (is the response accurate?). This view shows the set of evaluators configured for a project:
+
+![Evaluators — the configured checks that score each run, deterministic or LLM-as-judge](/productImages/evalandoptimization/evaluators.png)
+
+### Optimization
+
+The **optimization** view turns eval scores into actionable improvements — showing which prompts, tools, or guardrails are underperforming so you can iterate. This view shows the optimization dashboard with score trends across iterations:
+
+![Optimization — score trends across iterations, highlighting where prompts, tools, or guardrails need improvement](/productImages/evalandoptimization/optimization.png)
 
 → **Read the full concept page: [Evals and Optimization](../../02_concepts/06_quality/02_evals-and-optimization.md)**
 
