@@ -14,6 +14,18 @@ type Concept = {
   className?: string;
 };
 
+type ChatTemplate = {
+  id: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  title: string;
+  text: string;
+  toY: number;
+  className?: string;
+};
+
 const TABS = [
   { x: 82, w: 132, label: 'New Chat' },
   { x: 214, w: 170, label: 'Thread a633...' },
@@ -57,12 +69,59 @@ const CONCEPTS: Concept[] = [
   },
 ];
 
-const CHAT_LINKS = [
-  { id: 'next', fromX: 754, fromY: 168, toY: 154 },
-  { id: 'steering', fromX: 762, fromY: 307, toY: 240 },
-  { id: 'sub-agent', fromX: 754, fromY: 394, toY: 326 },
-  { id: 'sub-thread', fromX: 754, fromY: 444, toY: 412 },
-  { id: 'background-thread', fromX: 754, fromY: 535, toY: 498 },
+const CHAT_TEMPLATES: ChatTemplate[] = [
+  {
+    id: 'steering',
+    x: 512,
+    y: 198,
+    w: 250,
+    h: 44,
+    title: 'Steering',
+    text: 'tighten scope in current step',
+    toY: 240,
+    className: 'cb-threadsteps-step--active',
+  },
+  {
+    id: 'next',
+    x: 512,
+    y: 252,
+    w: 250,
+    h: 44,
+    title: 'Next step',
+    text: 'queue Review after Act',
+    toY: 154,
+    className: 'cb-threadsteps-step--next',
+  },
+  {
+    id: 'sub-agent',
+    x: 58,
+    y: 310,
+    w: 212,
+    h: 46,
+    title: 'Sub-agent',
+    text: 'child run inside this step',
+    toY: 326,
+  },
+  {
+    id: 'sub-thread',
+    x: 282,
+    y: 310,
+    w: 212,
+    h: 46,
+    title: 'Sub-thread',
+    text: 'child thread for task branch',
+    toY: 412,
+  },
+  {
+    id: 'background-thread',
+    x: 506,
+    y: 310,
+    w: 236,
+    h: 46,
+    title: 'Background thread',
+    text: 'detached work beside chat',
+    toY: 498,
+  },
 ];
 
 function renderLines(lines: TextLine[] | undefined, x: number, y: number, textAnchor: 'start' | 'middle' = 'middle') {
@@ -88,6 +147,24 @@ function renderConceptCard(concept: Concept, x: number, y: number) {
         {concept.eyebrow}
       </text>
       {renderLines(concept.lines, x + 18, y + 47, 'start')}
+    </g>
+  );
+}
+
+function renderChatTemplate(template: ChatTemplate) {
+  const cardClass = template.className
+    ? `cb-threadsteps-message-template ${template.className}`
+    : 'cb-threadsteps-message-template';
+
+  return (
+    <g key={template.id} className="cb-threadsteps-card">
+      <rect x={template.x} y={template.y} width={template.w} height={template.h} rx="8" className={cardClass} />
+      <text x={template.x + 16} y={template.y + 19} className="cb-threadsteps-card-title">
+        {template.title}
+      </text>
+      <text x={template.x + 16} y={template.y + 36} className="cb-threadsteps-copy">
+        {template.text}
+      </text>
     </g>
   );
 }
@@ -137,28 +214,23 @@ export default function ThreadStepsFlow() {
           + open save
         </text>
 
-        <text x="58" y="112" className="cb-threadsteps-muted">
-          - Core Concepts menu now shows: How It Works, Start Simple, Run It Longer,
-        </text>
-        <text x="58" y="140" className="cb-threadsteps-muted">
-          - Customize Process, Extend To Your Process, Local Scaling, Cloud Scaling.
-        </text>
-        <text x="58" y="168" className="cb-threadsteps-muted">
-          - Threads keep task history, context, checkpoints, logs, and agent activity together.
-        </text>
-        <text x="58" y="214" className="cb-threadsteps-response">
-          Core Concepts pages were updated and the old overview page was removed.
-        </text>
-        <text x="58" y="240" className="cb-threadsteps-response">
-          The remaining pages are reachable from the sidebar in their new order.
+        <rect x="448" y="104" width="314" height="42" rx="12" className="cb-threadsteps-user-bubble" />
+        <text x="470" y="131" className="cb-threadsteps-user-text">
+          update docs and check the menu
         </text>
 
-        <rect x="512" y="286" width="250" height="42" rx="12" className="cb-threadsteps-user-bubble" />
-        <text x="534" y="313" className="cb-threadsteps-user-text">
-          can you check why still showing in menu
+        <rect x="48" y="160" width="706" height="34" rx="5" className="cb-threadsteps-agent-card" />
+        <circle cx="78" cy="177" r="11" className="cb-threadsteps-avatar" />
+        <text x="100" y="182" className="cb-threadsteps-agent-title">
+          Agent: Act
+        </text>
+        <text x="244" y="182" className="cb-threadsteps-muted">
+          Step 1: active agent loop
         </text>
 
-        <rect x="48" y="360" width="706" height="122" rx="5" className="cb-threadsteps-agent-card" />
+        {CHAT_TEMPLATES.map(renderChatTemplate)}
+
+        <rect x="48" y="370" width="706" height="112" rx="5" className="cb-threadsteps-agent-card" />
         <circle cx="78" cy="389" r="13" className="cb-threadsteps-avatar" />
         <text x="100" y="394" className="cb-threadsteps-agent-title">
           Agent: Act
@@ -196,11 +268,11 @@ export default function ThreadStepsFlow() {
         <text x="862" y="100" className="cb-threadsteps-side-copy">
           This side explains runtime concepts.
         </text>
-        {CHAT_LINKS.map((link) => (
-          <g key={link.id}>
-            <circle cx={link.fromX} cy={link.fromY} r="3" className="cb-threadsteps-link-dot" />
+        {CHAT_TEMPLATES.map((template) => (
+          <g key={`${template.id}-link`}>
+            <circle cx={template.x + template.w} cy={template.y + template.h / 2} r="3" className="cb-threadsteps-link-dot" />
             <path
-              d={`M ${link.fromX + 5} ${link.fromY} C 792 ${link.fromY}, 810 ${link.toY}, 846 ${link.toY}`}
+              d={`M ${template.x + template.w + 5} ${template.y + template.h / 2} C 792 ${template.y + template.h / 2}, 810 ${template.toY}, 846 ${template.toY}`}
               className="cb-threadsteps-wire cb-threadsteps-wire--dashed"
               markerEnd="url(#cb-threadsteps-arrow)"
             />

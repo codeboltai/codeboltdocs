@@ -934,6 +934,14 @@
 .cb-threadsteps-card:hover .cb-threadsteps-concept-card {
   stroke: #0ea5e9;
 }
+.cb-threadsteps-message-template {
+  fill: rgba(31, 41, 55, 0.9);
+  stroke: rgba(148, 163, 184, 0.22);
+  stroke-width: 1;
+}
+.cb-threadsteps-card:hover .cb-threadsteps-message-template {
+  stroke: #0ea5e9;
+}
 .cb-threadsteps-step--active {
   fill: rgba(14, 165, 233, 0.12);
   stroke: #0ea5e9;
