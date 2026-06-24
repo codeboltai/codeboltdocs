@@ -57,4 +57,4 @@ Most teams stay at level 0 or 1.
 ## See also
 
 - [Tools and MCP](./04_tools-and-mcp.md)
-- [Guardrails](./08_guardrails.md)
+- [Guardrails](../../02_concepts/06_quality/01_guardrails.md)

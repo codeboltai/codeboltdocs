@@ -2,6 +2,7 @@
 sidebar_position: 9
 title: Evals and Optimization
 description: Measuring and improving agent quality across many runs — the offline counterpart to guardrails.
+unlisted: true
 ---
 
 import EvalAnatomy from '@site/src/components/diagrams/EvalAnatomy';

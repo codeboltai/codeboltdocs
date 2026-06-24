@@ -53,4 +53,4 @@ The **knowledge graph** holds structured entity and relationship data about the 
 ## See also
 
 - [Hooks and Processors](./05_hooks-and-processors.md)
-- [Event Log](./07_persistence.md)
+- [Event Log](../../02_concepts/05_persistence/02_event-log.md)

@@ -46,4 +46,4 @@ A **processor** is a transformation in the **context assembly** pipeline. Where 
 ## See also
 
 - [Context and Memory](./06_context-and-memory.md)
-- [Guardrails](./08_guardrails.md)
+- [Guardrails](../../02_concepts/06_quality/01_guardrails.md)

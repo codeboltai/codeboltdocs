@@ -39,4 +39,4 @@ Inside the server, the planes are implemented by 12 subsystems — context assem
 ## See also
 
 - [Agents](./03_agents.md)
-- [Guardrails](./08_guardrails.md)
+- [Guardrails](../../02_concepts/06_quality/01_guardrails.md)

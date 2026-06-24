@@ -2,6 +2,7 @@
 sidebar_position: 8
 title: Guardrails
 description: How Codebolt keeps a single agent run from going off the rails — allow, rewrite, deny, pause.
+unlisted: true
 ---
 
 import GuardrailFlow from '@site/src/components/diagrams/GuardrailFlow';

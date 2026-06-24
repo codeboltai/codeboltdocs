@@ -19,15 +19,12 @@ Each page below is a **detailed summary with diagrams and screenshots**, plus a 
 | **Tools and MCP** | How agents act on the world — built-in tools, MCP servers, capabilities | [Tools and MCP →](./04_tools-and-mcp.md) |
 | **Hooks and Processors** | Intercept events (hooks) and transform context on every call (processors) | [Hooks and Processors →](./05_hooks-and-processors.md) |
 | **Context and Memory** | The memory layers and how context is assembled each turn | [Context and Memory →](./06_context-and-memory.md) |
-| **Shadow Git, Checkpoints & Event Log** | Reversible edits via shadow git, and the immutable source of truth | [Persistence →](./07_persistence.md) |
-| **Guardrails** | Allow, rewrite, deny, or pause-for-human — keeping a run in bounds | [Guardrails →](./08_guardrails.md) |
-| **Evals and Optimization** | Measuring and improving agent quality across many runs | [Evals and Optimization →](./09_evals-and-optimization.md) |
 | **Multi-Agent Patterns** | Five shapes for getting agents to work together — swarm, plan-execute-review, debate, stigmergy, reputation | [Multi-Agent →](./10_multi-agent.md) |
 | **The Planning System** | A stack of artifacts — Roadmap, Specs, UI Flow, Requirement Plan, Action Plan, Tasks | [Planning →](./11_planning.md) |
 
 ## A one-paragraph mental model
 
-An **[agent](./03_agents.md)** is a loop that calls an LLM and **[tools](./04_tools-and-mcp.md)** until a task is done. Each turn it assembles **[context and memory](./06_context-and-memory.md)**, then **[guardrails](./08_guardrails.md)** vet every proposed action. Every action is recorded in the **[event log](./07_persistence.md)**, and every file edit is checkpointed in **shadow git** so it can be rolled back. When one agent isn't enough, you compose **[multi-agent patterns](./10_multi-agent.md)**; when the work is non-trivial, agents plan against the **[planning system](./11_planning.md)**. All of this sits on the five-plane **[architecture](./02_architecture.md)**.
+An **[agent](./03_agents.md)** is a loop that calls an LLM and **[tools](./04_tools-and-mcp.md)** until a task is done. Each turn it assembles **[context and memory](./06_context-and-memory.md)**, then **[guardrails](../../02_concepts/06_quality/01_guardrails.md)** vet every proposed action. Every action is recorded in the **[event log](../../02_concepts/05_persistence/02_event-log.md)**, and every file edit is checkpointed in **[shadow git](../../02_concepts/05_persistence/01_shadow-git-and-checkpoints.md)** so it can be rolled back. When one agent isn't enough, you compose **[multi-agent patterns](./10_multi-agent.md)**; when the work is non-trivial, agents plan against the **[planning system](./11_planning.md)**. All of this sits on the five-plane **[architecture](./02_architecture.md)**.
 
 ## Where to go next
 

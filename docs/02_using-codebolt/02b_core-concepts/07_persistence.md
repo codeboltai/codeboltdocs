@@ -2,6 +2,7 @@
 sidebar_position: 7
 title: Shadow Git, Checkpoints & Event Log
 description: How Codebolt makes agent edits safely reversible and records the source of truth.
+unlisted: true
 ---
 
 import ShadowGitTimelines from '@site/src/components/diagrams/ShadowGitTimelines';
