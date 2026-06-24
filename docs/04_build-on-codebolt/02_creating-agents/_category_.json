@@ -1,0 +1,9 @@
+{
+  "label": "Creating Agents",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": true,
+  "customProps": {
+    "sectionLabel": "Agents"
+  }
+}

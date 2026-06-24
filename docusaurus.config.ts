@@ -148,7 +148,7 @@ const config: Config = {
           // editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           async sidebarItemsGenerator({ defaultSidebarItemsGenerator, item, ...args }) {
             const sidebarItems = await defaultSidebarItemsGenerator({ item, ...args });
-            if (item.dirName !== '02_using-codebolt') return sidebarItems;
+            if (item.dirName !== '02_using-codebolt' && item.dirName !== '04_build-on-codebolt') return sidebarItems;
 
             const desktopAppChildLabels = new Set([
               'Chat',
@@ -166,6 +166,8 @@ const config: Config = {
             const result: typeof sidebarItems = [];
             for (const sidebarItem of sidebarItems) {
               if (
+                item.dirName === '02_using-codebolt'
+                &&
                 sidebarItem.type === 'category'
                 && (desktopAppChildLabels.has(sidebarItem.label) || sidebarItem.label === 'CLI Interface')
               ) {

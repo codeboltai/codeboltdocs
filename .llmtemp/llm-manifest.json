@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-24T09:54:37.925Z",
-  "sourceCount": 388,
+  "generatedAt": "2026-06-24T11:27:44.429Z",
+  "sourceCount": 391,
   "curatedCount": 65,
   "sections": [
     {
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 174,
+      "count": 177,
       "order": 1,
       "files": [
         {
@@ -114,6 +114,10 @@
         {
           "path": "using-codebolt/surfaces/headless.md",
           "title": "Headless Mode"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud.md",
+          "title": "Cloud"
         },
         {
           "path": "using-codebolt/chat/overview.md",
@@ -594,6 +598,14 @@
         {
           "path": "using-codebolt/cloud/marketplace-publishing.md",
           "title": "Marketplace Publishing"
+        },
+        {
+          "path": "using-codebolt/cloud/environments.md",
+          "title": "Cloud Environments"
+        },
+        {
+          "path": "using-codebolt/cloud/syncing-changes.md",
+          "title": "Syncing Changes"
         },
         {
           "path": "using-codebolt/plugins/overview.md",
