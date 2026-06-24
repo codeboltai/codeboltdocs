@@ -718,6 +718,306 @@
 }
 [data-theme='dark'] .cb-message-label { fill: #7dd3fc; }
 
+/* ── Runtime comparison ──────────────────── */
+
+.cb-runtime-compare-heading {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  fill: #18181b;
+}
+[data-theme='dark'] .cb-runtime-compare-heading { fill: #f4f4f5; }
+.cb-runtime-compare-divider {
+  stroke: rgba(63, 63, 70, 0.22);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+[data-theme='dark'] .cb-runtime-compare-divider { stroke: rgba(113, 113, 122, 0.36); }
+.cb-runtime-compare-rect {
+  fill: rgba(0, 0, 0, 0.02);
+  stroke: #3f3f46;
+  stroke-width: 1;
+  transition: fill 180ms ease, stroke 180ms ease;
+}
+[data-theme='dark'] .cb-runtime-compare-rect {
+  fill: rgba(255, 255, 255, 0.025);
+  stroke: #71717a;
+}
+.cb-runtime-compare-rect--accent {
+  fill: rgba(14, 165, 233, 0.04);
+  stroke: #0ea5e9;
+}
+[data-theme='dark'] .cb-runtime-compare-rect--accent {
+  fill: rgba(14, 165, 233, 0.06);
+  stroke: #38bdf8;
+}
+.cb-runtime-compare-box:hover .cb-runtime-compare-rect {
+  fill: rgba(14, 165, 233, 0.06);
+  stroke: #0ea5e9;
+}
+.cb-runtime-compare-title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  fill: #18181b;
+}
+[data-theme='dark'] .cb-runtime-compare-title { fill: #f4f4f5; }
+.cb-runtime-compare-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 8.8px;
+  fill: #737373;
+}
+[data-theme='dark'] .cb-runtime-compare-sub { fill: #a1a1aa; }
+.cb-runtime-compare-wire {
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-runtime-compare-wire { stroke: #71717a; }
+.cb-runtime-compare-wire--soft {
+  stroke-dasharray: 3 3;
+  opacity: 0.68;
+}
+.cb-runtime-compare-arrowhead {
+  fill: none;
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-runtime-compare-arrowhead { stroke: #71717a; }
+.cb-runtime-compare-note {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: #0369a1;
+}
+[data-theme='dark'] .cb-runtime-compare-note { fill: #7dd3fc; }
+
+/* ── Runtime capability control ──────────── */
+
+.cb-capcontrol-heading {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  fill: #18181b;
+}
+[data-theme='dark'] .cb-capcontrol-heading { fill: #f4f4f5; }
+.cb-capcontrol-container {
+  fill: rgba(0, 0, 0, 0.012);
+  stroke: #3f3f46;
+  stroke-width: 1;
+}
+[data-theme='dark'] .cb-capcontrol-container {
+  fill: rgba(255, 255, 255, 0.018);
+  stroke: #71717a;
+}
+.cb-capcontrol-container--accent {
+  stroke: #0ea5e9;
+}
+.cb-capcontrol-rect {
+  fill: var(--ifm-background-color, #fff);
+  stroke: #3f3f46;
+  stroke-width: 1;
+  transition: fill 180ms ease, stroke 180ms ease;
+}
+[data-theme='dark'] .cb-capcontrol-rect {
+  fill: #050505;
+  stroke: #71717a;
+}
+.cb-capcontrol-rect--accent {
+  fill: rgba(14, 165, 233, 0.04);
+  stroke: #0ea5e9;
+}
+[data-theme='dark'] .cb-capcontrol-rect--accent {
+  fill: rgba(14, 165, 233, 0.06);
+  stroke: #38bdf8;
+}
+.cb-capcontrol-box:hover .cb-capcontrol-rect {
+  fill: rgba(14, 165, 233, 0.06);
+  stroke: #0ea5e9;
+}
+.cb-capcontrol-title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  fill: #18181b;
+}
+[data-theme='dark'] .cb-capcontrol-title { fill: #f4f4f5; }
+.cb-capcontrol-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 8.8px;
+  fill: #737373;
+}
+[data-theme='dark'] .cb-capcontrol-sub { fill: #a1a1aa; }
+.cb-capcontrol-wire {
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-capcontrol-wire { stroke: #71717a; }
+.cb-capcontrol-wire--dashed {
+  stroke-dasharray: 3 3;
+  opacity: 0.72;
+}
+.cb-capcontrol-arrowhead {
+  fill: none;
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-capcontrol-arrowhead { stroke: #71717a; }
+.cb-capcontrol-note {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9px;
+  font-weight: 600;
+  fill: #0369a1;
+}
+[data-theme='dark'] .cb-capcontrol-note { fill: #7dd3fc; }
+
+/* ── Thread steps chat window ────────────── */
+
+.cb-threadsteps-window {
+  fill: #0f141b;
+  stroke: rgba(148, 163, 184, 0.24);
+  stroke-width: 1;
+}
+.cb-threadsteps-tabbar,
+.cb-threadsteps-tabbar-fill {
+  fill: #0b1016;
+}
+.cb-threadsteps-tab {
+  fill: transparent;
+  stroke: rgba(148, 163, 184, 0.16);
+  stroke-width: 1;
+}
+.cb-threadsteps-tab--active {
+  fill: rgba(148, 163, 184, 0.06);
+}
+.cb-threadsteps-count-pill,
+.cb-threadsteps-composer,
+.cb-threadsteps-agent-card {
+  fill: rgba(15, 23, 42, 0.92);
+  stroke: rgba(148, 163, 184, 0.22);
+  stroke-width: 1;
+}
+.cb-threadsteps-side-panel {
+  fill: rgba(15, 23, 42, 0.86);
+  stroke: rgba(148, 163, 184, 0.26);
+  stroke-width: 1;
+}
+.cb-threadsteps-user-bubble {
+  fill: rgba(31, 41, 55, 0.96);
+  stroke: rgba(148, 163, 184, 0.14);
+  stroke-width: 1;
+}
+.cb-threadsteps-card-bg {
+  fill: rgba(15, 23, 42, 0.96);
+  stroke: rgba(148, 163, 184, 0.28);
+  stroke-width: 1;
+}
+.cb-threadsteps-card:hover .cb-threadsteps-card-bg {
+  stroke: #0ea5e9;
+}
+.cb-threadsteps-concept-card {
+  fill: rgba(15, 23, 42, 0.96);
+  stroke: rgba(148, 163, 184, 0.28);
+  stroke-width: 1;
+}
+.cb-threadsteps-card:hover .cb-threadsteps-concept-card {
+  stroke: #0ea5e9;
+}
+.cb-threadsteps-step--active {
+  fill: rgba(14, 165, 233, 0.12);
+  stroke: #0ea5e9;
+}
+.cb-threadsteps-step--next {
+  fill: rgba(250, 204, 21, 0.10);
+  stroke: #ca8a04;
+}
+.cb-threadsteps-steering {
+  fill: rgba(250, 204, 21, 0.10);
+  stroke: #ca8a04;
+  stroke-width: 1;
+}
+.cb-threadsteps-avatar {
+  fill: #8b5cf6;
+  stroke: #fb7185;
+  stroke-width: 1.2;
+}
+.cb-threadsteps-ok {
+  fill: rgba(34, 197, 94, 0.12);
+  stroke: #22c55e;
+  stroke-width: 2;
+}
+.cb-threadsteps-wire {
+  fill: none;
+  stroke: #64748b;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cb-threadsteps-wire--dashed {
+  stroke-dasharray: 4 3;
+  opacity: 0.86;
+}
+.cb-threadsteps-arrowhead {
+  fill: none;
+  stroke: #64748b;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cb-threadsteps-divider {
+  stroke: rgba(148, 163, 184, 0.16);
+  stroke-width: 1;
+}
+.cb-threadsteps-tab-text,
+.cb-threadsteps-agent-title,
+.cb-threadsteps-response,
+.cb-threadsteps-user-text,
+.cb-threadsteps-count,
+.cb-threadsteps-card-title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  fill: #e5e7eb;
+  font-size: 11px;
+  font-weight: 700;
+}
+.cb-threadsteps-toolbar,
+.cb-threadsteps-muted,
+.cb-threadsteps-copy {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  fill: #94a3b8;
+  font-size: 9.5px;
+}
+.cb-threadsteps-side-copy,
+.cb-threadsteps-chip {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  fill: #94a3b8;
+  font-size: 8.5px;
+  font-weight: 600;
+}
+.cb-threadsteps-copy--accent {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  fill: #7dd3fc;
+  font-size: 9.5px;
+  font-weight: 700;
+}
+.cb-threadsteps-section {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  fill: #cbd5e1;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
 /* ── Eval anatomy ────────────────────────── */
 
 .cb-eval-wire {

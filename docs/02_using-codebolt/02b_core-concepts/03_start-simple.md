@@ -4,15 +4,35 @@ title: Start Simple
 description: "The smallest useful Codebolt model: one thread, one agent, one model, and a controlled set of tools."
 ---
 
+import ThreadStepsFlow from '@site/src/components/diagrams/ThreadStepsFlow';
+
 # Start Simple
 
-The smallest useful Codebolt setup is a thread, an agent, a model, and a set of tools. Most daily work starts here.
+You can start with Codebolt the same way you would use a normal coding agent: open the app or run the CLI, describe the task, choose an agent, and let it work in your project.
+
+Use the [desktop app](../02_surfaces/02_desktop-app/00_get-started.md) when you want chat, files, panels, settings, and project state in one interface. Use the [CLI](../02_surfaces/03_cli/00_get-started.md) when you want terminal-first agent runs, scripts, logs, or automation.
+
+Under that simple experience, the smallest useful Codebolt setup is a thread, an agent, a model, and a set of tools. Most daily work starts here.
 
 ## Threads
 
-A **thread** is the working conversation around a task. It contains the user request, the agent responses, tool results, context references, and the history needed to continue later.
+Many coding agents are organized around a single chat conversation. Codebolt uses **threads** instead. A thread is the working conversation around one task, and you can run multiple threads in parallel.
+
+Each thread can have its own agent, model, context, tool activity, and history. That means one thread can run a quick fix with a lightweight agent while another thread runs a deeper investigation or background task with a different agent.
+
+The diagram below keeps the main chat thread on the left and explains thread steps, steering, sub-agents, sub-threads, and background threads on the right.
+
+<ThreadStepsFlow />
+
+Inside a thread, each step is one agent loop or run. Step 1 can run with one agent, finish, and then the runtime can start Step 2 in the same thread with another agent. If a new message arrives while an agent is already running, Codebolt can queue it as a pending step and start it after the active step completes.
+
+Steering is how you guide work without starting a separate conversation. A steering message is sent into the same thread and current agent context so the running agent can adjust direction, add a constraint, or handle a correction while the step is still active. Steering is different from a queued next step: it is guidance for the current loop, not a separate future run to replay after the agent finishes.
+
+An agent can also branch work. It can start a sub-agent as a child run under the same parent agent instance, or start a child/background thread when the delegated work needs its own thread, environment, or lifecycle.
 
 Threads matter because they make work durable. You can come back to a task, inspect what happened, continue from the current state, or roll back to an earlier checkpoint.
+
+Related details: [Chat Overview](../03_chat/01_overview.md), [Tabs and History](../03_chat/02_tabs-and-history.md), [Running Parallel Agents](../07a_parallel-agents/02_running-parallel-agents.md), [Sub Agent](../07a_parallel-agents/05_sub-agent.md), [Background Agent](../07a_parallel-agents/04_background-agent.md), and [Thread Panel](../04_agents/08_thread-panel.md).
 
 ## Agents
 
