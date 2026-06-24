@@ -447,11 +447,22 @@ div[class*="searchResults"] {
   background-color: transparent !important;
   border-right: 1px solid var(--cb-border) !important;
   padding: 0 0.75rem 0.75rem 1rem !important;
+  overflow-x: hidden;
 }
 
 /* Sidebar menu itself */
 .menu {
   padding: 0.5rem 0 !important;
+  min-width: 0;
+}
+
+.menu__list-item-collapsible {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* ── Top-level category labels — monospace kicker style ── */
@@ -552,10 +563,14 @@ div[class*="searchResults"] {
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
-  margin-right: 0.4rem;
-  width: auto !important;
+  margin: 0 !important;
+  width: 1.6rem !important;
   height: auto !important;
-  min-width: auto !important;
+  min-width: 1.6rem !important;
+  flex: 0 0 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   appearance: none;
   -webkit-appearance: none;
   outline: none;
@@ -582,7 +597,22 @@ div[class*="searchResults"] {
 }
 
 .menu__list-item--collapsible .menu__link {
-  padding-left: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-left: 0 !important;
+  padding-right: 0.35rem !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu__list-item-collapsible > .menu__link {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 1.6rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* ── Category separator line between groups ── */
