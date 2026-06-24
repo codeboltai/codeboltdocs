@@ -258,6 +258,12 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
+          sidebarId: 'getStartedSidebar',
+          position: 'left',
+          label: 'Get Started',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'usingCodeboltSidebar',
           position: 'left',
           label: 'Using Codebolt',
