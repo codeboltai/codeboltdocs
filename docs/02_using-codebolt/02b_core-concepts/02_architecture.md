@@ -1,42 +1,75 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 title: Architecture
-description: Codebolt's five cooperating planes — the foundation that makes everything else fall into place.
+description: "How Codebolt's web app interfaces connect to the agent runtime, tools, providers, and storage."
 ---
 
-import FivePlanes from '@site/src/components/diagrams/FivePlanes';
+import CodeboltWebAppArchitecture from '@site/src/components/diagrams/CodeboltWebAppArchitecture';
+import UserMessageProcessingSwimlane from '@site/src/components/diagrams/UserMessageProcessingSwimlane';
 
 # Architecture
 
-Codebolt is organized as **five cooperating planes**, each with a clear responsibility. Understanding the planes makes everything else — agents, tools, hooks, memory — fall into place.
+Codebolt sits between the interfaces people use and the agents that do the work. The core product receives work from web, CLI, and plugins, then routes that work into agents and the runtime services behind them.
 
-<FivePlanes />
+<CodeboltWebAppArchitecture />
 
-## The five planes
+## User message processing
 
-| Plane | Responsibility | In plain terms |
-|---|---|---|
-| **Control** | Config, identity, permissions, project metadata | The "who" and "what's allowed" |
-| **Executive** | The agent runtime — deliberation, tool calls, LLM requests, the per-turn loop | The brain doing the work |
-| **Wait & delegation** | Long-running work, sub-agent spawning, human checkpoints, async tasks | Hands work off and waits |
-| **Guardrails** | Hooks, evals, loop detection, budget enforcement | Anything that says "stop" or "rewrite this" |
-| **Bus & storage** | The event log, memory layers, vector/KG stores, shadow git | The persistent substrate |
+This swimlane shows how a user message moves from the application surface into the selected agent, then back through Codebolt runtime services when the agent needs context, a model call, or a tool call.
 
-## How a request flows
+<UserMessageProcessingSwimlane />
 
-Every action an agent takes flows through the planes **in order**: the executive plane proposes a tool call, the guardrails plane vets it, the bus records it, and the storage plane materializes any side effects.
+## Web app interfaces
 
-## Why the separation matters
+The architecture starts with the surfaces that create or control work:
 
-- **Each plane is replaceable.** Swap the LLM provider (executive), add a guardrail (guardrails), or change the storage backend (bus & storage) without touching the others.
-- **Failures are localized.** A bad hook can't corrupt the event log; a crashed tool can't bypass guardrails.
-- **The model maps to the codebase.** `packages/server/src/services/` is organized by plane.
+| Interface | What it is for |
+|---|---|
+| **Web** | The browser or desktop-hosted web interface for chat, code, settings, agents, and project state. |
+| **CLI** | Terminal-first access for starting work, selecting providers, inspecting logs, and integrating Codebolt into scripts. |
+| **Plugins** | Extension points that can add UI, commands, integrations, workflows, or provider behavior. |
+| **Agents** | The workers that execute tasks through models, tools, memory, and runtime services. |
 
-Inside the server, the planes are implemented by 12 subsystems — context assembly, memory ingestion, guardrails & eval, the deliberation loop, the tool runtime, and more.
+The interface captures intent and displays state. Codebolt coordinates the run. Agents decide and act within the permissions, tools, providers, and environments configured for that run.
 
-→ **Read the full concept page: [Architecture](../../02_concepts/02_foundation/01_architecture.md)**
+## Codebolt as the center
+
+The center of the diagram is Codebolt itself. It is responsible for:
+
+| Responsibility | What it means |
+|---|---|
+| **Threads and state** | Tracks conversations, active runs, events, checkpoints, and user-visible history. |
+| **Agent routing** | Starts the selected agent with the right task, model, permissions, and context. |
+| **Tool access** | Exposes built-in tools and MCP tools under the agent's allowlist. |
+| **Provider access** | Connects the run to model providers and execution environments. |
+| **Guardrails** | Applies policy before actions take effect. |
+| **Extension points** | Lets plugins add product behavior without replacing the core runtime. |
+
+## Plugins and agents are bidirectional
+
+The canvas shows plugins and agents connected both ways with Codebolt.
+
+Plugins can send work into Codebolt and receive state back for custom panels, commands, or integrations. Agents receive tasks from Codebolt, call back through Codebolt for tools and context, and return observations, events, and results.
+
+## Request flow
+
+A message usually follows this path:
+
+1. The UI or CLI sends the user message, selected agent, thread, and project state into the runtime over sockets.
+2. The runtime attaches the message to the active thread and starts the selected agent for the task.
+3. The agent process connects back to the runtime through `codeboltjs` and receives the message as `messageResponse`.
+4. The agent uses `codeboltjs` APIs to gather project context before calling the configured model.
+5. Model requests and responses pass through the runtime so providers, guardrails, and run state stay centralized.
+6. When the model requests a tool, the agent calls the Codebolt tool API through `codeboltjs`.
+7. Tool requests travel over the agent socket into `server/src/cliLib`, where runtime services execute the requested operation.
+8. Tool results return to the agent, the agent continues or finishes, and the runtime streams events and final state back to the UI or CLI.
+
+## Why this shape matters
+
+This shape keeps interfaces, extensions, and agents separate. You can add a plugin, run from the CLI, switch model providers, or customize an agent without changing the whole product architecture.
 
 ## See also
 
-- [Agents](./03_agents.md)
-- [Guardrails](../../02_concepts/06_quality/01_guardrails.md)
+- [Clients](../02_surfaces/01_overview.md)
+- [Start Simple](./03_start-simple.md)
+- [Full architecture concept](../../02_concepts/02_foundation/01_architecture.md)

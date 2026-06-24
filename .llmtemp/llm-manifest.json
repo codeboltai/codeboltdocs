@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-23T12:28:05.702Z",
-  "sourceCount": 380,
-  "curatedCount": 65,
+  "generatedAt": "2026-06-24T05:35:15.286Z",
+  "sourceCount": 388,
+  "curatedCount": 67,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 180,
+      "count": 188,
       "order": 1,
       "files": [
         {
@@ -34,10 +34,6 @@
         {
           "path": "using-codebolt/surfaces/overview.md",
           "title": "Platform Overview"
-        },
-        {
-          "path": "using-codebolt/surfaces/desktop-app/desktop-app-overview.md",
-          "title": "Desktop App"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/get-started.md",
@@ -80,10 +76,6 @@
           "title": "Themes"
         },
         {
-          "path": "using-codebolt/surfaces/cli/cli-overview.md",
-          "title": "CLI"
-        },
-        {
           "path": "using-codebolt/surfaces/cli/get-started.md",
           "title": "Get Started"
         },
@@ -112,10 +104,6 @@
           "title": "Get Started"
         },
         {
-          "path": "using-codebolt/surfaces/tui/tui-overview.md",
-          "title": "TUI"
-        },
-        {
           "path": "using-codebolt/surfaces/tui/overview.md",
           "title": "TUI Overview"
         },
@@ -138,6 +126,50 @@
         {
           "path": "using-codebolt/surfaces/headless.md",
           "title": "Headless Mode"
+        },
+        {
+          "path": "using-codebolt/core-concepts/overview.md",
+          "title": "Core Concepts Overview"
+        },
+        {
+          "path": "using-codebolt/core-concepts/architecture.md",
+          "title": "Architecture"
+        },
+        {
+          "path": "using-codebolt/core-concepts/start-simple.md",
+          "title": "Start Simple"
+        },
+        {
+          "path": "using-codebolt/core-concepts/run-it-longer.md",
+          "title": "Run It Longer"
+        },
+        {
+          "path": "using-codebolt/core-concepts/customize-process.md",
+          "title": "Customize Process"
+        },
+        {
+          "path": "using-codebolt/core-concepts/extend-to-your-process.md",
+          "title": "Extend To Your Process"
+        },
+        {
+          "path": "using-codebolt/core-concepts/local-scaling.md",
+          "title": "Local Scaling"
+        },
+        {
+          "path": "using-codebolt/core-concepts/cloud-scaling.md",
+          "title": "Cloud Scaling"
+        },
+        {
+          "path": "using-codebolt/platforms/desktop.md",
+          "title": "Desktop App"
+        },
+        {
+          "path": "using-codebolt/platforms/cli.md",
+          "title": "CLI"
+        },
+        {
+          "path": "using-codebolt/platforms/tui.md",
+          "title": "TUI"
         },
         {
           "path": "using-codebolt/chat/overview.md",

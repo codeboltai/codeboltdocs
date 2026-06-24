@@ -586,6 +586,138 @@
 }
 [data-theme='dark'] .cb-capstack-wire { stroke: #71717a; }
 
+/* ── Codebolt web app architecture ───────── */
+
+.cb-webarch-rect {
+  fill: rgba(0, 0, 0, 0.02);
+  stroke: #3f3f46;
+  stroke-width: 1;
+  transition: fill 180ms ease, stroke 180ms ease;
+}
+[data-theme='dark'] .cb-webarch-rect {
+  fill: rgba(255, 255, 255, 0.025);
+  stroke: #71717a;
+}
+.cb-webarch-rect--accent {
+  stroke: #0ea5e9;
+}
+.cb-webarch-node:hover .cb-webarch-rect {
+  fill: rgba(14, 165, 233, 0.06);
+  stroke: #0ea5e9;
+}
+.cb-webarch-name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: #18181b;
+}
+[data-theme='dark'] .cb-webarch-name { fill: #f4f4f5; }
+.cb-webarch-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9px;
+  fill: #737373;
+}
+[data-theme='dark'] .cb-webarch-sub { fill: #a1a1aa; }
+.cb-webarch-wire {
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-webarch-wire { stroke: #71717a; }
+.cb-webarch-arrowhead {
+  fill: none;
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-webarch-arrowhead { stroke: #71717a; }
+
+/* ── User message processing swimlane ────── */
+
+.cb-message-lane {
+  fill: rgba(0, 0, 0, 0.012);
+  stroke: rgba(63, 63, 70, 0.24);
+  stroke-width: 1;
+}
+[data-theme='dark'] .cb-message-lane {
+  fill: rgba(255, 255, 255, 0.018);
+  stroke: rgba(113, 113, 122, 0.32);
+}
+.cb-message-lane-title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: #18181b;
+}
+[data-theme='dark'] .cb-message-lane-title { fill: #f4f4f5; }
+.cb-message-lane-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 8.5px;
+  fill: #737373;
+}
+[data-theme='dark'] .cb-message-lane-sub { fill: #a1a1aa; }
+.cb-message-step-rect {
+  fill: var(--ifm-background-color, #fff);
+  stroke: #3f3f46;
+  stroke-width: 1;
+  transition: fill 180ms ease, stroke 180ms ease;
+}
+[data-theme='dark'] .cb-message-step-rect {
+  fill: #050505;
+  stroke: #71717a;
+}
+.cb-message-step-rect--accent {
+  stroke: #0ea5e9;
+}
+.cb-message-step:hover .cb-message-step-rect {
+  fill: rgba(14, 165, 233, 0.06);
+  stroke: #0ea5e9;
+}
+.cb-message-step-title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  fill: #18181b;
+}
+[data-theme='dark'] .cb-message-step-title { fill: #f4f4f5; }
+.cb-message-step-sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 8.5px;
+  fill: #737373;
+}
+[data-theme='dark'] .cb-message-step-sub { fill: #a1a1aa; }
+.cb-message-wire {
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-message-wire { stroke: #71717a; }
+.cb-message-wire--dashed {
+  stroke-dasharray: 4 3;
+}
+.cb-message-arrowhead {
+  fill: none;
+  stroke: #3f3f46;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme='dark'] .cb-message-arrowhead { stroke: #71717a; }
+.cb-message-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  fill: #0369a1;
+}
+[data-theme='dark'] .cb-message-label { fill: #7dd3fc; }
+
 /* ── Eval anatomy ────────────────────────── */
 
 .cb-eval-wire {
@@ -2531,4 +2663,3 @@
 [data-theme='dark'] .cb-agentic-label--accent {
   fill: #7dd3fc;
 }
-
