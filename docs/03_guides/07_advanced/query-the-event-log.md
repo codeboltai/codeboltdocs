@@ -72,10 +72,10 @@ The event log is indexed on common fields. Browsing recent history in the UI is 
 
 ## Exporting data
 
-For analysis outside the UI, the event log data can be exported. See [Persistence & Event Log (internals)](../../04_build-on-codebolt/08_internals/03_subsystems/12_persistence-and-eventlog.md) for details on the underlying storage format.
+For analysis outside the UI, the event log data can be exported. See [Persistence & Event Log (internals)](../../04_build-on-codebolt/07b_subsystems/12_persistence-and-eventlog.md) for details on the underlying storage format.
 
 ## See also
 
-- [Persistence & Event Log (internals)](../../04_build-on-codebolt/08_internals/03_subsystems/12_persistence-and-eventlog.md)
+- [Persistence & Event Log (internals)](../../04_build-on-codebolt/07b_subsystems/12_persistence-and-eventlog.md)
 - [Observability and Tracing](../../02_using-codebolt/07_multi-agent-usage/05_observability-and-tracing.md)
 - [Logs and Diagnostics](../../02_using-codebolt/10_troubleshooting/02_logs-and-diagnostics.md)

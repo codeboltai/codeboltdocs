@@ -138,6 +138,6 @@ This is what lets you ask, a month later: "Why did the reviewer agent reject thi
 
 - [Chat message end-to-end](./chat-message-end-to-end.md) — one turn in detail
 - [Tool call end-to-end](./tool-call-end-to-end.md) — one tool call in detail
-- [Agent Subsystem](../../09_internals/03_subsystems/01_agent-subsystem.md)
-- [Planning Hierarchy](../../09_internals/03_subsystems/08_planning-hierarchy.md) — how replan works
+- [Agent Subsystem](../../07b_subsystems/01_agent-subsystem.md)
+- [Planning Hierarchy](../../07b_subsystems/08_planning-hierarchy.md) — how replan works
 - [Replay an agent run (guide)](../../../03_guides/07_advanced/replay-an-agent-run.md)

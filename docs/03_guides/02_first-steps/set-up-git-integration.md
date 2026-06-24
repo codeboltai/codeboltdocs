@@ -104,4 +104,4 @@ Codebolt's checkpoint rollback uses shadow git, never real git. You can have unc
 
 - [Git and Shadow Git](../../02_using-codebolt/08_integrations/03_git-and-shadow-git.md)
 - [Checkpoints and rollback](../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)
-- [Guardrails & Eval (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/09_guardrails-and-eval.md)
+- [Guardrails & Eval (internals)](../../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md)

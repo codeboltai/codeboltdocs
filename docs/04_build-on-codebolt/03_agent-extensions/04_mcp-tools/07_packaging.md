@@ -215,4 +215,4 @@ MCP servers run with the user's credentials. Don't abuse that trust.
 - [MCP Tools Overview](./01_overview.md)
 - [Publishing](../../02_creating-agents/10_publishing.md) — after packaging comes publishing
 - [Quickstart](./02_quickstart-local-mcp.md)
-- [MCP & Tools (internals)](../../09_internals/03_subsystems/02_mcp-and-tools.md)
+- [MCP & Tools (internals)](../../07b_subsystems/02_mcp-and-tools.md)

@@ -20,15 +20,15 @@ A lot of "AI coding tools" are an autocomplete plus a chat box. Codebolt is a di
 
 1. **Agents are real processes, not loops.** Each agent runs in its own OS process, supervised by a process manager, with heartbeats and restart policies. Crashes are contained. Long-running work is durable.
 
-2. **Multi-layer memory, not "a context window".** Working memory, episodic memory, persistent memory, KV store, knowledge graph (Kuzu), vector DB, narrative threads — with a context assembler that picks what goes into the prompt. See [Memory](../04_build-on-codebolt/08_internals/03_subsystems/04_memory.md).
+2. **Multi-layer memory, not "a context window".** Working memory, episodic memory, persistent memory, KV store, knowledge graph (Kuzu), vector DB, narrative threads — with a context assembler that picks what goes into the prompt. See [Memory](../04_build-on-codebolt/07b_subsystems/04_memory.md).
 
 3. **Shadow git.** Every agent edit is committed to a parallel git repo automatically, so you can roll back any change instantly without touching your real git history. See [Checkpoints](../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md).
 
-4. **Guardrails as a sidecar.** Rule-based and LLM-based checks run before every tool call. See [Guardrails](../04_build-on-codebolt/08_internals/03_subsystems/09_guardrails-and-eval.md).
+4. **Guardrails as a sidecar.** Rule-based and LLM-based checks run before every tool call. See [Guardrails](../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md).
 
 5. **Multi-agent is first-class.** Swarms, agent flows, roles, teams, plan-execute-review, debate, stigmergy — all supported, with a graph runtime and a full event log. See [Multi-Agent Orchestration](../04_build-on-codebolt/08_multi-agent-orchestration/01_overview.md).
 
-6. **Everything is replayable.** The event log is the authoritative causal record. You can replay any run, audit any decision, query the history. See [Persistence & Event Log](../04_build-on-codebolt/08_internals/03_subsystems/12_persistence-and-eventlog.md).
+6. **Everything is replayable.** The event log is the authoritative causal record. You can replay any run, audit any decision, query the history. See [Persistence & Event Log](../04_build-on-codebolt/07b_subsystems/12_persistence-and-eventlog.md).
 
 ## What you can do with it
 

@@ -360,4 +360,4 @@ For a step-by-step tutorial that walks through scaffolding a project, making API
 
 - [Existing UIs](./03_existing-uis.md)
 - [Chat Widget](./04_chat-widget.md)
-- [Internals → Communication](../09_internals/03_subsystems/11_communication.md)
+- [Internals → Communication](../07b_subsystems/11_communication.md)

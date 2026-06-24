@@ -105,7 +105,7 @@ Even when an agent's allowlist permits a tool, guardrails can block specific cal
 - No `codebolt_git.push` to protected branches.
 - No writes outside the workspace root.
 
-See [Guardrails & Eval (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/09_guardrails-and-eval.md).
+See [Guardrails & Eval (internals)](../../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md).
 
 ## Extending the built-ins
 
@@ -121,4 +121,4 @@ See [MCP Tools](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_o
 
 - [Agent Tools Overview](./01_overview.md)
 - [Reference → Built-in Tools](../../05_reference/01_overview.md) — full schemas
-- [MCP & Tools (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/02_mcp-and-tools.md)
+- [MCP & Tools (internals)](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)

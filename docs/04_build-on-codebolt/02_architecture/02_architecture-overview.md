@@ -6,7 +6,7 @@ description: Codebolt is built as a set of cooperating subsystems that run insid
 
 # Architecture Overview
 
-Codebolt is built as a set of cooperating subsystems that run inside `packages/server` (the long-lived process), with `packages/electron` + `packages/ui` providing the desktop client and `packages/cli` + `packages/gotui` providing terminal access. This page gives the 30-second mental model; each subsystem has its own page under [Subsystems](../09_internals/03_subsystems/01_agent-subsystem.md).
+Codebolt is built as a set of cooperating subsystems that run inside `packages/server` (the long-lived process), with `packages/electron` + `packages/ui` providing the desktop client and `packages/cli` + `packages/gotui` providing terminal access. This page gives the 30-second mental model; each subsystem has its own page under [Subsystems](../07b_subsystems/01_agent-subsystem.md).
 
 ## The five planes
 
@@ -62,6 +62,6 @@ A full annotated walkthrough lives at [Chat message end-to-end](./04_data-flow-w
 ## Where to go next
 
 - **Just want to use Codebolt?** Skip this section — head to the [What is Codebolt](../../01_get-started/02_what-is-codebolt.md) docs.
-- **Want to understand a specific subsystem?** Jump into [Subsystems](../09_internals/03_subsystems/01_agent-subsystem.md).
-- **Building a custom agent?** Read [Agent Subsystem](../09_internals/03_subsystems/01_agent-subsystem.md), then go to [Creating Agents](../02_creating-agents/01_overview.md).
+- **Want to understand a specific subsystem?** Jump into [Subsystems](../07b_subsystems/01_agent-subsystem.md).
+- **Building a custom agent?** Read [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md), then go to [Creating Agents](../02_creating-agents/01_overview.md).
 - **Self-hosting?** Read this page + [The Server](./03_process-model.md), then [Self-Hosting](../11_agent-infrastructure/01_overview.md).

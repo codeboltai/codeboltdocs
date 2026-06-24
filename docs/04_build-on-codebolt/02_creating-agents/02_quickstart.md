@@ -190,5 +190,5 @@ That is why the same remote agent can appear in the normal agent picker even tho
 
 - **Too broad tool allowlist.** Start restrictive. An agent with `allow: [*]` is hard to reason about.
 - **Chat-shaped agent for a pipeline slot.** If the agent is going to be a flow node, give it a typed `inputs` and `outputs` block — don't rely on free-form chat.
-- **Re-implementing planning.** The [planning hierarchy](../09_internals/03_subsystems/08_planning-hierarchy.md) already exists. Use it instead of rolling your own.
+- **Re-implementing planning.** The [planning hierarchy](../07b_subsystems/08_planning-hierarchy.md) already exists. Use it instead of rolling your own.
 - **No tests.** An agent without replay tests will silently regress when you change its prompt. Set up [testing](./09_testing-and-debugging.md) from day one.

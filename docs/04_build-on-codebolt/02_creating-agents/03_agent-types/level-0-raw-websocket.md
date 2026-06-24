@@ -146,5 +146,5 @@ If you can use `@codebolt/codeboltjs`, do that instead.
 ## See also
 
 - [Level 2 — codeboltjs](./level-2-codeboltjs.md)
-- [Communication Subsystem internals](../../09_internals/03_subsystems/11_communication.md)
+- [Communication Subsystem internals](../../07b_subsystems/11_communication.md)
 - [Remote Execution](../../11_agent-infrastructure/09_remote-execution.md)

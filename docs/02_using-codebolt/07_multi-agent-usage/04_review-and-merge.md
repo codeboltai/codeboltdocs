@@ -137,4 +137,4 @@ Pick one and configure the policy to match. Running both in parallel creates dou
 
 - [Multi-Agent Usage Overview](./01_overview.md)
 - [Review & Merge Design](../../04_build-on-codebolt/08_multi-agent-orchestration/07_review-and-merge-design.md)
-- [Guardrails & Eval (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/09_guardrails-and-eval.md)
+- [Guardrails & Eval (internals)](../../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md)

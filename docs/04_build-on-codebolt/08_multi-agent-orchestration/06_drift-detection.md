@@ -31,7 +31,7 @@ Codebolt's drift detector runs as a background check on long runs. It periodical
 When it fires `drifting` or `off_track`, it doesn't kill the agent — it emits a warning event the orchestrator can react to. Typical reactions:
 
 - **`drifting`** — the orchestrator injects a reminder into the next step's context ("your original task was X, you're currently working on Y — confirm this is still on the path").
-- **`off_track`** — the orchestrator triggers a replan at the appropriate level of the [planning hierarchy](../09_internals/03_subsystems/08_planning-hierarchy.md), or pauses the run for human input.
+- **`off_track`** — the orchestrator triggers a replan at the appropriate level of the [planning hierarchy](../07b_subsystems/08_planning-hierarchy.md), or pauses the run for human input.
 
 ## Why it runs as a sidecar
 
@@ -62,7 +62,7 @@ Drift detection is a small recurring cost — one cheap LLM call every few phase
 
 Drift detection works best alongside:
 
-- **[Guardrails](../09_internals/03_subsystems/09_guardrails-and-eval.md)** — deterministic rules catch hard violations; drift catches soft ones.
+- **[Guardrails](../07b_subsystems/09_guardrails-and-eval.md)** — deterministic rules catch hard violations; drift catches soft ones.
 - **[Reputation](./05_stigmergy-and-reputation.md)** — agents with chronic drift lose reputation over time and get assigned less work.
 - **Explicit scope in the task.** A task written as "only touch files under src/auth/" gives the detector something concrete to check against. Vague tasks ("improve the auth code") are harder to drift-check.
 - **[Checkpoints](../02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)** — when drift is detected and the run is rolled back, you already have the state from before the drift started.
@@ -76,6 +76,6 @@ Drift detection works best alongside:
 
 ## See also
 
-- [Guardrails & Eval](../09_internals/03_subsystems/09_guardrails-and-eval.md)
-- [Planning Hierarchy](../09_internals/03_subsystems/08_planning-hierarchy.md)
+- [Guardrails & Eval](../07b_subsystems/09_guardrails-and-eval.md)
+- [Planning Hierarchy](../07b_subsystems/08_planning-hierarchy.md)
 - [Stigmergy and Reputation](./05_stigmergy-and-reputation.md)

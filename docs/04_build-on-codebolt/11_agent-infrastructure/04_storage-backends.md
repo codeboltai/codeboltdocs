@@ -199,6 +199,6 @@ See [Backup and Restore](./07_backup-and-restore.md) for the scripted version.
 ## See also
 
 - [Database](./03_database.md)
-- [Memory (internals)](../09_internals/03_subsystems/04_memory.md)
-- [Knowledge & Vector (internals)](../09_internals/03_subsystems/05_knowledge-and-vector.md)
+- [Memory (internals)](../07b_subsystems/04_memory.md)
+- [Knowledge & Vector (internals)](../07b_subsystems/05_knowledge-and-vector.md)
 - [Backup and Restore](./07_backup-and-restore.md)

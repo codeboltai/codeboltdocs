@@ -232,5 +232,5 @@ The cost is one extra hop: your app → Codebolt server → LLM provider, instea
 - [What is an Agent](./01_what-is-an-agent.md) — the user view
 - [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md) — full builder docs
 - [Creating Agents → Quickstart](../../04_build-on-codebolt/02_creating-agents/02_quickstart.md) — first agent in 10 minutes
-- [Agent Subsystem (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md) — how the server runs agents
+- [Agent Subsystem (internals)](../../04_build-on-codebolt/07b_subsystems/01_agent-subsystem.md) — how the server runs agents
 - [Marketplace Publishing](../08f_cloud/05_marketplace-publishing.md) — ship the agent you built

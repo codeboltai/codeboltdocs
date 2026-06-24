@@ -210,7 +210,7 @@ First team members should include at least two admins (bus factor).
 As an admin, set up team-wide defaults:
 
 - **Providers** — configure one or two LLM providers centrally so users don't each paste their own keys. See [LLM Providers](../../02_using-codebolt/08_integrations/01_llm-providers.md).
-- **Guardrails** — workspace-level rules that apply to everyone. See [Guardrails & Eval](../../04_build-on-codebolt/09_internals/03_subsystems/09_guardrails-and-eval.md).
+- **Guardrails** — workspace-level rules that apply to everyone. See [Guardrails & Eval](../../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md).
 - **Portfolio** — curated set of agents available to everyone. See [Agent Portfolios](../../02_using-codebolt/04_agents/06_agent-portfolios.md).
 - **Review policies** — default behaviour for merge requests. See [Review & Merge](../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge.md).
 

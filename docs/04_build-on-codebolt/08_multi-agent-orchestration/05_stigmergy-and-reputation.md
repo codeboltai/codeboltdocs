@@ -96,4 +96,4 @@ These are advanced mechanisms. Most projects don't need them. Signs you should u
 
 - [Manager-Worker](./03_patterns/manager-worker.md) — the simpler alternative
 - [Drift Detection](./06_drift-detection.md) — complements reputation
-- [Agent Subsystem](../09_internals/03_subsystems/01_agent-subsystem.md)
+- [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md)

@@ -13,7 +13,7 @@ Most tasks are single-agent tasks. Before designing a swarm, make sure you actua
 A well-prompted single agent with good tools can usually:
 
 - Read and understand a codebase via the codemap + vector search.
-- Plan work itself using the [planning hierarchy](../09_internals/03_subsystems/08_planning-hierarchy.md).
+- Plan work itself using the [planning hierarchy](../07b_subsystems/08_planning-hierarchy.md).
 - Execute, test, and report.
 - Self-correct when tests or guardrails fail.
 
@@ -58,7 +58,7 @@ When an agent is allowed to do something dangerous (push code, call payment APIs
 Signs you're about to over-engineer:
 
 - **You want more "opinions"** on a subjective decision. Multi-agent isn't a voting system; it's work division. If you want diverse perspectives, use a single agent with better prompting, or explicitly use a [debate pattern](./03_patterns/debate.md) and know what you're getting into.
-- **You want "reliability" by having agents double-check each other.** Two LLMs making the same mistake is not more reliable than one. Reliability comes from deterministic checks — [guardrails](../09_internals/03_subsystems/09_guardrails-and-eval.md) — not from more LLMs.
+- **You want "reliability" by having agents double-check each other.** Two LLMs making the same mistake is not more reliable than one. Reliability comes from deterministic checks — [guardrails](../07b_subsystems/09_guardrails-and-eval.md) — not from more LLMs.
 - **You're trying to work around a context window limit.** Sharding state across agents is rarely the right answer. Better memory, better context assembly, and compression usually solve this.
 - **You think a swarm "feels more advanced".** It isn't. A single well-designed agent is better engineering than a sprawling swarm.
 
@@ -91,4 +91,4 @@ Use a single agent.
 
 - [Overview](./01_overview.md)
 - [Patterns](./03_patterns/manager-worker.md)
-- [Planning Hierarchy](../09_internals/03_subsystems/08_planning-hierarchy.md)
+- [Planning Hierarchy](../07b_subsystems/08_planning-hierarchy.md)

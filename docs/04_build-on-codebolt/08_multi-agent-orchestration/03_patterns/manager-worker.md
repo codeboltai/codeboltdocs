@@ -81,4 +81,4 @@ Manager populates a shared task queue. Workers pull from the queue when they're 
 
 - [Map-Reduce](./map-reduce.md) — a specialisation of manager-worker
 - [Pipeline](./pipeline.md) — when work is sequential, not parallel
-- [Agent Subsystem](../../09_internals/03_subsystems/01_agent-subsystem.md)
+- [Agent Subsystem](../../07b_subsystems/01_agent-subsystem.md)

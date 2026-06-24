@@ -8,7 +8,7 @@ description: From a user's point of view, an agent is the "who" that handles you
 
 From a user's point of view, an agent is the "who" that handles your chat. When you type a message, an agent receives it, reads the code, decides what to do, calls tools, and reports back. Different agents are good at different things.
 
-For agent development, see [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md) and [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). For runtime internals, see [Agent Subsystem](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md).
+For agent development, see [Codebolt as an Agent Framework](./01c_codebolt-as-agent-framework.md) and [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md). For runtime internals, see [Agent Subsystem](../../04_build-on-codebolt/07b_subsystems/01_agent-subsystem.md).
 
 ## Mental model
 
@@ -129,4 +129,4 @@ See [Agent Debug](../05c_agent-observability/02_agent-debug.md).
 - [The marketplace](./04_the-marketplace.md)
 - [Agent Debug](../05c_agent-observability/02_agent-debug.md)
 - [Custom Agents (for builders)](../../04_build-on-codebolt/02_creating-agents/01_overview.md)
-- [Agent Subsystem (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/01_agent-subsystem.md)
+- [Agent Subsystem (internals)](../../04_build-on-codebolt/07b_subsystems/01_agent-subsystem.md)

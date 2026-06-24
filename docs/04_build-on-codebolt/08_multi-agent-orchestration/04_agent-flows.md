@@ -127,5 +127,5 @@ Subflows are the composition primitive: a "feature development" flow can be buil
 
 - [Plan-Execute-Review](./03_patterns/plan-execute-review.md) — the canonical flow shape
 - [Pipeline](./03_patterns/pipeline.md)
-- [Agent Subsystem](../09_internals/03_subsystems/01_agent-subsystem.md)
+- [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md)
 - [Guide: build a plan-execute-review flow](../../03_guides/05_multi-agent/build-a-plan-execute-review-flow.md)

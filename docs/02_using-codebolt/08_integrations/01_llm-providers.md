@@ -262,4 +262,4 @@ Agents bound to the removed provider fall back to their next-best option, or fai
 - [Local models](./02_local-models.md)
 - [Model selection](../03_chat/06_model-selection.md)
 - [Custom LLM Provider (for builders)](../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md)
-- [LLM & Inference (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/03_llm-and-inference.md)
+- [LLM & Inference (internals)](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

@@ -131,4 +131,4 @@ Useful when your custom provider is an experimental one you want to test, with a
 
 - [LLM Providers (reference)](../../02_using-codebolt/08_integrations/01_llm-providers.md)
 - [Custom LLM Provider (for builders)](../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md)
-- [LLM & Inference (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/03_llm-and-inference.md)
+- [LLM & Inference (internals)](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

@@ -61,5 +61,5 @@ A single bus makes the system replayable: if you record every bus event, you can
 ## See also
 
 - [Architecture Overview](./02_architecture-overview.md)
-- [Agent Subsystem](../09_internals/03_subsystems/01_agent-subsystem.md)
-- [Persistence & Event Log](../09_internals/03_subsystems/12_persistence-and-eventlog.md)
+- [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md)
+- [Persistence & Event Log](../07b_subsystems/12_persistence-and-eventlog.md)

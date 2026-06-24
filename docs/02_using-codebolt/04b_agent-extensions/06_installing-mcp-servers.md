@@ -228,4 +228,4 @@ Uninstalling does **not** delete historical runs that used the tool; those are s
 - [Agent Extensions Overview](./01_overview.md)
 - [Managing MCP servers](./07_managing-mcp-servers.md)
 - [MCP Tools (for builders)](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md)
-- [MCP & Tools (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/02_mcp-and-tools.md)
+- [MCP & Tools (internals)](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)

@@ -126,4 +126,4 @@ AI Requests is the user-facing surface for inspecting LLM request activity. In c
 - [Chat Overview](./01_overview.md)
 - [LLM Providers](../08_integrations/01_llm-providers.md)
 - [Query the event log](../../03_guides/07_advanced/query-the-event-log.md)
-- [LLM & Inference (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/03_llm-and-inference.md)
+- [LLM & Inference (internals)](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

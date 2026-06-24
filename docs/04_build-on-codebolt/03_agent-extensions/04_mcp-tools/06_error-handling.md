@@ -240,4 +240,4 @@ The tool execution flow returns results as `[didUserReject, result]` tuples — 
 - [Tool schema](./03_tool-schema.md)
 - [Parameter validation](./03_tool-schema.md)
 - [Tool call end-to-end (internals)](../../02_architecture/04_data-flow-walkthroughs/tool-call-end-to-end.md)
-- [Guardrails & Eval (internals)](../../09_internals/03_subsystems/09_guardrails-and-eval.md)
+- [Guardrails & Eval (internals)](../../07b_subsystems/09_guardrails-and-eval.md)

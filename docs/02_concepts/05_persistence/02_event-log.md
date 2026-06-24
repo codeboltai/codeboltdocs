@@ -54,4 +54,4 @@ Because the log is complete, an agent run can be **replayed** — re-executing e
 
 - [Query the event log (guide)](../../03_guides/07_advanced/query-the-event-log.md)
 - [Replay an agent run (guide)](../../03_guides/07_advanced/replay-an-agent-run.md)
-- [Event Log subsystem](../../04_build-on-codebolt/09_internals/03_subsystems/12_persistence-and-eventlog.md)
+- [Event Log subsystem](../../04_build-on-codebolt/07b_subsystems/12_persistence-and-eventlog.md)

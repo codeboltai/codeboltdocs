@@ -139,5 +139,5 @@ The agent's success criterion is "produced a reviewable change", not "got it mer
 
 - [Plan-Execute-Review](./03_patterns/plan-execute-review.md)
 - [Debate](./03_patterns/debate.md) — when reviewers disagree
-- [Guardrails & Eval](../09_internals/03_subsystems/09_guardrails-and-eval.md)
+- [Guardrails & Eval](../07b_subsystems/09_guardrails-and-eval.md)
 - [Multi-Agent Usage: Review & Merge](../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge.md) — the user-facing side

@@ -314,4 +314,4 @@ Audit tool usage through the observability surfaces exposed by your build or sel
 - [Installing MCP Servers](./06_installing-mcp-servers.md)
 - [Agent Tools](../05a_tools-and-mcp/01_overview.md)
 - [CLI reference](../02_surfaces/03_cli/01_overview.md) — current CLI surface overview
-- [MCP & Tools (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/02_mcp-and-tools.md)
+- [MCP & Tools (internals)](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)

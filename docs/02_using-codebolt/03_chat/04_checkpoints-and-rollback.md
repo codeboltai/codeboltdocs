@@ -130,7 +130,7 @@ Rollback can undo file changes. It **cannot** undo:
 - **Changes outside the workspace.** Edits to files outside the project folder, modifications to a running database, container state.
 - **Git push.** If the agent pushed to a remote (it shouldn't, by default — guardrails block this), rollback doesn't unpush.
 
-For anything with external side effects, **[guardrails](../../04_build-on-codebolt/09_internals/03_subsystems/09_guardrails-and-eval.md)** are the mechanism, not rollback. The default policy blocks send/push/external-call actions without explicit approval.
+For anything with external side effects, **[guardrails](../../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md)** are the mechanism, not rollback. The default policy blocks send/push/external-call actions without explicit approval.
 
 ## Troubleshooting
 
@@ -150,5 +150,5 @@ Rollback doesn't delete anything. To genuinely remove past states, use **Setting
 
 - [Chat Overview](./01_overview.md)
 - [Checkpoint and rollback (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
-- [Project & Workspace internals](../../04_build-on-codebolt/09_internals/03_subsystems/10_project-and-workspace.md) — where shadow git lives
-- [Guardrails](../../04_build-on-codebolt/09_internals/03_subsystems/09_guardrails-and-eval.md) — for things rollback can't fix
+- [Project & Workspace internals](../../04_build-on-codebolt/07b_subsystems/10_project-and-workspace.md) — where shadow git lives
+- [Guardrails](../../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md) — for things rollback can't fix

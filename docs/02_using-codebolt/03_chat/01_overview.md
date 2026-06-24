@@ -50,7 +50,7 @@ See [Tabs and history](./02_tabs-and-history.md).
 
 ## The context window
 
-The chat doesn't dump your entire conversation into the LLM every turn. The [context assembler](../../04_build-on-codebolt/09_internals/03_subsystems/07_context-assembly.md) picks what goes in, based on:
+The chat doesn't dump your entire conversation into the LLM every turn. The [context assembler](../../04_build-on-codebolt/07b_subsystems/07_context-assembly.md) picks what goes in, based on:
 
 - Recent turns (most recent N).
 - Persistent memory relevant to the current task.

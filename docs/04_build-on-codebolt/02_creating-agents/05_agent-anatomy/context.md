@@ -100,7 +100,7 @@ const asm = await ctx.context.assemble({ task, history, budget: { tokens: 60000 
 const response = await ctx.llm.chat({ messages: asm.messages, tools: asm.tools });
 ```
 
-Lets the [context assembler](../../../09_internals/03_subsystems/07_context-assembly.md) pull in rules, memory, codemap, vector hits, etc. Use this for "real" agent work.
+Lets the [context assembler](../../07b_subsystems/07_context-assembly.md) pull in rules, memory, codemap, vector hits, etc. Use this for "real" agent work.
 
 ### Raw
 ```ts

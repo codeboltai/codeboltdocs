@@ -101,7 +101,7 @@ The agent now has the list of files containing `getUser`. Each rewrite goes thro
 
 ## Step 10 — completion and response
 
-When the agent decides it's done, `autoTestingService` kicks off the project's test suite (if configured). If tests pass, the agent emits a final assistant message on the `chat` channel. If they fail, the agent gets the failure back and replans at the task level (see [Planning Hierarchy](../../09_internals/03_subsystems/08_planning-hierarchy.md)).
+When the agent decides it's done, `autoTestingService` kicks off the project's test suite (if configured). If tests pass, the agent emits a final assistant message on the `chat` channel. If they fail, the agent gets the failure back and replans at the task level (see [Planning Hierarchy](../../07b_subsystems/08_planning-hierarchy.md)).
 
 The assistant message flows back through `channels/chat` → the WS connection → the desktop app, which renders it.
 

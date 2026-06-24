@@ -154,7 +154,7 @@ The agent's typed contract when called as a flow node or from another agent. Opt
 ### `limits`
 Budget enforcement. Every limit is checked continuously during the run; exceeding any of them aborts the run with a structured reason. Setting sensible defaults here is one of the most effective guardrails you can add.
 ### `triggers`
-For [background agents](../../../09_internals/03_subsystems/01_agent-subsystem.md) that run on schedules or events instead of chat. Each trigger type is documented under its own page (cron, file-change, webhook).
+For [background agents](../../07b_subsystems/01_agent-subsystem.md) that run on schedules or events instead of chat. Each trigger type is documented under its own page (cron, file-change, webhook).
 ### `remix` block
 Only valid with `remix_of`. Every field you put inside `remix:` overrides the corresponding field from the parent. Deep-merged for nested objects (`tools`, `processors`), replaced for scalars.
 ### `metadata`

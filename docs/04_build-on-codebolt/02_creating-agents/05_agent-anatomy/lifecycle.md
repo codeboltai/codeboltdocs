@@ -90,7 +90,7 @@ Assemble context, call the LLM, parse the response.
 ### Execute
 Run whatever the LLM asked for.
 
-- For each tool call: validate args, run through [guardrails](../../09_internals/03_subsystems/09_guardrails-and-eval.md) (server-side, you don't do anything), call via `ctx.tools.call`, collect the result.
+- For each tool call: validate args, run through [guardrails](../../07b_subsystems/09_guardrails-and-eval.md) (server-side, you don't do anything), call via `ctx.tools.call`, collect the result.
 - Run in parallel if the tool calls are independent. `Promise.all` is fine for tools, but not for things with side effects that must be ordered.
 
 ### Reflect

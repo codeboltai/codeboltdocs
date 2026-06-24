@@ -22,7 +22,7 @@ If you want to *run* an already-designed swarm, see [Multi-Agent Usage](../../02
 
 ## Where this sits in Codebolt
 
-This section lives primarily in the [Agent Subsystem](../09_internals/03_subsystems/01_agent-subsystem.md) and the orchestration-facing parts of `@codebolt/codeboltjs`.
+This section lives primarily in the [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md) and the orchestration-facing parts of `@codebolt/codeboltjs`.
 
 The coordination side looks like this:
 
@@ -51,6 +51,6 @@ If none of these apply, use one agent.
 
 - [Multi-Agent Orchestration Management](./02_multi-agent-orchestration-management.md)
 - [Multi-Environment Orchestration](../08a_multi-environment-orchestration/01_overview.md)
-- [Agent Subsystem](../09_internals/03_subsystems/01_agent-subsystem.md) — the runtime this section builds on
-- [Planning Hierarchy](../09_internals/03_subsystems/08_planning-hierarchy.md) — orchestration often shows up as planned blocks assigned to different agents
+- [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md) — the runtime this section builds on
+- [Planning Hierarchy](../07b_subsystems/08_planning-hierarchy.md) — orchestration often shows up as planned blocks assigned to different agents
 - [Multi-Agent Usage](../../02_using-codebolt/07_multi-agent-usage/01_overview.md) — running, not designing

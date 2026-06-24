@@ -278,15 +278,15 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'guidesSidebar',
-          position: 'left',
-          label: 'Guides',
-        },
-        {
-          type: 'docSidebar',
           sidebarId: 'buildSidebar',
           position: 'left',
           label: 'Build on Codebolt',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'guidesSidebar',
+          position: 'left',
+          label: 'Guides',
         },
         // Reference sidebar is excluded in dev (05_reference files not watched).
         // In dev we show a plain href so the navbar doesn't break.

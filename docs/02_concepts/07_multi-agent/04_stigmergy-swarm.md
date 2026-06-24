@@ -186,6 +186,6 @@ Near-linear scaling up to 200 agents. The failure rate grows with size but stays
 
 ## See also
 
-- [Swarm service (build)](../../04_build-on-codebolt/09_internals/03_subsystems/11_communication.md)
+- [Swarm service (build)](../../04_build-on-codebolt/07b_subsystems/11_communication.md)
 - [Running a swarm (using)](../../02_using-codebolt/07_multi-agent-usage/02_running-a-swarm.md)
 - [Build a code-review swarm (guide)](../../03_guides/05_multi-agent/build-a-code-review-swarm.md)

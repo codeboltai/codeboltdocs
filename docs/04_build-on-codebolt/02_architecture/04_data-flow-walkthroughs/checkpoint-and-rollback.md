@@ -100,7 +100,7 @@ These limits are why the guardrail engine is stricter about externally-visible a
 
 ## See also
 
-- [Project & Workspace Subsystem](../../09_internals/03_subsystems/10_project-and-workspace.md) — where shadow git lives
-- [Persistence & Event Log](../../09_internals/03_subsystems/12_persistence-and-eventlog.md) — the append-only side
+- [Project & Workspace Subsystem](../../07b_subsystems/10_project-and-workspace.md) — where shadow git lives
+- [Persistence & Event Log](../../07b_subsystems/12_persistence-and-eventlog.md) — the append-only side
 - [Checkpoints (user-facing)](../../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)
 - [Replay an agent run (guide)](../../../03_guides/07_advanced/replay-an-agent-run.md)

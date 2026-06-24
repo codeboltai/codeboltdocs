@@ -225,4 +225,4 @@ If you need to write your agent in Go, Rust, Python, or anything that isn't Java
 - [Level 1 — Framework](./level-1-framework.md) — the level most agents should live at
 - [Level 3 — Raw WebSocket](./level-3-raw-websocket.md) — non-JS agents
 - [codeboltjs reference](../../../../05_reference/01_overview.md)
-- [Agent Subsystem internals](../../../09_internals/03_subsystems/01_agent-subsystem.md)
+- [Agent Subsystem internals](../../07b_subsystems/01_agent-subsystem.md)

@@ -10,7 +10,7 @@ What actually happens between "the LLM emitted a tool call" and "the tool result
 
 ## Step 0 — the LLM emits intent
 
-During [`llmService.chat(...)`](../../09_internals/03_subsystems/03_llm-and-inference.md), the provider returns a response that includes a tool call:
+During [`llmService.chat(...)`](../../07b_subsystems/03_llm-and-inference.md), the provider returns a response that includes a tool call:
 
 ```json
 {
@@ -142,6 +142,6 @@ The `ToolResult` is handed back to the agent loop. The loop appends it to the wo
 
 - [Chat message end-to-end](./chat-message-end-to-end.md)
 - [Agent run end-to-end](./agent-run-end-to-end.md)
-- [MCP & Tools Subsystem](../../09_internals/03_subsystems/02_mcp-and-tools.md)
-- [Guardrails & Eval](../../09_internals/03_subsystems/09_guardrails-and-eval.md)
+- [MCP & Tools Subsystem](../../07b_subsystems/02_mcp-and-tools.md)
+- [Guardrails & Eval](../../07b_subsystems/09_guardrails-and-eval.md)
 - [Hooks](../../05_plugins/01_overview.md)

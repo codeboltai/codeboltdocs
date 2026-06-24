@@ -63,4 +63,4 @@ Minimal shape:
 - [Custom Agents](../02_creating-agents/01_overview.md) — the other side of the agent-UI boundary
 - [Plugins](../05_plugins/01_overview.md) — for backend runtime extensions that can also open embedded panels
 - [Custom Agentic Applications](../04b_custom-agentic-applications/01_overview.md) — for application-level patterns that combine UI and plugin/backend layers
-- [Internals → Communication](../09_internals/03_subsystems/11_communication.md) — the protocol underneath
+- [Internals → Communication](../07b_subsystems/11_communication.md) — the protocol underneath

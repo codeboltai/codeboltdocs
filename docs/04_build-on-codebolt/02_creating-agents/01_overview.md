@@ -18,7 +18,7 @@ An agent is a program the server spawns when there's work to do. It:
 2. Runs a loop: assemble context → call the LLM → execute tool calls → reflect → repeat.
 3. Eventually reports done, fails, or gets interrupted.
 
-Every agent runs in its own process, supervised by [`AgentProcessManager`](../09_internals/03_subsystems/01_agent-subsystem.md). This isolation means your agent can crash, hang, or leak memory without affecting anything else.
+Every agent runs in its own process, supervised by [`AgentProcessManager`](../07b_subsystems/01_agent-subsystem.md). This isolation means your agent can crash, hang, or leak memory without affecting anything else.
 
 ## Agent lifecycle
 
@@ -153,5 +153,5 @@ When you're ready, your agent can be:
 - [Agent Extensions](../03_agent-extensions/01_overview.md) — what any agent can consume
 - [Dynamic Agent Events](./08_dynamic-agent-events.md) — publish named events from an agent
 - [Auto-Optimize Agents](./10_auto-optimize-agents.md) — improve quality systematically
-- [Agent Subsystem internals](../09_internals/03_subsystems/01_agent-subsystem.md) — what happens under the hood
+- [Agent Subsystem internals](../07b_subsystems/01_agent-subsystem.md) — what happens under the hood
 - [Multi-Agent Orchestration](../08_multi-agent-orchestration/01_overview.md) — multi-agent patterns

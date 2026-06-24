@@ -197,4 +197,4 @@ You lose all runs, memory, history, settings. User-facing project files (actual 
 - [Self-Hosting Overview](./01_overview.md)
 - [Storage Backends](./04_storage-backends.md) — vectors, KG, files
 - [Backup and Restore](./07_backup-and-restore.md)
-- [Persistence & Event Log (internals)](../09_internals/03_subsystems/12_persistence-and-eventlog.md)
+- [Persistence & Event Log (internals)](../07b_subsystems/12_persistence-and-eventlog.md)

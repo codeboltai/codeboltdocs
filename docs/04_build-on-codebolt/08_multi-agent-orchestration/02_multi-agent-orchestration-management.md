@@ -149,4 +149,4 @@ That covers most real systems.
 - [Subagents](../03_agent-extensions/08_subagents.md)
 - [Side Execution](../03_agent-extensions/07_side-execution.md)
 - [Action Blocks](../03_agent-extensions/05_action-blocks/01_overview.md)
-- [Agent Subsystem](../09_internals/03_subsystems/01_agent-subsystem.md)
+- [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md)
