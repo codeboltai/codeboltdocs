@@ -957,6 +957,11 @@
   stroke: #22c55e;
   stroke-width: 2;
 }
+.cb-threadsteps-link-dot {
+  fill: #7dd3fc;
+  stroke: #0f172a;
+  stroke-width: 1;
+}
 .cb-threadsteps-wire {
   fill: none;
   stroke: #64748b;

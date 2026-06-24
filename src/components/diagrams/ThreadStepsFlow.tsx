@@ -57,6 +57,14 @@ const CONCEPTS: Concept[] = [
   },
 ];
 
+const CHAT_LINKS = [
+  { id: 'next', fromX: 754, fromY: 168, toY: 154 },
+  { id: 'steering', fromX: 762, fromY: 307, toY: 240 },
+  { id: 'sub-agent', fromX: 754, fromY: 394, toY: 326 },
+  { id: 'sub-thread', fromX: 754, fromY: 444, toY: 412 },
+  { id: 'background-thread', fromX: 754, fromY: 535, toY: 498 },
+];
+
 function renderLines(lines: TextLine[] | undefined, x: number, y: number, textAnchor: 'start' | 'middle' = 'middle') {
   if (!lines?.length) return null;
 
@@ -94,6 +102,12 @@ export default function ThreadStepsFlow() {
         <title id="threadsteps-title">
           Chat window showing Codebolt threads, steps, steering, sub-agents, sub-threads, and background threads
         </title>
+
+        <defs>
+          <marker id="cb-threadsteps-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10" className="cb-threadsteps-arrowhead" />
+          </marker>
+        </defs>
 
         <rect x="24" y="22" width="780" height="548" rx="8" className="cb-threadsteps-window" />
 
@@ -182,6 +196,16 @@ export default function ThreadStepsFlow() {
         <text x="862" y="100" className="cb-threadsteps-side-copy">
           This side explains runtime concepts.
         </text>
+        {CHAT_LINKS.map((link) => (
+          <g key={link.id}>
+            <circle cx={link.fromX} cy={link.fromY} r="3" className="cb-threadsteps-link-dot" />
+            <path
+              d={`M ${link.fromX + 5} ${link.fromY} C 792 ${link.fromY}, 810 ${link.toY}, 846 ${link.toY}`}
+              className="cb-threadsteps-wire cb-threadsteps-wire--dashed"
+              markerEnd="url(#cb-threadsteps-arrow)"
+            />
+          </g>
+        ))}
         {CONCEPTS.map((concept, index) => renderConceptCard(concept, 850, 116 + index * 86))}
       </svg>
     </div>
