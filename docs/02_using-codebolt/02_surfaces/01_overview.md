@@ -16,8 +16,9 @@ Codebolt is the same agent runtime no matter how you talk to it. The **client** 
 | **[CLI](../02f_platforms/02_cli.md)** | Scripting, CI, one-off commands, remote SSH | Command-driven, less visual |
 | **[TUI](../02f_platforms/03_tui.md)** | Terminal-only environments where you still want an interactive UI | Narrower surface model than the desktop app |
 | **[Headless](./05_headless.md)** | Servers, automation, agent execution without any UI | No interactive chat |
+| **[Cloud](./06_cloud.md)** | Browser-based access, managed sandboxes, driving your machine from anywhere | Needs a network connection; lighter affordances than the desktop app |
 
-The same project, the same agents, the same memory — only the client differs.
+The same project, the same agents, the same memory — only the client differs. (Cloud is a bit different — it controls *where the agent runs* rather than being a client you install, but the same runtime and plugin system apply.)
 
 ## What stays the same across clients
 
@@ -43,3 +44,4 @@ The pages under **Clients** are **reference catalogs** for each client — what 
 - [Desktop App](../02f_platforms/01_desktop.md)
 - [CLI](../02f_platforms/02_cli.md)
 - [TUI](../02f_platforms/03_tui.md)
+- [Cloud](./06_cloud.md)

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-24T05:35:15.286Z",
+  "generatedAt": "2026-06-24T09:54:37.925Z",
   "sourceCount": 388,
-  "curatedCount": 67,
+  "curatedCount": 65,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,21 +16,9 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 188,
+      "count": 174,
       "order": 1,
       "files": [
-        {
-          "path": "using-codebolt/overview.md",
-          "title": "Overview"
-        },
-        {
-          "path": "using-codebolt/what-is-codebolt.md",
-          "title": "What is Codebolt"
-        },
-        {
-          "path": "using-codebolt/quickstart.md",
-          "title": "Get Started"
-        },
         {
           "path": "using-codebolt/surfaces/overview.md",
           "title": "Platform Overview"
@@ -126,50 +114,6 @@
         {
           "path": "using-codebolt/surfaces/headless.md",
           "title": "Headless Mode"
-        },
-        {
-          "path": "using-codebolt/core-concepts/overview.md",
-          "title": "Core Concepts Overview"
-        },
-        {
-          "path": "using-codebolt/core-concepts/architecture.md",
-          "title": "Architecture"
-        },
-        {
-          "path": "using-codebolt/core-concepts/start-simple.md",
-          "title": "Start Simple"
-        },
-        {
-          "path": "using-codebolt/core-concepts/run-it-longer.md",
-          "title": "Run It Longer"
-        },
-        {
-          "path": "using-codebolt/core-concepts/customize-process.md",
-          "title": "Customize Process"
-        },
-        {
-          "path": "using-codebolt/core-concepts/extend-to-your-process.md",
-          "title": "Extend To Your Process"
-        },
-        {
-          "path": "using-codebolt/core-concepts/local-scaling.md",
-          "title": "Local Scaling"
-        },
-        {
-          "path": "using-codebolt/core-concepts/cloud-scaling.md",
-          "title": "Cloud Scaling"
-        },
-        {
-          "path": "using-codebolt/platforms/desktop.md",
-          "title": "Desktop App"
-        },
-        {
-          "path": "using-codebolt/platforms/cli.md",
-          "title": "CLI"
-        },
-        {
-          "path": "using-codebolt/platforms/tui.md",
-          "title": "TUI"
         },
         {
           "path": "using-codebolt/chat/overview.md",
@@ -1587,6 +1531,69 @@
         {
           "path": "build-on-codebolt/agent-infrastructure/remote-execution.md",
           "title": "Remote Execution"
+        }
+      ]
+    },
+    {
+      "heading": "Optional",
+      "count": 14,
+      "order": 99,
+      "files": [
+        {
+          "path": "get-started/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "get-started/what-is-codebolt.md",
+          "title": "What is Codebolt"
+        },
+        {
+          "path": "get-started/platforms/desktop.md",
+          "title": "Desktop App"
+        },
+        {
+          "path": "get-started/platforms/cli.md",
+          "title": "CLI"
+        },
+        {
+          "path": "get-started/platforms/tui.md",
+          "title": "TUI"
+        },
+        {
+          "path": "get-started/platforms/cloud.md",
+          "title": "Cloud"
+        },
+        {
+          "path": "get-started/quickstart.md",
+          "title": "Get Started"
+        },
+        {
+          "path": "get-started/core-concepts/how-it-works.md",
+          "title": "How It Works"
+        },
+        {
+          "path": "get-started/core-concepts/start-simple.md",
+          "title": "Start Simple"
+        },
+        {
+          "path": "get-started/core-concepts/run-it-longer.md",
+          "title": "Run It Longer"
+        },
+        {
+          "path": "get-started/core-concepts/customize-process.md",
+          "title": "Customize Process"
+        },
+        {
+          "path": "get-started/core-concepts/extend-to-your-process.md",
+          "title": "Extend To Your Process"
+        },
+        {
+          "path": "get-started/core-concepts/local-scaling.md",
+          "title": "Local Scaling"
+        },
+        {
+          "path": "get-started/core-concepts/cloud-scaling.md",
+          "title": "Cloud Scaling"
         }
       ]
     }

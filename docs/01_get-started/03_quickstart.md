@@ -15,8 +15,9 @@ Pick one to get going in about 5–10 minutes:
 | **Desktop App** | Daily coding work, multi-panel context, visual diffs, rich chat | [Get Started →](../02_using-codebolt/02_surfaces/02_desktop-app/00_get-started.md) |
 | **CLI** | Scripting, CI, one-off commands, remote SSH | [Get Started →](../02_using-codebolt/02_surfaces/03_cli/00_get-started.md) |
 | **TUI** | Terminal-only environments where you still want an interactive UI | [Get Started →](../02_using-codebolt/02_surfaces/04_tui/00_get-started.md) |
+| **Cloud** | Browser-based access with no install — managed sandboxes or drive your own machine from anywhere | [Cloud Platform →](./02f_platforms/04_cloud.md) |
 
-> **Heads up:** the desktop app is the most common starting point. If you're not sure which to pick, start there — the CLI and TUI are bundled with it.
+> **Heads up:** the desktop app is the most common starting point. If you're not sure which to pick, start there — the CLI and TUI are bundled with it. **Cloud** is the no-install option if you'd rather work from a browser.
 
 ---
 

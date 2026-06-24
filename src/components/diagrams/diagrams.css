@@ -2976,3 +2976,156 @@
 [data-theme='dark'] .cb-agentic-label--accent {
   fill: #7dd3fc;
 }
+
+/* ── Cloud platform architecture ─────────── */
+
+.cb-diagram--cloud {
+  background: #f5f4ed;
+  border-color: rgba(11, 13, 11, 0.12);
+}
+[data-theme='dark'] .cb-diagram--cloud {
+  background: #141412;
+  border-color: rgba(240, 239, 232, 0.10);
+}
+
+.cb-cloud-arrowfill {
+  fill: #52534e;
+}
+[data-theme='dark'] .cb-cloud-arrowfill { fill: #a0a09a; }
+
+.cb-cloud-eyebrow,
+.cb-cloud-title,
+.cb-cloud-sub,
+.cb-cloud-foot,
+.cb-cloud-chip-label,
+.cb-cloud-badge-text,
+.cb-cloud-wire-label,
+.cb-cloud-caption {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.cb-cloud-eyebrow {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  fill: #52534e;
+}
+[data-theme='dark'] .cb-cloud-eyebrow { fill: #a0a09a; }
+
+.cb-cloud-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  fill: #0b0d0b;
+}
+[data-theme='dark'] .cb-cloud-title { fill: #f0efe8; }
+
+.cb-cloud-sub {
+  font-size: 9px;
+  fill: #52534e;
+}
+[data-theme='dark'] .cb-cloud-sub { fill: #a0a09a; }
+
+.cb-cloud-foot {
+  font-size: 8.5px;
+  fill: #52534e;
+}
+[data-theme='dark'] .cb-cloud-foot { fill: #a0a09a; }
+
+.cb-cloud-chip-label {
+  font-size: 8.6px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  fill: #0b0d0b;
+}
+[data-theme='dark'] .cb-cloud-chip-label { fill: #f0efe8; }
+
+.cb-cloud-col-rect,
+.cb-cloud-module-rect,
+.cb-cloud-chip-rect {
+  fill: rgba(255, 255, 255, 0.84);
+  stroke: rgba(11, 13, 11, 0.18);
+  stroke-width: 1;
+}
+[data-theme='dark'] .cb-cloud-col-rect,
+[data-theme='dark'] .cb-cloud-module-rect,
+[data-theme='dark'] .cb-cloud-chip-rect {
+  fill: rgba(240, 239, 232, 0.04);
+  stroke: rgba(240, 239, 232, 0.18);
+}
+
+.cb-cloud-server-rect {
+  fill: rgba(14, 165, 233, 0.06);
+  stroke: #0ea5e9;
+  stroke-width: 1;
+}
+[data-theme='dark'] .cb-cloud-server-rect {
+  fill: rgba(14, 165, 233, 0.10);
+  stroke: #38bdf8;
+}
+
+.cb-cloud-runtime-rect {
+  fill: rgba(247, 89, 31, 0.08);
+  stroke: #f7591f;
+  stroke-width: 1;
+}
+[data-theme='dark'] .cb-cloud-runtime-rect {
+  fill: rgba(247, 89, 31, 0.10);
+  stroke: #fb923c;
+}
+
+.cb-cloud-sandbox-rect {
+  fill: rgba(22, 163, 74, 0.08);
+  stroke: #16a34a;
+  stroke-width: 1;
+}
+[data-theme='dark'] .cb-cloud-sandbox-rect {
+  fill: rgba(22, 163, 74, 0.10);
+  stroke: #4ade80;
+}
+
+.cb-cloud-badge {
+  fill: transparent;
+  stroke: rgba(11, 13, 11, 0.30);
+  stroke-width: 0.8;
+}
+[data-theme='dark'] .cb-cloud-badge { stroke: rgba(240, 239, 232, 0.22); }
+
+.cb-cloud-badge-text {
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: #52534e;
+}
+[data-theme='dark'] .cb-cloud-badge-text { fill: #a0a09a; }
+
+.cb-cloud-wire {
+  stroke: #52534e;
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+  fill: none;
+}
+[data-theme='dark'] .cb-cloud-wire { stroke: #a0a09a; }
+
+.cb-cloud-wire--accent {
+  stroke: #0ea5e9;
+}
+[data-theme='dark'] .cb-cloud-wire--accent { stroke: #38bdf8; }
+
+.cb-cloud-dot {
+  fill: #0ea5e9;
+}
+
+.cb-cloud-wire-label {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  fill: #52534e;
+}
+[data-theme='dark'] .cb-cloud-wire-label { fill: #a0a09a; }
+
+.cb-cloud-caption {
+  font-size: 8.5px;
+  fill: #52534e;
+}
+[data-theme='dark'] .cb-cloud-caption { fill: #a0a09a; }
