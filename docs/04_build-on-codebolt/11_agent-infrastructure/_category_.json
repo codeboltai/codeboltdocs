@@ -1,0 +1,9 @@
+{
+  "label": "Agent Infrastructure",
+  "position": 11,
+  "collapsible": true,
+  "collapsed": true,
+  "customProps": {
+    "sectionLabel": "Self Hosting"
+  }
+}

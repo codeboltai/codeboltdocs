@@ -2,5 +2,8 @@
   "label": "Multi-Agent Orchestration",
   "position": 8,
   "collapsible": true,
-  "collapsed": true
+  "collapsed": true,
+  "customProps": {
+    "sectionLabel": "Mutliagent Local  Scaling"
+  }
 }

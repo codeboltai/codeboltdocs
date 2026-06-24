@@ -1,3 +1,6 @@
 {
-  "label": "System Internals"
+  "label": "System Internals",
+  "position": 9.2,
+  "collapsible": true,
+  "collapsed": true
 }
