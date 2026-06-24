@@ -6,13 +6,13 @@ description: Task-oriented walkthroughs. Each guide answers a specific "how do I
 
 # Guides & Tutorials
 
-Task-oriented walkthroughs. Each guide answers a specific "how do I do X?" with numbered steps and a concrete outcome. Not reference documentation — if you want that, [Using Codebolt](../02_using-codebolt/01_overview.md) and [Reference](../05_reference/01_overview.md) have it.
+Task-oriented walkthroughs. Each guide answers a specific "how do I do X?" with numbered steps and a concrete outcome. Not reference documentation — if you want that, [Get Started](../01_get-started/01_overview.md) and [Reference](../05_reference/01_overview.md) have it.
 
 ## How to use this section
 
 Find the guide closest to your goal and follow the steps. Guides assume:
 
-- You've finished [Get Started](../02_using-codebolt/02_quickstart.md) — install, sign in, and run your first agent.
+- You've finished [Get Started](../01_get-started/03_quickstart.md) — install, sign in, and run your first agent.
 - You have a provider configured and a project open.
 - You're comfortable reading code — most guides show small config/code snippets.
 

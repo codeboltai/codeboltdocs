@@ -8,7 +8,7 @@ description: "Build your own interface on top of Codebolt: a chat panel, a CLI, 
 
 Build your own interface on top of Codebolt: a chat panel, a CLI, an IDE extension, a web dashboard, a mobile companion, or a product-specific front-end.
 
-If you want to *use* an existing UI (desktop app, web app, IDE extensions), see [Using Codebolt](../../02_using-codebolt/01_overview.md). This section is for *building new ones*.
+If you want to *use* an existing UI (desktop app, web app, IDE extensions), see [Get Started](../../01_get-started/01_overview.md). This section is for *building new ones*.
 
 ## When to build a custom UI
 

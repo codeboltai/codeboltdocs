@@ -8,7 +8,7 @@ description: Build and run a minimal custom agent in ~15 minutes. Covers level 0
 
 Build and run a minimal custom agent in ~15 minutes. Covers level 0 (remix), level 1 (framework), and remote agents. For the full surface see [Overview](./01_overview.md) and the [creation levels](./03_creation-levels/level-0-remix.md).
 
-**You'll need:** Codebolt installed, a provider configured, a project open. If any of that isn't true, do [Get Started](../../../02_using-codebolt/02_quickstart.md) first.
+**You'll need:** Codebolt installed, a provider configured, a project open. If any of that isn't true, do [Get Started](../../../01_get-started/03_quickstart.md) first.
 
 ## Part 1 — Remix (level 0)
 
