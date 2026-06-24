@@ -82,5 +82,5 @@ Seeders run on first boot and on upgrade.
 ## See also
 
 - [Memory](./04_memory.md) — the memory layers land on top of the storage described here
-- [Process Model](../02_process-model.md) — how the bus feeds the event log
+- [Process Model](../../02_architecture/03_process-model.md) — how the bus feeds the event log
 - [Query the event log](../../../03_guides/07_advanced/query-the-event-log.md) — user-facing how-to

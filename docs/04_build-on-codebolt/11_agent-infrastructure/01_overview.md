@@ -92,7 +92,7 @@ Auth is the boundary; everything else is defence in depth. A self-hosted server 
 ## See also
 
 - [Self Hosted Agent Infrastructure](../../02_using-codebolt/08dc_self-hosted-custom-agents/01_overview.md) for business-facing deployment patterns and use-case framing
-- [Architecture Overview](../09_internals/01_architecture-overview.md) — understand the system before hosting it
-- [Process Model](../09_internals/02_process-model.md) — what runs where
+- [Architecture Overview](../02_architecture/02_architecture-overview.md) — understand the system before hosting it
+- [Process Model](../02_architecture/03_process-model.md) — what runs where
 - [Persistence & Event Log](../09_internals/03_subsystems/12_persistence-and-eventlog.md) — the storage floor
 - [Guide: self-host for a team](../../03_guides/07_advanced/self-host-for-a-team.md)

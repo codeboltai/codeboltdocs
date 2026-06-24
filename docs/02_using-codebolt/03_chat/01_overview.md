@@ -114,4 +114,4 @@ New chat creation, history access, restart, and most thread navigation are curre
 - [Context and @-mentions](./03_context-and-at-mentions.md)
 - [Checkpoints and rollback](./04_checkpoints-and-rollback.md)
 - [Model selection](./06_model-selection.md)
-- [Chat message end-to-end (internals)](../../04_build-on-codebolt/09_internals/04_data-flow-walkthroughs/chat-message-end-to-end.md)
+- [Chat message end-to-end (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/chat-message-end-to-end.md)

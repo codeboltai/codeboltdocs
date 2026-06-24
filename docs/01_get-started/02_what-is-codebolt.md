@@ -22,7 +22,7 @@ A lot of "AI coding tools" are an autocomplete plus a chat box. Codebolt is a di
 
 2. **Multi-layer memory, not "a context window".** Working memory, episodic memory, persistent memory, KV store, knowledge graph (Kuzu), vector DB, narrative threads — with a context assembler that picks what goes into the prompt. See [Memory](../04_build-on-codebolt/08_internals/03_subsystems/04_memory.md).
 
-3. **Shadow git.** Every agent edit is committed to a parallel git repo automatically, so you can roll back any change instantly without touching your real git history. See [Checkpoints](../04_build-on-codebolt/08_internals/04_data-flow-walkthroughs/checkpoint-and-rollback.md).
+3. **Shadow git.** Every agent edit is committed to a parallel git repo automatically, so you can roll back any change instantly without touching your real git history. See [Checkpoints](../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md).
 
 4. **Guardrails as a sidecar.** Rule-based and LLM-based checks run before every tool call. See [Guardrails](../04_build-on-codebolt/08_internals/03_subsystems/09_guardrails-and-eval.md).
 
@@ -52,5 +52,5 @@ So you don't build the wrong mental model:
 ## Where to next
 
 - **Want to try it now?** → [Get Started](./03_quickstart.md) (~5–10 min per client)
-- **Want to understand how it works first?** → [Architecture Overview](../04_build-on-codebolt/08_internals/01_architecture-overview.md)
+- **Want to understand how it works first?** → [Architecture Overview](../04_build-on-codebolt/02_architecture/02_architecture-overview.md)
 - **Already running it, want to do something specific?** → [Guides & Tutorials](../03_guides/01_overview.md)

@@ -75,6 +75,6 @@ Shadow git is invisible to the user until they want to time-travel.
 
 ## See also
 
-- [Process Model](../02_process-model.md) — where language servers fit
+- [Process Model](../../02_architecture/03_process-model.md) — where language servers fit
 - [Communication](./11_communication.md) — how app state reaches the UI
 - [Checkpoints (user-facing)](../../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)

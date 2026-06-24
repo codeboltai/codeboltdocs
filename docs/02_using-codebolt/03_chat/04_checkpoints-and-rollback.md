@@ -10,7 +10,7 @@ description: "How it works under the hood: shadow git + the event log. See Check
 
 Codebolt saves a rollback-able snapshot at every meaningful step. You can undo any agent change, instantly, without touching your real git. This is what makes it safe to let agents run on real code.
 
-> **How it works under the hood:** shadow git + the event log. See [Checkpoint and rollback (internals)](../../04_build-on-codebolt/09_internals/04_data-flow-walkthroughs/checkpoint-and-rollback.md) for the full story. This page is the user's view.
+> **How it works under the hood:** shadow git + the event log. See [Checkpoint and rollback (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md) for the full story. This page is the user's view.
 
 ## What gets checkpointed
 
@@ -149,6 +149,6 @@ Rollback doesn't delete anything. To genuinely remove past states, use **Setting
 ## See also
 
 - [Chat Overview](./01_overview.md)
-- [Checkpoint and rollback (internals)](../../04_build-on-codebolt/09_internals/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
+- [Checkpoint and rollback (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
 - [Project & Workspace internals](../../04_build-on-codebolt/09_internals/03_subsystems/10_project-and-workspace.md) — where shadow git lives
 - [Guardrails](../../04_build-on-codebolt/09_internals/03_subsystems/09_guardrails-and-eval.md) — for things rollback can't fix

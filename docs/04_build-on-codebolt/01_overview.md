@@ -10,7 +10,7 @@ import SystemArchitecture from '@site/src/components/diagrams/SystemArchitecture
 
 This section is for developers extending Codebolt. If you want to *use* Codebolt, start at [Get Started](../01_get-started/01_overview.md). If you want to follow a specific how-to, try [Guides](../03_guides/01_overview.md). Everything here is for people writing code that plugs into the server.
 
-If you are new to the builder-facing architecture, read [Architecture for Builders](./02_architecture-for-builders.md) first. It explains how the server, clients, agents, plugins, and agent extensions fit together.
+If you are new to the builder-facing architecture, read [Architecture for Builders](./02_architecture/01_architecture-for-builders.md) first. It explains how the server, clients, agents, plugins, and agent extensions fit together.
 
 ## The system at a glance
 
@@ -32,7 +32,7 @@ Codebolt exposes these extension points. Agent customization now splits into two
 
 | Extension point | What it is | Start here |
 |---|---|---|
-| **Architecture for Builders** | The server-centered mental model and SDK split | [Architecture for Builders](./02_architecture-for-builders.md) |
+| **Architecture for Builders** | The server-centered mental model and SDK split | [Architecture for Builders](./02_architecture/01_architecture-for-builders.md) |
 | **Creating Agents** | Write or wrap agents that show up in the picker | [Creating Agents](./02_creating-agents/01_overview.md) |
 | **Agent Extensions** | Shared primitives agents consume: skills, capabilities, MCP tools, and blocks | [Agent Extensions](./03_agent-extensions/01_overview.md) |
 | **Custom Interfaces** | Build your own interface on top of the server | [Custom Interfaces](./04_custom-uis/01_overview.md) |
@@ -42,7 +42,7 @@ Codebolt exposes these extension points. Agent customization now splits into two
 | **Evaluation & Optimization** | Measure, refine, and tune agents | [Evaluation & Optimization](./07_eval-and-optimization/01_overview.md) |
 | **Multi-Agent Orchestration** | Multi-agent coordination design — swarms, flows, roles, and review patterns. | [Multi-Agent Orchestration](./08_multi-agent-orchestration/01_overview.md) |
 | **Multi-Environment Orchestration** | Provider-driven execution across remote or alternate environments. | [Multi-Environment Orchestration](./08a_multi-environment-orchestration/01_overview.md) |
-| **Internals** | How the server works — for devs who need to extend intelligently. | [Internals](./09_internals/01_architecture-overview.md) |
+| **Internals** | How the server works — for devs who need to extend intelligently. | [Internals](./02_architecture/02_architecture-overview.md) |
 | **Building Integrations** | Connect Codebolt to chat apps, CI/CD, project tools, IDEs | [Building Integrations](./10_building-integrations/01_overview.md) |
 | **Agent Infrastructure** | Run the server yourself — deployment, scaling, remote execution | [Agent Infrastructure](./11_agent-infrastructure/01_overview.md) |
 
@@ -65,7 +65,7 @@ A decision guide:
 - **I want several agents to cooperate on a task.** → [Multi-Agent Orchestration](./08_multi-agent-orchestration/01_overview.md). Read [When to use multi-agent](./08_multi-agent-orchestration/02_when-multi-agent.md) first.
 - **I want runs to cross into remote or alternate environments.** → [Multi-Environment Orchestration](./08a_multi-environment-orchestration/01_overview.md).
 - **I need to run the server myself.** → [Agent Infrastructure](./11_agent-infrastructure/01_overview.md).
-- **I want to understand the whole system.** → [Internals → Architecture Overview](./09_internals/01_architecture-overview.md). Then pick subsystems as you need them.
+- **I want to understand the whole system.** → [Internals → Architecture Overview](./02_architecture/02_architecture-overview.md). Then pick subsystems as you need them.
 
 ## The level-zero mindset
 
@@ -96,8 +96,8 @@ These aren't rules, just things to keep in mind as you write.
 
 ## See also
 
-- [Architecture for Builders](./02_architecture-for-builders.md) — the builder-facing system map
-- [Architecture Overview](./09_internals/01_architecture-overview.md) — the mental model of the server
+- [Architecture for Builders](./02_architecture/01_architecture-for-builders.md) — the builder-facing system map
+- [Architecture Overview](./02_architecture/02_architecture-overview.md) — the mental model of the server
 - [Creating Agents](./02_creating-agents/01_overview.md) — build or wrap agents
 - [Agent Extensions](./03_agent-extensions/01_overview.md) — shared capabilities agents consume
 - [Agent Extensions → MCP Tools](./03_agent-extensions/04_mcp-tools/01_overview.md)

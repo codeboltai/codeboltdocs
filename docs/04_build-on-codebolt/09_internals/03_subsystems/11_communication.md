@@ -79,6 +79,6 @@ Because the same message ("run this agent on this project") can arrive over WS f
 
 ## See also
 
-- [Process Model](../02_process-model.md) — external clients as peers
+- [Process Model](../../02_architecture/03_process-model.md) — external clients as peers
 - [Agent Subsystem](./01_agent-subsystem.md) — where messages end up
-- [Chat message end-to-end](../04_data-flow-walkthroughs/chat-message-end-to-end.md)
+- [Chat message end-to-end](../../02_architecture/04_data-flow-walkthroughs/chat-message-end-to-end.md)

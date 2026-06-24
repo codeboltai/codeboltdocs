@@ -66,4 +66,4 @@ Durable queue for agent-bound events: incoming user turns, tool results, peer-ag
 
 - [Build a custom agent](../../02_creating-agents/01_overview.md) — the developer-facing how‑to.
 - [Multi-Agent Orchestration](../../08_multi-agent-orchestration/01_overview.md) — when you need more than one agent.
-- [Agent run end-to-end](../04_data-flow-walkthroughs/agent-run-end-to-end.md) — annotated trace of a full run.
+- [Agent run end-to-end](../../02_architecture/04_data-flow-walkthroughs/agent-run-end-to-end.md) — annotated trace of a full run.

@@ -115,5 +115,5 @@ Shadow git handles submodules like normal git — each submodule has its own sha
 ## See also
 
 - [Checkpoints and rollback](../03_chat/04_checkpoints-and-rollback.md)
-- [Checkpoint and rollback (internals)](../../04_build-on-codebolt/09_internals/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
+- [Checkpoint and rollback (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
 - [Project & Workspace (internals)](../../04_build-on-codebolt/09_internals/03_subsystems/10_project-and-workspace.md)

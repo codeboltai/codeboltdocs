@@ -85,5 +85,5 @@ See [Hooks](../../05_plugins/01_overview.md) for the full hook lifecycle.
 ## See also
 
 - [Build Tools / MCP](../../03_agent-extensions/04_mcp-tools/01_overview.md) — how to author your own.
-- [Tool call end-to-end](../04_data-flow-walkthroughs/tool-call-end-to-end.md) — annotated trace.
+- [Tool call end-to-end](../../02_architecture/04_data-flow-walkthroughs/tool-call-end-to-end.md) — annotated trace.
 - [Guardrails](./09_guardrails-and-eval.md) — why a tool call may be blocked.

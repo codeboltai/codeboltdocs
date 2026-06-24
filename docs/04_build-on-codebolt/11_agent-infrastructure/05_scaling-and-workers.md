@@ -223,4 +223,4 @@ Scale Codebolt; don't try to scale away upstream bottlenecks.
 - [Database](./03_database.md)
 - [Storage Backends](./04_storage-backends.md)
 - [Security Hardening](./06_security-hardening.md)
-- [Process Model (internals)](../09_internals/02_process-model.md)
+- [Process Model (internals)](../02_architecture/03_process-model.md)

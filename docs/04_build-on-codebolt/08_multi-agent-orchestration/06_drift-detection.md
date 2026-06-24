@@ -65,7 +65,7 @@ Drift detection works best alongside:
 - **[Guardrails](../09_internals/03_subsystems/09_guardrails-and-eval.md)** — deterministic rules catch hard violations; drift catches soft ones.
 - **[Reputation](./05_stigmergy-and-reputation.md)** — agents with chronic drift lose reputation over time and get assigned less work.
 - **Explicit scope in the task.** A task written as "only touch files under src/auth/" gives the detector something concrete to check against. Vague tasks ("improve the auth code") are harder to drift-check.
-- **[Checkpoints](../09_internals/04_data-flow-walkthroughs/checkpoint-and-rollback.md)** — when drift is detected and the run is rolled back, you already have the state from before the drift started.
+- **[Checkpoints](../02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)** — when drift is detected and the run is rolled back, you already have the state from before the drift started.
 
 ## Pitfalls
 

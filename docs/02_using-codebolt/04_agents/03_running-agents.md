@@ -86,7 +86,7 @@ If the agent is mid-task and you need to add context, send another message in th
 ## Running multiple agents at once
 
 - Different chat threads can use different agents at the same time.
-- Child agents can be spawned from within a larger run. See [Agent run end-to-end](../../04_build-on-codebolt/09_internals/04_data-flow-walkthroughs/agent-run-end-to-end.md).
+- Child agents can be spawned from within a larger run. See [Agent run end-to-end](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/agent-run-end-to-end.md).
 - Swarm-style coordination is covered separately in [Running a swarm](../07_multi-agent-usage/02_running-a-swarm.md).
 
 ## Stopping a running agent

@@ -8,7 +8,7 @@ description: From "something triggered this agent" to "the run row is in the dat
 
 From "something triggered this agent" to "the run row is in the database with status=completed". Every framework-level agent goes through the same lifecycle; understanding it is how you debug agents that "just stop working".
 
-This page is the *author's* view. For the server-side trace of the same lifecycle, see [Agent run end-to-end](../../../09_internals/04_data-flow-walkthroughs/agent-run-end-to-end.md).
+This page is the *author's* view. For the server-side trace of the same lifecycle, see [Agent run end-to-end](../../02_architecture/04_data-flow-walkthroughs/agent-run-end-to-end.md).
 
 ## The stages
 
@@ -90,7 +90,7 @@ Assemble context, call the LLM, parse the response.
 ### Execute
 Run whatever the LLM asked for.
 
-- For each tool call: validate args, run through [guardrails](../../../09_internals/03_subsystems/09_guardrails-and-eval.md) (server-side, you don't do anything), call via `ctx.tools.call`, collect the result.
+- For each tool call: validate args, run through [guardrails](../../09_internals/03_subsystems/09_guardrails-and-eval.md) (server-side, you don't do anything), call via `ctx.tools.call`, collect the result.
 - Run in parallel if the tool calls are independent. `Promise.all` is fine for tools, but not for things with side effects that must be ordered.
 
 ### Reflect
@@ -162,5 +162,5 @@ You'll see exactly which stage the run reached, which phase it was in when it fa
 
 - [agent.yaml](./agent-yaml.md) — what gets loaded in stage 2
 - [Context](./context.md) — the working state during the loop
-- [Agent run end-to-end](../../../09_internals/04_data-flow-walkthroughs/agent-run-end-to-end.md) — the server-side view of the same stages
+- [Agent run end-to-end](../../02_architecture/04_data-flow-walkthroughs/agent-run-end-to-end.md) — the server-side view of the same stages
 - [Testing and debugging](../09_testing-and-debugging.md)

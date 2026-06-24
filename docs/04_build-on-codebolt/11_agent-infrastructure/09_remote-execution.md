@@ -185,5 +185,5 @@ Each provider has its own debug view: `codebolt agent logs <run_id> --source pro
 - [Remote Environments](../08a_multi-environment-orchestration/02_remote-environments/01_overview.md) — remote runtime model
 - [Creating a Custom Provider](../08a_multi-environment-orchestration/03_creating-a-custom-provider.md) — building one
 - [Proxy Execution Gateway](../05_plugins/08_proxy-execution-gateway/01_overview.md) — selective capability proxying
-- [Process Model (internals)](../09_internals/02_process-model.md)
+- [Process Model (internals)](../02_architecture/03_process-model.md)
 - [Self-hosting](./01_overview.md) — often combined with remote execution

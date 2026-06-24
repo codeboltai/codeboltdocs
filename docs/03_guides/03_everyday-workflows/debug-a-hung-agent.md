@@ -148,5 +148,5 @@ If the hang is reproducible, note the steps and context that triggered it. This 
 
 - [Agent Debug](../../02_using-codebolt/05c_agent-observability/02_agent-debug.md)
 - [Running agents](../../02_using-codebolt/04_agents/03_running-agents.md)
-- [Agent run end-to-end (internals)](../../04_build-on-codebolt/09_internals/04_data-flow-walkthroughs/agent-run-end-to-end.md)
-- [Process Model (internals)](../../04_build-on-codebolt/09_internals/02_process-model.md)
+- [Agent run end-to-end (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/agent-run-end-to-end.md)
+- [Process Model (internals)](../../04_build-on-codebolt/02_architecture/03_process-model.md)
