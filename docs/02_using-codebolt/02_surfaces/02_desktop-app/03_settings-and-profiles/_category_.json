@@ -1,6 +1,10 @@
 {
-  "label": "Settings and Profiles",
+  "label": "Settings",
   "position": 3,
+  "link": {
+    "type": "doc",
+    "id": "using-codebolt/surfaces/desktop-app/settings-and-profiles/settings-and-profiles"
+  },
   "collapsible": true,
   "collapsed": true
 }

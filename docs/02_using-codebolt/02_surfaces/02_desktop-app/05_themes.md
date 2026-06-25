@@ -1,75 +1,64 @@
 ---
 sidebar_position: 5
 title: Themes
-description: Visual themes for the desktop app. Ships with several built-ins; custom themes can be installed from the marketplace or written yourself.
+description: Visual themes for the Desktop App. Use Appearance and Theme Editor to select, copy, edit, import, export, and delete themes.
 ---
 
 # Themes
 
-Visual themes for the desktop app. Ships with several built-ins; custom themes can be installed from the marketplace or written yourself.
+Visual themes control the Desktop App colors. Use **Settings -> Appearance** to choose a theme or open the Theme Editor.
 
 ## Built-in themes
 
-- **Dark** (default)
-- **Light**
-- **High contrast**
-- **Solarized dark / light**
-- **Dracula**
-- **Monokai**
+The current Desktop App includes these built-in base themes:
 
-Switch in **Settings → Appearance → Theme**.
+- **Default Dark**
+- **Default Light**
+- **Blue**
 
-## Follow system
+Built-in themes are protected. To customize one, select it in Theme Editor and save a copy.
 
-**Auto** follows your OS light/dark preference. Switches automatically when your system changes.
+## Switching themes
 
-## Installing a custom theme
-
-Browse **Settings → Marketplace → Themes**. Click install. The theme appears in your theme picker.
+Open **Settings -> Appearance** and select a theme. Theme changes apply through the app theme store.
 
 ## Theme Editor
 
-The built-in Theme Editor lets you customise every colour in the UI. Select a base theme to start from, then adjust Base Colors, UI Elements, Text Colors, Editor Colors, Terminal Colors, and Tiptap Editor styles. You can also import, export, and delete custom themes.
+The built-in Theme Editor lets you customize the app's color variables. Select a base theme to start from, then adjust the available color groups. You can also:
+
+- copy a built-in theme into a custom theme
+- update a custom theme
+- import a `.json` theme file
+- export the selected theme
+- delete custom themes
+- reset back to default themes
 
 ![Theme Customization](/productImages/applicationfeatures/Appearance.png)
 
 ## Writing a theme
 
-A theme is a JSON file with colour and style variables:
+A theme is a JSON file with a name, type, and color variables:
 
 ```json
 {
   "name": "my-theme",
   "type": "dark",
   "colors": {
-    "editor.background": "#1a1a2e",
-    "editor.foreground": "#eaeaea",
-    "activityBar.background": "#0f0f1e",
-    "sideBar.background": "#16162a",
-    "tab.activeBackground": "#242442",
-    "statusBar.background": "#0a0a1a",
-    "chat.userMessage.background": "#2a2a4a",
-    "chat.assistantMessage.background": "#1a1a2e"
-  },
-  "tokenColors": [
-    { "scope": "comment", "settings": { "foreground": "#7a7a9a" } },
-    { "scope": "string", "settings": { "foreground": "#a5d6a7" } },
-    { "scope": "keyword", "settings": { "foreground": "#ce93d8" } }
-  ]
+    "editorBackground": "#1a1a2e",
+    "foreground": "#eaeaea",
+    "sideBarBackground": "#16162a",
+    "buttonBackground": "#2a2a4a"
+  }
 }
 ```
 
-Save under `~/.codebolt/themes/my-theme.json` — it appears in the picker immediately.
+Import the JSON file from **Settings -> Appearance -> Theme Editor**.
 
 ## Colour variable reference
 
-The full list of variables is under [Reference → Theme schema](../../../05_reference/01_overview.md). Codebolt uses a VS Code-compatible subset plus chat-specific extensions.
-
-## Publishing a theme
-
-Publish themes through the marketplace or extension workflow that your build exposes. Earlier drafts referenced a standalone theme publish command, but that is not part of the current CLI.
+The Theme Editor shows the editable color variables available in the current Desktop App.
 
 ## See also
 
-- [Settings and Profiles](./03_settings-and-profiles/02_settings-and-profiles.md)
-- [Panels and layout](./02_panels-and-layout/02_panels-and-layout.md)
+- [Settings](./03_settings-and-profiles/02_settings-and-profiles.md)
+- [Panels and layout](./02_panels-and-layout/02_using-panels.md)

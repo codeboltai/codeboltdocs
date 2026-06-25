@@ -1,6 +1,10 @@
 {
   "label": "Panels and Layout",
   "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "using-codebolt/surfaces/desktop-app/panels-and-layout/using-panels"
+  },
   "collapsible": true,
   "collapsed": true
 }

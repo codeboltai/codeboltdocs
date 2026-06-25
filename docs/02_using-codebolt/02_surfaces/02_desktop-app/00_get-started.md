@@ -90,9 +90,9 @@ Click your provider, enter the key or URL, then select an **LLM model** and an *
 
 **Screen: "Review Settings"**
 
-- **Default workspace** — Defaults to your Desktop. Click **Browse** to change. You can always open any folder from any location.
-- **CLI installation** — Click **Install** to add `codebolt` to your PATH. Skip to install later via **Settings → Global Settings → CLI Setup**.
-- **Theme** — Pick light, dark, or system. More themes available in **Settings → Appearance** any time.
+- **Default workspace** - Defaults to your Desktop. Click **Browse** to change. You can always open any folder from any location.
+- **CLI installation** - Click **Install** to add `codebolt` to your PATH. Skip to install later via **Settings -> Global Settings**.
+- **Theme** - Choose the starting app theme. You can change or customize themes later in **Settings -> Appearance**.
 
 ---
 
@@ -100,15 +100,15 @@ Click your provider, enter the key or URL, then select an **LLM model** and an *
 
 **Screen: "Select Default Agent"**
 
-Browse or search the agent grid. Click **Add as Default Agent**. Codebolt installs it and sets it as the default for new projects. You can change this at any time from **Settings → Agents**.
+Browse or search the agent grid. Click **Add as Default Agent**. Codebolt installs it and sets it as the default for new projects. You can change agent-related settings later from **Settings -> Universal Agent**.
 
 ---
 
 ## 6. Open a project
 
-You land on the **project dashboard**. Click **Open Project** and pick any folder — any git repo works, or create a new empty folder for a clean start.
+You land on the **project dashboard**. Click **Open project** and pick any folder, or create a new empty folder for a clean start.
 
-Codebolt indexes the project (file tree, symbols, codemap) in a few seconds, then a chat panel opens.
+Codebolt opens the project in the default development layout with the code editor and chat panels.
 
 ---
 
@@ -126,58 +126,16 @@ The agent reads your existing README, writes the file, and shows you the diff.
 
 ---
 
-## 8. Review and keep — or roll back
+## 8. Review and continue
 
-Every change is checkpointed automatically. Click the **checkpoint badge** at the top of the chat to see the snapshot created before the agent ran. You have three options:
+When an agent makes a change, review the updated files and diffs before you continue. You can:
 
-- **Keep it** — the file stays as written. Commit to git whenever you're ready using the git panel or your own terminal.
-- **Roll back** — click **Rollback**. Every file returns to exactly where it was before the agent ran. Real git history is untouched.
-- **Iterate** — type a follow-up. The agent keeps the full context from the previous turn.
+- **Keep it** - leave the file as written and commit when you are ready.
+- **Edit it** - make manual changes in the code editor.
+- **Iterate** - type a follow-up request in chat.
 
 ---
 
 That's the core loop. Every other feature builds on this.
 
-**Next:** [Desktop App Overview](./01_workspace-and-projects/01_overview.md) · [Chat](../../03_chat/01_overview.md) · [Agents](../../04_agents/01_what-is-an-agent.md)
-
----
-
-## Updating
-
-The desktop app updates automatically. Check **Settings → Updates** to choose the channel (`stable` / `beta` / `nightly`).
-
----
-
-## Uninstalling
-
-Uninstall removes binaries only — **projects and data are not deleted** by default.
-
-| OS | How to uninstall |
-|---|---|
-| Windows | Settings → Apps → Codebolt → Uninstall |
-| macOS | Drag to Trash or `brew uninstall --cask codebolt` |
-| Linux | `sudo apt remove codebolt` or `flatpak uninstall …` |
-
-To **remove all data** (chat history, settings, runs — irreversible):
-
-```bash
-# Linux
-rm -rf ~/.config/CodeBolt
-# macOS
-rm -rf ~/Library/Application\ Support/CodeBolt
-# Windows (PowerShell)
-Remove-Item -Recurse -Force $env:APPDATA\CodeBolt
-```
-
----
-
-## Troubleshooting
-
-| Symptom | Fix |
-|---|---|
-| Port in use on startup | Change port in **Settings → Server** |
-| Permission error on Windows | Run installer as administrator once |
-| Missing build tools on Linux | Install `build-essential` (Debian) or `gcc make` (Fedora) |
-| Rosetta 2 required on macOS | Download the `arm64` build instead of `x64` |
-| Antivirus blocking on Windows | Whitelist `Codebolt.exe` — Electron apps are commonly flagged |
-| `glibc` version error on Linux | Upgrade to Ubuntu 20.04+ or use the Docker install |
+**Next:** [Workspace and Projects](./01_workspace-and-projects/02_workspace-and-projects.md) · [Chat](../../03_chat/01_overview.md) · [Agents](../../04_agents/01_what-is-an-agent.md)

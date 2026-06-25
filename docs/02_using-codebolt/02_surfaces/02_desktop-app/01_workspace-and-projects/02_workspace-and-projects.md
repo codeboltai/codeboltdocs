@@ -1,119 +1,63 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 sidebar_label: Working with Projects
 title: Workspace and Projects
-description: "The two durable containers for your work in Codebolt. Every chat, every agent run, every file edit lives inside one of them."
+description: "Use workspaces to group projects, then open a project folder to start working in the Desktop App."
 ---
 
 # Workspace and Projects
 
-The two durable containers for your work in Codebolt. Every chat, every agent run, every file edit lives inside one of them.
+Workspaces group related projects. A project is a folder you open from the Desktop App so Codebolt can show the code editor, chat, and other project tools for that codebase.
 
 ## The distinction
 
 | Concept | What it is | Scope |
 |---|---|---|
-| **Workspace** | A top-level container for related projects, settings, agents, and integrations | Per-user |
-| **Project** | A single codebase (usually a git repo) you're working on | Inside a workspace |
+| **Workspace** | A top-level container for related projects | Per-user |
+| **Project** | A folder or codebase you open in Codebolt | Inside a workspace |
 
 Most people have one workspace and many projects inside it. Teams with several unrelated bodies of work may have multiple workspaces, one per domain.
 
-## What a project contains (from Codebolt's view)
+## Project dashboard
 
-When you open a folder as a project, Codebolt sets up:
+After sign-in and onboarding, returning users land on the project dashboard. From there you can:
 
-1. **The project structure index** — a live tree of files, updated as you edit.
-2. **The codebase index** — semantic index of symbols, imports, calls. Powers "find definition" and codebase search.
-3. **The codemap** — a compressed architectural summary that gets injected into agent context. Auto-rebuilt.
-4. **A shadow git repo** in `.codebolt/shadow-git/` — parallel history used for checkpoints and rollback. Your real `.git` is untouched.
-5. **A project-local config directory** in `.codebolt/` — for local agents, flows, hooks, context rules.
-6. **A database row** tracking the project's state in the Codebolt DB.
-
-Indexing takes seconds to a minute depending on project size. You can start chatting before it's done.
+- open a project folder
+- create a quick project
+- create a project from a template
+- switch between recent and workspace project lists
+- switch between local and cloud workspaces when those options are available
 
 ## Opening a project
 
-Three ways:
+Click **Open project** and choose a folder. Codebolt creates or activates the project record, then opens the project in the development layout.
 
-- **From the project panel** — click "Open project" and pick a folder.
-- **From the command line** — `cd /path/to/project && codebolt`.
-- **Drag-and-drop** — drop a folder onto the app.
+When a project opens, the default layout starts with the **Code** and **Chat** panels. Open more panels from the panel picker when you need terminal, git, preview, environment, settings, or debugging tools.
 
-Projects remember their last state: open files, active chat tab, checkpoints. Reopening a project should feel like resuming, not starting fresh.
+## Recent and workspace projects
 
-## Project-local configuration
+The dashboard has project lists for recent projects and workspace projects. Click a project row to set it active and open it.
 
-Anything project-specific lives in `.codebolt/`:
+If you use cloud workspaces, the dashboard can show available cloud workspaces and the projects inside them.
 
-```
-.codebolt/
-├── agents/              ← project-local custom agents
-├── flows/               ← agent flows
-├── hooks/               ← project-scoped hooks
-├── context-rules/       ← context assembly rules
-├── settings.yaml        ← per-project settings override
-└── shadow-git/          ← do not edit; managed by the server
-```
+## Creating projects
 
-Everything in `.codebolt/` except `shadow-git/` should be committed to your real git. That's how project-specific agents, hooks, and rules travel with the codebase.
+Use **Quick Create** for a fast new project flow, or **Create via Template** when you want to start from a template.
 
-Add `.codebolt/shadow-git/` to your `.gitignore` — it's huge and not useful outside the server that created it.
+## Removing a project from the dashboard
 
-## Settings hierarchy
+The dashboard includes project actions for removing project entries from Codebolt. Removing a project entry from the dashboard is different from deleting your source folder.
 
-Settings are layered in order of precedence (highest wins):
+## Workspace selection
 
-1. **Project** (`.codebolt/settings.yaml`)
-2. **Workspace**
-3. **User** (`~/.codebolt/settings.yaml`)
-4. **Server** (only if self-hosting)
+The onboarding flow sets a default workspace location. The project dashboard can also show local and cloud workspace selectors when those are available for your account.
 
-If the same setting appears at multiple levels, the highest-precedence layer wins. This is what lets one user work on two projects with different providers, limits, or guardrails without constantly reconfiguring.
+## Command line opening
 
-## Multiple projects at once
-
-You can have multiple projects open in tabs. Each has its own:
-- File tree
-- Chat tabs
-- Active agent runs
-- Checkpoint history
-
-Agents in one project don't see anything in another. This is both a safety property (a code-review agent in project A can't accidentally read project B's secrets) and a simple mental model.
-
-**Memory is per-project by default.** Persistent memory, the knowledge graph, and the vector DB are scoped to the project they were written from. Cross-project memory is possible but requires explicit opt-in.
-
-## Closing a project
-
-Closing a project:
-- Stops any agents still running in it.
-- Flushes the event log.
-- Persists the project state.
-- Does **not** delete anything — you can reopen it any time.
-
-To genuinely remove a project from Codebolt, use **Settings → Projects → Remove**. That removes the project row from the DB and (optionally) deletes `.codebolt/` from disk. Your real codebase is untouched.
-
-## Moving or renaming a project
-
-If you move the project folder on disk:
-
-1. Codebolt's "recent projects" list still points at the old path and will fail to open.
-2. Open the project at its new path — Codebolt will detect that it's the same project (via a stable ID in `.codebolt/`) and offer to update its records.
-3. Confirm, and history is preserved.
-
-If you skip step 3 and open at the new path as a new project, you'll have two rows pointing at the same codebase with split history. Merging them is manual.
-
-## Multi-root workspaces
-
-Not supported. Codebolt expects one project = one root folder. If you need to work across several repos simultaneously, either:
-
-- Open multiple projects in tabs (simple, no shared state).
-- Use a meta-repo that contains the others as submodules (complex, but shared indexing works).
-
-Cross-project orchestration lives in the roadmap, not shipped.
+If the CLI is installed, Codebolt can open a folder passed from the command line. Use **Settings -> Global Settings** to install or check the CLI setup.
 
 ## See also
 
-- [Panels and layout](../02_panels-and-layout/01_overview.md)
-- [Settings and profiles](../03_settings-and-profiles/01_overview.md)
-- [Project & Workspace internals](../../../../04_build-on-codebolt/07b_subsystems/10_project-and-workspace.md)
-- [Checkpoints](../../../03_chat/04_checkpoints-and-rollback.md)
+- [Panels and layout](../02_panels-and-layout/02_using-panels.md)
+- [Settings](../03_settings-and-profiles/02_settings-and-profiles.md)
+- [Environments](../04_environments/02_environments.md)

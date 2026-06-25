@@ -1,106 +1,59 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 sidebar_label: Managing Settings
-title: Settings and Profiles
-description: "Settings are layered across scopes. Profiles let you switch between pre-configured sets of settings quickly."
+title: Settings
+description: "Use the Desktop App Settings panel to configure models, agents, editor behavior, appearance, environments, MCP servers, and related app options."
 ---
 
-# Settings and Profiles
+# Settings
 
-Settings are layered across scopes. Profiles let you switch between pre-configured sets of settings quickly.
+Open **Settings** from the top navigation, the bottom launcher bar, or the new panel picker. The Settings panel is organized into sections for models, providers, agents, editor behavior, appearance, environments, MCP servers, and related app options.
 
-## The four scopes
+## Settings sections
 
-Settings resolve in this order (highest wins):
-
-1. **Project** — `.codebolt/settings.yaml` in the project root
-2. **Workspace** — your workspace-level preferences
-3. **User** — your per-user defaults
-4. **Server** — admin-set defaults on self-hosted instances
-
-When the same setting is defined at multiple scopes, the higher one wins. This lets you have user defaults for everything, workspace overrides for certain projects, and project overrides for one-off specifics.
-
-**Settings → Preferences** shows the merged view and marks where each value comes from.
-
-## What's in settings
-
-| Area | Examples |
+| Section | Use it for |
 |---|---|
-| **Appearance** | Theme, font size, panel layout |
-| **Editor** | Tab size, word wrap, auto-save, format-on-save |
-| **Chat** | Default agent, default model, compression thresholds |
-| **Agents** | Default tool allowlist, default limits |
-| **Providers** | API keys, endpoints, fallback chains |
-| **Guardrails** | Workspace-level rules |
-| **Indexing** | What to include/exclude, codemap budget |
-| **Memory** | Ingestion policy, retention |
-| **Updates** | Channel, auto-update behaviour |
-| **Telemetry** | Opt in/out |
-| **Keyboard** | Shortcuts and bindings |
+| **Default Settings** | Select the default application LLM and embedding model. |
+| **LLMs** | Manage language model providers and model configuration. |
+| **Web Search** | Configure web search provider behavior. |
+| **LLM Role** | Configure model roles used by the app. |
+| **Universal Agent** | Configure the default or universal agent behavior. |
+| **Code Editor Setting** | Configure editor behavior. |
+| **Global Settings** | Configure global app options, including CLI setup and background color. |
+| **Agent Steps** | Configure agent step behavior. |
+| **Environment and Services** | Configure environment-related services. |
+| **Language Server Protocol** | Configure LSP behavior. |
+| **MCP Servers** | Manage MCP servers. |
+| **Pheromones** | Configure pheromone-related app behavior. |
+| **Appearance** | Customize themes and theme colors. |
+| **Environment Provider** | Manage environment providers. |
+| **Merge Config** | Configure merge behavior. |
+| **Flags** | Toggle app flags. |
 
-## Profiles
+## Default models
 
-A **profile** is a named set of settings you can switch between. Use cases:
+Use **Default Settings** to choose the app's default LLM and embedding model. These are the defaults the app uses when a workflow does not specify a different model.
 
-- **Personal vs work.** Different providers, different themes, different default agents.
-- **High privacy mode.** All local models, no telemetry, aggressive redaction hooks.
-- **Demo mode.** Read-only tools, safe defaults, no external calls.
+## CLI setup
 
-Create a profile: **Settings → Profiles → New profile** → name it → save current settings to it.
+Use **Global Settings** for CLI setup. The CLI setup control can install or check the `codebolt` command line entrypoint.
 
-Switch profiles: **Settings → Profiles → Activate** or command palette `Switch profile`.
+## Appearance
 
-Profiles apply at the **user** scope. Project and workspace settings still override the profile.
+Use **Appearance** to select and customize themes. The Theme Editor lets you copy a built-in theme, edit color variables, import a theme JSON file, export a selected theme, delete custom themes, or reset back to defaults.
 
-## Where settings live on disk
+See [Themes](../05_themes.md) for the theme workflow.
 
-- **User:** `~/.codebolt/settings.yaml`
-- **Workspace:** `~/.codebolt/workspaces/<workspace-id>/settings.yaml`
-- **Project:** `<project>/.codebolt/settings.yaml`
-- **Server:** `/etc/codebolt/codebolt-server.yaml`
+## Environments and providers
 
-Commit the project file to git so teammates share it. User and workspace files are per-machine.
+Use **Environment and Services** and **Environment Provider** for environment-related configuration. Use the dedicated [Environments](../04_environments/02_environments.md) section for the runtime tree and lifecycle actions.
 
-## Example settings.yaml
+## MCP servers
 
-```yaml
-appearance:
-  theme: dark
-  font_size: 14
-
-chat:
-  default_agent: generalist
-  default_model: claude-sonnet-4-6
-  compression:
-    threshold: 0.8
-
-agents:
-  default_limits:
-    max_tool_calls: 100
-    max_tokens: 200000
-    max_cost_usd: 5.00
-
-indexing:
-  exclude:
-    - "node_modules"
-    - "dist"
-    - ".next"
-    - "generated"
-  codemap_budget_tokens: 3000
-
-memory:
-  ingestion:
-    enabled: true
-    persistent_from_vector: top_k_5
-  retention_days: 365
-```
-
-## Reset to defaults
-
-**Settings → Reset** restores all settings at the current scope to defaults. Does not affect other scopes. Does not delete data (projects, memory, history).
+Use **MCP Servers** to manage Model Context Protocol servers available to the app.
 
 ## See also
 
-- [Workspace and Projects](../01_workspace-and-projects/01_overview.md)
-- [Environments](../04_environments/01_overview.md)
+- [Workspace and Projects](../01_workspace-and-projects/02_workspace-and-projects.md)
+- [Environments](../04_environments/02_environments.md)
 - [Themes](../05_themes.md)

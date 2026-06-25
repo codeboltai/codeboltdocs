@@ -1,6 +1,10 @@
 {
   "label": "Workspace and Projects",
   "position": 1,
+  "link": {
+    "type": "doc",
+    "id": "using-codebolt/surfaces/desktop-app/workspace-and-projects/workspace-and-projects"
+  },
   "collapsible": true,
   "collapsed": true
 }
