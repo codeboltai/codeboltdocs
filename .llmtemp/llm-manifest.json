@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-24T11:27:44.429Z",
-  "sourceCount": 391,
-  "curatedCount": 65,
+  "generatedAt": "2026-06-25T05:31:22.118Z",
+  "sourceCount": 389,
+  "curatedCount": 62,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 177,
+      "count": 173,
       "order": 1,
       "files": [
         {
@@ -28,32 +28,16 @@
           "title": "Get Started"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects/overview.md",
-          "title": "Workspace and Projects Overview"
-        },
-        {
           "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects/workspace-and-projects.md",
           "title": "Workspace and Projects"
-        },
-        {
-          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout/overview.md",
-          "title": "Panels and Layout Overview"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/panels-and-layout/using-panels.md",
           "title": "Panels and Layout"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/settings-and-profiles/overview.md",
-          "title": "Settings and Profiles Overview"
-        },
-        {
           "path": "using-codebolt/surfaces/desktop-app/settings-and-profiles/settings-and-profiles.md",
-          "title": "Settings and Profiles"
-        },
-        {
-          "path": "using-codebolt/surfaces/desktop-app/environments/overview.md",
-          "title": "Environments Overview"
+          "title": "Settings"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/environments/environments.md",
@@ -806,7 +790,7 @@
     },
     {
       "heading": "Guides",
-      "count": 24,
+      "count": 25,
       "order": 3,
       "files": [
         {
@@ -832,6 +816,10 @@
         {
           "path": "guides/first-steps/set-up-git-integration.md",
           "title": "Set Up Git Integration"
+        },
+        {
+          "path": "guides/loops-and-deposition-engineering/overview.md",
+          "title": "Overview"
         },
         {
           "path": "guides/everyday-workflows/bulk-refactor-with-checkpoints.md",
@@ -909,7 +897,7 @@
     },
     {
       "heading": "Build on Codebolt",
-      "count": 158,
+      "count": 159,
       "order": 4,
       "files": [
         {
@@ -917,8 +905,32 @@
           "title": "Build on Codebolt"
         },
         {
-          "path": "build-on-codebolt/architecture-for-builders.md",
+          "path": "build-on-codebolt/architecture/architecture-for-builders.md",
           "title": "Architecture for Builders"
+        },
+        {
+          "path": "build-on-codebolt/architecture/architecture-overview.md",
+          "title": "Architecture Overview"
+        },
+        {
+          "path": "build-on-codebolt/architecture/process-model.md",
+          "title": "Process Model"
+        },
+        {
+          "path": "build-on-codebolt/architecture/data-flow-walkthroughs/agent-run-end-to-end.md",
+          "title": "Agent run end-to-end"
+        },
+        {
+          "path": "build-on-codebolt/architecture/data-flow-walkthroughs/chat-message-end-to-end.md",
+          "title": "Chat message end-to-end"
+        },
+        {
+          "path": "build-on-codebolt/architecture/data-flow-walkthroughs/checkpoint-and-rollback.md",
+          "title": "Checkpoint and rollback"
+        },
+        {
+          "path": "build-on-codebolt/architecture/data-flow-walkthroughs/tool-call-end-to-end.md",
+          "title": "Tool call end-to-end"
         },
         {
           "path": "build-on-codebolt/creating-agents/overview.md",
@@ -1313,6 +1325,54 @@
           "title": "Optimization Patterns"
         },
         {
+          "path": "build-on-codebolt/subsystems/agent-subsystem.md",
+          "title": "Agent Subsystem"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/mcp-and-tools.md",
+          "title": "MCP & Tools"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/llm-and-inference.md",
+          "title": "LLM & Inference"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/memory.md",
+          "title": "Memory"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/knowledge-and-vector.md",
+          "title": "Knowledge & Vector"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/narrative-engine.md",
+          "title": "Narrative Engine"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/context-assembly.md",
+          "title": "Context Assembly"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/planning-hierarchy.md",
+          "title": "Planning Hierarchy"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/guardrails-and-eval.md",
+          "title": "Guardrails & Eval"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/project-and-workspace.md",
+          "title": "Project & Workspace"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/communication.md",
+          "title": "Communication"
+        },
+        {
+          "path": "build-on-codebolt/subsystems/persistence-and-eventlog.md",
+          "title": "Persistence & Event Log"
+        },
+        {
           "path": "build-on-codebolt/multi-agent-orchestration/overview.md",
           "title": "Multi-Agent Orchestration"
         },
@@ -1393,76 +1453,8 @@
           "title": "Creating a Custom Provider"
         },
         {
-          "path": "build-on-codebolt/internals/architecture-overview.md",
-          "title": "Architecture Overview"
-        },
-        {
-          "path": "build-on-codebolt/internals/process-model.md",
-          "title": "Process Model"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/agent-subsystem.md",
-          "title": "Agent Subsystem"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/mcp-and-tools.md",
-          "title": "MCP & Tools"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/llm-and-inference.md",
-          "title": "LLM & Inference"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/memory.md",
-          "title": "Memory"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/knowledge-and-vector.md",
-          "title": "Knowledge & Vector"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/narrative-engine.md",
-          "title": "Narrative Engine"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/context-assembly.md",
-          "title": "Context Assembly"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/planning-hierarchy.md",
-          "title": "Planning Hierarchy"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/guardrails-and-eval.md",
-          "title": "Guardrails & Eval"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/project-and-workspace.md",
-          "title": "Project & Workspace"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/communication.md",
-          "title": "Communication"
-        },
-        {
-          "path": "build-on-codebolt/internals/subsystems/persistence-and-eventlog.md",
-          "title": "Persistence & Event Log"
-        },
-        {
-          "path": "build-on-codebolt/internals/data-flow-walkthroughs/agent-run-end-to-end.md",
-          "title": "Agent run end-to-end"
-        },
-        {
-          "path": "build-on-codebolt/internals/data-flow-walkthroughs/chat-message-end-to-end.md",
-          "title": "Chat message end-to-end"
-        },
-        {
-          "path": "build-on-codebolt/internals/data-flow-walkthroughs/checkpoint-and-rollback.md",
-          "title": "Checkpoint and rollback"
-        },
-        {
-          "path": "build-on-codebolt/internals/data-flow-walkthroughs/tool-call-end-to-end.md",
-          "title": "Tool call end-to-end"
+          "path": "build-on-codebolt/cloud/intro-to-cloud.md",
+          "title": "Intro to Cloud"
         },
         {
           "path": "build-on-codebolt/building-integrations/overview.md",
