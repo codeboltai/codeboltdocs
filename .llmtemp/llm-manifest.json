@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-25T05:31:22.118Z",
-  "sourceCount": 389,
-  "curatedCount": 62,
+  "generatedAt": "2026-06-25T05:48:12.614Z",
+  "sourceCount": 393,
+  "curatedCount": 61,
   "sections": [
     {
       "heading": "Start Here",
@@ -790,7 +790,7 @@
     },
     {
       "heading": "Guides",
-      "count": 25,
+      "count": 29,
       "order": 3,
       "files": [
         {
@@ -818,8 +818,24 @@
           "title": "Set Up Git Integration"
         },
         {
-          "path": "guides/loops-and-deposition-engineering/overview.md",
-          "title": "Overview"
+          "path": "guides/loops-and-deposition-engineering/custom-depositions.md",
+          "title": "Custom Depositions"
+        },
+        {
+          "path": "guides/loops-and-deposition-engineering/deposition-framework.md",
+          "title": "Deposition Framework"
+        },
+        {
+          "path": "guides/loops-and-deposition-engineering/multi-environment-loop.md",
+          "title": "Multi Environment Loop"
+        },
+        {
+          "path": "guides/loops-and-deposition-engineering/multiagent-loops.md",
+          "title": "MultiAgent Loops"
+        },
+        {
+          "path": "guides/loops-and-deposition-engineering/single-agent-loop.md",
+          "title": "Single Agent Loop"
         },
         {
           "path": "guides/everyday-workflows/bulk-refactor-with-checkpoints.md",
