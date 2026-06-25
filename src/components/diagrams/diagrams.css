@@ -3314,6 +3314,25 @@
   border-color: rgba(200, 207, 199, 0.16);
 }
 
+.cb-sawl-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.cb-sawl-image--dark {
+  display: none;
+}
+
+[data-theme='dark'] .cb-sawl-image--light {
+  display: none;
+}
+
+[data-theme='dark'] .cb-sawl-image--dark {
+  display: block;
+}
+
 .cb-sawl-kicker,
 .cb-sawl-lane-label,
 .cb-sawl-lane-copy,

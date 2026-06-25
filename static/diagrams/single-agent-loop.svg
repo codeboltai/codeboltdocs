@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1407" height="504" viewBox="0 0 1407 504">
+<defs><filter id="cardShadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0a0f19" flood-opacity="0.22"/></filter></defs>
+<rect x="30" y="30" width="951.27" height="338" rx="12" ry="12" fill="#0C1117" stroke="#222C38" stroke-width="1"/>
+<text x="62" y="59" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">1</text>
+<text x="76" y="59" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">codebolt.onMessage(async (reqMessage: FlatUserMessage) =&gt; {</text>
+<text x="62" y="87" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">2</text>
+<text x="76" y="87" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">  const agent = createCodeboltAgent({</text>
+<text x="62" y="115" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">3</text>
+<text x="76" y="115" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">     systemPrompt:"You are a careful coding agent. Inspect, edit, verify, and summarize." </text>
+<text x="62" y="143" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">4</text>
+<text x="76" y="143" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">   });</text>
+<text x="62" y="171" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">5</text>
+<text x="76" y="171" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">  let nextMessage= reqMessage, testResult='fail';</text>
+<rect x="31" y="185" width="949.27" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="199" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">6</text>
+<text x="76" y="199" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">  while (testResult=='fail') {</text>
+<rect x="31" y="213" width="949.27" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="227" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">7</text>
+<text x="76" y="227" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">    const result = await agent.processMessage(nextMessage);</text>
+<rect x="31" y="241" width="949.27" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="255" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">8</text>
+<text x="76" y="255" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">    const testResult = testOutput(finalMessage);</text>
+<rect x="31" y="269" width="949.27" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="283" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">9</text>
+<text x="76" y="283" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">    nextMessage = 'The previous output failed verification: ' + testResult.feedback+ ' Fix it and try again.';</text>
+<text x="62" y="311" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">10</text>
+<text x="76" y="311" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">  }</text>
+<text x="62" y="339" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">11</text>
+<text x="76" y="339" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central" xml:space="preserve">});</text>
+<rect x="991" y="188" width="3" height="22" rx="1.5" ry="1.5" fill="#2dd4bf"/>
+<rect x="991" y="216" width="3" height="22" rx="1.5" ry="1.5" fill="#2dd4bf"/>
+<rect x="991" y="244" width="3" height="22" rx="1.5" ry="1.5" fill="#2dd4bf"/>
+<rect x="991" y="272" width="3" height="22" rx="1.5" ry="1.5" fill="#2dd4bf"/>
+<path d="M 994 199 C 1013.47 199, 1011.27 199, 1037.27 199" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5" opacity="0.95"/>
+<path d="M 994 227 C 1013.47 227, 1011.27 287, 1037.27 287" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5" opacity="0.95"/>
+<path d="M 994 255 C 1013.47 255, 1011.27 365, 1037.27 365" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5" opacity="0.95"/>
+<path d="M 994 283 C 1013.47 283, 1011.27 443, 1037.27 443" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5" opacity="0.95"/>
+<circle cx="1037.2734375" cy="199" r="3" fill="#2dd4bf"/>
+<circle cx="1037.2734375" cy="287" r="3" fill="#2dd4bf"/>
+<circle cx="1037.2734375" cy="365" r="3" fill="#2dd4bf"/>
+<circle cx="1037.2734375" cy="443" r="3" fill="#2dd4bf"/>
+<g filter="url(#cardShadow)"><rect x="1037.27" y="158" width="340" height="82" rx="11" ry="11" fill="#141C26" stroke="#28323E" stroke-width="1"/></g>
+<rect x="1037.27" y="158" width="4" height="82" fill="#2dd4bf"/>
+<text x="1053.27" y="175.75" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" dominant-baseline="central" letter-spacing="0.6">LINE 6</text>
+<text x="1053.27" y="196.5" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" dominant-baseline="central">This is the LOOP that keeps on running until</text>
+<text x="1053.27" y="216.75" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" dominant-baseline="central">there is no issue</text>
+<g filter="url(#cardShadow)"><rect x="1037.27" y="256" width="340" height="61.75" rx="11" ry="11" fill="#141C26" stroke="#28323E" stroke-width="1"/></g>
+<rect x="1037.27" y="256" width="4" height="61.75" fill="#2dd4bf"/>
+<text x="1053.27" y="273.75" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" dominant-baseline="central" letter-spacing="0.6">LINE 7</text>
+<text x="1053.27" y="294.5" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" dominant-baseline="central">This is running the user request</text>
+<g filter="url(#cardShadow)"><rect x="1037.27" y="334" width="340" height="61.75" rx="11" ry="11" fill="#141C26" stroke="#28323E" stroke-width="1"/></g>
+<rect x="1037.27" y="334" width="4" height="61.75" fill="#2dd4bf"/>
+<text x="1053.27" y="351.75" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" dominant-baseline="central" letter-spacing="0.6">LINE 8</text>
+<text x="1053.27" y="372.5" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" dominant-baseline="central">Test Step</text>
+<g filter="url(#cardShadow)"><rect x="1037.27" y="412" width="340" height="61.75" rx="11" ry="11" fill="#141C26" stroke="#28323E" stroke-width="1"/></g>
+<rect x="1037.27" y="412" width="4" height="61.75" fill="#2dd4bf"/>
+<text x="1053.27" y="429.75" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" dominant-baseline="central" letter-spacing="0.6">LINE 9</text>
+<text x="1053.27" y="450.5" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" dominant-baseline="central">Sending the test result back to the agent</text>
+</svg>
