@@ -13,24 +13,9 @@ A single agent loop is the simplest reliable way to use Codebolt for iterative w
 
 **Use case:** you want one agent to complete a scoped task without coordinating with other agents or environments.
 
-## How the loop runs
-
-In the `act-updated` agent, the loop starts when Codebolt receives a user message and passes it into `CodeboltAgent.processMessage`. The agent does not act on the raw prompt alone. It first assembles a structured working prompt from chat history, project context, IDE context, selected capabilities, system instructions, tools, and `@file` references.
-
-After that, the agent repeatedly alternates between model reasoning and tool execution. Each turn may produce a direct response, a tool call, or a completion response. Tool results are fed back into the next prompt so the agent can refine its next action.
 
 <SingleAgentLoop />
 
-## Runtime stages
-
-1. **Receive the task.** `codebolt.onMessage` receives the `FlatUserMessage` and starts a single `CodeboltAgent` instance for that request.
-2. **Assemble context.** Message modifiers add chat history, capability context, environment details, directory structure, IDE state, system instructions, tool definitions, and `@file` content.
-3. **Inject live events.** Pending steering messages, agent queue events, and background agent completion events are inserted into the prompt before inference.
-4. **Reason and choose an action.** The model either responds directly or selects a tool from the injected tool set.
-5. **Run tools and observe results.** Tool outputs are returned to the agent as new context for the next turn.
-6. **Re-check live events after tools.** The agent checks for new steering or background completion events after tool execution so it can adjust mid-loop.
-7. **Prevent runaway behavior.** `LoopDetectionService` watches repeated behavior, and `maxTurns: 30` caps the loop.
-8. **Return the final message.** When the task is complete, blocked, or stopped by safety controls, the agent returns the final response to Codebolt.
 
 ## Basic code structure
 
@@ -52,13 +37,13 @@ codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
 
 <SingleAgentWhileLoop />
 
-## Testing the loop
-
 There are two common ways to tell a single-agent loop how to verify its work.
 
 ### Option 1: Using a prompt
 
-For one-off tasks, put the task and the verification instructions in the same prompt. The agent receives both the goal and the checks it should use before finishing.
+For one-off tasks, put the task and the verification instructions in the user message. You do not need to update the agent `systemPrompt`; the prompt itself carries both the goal and the checks the agent should use before finishing.
+
+The agent can pass the received `reqMessage` directly into `processMessage`. The user prompt itself includes the task and the verification rules:
 
 ```text
 Write a TypeScript function named isEven(value: number): boolean.
