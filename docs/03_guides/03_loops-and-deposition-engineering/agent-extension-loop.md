@@ -4,6 +4,8 @@ title: Agent Extension Loop
 description: Extend an agent with tools, MCP, message modifiers, and processors
 ---
 
+import AgentExtensionLoopDiagram from '@site/src/components/diagrams/AgentExtensionLoopDiagram';
+
 # Agent Extension Loop
 
 An agent extension loop is how you improve an existing agent without rebuilding it from scratch.
@@ -11,6 +13,8 @@ An agent extension loop is how you improve an existing agent without rebuilding 
 Start with a working agent, add one focused extension, test it, and refine until the agent handles the new workflow reliably.
 
 **Use case:** your agent already works, but it needs one more capability such as a domain-specific tool, a shared MCP tool, better prompt context, or validation around tool calls.
+
+<AgentExtensionLoopDiagram />
 
 ## What you can add
 

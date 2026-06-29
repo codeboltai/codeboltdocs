@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1407" height="504" viewBox="0 0 1407 504">
+<defs><filter id="cardShadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0a0f19" flood-opacity="0.22"/></filter></defs>
+<rect x="30" y="30" width="951" height="338" rx="12" fill="#0C1117" stroke="#222C38"/>
+<text x="62" y="59" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">1</text>
+<text x="76" y="59" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">const uiDeposition = {</text>
+<rect x="31" y="73" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="87" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">2</text>
+<text x="76" y="87" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  pluginId: 'release-panel',</text>
+<rect x="31" y="101" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="115" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">3</text>
+<text x="76" y="115" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  uiSurface: 'release-approval',</text>
+<text x="62" y="143" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">4</text>
+<text x="76" y="143" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  selectedRecordId: 'release-2026-06-26',</text>
+<rect x="31" y="157" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="171" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">5</text>
+<text x="76" y="171" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  toolResults: {</text>
+<text x="62" y="199" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">6</text>
+<text x="76" y="199" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">    checklistStatus: 'passed',</text>
+<text x="62" y="227" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">7</text>
+<text x="76" y="227" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">    previewThreadId: 'thread-preview-123',</text>
+<text x="62" y="255" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">8</text>
+<text x="76" y="255" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  },</text>
+<rect x="31" y="269" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="283" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">9</text>
+<text x="76" y="283" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  interactionResult: 'approved-for-staging',</text>
+<rect x="31" y="297" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="311" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">10</text>
+<text x="76" y="311" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  nextAction: 'Start staging validation agent.',</text>
+<text x="62" y="339" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">11</text>
+<text x="76" y="339" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">};</text>
+<path d="M994 87 C1014 87,1011 101,1037 101" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+<path d="M994 171 C1014 171,1011 211,1037 211" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+<path d="M994 283 C1014 283,1011 311,1037 311" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+<path d="M994 311 C1014 311,1011 413,1037 413" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+<g filter="url(#cardShadow)"><rect x="1037" y="60" width="340" height="82" rx="11" fill="#141C26" stroke="#28323E"/></g>
+<rect x="1037" y="60" width="4" height="82" fill="#2dd4bf"/>
+<text x="1053" y="78" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINES 2-3</text>
+<text x="1053" y="100" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Plugin and UI surface tell Codebolt</text>
+<text x="1053" y="122" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">where this deposition belongs.</text>
+<g filter="url(#cardShadow)"><rect x="1037" y="180" width="340" height="72" rx="11" fill="#141C26" stroke="#28323E"/></g>
+<rect x="1037" y="180" width="4" height="72" fill="#2dd4bf"/>
+<text x="1053" y="198" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINES 5-8</text>
+<text x="1053" y="220" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Dedicated UI tools deposit their</text>
+<text x="1053" y="242" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">outputs instead of rerunning later.</text>
+<g filter="url(#cardShadow)"><rect x="1037" y="280" width="340" height="62" rx="11" fill="#141C26" stroke="#28323E"/></g>
+<rect x="1037" y="280" width="4" height="62" fill="#2dd4bf"/>
+<text x="1053" y="298" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINE 9</text>
+<text x="1053" y="320" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Record the user's or agent's choice.</text>
+<g filter="url(#cardShadow)"><rect x="1037" y="382" width="340" height="62" rx="11" fill="#141C26" stroke="#28323E"/></g>
+<rect x="1037" y="382" width="4" height="62" fill="#2dd4bf"/>
+<text x="1053" y="400" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINE 10</text>
+<text x="1053" y="422" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Next action makes the pickup step</text>
+<text x="1053" y="444" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">explicit for another agent or UI.</text>
+</svg>

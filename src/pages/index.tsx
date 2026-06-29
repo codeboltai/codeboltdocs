@@ -11,13 +11,13 @@ const sections = [
     label: 'START',
     title: 'Getting Started',
     description: 'Install Codebolt, run your first agent, and learn the lay of the land.',
-    link: '/docs/using-codebolt/what-is-codebolt',
+    link: '/docs/get-started/what-is-codebolt',
   },
   {
     label: 'USE',
     title: 'Using Codebolt',
     description: 'Day-to-day product reference — surfaces, chat, agents, tools, integrations.',
-    link: '/docs/using-codebolt/overview',
+    link: '/docs/using-codebolt/surfaces/overview',
   },
   {
     label: 'LEARN',
@@ -79,7 +79,7 @@ export default function Home(): JSX.Element {
               Everything you need to build, customize, and deploy AI&#8209;powered coding agents.
             </p>
             <div className={styles.buttons}>
-              <Link className={styles.btnPrimary} to="/docs/getting-started/what-is-codebolt">
+              <Link className={styles.btnPrimary} to="/docs/get-started/quickstart">
                 Get Started
                 <svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M0 6H12M9 3l3 3-3 3" />

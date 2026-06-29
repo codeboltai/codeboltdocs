@@ -4,11 +4,15 @@ title: Multi Environment Loop
 description: Validate agent work by starting threads across local, preview, staging, and remote environments
 ---
 
+import MultiEnvironmentLoopDiagram from '@site/src/components/diagrams/MultiEnvironmentLoopDiagram';
+
 # Multi Environment Loop
 
 A multi environment loop moves agent work through more than one runtime context. The main agent can work locally, then start a new thread in another environment to validate the same task in isolation.
 
 **Use case:** the task depends on environment-specific configuration, data, integrations, or deployment behavior.
+
+
 
 ## The loop
 
@@ -45,7 +49,7 @@ await codebolt.thread.createThreadInBackground({
   parentId: currentThreadId,
   groupId: 'integration-checks',
   remoteEnv: true,
-  environmentProvider: { id: 'sandbox' },
+  environmentProvider: { id: 'e2b-sandbox' },
   environmentName: 'integration-sandbox',
 });
 ```
@@ -61,12 +65,6 @@ Use a multi environment loop when:
 - Configuration changes must be tested safely.
 - Rollout and rollback steps matter.
 - You need to start a separate thread in a remote or isolated environment.
-
-## Example prompt
-
-```text
-Implement this webhook retry change locally first, then prepare validation steps for preview and staging. Check environment variables, queue behavior, provider callbacks, and rollback requirements before marking it done.
-```
 
 ## Environment checklist
 

@@ -1,53 +1,62 @@
 ---
 sidebar_position: 4
 title: Deposition Framework
-description: Structure agent handoffs as clear records of context, decisions, evidence, and next actions
+description: Deposit agent results so another agent can pick up the work later
 ---
+
+import DepositionPickupDiagram from '@site/src/components/diagrams/DepositionPickupDiagram';
 
 # Deposition Framework
 
-The deposition framework is a way to make agent work auditable. A deposition records what the agent learned, what decisions it made, what evidence supports those decisions, and what should happen next.
+The deposition framework is a way to deposit agent results so another agent can pick them up later.
 
-**Use case:** you need durable handoffs between humans, agents, reviews, or future sessions.
+A deposition is a stored result, finding, test run, decision, or handoff package. It tells the next agent what happened, where the useful artifacts are, and what to do next.
 
-## What a deposition contains
+**Use case:** one agent finishes part of a workflow and another agent, thread, or future session needs to continue from that result.
 
-A useful deposition includes:
 
-- **Goal:** the outcome the agent was asked to achieve.
-- **Context:** files, systems, constraints, and assumptions discovered during work.
-- **Actions:** the edits, commands, or operational steps performed.
-- **Evidence:** test output, build results, logs, screenshots, or reviewed source references.
-- **Decisions:** tradeoffs, rejected options, and why the chosen path was used.
-- **Open risks:** unresolved questions, known limitations, and follow-up work.
-- **Next actions:** what the next human or agent should do.
+
 
 ## The framework loop
 
-1. **Collect context.** Record the sources used to understand the task.
-2. **State assumptions.** Make uncertainty visible before acting on it.
-3. **Perform the work.** Keep changes connected to the original goal.
-4. **Capture evidence.** Save the verification results that prove the work.
-5. **Summarize decisions.** Explain why the final approach was chosen.
-6. **Hand off cleanly.** Leave enough information for another agent to continue.
+1. **Do the work.** Let the agent complete a focused part of the task.
+2. **Produce a result.** Turn the work into a clear output, finding, run, or decision.
+3. **Deposit it durably.** Store the result somewhere another agent can retrieve.
+4. **Record how to retrieve it.** Include IDs, paths, or links to the deposited result.
+5. **Add evidence.** Attach test output, logs, summaries, or other proof.
+6. **Leave the next action.** Tell the next agent exactly how to continue.
 
-## Example deposition template
+## Server examples
 
-```markdown
-## Goal
+Codebolt already has durable surfaces that work like depositions:
 
-## Context reviewed
+- **Auto-testing:** agents can deposit test suites, test cases, test runs, step statuses, and logs under `.codebolt/autotests`.
+- **Agent deliberation:** agents can deposit shared decisions, responses, votes, winners, and summaries under `.codebolt/agentdeliberation`.
 
-## Actions taken
+These are not one generic `deposition` API. They are examples of durable results that another agent can list, load, and continue from later.
 
-## Evidence
+## Code example
 
-## Decisions
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-## Risks and limitations
+await codebolt.agentDeliberation.summary({
+  deliberationId: 'delib-123',
+  summary: 'Use the preview-thread result. The API check passed, but staging secrets still need review.',
+  authorId: 'validator-agent',
+  authorName: 'Validator Agent',
+});
 
-## Next actions
+await codebolt.autoTesting.updateRunStepStatus({
+  runId: 'run-123',
+  caseId: 'case-456',
+  stepId: 'api-check',
+  status: 'passed',
+  logs: 'Preview API returned 200 and matched the expected response shape.',
+});
 ```
+
+The next agent can load the deliberation or test run by ID and continue from the deposited result.
 
 ## When to use it
 
@@ -55,10 +64,14 @@ Use the deposition framework when:
 
 - Work spans multiple sessions.
 - Another agent will continue the task.
-- Reviewers need evidence, not just a summary.
-- Production changes require a clear audit trail.
+- A test run, deliberation, or generated artifact should be reused later.
+- The next agent needs more than a plain summary.
+- You need to preserve the result of one loop for another loop.
 
 ## See also
 
+- [Auto-testing API](../../05_reference/02_codeboltjs/10_api-access/autoTesting/index.md)
+- [Agent Deliberation](../../02_using-codebolt/07c_agent-coordination/04_agent-deliberation.md)
+- [Agent Deliberation API](../../05_reference/02_codeboltjs/10_api-access/agentDeliberation/index.md)
 - [Query the event log](../08_advanced/query-the-event-log.md)
 - [Replay an agent run](../08_advanced/replay-an-agent-run.md)

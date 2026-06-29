@@ -4,11 +4,14 @@ title: MultiAgent Loops
 description: Coordinate multiple agents through delegation, parallel discovery, review, and verification
 ---
 
+import MultiAgentSpawnLoopDiagram from '@site/src/components/diagrams/MultiAgentSpawnLoopDiagram';
+
 # MultiAgent Loops
 
 MultiAgent loops split work across specialized agents. One agent can coordinate the loop and spawn child agents for focused subtasks, or several agents can be arranged ahead of time as a fixed flow.
 
 **Use case:** you need faster exploration, independent review, or multiple specialists working on the same goal.
+
 
 ## The loop
 
@@ -71,12 +74,6 @@ Use MultiAgent loops when:
 - One coordinator needs to spawn specialist agents during the loop.
 
 Avoid it for tiny tasks where coordination costs more than the work itself.
-
-## Example prompt
-
-```text
-Use a planner, builder, and reviewer flow for this checkout refactor. The planner should inspect the current flow first. The builder should edit only after the plan is clear. The reviewer should check the final diff and require verification before completion.
-```
 
 ## Common pitfalls
 
