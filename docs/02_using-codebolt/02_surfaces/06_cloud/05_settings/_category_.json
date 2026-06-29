@@ -1,0 +1,10 @@
+{
+  "label": "Settings",
+  "position": 5,
+  "link": {
+    "type": "doc",
+    "id": "using-codebolt/surfaces/cloud/settings/overview"
+  },
+  "collapsible": true,
+  "collapsed": true
+}

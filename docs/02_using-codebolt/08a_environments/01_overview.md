@@ -135,4 +135,4 @@ Codebolt UI
 - [Configuring Environments](./02_configuring-environments.md)
 - [Environment Providers](./03_environment-providers.md)
 - [Environment Debug](./04_environment-debug.md)
-- [Cloud runtimes and providers](../08f_cloud/04_runtimes-and-providers.md)
+- [Cloud runtimes and providers](../02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)

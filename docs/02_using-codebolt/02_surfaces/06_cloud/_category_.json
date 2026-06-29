@@ -1,0 +1,9 @@
+{
+  "label": "Cloud",
+  "position": 6,
+  "collapsible": true,
+  "collapsed": true,
+  "customProps": {
+    "sectionLabel": "Cloud"
+  }
+}

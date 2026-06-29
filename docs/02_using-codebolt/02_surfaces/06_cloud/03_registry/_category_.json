@@ -1,0 +1,10 @@
+{
+  "label": "Registry",
+  "position": 3,
+  "link": {
+    "type": "doc",
+    "id": "using-codebolt/surfaces/cloud/registry/overview"
+  },
+  "collapsible": true,
+  "collapsed": true
+}

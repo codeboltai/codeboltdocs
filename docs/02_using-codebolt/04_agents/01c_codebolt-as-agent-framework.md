@@ -203,7 +203,7 @@ When your Next.js app talks to a Codebolt server, it inherits — without writin
 - **Multi-agent coordination** — [jobs, swarms, deliberation, stigmergic primitives](../07c_agent-coordination/01_overview.md).
 - **Observability** — [Agent Debug](../05c_agent-observability/02_agent-debug.md), [AI Debug](../05c_agent-observability/03_ai-debug-and-console.md), [event log](../07_memory/07_event-log.md).
 - **Environments** — run agent code [locally, in Docker, E2B, Daytona, or remote](../08a_environments/01_overview.md).
-- **Marketplace** — install, publish, version any agent built on `@codebolt/agent` ([Marketplace Publishing](../08f_cloud/05_marketplace-publishing.md)).
+- **Marketplace** — install, publish, version any agent built on `@codebolt/agent` ([Marketplace Publishing](../02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md)).
 
 ## How this is different from "framework in your process"
 
@@ -233,4 +233,4 @@ The cost is one extra hop: your app → Codebolt server → LLM provider, instea
 - [Build on Codebolt → Custom Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md) — full builder docs
 - [Creating Agents → Quickstart](../../04_build-on-codebolt/02_creating-agents/02_quickstart.md) — first agent in 10 minutes
 - [Agent Subsystem (internals)](../../04_build-on-codebolt/07b_subsystems/01_agent-subsystem.md) — how the server runs agents
-- [Marketplace Publishing](../08f_cloud/05_marketplace-publishing.md) — ship the agent you built
+- [Marketplace Publishing](../02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md) — ship the agent you built

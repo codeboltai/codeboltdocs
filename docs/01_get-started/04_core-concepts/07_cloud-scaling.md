@@ -58,7 +58,7 @@ Before moving a workflow to cloud, decide:
 
 ## See also
 
-- [Cloud](../../02_using-codebolt/08f_cloud/01_overview.md)
-- [Remote chat](../../02_using-codebolt/08f_cloud/03_remote-chat.md)
-- [Runtimes and providers](../../02_using-codebolt/08f_cloud/04_runtimes-and-providers.md)
-- [Marketplace publishing](../../02_using-codebolt/08f_cloud/05_marketplace-publishing.md)
+- [Cloud](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)
+- [Remote chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)
+- [Runtimes and providers](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)
+- [Marketplace publishing](../../02_using-codebolt/02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md)

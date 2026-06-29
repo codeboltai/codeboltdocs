@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-29T05:27:07.353Z",
-  "sourceCount": 394,
-  "curatedCount": 61,
+  "generatedAt": "2026-06-29T11:22:39.052Z",
+  "sourceCount": 412,
+  "curatedCount": 63,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 173,
+      "count": 191,
       "order": 1,
       "files": [
         {
@@ -100,8 +100,8 @@
           "title": "Headless Mode"
         },
         {
-          "path": "using-codebolt/surfaces/cloud.md",
-          "title": "Cloud"
+          "path": "using-codebolt/surfaces/cloud/get-started.md",
+          "title": "Get Started"
         },
         {
           "path": "using-codebolt/chat/overview.md",
@@ -572,24 +572,96 @@
           "title": "Cloud Portal"
         },
         {
-          "path": "using-codebolt/cloud/remote-chat.md",
-          "title": "Remote Chat"
+          "path": "using-codebolt/cloud/registry/overview.md",
+          "title": "Registry Overview"
         },
         {
-          "path": "using-codebolt/cloud/runtimes-and-providers.md",
-          "title": "Runtimes & Providers"
-        },
-        {
-          "path": "using-codebolt/cloud/marketplace-publishing.md",
+          "path": "using-codebolt/cloud/registry/marketplace-publishing.md",
           "title": "Marketplace Publishing"
         },
         {
-          "path": "using-codebolt/cloud/environments.md",
+          "path": "using-codebolt/cloud/registry/ai-models.md",
+          "title": "AI Models"
+        },
+        {
+          "path": "using-codebolt/cloud/registry/profiles.md",
+          "title": "Profiles"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/remote-chat.md",
+          "title": "Remote Chat"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/environments.md",
           "title": "Cloud Environments"
         },
         {
-          "path": "using-codebolt/cloud/syncing-changes.md",
+          "path": "using-codebolt/cloud/running-agents/syncing-changes.md",
           "title": "Syncing Changes"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/runtimes-and-providers.md",
+          "title": "Runtimes & Providers"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/runner-nodes.md",
+          "title": "Runner Nodes"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/review-merge-requests.md",
+          "title": "Review Merge Requests"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/scheduled-tasks.md",
+          "title": "Scheduled Tasks"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/inbox.md",
+          "title": "Inbox"
+        },
+        {
+          "path": "using-codebolt/cloud/running-agents/issues-and-tasks.md",
+          "title": "Issues & Tasks"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/overview.md",
+          "title": "Settings Overview"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/connectors.md",
+          "title": "Connectors"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/remote-sandboxes.md",
+          "title": "Remote Sandboxes"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/thread-runtime-providers.md",
+          "title": "Thread Runtime Providers"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/llm-provider-settings.md",
+          "title": "LLM Provider Settings"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/preview-provider-settings.md",
+          "title": "Preview Provider Settings"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/login-tokens.md",
+          "title": "Login Tokens"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/subscription-plans-usage-billing.md",
+          "title": "Plans, Usage & Billing"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/team-settings.md",
+          "title": "Team Settings"
+        },
+        {
+          "path": "using-codebolt/cloud/settings/account-settings.md",
+          "title": "Account Settings"
         },
         {
           "path": "using-codebolt/plugins/overview.md",

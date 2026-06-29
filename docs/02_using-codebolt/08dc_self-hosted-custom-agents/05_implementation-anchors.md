@@ -121,4 +121,4 @@ Taken together, these implementation anchors support a stronger market statement
 - [External Integrations](../08e_external-integrations/01_overview.md)
 - [Custom Agentic Application](../08da_custom-agentic-application/01_overview.md)
 - [Headless Mode](../02_surfaces/05_headless.md)
-- [Cloud](../08f_cloud/01_overview.md)
+- [Cloud](../02_surfaces/06_cloud/00_get-started.md)

@@ -46,6 +46,6 @@ What changes is where the UI runs, where the application logic runs, and whether
 - [Plugins](../07z_plugins/01_overview.md) for plugin packaging and lifecycle
 - [Auto Interactivity](../08d_auto-interactivity/01_overview.md) for webhooks, schedules, and hooks
 - [External Integrations](../08e_external-integrations/01_overview.md) for routing gateway and channel-style integrations
-- [Cloud](../08f_cloud/01_overview.md) for hosted runtimes and remote execution
+- [Cloud](../02_surfaces/06_cloud/00_get-started.md) for hosted runtimes and remote execution
 - [Client SDK](../../04_build-on-codebolt/04_custom-uis/02_client-sdk.md) for standalone client applications
 - [Custom Interfaces Overview](../../04_build-on-codebolt/04_custom-uis/01_overview.md) for frontend-building paths

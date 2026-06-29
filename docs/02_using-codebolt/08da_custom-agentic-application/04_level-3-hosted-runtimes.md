@@ -61,5 +61,5 @@ Limits:
 
 ## Related docs
 
-- [Cloud](../08f_cloud/01_overview.md)
+- [Cloud](../02_surfaces/06_cloud/00_get-started.md)
 - [Choosing the Right Architecture](./05_choosing-the-right-architecture.md)

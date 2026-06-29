@@ -15,7 +15,7 @@ Cloud is unique among the four platforms because it offers **two execution model
 - **Cloud sandbox** — the portal spins up an isolated sandbox (E2B, Daytona, Runloop, or a Runner Node) and runs the CodeBolt CLI inside it. No local setup.
 - **Local runtime** — you connect your own machine to the cloud with the **cloud plugin**. The agent runs on your hardware with your files and tools, but you can drive it from any browser.
 
-> New here? The **[Cloud Overview](../../02_using-codebolt/08f_cloud/01_overview.md)** explains what Cloud gives you, and **[Remote Chat](../../02_using-codebolt/08f_cloud/03_remote-chat.md)** walks you through your first cloud agent run.
+> New here? The **[Cloud Overview](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)** explains what Cloud gives you, and **[Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)** walks you through your first cloud agent run.
 
 ## How to launch
 
@@ -76,7 +76,7 @@ The Registry tab is where you browse everything publishable. Each entity type ha
 | **Templates** | Project templates |
 | **Apps** | Packaged applications |
 
-See **[Marketplace Publishing](../../02_using-codebolt/08f_cloud/05_marketplace-publishing.md)** for the publish flow.
+See **[Marketplace Publishing](../../02_using-codebolt/02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md)** for the publish flow.
 
 ### Agents — run and iterate
 
@@ -92,7 +92,7 @@ This tab is where you actually *use* the cloud runtime.
 | **Tasks** | `/tasks` | Ticket-style issue tracking, synced bidirectionally with local agents |
 | **Review Merge** | `/review-merge-requests` | Review/Merge Requests (RMRs) raised by agents before their changes are merged |
 
-See **[Remote Chat](../../02_using-codebolt/08f_cloud/03_remote-chat.md)** and **[Runtimes & Providers](../../02_using-codebolt/08f_cloud/04_runtimes-and-providers.md)** for the deep dive.
+See **[Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)** and **[Runtimes & Providers](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)** for the deep dive.
 
 ### Settings — account and config
 
@@ -257,11 +257,11 @@ The platform page you're reading is the entry point. The detailed Cloud document
 
 | Page | What it covers |
 |---|---|
-| **[Cloud Overview](../../02_using-codebolt/08f_cloud/01_overview.md)** | What Cloud gives you, when to reach for it, and how it connects to the rest of CodeBolt |
-| **[Cloud Portal](../../02_using-codebolt/08f_cloud/02_cloud-portal.md)** | The browser UI — three tabs and what lives under each |
-| **[Remote Chat](../../02_using-codebolt/08f_cloud/03_remote-chat.md)** | Chat against an agent in a cloud sandbox or on your local machine |
-| **[Runtimes & Providers](../../02_using-codebolt/08f_cloud/04_runtimes-and-providers.md)** | Manage runtime instances, bring your own sandbox API key, scaling patterns |
-| **[Marketplace Publishing](../../02_using-codebolt/08f_cloud/05_marketplace-publishing.md)** | Publishing agents, MCPs, skills, plugins, and more from the portal or CLI |
+| **[Cloud Overview](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)** | What Cloud gives you, when to reach for it, and how it connects to the rest of CodeBolt |
+| **[Cloud Portal](../../02_using-codebolt/02_surfaces/06_cloud/02_cloud-portal.md)** | The browser UI — three tabs and what lives under each |
+| **[Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)** | Chat against an agent in a cloud sandbox or on your local machine |
+| **[Runtimes & Providers](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)** | Manage runtime instances, bring your own sandbox API key, scaling patterns |
+| **[Marketplace Publishing](../../02_using-codebolt/02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md)** | Publishing agents, MCPs, skills, plugins, and more from the portal or CLI |
 
 ## When to use Cloud
 
@@ -277,8 +277,8 @@ If you need the fullest desktop affordances (`@mentions`, Ctrl+K inline editing,
 
 ## See also
 
-- [Cloud Overview](../../02_using-codebolt/08f_cloud/01_overview.md)
-- [Remote Chat](../../02_using-codebolt/08f_cloud/03_remote-chat.md)
-- [Runtimes & Providers](../../02_using-codebolt/08f_cloud/04_runtimes-and-providers.md)
+- [Cloud Overview](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)
+- [Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)
+- [Runtimes & Providers](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)
 - [Platform Overview](../02_surfaces/01_overview.md) — compare all four platforms
 - [Environments](../../02_using-codebolt/08a_environments/01_overview.md) — the broader environment concept that runtimes implement

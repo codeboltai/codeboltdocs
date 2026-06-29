@@ -119,5 +119,5 @@ Because Codebolt can operate across local, sandbox, Docker, and cloud setups, th
 
 - [Headless Mode](../02_surfaces/05_headless.md)
 - [Environments](../08a_environments/01_overview.md)
-- [Cloud](../08f_cloud/01_overview.md)
+- [Cloud](../02_surfaces/06_cloud/00_get-started.md)
 - [Self-Host for a Team](../../03_guides/07_advanced/self-host-for-a-team.md)

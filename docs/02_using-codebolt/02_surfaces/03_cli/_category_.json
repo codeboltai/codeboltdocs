@@ -1,9 +1,9 @@
 {
-  "label": "CLI",
+  "label": "Command Mode",
   "position": 3,
   "collapsible": true,
   "collapsed": true,
   "customProps": {
-    "sectionLabel": "CLI"
+    "sectionLabel": "Command Mode"
   }
 }
