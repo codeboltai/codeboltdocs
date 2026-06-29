@@ -1,17 +1,103 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1407" height="504" viewBox="0 0 1407 504">
-<defs><filter id="cardShadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0a0f19" flood-opacity="0.22"/></filter></defs>
-<rect x="30" y="30" width="951" height="338" rx="12" fill="#0C1117" stroke="#222C38"/>
-<text x="62" y="59" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">1</text><text x="76" y="59" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">await codebolt.agentDeliberation.summary({</text>
-<text x="62" y="87" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">2</text><text x="76" y="87" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  deliberationId: 'delib-123',</text>
-<rect x="31" y="101" width="949" height="28" fill="rgba(127,140,160,0.06)"/><text x="62" y="115" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">3</text><text x="76" y="115" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  summary: 'Preview passed; staging secrets still need review.',</text>
-<text x="62" y="143" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">4</text><text x="76" y="143" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  authorId: 'validator-agent', authorName: 'Validator Agent',</text>
-<text x="62" y="171" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">5</text><text x="76" y="171" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">});</text>
-<rect x="31" y="213" width="949" height="28" fill="rgba(127,140,160,0.06)"/><text x="62" y="227" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">6</text><text x="76" y="227" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">await codebolt.autoTesting.updateRunStepStatus({</text>
-<text x="62" y="255" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">7</text><text x="76" y="255" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  runId: 'run-123', caseId: 'case-456', stepId: 'api-check',</text>
-<rect x="31" y="269" width="949" height="28" fill="rgba(127,140,160,0.06)"/><text x="62" y="283" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">8</text><text x="76" y="283" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  status: 'passed', logs: 'Preview API returned 200.',</text>
-<text x="62" y="311" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">9</text><text x="76" y="311" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">});</text>
-<path d="M994 115 C1014 115,1011 129,1037 129" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/><path d="M994 227 C1014 227,1011 251,1037 251" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/><path d="M994 283 C1014 283,1011 353,1037 353" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
-<g filter="url(#cardShadow)"><rect x="1037" y="88" width="340" height="82" rx="11" fill="#141C26" stroke="#28323E"/></g><rect x="1037" y="88" width="4" height="82" fill="#2dd4bf"/><text x="1053" y="106" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINE 3</text><text x="1053" y="128" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Deposit the decision or handoff</text><text x="1053" y="150" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">summary in deliberation.</text>
-<g filter="url(#cardShadow)"><rect x="1037" y="220" width="340" height="62" rx="11" fill="#141C26" stroke="#28323E"/></g><rect x="1037" y="220" width="4" height="62" fill="#2dd4bf"/><text x="1053" y="238" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINES 6-8</text><text x="1053" y="260" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Deposit executable evidence and logs.</text>
-<g filter="url(#cardShadow)"><rect x="1037" y="322" width="340" height="62" rx="11" fill="#141C26" stroke="#28323E"/></g><rect x="1037" y="322" width="4" height="62" fill="#2dd4bf"/><text x="1053" y="340" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">IDS</text><text x="1053" y="362" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Next agent loads delib-123 or run-123.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1407" height="560" viewBox="0 0 1407 560" role="img" aria-labelledby="title desc">
+  <title id="title">Deposition loop</title>
+  <desc id="desc">A flow diagram showing an agent doing focused work, producing a result, choosing a deposition surface, depositing through Codebolt APIs, recording evidence and pickup instructions, and a later agent loading the result by ID.</desc>
+  <defs>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0a0f19" flood-opacity="0.18"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2dd4bf"/>
+    </marker>
+  </defs>
+
+  <rect x="24" y="24" width="1359" height="512" rx="18" fill="#0C1117" stroke="#222C38"/>
+  <text x="60" y="64" font-size="18" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="760">Deposition loop</text>
+  <text x="60" y="90" font-size="13" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#8FA1B5">Durable handoff between the agent that did the work and the agent, thread, or future session that picks it up.</text>
+
+  <g filter="url(#cardShadow)">
+    <rect x="60" y="138" width="205" height="96" rx="12" fill="#141C26" stroke="#28323E"/>
+  </g>
+  <rect x="60" y="138" width="5" height="96" fill="#2dd4bf"/>
+  <text x="84" y="167" font-size="11" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.7">STEP 1</text>
+  <text x="84" y="194" font-size="16" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="700">Do focused work</text>
+  <text x="84" y="216" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Main agent or subagent completes a bounded task.</text>
+
+  <path d="M 265 186 L 325 186" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="325" y="138" width="205" height="96" rx="12" fill="#141C26" stroke="#28323E"/>
+  </g>
+  <rect x="325" y="138" width="5" height="96" fill="#2dd4bf"/>
+  <text x="349" y="167" font-size="11" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.7">STEP 2</text>
+  <text x="349" y="194" font-size="16" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="700">Produce result</text>
+  <text x="349" y="216" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Finding, decision, test run, artifact, or blocker.</text>
+
+  <path d="M 530 186 L 590 186" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="590" y="126" width="235" height="120" rx="12" fill="#141C26" stroke="#28323E"/>
+  </g>
+  <rect x="590" y="126" width="5" height="120" fill="#f59e0b"/>
+  <text x="614" y="156" font-size="11" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#fbbf24" font-weight="750" letter-spacing="0.7">STEP 3</text>
+  <text x="614" y="183" font-size="16" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="700">Choose surface</text>
+  <text x="614" y="207" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Pick the durable store that matches the handoff.</text>
+
+  <path d="M 708 246 L 708 278" stroke="#2dd4bf" stroke-width="2"/>
+  <path d="M 708 278 L 322 278 L 322 310" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 708 278 L 636 278 L 636 310" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 708 278 L 950 278 L 950 310" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="192" y="310" width="260" height="92" rx="12" fill="#101820" stroke="#28323E"/>
+  </g>
+  <text x="216" y="340" font-size="15" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="720">Auto testing</text>
+  <text x="216" y="364" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Suites, cases, runs, statuses, logs.</text>
+  <text x="216" y="386" font-size="12" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" fill="#75E6D7">codebolt.autoTesting.*</text>
+
+  <g filter="url(#cardShadow)">
+    <rect x="506" y="310" width="260" height="92" rx="12" fill="#101820" stroke="#28323E"/>
+  </g>
+  <text x="530" y="340" font-size="15" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="720">Agent deliberation</text>
+  <text x="530" y="364" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Decisions, responses, votes, summaries.</text>
+  <text x="530" y="386" font-size="12" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" fill="#75E6D7">codebolt.agentDeliberation.*</text>
+
+  <g filter="url(#cardShadow)">
+    <rect x="820" y="310" width="260" height="92" rx="12" fill="#101820" stroke="#28323E"/>
+  </g>
+  <text x="844" y="340" font-size="15" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="720">Custom deposition</text>
+  <text x="844" y="364" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Plugin, custom UI, or domain state.</text>
+  <text x="844" y="386" font-size="12" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" fill="#75E6D7">workflow-specific API</text>
+
+  <path d="M 452 356 C 610 260, 1000 186, 1160 186" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 766 356 C 910 280, 1020 186, 1160 186" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 1080 356 C 1125 356, 1125 186, 1160 186" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="1160" y="126" width="185" height="120" rx="12" fill="#141C26" stroke="#28323E"/>
+  </g>
+  <rect x="1160" y="126" width="5" height="120" fill="#2dd4bf"/>
+  <text x="1184" y="156" font-size="11" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.7">STEP 4</text>
+  <text x="1184" y="183" font-size="16" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="700">Deposit via API</text>
+  <text x="1184" y="207" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Persist through Codebolt or the workflow surface.</text>
+
+  <path d="M 1252 246 L 1252 318" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="1144" y="318" width="220" height="94" rx="12" fill="#141C26" stroke="#28323E"/>
+  </g>
+  <rect x="1144" y="318" width="5" height="94" fill="#2dd4bf"/>
+  <text x="1168" y="348" font-size="11" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.7">STEP 5</text>
+  <text x="1168" y="375" font-size="16" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="700">Record pickup data</text>
+  <text x="1168" y="397" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">IDs, evidence, status, owner, next action.</text>
+
+  <path d="M 1144 365 C 1040 456, 354 456, 250 410" fill="none" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <g filter="url(#cardShadow)">
+    <rect x="60" y="430" width="250" height="70" rx="12" fill="#141C26" stroke="#28323E"/>
+  </g>
+  <text x="84" y="458" font-size="15" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA" font-weight="720">Next agent loads by ID</text>
+  <text x="84" y="482" font-size="12.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#AAB6C5">Then continues the workflow with context.</text>
+
+  <path d="M 310 465 L 386 465" stroke="#2dd4bf" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="416" y="470" font-size="13" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#8FA1B5">The handoff is useful only when it can be retrieved and acted on.</text>
 </svg>

@@ -8,24 +8,24 @@ import MultiAgentSpawnLoopDiagram from '@site/src/components/diagrams/MultiAgent
 
 # MultiAgent Loops
 
-MultiAgent loops split work across specialized agents. One agent can coordinate the loop and spawn child agents for focused subtasks, or several agents can be arranged ahead of time as a fixed flow.
+MultiAgent loops split work across specialized agents. The main agent can own the loop and spawn subagents for focused subtasks, or several agents can be arranged ahead of time as a fixed flow.
 
 **Use case:** you need faster exploration, independent review, or multiple specialists working on the same goal.
 
 
 ## The loop
 
-1. **Start with a coordinator.** One agent owns the main goal, constraints, and final answer.
-2. **Assign roles.** Decide which child agents plan, inspect, implement, review, or verify.
-3. **Spawn child agents.** The coordinator delegates focused tasks to other agents.
-4. **Collect results.** Child agents return findings, edits, or review notes to the coordinator.
-5. **Merge findings.** The coordinator decides what to keep, what conflicts, and what needs another pass.
-6. **Loop if needed.** Spawn another child agent or send a follow-up task when the result is incomplete.
+1. **Start with the main agent.** One agent owns the main goal, constraints, and final answer.
+2. **Assign roles.** Decide which subagents plan, inspect, implement, review, or verify.
+3. **Spawn subagents.** The main agent delegates focused tasks to other agents.
+4. **Collect results.** Subagents return findings, edits, or review notes to the main agent.
+5. **Merge findings.** The main agent decides what to keep, what conflicts, and what needs another pass.
+6. **Loop if needed.** Spawn another subagent or send a follow-up task when the result is incomplete.
 7. **Verify together.** Run checks and summarize the final outcome.
 
-## Coordinator-spawned agents
+## Subagents spawned by the main agent
 
-The most common shape is a coordinator agent that stays in the main loop and calls other agents as needed.
+The most common shape is a main agent that stays in the main loop and calls subagents as needed.
 
 Use this when one agent should keep ownership of the task, but needs help from specialists.
 
@@ -38,11 +38,11 @@ const result = await codebolt.agent.startAgent(
 );
 
 if (result.success) {
-  // The coordinator uses the child result in its next loop step.
+  // The main agent uses the subagent result in its next loop step.
 }
 ```
 
-For isolated or parallel work, the coordinator can start child agents in separate threads:
+For isolated or parallel work, the main agent can start subagents in separate threads:
 
 ```ts
 await codebolt.thread.createThreadInBackground({
@@ -53,7 +53,7 @@ await codebolt.thread.createThreadInBackground({
 });
 ```
 
-Keep the coordinator responsible for the final decision. Child agents should own a narrow task and report back clearly.
+Keep the main agent responsible for the final decision. Subagents should own a narrow task and report back clearly.
 
 ## Role examples
 
@@ -71,7 +71,7 @@ Use MultiAgent loops when:
 - Independent critique would improve quality.
 - Discovery can be parallelized safely.
 - You need separate agents for code, tests, and documentation.
-- One coordinator needs to spawn specialist agents during the loop.
+- The main agent needs to spawn specialist subagents during the loop.
 
 Avoid it for tiny tasks where coordination costs more than the work itself.
 
@@ -79,7 +79,7 @@ Avoid it for tiny tasks where coordination costs more than the work itself.
 
 - **Unclear ownership.** Two agents editing the same files can conflict.
 - **No merge point.** Parallel findings must be reconciled before implementation.
-- **Unbounded spawning.** A coordinator should limit how many child agents it starts.
+- **Unbounded spawning.** The main agent should limit how many subagents it starts.
 - **Skipping review.** MultiAgent work is strongest when one agent challenges another.
 
 ## See also

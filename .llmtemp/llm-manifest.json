@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-25T05:48:12.614Z",
-  "sourceCount": 393,
+  "generatedAt": "2026-06-29T05:27:07.353Z",
+  "sourceCount": 394,
   "curatedCount": 61,
   "sections": [
     {
@@ -790,7 +790,7 @@
     },
     {
       "heading": "Guides",
-      "count": 29,
+      "count": 30,
       "order": 3,
       "files": [
         {
@@ -816,6 +816,10 @@
         {
           "path": "guides/first-steps/set-up-git-integration.md",
           "title": "Set Up Git Integration"
+        },
+        {
+          "path": "guides/loops-and-deposition-engineering/agent-extension-loop.md",
+          "title": "Agent Extension Loop"
         },
         {
           "path": "guides/loops-and-deposition-engineering/custom-depositions.md",

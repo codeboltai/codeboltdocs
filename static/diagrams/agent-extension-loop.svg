@@ -1,40 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1407" height="504" viewBox="0 0 1407 504">
 <defs><filter id="cardShadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0a0f19" flood-opacity="0.22"/></filter></defs>
-<rect x="30" y="30" width="951" height="338" rx="12" ry="12" fill="#0C1117" stroke="#222C38" stroke-width="1"/>
+<rect x="30" y="30" width="951" height="408" rx="12" ry="12" fill="#0C1117" stroke="#222C38" stroke-width="1"/>
 <text x="62" y="59" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">1</text>
-<text x="76" y="59" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">const agent = createCodeboltAgent({</text>
+<text x="76" y="59" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">import { Agent, createTool } from '@codebolt/agent/unified';</text>
 <text x="62" y="87" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">2</text>
-<text x="76" y="87" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  systemPrompt: 'Help maintain this repository safely.',</text>
+<text x="76" y="87" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">import { CapabilityContextModifier } from '@codebolt/agent/processor-pieces';</text>
 <rect x="31" y="101" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
 <text x="62" y="115" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">3</text>
-<text x="76" y="115" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  tools: [projectPolicyTool],</text>
-<rect x="31" y="129" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
-<text x="62" y="143" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">4</text>
-<text x="76" y="143" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  preToolCallProcessors: [new ToolValidationModifier()],</text>
-<text x="62" y="171" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">5</text>
-<text x="76" y="171" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">});</text>
+<text x="76" y="115" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">const projectPolicyTool = createTool({ id: 'check_project_policy', ... });</text>
+<rect x="31" y="157" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="171" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">4</text>
+<text x="76" y="171" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">const agent = new Agent({</text>
+<rect x="31" y="185" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="199" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">5</text>
+<text x="76" y="199" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  tools: [projectPolicyTool],</text>
+<rect x="31" y="213" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
 <text x="62" y="227" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">6</text>
-<text x="76" y="227" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">const result = await agent.processMessage(task);</text>
-<rect x="31" y="241" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="76" y="227" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">  messageModifiers: [new CapabilityContextModifier({ timeout: 30000 })],</text>
 <text x="62" y="255" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">7</text>
-<text x="76" y="255" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">inspect(result.toolCalls, result.finalMessage);</text>
-<rect x="31" y="269" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
-<text x="62" y="283" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">8</text>
-<text x="76" y="283" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">refineToolSchemaOrProcessor();</text>
-<rect x="991" y="104" width="3" height="50" rx="1.5" fill="#2dd4bf"/>
-<rect x="991" y="244" width="3" height="50" rx="1.5" fill="#2dd4bf"/>
+<text x="76" y="255" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">});</text>
+<text x="62" y="311" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">8</text>
+<text x="76" y="311" font-size="13" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">const result = await agent.run({ userMessage, selectedCapabilities, mentionedAgents, messageId, threadId });</text>
+<rect x="31" y="325" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="339" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">9</text>
+<text x="76" y="339" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">inspect(result.toolResults, result.finalMessage, result.state);</text>
+<rect x="31" y="353" width="949" height="28" fill="rgba(127,140,160,0.06)"/>
+<text x="62" y="367" font-size="12" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#475263" text-anchor="end" dominant-baseline="central">10</text>
+<text x="76" y="367" font-size="13.5" font-family="ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,monospace" fill="#D8DFEA" dominant-baseline="central">refine the tool schema, modifier options, or server-backed capability.</text>
+
+<rect x="991" y="102" width="3" height="28" rx="1.5" fill="#2dd4bf"/>
+<rect x="991" y="186" width="3" height="58" rx="1.5" fill="#2dd4bf"/>
+<rect x="991" y="326" width="3" height="58" rx="1.5" fill="#2dd4bf"/>
 <path d="M994 115 C1014 115,1011 115,1037 115" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
-<path d="M994 143 C1014 143,1011 207,1037 207" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
-<path d="M994 255 C1014 255,1011 319,1037 319" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+<path d="M994 199 C1014 199,1011 207,1037 207" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+<path d="M994 227 C1014 227,1011 294,1037 294" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+<path d="M994 339 C1014 339,1011 376,1037 376" fill="none" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1 5"/>
+
 <g filter="url(#cardShadow)"><rect x="1037" y="74" width="340" height="82" rx="11" fill="#141C26" stroke="#28323E"/></g>
-<rect x="1037" y="74" width="4" height="82" fill="#2dd4bf"/><text x="1053" y="92" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINES 3-4</text>
-<text x="1053" y="114" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Add one extension point:</text>
-<text x="1053" y="136" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">tool, MCP, modifier, or processor.</text>
-<g filter="url(#cardShadow)"><rect x="1037" y="176" width="340" height="62" rx="11" fill="#141C26" stroke="#28323E"/></g>
-<rect x="1037" y="176" width="4" height="62" fill="#2dd4bf"/><text x="1053" y="194" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINE 4</text>
-<text x="1053" y="216" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Validate tool calls before execution.</text>
-<g filter="url(#cardShadow)"><rect x="1037" y="288" width="340" height="82" rx="11" fill="#141C26" stroke="#28323E"/></g>
-<rect x="1037" y="288" width="4" height="82" fill="#2dd4bf"/><text x="1053" y="306" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINES 7-8</text>
-<text x="1053" y="328" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Inspect behavior, then refine the</text>
-<text x="1053" y="350" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">extension until the loop is reliable.</text>
+<rect x="1037" y="74" width="4" height="82" fill="#2dd4bf"/>
+<text x="1053" y="92" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINE 3</text>
+<text x="1053" y="114" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Use real agent SDK tools for</text>
+<text x="1053" y="136" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">agent-local behavior.</text>
+
+<g filter="url(#cardShadow)"><rect x="1037" y="176" width="340" height="74" rx="11" fill="#141C26" stroke="#28323E"/></g>
+<rect x="1037" y="176" width="4" height="74" fill="#2dd4bf"/>
+<text x="1053" y="194" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINES 5-6</text>
+<text x="1053" y="216" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Wire local tools and server-backed</text>
+<text x="1053" y="238" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">capability context into the agent.</text>
+
+<g filter="url(#cardShadow)"><rect x="1037" y="274" width="340" height="74" rx="11" fill="#141C26" stroke="#28323E"/></g>
+<rect x="1037" y="274" width="4" height="74" fill="#2dd4bf"/>
+<text x="1053" y="292" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINE 6</text>
+<text x="1053" y="314" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">CapabilityContextModifier calls the</text>
+<text x="1053" y="336" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">server capability APIs for skills.</text>
+
+<g filter="url(#cardShadow)"><rect x="1037" y="368" width="340" height="68" rx="11" fill="#141C26" stroke="#28323E"/></g>
+<rect x="1037" y="368" width="4" height="68" fill="#2dd4bf"/>
+<text x="1053" y="386" font-size="10" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#2dd4bf" font-weight="750" letter-spacing="0.6">LINES 9-10</text>
+<text x="1053" y="408" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">Inspect real run state, then refine</text>
+<text x="1053" y="426" font-size="13.5" font-family="Inter,ui-sans-serif,system-ui,sans-serif" fill="#D8DFEA">the actual extension surface.</text>
 </svg>

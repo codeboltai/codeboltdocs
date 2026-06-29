@@ -7,7 +7,7 @@ export default function DepositionPickupDiagram() {
       <img
         className="cb-sawl-image"
         src="/diagrams/deposition-pickup.svg"
-        alt="Annotated code example showing an agent depositing a deliberation summary and test result for a later agent"
+        alt="Flow diagram showing an agent producing a result, choosing a deposition surface, depositing evidence through Codebolt APIs, and a later agent loading the result by ID"
       />
     </div>
   );
