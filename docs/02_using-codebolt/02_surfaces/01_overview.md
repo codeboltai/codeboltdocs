@@ -6,17 +6,15 @@ description: Codebolt is the same agent runtime no matter how you talk to it
 
 # Platform Overview
 
-Codebolt is the same agent runtime no matter how you talk to it. The **client** is the part you actually install and use — and you have four to pick from depending on what you're doing.
+Codebolt is the same agent runtime no matter how you talk to it. The **client** is the part you actually install and use.
 
 ## Pick your client
 
 | Client | Best for | Trade-off |
 |---|---|---|
-| **[Desktop app](../02f_platforms/01_desktop.md)** | Daily coding work, multi-panel context, visual diffs, rich chat | Heaviest install, single machine |
-| **[CLI](../02f_platforms/02_cli.md)** | Scripting, CI, one-off commands, remote SSH | Command-driven, less visual |
-| **[TUI](../02f_platforms/03_tui.md)** | Terminal-only environments where you still want an interactive UI | Narrower surface model than the desktop app |
-| **[Headless](./05_headless.md)** | Servers, automation, agent execution without any UI | No interactive chat |
-| **[Cloud](./06_cloud.md)** | Browser-based access, managed sandboxes, driving your machine from anywhere | Needs a network connection; lighter affordances than the desktop app |
+| **[Desktop app](./02_desktop-app/00_get-started.md)** | Daily coding work, multi-panel context, visual diffs, rich chat | Heaviest install, single machine |
+| **[CLI](./04_tui/01_cli-interface/00_get-started.md)** | Interactive terminal interface, command mode, headless server, one-shot prompts, CI, remote SSH | Terminal-first, less visual than the desktop app |
+| **[Cloud](./06_cloud/00_get-started.md)** | Browser-based access, managed sandboxes, driving your machine from anywhere | Needs a network connection; lighter affordances than the desktop app |
 
 The same project, the same agents, the same memory — only the client differs. (Cloud is a bit different — it controls *where the agent runs* rather than being a client you install, but the same runtime and plugin system apply.)
 
@@ -29,7 +27,7 @@ The same project, the same agents, the same memory — only the client differs. 
 
 ## What varies
 
-- **Chat ergonomics** — multi-tab in the desktop, one-shot in the CLI, single-thread in the TUI, scripted in headless. See [Chat](../03_chat/01_overview.md).
+- **Chat ergonomics** — multi-tab in the desktop, interactive or one-shot in the CLI, browser-based in Cloud. See [Chat](../03_chat/01_overview.md).
 - **Context affordances** — `@mentions`, panel pickers, and inline previews are desktop-only.
 - **Inline editing** — Ctrl+K-style inline edits are desktop-only.
 - **Multi-pane diffs** — visual diffs are richest in the desktop app.
@@ -40,8 +38,9 @@ The pages under **Clients** are **reference catalogs** for each client — what 
 
 ## See also
 
-- [Get Started](../02_quickstart.md)
-- [Desktop App](../02f_platforms/01_desktop.md)
-- [CLI](../02f_platforms/02_cli.md)
-- [TUI](../02f_platforms/03_tui.md)
-- [Cloud](./06_cloud.md)
+- [Get Started](../../01_get-started/03_quickstart.md)
+- [Desktop App](./02_desktop-app/00_get-started.md)
+- [CLI](./04_tui/01_cli-interface/00_get-started.md)
+- [CLI Commands](./04_tui/02_cli-commands/01_overview.md)
+- [Headless CLI](./04_tui/03_cli-headless/01_overview.md)
+- [Cloud](./06_cloud/00_get-started.md)

@@ -99,22 +99,22 @@ Useful defaults:
 
 Some editor and chat actions have their own shortcuts inside those panels.
 
-## What the TUI looks like
+## What the CLI interface looks like
 
-If you're using the [TUI](../../04_tui/01_overview.md) instead of the desktop app, the layout is not the same docked panel grid as the desktop surface.
+If you're using the [CLI interface](../../04_tui/01_cli-interface/01_overview.md) instead of the desktop app, the layout is not the same docked panel grid as the desktop surface.
 
-The current TUI is organized around four top-level tabs:
+The current CLI interface is organized around four top-level tabs:
 
 - Chat
 - Logs
 - Git
 - Files
 
-Within the Chat tab, additional context appears through sidebars and dialogs rather than separate desktop-style panels. See [TUI → Tabs, Panels, and Layout Modes](../../04_tui/03_tabs-and-panels.md) and [TUI → Navigation and Keybindings](../../04_tui/02_navigation-and-keybindings.md).
+Within the Chat tab, additional context appears through sidebars and dialogs rather than separate desktop-style panels. See [CLI Interface - Tabs, Panels, and Layout Modes](../../04_tui/01_cli-interface/03_tabs-and-panels.md) and [CLI Interface - Navigation and Keybindings](../../04_tui/01_cli-interface/02_navigation-and-keybindings.md).
 
 ## See also
 
 - [Workspace and Projects](../01_workspace-and-projects/02_workspace-and-projects.md)
 - [Chat Overview](../../../03_chat/01_overview.md)
 - [Settings](../03_settings-and-profiles/02_settings-and-profiles.md)
-- [TUI Overview](../../04_tui/01_overview.md)
+- [CLI Interface Overview](../../04_tui/01_cli-interface/01_overview.md)

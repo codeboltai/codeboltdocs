@@ -97,7 +97,7 @@ This makes Codebolt suitable for infrastructure patterns where the agent control
 | If your priority is... | Start with... |
 |---|---|
 | Fastest personal adoption | Local desktop or terminal runtime |
-| Low-friction automation | [Headless Mode](../02_surfaces/05_headless.md) |
+| Low-friction automation | [Headless Mode](../02_surfaces/04_tui/03_cli-headless/01_overview.md) |
 | Custom product UX | [Custom Agentic Application](../08da_custom-agentic-application/01_overview.md) |
 | External channel access | [External Integrations](../08e_external-integrations/01_overview.md) |
 | Shared enterprise control | Central server plus managed plugins and policies |
@@ -117,7 +117,7 @@ Because Codebolt can operate across local, sandbox, Docker, and cloud setups, th
 
 ## See also
 
-- [Headless Mode](../02_surfaces/05_headless.md)
+- [Headless Mode](../02_surfaces/04_tui/03_cli-headless/01_overview.md)
 - [Environments](../08a_environments/01_overview.md)
 - [Cloud](../02_surfaces/06_cloud/00_get-started.md)
 - [Self-Host for a Team](../../03_guides/07_advanced/self-host-for-a-team.md)

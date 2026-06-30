@@ -10,7 +10,7 @@ Codebolt is an AI-native coding environment. You can use it the way you'd use a 
 
 ## The short version
 
-- **For end users** — a desktop app (with a CLI and TUI companion) that lets you work with AI agents on real projects. Think of it as an editor where "run an agent" is as first-class as "open a file".
+- **For end users** — a desktop app and CLI that let you work with AI agents on real projects. The CLI includes the interactive terminal interface, command mode, and headless modes. Think of it as an editor where "run an agent" is as first-class as "open a file".
 - **For developers** — an extensible agent runtime. Every piece is designed to be replaced: custom agents, custom tools, custom providers, custom orchestration, custom memory. The server is open for you to build on.
 - **For teams** — a self-hostable server with full audit trails, guardrails, human-in-the-loop review, and a marketplace of agents and tools.
 
@@ -39,7 +39,7 @@ Quick sampling, from easiest to most ambitious:
 - **Custom agents.** Build an agent specialised for your codebase — your coding conventions, your internal APIs, your review standards. See [Build Agents](../04_build-on-codebolt/02_creating-agents/01_overview.md).
 - **Custom tools.** Write an MCP server that gives agents access to your internal systems. See [MCP Tools](../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md).
 - **Multi-agent workflows.** Set up a plan-execute-review flow for high-risk changes, or a map-reduce for embarrassingly parallel work. See [Multi-Agent Orchestration](../04_build-on-codebolt/08_multi-agent-orchestration/01_overview.md).
-- **Self-hosting for a team.** Run the server yourself, with shared memory, guardrails, and audit trails across your organisation. See [Self-Hosting](../04_build-on-codebolt/10_self-hosting/01_overview.md).
+- **Self-hosting for a team.** Run the server yourself, with shared memory, guardrails, and audit trails across your organisation. See [Agent Infrastructure](../04_build-on-codebolt/11_agent-infrastructure/01_overview.md).
 
 ## What it is NOT
 

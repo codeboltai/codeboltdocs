@@ -225,7 +225,7 @@ The cost is one extra hop: your app → Codebolt server → LLM provider, instea
 - **You're building an internal AI feature in a Next.js / SaaS product.** Use `@codebolt/agent` to define the agent and `@codebolt/client-sdk` to call it. Run a Codebolt server alongside your app, or let the SDK spawn one.
 - **You're building a developer tool.** Same as above, plus consider publishing the agent to the marketplace so users install it inside their own Codebolt.
 - **You don't need custom code, just a configured assistant.** Skip the framework — use the [marketplace](./04_the-marketplace.md) and configure with [agent.yaml](../../04_build-on-codebolt/02_creating-agents/05_agent-anatomy/agent-yaml.md).
-- **You're embedding agents into a CLI / job runner / cron.** Use `@codebolt/client-sdk` against a [headless Codebolt server](../02_surfaces/05_headless.md).
+- **You're embedding agents into a CLI / job runner / cron.** Use `@codebolt/client-sdk` against a [headless Codebolt server](../02_surfaces/04_tui/03_cli-headless/01_overview.md).
 
 ## See also
 

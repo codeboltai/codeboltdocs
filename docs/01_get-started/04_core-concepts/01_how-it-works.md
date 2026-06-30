@@ -13,7 +13,7 @@ import UserMessageProcessingSwimlane from '@site/src/components/diagrams/UserMes
 
 Codebolt is a platform runtime for building and running coding agents. The core runtime handles the operational layer: interfaces, sockets, threads, project context, model providers, tools, permissions, memory, guardrails, storage, and execution environments.
 
-Agents and agent scripts sit on top of that runtime. They receive work from Codebolt, use the runtime features through `codeboltjs`, and decide how to run the agentic loop for the task.
+Agents  sit on top of that runtime. They receive work from Codebolt, use the runtime features through `codeboltjs`, and decide how to run the agentic loop for the task.
 
 <CodeboltWebAppArchitecture />
 

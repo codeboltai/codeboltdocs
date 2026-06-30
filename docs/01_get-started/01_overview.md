@@ -20,7 +20,7 @@ New to Codebolt? Start with what it is, get it installed, and run your first age
 
 <DocCardGrid columns={2} items={[
   { label: 'Intro', title: 'What is Codebolt', description: 'The core idea, what makes it different, and what you can do with it.', href: './02_what-is-codebolt' },
-  { label: 'Start', title: 'Get Started', description: 'Pick your client — desktop app, CLI, or TUI — and install, configure, and run your first agent.', href: './03_quickstart' },
+  { label: 'Start', title: 'Get Started', description: 'Pick your client — desktop app, CLI, or Cloud — and install, configure, and run your first agent.', href: './03_quickstart' },
 ]} />
 
 <p class="uc-section-label">Workspace</p>

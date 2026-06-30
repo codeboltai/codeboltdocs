@@ -1,19 +1,19 @@
 ---
 sidebar_position: 2
 title: CLI
-description: The command-line entry point for running the Codebolt server, launching the TUI, connecting to a server, and running headless prompts.
+description: The terminal entry point for Codebolt, including the interactive CLI interface, command mode, headless server, and one-shot prompts.
 ---
 
 # CLI
 
-The `codebolt` CLI is the command-line entry point to Codebolt. With it you run the server, launch the TUI, connect to an existing server, fire off one-shot headless prompts, and drive extension authoring. It is ideal for scripting, CI, remote SSH, and one-off commands.
+The `codebolt` CLI is the terminal entry point to Codebolt. It now groups the interactive CLI interface, command mode, headless server, and one-shot prompts in one place. Use it for scripting, CI, remote SSH, keyboard-first interactive work, and automation.
 
-> Already have the desktop app? The CLI is already installed — no separate setup needed. Otherwise see **[Get Started](../02_surfaces/03_cli/00_get-started.md)**.
+> Already have the desktop app? The CLI is already installed - no separate setup needed. Otherwise see **[CLI Interface Get Started](../../02_using-codebolt/02_surfaces/04_tui/01_cli-interface/00_get-started.md)**.
 
 ## How to launch
 
 ```bash
-codebolt                  # start server + launch the TUI
+codebolt                  # start server + launch the interactive CLI interface
 codebolt --server         # start the server only (headless)
 codebolt --prompt "..."   # run a one-shot agent prompt
 ```
@@ -22,24 +22,24 @@ codebolt --prompt "..."   # run a one-shot agent prompt
 
 | Page | What it covers |
 |---|---|
-| **[Get Started](../02_surfaces/03_cli/00_get-started.md)** | Install the CLI, authenticate, configure a provider, and run your first task |
-| **[CLI Overview](../02_surfaces/03_cli/01_overview.md)** | The root command, runtime modes, root flags, and command groups |
-| **[Agent Commands](../02_surfaces/03_cli/02_agent-commands.md)** | One-shot prompts, inspecting installed agents, and authoring agent extensions |
-| **[Tool Commands](../02_surfaces/03_cli/03_tool-commands.md)** | Building and publishing tool extensions |
-| **[Provider Commands](../02_surfaces/03_cli/04_provider-commands.md)** | Inspecting LLMs, setting defaults and keys, and authoring provider extensions |
-| **[App Commands](../02_surfaces/03_cli/05_app-commands.md)** | Root runtime modes and `command system` subcommands |
+| **[CLI Interface Get Started](../../02_using-codebolt/02_surfaces/04_tui/01_cli-interface/00_get-started.md)** | Install, authenticate, configure a provider, and send your first interactive terminal message |
+| **[CLI Interface Overview](../../02_using-codebolt/02_surfaces/04_tui/01_cli-interface/01_overview.md)** | How the interactive terminal interface launches and what it contains |
+| **[CLI Commands Overview](../../02_using-codebolt/02_surfaces/04_tui/02_cli-commands/01_overview.md)** | Command mode, root flags, runtime modes, and command groups |
+| **[Agent Commands](../../02_using-codebolt/02_surfaces/04_tui/02_cli-commands/02_agent-commands.md)** | One-shot prompts, inspecting installed agents, and authoring agent extensions |
+| **[Headless CLI](../../02_using-codebolt/02_surfaces/04_tui/03_cli-headless/01_overview.md)** | Headless server mode and headless prompt mode |
 
 ## When to use the CLI
 
+- Interactive terminal work over SSH or in terminal-only environments
 - Shell-native workflows and simple scripting
 - CI pipelines and automation
-- Remote command execution over SSH
 - Server administration and command-style inspection
+- One-shot prompts or long-running headless server workflows
 
-For an interactive terminal UI, use the **[TUI](./03_tui.md)**. For server-only startup or one-shot prompts without a UI, use **[Headless mode](../02_surfaces/05_headless.md)**.
+For the detailed merged docs, start at **[Using Codebolt -> CLI](../../02_using-codebolt/02_surfaces/04_tui/01_cli-interface/00_get-started.md)**, then choose **[CLI Commands](../../02_using-codebolt/02_surfaces/04_tui/02_cli-commands/01_overview.md)** or **[Headless CLI](../../02_using-codebolt/02_surfaces/04_tui/03_cli-headless/01_overview.md)** as needed.
 
 ## See also
 
-- [Platform Overview](../02_surfaces/01_overview.md)
-- [Headless Mode](../02_surfaces/05_headless.md)
+- [Platform Overview](../../02_using-codebolt/02_surfaces/01_overview.md)
+- [Headless CLI](../../02_using-codebolt/02_surfaces/04_tui/03_cli-headless/01_overview.md)
 - [Reference → Codebolt CLI](../../05_reference/06_codebolt-cli/01_overview.md)

@@ -8,7 +8,7 @@ import { Accordion, AccordionItem } from '@site/src/components/Accordion';
 
 # Marketplace Publishing
 
-Anything you build for Codebolt can be published to the marketplace — agents, plugins, skills, MCPs, and more. Once published, your item is discoverable and installable from the desktop app, CLI, and TUI.
+Anything you build for Codebolt can be published to the marketplace - agents, plugins, skills, MCPs, and more. Once published, your item is discoverable and installable from the desktop app, command mode, and CLI interface.
 
 Publishing happens from the **cloud portal** or the **CLI**. Each extension type has matching `create`, `publish`, and `list` subcommands under `codebolt action`.
 

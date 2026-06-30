@@ -10,7 +10,7 @@ import ThreadStepsFlow from '@site/src/components/diagrams/ThreadStepsFlow';
 
 You can start with Codebolt the same way you would use a normal coding agent: open the app or run the CLI, describe the task, choose an agent, and let it work in your project.
 
-Use the [desktop app](../../02_using-codebolt/02_surfaces/02_desktop-app/00_get-started.md) when you want chat, files, panels, settings, and project state in one interface. Use the [CLI](../../02_using-codebolt/02_surfaces/03_cli/00_get-started.md) when you want terminal-first agent runs, scripts, logs, or automation.
+Use the [desktop app](../../02_using-codebolt/02_surfaces/02_desktop-app/00_get-started.md) when you want chat, files, panels, settings, and project state in one interface. Use the [CLI](../../02_using-codebolt/02_surfaces/04_tui/01_cli-interface/00_get-started.md) when you want terminal-first agent runs, scripts, logs, command mode, or automation.
 
 Under that simple experience, the smallest useful Codebolt setup is a thread, an agent, a model, and a set of tools. Most daily work starts here.
 

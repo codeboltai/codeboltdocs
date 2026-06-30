@@ -184,7 +184,7 @@ The best architecture usually depends on four decisions:
 
 ## See also
 
-- [Headless Mode](../02_surfaces/05_headless.md)
+- [Headless Mode](../02_surfaces/04_tui/03_cli-headless/01_overview.md)
 - [Custom Agentic Application](../08da_custom-agentic-application/01_overview.md)
 - [Autonomous Companies](../08db_autonomous-companies/01_overview.md)
 - [Cloud](../02_surfaces/06_cloud/00_get-started.md)

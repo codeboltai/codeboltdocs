@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: Run It Longer
-description: "How Codebolt supports longer work through loops, delegation, deposited state, guardrails, memory, and checkpoints."
+description: "How Codebolt supports longer work through loops, delegation, deposition, auto testing, guardrails, memory, and checkpoints."
 ---
 
 # Run It Longer
@@ -28,7 +28,7 @@ As work gets longer, the agent should not keep everything in a single private sc
 
 **Delegation** means assigning parts of the work to sub-agents, background agents, or specialized flows. This is useful when tasks can run in parallel, need different skills, or need review before merging.
 
-**Deposition** means leaving durable traces for later turns or other agents. Examples include task status, event log entries, memory updates, file update intents, locks, comments, and stigmergic signals such as pheromones. Deposited state prevents long work from depending only on transient model context.
+**Deposition** means leaving durable traces for later turns or other agents. Examples include task status, event log entries, memory updates, file update intents, locks, comments, auto-testing records, and stigmergic signals such as pheromones. Auto testing is part of this deposition model: one agent can finish an implementation task and deposit the expected test suites or test cases, then another agent can later pick up those deposited tests, run them, update run case statuses and run step statuses, and attach logs. Deposited state prevents long work from depending only on transient model context.
 
 ## Guardrails
 
@@ -69,3 +69,4 @@ Checkpoints make it practical to let an agent attempt larger changes, inspect th
 - [Memory & Context](../../02_using-codebolt/07_memory/01_overview.md)
 - [Guardrails](../../02_using-codebolt/05b_guardrails-and-settings/01_guardrails.md)
 - [Stigmergic Coordination](../../02_using-codebolt/07d_stigmergic-coordination/01_overview.md)
+- [Deposition Framework](../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)

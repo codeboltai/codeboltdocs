@@ -10,7 +10,7 @@ Once the basic loop works, the next step is making it behave like your team. In 
 
 ## Custom agents
 
-A custom agent packages instructions, model choices, tool permissions, budgets, and process assumptions into a reusable worker.
+A custom agent packages instructions, model choices, tool permissions, and process assumptions into a reusable worker.
 
 Use a custom agent when you want consistent behavior for a recurring job:
 

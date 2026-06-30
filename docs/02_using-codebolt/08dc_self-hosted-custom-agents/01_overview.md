@@ -96,7 +96,7 @@ That leads to much better architecture decisions, especially for companies that 
 
 ## See also
 
-- [Headless Mode](../02_surfaces/05_headless.md)
+- [Headless Mode](../02_surfaces/04_tui/03_cli-headless/01_overview.md)
 - [Agents](../04_agents/01_what-is-an-agent.md)
 - [Agent Extensions](../04b_agent-extensions/01_overview.md)
 - [External Integrations](../08e_external-integrations/01_overview.md)
