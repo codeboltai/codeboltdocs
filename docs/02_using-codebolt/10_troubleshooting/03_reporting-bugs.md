@@ -26,15 +26,6 @@ The current CLI does not expose the older diagnostic report command from previou
 **Settings → Help → Generate diagnostic report.** Saves a `.txt` file you can attach to a bug report. Includes everything the CLI version includes.
 
 </TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/diagnostics/report
-```
-
-Returns the same redacted bundle as text/plain.
-
-</TabItem>
 </Tabs>
 
 The report is **designed to be safe to share** — secrets are stripped. Review it before sending if you're paranoid.

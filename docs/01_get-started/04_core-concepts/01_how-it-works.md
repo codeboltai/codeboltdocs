@@ -96,7 +96,7 @@ That unlocks a different way to build agents:
 | Verification, guardrails, evals, and approval checks | [Guardrails](../../02_using-codebolt/05b_guardrails-and-settings/01_guardrails.md), [Eval and Optimization](../../02_using-codebolt/05e_eval-and-optimization/01_overview.md) | When to continue, retry, stop, or ask for help |
 | Local and remote execution environments | [Local Scaling](./06_local-scaling.md), [Cloud Scaling](./07_cloud-scaling.md), [Environment Providers](../../02_using-codebolt/08a_environments/03_environment-providers.md) | Where the work should run for a task |
 | Review and merge workflows | [Review and Merge](../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge.md), [Git and Shadow Git](../../02_using-codebolt/08_integrations/03_git-and-shadow-git.md) | What change to propose and what policy to follow |
-| Plugin, client, and custom app surfaces | [Extend To Your Process](./05_extend-to-your-process.md), [Building Plugins](../../02_using-codebolt/07z_plugins/04_building-plugins.md), [Custom Agentic Applications](../../02_using-codebolt/08da_custom-agentic-application/01_overview.md) | How users and external systems interact with the agent |
+| Plugin, client, and custom app surfaces | [Extend To Your Process](./05_extend-to-your-process.md), [Building Plugins](../../02_using-codebolt/07z_plugins/04_building-plugins.md), [Custom Agentic Applications](../../04_build-on-codebolt/04b_custom-agentic-applications/01_overview.md) | How users and external systems interact with the agent |
 
 ## See also
 

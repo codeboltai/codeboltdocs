@@ -36,17 +36,6 @@ Everything Codebolt does is recorded in the event log, so usage is always querya
 The current CLI does not expose the older aggregate `provider usage` or `events query` reporting commands. Use the desktop usage surfaces for end-user usage and billing inspection.
 
 </TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/usage?since=7d
-GET /api/usage?since=1mo&group_by=agent
-GET /api/usage?since=1mo&group_by=model
-```
-
-For team plans, add `?team=<id>` to scope to a team.
-
-</TabItem>
 </Tabs>
 
 ## LLM cost

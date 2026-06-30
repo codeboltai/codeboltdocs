@@ -66,5 +66,5 @@ The right shape depends on who the users are, where data must live, and how much
 ## See also
 
 - [Plugins](../../02_using-codebolt/07z_plugins/01_overview.md)
-- [Custom Agentic Application](../../02_using-codebolt/08da_custom-agentic-application/01_overview.md)
+- [Custom Agentic Applications](../../04_build-on-codebolt/04b_custom-agentic-applications/01_overview.md)
 - [External Integrations](../../02_using-codebolt/08e_external-integrations/01_overview.md)

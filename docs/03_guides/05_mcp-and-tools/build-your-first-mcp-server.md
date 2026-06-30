@@ -274,4 +274,4 @@ The agent should receive the structured error, explain to the user that Atlantis
 - [MCP Tools Overview](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md)
 - [Tool schema](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/03_tool-schema.md)
 - [Error handling](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/06_error-handling.md)
-- [Publishing](../../04_build-on-codebolt/02_creating-agents/10_publishing.md)
+- [Publishing](../../04_build-on-codebolt/02_creating-agents/99_publishing.md)

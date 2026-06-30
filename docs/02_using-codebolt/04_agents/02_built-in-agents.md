@@ -6,13 +6,7 @@ description: The default agents currently available from Codebolt's hosted agent
 
 # Built-in Agents
 
-Codebolt's built-in agents are the default agents exposed through the hosted agent list:
-
-```text
-https://api.codebolt.ai/api/agents/list
-```
-
-The available set can change over time. The list below matches the hosted API on **April 27, 2026**.
+Codebolt's built-in agents are the default agents exposed through the hosted agent list. The available set can change over time, so use the in-product agent picker or marketplace list as the source of truth for your current build.
 
 ![Built-in Agents](/productImages/agents/builtin_agents.png)
 

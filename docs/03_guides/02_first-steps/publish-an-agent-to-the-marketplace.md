@@ -65,6 +65,6 @@ Confirm it works in a clean environment.
 
 ## See also
 
-- [Publishing (full guide)](../../04_build-on-codebolt/02_creating-agents/10_publishing.md)
+- [Publishing (full guide)](../../04_build-on-codebolt/02_creating-agents/99_publishing.md)
 - [Custom Agents Quickstart](../../04_build-on-codebolt/02_creating-agents/02_quickstart.md)
 - [The Marketplace](../../02_using-codebolt/04_agents/04_the-marketplace.md)

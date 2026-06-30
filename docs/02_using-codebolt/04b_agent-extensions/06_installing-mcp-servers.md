@@ -1,231 +1,139 @@
 ---
 sidebar_position: 6
 title: Installing MCP Servers
-description: "Three sources for an MCP server: a marketplace registry, a manual config entry for a private/local server, or a capability bundle that ships its own"
+description: Add marketplace, local, or manually configured MCP servers to Codebolt.
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Installing MCP Servers
 
 ![Installing MCP Servers](/productImages/agent_extensions/install_mcp_server.png)
 
-Three sources for an MCP server: a marketplace registry, a manual config entry for a private/local server, or a capability bundle that ships its own. The mechanics are the same — what differs is where the manifest comes from.
+Codebolt stores MCP server configuration in `mcp_servers.json` under the Codebolt config directory. The server exposes MCP management through the `/mcp` route group; the current CLI does not expose the older end-user `tools install` command family.
 
-## 1. From the marketplace (easiest)
+## Install from the product UI
 
-The same install action across surfaces:
+Use the MCP server or Tools install surface exposed by your build. Review the server description and permissions, then install it.
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
+Behind the scenes, Codebolt resolves the marketplace item, asks the MCP installer flow to configure it, writes the result into `mcp_servers.json`, tests that the server returns tools, caches those tools, and enables the server only when the tool check succeeds.
 
-Use the MCP server or Tools install surface exposed by your build. Read the description, review permissions, then install.
+## Install from the MCP API
 
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose the older runtime tool-install commands from previous drafts.
-
-</TabItem>
-<TabItem value="tui" label="TUI">
-
-Press `m` to open the marketplace pane, switch to the **Tools** tab with `Tab`, navigate with `↑/↓`, press `Enter` on the entry, then `i` to install.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
+The current server-backed install route is:
 
 ```http
-POST /api/tools/install
+POST /mcp/install
 Content-Type: application/json
 
-{ "source": "marketplace/my-server", "version": "2.1.0" }
+{ "mcpId": "marketplace-server-id" }
 ```
 
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
+For local MCP definitions discovered by the server, pass the local name:
 
-```ts
-import codebolt from '@codebolt/codeboltjs';
+```http
+POST /mcp/install
+Content-Type: application/json
 
-await codebolt.tools.install('marketplace/my-server');
-await codebolt.tools.install('marketplace/my-server', { version: '2.1.0' });
+{ "isLocal": true, "uniqueName": "my-local-server" }
 ```
 
-</TabItem>
-</Tabs>
+Useful discovery routes:
 
-What happens internally — same in every surface:
-
-1. The marketplace manifest is downloaded and **signature-verified**.
-2. Codebolt checks **compatibility** (MCP protocol version, required dependencies).
-3. The server binary or package is fetched.
-4. A local entry is added to your workspace's `.codebolt/mcp-servers.yaml`.
-5. The server is spawned under `PluginProcessManager`.
-6. Codebolt performs the MCP **handshake** and enumerates the tools.
-7. The tools appear in your workspace's tool namespace.
-
-You see a success toast (desktop), a `✓ installed` line (CLI), a state-change notification (TUI), or a 200 response (API/SDK) — but the work is the same.
-
-## 2. Manual configuration (for private or local servers)
-
-When you have an MCP server that isn't on the marketplace — an internal tool, a development build, a local binary, a remote endpoint — add it manually.
-
-Edit `.codebolt/mcp-servers.yaml` (create it if it doesn't exist):
-
-```yaml
-servers:
-  # Local binary
-  my-linter:
-    command: /usr/local/bin/my-linter-mcp
-    args: ["--config", ".linterrc"]
-    env:
-      LINTER_MODE: strict
-
-  # Node package
-  another-tool:
-    command: node
-    args: ["./tools/my-mcp-server/index.js"]
-
-  # Python package
-  py-tool:
-    command: python
-    args: ["-m", "my_tool.server"]
-
-  # Remote HTTP
-  internal-api:
-    url: https://mcp.my-company.com
-    auth:
-      type: bearer
-      token_env: INTERNAL_MCP_TOKEN
+```http
+GET /mcp/available/list
+GET /mcp/available/list/detail/:mcpId
+GET /mcp/available/all
+GET /mcp/localMcp/list
+GET /mcp/getMcpConfig/Path
 ```
 
-Save the file. Codebolt watches the file and starts any new servers automatically.
+## Manual configuration
 
-To verify: the MCP server or Tools management surface should show the new server within a few seconds, with state `running` and a list of provided tools.
+Use manual configuration for private MCP servers, development builds, or local binaries. The stored file shape is JSON:
 
-### Field reference
-
-| Field | Required | Meaning |
-|---|---|---|
-| `command` | for local | Binary or interpreter to run |
-| `args` | optional | Arguments to pass |
-| `env` | optional | Environment variables for the server process |
-| `cwd` | optional | Working directory (defaults to project root) |
-| `url` | for remote | Remote MCP endpoint |
-| `auth` | optional | Auth block for remote servers |
-| `auth.type` | | `bearer`, `basic`, `custom_header` |
-| `auth.token_env` | | Env var to read the token from (never hard-code tokens) |
-| `startup_timeout` | optional | How long to wait for the handshake (default 10s) |
-| `restart_policy` | optional | `always`, `on_failure`, `never` (default `on_failure`) |
-
-## 3. As part of a capability bundle
-
-Capabilities can ship MCP servers. When you install a capability, its MCP servers are installed automatically as part of the bundle.
-
-You see them in the MCP server or Tools management surface, marked as being provided by the capability bundle.
-
-## Verifying an install
-
-After any install:
-
-1. The MCP server or Tools management surface should show `running`.
-2. Expand the server — you should see a list of tools with descriptions.
-3. **Test a tool** — click any tool and pick "Test". Enter sample arguments. You should get a structured response.
-
-If the server is red (errored), expand the logs:
-
-```
-ERROR: spawn my-linter-mcp ENOENT
+```json
+{
+  "mcpServers": {
+    "my-linter": {
+      "command": "/usr/local/bin/my-linter-mcp",
+      "args": ["--config", ".linterrc"],
+      "env": {
+        "LINTER_MODE": "strict"
+      }
+    }
+  },
+  "enabled": ["my-linter"]
+}
 ```
 
-→ binary isn't on PATH. Fix the `command:` to be an absolute path, or add the binary to PATH.
+The route-backed way to update one server is:
 
-```
-ERROR: handshake timeout
+```http
+POST /mcp/configure/:serverName
+Content-Type: application/json
+
+{
+  "command": "/usr/local/bin/my-linter-mcp",
+  "args": ["--config", ".linterrc"],
+  "env": {
+    "LINTER_MODE": "strict"
+  }
+}
 ```
 
-→ the server is running but not speaking MCP. Either the wrong binary, a crashed startup, or a version mismatch.
+When a named server is configured, Codebolt tests whether it can return MCP tools. If tools are returned, the server is added to the enabled list. If it returns no tools or errors during the check, the config is saved but the server is not enabled.
 
-```
-ERROR: unauthorized (401)
+To replace the full configured server map:
+
+```http
+POST /mcp/configure
+Content-Type: application/json
+
+{
+  "my-linter": {
+    "command": "/usr/local/bin/my-linter-mcp",
+    "args": ["--config", ".linterrc"]
+  }
+}
 ```
 
-→ remote server rejected auth. Check `token_env` points at a real env var.
+## Enable or disable a server
+
+Use the toggle route to add or remove a configured server from the enabled list:
+
+```http
+POST /mcp/toggle
+Content-Type: application/json
+
+{ "serverName": "my-linter", "enabled": true }
+```
+
+Use `enabled: false` to disable it without deleting the configuration.
+
+## Verify an install
+
+After installing or configuring a server:
+
+```http
+GET /mcp
+GET /mcp/:serverName
+GET /mcp/configured/mcps
+POST /mcp/tools/update
+```
+
+The management surface should show the server and its tools after the tool cache updates. If the server is configured but not enabled, check whether the command exists, the arguments are valid, and the server actually speaks MCP and returns at least one tool.
 
 ## Security considerations
 
-An MCP server you install runs code on your machine with your credentials. Treat it the same way you'd treat installing a shell tool or an npm package:
+An MCP server runs code on your machine or calls a remote service using your credentials. Treat installation like adding any other local developer tool:
 
-- **Check the source.** Marketplace entries show author and install count. Low-trust sources warrant extra caution.
-- **Read the tools list.** A linter that wants `codebolt_fs.write_file + codebolt_git.push` is suspicious. A linter needs reads, not writes.
-- **Prefer first-party servers** from the vendor of the service you're integrating. "Stripe's official MCP server" > "some person's Stripe MCP".
-- **Use env-var auth for secrets.** Never hard-code tokens in `mcp-servers.yaml` — that file gets committed.
-- **Start with a scoped allowlist.** Don't immediately add new tool families to every agent's `tools.allow`. Add them only to agents that need them.
-
-## Troubleshooting
-
-### "The server starts, tools appear, but my agent says 'tool not found'"
-The agent's `tools.allow` doesn't include the new tool. Add it:
-
-```yaml
-# .codebolt/agents/my-agent/agent.yaml
-tools:
-  allow:
-    - codebolt_fs.*
-    - my-linter.*    # ← add this
-```
-
-Or use the agent picker to switch to an agent with a broader allowlist.
-
-### "The server keeps restarting"
-Check the server logs in the MCP management UI. Usually this is a crash loop from a missing dependency, a port conflict, or a config error.
-
-### "Every new shell has to re-set the env var"
-Put it in your shell profile (`.zshrc`, `.bashrc`) or use a secrets manager that your shell loads automatically.
-
-### "The server is slow and blocks agents"
-MCP servers can be slow — that's a property of the server, not Codebolt. Agents wait on tool calls. If a server is consistently slow:
-- Check if the server is doing work it doesn't need to (e.g. re-initializing on every call).
-- Look for a faster alternative or build a wrapper that caches results.
-- Constrain which agents use the slow tool.
-
-## Uninstalling
-
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
-Use the uninstall action in the MCP server or Tools management UI.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose the older runtime tool-uninstall command from previous drafts.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-DELETE /api/tools/<name>
-```
-
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
-
-```ts
-await codebolt.tools.uninstall('my-server');
-```
-
-</TabItem>
-</Tabs>
-
-The server is stopped, removed from `.codebolt/mcp-servers.yaml`, and its tools disappear from the namespace. Agents that referenced those tools will get `tool_not_found` errors on next use — update their allowlists to remove the stale entries.
-
-Uninstalling does **not** delete historical runs that used the tool; those are still queryable via the event log.
+- Check the source and maintainer.
+- Review the tools it exposes before granting agents broad access.
+- Store secrets in environment variables, not in project files.
+- Add tools only to agents that need them.
 
 ## See also
 
 - [Agent Extensions Overview](./01_overview.md)
-- [Managing MCP servers](./07_managing-mcp-servers.md)
-- [MCP Tools (for builders)](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md)
-- [MCP & Tools (internals)](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)
+- [Managing MCP Servers](./07_managing-mcp-servers.md)
+- [MCP Tools for Builders](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md)
+- [MCP and Tools Internals](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)

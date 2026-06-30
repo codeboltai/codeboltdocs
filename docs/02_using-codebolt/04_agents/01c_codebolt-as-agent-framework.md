@@ -9,7 +9,7 @@ import AgentPipeline from '@site/src/components/diagrams/AgentPipeline';
 
 # Codebolt as an Agent Framework
 
-Codebolt is most visible as the desktop / CLI / TUI you chat with — but underneath, it is also an **agent framework**. If you have used [LangChain](https://js.langchain.com), [Mastra](https://mastra.ai), the [Vercel AI SDK](https://sdk.vercel.ai), or AutoGen, the mental model is familiar: you define an agent in code with instructions, tools, and processors, then call it from your application.
+Codebolt is most visible as the desktop app and CLI you chat with, but underneath it is also an **agent framework**. If you have used [LangChain](https://js.langchain.com), [Mastra](https://mastra.ai), the [Vercel AI SDK](https://sdk.vercel.ai), or AutoGen, the mental model is familiar: you define an agent in code with instructions, tools, and processors, then call it from your application.
 
 The difference is that Codebolt agents don't run *inside* your application process. They run inside a **Codebolt server** — local, in a container, or in the cloud — and your application talks to that server through a typed client SDK. You keep the same flexibility a framework gives you, plus everything else Codebolt provides: persistent memory, multi-agent coordination, MCP tools, observability, and the marketplace.
 
@@ -225,7 +225,7 @@ The cost is one extra hop: your app → Codebolt server → LLM provider, instea
 - **You're building an internal AI feature in a Next.js / SaaS product.** Use `@codebolt/agent` to define the agent and `@codebolt/client-sdk` to call it. Run a Codebolt server alongside your app, or let the SDK spawn one.
 - **You're building a developer tool.** Same as above, plus consider publishing the agent to the marketplace so users install it inside their own Codebolt.
 - **You don't need custom code, just a configured assistant.** Skip the framework — use the [marketplace](./04_the-marketplace.md) and configure with [agent.yaml](../../04_build-on-codebolt/02_creating-agents/05_agent-anatomy/agent-yaml.md).
-- **You're embedding agents into a CLI / job runner / cron.** Use `@codebolt/client-sdk` against a [headless Codebolt server](../02_surfaces/04_tui/03_cli-headless/01_overview.md).
+- **You're embedding agents into a CLI / job runner / cron.** Use `@codebolt/client-sdk` against a [headless Codebolt server](../02_surfaces/04_cli/03_cli-headless/01_overview.md).
 
 ## See also
 

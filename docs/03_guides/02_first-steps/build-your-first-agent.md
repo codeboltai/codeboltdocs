@@ -116,7 +116,7 @@ Level 1 agents are framework-based TypeScript projects. See [Level 1 — Framewo
 ## Where to next
 
 - **Commit your agent** to the project repo so your team gets it automatically. `.codebolt/agents/` should be in git.
-- **Publish it to the marketplace** — see [Publishing](../../04_build-on-codebolt/02_creating-agents/10_publishing.md).
+- **Publish it to the marketplace** — see [Publishing](../../04_build-on-codebolt/02_creating-agents/99_publishing.md).
 - **Code review with an agent** — see [Code review guide](../03_everyday-workflows/code-review-with-an-agent.md).
 
 ## See also

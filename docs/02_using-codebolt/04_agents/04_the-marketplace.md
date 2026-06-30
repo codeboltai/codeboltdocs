@@ -4,9 +4,6 @@ title: The Marketplace
 description: A public catalog of agents, tools, and capabilities that anyone can install into their Codebolt
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # The Agent Marketplace
 
 A public catalog of agents, tools, and capabilities that anyone can install into their Codebolt. Think of it as a package registry — npm or PyPI, but for AI agents.
@@ -25,15 +22,11 @@ Three kinds of things:
 
 All three install through the same UI. From your point of view, installing an agent and installing an MCP server look the same.
 
-## Browsing
-
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
+## Browsing from the desktop app
 
 Open the **Agents** panel and switch to the **Marketplace** tab. The same marketplace tab is also available from the **Select your Agent** dialog.
 
-</TabItem>
-<TabItem value="cli" label="CLI">
+## Browsing from command mode
 
 ```bash
 codebolt command agents featured
@@ -43,22 +36,6 @@ codebolt command agents config <name>
 ```
 
 The current CLI does not expose a dedicated `marketplace` command family. In practice, the available agent discovery commands are the `featured`, `recommended`, `list`, and `config` commands under `codebolt command agents`.
-
-</TabItem>
-<TabItem value="tui" label="TUI">
-
-`m` opens the marketplace pane. `Tab` switches between Agents / Tools / Capabilities. `/` to search, `↑/↓` to navigate, `Enter` for detail.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/marketplace/search?q=reviewer&kind=agent
-GET /api/marketplace/items/:name
-```
-
-</TabItem>
-</Tabs>
 
 In the current desktop UI, the marketplace is an in-app agent browser rather than a separate browser page. You can:
 
@@ -86,13 +63,7 @@ Installation is per-workspace by default. Use the settings UI when you need to c
 
 ## Trust model
 
-Marketplace entries go through automated review:
-
-- **Lint check** — manifest is valid, required fields present.
-- **Security scan** — no obvious secret leakage, no known-bad dependencies.
-- **Basic behaviour check** — the agent loads and can handle a trivial task.
-
-This catches obvious problems. It **does not** catch:
+Marketplace entries should be treated like third-party packages. Review the manifest, source, required tools, and author before installing. Automated checks may catch obvious packaging problems, but they do not catch:
 
 - Malicious intent disguised as normal behaviour.
 - Subtle security issues (prompt injection vulnerabilities, privilege escalation via tool chains).
@@ -106,11 +77,11 @@ Your workspace has an **agent portfolio** — the curated set of agents actually
 
 In the current desktop UI, installed agents show up under the **Installed** and **My Agents** tabs, and per-agent portfolio data is available from the agent profile panel.
 
-Teams that self-host often constrain what the portfolio can contain: "only approved agents from our internal registry". See [Self-hosting](../../04_build-on-codebolt/10_self-hosting/01_overview.md).
+Teams that self-host often constrain what the portfolio can contain: "only approved agents from our internal registry". See [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md).
 
 ## Publishing your own
 
-To publish an agent, see [Build on Codebolt → Publishing](../../04_build-on-codebolt/02_creating-agents/10_publishing.md).
+To publish an agent, see [Build on Codebolt -> Publishing](../../04_build-on-codebolt/02_creating-agents/99_publishing.md).
 
 Quick version:
 
@@ -129,7 +100,7 @@ Organizations can host their own marketplace. A private registry:
 - Supports reviewing agents before they become available.
 - Can mirror approved public marketplace entries.
 
-Configure a private registry in **Settings → Registries**. Private registries take precedence over the public marketplace for the same name. See [Self-hosting → Registries](../../04_build-on-codebolt/10_self-hosting/01_overview.md).
+If your build ships a private registry surface, configure it through that settings area. See [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md) for self-hosted deployment context.
 
 ## See also
 
@@ -137,4 +108,4 @@ Configure a private registry in **Settings → Registries**. Private registries 
 - [Running agents](./03_running-agents.md)
 - [Installing an agent](./05_installing-an-agent.md)
 - [Agent portfolios](./06_agent-portfolios.md)
-- [Publishing (for builders)](../../04_build-on-codebolt/02_creating-agents/10_publishing.md)
+- [Publishing (for builders)](../../04_build-on-codebolt/02_creating-agents/99_publishing.md)

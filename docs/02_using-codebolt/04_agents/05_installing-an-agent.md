@@ -4,9 +4,6 @@ title: Installing an Agent
 description: Adding an agent from the marketplace, a private registry, or a local file. Same process regardless of source — what differs is where the manifest comes from.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Installing an Agent
 
 Adding an agent from the marketplace, a private registry, or a local file. Same process regardless of source — what differs is where the manifest comes from.
@@ -15,38 +12,9 @@ Adding an agent from the marketplace, a private registry, or a local file. Same 
 
 ## From the marketplace
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
 Open the **Agents** panel and switch to **Marketplace**, or open **Select your Agent** and switch to **Marketplace**. Click an agent to open its details, then choose **Install**.
 
-</TabItem>
-<TabItem value="cli" label="CLI">
-
 The current `packages/cli` implementation does not expose an end-user `agent install` command. Use the desktop UI for marketplace installs, or add a project-local agent under `.codebolt/agents/` when you are working directly in the filesystem.
-
-</TabItem>
-<TabItem value="tui" label="TUI">
-
-`m` → marketplace pane → `Tab` to **Agents** → `↑/↓` → `Enter` → `i` to install.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-POST /api/agents/install
-{ "source": "marketplace/my-agent", "version": "1.2.0" }
-```
-
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
-
-```ts
-await codebolt.agents.install('marketplace/my-agent');
-```
-
-</TabItem>
-</Tabs>
 
 Under the hood: download, verify signature, check compatibility, install files, add to portfolio.
 
@@ -116,63 +84,15 @@ codebolt command agents config <name>
 
 ## Updating
 
-<Tabs groupId="surface">
-<TabItem value="cli" label="CLI" default>
-
 The current CLI does not expose `agent update` or `agent update-all`. Use the desktop UI for agent updates.
-
-</TabItem>
-<TabItem value="desktop" label="Desktop">
 
 The current `packages/ui` agent marketplace components do not expose a clear desktop update action. Document a specific update flow only for builds that ship one.
 
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-POST /api/agents/:name/update
-POST /api/agents/:name/update  { "version": "1.3.0" }
-```
-
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
-
-```ts
-await codebolt.agents.update('my-agent');
-await codebolt.agents.update('my-agent', { version: '1.3.0' });
-```
-
-</TabItem>
-</Tabs>
-
 ## Uninstalling
-
-<Tabs groupId="surface">
-<TabItem value="cli" label="CLI" default>
 
 The current CLI does not expose `agent uninstall`. Use the desktop UI to remove an installed agent.
 
-</TabItem>
-<TabItem value="desktop" label="Desktop">
-
 The current `packages/ui` agent marketplace components do not expose a clear desktop uninstall action.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-DELETE /api/agents/:name
-```
-
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
-
-```ts
-await codebolt.agents.uninstall('my-agent');
-```
-
-</TabItem>
-</Tabs>
 
 Removes the files, removes from portfolio, removes from the agent list. Does not delete:
 
@@ -200,4 +120,4 @@ Filesystem permission issue. Check ownership of `~/.codebolt/agents/` (or `.code
 
 - [The Marketplace](./04_the-marketplace.md)
 - [Agent Portfolios](./06_agent-portfolios.md)
-- [Publishing (for builders)](../../04_build-on-codebolt/02_creating-agents/10_publishing.md)
+- [Publishing (for builders)](../../04_build-on-codebolt/02_creating-agents/99_publishing.md)

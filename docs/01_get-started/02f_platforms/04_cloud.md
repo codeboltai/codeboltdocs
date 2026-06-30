@@ -15,7 +15,7 @@ Cloud is unique among the four platforms because it offers **two execution model
 - **Cloud sandbox** — the portal spins up an isolated sandbox (E2B, Daytona, Runloop, or a Runner Node) and runs the CodeBolt CLI inside it. No local setup.
 - **Local runtime** — you connect your own machine to the cloud with the **cloud plugin**. The agent runs on your hardware with your files and tools, but you can drive it from any browser.
 
-> New here? The **[Cloud Overview](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)** explains what Cloud gives you, and **[Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)** walks you through your first cloud agent run.
+> New here? **[Using Codebolt -> Cloud](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)** explains what Cloud gives you, and **[Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)** walks you through your first cloud agent run.
 
 ## How to launch
 
@@ -128,7 +128,7 @@ The platform page you're reading is the entry point. The detailed Cloud document
 
 | Page | What it covers |
 |---|---|
-| **[Cloud Overview](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)** | What Cloud gives you, when to reach for it, and how it connects to the rest of CodeBolt |
+| **[Using Codebolt -> Cloud](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)** | What Cloud gives you, when to reach for it, and how it connects to the rest of CodeBolt |
 | **[Cloud Portal](../../02_using-codebolt/02_surfaces/06_cloud/02_cloud-portal.md)** | The browser UI — three tabs and what lives under each |
 | **[Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)** | Chat against an agent in a cloud sandbox or on your local machine |
 | **[Runtimes & Providers](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)** | Manage runtime instances, bring your own sandbox API key, scaling patterns |
@@ -148,7 +148,7 @@ If you need the fullest desktop affordances (`@mentions`, Ctrl+K inline editing,
 
 ## See also
 
-- [Cloud Overview](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)
+- [Using Codebolt -> Cloud](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)
 - [Remote Chat](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat.md)
 - [Runtimes & Providers](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)
 - [Platform Overview](../../02_using-codebolt/02_surfaces/01_overview.md) - compare all platforms

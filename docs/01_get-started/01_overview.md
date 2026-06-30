@@ -120,7 +120,7 @@ Mechanisms that trigger agents automatically — without a user typing a message
 Build focused agent-powered products on top of Codebolt by combining a custom UI, domain-specific agents, and the right automation and integration surface.
 
 <DocCardGrid columns={3} items={[
-  { label: 'App', title: 'Custom Agentic Application', description: 'How to combine custom interfaces, agents, automation, and integrations into a product-specific app.', href: '../02_using-codebolt/08da_custom-agentic-application/01_overview' },
+  { label: 'App', title: 'Custom Agentic Application', description: 'How to combine custom interfaces, agents, automation, and integrations into a product-specific app.', href: '../04_build-on-codebolt/04b_custom-agentic-applications/01_overview' },
 ]} />
 
 <p class="uc-section-label">Cloud</p>
@@ -128,7 +128,7 @@ Build focused agent-powered products on top of Codebolt by combining a custom UI
 The hosted portal at portal.codebolt.ai — run and scale agents in cloud sandboxes, bring your own E2B or Daytona key, and publish to the marketplace.
 
 <DocCardGrid columns={3} items={[
-  { label: 'Cloud', title: 'Cloud Overview', description: 'What Codebolt Cloud gives you, when to use it, and when local is enough.', href: '../02_using-codebolt/02_surfaces/06_cloud/00_get-started' },
+  { label: 'Cloud', title: 'Cloud', description: 'What Codebolt Cloud gives you, when to use it, and when local is enough.', href: '../02_using-codebolt/02_surfaces/06_cloud/00_get-started' },
   { label: 'Chat', title: 'Remote Chat', description: 'Chat against an agent running in a cloud sandbox, optionally bound to a GitHub repo.', href: '../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/01_remote-chat' },
   { label: 'RT', title: 'Runtimes & Providers', description: 'Manage cloud sandbox instances and bring your own E2B or Daytona credentials.', href: '../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers' },
 ]} />

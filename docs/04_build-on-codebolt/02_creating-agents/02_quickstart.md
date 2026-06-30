@@ -184,7 +184,7 @@ That is why the same remote agent can appear in the normal agent picker even tho
 - **Pick a pattern for non-trivial agents** → [Patterns overview](./06_patterns/overview.md)
 - **Add custom behaviour via processors** → [Processors](./07_processors/01_what-are-processors.md)
 - **Test your agent rigorously** → [Testing and debugging](./09_testing-and-debugging.md)
-- **Ship it** → [Publishing](./10_publishing.md)
+- **Ship it** → [Publishing](./99_publishing.md)
 
 ## Common pitfalls (first-time agent authors)
 

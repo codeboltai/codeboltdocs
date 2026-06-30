@@ -145,7 +145,7 @@ Agents are programs; test them like programs.
 When you're ready, your agent can be:
 
 - **Private to your project** — lives in `.codebolt/agents/`. No publishing needed.
-- **Published to the CodeBolt registry** — `codebolt agent publish`. See [Publishing](./10_publishing.md).
+- **Published to the CodeBolt registry** — `codebolt agent publish`. See [Publishing](./99_publishing.md).
 
 ## See also
 

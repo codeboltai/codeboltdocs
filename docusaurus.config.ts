@@ -184,7 +184,7 @@ const config: Config = {
 
                 if (label === 'Platforms' && sidebarItem.label === 'Clients') {
                   const flattenedPlatformItems = sidebarItem.items.map((platformItem) => {
-                    if (platformItem.type === 'category' && platformItem.label === 'TUI Mode' && cliInterfaceItem) {
+                    if (platformItem.type === 'category' && platformItem.label === 'CLI' && cliInterfaceItem) {
                       return {
                         ...platformItem,
                         items: [...platformItem.items, cliInterfaceItem],

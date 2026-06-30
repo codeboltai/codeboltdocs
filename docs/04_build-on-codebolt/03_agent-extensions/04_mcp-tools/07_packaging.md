@@ -213,6 +213,6 @@ MCP servers run with the user's credentials. Don't abuse that trust.
 ## See also
 
 - [MCP Tools Overview](./01_overview.md)
-- [Publishing](../../02_creating-agents/10_publishing.md) — after packaging comes publishing
+- [Publishing](../../02_creating-agents/99_publishing.md) — after packaging comes publishing
 - [Quickstart](./02_quickstart-local-mcp.md)
 - [MCP & Tools (internals)](../../07b_subsystems/02_mcp-and-tools.md)

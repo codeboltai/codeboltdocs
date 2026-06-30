@@ -178,4 +178,4 @@ When the server loads an agent, it caches the manifest. After editing `codebolta
 - [Context](./context.md) — the working state the handler sees
 - [Level 0 — Remix](../03_creation-levels/level-0-remix.md)
 - [Level 1 — Framework](../03_creation-levels/level-1-framework.md)
-- [Publishing](../10_publishing.md)
+- [Publishing](../99_publishing.md)

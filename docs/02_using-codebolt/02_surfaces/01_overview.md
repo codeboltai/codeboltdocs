@@ -13,7 +13,7 @@ Codebolt is the same agent runtime no matter how you talk to it. The **client** 
 | Client | Best for | Trade-off |
 |---|---|---|
 | **[Desktop app](./02_desktop-app/00_get-started.md)** | Daily coding work, multi-panel context, visual diffs, rich chat | Heaviest install, single machine |
-| **[CLI](./04_tui/01_cli-interface/00_get-started.md)** | Interactive terminal interface, command mode, headless server, one-shot prompts, CI, remote SSH | Terminal-first, less visual than the desktop app |
+| **[CLI](./04_cli/01_cli-interface/00_get-started.md)** | Interactive terminal interface, command mode, headless server, one-shot prompts, CI, remote SSH | Terminal-first, less visual than the desktop app |
 | **[Cloud](./06_cloud/00_get-started.md)** | Browser-based access, managed sandboxes, driving your machine from anywhere | Needs a network connection; lighter affordances than the desktop app |
 
 The same project, the same agents, the same memory — only the client differs. (Cloud is a bit different — it controls *where the agent runs* rather than being a client you install, but the same runtime and plugin system apply.)
@@ -40,7 +40,7 @@ The pages under **Clients** are **reference catalogs** for each client — what 
 
 - [Get Started](../../01_get-started/03_quickstart.md)
 - [Desktop App](./02_desktop-app/00_get-started.md)
-- [CLI](./04_tui/01_cli-interface/00_get-started.md)
-- [CLI Commands](./04_tui/02_cli-commands/01_overview.md)
-- [Headless CLI](./04_tui/03_cli-headless/01_overview.md)
+- [CLI](./04_cli/01_cli-interface/00_get-started.md)
+- [Command Mode](./04_cli/02_cli-commands/01_overview.md)
+- [Headless CLI](./04_cli/03_cli-headless/01_overview.md)
 - [Cloud](./06_cloud/00_get-started.md)

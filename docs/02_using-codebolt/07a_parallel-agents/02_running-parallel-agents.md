@@ -51,14 +51,6 @@ The current CLI does not expose the older flow-execution commands from previous 
 **Flows panel → Run** on a flow card. Inputs are filled from the flow's input schema.
 
 </TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-POST /api/flows/:name/run
-{ "inputs": { "task": "..." } }
-```
-
-</TabItem>
 </Tabs>
 
 **Use this when:** you have a repeatable multi-agent pattern with a fixed structure. See [Reading a flow](../07_multi-agent-usage/03_reading-a-flow.md).
@@ -99,7 +91,7 @@ All concurrent runs share server-wide limits:
 - **Max spawn rate** — prevents runaway delegation loops
 - **Per-agent budgets** — `max_tool_calls`, `max_tokens`, `max_wall_time_seconds`, `max_cost_usd` in the agent manifest
 
-If you hit concurrency limits, new runs queue until a slot opens. See [Self-hosting → Scaling](../../04_build-on-codebolt/10_self-hosting/01_overview.md) for raising these limits.
+If you hit concurrency limits, new runs queue until a slot opens. See [Self-hosting → Scaling](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md) for raising these limits.
 
 ---
 

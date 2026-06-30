@@ -4,9 +4,6 @@ title: Agent Portfolios
 description: A portfolio is the curated set of agents active in a workspace
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Agent Portfolios
 
 A **portfolio** is the curated set of agents active in a workspace. Installing an agent doesn't automatically add it to the portfolio — you choose which installed agents are actually available in a given project.
@@ -22,41 +19,15 @@ Two reasons:
 
 ## Viewing your portfolio
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
 Open an agent's profile from the **Agents** panel or an agent picker to inspect portfolio-style data such as reputation, conversations, testimonials, karma, and talents. The current desktop UI does not expose a dedicated **Settings → Agents → Portfolio** screen.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
 
 The current CLI does not expose `agent portfolio` commands. Portfolio management is currently a UI-driven concept.
 
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/portfolio
-GET /api/portfolio?scope=workspace
-```
-
-</TabItem>
-</Tabs>
-
 ## Adding and removing
-
-<Tabs groupId="surface">
-<TabItem value="cli" label="CLI" default>
 
 The current CLI does not expose add, remove, or pin operations for portfolios.
 
-</TabItem>
-<TabItem value="desktop" label="Desktop">
-
 Pinning is available from agent pickers. The current `packages/ui` code does not expose a dedicated desktop portfolio editor, so use the config file or the product surface shipped in your build when you need explicit portfolio editing.
-
-</TabItem>
-<TabItem value="config" label="Config file">
 
 Edit `.codebolt/portfolio.yaml` directly:
 
@@ -68,17 +39,6 @@ portfolio:
 ```
 
 Commit to git to share with the team.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-POST   /api/portfolio { "name": "my-agent", "pinned": false }
-DELETE /api/portfolio/:name
-```
-
-</TabItem>
-</Tabs>
 
 Removing from the portfolio doesn't uninstall — the agent is still on disk, just not in the active set. Re-add at any time.
 

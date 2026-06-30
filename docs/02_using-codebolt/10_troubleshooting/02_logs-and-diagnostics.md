@@ -37,19 +37,6 @@ Codebolt writes several streams of diagnostic output:
 The current CLI does not expose the older log-viewing commands from previous drafts. Read raw log files directly or use the desktop log viewer.
 
 </TabItem>
-<TabItem value="tui" label="TUI">
-
-Press `l` to open the logs pane. `/` to filter, `f` to follow, `0-5` to set level (TRACE to ERROR).
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/logs?tail=500&level=warn&component=agentService
-GET /api/logs/stream    # SSE
-```
-
-</TabItem>
 <TabItem value="raw" label="Raw files">
 
 Server logs live on disk for direct access (e.g. for tailing with `tail -f` or shipping to a collector):
@@ -156,7 +143,7 @@ logging:
   rotate: daily
 ```
 
-For self-hosted production, ship logs to a centralised aggregator rather than relying on local files. See [Self-hosting](../../04_build-on-codebolt/10_self-hosting/01_overview.md).
+For self-hosted production, ship logs to a centralised aggregator rather than relying on local files. See [Self-hosting](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md).
 
 ## Live metrics
 
@@ -166,7 +153,7 @@ For real-time observability (counts, rates, percentiles), use the Prometheus end
 http://localhost:9091/metrics
 ```
 
-See [Self-hosting → Scaling](../../04_build-on-codebolt/10_self-hosting/05_scaling-and-workers.md) for configuration.
+See [Self-hosting → Scaling](../../04_build-on-codebolt/11_agent-infrastructure/05_scaling-and-workers.md) for configuration.
 
 ## See also
 

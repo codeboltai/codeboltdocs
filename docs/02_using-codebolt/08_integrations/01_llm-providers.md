@@ -33,7 +33,7 @@ Local:
 BYO:
 
 - **Custom HTTP endpoints** — any OpenAI-compatible API
-- **Custom providers** — see [Build on Codebolt → Custom LLM Provider](../../04_build-on-codebolt/06_remote-env-providers/01_llm-provider.md)
+- **Custom providers** — see [Build on Codebolt -> Custom LLM Provider](../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md)
 
 See [Local models](./02_local-models.md) for local setup.
 
@@ -82,20 +82,6 @@ providers:
 ```
 
 Use `_env` suffixes to read secrets from environment variables instead of hard-coding.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-POST /api/providers
-{
-  "type": "anthropic",
-  "name": "anthropic",
-  "credentials": { "api_key": "sk-ant-..." }
-}
-
-POST /api/providers/:name/test
-```
 
 </TabItem>
 </Tabs>
@@ -178,7 +164,7 @@ For headless / CI environments where no keychain exists, provide the master key 
 export CODEBOLT_MASTER_KEY=...
 ```
 
-See [Self-hosting → Security hardening](../../04_build-on-codebolt/10_self-hosting/01_overview.md) for the full key management story.
+See [Self-hosting → Security hardening](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md) for the full key management story.
 
 ## Per-scope configuration
 

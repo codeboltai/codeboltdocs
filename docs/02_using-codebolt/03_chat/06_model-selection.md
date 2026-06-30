@@ -55,16 +55,6 @@ codebolt command llm set-default --provider anthropic --model claude-sonnet-4-6
 ```
 
 </TabItem>
-<TabItem value="api" label="HTTP API">
-
-Either set on `POST /api/agents/:name/start` body, or globally:
-
-```http
-PUT /api/config/default_model
-{ "value": "claude-sonnet-4-6" }
-```
-
-</TabItem>
 </Tabs>
 
 ## Picking between remote providers

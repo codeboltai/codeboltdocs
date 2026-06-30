@@ -86,7 +86,7 @@ codebolt action plugin publish --path ./my-plugin
 codebolt action plugin list
 ```
 
-See [Building Plugins](../../../08g_plugins/04_building-plugins.md) and the [Plugin developer docs](../../../../04_build-on-codebolt/05_plugins/01_overview.md).
+See [Building Plugins](../../../07z_plugins/04_building-plugins.md) and the [Plugin developer docs](../../../../04_build-on-codebolt/05_plugins/01_overview.md).
 
 </AccordionItem>
 
@@ -277,4 +277,4 @@ Anyone with a signed-in account can publish. Team-owned items on self-hosted dep
 - [Cloud Portal](../02_cloud-portal.md)
 - [Installing an Agent](../../../04_agents/05_installing-an-agent.md)
 - [The Marketplace (in-app)](../../../04_agents/04_the-marketplace.md)
-- [Plugin Marketplace](../../../08g_plugins/03_plugin-marketplace.md)
+- [Plugin Marketplace](../../../07z_plugins/03_plugin-marketplace.md)

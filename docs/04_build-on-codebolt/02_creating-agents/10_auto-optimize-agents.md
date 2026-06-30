@@ -86,4 +86,4 @@ So the top-level [Evaluation & Optimization](../07_eval-and-optimization/01_over
 ## See also
 
 - [Testing and Debugging](./09_testing-and-debugging.md)
-- [Publishing](./10_publishing.md)
+- [Publishing](./99_publishing.md)

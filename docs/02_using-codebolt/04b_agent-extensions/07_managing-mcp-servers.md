@@ -1,317 +1,119 @@
 ---
 sidebar_position: 7
 title: Managing MCP Servers
-description: Once MCP servers are installed, there are five ways to manage them — desktop app, CLI, TUI, HTTP API, and the Plugin SDK
+description: Inspect configured MCP servers, toggle them on or off, refresh tool caches, and troubleshoot configuration.
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Managing MCP Servers
 
-Once MCP servers are installed, the mental model is the same across surfaces: a server is a supervised process with a lifecycle, config, logs, and resource limits.
+Once an MCP server is installed or configured, Codebolt manages it through the `/mcp` route group and the product MCP management surfaces. The current CLI does not expose the older runtime `tools start`, `tools logs`, or `tools update` command family.
 
-:::tip Pilot page
-This page is the pilot for our **feature-first + tabbed surfaces** pattern. The conceptual explanation is shared; the surface-specific commands live in tabs. If this reads well to you, the rest of *Using Codebolt* will follow the same shape.
-:::
+## What you can manage
 
-## What you manage
+The current server-backed management model covers:
 
-Every installed MCP server has:
+- configured MCP server entries
+- enabled or disabled state
+- available marketplace/local MCP metadata
+- cached tools from enabled MCP servers
+- browser navigation helper used by MCP-related flows
 
-- **Name and version**
-- **State** — `running` / `stopped` / `crashed` / `starting`
-- **Tools provided** — the list of tool functions the server exposes
-- **Resource usage** — CPU, memory (when the server reports it)
-- **Last activity** — when a tool from this server was last called
-- **Logs** — everything the server wrote to stderr
+It does not expose the older tool lifecycle, log streaming, or update route family described in earlier drafts.
 
-`PluginProcessManager` supervises all servers and handles restarts, health checks, and resource enforcement. How you *view* and *control* this varies by surface; what's being controlled does not.
+## Inspect configuration and tools
 
-## Start · stop · restart
-
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
-Use the MCP server or Tools management surface exposed by your build to inspect state and control the server lifecycle.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose the older runtime tool lifecycle commands from previous drafts.
-
-</TabItem>
-<TabItem value="tui" label="TUI">
-
-Press `t` to open the tools pane, select a server with `↑/↓`, then:
-
-- `s` — start
-- `x` — stop
-- `r` — restart
-
-The state column updates live.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
+Use these routes to inspect MCP state:
 
 ```http
-POST /api/tools/:name/start
-POST /api/tools/:name/stop
-POST /api/tools/:name/restart
-GET  /api/tools               # list all + state
+GET /mcp
+GET /mcp/:serverName
+GET /mcp/configured/mcps
+GET /mcp/getMcpConfig/Path
 ```
 
-All endpoints accept an optional `X-Codebolt-Token` header for auth when the server isn't local.
+Use `GET /mcp` for the installed server list, `GET /mcp/:serverName` for one stored config, and `GET /mcp/configured/mcps` for the currently cached tools.
 
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
+## Enable and disable
 
-```ts
-import codebolt from '@codebolt/codeboltjs';
-
-await codebolt.tools.start('my-server');
-await codebolt.tools.stop('my-server');
-await codebolt.tools.restart('my-server');
-const servers = await codebolt.tools.list();
-```
-
-</TabItem>
-</Tabs>
-
-Servers normally start automatically when the Codebolt server boots — you only touch this manually when debugging, recovering from a crash, or testing a new server.
-
-## Auto-restart policy
-
-Every server runs under a restart policy:
-
-- **`always`** — restart on any exit (clean or crashed).
-- **`on_failure`** *(default)* — restart only on non-zero exit.
-- **`never`** — let it die and stay dead.
-
-Under `on_failure`, a crashing server is retried with exponential backoff (1s, 5s, 15s, 60s) and **circuit-breaks after 5 consecutive failures**. At that point it's marked errored and needs manual intervention — restart policies don't rescue a fundamentally broken server.
-
-The policy is set in the server's config; see [Installing MCP Servers](./06_installing-mcp-servers.md).
-
-## Viewing logs
-
-Everything a server writes to **stderr** is captured as logs. (Stdout is reserved for the MCP protocol itself.) When a server crashes, the cause is almost always in the last few log lines.
-
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
-Use the logs view in the MCP server or Tools management UI.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose the older runtime tool log commands from previous drafts.
-
-</TabItem>
-<TabItem value="tui" label="TUI">
-
-In the tools pane, select the server and press `L` to open the log viewer. `/` filters, `f` toggles follow mode.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
+Enable or disable a configured MCP server with:
 
 ```http
-GET /api/tools/:name/logs?tail=100
-GET /api/tools/:name/logs?follow=true   # SSE stream
+POST /mcp/toggle
+Content-Type: application/json
+
+{ "serverName": "my-linter", "enabled": false }
 ```
 
-The follow mode returns a Server-Sent Events stream.
+Disabling removes the server name from the enabled list but keeps its configuration in `mcp_servers.json`.
 
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
+## Update configuration
 
-```ts
-const logs = await codebolt.tools.logs('my-server', { tail: 100 });
-// Or stream:
-for await (const line of codebolt.tools.logStream('my-server')) {
-  console.log(line);
+Update a single server config:
+
+```http
+POST /mcp/configure/:serverName
+Content-Type: application/json
+
+{
+  "command": "/usr/local/bin/my-linter-mcp",
+  "args": ["--config", ".linterrc"]
 }
 ```
 
-</TabItem>
-</Tabs>
-
-## Updating a server
-
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
-Use the update action in the MCP server or Tools management UI when your build exposes one.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose the older runtime tool update commands from previous drafts.
-
-</TabItem>
-<TabItem value="tui" label="TUI">
-
-In the tools pane with the server selected, press `u`. Pins the running version as a rollback target, then swaps.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
+Replace the full configured server map:
 
 ```http
-POST /api/tools/:name/update
-POST /api/tools/:name/update  { "version": "2.0.0" }
+POST /mcp/configure
+Content-Type: application/json
+
+{
+  "my-linter": {
+    "command": "/usr/local/bin/my-linter-mcp"
+  }
+}
 ```
 
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
+For named configuration updates, Codebolt checks whether the server returns tools before enabling it.
 
-```ts
-await codebolt.tools.update('my-server');
-await codebolt.tools.update('my-server', { version: '2.0.0' });
-```
+## Refresh tool cache
 
-</TabItem>
-</Tabs>
-
-Every update path does the same thing: download the new version, verify its signature, stop the old version, swap files, start the new version, **and restore the old version if the new one fails to start**. For manually-configured servers (not from a registry), update by editing `.codebolt/mcp-servers.yaml` yourself.
-
-## Disabling vs uninstalling
-
-Two very different operations:
-
-- **Disable** — keep the server installed but don't start it. Reversible with one flag.
-- **Uninstall** — remove files, config entries, and registered tools. Not reversible without reinstalling.
-
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
-Use the disable or uninstall actions in the MCP server or Tools management UI when your build exposes them.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose the older runtime tool disable, enable, or uninstall commands from previous drafts.
-
-</TabItem>
-<TabItem value="tui" label="TUI">
-
-`d` to disable/enable, `Shift+D` with confirmation to uninstall.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
+After changing configuration, refresh the MCP tools cache:
 
 ```http
-POST   /api/tools/:name/disable
-POST   /api/tools/:name/enable
-DELETE /api/tools/:name
+POST /mcp/tools/update
 ```
 
-</TabItem>
-<TabItem value="sdk" label="Plugin SDK">
+If the server returns tools, those tools become available to agents that are allowed to use them.
 
-```ts
-await codebolt.tools.disable('my-server');
-await codebolt.tools.enable('my-server');
-await codebolt.tools.uninstall('my-server');
-```
+## Available and local MCP servers
 
-</TabItem>
-</Tabs>
-
-Disable is also editable directly in config:
-
-```yaml
-# .codebolt/mcp-servers.yaml
-servers:
-  my-server:
-    command: /usr/local/bin/my-server
-    enabled: false
-```
-
-## Health checks
-
-Codebolt pings each server periodically. A non-responsive server is marked **unhealthy** and subsequent tool calls to it **fail fast** instead of hanging. Configure per server:
-
-```yaml
-# .codebolt/mcp-servers.yaml
-servers:
-  my-server:
-    health_check_interval_seconds: 30
-    health_check_timeout_seconds: 5
-```
-
-State (`healthy` / `unhealthy`) appears in the management surface your build exposes, as well as API and SDK responses where available.
-
-## Resource limits
-
-Per-server caps keep a buggy server from eating your machine:
-
-```yaml
-# .codebolt/mcp-servers.yaml
-servers:
-  my-server:
-    command: ...
-    limits:
-      memory_mb: 512
-      cpu_shares: 512
-      open_files: 256
-```
-
-On Linux these map to **cgroups**; on macOS/Windows they're enforced via soft process monitoring. A server exceeding its limits is **killed and restarted** (subject to the circuit breaker).
-
-## User-wide vs project-local servers
-
-By default, MCP server configs live in the project (`.codebolt/mcp-servers.yaml`) so each project can have its own set. For servers you want everywhere, use the **user-level** config:
-
-```yaml
-# ~/.codebolt/mcp-servers.yaml
-servers:
-  my-common-server:
-    command: my-common-server-binary
-```
-
-The runtime merges user-level + project-local (project wins on conflicts) before handing the list to `PluginProcessManager`.
-
-## Debugging a broken server
-
-The same 5-step flowchart, regardless of surface:
-
-1. **Is it running?** Check the state. If not `running`, start it.
-2. **If crashed, why?** Tail the last 50 log lines. Look for the last error before exit.
-3. **If running but tools don't work:** invoke the tool directly (bypassing the agent) and see what it returns.
-4. **If the direct call fails:** the issue is inside the server's tool implementation. Check the server's own application logs.
-5. **If the direct call works but the agent still can't use it:** check the agent's `tools.allow` list — the tool might not be granted.
-
-<Tabs groupId="surface">
-<TabItem value="cli" label="CLI" default>
-
-The current CLI does not expose the older direct MCP runtime debugging commands. Use the management UI and any deployment-specific APIs your build exposes.
-
-</TabItem>
-<TabItem value="desktop" label="Desktop">
-
-1. Tools panel → state column.
-2. Tools panel → server → Logs tab → tail 50.
-3. Tools panel → server → Tools tab → pick a tool → **Try it** button (opens a form for its input schema).
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
+Use these routes when browsing what can be installed:
 
 ```http
-GET  /api/tools
-GET  /api/tools/:name/logs?tail=50
-POST /api/tools/:server/:tool/call  { "args": {} }
+GET /mcp/available/list
+GET /mcp/available/list/detail/:mcpId
+GET /mcp/available/all
+GET /mcp/localMcp/list
+POST /mcp/refreshIndex
 ```
 
-</TabItem>
-</Tabs>
+Use `POST /mcp/install` to install an available or local MCP entry, as described in [Installing MCP Servers](./06_installing-mcp-servers.md).
 
-## Auditing which servers are doing what
+## Troubleshooting
 
-Audit tool usage through the observability surfaces exposed by your build or self-hosted deployment. Older event-query CLI examples are not part of the current `packages/cli` implementation.
+If a configured server does not appear as enabled:
+
+1. Confirm the server exists with `GET /mcp/:serverName`.
+2. Confirm the command path and args are valid.
+3. Run `POST /mcp/tools/update`.
+4. Check whether the server returns at least one MCP tool.
+5. Confirm the active agent is allowed to use the relevant tool namespace.
+
+If the server is disabled intentionally, re-enable it with `POST /mcp/toggle`.
 
 ## See also
 
 - [Agent Extensions Overview](./01_overview.md)
 - [Installing MCP Servers](./06_installing-mcp-servers.md)
 - [Agent Tools](../05a_tools-and-mcp/01_overview.md)
-- [CLI reference](../02_surfaces/04_tui/01_cli-interface/02_cli-commands/01_overview.md) — current CLI surface overview
-- [MCP & Tools (internals)](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)
+- [MCP and Tools Internals](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)

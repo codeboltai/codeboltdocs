@@ -6,7 +6,7 @@ description: "A practical walkthrough: set up a Codebolt server for a team of 5-
 
 # Self-Host for a Team
 
-A practical walkthrough: set up a Codebolt server for a team of 5-20 people from zero to working in a couple of hours. For the reference docs, see [Self-Hosting](../../04_build-on-codebolt/10_self-hosting/01_overview.md).
+A practical walkthrough: set up a Codebolt server for a team of 5-20 people from zero to working in a couple of hours. For the reference docs, see [Self-Hosting](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md).
 
 **You'll need:** a Linux server (Ubuntu 22.04 or similar), a domain name, SSH access, sudo, and either an existing Postgres or willingness to install one.
 
@@ -260,12 +260,12 @@ Point your monitoring (Prometheus, Datadog, whatever) at `:9091/metrics`. Key da
 - **Database growth** — event log gets large. Enable retention cleanup.
 - **User onboarding friction** — OIDC group membership lag. Document the lookup path.
 
-All of these have solutions in the full [Self-Hosting](../../04_build-on-codebolt/10_self-hosting/01_overview.md) docs.
+All of these have solutions in the full [Self-Hosting](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md) docs.
 
 ## See also
 
-- [Self-Hosting Overview](../../04_build-on-codebolt/10_self-hosting/01_overview.md)
+- [Self-Hosting Overview](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md)
 - [Running the server](../../04_build-on-codebolt/10_self-hosting/02_running-the-server.md)
-- [Security hardening](../../04_build-on-codebolt/10_self-hosting/06_security-hardening.md)
+- [Security hardening](../../04_build-on-codebolt/11_agent-infrastructure/06_security-hardening.md)
 - [Backup and restore](../../04_build-on-codebolt/10_self-hosting/07_backup-and-restore.md)
 - [Upgrade guide](../../04_build-on-codebolt/10_self-hosting/08_upgrade-guide.md)

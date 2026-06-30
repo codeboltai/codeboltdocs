@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-29T11:22:39.052Z",
-  "sourceCount": 412,
-  "curatedCount": 63,
+  "generatedAt": "2026-06-30T11:50:13.169Z",
+  "sourceCount": 384,
+  "curatedCount": 58,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 191,
+      "count": 164,
       "order": 1,
       "files": [
         {
@@ -48,60 +48,164 @@
           "title": "Themes"
         },
         {
-          "path": "using-codebolt/surfaces/cli/get-started.md",
+          "path": "using-codebolt/surfaces/cli/cli-interface/get-started.md",
           "title": "Get Started"
         },
         {
-          "path": "using-codebolt/surfaces/cli/overview.md",
-          "title": "CLI Overview"
+          "path": "using-codebolt/surfaces/cli/cli-interface/overview.md",
+          "title": "Overview"
         },
         {
-          "path": "using-codebolt/surfaces/cli/agent-commands.md",
-          "title": "Agent Commands"
-        },
-        {
-          "path": "using-codebolt/surfaces/cli/tool-commands.md",
-          "title": "Tool Commands"
-        },
-        {
-          "path": "using-codebolt/surfaces/cli/provider-commands.md",
-          "title": "Provider Commands"
-        },
-        {
-          "path": "using-codebolt/surfaces/cli/app-commands.md",
-          "title": "App Commands"
-        },
-        {
-          "path": "using-codebolt/surfaces/tui/get-started.md",
-          "title": "Get Started"
-        },
-        {
-          "path": "using-codebolt/surfaces/tui/overview.md",
-          "title": "TUI Overview"
-        },
-        {
-          "path": "using-codebolt/surfaces/tui/navigation-and-keybindings.md",
+          "path": "using-codebolt/surfaces/cli/cli-interface/navigation-and-keybindings.md",
           "title": "Navigation and Keybindings"
         },
         {
-          "path": "using-codebolt/surfaces/tui/tabs-and-panels.md",
+          "path": "using-codebolt/surfaces/cli/cli-interface/tabs-and-panels.md",
           "title": "Tabs, Panels, and Layout Modes"
         },
         {
-          "path": "using-codebolt/surfaces/tui/onboarding-and-settings.md",
+          "path": "using-codebolt/surfaces/cli/cli-interface/onboarding-and-settings.md",
           "title": "Onboarding and Settings"
         },
         {
-          "path": "using-codebolt/surfaces/tui/remote-and-requirements.md",
+          "path": "using-codebolt/surfaces/cli/cli-interface/remote-and-requirements.md",
           "title": "Remote Use, Direct gotui, and Requirements"
         },
         {
-          "path": "using-codebolt/surfaces/headless.md",
-          "title": "Headless Mode"
+          "path": "using-codebolt/surfaces/cli/cli-commands/get-started.md",
+          "title": "Get Started"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-commands/overview.md",
+          "title": "Command Mode Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-commands/agent-commands.md",
+          "title": "Agent Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-commands/tool-commands.md",
+          "title": "Tool Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-commands/provider-commands.md",
+          "title": "Provider Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-commands/app-commands.md",
+          "title": "App Commands"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-headless/overview.md",
+          "title": "Headless CLI"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-headless/headless-server.md",
+          "title": "Headless Server"
+        },
+        {
+          "path": "using-codebolt/surfaces/cli/cli-headless/headless-prompt.md",
+          "title": "Headless Prompt"
         },
         {
           "path": "using-codebolt/surfaces/cloud/get-started.md",
           "title": "Get Started"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/cloud-portal.md",
+          "title": "Cloud Portal"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/registry/overview.md",
+          "title": "Registry Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/registry/marketplace-publishing.md",
+          "title": "Marketplace Publishing"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/registry/ai-models.md",
+          "title": "AI Models"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/registry/profiles.md",
+          "title": "Profiles"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/remote-chat.md",
+          "title": "Remote Chat"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/environments.md",
+          "title": "Cloud Environments"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/syncing-changes.md",
+          "title": "Syncing Changes"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/runtimes-and-providers.md",
+          "title": "Runtimes & Providers"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/runner-nodes.md",
+          "title": "Runner Nodes"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/review-merge-requests.md",
+          "title": "Review Merge Requests"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/scheduled-tasks.md",
+          "title": "Scheduled Tasks"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/inbox.md",
+          "title": "Inbox"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/issues-and-tasks.md",
+          "title": "Issues & Tasks"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/overview.md",
+          "title": "Settings Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/connectors.md",
+          "title": "Connectors"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/remote-sandboxes.md",
+          "title": "Remote Sandboxes"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/thread-runtime-providers.md",
+          "title": "Thread Runtime Providers"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/llm-provider-settings.md",
+          "title": "LLM Provider Settings"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/preview-provider-settings.md",
+          "title": "Preview Provider Settings"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/login-tokens.md",
+          "title": "Login Tokens"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/subscription-plans-usage-billing.md",
+          "title": "Plans, Usage & Billing"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/team-settings.md",
+          "title": "Team Settings"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/settings/account-settings.md",
+          "title": "Account Settings"
         },
         {
           "path": "using-codebolt/chat/overview.md",
@@ -476,74 +580,6 @@
           "title": "Hooks"
         },
         {
-          "path": "using-codebolt/08da-custom-agentic-application/overview.md",
-          "title": "Custom Agentic Application Overview"
-        },
-        {
-          "path": "using-codebolt/08da-custom-agentic-application/level-1-inside-codebolt.md",
-          "title": "Level 1 Inside Codebolt"
-        },
-        {
-          "path": "using-codebolt/08da-custom-agentic-application/level-2-separate-app-local-server.md",
-          "title": "Level 2 Separate App with Local Server"
-        },
-        {
-          "path": "using-codebolt/08da-custom-agentic-application/level-3-hosted-runtimes.md",
-          "title": "Level 3 Hosted Runtimes"
-        },
-        {
-          "path": "using-codebolt/08da-custom-agentic-application/choosing-the-right-architecture.md",
-          "title": "Choosing the Right Architecture"
-        },
-        {
-          "path": "using-codebolt/08db-autonomous-companies/overview.md",
-          "title": "Autonomous Companies Overview"
-        },
-        {
-          "path": "using-codebolt/08db-autonomous-companies/virtual-employees.md",
-          "title": "Virtual Employees"
-        },
-        {
-          "path": "using-codebolt/08db-autonomous-companies/goals-and-task-systems.md",
-          "title": "Goals and Task Systems"
-        },
-        {
-          "path": "using-codebolt/08db-autonomous-companies/communication-and-channels.md",
-          "title": "Communication and Channels"
-        },
-        {
-          "path": "using-codebolt/08db-autonomous-companies/monitoring-and-automation.md",
-          "title": "Monitoring and Automation"
-        },
-        {
-          "path": "using-codebolt/08db-autonomous-companies/coordination-models.md",
-          "title": "Coordination Models"
-        },
-        {
-          "path": "using-codebolt/08db-autonomous-companies/reference-architecture.md",
-          "title": "Reference Architecture"
-        },
-        {
-          "path": "using-codebolt/08dc-self-hosted-custom-agents/overview.md",
-          "title": "Self Hosted Agent Infrastructure Overview"
-        },
-        {
-          "path": "using-codebolt/08dc-self-hosted-custom-agents/deployment-modes-and-topologies.md",
-          "title": "Deployment Modes and Topologies"
-        },
-        {
-          "path": "using-codebolt/08dc-self-hosted-custom-agents/business-and-customer-use-cases.md",
-          "title": "Business and Customer Use Cases"
-        },
-        {
-          "path": "using-codebolt/08dc-self-hosted-custom-agents/architecture-patterns.md",
-          "title": "Architecture Patterns"
-        },
-        {
-          "path": "using-codebolt/08dc-self-hosted-custom-agents/implementation-anchors.md",
-          "title": "Implementation Anchors"
-        },
-        {
           "path": "using-codebolt/external-integrations/overview.md",
           "title": "External Integrations Overview"
         },
@@ -562,122 +598,6 @@
         {
           "path": "using-codebolt/external-integrations/building-a-channel-plugin.md",
           "title": "Building a Channel Plugin"
-        },
-        {
-          "path": "using-codebolt/cloud/overview.md",
-          "title": "Cloud Overview"
-        },
-        {
-          "path": "using-codebolt/cloud/cloud-portal.md",
-          "title": "Cloud Portal"
-        },
-        {
-          "path": "using-codebolt/cloud/registry/overview.md",
-          "title": "Registry Overview"
-        },
-        {
-          "path": "using-codebolt/cloud/registry/marketplace-publishing.md",
-          "title": "Marketplace Publishing"
-        },
-        {
-          "path": "using-codebolt/cloud/registry/ai-models.md",
-          "title": "AI Models"
-        },
-        {
-          "path": "using-codebolt/cloud/registry/profiles.md",
-          "title": "Profiles"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/remote-chat.md",
-          "title": "Remote Chat"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/environments.md",
-          "title": "Cloud Environments"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/syncing-changes.md",
-          "title": "Syncing Changes"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/runtimes-and-providers.md",
-          "title": "Runtimes & Providers"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/runner-nodes.md",
-          "title": "Runner Nodes"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/review-merge-requests.md",
-          "title": "Review Merge Requests"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/scheduled-tasks.md",
-          "title": "Scheduled Tasks"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/inbox.md",
-          "title": "Inbox"
-        },
-        {
-          "path": "using-codebolt/cloud/running-agents/issues-and-tasks.md",
-          "title": "Issues & Tasks"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/overview.md",
-          "title": "Settings Overview"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/connectors.md",
-          "title": "Connectors"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/remote-sandboxes.md",
-          "title": "Remote Sandboxes"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/thread-runtime-providers.md",
-          "title": "Thread Runtime Providers"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/llm-provider-settings.md",
-          "title": "LLM Provider Settings"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/preview-provider-settings.md",
-          "title": "Preview Provider Settings"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/login-tokens.md",
-          "title": "Login Tokens"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/subscription-plans-usage-billing.md",
-          "title": "Plans, Usage & Billing"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/team-settings.md",
-          "title": "Team Settings"
-        },
-        {
-          "path": "using-codebolt/cloud/settings/account-settings.md",
-          "title": "Account Settings"
-        },
-        {
-          "path": "using-codebolt/plugins/overview.md",
-          "title": "What are Plugins"
-        },
-        {
-          "path": "using-codebolt/plugins/installing-plugins.md",
-          "title": "Installing Plugins"
-        },
-        {
-          "path": "using-codebolt/plugins/plugin-marketplace.md",
-          "title": "Plugin Marketplace"
-        },
-        {
-          "path": "using-codebolt/plugins/building-plugins.md",
-          "title": "Building Plugins"
         },
         {
           "path": "using-codebolt/account/authentication-and-authorization.md",
@@ -742,34 +662,6 @@
         {
           "path": "using-codebolt/code-observability/narrative-graph.md",
           "title": "Narrative Graph"
-        },
-        {
-          "path": "using-codebolt/cli-interface/overview.md",
-          "title": "CLI Interface"
-        },
-        {
-          "path": "using-codebolt/cli-interface/conversations-and-tabs.md",
-          "title": "Conversations and Tabs"
-        },
-        {
-          "path": "using-codebolt/cli-interface/chat-and-commands.md",
-          "title": "Chat and Commands"
-        },
-        {
-          "path": "using-codebolt/cli-interface/logs-and-connection.md",
-          "title": "Logs and Connection"
-        },
-        {
-          "path": "using-codebolt/cli-interface/files-and-git.md",
-          "title": "Files and Git"
-        },
-        {
-          "path": "using-codebolt/cli-interface/onboarding-and-settings.md",
-          "title": "Onboarding and Settings"
-        },
-        {
-          "path": "using-codebolt/cli-interface/keybindings-and-layout.md",
-          "title": "Keybindings and Layout"
         },
         {
           "path": "using-codebolt/troubleshooting/common-issues.md",
@@ -1632,7 +1524,7 @@
     },
     {
       "heading": "Optional",
-      "count": 14,
+      "count": 13,
       "order": 99,
       "files": [
         {
@@ -1650,10 +1542,6 @@
         {
           "path": "get-started/platforms/cli.md",
           "title": "CLI"
-        },
-        {
-          "path": "get-started/platforms/tui.md",
-          "title": "TUI"
         },
         {
           "path": "get-started/platforms/cloud.md",

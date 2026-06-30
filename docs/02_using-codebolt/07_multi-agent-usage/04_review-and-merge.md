@@ -4,9 +4,6 @@ title: Review and Merge
 description: The human-in-the-loop side of multi-agent work. When agents produce changes that need approval before they land, they go through the review/merge system.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 # Review and Merge
 
 ![Review and Merge](/productImages/multiagentusage/review_merge_request.png)
@@ -17,24 +14,7 @@ For the design side ("how do I structure review policies?"), see [Review & Merge
 
 ## The merge request inbox
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
 **Agents panel → Merge Requests** shows every pending review request waiting on you.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET    /api/reviews?status=pending
-GET    /api/reviews/:id
-POST   /api/reviews/:id/approve
-POST   /api/reviews/:id/reject
-POST   /api/reviews/:id/request-changes
-```
-
-</TabItem>
-</Tabs>
 
 The inbox shows every pending review request waiting on you.
 

@@ -26,14 +26,6 @@ The underlying data is the event log (`type == llm.chat`). Every surface is just
 The current CLI does not expose the older reporting command families from previous drafts. Use the desktop AI Requests view for usage and request inspection.
 
 </TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/events?type=llm.chat&since=1h
-GET /api/usage?since=7d&group_by=agent
-```
-
-</TabItem>
 </Tabs>
 
 ## What's shown
@@ -103,14 +95,6 @@ The current CLI does not expose a dedicated AI Requests export command.
 <TabItem value="desktop" label="Desktop">
 
 Settings → AI Requests → **Export** button. CSV or JSON. Honours the active filters.
-
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-```http
-GET /api/events?type=llm.chat&format=jsonl    # streaming JSONL
-GET /api/events?type=llm.chat&format=csv
-```
 
 </TabItem>
 </Tabs>

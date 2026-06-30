@@ -54,4 +54,4 @@ The detailed Cloud documentation lives under **Using Codebolt → Cloud**:
 
 - [Cloud (Platforms)](../../../01_get-started/02f_platforms/04_cloud.md) — the platform entry point and architecture
 - [Platform Overview](../01_overview.md) — compare all clients
-- [Headless CLI](../04_tui/03_cli-headless/01_overview.md)
+- [Headless CLI](../04_cli/03_cli-headless/01_overview.md)
