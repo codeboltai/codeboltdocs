@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-01T10:52:44.944Z",
-  "sourceCount": 434,
-  "curatedCount": 68,
+  "generatedAt": "2026-07-01T13:13:25.744Z",
+  "sourceCount": 432,
+  "curatedCount": 67,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 211,
+      "count": 209,
       "order": 1,
       "files": [
         {
@@ -288,6 +288,10 @@
           "title": "Settings Overview"
         },
         {
+          "path": "using-codebolt/surfaces/desktop-app/settings/app-and-project-settings.md",
+          "title": "App & Project Settings"
+        },
+        {
           "path": "using-codebolt/surfaces/desktop-app/settings/llm-settings.md",
           "title": "LLM Settings"
         },
@@ -532,28 +536,16 @@
           "title": "Executors"
         },
         {
-          "path": "using-codebolt/agent-extensions/installing-mcp-servers.md",
-          "title": "Installing MCP Servers"
+          "path": "using-codebolt/agent-extensions/mcp-server.md",
+          "title": "Mcp Server"
         },
         {
-          "path": "using-codebolt/agent-extensions/managing-mcp-servers.md",
-          "title": "Managing MCP Servers"
-        },
-        {
-          "path": "using-codebolt/tools-and-mcp/overview.md",
-          "title": "Agent Tools Overview"
-        },
-        {
-          "path": "using-codebolt/tools-and-mcp/built-in-tools.md",
-          "title": "Built-in Tools"
+          "path": "using-codebolt/agent-extensions/custom-tools.md",
+          "title": "Custom Tools"
         },
         {
           "path": "using-codebolt/guardrails-and-settings/guardrails.md",
           "title": "Guardrails"
-        },
-        {
-          "path": "using-codebolt/guardrails-and-settings/app-and-project-settings.md",
-          "title": "App & Project Settings"
         },
         {
           "path": "using-codebolt/guardrails-and-settings/routing-gateway.md",

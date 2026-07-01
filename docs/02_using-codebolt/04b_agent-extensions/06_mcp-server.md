@@ -7,13 +7,9 @@ description: Install, configure, enable, inspect, and troubleshoot MCP servers i
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# MCP Server
 
-MCP servers extend Codebolt agents with tools from local binaries, private services, cloud services, and registry integrations. Use this page to understand how MCP servers fit into Codebolt's agent extension model.
 
-For the Desktop App settings workflow, see [MCP Servers in Settings](../02_surfaces/02_desktop-app/Settings/06_mcp-servers.md).
-
-## What is MCP
+# What is MCP
 
 Model Context Protocol (MCP) is a standard way for an AI application to connect to external tools and data sources. An MCP server exposes one or more tools with structured input schemas, and Codebolt agents can call those tools during a task.
 
@@ -96,32 +92,30 @@ POST /mcp/refreshIndex
 </details>
 
 <details>
-<summary><strong>Custom MCP Servers</strong></summary>
+<summary><strong>Third-party MCP Servers</strong></summary>
 
 Use a custom MCP server when the server is not listed in Codebolt's registry or when it belongs to your team, product, or internal infrastructure.
 
-<Tabs groupId="mcp-custom-install">
-<TabItem value="where" label="Where to Find" default>
+A custom MCP server is any MCP-compatible server that you configure manually instead of installing from the Codebolt registry. This can be a public third-party server, a vendor-maintained server, a server you run locally during development, or an internal server maintained by your team.
 
-Common sources for custom and third-party MCP servers include:
+You can find third-party MCP servers in several places:
 
-- vendor documentation
-- GitHub repositories
-- npm packages
-- internal company repositories
-- official MCP community resources
+- **Vendor documentation** for products such as databases, issue trackers, source control systems, cloud platforms, and SaaS APIs.
+- **GitHub repositories** that publish MCP servers with setup instructions and example configs.
+- **npm packages** for Node-based MCP servers that can be launched with `npx` or installed globally.
+- **Internal company repositories** for private tools, internal APIs, or workspace-specific automation.
+- **Official MCP community resources** and ecosystem lists for servers maintained by the broader MCP community.
 
-Review the server's README before installing it. Confirm the command, required arguments, required environment variables, and transport mode.
+Before adding a custom MCP server, review its README and confirm:
 
-</TabItem>
-<TabItem value="desktop" label="Desktop App">
+- the command used to start the server
+- required arguments
+- required environment variables
+- whether it uses stdio, SSE, or another supported transport
+- what tools it exposes
+- what credentials or local permissions it needs
 
-Use **Configure** in the installed MCP list or **Open MCP Config** in the chat MCP picker. Add a server entry with a command, optional args, and optional environment values.
-
-</TabItem>
-<TabItem value="config" label="Config JSON">
-
-Most custom MCP servers are configured with a command, optional arguments, and optional environment variables:
+Use **Configure** in the installed MCP list or **Open MCP Config** in the chat MCP picker to add a manual entry. Most custom MCP servers are configured with a command, optional arguments, and optional environment variables:
 
 ```json
 {
@@ -137,18 +131,19 @@ Use custom MCP servers for private integrations, local development servers, inte
 
 For a step-by-step guide, see [Install a Third-Party MCP Server](../../03_guides/05_mcp-and-tools/install-a-third-party-mcp-server.md).
 
-</TabItem>
-</Tabs>
-
 </details>
 
 <details>
-<summary><strong>Local Project Tool</strong></summary>
+<summary><strong>Custom Local MCP Server</strong></summary>
 
-Use a local project tool when the tool should belong to the current workspace and be versioned with the project.
+Use a custom local MCP server when the tool should run from the current machine or belong to the current workspace. This is the right path for project automation, internal scripts, local development tools, or CodeboltJS tools that you want to expose through MCP.
 
-<Tabs groupId="mcp-local-install">
-<TabItem value="structure" label="Project Structure" default>
+Codebolt supports two local patterns:
+
+- **Project-local tools** stored in `.codebolt/tools`.
+- **Programmatic CodeboltJS MCP servers** created with `startCodeboltMcpServer()` or `createCodeboltMcpServer()`.
+
+### Project-local tool structure
 
 The current application code discovers local MCP-style project tools from:
 
@@ -157,7 +152,7 @@ The current application code discovers local MCP-style project tools from:
 .codebolt/tools/<tool-name>/index.js
 ```
 
-`codebolttool.yaml` defines the tool metadata:
+`codebolttool.yaml` defines the local tool metadata that Codebolt uses for discovery:
 
 ```yaml
 name: My Tool
@@ -165,9 +160,6 @@ uniqueName: my-tool
 version: 1.0.0
 description: Runs project-specific automation
 ```
-
-</TabItem>
-<TabItem value="generated-config" label="Generated Config">
 
 Codebolt converts this local tool into an MCP config:
 
@@ -182,9 +174,6 @@ Codebolt converts this local tool into an MCP config:
 
 The app code scans `.codebolt/tools` for project-level local tools. It does not currently scan `.codebolt/mcp`.
 
-</TabItem>
-<TabItem value="cli" label="CLI">
-
 Install a local project MCP by its `uniqueName`:
 
 ```bash
@@ -193,8 +182,37 @@ codebolt command mcp install-local --name <uniqueName>
 
 Command reference: [`install-local`](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#install-local-mcp)
 
-</TabItem>
-<TabItem value="api" label="API">
+### Programmatic CodeboltJS MCP server
+
+CodeboltJS can also expose Codebolt tools as an MCP server. The MCP server wrapper does not create brand-new tool definitions inline. It wraps the CodeboltJS tools singleton and exposes those tools through MCP `tools/list` and `tools/call`.
+
+Use `startCodeboltMcpServer()` when you want CodeboltJS to create the MCP server and start the transport. Use `createCodeboltMcpServer()` when you need to connect the MCP transport yourself.
+
+The wrapper supports:
+
+| Option | Purpose |
+|---|---|
+| `transport` | `stdio` or `sse` when using `startCodeboltMcpServer()` |
+| `port` | SSE port; `0` means random available port |
+| `hostname` | SSE host, default `127.0.0.1` |
+| `serverName` | MCP server name shown to clients |
+| `serverVersion` | MCP server version on `createCodeboltMcpServer()` |
+| `toolFilter` | expose only selected CodeboltJS tools |
+| `toolPrefix` | prefix MCP tool names, for example `mytools_read_file` |
+
+For SSE transport, CodeboltJS starts:
+
+```text
+GET  /sse
+POST /messages?sessionId=<sessionId>
+GET  /health
+```
+
+The server maps MCP calls back to CodeboltJS tool execution. For example, a prefixed MCP tool such as `mytools_read_file` is resolved back to the original CodeboltJS tool name `read_file`, then executed through the CodeboltJS tools singleton.
+
+To create a custom MCP server, see [Build Your First MCP Server](../../03_guides/05_mcp-and-tools/build-your-first-mcp-server.md).
+
+### Local discovery and install API
 
 List local project MCPs:
 
@@ -217,10 +235,14 @@ Open the config path for a local MCP:
 GET /mcp/getMcpConfig/Path?mcpId=my-local-server&isLocal=true
 ```
 
-</TabItem>
-</Tabs>
+### Notes
 
-For the full structure, see [Quickstart: Local MCP Server](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/02_quickstart-local-mcp.md) and [Custom Tools](./07_custom-tools.md).
+- The root import `@codebolt/codeboltjs` exposes the MCP server helpers.
+- The transport classes come from `@modelcontextprotocol/sdk` when you manually connect a transport.
+- Project-local tools should use `.codebolt/tools`, not `.codebolt/mcp`.
+- A local MCP server should return at least one tool during discovery before it is useful to agents.
+
+For the full structure, see [Quickstart: Local MCP Server](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/02_quickstart-local-mcp.md), [Build Your First MCP Server](../../03_guides/05_mcp-and-tools/build-your-first-mcp-server.md), and [Custom Tools](./07_custom-tools.md).
 
 </details>
 
@@ -297,7 +319,7 @@ For typed SDK methods, see [MCP Client SDK Reference](../../05_reference/04_clie
 </TabItem>
 </Tabs>
 
-## MCP server uses
+## How to use MCP server
 
 <Tabs groupId="mcp-use">
 <TabItem value="agent-code" label="From Agent Code" default>
@@ -385,119 +407,6 @@ These are useful for project-specific automation and tools that should travel wi
 </TabItem>
 </Tabs>
 
-## Manual configuration
-
-Use manual configuration for private MCP servers, development builds, or local binaries. The stored file shape is JSON:
-
-```json
-{
-  "mcpServers": {
-    "my-linter": {
-      "command": "/usr/local/bin/my-linter-mcp",
-      "args": ["--config", ".linterrc"],
-      "env": {
-        "LINTER_MODE": "strict"
-      }
-    }
-  },
-  "enabled": ["my-linter"]
-}
-```
-
-Update one server:
-
-```http
-POST /mcp/configure/:serverName
-Content-Type: application/json
-
-{
-  "command": "/usr/local/bin/my-linter-mcp",
-  "args": ["--config", ".linterrc"],
-  "env": {
-    "LINTER_MODE": "strict"
-  }
-}
-```
-
-When a named server is configured, Codebolt tests whether it can return MCP tools. If tools are returned, the server is added to the enabled list. If it returns no tools or errors during the check, the config is saved but the server is not enabled.
-
-Replace the full configured server map:
-
-```http
-POST /mcp/configure
-Content-Type: application/json
-
-{
-  "my-linter": {
-    "command": "/usr/local/bin/my-linter-mcp",
-    "args": ["--config", ".linterrc"]
-  }
-}
-```
-
-## Inspect configuration and tools
-
-Use these routes to inspect MCP state:
-
-```http
-GET /mcp
-GET /mcp/:serverName
-GET /mcp/configured/mcps
-GET /mcp/getMcpConfig/Path
-```
-
-Use `GET /mcp` for the installed server list, `GET /mcp/:serverName` for one stored config, and `GET /mcp/configured/mcps` for currently cached tools.
-
-## Enable or disable a server
-
-Use the toggle route to add or remove a configured server from the enabled list:
-
-```http
-POST /mcp/toggle
-Content-Type: application/json
-
-{ "serverName": "my-linter", "enabled": true }
-```
-
-Use `enabled: false` to disable it without deleting the configuration.
-
-## Refresh tool cache
-
-After installing or changing configuration, refresh the MCP tools cache:
-
-```http
-POST /mcp/tools/update
-```
-
-If the server returns tools, those tools become available to agents that are allowed to use them.
-
-## Registry and local discovery routes
-
-Use these routes to inspect what can be installed:
-
-```http
-GET /mcp/available/list
-GET /mcp/available/list/detail/:mcpId
-GET /mcp/available/all
-GET /mcp/localMcp/list
-POST /mcp/refreshIndex
-```
-
-Install a registry or local MCP:
-
-```http
-POST /mcp/install
-Content-Type: application/json
-
-{ "mcpId": "registry-mcp-id" }
-```
-
-```http
-POST /mcp/install
-Content-Type: application/json
-
-{ "isLocal": true, "uniqueName": "my-local-server" }
-```
 
 ## Troubleshooting
 
