@@ -147,11 +147,10 @@ h3 {
   transition: none;                      /* no animated height/padding transitions */
 }
 
-/* Lock the sidebar's sticky position so it doesn't reflow on scroll */
+/* Keep the sidebar above the page background without changing Docusaurus' own offset model. */
 .theme-doc-sidebar-container,
 aside.theme-doc-sidebar-container {
-  position: sticky;
-  top: var(--ifm-navbar-height);
+  position: relative;
 }
 
 [data-theme="dark"] .navbar {
@@ -448,6 +447,21 @@ div[class*="searchResults"] {
   border-right: 1px solid var(--cb-border) !important;
   padding: 0 0.75rem 0.75rem 1rem !important;
   overflow-x: hidden;
+}
+
+@media (min-width: 997px) {
+  .theme-doc-sidebar-container,
+  aside.theme-doc-sidebar-container {
+    overflow-x: hidden;
+  }
+
+  .theme-doc-sidebar-container nav.menu {
+    max-height: calc(100vh - var(--ifm-navbar-height));
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
 }
 
 /* Sidebar menu itself */
@@ -1470,7 +1484,11 @@ footer {
 }
 
 /* Ensure content sits above grid */
-.theme-doc-sidebar-container,
+.theme-doc-sidebar-container {
+  position: relative;
+  z-index: 1;
+}
+
 .theme-doc-main-container,
 .theme-doc-toc-container {
   position: relative;

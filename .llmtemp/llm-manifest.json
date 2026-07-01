@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-07-01T10:32:24.505Z",
-  "sourceCount": 433,
+  "generatedAt": "2026-07-01T10:52:44.944Z",
+  "sourceCount": 434,
   "curatedCount": 68,
   "sections": [
     {
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 210,
+      "count": 211,
       "order": 1,
       "files": [
         {
@@ -434,6 +434,10 @@
         {
           "path": "using-codebolt/surfaces/cloud/running-agents/issues-and-tasks.md",
           "title": "Issues & Tasks"
+        },
+        {
+          "path": "using-codebolt/surfaces/cloud/running-agents/artifacts.md",
+          "title": "Artifacts"
         },
         {
           "path": "using-codebolt/surfaces/cloud/settings/overview.md",

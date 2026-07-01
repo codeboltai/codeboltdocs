@@ -196727,3 +196727,1415 @@ Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentIns
 ℹ️  INFO [2026-07-01T10:51:15.084Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
 ℹ️  INFO [2026-07-01T10:51:15.086Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=2ms
 ℹ️  INFO [2026-07-01T10:51:15.086Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+ℹ️  INFO [2026-07-01T10:51:20.464Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.469Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.518Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.541Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.608Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.618Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.618Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.655Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.686Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.732Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.757Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.876Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.876Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.880Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.938Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:20.957Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.003Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.035Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.069Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.103Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.127Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.180Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.264Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.277Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.278Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.345Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.401Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.431Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.434Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:21.484Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:51:24.278Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:51:24.286Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+Error fetching models: AxiosError: connect ETIMEDOUT 100.66.109.32:1234
+    at AxiosError.from (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:503354:24)
+    at RedirectableRequest.handleRequestError (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:506186:29)
+[90m    at RedirectableRequest.emit (node:events:509:20)[39m
+    at eventHandlers.<computed> (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:100797:24)
+[90m    at ClientRequest.emit (node:events:509:20)[39m
+[90m    at emitErrorEvent (node:_http_client:109:11)[39m
+[90m    at Socket.socketErrorListener (node:_http_client:593:5)[39m
+[90m    at Socket.emit (node:events:509:20)[39m
+[90m    at emitErrorNT (node:internal/streams/destroy:170:8)[39m
+[90m    at emitErrorCloseNT (node:internal/streams/destroy:129:3)[39m
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)[39m
+    at Axios.request (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:507502:41)
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)[39m
+    at async LMStudio.getModels (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:273670:30)
+    at async fetchProviderModels (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:422684:40)
+    at async Promise.all (index 0)
+    at async Object.getAllModels (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:422693:27)
+    at async getAllModels (/opt/homebrew/lib/node_modules/[4mcodebolt[24m/dist/index.js:330983:24) {
+  isAxiosError: [33mtrue[39m,
+  code: [32m'ETIMEDOUT'[39m,
+  config: {
+    transitional: {
+      silentJSONParsing: [33mtrue[39m,
+      forcedJSONParsing: [33mtrue[39m,
+      clarifyTimeoutError: [33mfalse[39m,
+      legacyInterceptorReqResOrdering: [33mtrue[39m
+    },
+    adapter: [ [32m'xhr'[39m, [32m'http'[39m, [32m'fetch'[39m ],
+    transformRequest: [ [36m[Function: transformRequest][39m ],
+    transformResponse: [ [36m[Function: transformResponse][39m ],
+    timeout: [33m0[39m,
+    xsrfCookieName: [32m'XSRF-TOKEN'[39m,
+    xsrfHeaderName: [32m'X-XSRF-TOKEN'[39m,
+    maxContentLength: [33m-1[39m,
+    maxBodyLength: [33m-1[39m,
+    env: { FormData: [36m[Function][39m, Blob: [36m[class Blob][39m },
+    validateStatus: [36m[Function: validateStatus][39m,
+    headers: Object [AxiosHeaders] {
+      Accept: [32m'application/json, text/plain, */*'[39m,
+      [32m'Content-Type'[39m: [32m'application/json'[39m,
+      [32m'User-Agent'[39m: [32m'axios/1.13.6'[39m,
+      [32m'Accept-Encoding'[39m: [32m'gzip, compress, deflate, br'[39m
+    },
+    method: [32m'get'[39m,
+    url: [32m'http://100.66.109.32:1234/v1/models'[39m,
+    allowAbsoluteUrls: [33mtrue[39m,
+    data: [90mundefined[39m
+  },
+  request: [36m<ref *1>[39m Writable {
+    _events: {
+      close: [90mundefined[39m,
+      error: [36m[Function: handleRequestError][39m,
+      prefinish: [90mundefined[39m,
+      finish: [90mundefined[39m,
+      drain: [90mundefined[39m,
+      response: [36m[Function: handleResponse][39m,
+      socket: [36m[Array][39m,
+      abort: [90mundefined[39m
+    },
+    _writableState: WritableState {
+      highWaterMark: [33m65536[39m,
+      length: [33m0[39m,
+      corked: [33m0[39m,
+      onwrite: [36m[Function (anonymous)][39m,
+      writelen: [33m0[39m,
+      bufferedIndex: [33m0[39m,
+      pendingcb: [33m0[39m,
+      [32mSymbol(kState)[39m: [33m17580812[39m,
+      [32mSymbol(kBufferedValue)[39m: [1mnull[22m
+    },
+    _maxListeners: [90mundefined[39m,
+    _options: {
+      maxRedirects: [33m21[39m,
+      maxBodyLength: [33mInfinity[39m,
+      protocol: [32m'http:'[39m,
+      path: [32m'/v1/models'[39m,
+      method: [32m'GET'[39m,
+      headers: [36m[Object: null prototype][39m,
+      agents: [36m[Object][39m,
+      auth: [90mundefined[39m,
+      family: [90mundefined[39m,
+      beforeRedirect: [36m[Function: dispatchBeforeRedirect][39m,
+      beforeRedirects: [36m[Object][39m,
+      http2Options: [90mundefined[39m,
+      hostname: [32m'100.66.109.32'[39m,
+      port: [32m'1234'[39m,
+      agent: [90mundefined[39m,
+      nativeProtocols: [36m[Object][39m,
+      pathname: [32m'/v1/models'[39m
+    },
+    _ended: [33mtrue[39m,
+    _ending: [33mtrue[39m,
+    _redirectCount: [33m0[39m,
+    _redirects: [],
+    _requestBodyLength: [33m0[39m,
+    _requestBodyBuffers: [],
+    _eventsCount: [33m3[39m,
+    _onNativeResponse: [36m[Function (anonymous)][39m,
+    _currentRequest: ClientRequest {
+      _events: [36m[Object: null prototype][39m,
+      _eventsCount: [33m7[39m,
+      _maxListeners: [90mundefined[39m,
+      outputData: [],
+      outputSize: [33m0[39m,
+      writable: [33mtrue[39m,
+      destroyed: [33mfalse[39m,
+      _last: [33mtrue[39m,
+      chunkedEncoding: [33mfalse[39m,
+      shouldKeepAlive: [33mtrue[39m,
+      maxRequestsOnConnectionReached: [33mfalse[39m,
+      _defaultKeepAlive: [33mtrue[39m,
+      useChunkedEncodingByDefault: [33mfalse[39m,
+      sendDate: [33mfalse[39m,
+      _removedConnection: [33mfalse[39m,
+      _removedContLen: [33mfalse[39m,
+      _removedTE: [33mfalse[39m,
+      strictContentLength: [33mfalse[39m,
+      _contentLength: [33m0[39m,
+      _hasBody: [33mtrue[39m,
+      _trailer: [32m''[39m,
+      finished: [33mtrue[39m,
+      _headerSent: [33mtrue[39m,
+      _closed: [33mfalse[39m,
+      _header: [32m'GET /v1/models HTTP/1.1\r\n'[39m +
+        [32m'Accept: application/json, text/plain, */*\r\n'[39m +
+        [32m'Content-Type: application/json\r\n'[39m +
+        [32m'User-Agent: axios/1.13.6\r\n'[39m +
+        [32m'Accept-Encoding: gzip, compress, deflate, br\r\n'[39m +
+        [32m'Host: 100.66.109.32:1234\r\n'[39m +
+        [32m'Connection: keep-alive\r\n'[39m +
+        [32m'\r\n'[39m,
+      _keepAliveTimeout: [33m0[39m,
+      _onPendingData: [36m[Function: nop][39m,
+      agent: [36m[Agent][39m,
+      socketPath: [90mundefined[39m,
+      method: [32m'GET'[39m,
+      maxHeaderSize: [90mundefined[39m,
+      insecureHTTPParser: [90mundefined[39m,
+      joinDuplicateHeaders: [90mundefined[39m,
+      _ended: [33mfalse[39m,
+      res: [1mnull[22m,
+      aborted: [33mfalse[39m,
+      timeoutCb: [36m[Function: emitRequestTimeout][39m,
+      upgradeOrConnect: [33mfalse[39m,
+      parser: [1mnull[22m,
+      maxHeadersCount: [1mnull[22m,
+      reusedSocket: [33mfalse[39m,
+      host: [32m'100.66.109.32'[39m,
+      protocol: [32m'http:'[39m,
+      _redirectable: [36m[Circular *1][39m,
+      [32mSymbol(shapeMode)[39m: [33mfalse[39m,
+      [32mSymbol(kCapture)[39m: [33mfalse[39m,
+      [32mSymbol(kBytesWritten)[39m: [33m0[39m,
+      [32mSymbol(kNeedDrain)[39m: [33mfalse[39m,
+      [32mSymbol(corked)[39m: [33m0[39m,
+      [32mSymbol(kChunkedBuffer)[39m: [],
+      [32mSymbol(kChunkedLength)[39m: [33m0[39m,
+      [32mSymbol(kSocket)[39m: [36m[Socket][39m,
+      [32mSymbol(kOutHeaders)[39m: [36m[Object: null prototype][39m,
+      [32mSymbol(errored)[39m: [1mnull[22m,
+      [32mSymbol(kHighWaterMark)[39m: [33m65536[39m,
+      [32mSymbol(kRejectNonStandardBodyWrites)[39m: [33mfalse[39m,
+      [32mSymbol(kPath)[39m: [32m'/v1/models'[39m,
+      [32mSymbol(kUniqueHeaders)[39m: [1mnull[22m
+    },
+    _currentUrl: [32m'http://100.66.109.32:1234/v1/models'[39m,
+    _timeout: [1mnull[22m,
+    [32mSymbol(shapeMode)[39m: [33mtrue[39m,
+    [32mSymbol(kCapture)[39m: [33mfalse[39m
+  },
+  cause: Error: connect ETIMEDOUT 100.66.109.32:1234
+  [90m    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16)[39m {
+    errno: [33m-60[39m,
+    code: [32m'ETIMEDOUT'[39m,
+    syscall: [32m'connect'[39m,
+    address: [32m'100.66.109.32'[39m,
+    port: [33m1234[39m
+  }
+}
+ℹ️  INFO [2026-07-01T10:51:32.196Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.199Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.199Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.207Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.213Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.244Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.244Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.292Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.295Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:32.297Z] AI response saved: ai_1782903092297_65dd7gd for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+🐛 DEBUG [2026-07-01T10:51:32.317Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'readFileResponse' ]
+ℹ️  INFO [2026-07-01T10:51:32.318Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:32.319Z] [FSService] handleFilesystemOperation called: operation=readFile, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+ℹ️  INFO [2026-07-01T10:51:32.324Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:32.327Z] [FSService] handleFilesystemOperation called: operation=readManyFiles, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+ℹ️  INFO [2026-07-01T10:51:32.327Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:32.330Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:51:32.340Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=4000e19f-df54-4e70-b1e4-16f4f4117013, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:32.340Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:51:32.340Z] AI response saved: ai_1782903092340_kjx3xfm for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:51:32.341Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:51:32.342Z] [llmProvider] Forwarded stream b64f7e96-9aba-4633-b45c-84671a222997 to plugin codex-plugin (openaicodex)
+ℹ️  INFO [2026-07-01T10:51:32.345Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:51:32.346Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=1ms
+ℹ️  INFO [2026-07-01T10:51:32.346Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+🐛 DEBUG [2026-07-01T10:51:34.277Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:51:34.286Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:51:34.885Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:34.886Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:34.920Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:34.958Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:34.994Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.055Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.068Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.115Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.152Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.180Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.181Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.224Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.259Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.313Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.330Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.369Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.404Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.449Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.477Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.578Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.579Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.606Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.633Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.668Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.703Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.761Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.791Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.814Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.853Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.889Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.946Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:35.976Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.197Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.199Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.199Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.209Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.209Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.212Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.218Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.240Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.242Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:44.244Z] AI response saved: ai_1782903104243_3f50100 for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+🐛 DEBUG [2026-07-01T10:51:44.272Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'fuzzySearchResponse' ]
+ℹ️  INFO [2026-07-01T10:51:44.273Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:44.274Z] [FSService] handleFilesystemOperation called: operation=fuzzySearch, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+🐛 DEBUG [2026-07-01T10:51:44.276Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:51:44.287Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+🐛 DEBUG [2026-07-01T10:51:45.217Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'fuzzySearchResponse' ]
+ℹ️  INFO [2026-07-01T10:51:45.218Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:45.218Z] [FSService] handleFilesystemOperation called: operation=fuzzySearch, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+🐛 DEBUG [2026-07-01T10:51:45.500Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'grepSearchResponse' ]
+ℹ️  INFO [2026-07-01T10:51:45.501Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:45.501Z] [FSService] handleFilesystemOperation called: operation=grepSearch, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+ℹ️  INFO [2026-07-01T10:51:45.503Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:51:45.538Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=d279b16b-644f-4006-b2d4-7f92430c6b31, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:45.538Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:51:45.538Z] AI response saved: ai_1782903105538_vb2gg0w for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:51:45.539Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:51:45.540Z] [llmProvider] Forwarded stream 8afe9a0c-a68b-40d4-b509-6a34bf76d280 to plugin codex-plugin (openaicodex)
+ℹ️  INFO [2026-07-01T10:51:45.545Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:51:45.546Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=1ms
+ℹ️  INFO [2026-07-01T10:51:45.546Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+ℹ️  INFO [2026-07-01T10:51:49.633Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.634Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.638Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.673Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.709Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.748Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.785Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.825Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.866Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.897Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.936Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:49.976Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.013Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.047Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.087Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.122Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.167Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.199Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.235Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.280Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.324Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.358Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.386Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.426Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.482Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.500Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.506Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.539Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.576Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:50.608Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:51:54.285Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:51:54.294Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:51:57.159Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:57.161Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:57.161Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:57.197Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:57.203Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:57.219Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:57.221Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:51:57.224Z] AI response saved: ai_1782903117223_ij586i6 for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+ℹ️  INFO [2026-07-01T10:51:57.246Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:57.248Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'commandError', 'commandFinish', 'commandRunning' ]
+🐛 DEBUG [2026-07-01T10:51:57.250Z] Current app state for permissions: {"layout":[{"name":"Normal Mode","layout":{"grid":{"root":{"type":"branch","data":[{"type":"leaf","data":{"views":["Code"],"activeView":"Code","id":"1"},"size":624},{"type":"leaf","data":{"views":["Ch...
+ℹ️  INFO [2026-07-01T10:51:57.254Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:57.256Z] notifyUserexecuteTool
+ℹ️  INFO [2026-07-01T10:51:57.257Z] commandfind /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/css /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme -maxdepth 3 -type f | sort
+ℹ️  INFO [2026-07-01T10:51:57.257Z] executing command in shell
+ℹ️  INFO [2026-07-01T10:51:57.268Z] opening new terminal
+ℹ️  INFO [2026-07-01T10:51:57.268Z] Command PTY spawned with pid: 56203 for command: find /Users/ravirawat/Documents/codeboltai/AiEdito
+🐛 DEBUG [2026-07-01T10:51:57.268Z] Setting up process stopped subscriber for messageId: lw3zc9d4nkcb5buavdf2o
+🐛 DEBUG [2026-07-01T10:51:57.268Z] Process stopped subscriber setup completed for messageId: lw3zc9d4nkcb5buavdf2o
+ℹ️  INFO [2026-07-01T10:51:57.269Z] Updated process 56203 status to executing
+ℹ️  INFO [2026-07-01T10:51:57.269Z] Updated process 56203 command to find /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/css /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme -maxdepth 3 -type f | sort
+ℹ️  INFO [2026-07-01T10:51:57.269Z] [PortScannerService] Starting port scanner service
+🐛 DEBUG [2026-07-01T10:51:57.278Z] [PortScannerService] Ports opened: 2721, 3000, 2720, 3100, 2719, 6379, 5000, 7000, 8021
+🐛 DEBUG [2026-07-01T10:51:57.287Z] Using raw terminal output for process 56203
+ℹ️  INFO [2026-07-01T10:51:57.290Z] [executeCommandInShell] PTY exited for "find /Users/ravirawat/Documents/codeboltai/AiEdito" exitCode=0, signal=0
+ℹ️  INFO [2026-07-01T10:51:57.491Z] Updated process 56203 status to done
+🐛 DEBUG [2026-07-01T10:51:57.492Z] Closed log buffer for process 56203
+🐛 DEBUG [2026-07-01T10:51:57.495Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: [Response from cbterminal.executeCommand] {
+  type: 'executeCommandResponse',
+  success: true,
+  output: 'Command executed.\n' +
+    'Output:\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/css/custom.css\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/DocItem/Content/index.tsx\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/DocItem/Footer/index.tsx\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/DocItem/Layout/index.tsx\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/DocItem/Layout/styles.module.css\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/DocItem/Metadata/index.tsx\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/DocItem/Paginator/index.tsx\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/DocItem/index.tsx\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/Root.tsx\n' +
+    '/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/theme/Unlisted/index.tsx',
+  exitCode: 0,
+  processId: 56203,
+  message: 'Command executed successfully',
+  timestamp: '2026-07-01T10:51:57.492Z',
+  requestId: 'b5d7a9fc-ae19-4ad8-a708-1544a31db783'
+}
+ℹ️  INFO [2026-07-01T10:51:57.497Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:57.497Z] [FSService] handleFilesystemOperation called: operation=readFile, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+ℹ️  INFO [2026-07-01T10:51:57.501Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:51:57.518Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=778cfa93-9f9d-4098-8234-39225d2c874d, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:57.518Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:51:57.520Z] AI response saved: ai_1782903117518_woto8ti for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:51:57.521Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:51:57.521Z] [llmProvider] Forwarded stream ac867ec5-127c-4e94-b37a-67db24af6f0e to plugin codex-plugin (openaicodex)
+ℹ️  INFO [2026-07-01T10:51:57.522Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:51:57.524Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=2ms
+ℹ️  INFO [2026-07-01T10:51:57.524Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+🐛 DEBUG [2026-07-01T10:52:00.758Z] Cleaned up orphaned message queue for non-existent process 56203
+ℹ️  INFO [2026-07-01T10:52:00.759Z] Periodic cleanup: removed 1 stale messages from message queues
+🐛 DEBUG [2026-07-01T10:52:04.277Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:52:04.288Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:52:09.202Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.203Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.257Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.268Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.308Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.387Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.393Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.413Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.461Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.496Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.529Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.607Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.614Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.614Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.662Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.924Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.925Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.925Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.929Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.929Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.929Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.931Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:09.949Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.019Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.026Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.061Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.098Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.173Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.196Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.235Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.270Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.311Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.315Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.382Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.393Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.400Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.438Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.476Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.552Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.598Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.601Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.660Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.748Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.750Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.810Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.814Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.815Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.848Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.906Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.944Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:10.967Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.050Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.084Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.120Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.153Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.762Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.764Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.765Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.834Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.837Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.866Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.902Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.936Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:11.969Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.009Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.048Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.079Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.118Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.172Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.193Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.232Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.279Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.281Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.313Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.344Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.383Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.451Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.481Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.491Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.550Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.567Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.603Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.641Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.679Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.790Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.791Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.816Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.851Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.881Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.962Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.962Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:12.987Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.022Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.053Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.090Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.130Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.201Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.201Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.206Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.244Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.296Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.319Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.357Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.394Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.454Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.474Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.504Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.567Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.582Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.617Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.674Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.696Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.733Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.770Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.809Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.849Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.883Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.933Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:13.966Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.018Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.018Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.078Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.078Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.115Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.177Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.182Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.225Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.268Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:52:14.279Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:52:14.288Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:52:14.295Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.341Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.380Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.420Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.473Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.491Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.542Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.570Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.611Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.656Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.670Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.716Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.751Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.879Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.900Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.936Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:14.937Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.071Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.092Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.093Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.103Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.131Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.164Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.194Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.446Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.512Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.557Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.557Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.557Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.557Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.570Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.570Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.598Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.598Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.598Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.605Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.605Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.635Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.809Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.811Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.811Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.824Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.829Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.880Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.912Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.912Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.970Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:15.989Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.322Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.334Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.335Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.335Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.336Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.337Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.339Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.340Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.341Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.380Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.490Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.490Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.491Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.541Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.546Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:52:16.613Z] [Multiplexed] Client connected
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:52:16.613Z] [Multiplexed] Client connected
+ℹ️  INFO [2026-07-01T10:52:16.613Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:52:16.617Z] [Multiplexed] Client connected
+ℹ️  INFO [2026-07-01T10:52:16.628Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:52:16.643Z] [Multiplexed] Client connected
+ℹ️  INFO [2026-07-01T10:52:16.659Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.659Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.695Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.772Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.824Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.832Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.846Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.883Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.922Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:16.958Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.007Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.034Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.070Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.118Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.166Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.184Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.238Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.272Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.301Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.337Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.373Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.409Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.450Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.485Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.535Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.566Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.568Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.604Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.633Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.686Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.708Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.746Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.790Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.826Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.862Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.896Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.942Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:17.976Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:18.281Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:18.284Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:18.289Z] AI response saved: ai_1782903138286_7fgkhi1 for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+🐛 DEBUG [2026-07-01T10:52:18.312Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'readFileResponse' ]
+ℹ️  INFO [2026-07-01T10:52:18.314Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:52:18.314Z] [FSService] handleFilesystemOperation called: operation=readFile, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+ℹ️  INFO [2026-07-01T10:52:18.317Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:52:18.319Z] [FSService] handleFilesystemOperation called: operation=updateFile, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+🐛 DEBUG [2026-07-01T10:52:18.322Z] Adjusted path from /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/src/css/custom.css to src/css/custom.css
+🐛 DEBUG [2026-07-01T10:52:18.325Z] Created hunk hunk-1: type=modification, lines=1473-1478, changes=6
+ℹ️  INFO [2026-07-01T10:52:18.325Z] Generated 1 logical hunks from 6 individual line changes
+🐛 DEBUG [2026-07-01T10:52:18.325Z] Hunk 1: modification at lines 1473-1478 (6 lines)
+ℹ️  INFO [2026-07-01T10:52:18.327Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:52:18.327Z] [IconView] Unmapped template/action: templateType=undefined, actionType=activeReviewsUpdate, type=activeReviewsUpdate
+🐛 DEBUG [2026-07-01T10:52:18.327Z] Broadcasted 1 active reviews to frontend
+🐛 DEBUG [2026-07-01T10:52:18.333Z] Saved 72 file changes to /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/review_fileChanges.json (1 active, 71 completed)
+ℹ️  INFO [2026-07-01T10:52:18.336Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:18.338Z] Review mode started for file: src/css/custom.css, review ID: review-w3umb7hanykjlk474ydi
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:52:18.365Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=56449b1b-24ad-4922-91ae-bf5732f62e27, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:52:18.365Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:52:18.366Z] AI response saved: ai_1782903138365_c9knv9r for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:52:18.368Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:52:18.369Z] [llmProvider] Forwarded stream 4d6a75d7-b938-4302-9517-c6f9c37498a5 to plugin codex-plugin (openaicodex)
+🐛 DEBUG [2026-07-01T10:52:18.370Z] Emitting event for messageId: w3umb7hanykjlk474ydi, type: confirmationResponse, listeners: 0
+[handleIncomingMessage] confirmationResponse messageId=w3umb7hanykjlk474ydi userMessage=Approve listeners=0
+message received in chat socket form user {
+  event: [32m'CHAT_MESSAGE_RECEIVED'[39m,
+  data: {
+    data: { text: [32m'Approve'[39m },
+    message: {
+      action: [32m'approve'[39m,
+      actions: [],
+      activeFile: [32m''[39m,
+      controlFiles: [],
+      currentFile: [32m''[39m,
+      feedbackMessage: [32m''[39m,
+      links: [],
+      mentionedAgents: [],
+      mentionedDocs: [],
+      mentionedFiles: [],
+      mentionedFolders: [],
+      mentionedMCPs: [],
+      mentionedMultiFile: [],
+      messageId: [32m'w3umb7hanykjlk474ydi'[39m,
+      openedFiles: [],
+      orchestratorId: [32m''[39m,
+      processId: [32m''[39m,
+      selectedAgent: [36m[Object][39m,
+      selection: [1mnull[22m,
+      templateType: [32m'REVIEWMODE'[39m,
+      terminalMessage: [32m''[39m,
+      threadId: [32m'62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76'[39m,
+      timestamp: [32m'2026-07-01T16:22:18.356076+05:30'[39m,
+      type: [32m'confirmationResponse'[39m,
+      uploadedImages: [],
+      userMessage: [32m'Approve'[39m
+    },
+    messageId: [32m'w3umb7hanykjlk474ydi'[39m,
+    sender: { senderInfo: {}, senderType: [32m'user'[39m },
+    templateType: [32m'REVIEWMODE'[39m,
+    threadId: [32m'62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76'[39m,
+    timestamp: [32m'2026-07-01T16:22:18.356076+05:30'[39m,
+    type: [32m'confirmationResponse'[39m
+  }
+}
+ℹ️  INFO [2026-07-01T10:52:18.372Z] Using threadId: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76 (from message: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76)
+ℹ️  INFO [2026-07-01T10:52:18.376Z] [MessageRouter] Routing message: type=confirmationResponse, isSteeringMessage=undefined, hasEnvironment=false, remoteEnv=false, hasEnvironmentProvider=false, parentRuntimeId=, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:18.376Z] [SteeringMessageHandler] canHandle check: isSteeringMessage=false, type=confirmationResponse
+ℹ️  INFO [2026-07-01T10:52:18.376Z] [MessageRouter] Message handled by: ResponseMessageHandler canHandle=true
+🐛 DEBUG [2026-07-01T10:52:18.376Z] Message routing info - threadId: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentId: act, socketId: undefined
+🐛 DEBUG [2026-07-01T10:52:18.376Z] Retrying to find target socket (attempt 2/5) after 50ms delay
+ℹ️  INFO [2026-07-01T10:52:18.378Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:52:18.382Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=4ms
+ℹ️  INFO [2026-07-01T10:52:18.382Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+🐛 DEBUG [2026-07-01T10:52:18.427Z] Retrying to find target socket (attempt 3/5) after 50ms delay
+🐛 DEBUG [2026-07-01T10:52:18.477Z] Retrying to find target socket (attempt 4/5) after 50ms delay
+🐛 DEBUG [2026-07-01T10:52:18.528Z] Retrying to find target socket (attempt 5/5) after 50ms delay
+⚠️  WARN [2026-07-01T10:52:18.579Z] Failed to find target socket after 5 attempts
+🐛 DEBUG [2026-07-01T10:52:18.579Z] No active agent found
+🐛 DEBUG [2026-07-01T10:52:18.579Z] Sending message to fallback codeboltSocketConnection
+ℹ️  INFO [2026-07-01T10:52:20.086Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.087Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.089Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.126Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.146Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.227Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.360Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.362Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.476Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.537Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.571Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.622Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.624Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.624Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.624Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.633Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.634Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.634Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.634Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.693Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.702Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.741Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.800Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.843Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.851Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.929Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.941Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:20.976Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:21.033Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:52:24.283Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:52:24.293Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:52:26.375Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:26.376Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:26.376Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:26.389Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:26.390Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:26.459Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:26.462Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:26.466Z] AI response saved: ai_1782903146463_6by4v2v for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+🐛 DEBUG [2026-07-01T10:52:26.485Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'readFileResponse' ]
+ℹ️  INFO [2026-07-01T10:52:26.487Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:52:26.488Z] [FSService] handleFilesystemOperation called: operation=readFile, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, alwaysAllowReadOnly=true, alwaysAllowWrite=true
+ℹ️  INFO [2026-07-01T10:52:26.492Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:26.500Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:52:26.503Z] Current app state for permissions: {"layout":[{"name":"Normal Mode","layout":{"grid":{"root":{"type":"branch","data":[{"type":"leaf","data":{"views":["Code"],"activeView":"Code","id":"1"},"size":624},{"type":"leaf","data":{"views":["Ch...
+ℹ️  INFO [2026-07-01T10:52:26.505Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:26.507Z] notifyUserexecuteTool
+ℹ️  INFO [2026-07-01T10:52:26.507Z] commandgit -C /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs diff -- src/css/custom.css
+ℹ️  INFO [2026-07-01T10:52:26.507Z] executing command in shell
+ℹ️  INFO [2026-07-01T10:52:26.508Z] opening new terminal
+ℹ️  INFO [2026-07-01T10:52:26.509Z] Command PTY spawned with pid: 56458 for command: git -C /Users/ravirawat/Documents/codeboltai/AiEdi
+🐛 DEBUG [2026-07-01T10:52:26.509Z] Setting up process stopped subscriber for messageId: yi4z6zxc91gkqteop3t0yr
+🐛 DEBUG [2026-07-01T10:52:26.509Z] Process stopped subscriber setup completed for messageId: yi4z6zxc91gkqteop3t0yr
+ℹ️  INFO [2026-07-01T10:52:26.510Z] Updated process 56458 status to executing
+ℹ️  INFO [2026-07-01T10:52:26.510Z] Updated process 56458 command to git -C /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs diff -- src/css/custom.css
+🐛 DEBUG [2026-07-01T10:52:26.510Z] [PortScannerService] Already running
+🐛 DEBUG [2026-07-01T10:52:26.545Z] Using raw terminal output for process 56458
+🐛 DEBUG [2026-07-01T10:52:26.545Z] Using raw terminal output for process 56458
+ℹ️  INFO [2026-07-01T10:52:26.546Z] [executeCommandInShell] PTY exited for "git -C /Users/ravirawat/Documents/codeboltai/AiEdi" exitCode=0, signal=0
+ℹ️  INFO [2026-07-01T10:52:26.747Z] Updated process 56458 status to done
+🐛 DEBUG [2026-07-01T10:52:26.749Z] Closed log buffer for process 56458
+🐛 DEBUG [2026-07-01T10:52:26.750Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: [Response from cbterminal.executeCommand] {
+  type: 'executeCommandResponse',
+  success: true,
+  output: 'Command executed.\n' +
+    'Output:\n' +
+    'diff --git a/src/css/custom.css b/src/css/custom.css\n' +
+    'index fec13d9e..49551d41 100644\n' +
+    '--- a/src/css/custom.css\n' +
+    '+++ b/src/css/custom.css\n' +
+    '@@ -1470,7 +1470,12 @@ footer {\n' +
+    ' }\n' +
+    ' \n' +
+    ' /* Ensure content sits above grid */\n' +
+    '-.theme-doc-sidebar-container,\n' +
+    '+.theme-doc-sidebar-container {\n' +
+    '+  position: sticky;\n' +
+    '+  top: var(--ifm-navbar-height);\n' +
+    '+  z-index: 1;\n' +
+    '+}\n' +
+    '+\n' +
+    ' .theme-doc-main-container,\n' +
+    ' .theme-doc-toc-container {\n' +
+    '   position: relative;',
+  exitCode: 0,
+  processId: 56458,
+  message: 'Command executed successfully',
+  timestamp: '2026-07-01T10:52:26.749Z',
+  requestId: '403c042f-3597-4119-ab60-6fdbbc6388e6'
+}
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:52:26.766Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=b7bd2df6-b5c9-4c49-a3d4-5e762df652b7, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:52:26.766Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:52:26.768Z] AI response saved: ai_1782903146766_eb1e3k9 for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:52:26.769Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:52:26.770Z] [llmProvider] Forwarded stream 27f2ad02-d4c8-420d-9938-fd6d8a9ac744 to plugin codex-plugin (openaicodex)
+ℹ️  INFO [2026-07-01T10:52:26.772Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:52:26.773Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=1ms
+ℹ️  INFO [2026-07-01T10:52:26.773Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+ℹ️  INFO [2026-07-01T10:52:28.551Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.551Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.624Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.624Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.663Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.698Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.739Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.783Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.814Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.814Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.882Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.885Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.928Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.963Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:28.995Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.049Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.078Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.138Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.146Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.184Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.224Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.264Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.321Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.334Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.374Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.441Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.447Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.483Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.521Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.558Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.599Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.638Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.670Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.713Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.741Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.748Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.785Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.822Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.861Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.898Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.933Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:29.970Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.007Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.042Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.080Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.122Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.165Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.195Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.233Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.270Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.310Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.350Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.397Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.421Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.465Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.513Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.555Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.584Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.613Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.623Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.657Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.692Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.725Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:52:30.759Z] Cleaned up orphaned message queue for non-existent process 56458
+ℹ️  INFO [2026-07-01T10:52:30.759Z] Periodic cleanup: removed 2 stale messages from message queues
+ℹ️  INFO [2026-07-01T10:52:30.815Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.822Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.834Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.879Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.913Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:30.944Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.016Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.020Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.074Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.096Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.135Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.173Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.211Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.250Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.283Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.344Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.365Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.443Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.509Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.510Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.511Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.511Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.557Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.614Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.683Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.683Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.698Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.797Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:31.800Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.451Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.451Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.481Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.515Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.553Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.556Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.594Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.630Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.665Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.705Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.739Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.785Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.823Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.855Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.911Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.961Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:32.979Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.005Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.051Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.087Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.116Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.156Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.188Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.229Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.267Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.320Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.339Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.406Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.435Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.468Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.598Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.598Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.599Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.600Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.605Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.646Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.677Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.731Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.765Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.791Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.832Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.900Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.909Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.945Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:33.980Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.021Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.050Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.094Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.135Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.180Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.211Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.253Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:52:34.282Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:52:34.292Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:52:34.295Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.348Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.365Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.385Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.402Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.446Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.467Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.805Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.808Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:34.812Z] AI response saved: ai_1782903154808_sidd5u6 for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+🐛 DEBUG [2026-07-01T10:52:34.834Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'commandError', 'commandFinish', 'commandRunning' ]
+ℹ️  INFO [2026-07-01T10:52:34.836Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:52:34.837Z] Current app state for permissions: {"layout":[{"name":"Normal Mode","layout":{"grid":{"root":{"type":"branch","data":[{"type":"leaf","data":{"views":["Code"],"activeView":"Code","id":"1"},"size":624},{"type":"leaf","data":{"views":["Ch...
+ℹ️  INFO [2026-07-01T10:52:34.840Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:34.842Z] notifyUserexecuteTool
+ℹ️  INFO [2026-07-01T10:52:34.843Z] commandcd /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs && npm run typecheck
+ℹ️  INFO [2026-07-01T10:52:34.843Z] executing command in shell
+ℹ️  INFO [2026-07-01T10:52:34.844Z] opening new terminal
+ℹ️  INFO [2026-07-01T10:52:34.844Z] Command PTY spawned with pid: 56507 for command: cd /Users/ravirawat/Documents/codeboltai/AiEditor/
+🐛 DEBUG [2026-07-01T10:52:34.844Z] Setting up process stopped subscriber for messageId: ex3qxkdfyrrdxdv6vtqgn5
+🐛 DEBUG [2026-07-01T10:52:34.844Z] Process stopped subscriber setup completed for messageId: ex3qxkdfyrrdxdv6vtqgn5
+ℹ️  INFO [2026-07-01T10:52:34.845Z] Updated process 56507 status to executing
+ℹ️  INFO [2026-07-01T10:52:34.845Z] Updated process 56507 command to cd /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs && npm run typecheck
+🐛 DEBUG [2026-07-01T10:52:34.845Z] [PortScannerService] Already running
+🐛 DEBUG [2026-07-01T10:52:35.099Z] Using raw terminal output for process 56507
+🐛 DEBUG [2026-07-01T10:52:37.207Z] Using raw terminal output for process 56507
+🐛 DEBUG [2026-07-01T10:52:37.210Z] Using raw terminal output for process 56507
+🐛 DEBUG [2026-07-01T10:52:37.210Z] Using raw terminal output for process 56507
+ℹ️  INFO [2026-07-01T10:52:37.212Z] [executeCommandInShell] PTY exited for "cd /Users/ravirawat/Documents/codeboltai/AiEditor/" exitCode=0, signal=0
+ℹ️  INFO [2026-07-01T10:52:37.414Z] Updated process 56507 status to done
+🐛 DEBUG [2026-07-01T10:52:37.417Z] Closed log buffer for process 56507
+🐛 DEBUG [2026-07-01T10:52:37.421Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: [Response from cbterminal.executeCommand] {
+  type: 'executeCommandResponse',
+  success: true,
+  output: 'Command executed.\nOutput:\n> @codebolt/docs@0.0.0 typecheck\n> tsc\\',
+  exitCode: 0,
+  processId: 56507,
+  message: 'Command executed successfully',
+  timestamp: '2026-07-01T10:52:37.417Z',
+  requestId: 'f273f26e-cdb2-457e-8f06-b46944cecb45'
+}
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:52:37.446Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=7d84c34e-9600-4b6d-b7b0-089339886690, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:52:37.447Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:52:37.449Z] AI response saved: ai_1782903157447_lb9ctz0 for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:52:37.451Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:52:37.452Z] [llmProvider] Forwarded stream 9841ffe1-ec4d-4aaa-8c7c-37b1b9154c2d to plugin codex-plugin (openaicodex)
+ℹ️  INFO [2026-07-01T10:52:37.457Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:52:37.459Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=2ms
+ℹ️  INFO [2026-07-01T10:52:37.459Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+ℹ️  INFO [2026-07-01T10:52:39.191Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.191Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.237Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.271Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.309Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.375Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.375Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.375Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.424Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.464Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.506Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.535Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.601Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.606Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.646Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.681Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.710Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.772Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.788Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.822Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.887Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.913Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.937Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:39.987Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.015Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.078Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.092Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.182Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.195Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.215Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.251Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.294Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.330Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.343Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.385Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.435Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.455Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.456Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.492Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.530Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.602Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.604Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.642Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.693Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.740Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.809Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.809Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.846Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.864Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:40.910Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.625Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.626Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.627Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.673Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.689Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.702Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.718Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.757Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.835Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.836Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.905Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.905Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.946Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:41.980Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.023Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.083Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.093Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.139Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.176Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.206Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.240Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.279Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.315Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.350Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.426Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.437Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.480Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.536Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.540Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.595Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.639Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.655Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.688Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.732Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.740Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.760Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.802Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.858Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.902Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.945Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.957Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:42.992Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.024Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.067Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.106Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.161Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.202Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.236Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.249Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.332Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.332Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.366Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.401Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.457Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.473Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.538Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.597Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.599Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.629Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.683Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.695Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.697Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.731Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.776Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.811Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.867Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.883Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.948Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:43.969Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:44.020Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:44.071Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:52:44.282Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:52:44.292Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:52:44.303Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:44.305Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:44.308Z] AI response saved: ai_1782903164305_zf76kx8 for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+🐛 DEBUG [2026-07-01T10:52:44.327Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'commandError', 'commandFinish', 'commandRunning' ]
+ℹ️  INFO [2026-07-01T10:52:44.329Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:52:44.330Z] Current app state for permissions: {"layout":[{"name":"Normal Mode","layout":{"grid":{"root":{"type":"branch","data":[{"type":"leaf","data":{"views":["Code"],"activeView":"Code","id":"1"},"size":624},{"type":"leaf","data":{"views":["Ch...
+ℹ️  INFO [2026-07-01T10:52:44.332Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:44.333Z] notifyUserexecuteTool
+ℹ️  INFO [2026-07-01T10:52:44.334Z] commandcd /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs && npm run build
+ℹ️  INFO [2026-07-01T10:52:44.334Z] executing command in shell
+ℹ️  INFO [2026-07-01T10:52:44.335Z] opening new terminal
+ℹ️  INFO [2026-07-01T10:52:44.335Z] Command PTY spawned with pid: 56635 for command: cd /Users/ravirawat/Documents/codeboltai/AiEditor/
+🐛 DEBUG [2026-07-01T10:52:44.335Z] Setting up process stopped subscriber for messageId: 4i600b5t52q23byt6wda77
+🐛 DEBUG [2026-07-01T10:52:44.335Z] Process stopped subscriber setup completed for messageId: 4i600b5t52q23byt6wda77
+ℹ️  INFO [2026-07-01T10:52:44.337Z] Updated process 56635 status to executing
+ℹ️  INFO [2026-07-01T10:52:44.337Z] Updated process 56635 command to cd /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs && npm run build
+🐛 DEBUG [2026-07-01T10:52:44.337Z] [PortScannerService] Already running
+🐛 DEBUG [2026-07-01T10:52:44.540Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:44.670Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:44.951Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:44.958Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:44.960Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:44.960Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:45.340Z] Setting up subscriber for messageId: 4i600b5t52q23byt6wda77
+🐛 DEBUG [2026-07-01T10:52:45.340Z] Subscriber setup completed for messageId: 4i600b5t52q23byt6wda77
+ℹ️  INFO [2026-07-01T10:52:45.340Z] Updated process 56635 status to background
+🐛 DEBUG [2026-07-01T10:52:45.345Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: [Response from cbterminal.executeCommand] {
+  type: 'executeCommandResponse',
+  success: true,
+  output: 'Command is running in the background.\n' +
+    'Process ID: 56635\n' +
+    'Output so far:\n' +
+    '> @codebolt/docs@0.0.0 build\n' +
+    '> npm run generate:llms && cross-env NODE_OPTIONS=--max-old-space-size=8192 npx docusaurus build && npm run postbuild:llm> @codebolt/docs@0.0.0 generate:llms\n' +
+    '> node scripts/generate-llms-txt.jsGenerated .llmtemp/llm.jsonl (434 pages, 68 curated) for LLM use.\\',
+  exitCode: 0,
+  processId: 56635,
+  status: 'running',
+  message: 'Command is running in the background',
+  timestamp: '2026-07-01T10:52:45.342Z',
+  requestId: '3996a796-548a-4a5a-90f1-d357d031899f'
+}
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:52:45.364Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=8b0b3d2e-87e7-4df7-a29c-704b9fea2a27, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:52:45.364Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:52:45.367Z] AI response saved: ai_1782903165365_6hsdukm for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:52:45.369Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:52:45.370Z] [llmProvider] Forwarded stream fee00c27-c3e2-48b0-810e-39849abb6443 to plugin codex-plugin (openaicodex)
+ℹ️  INFO [2026-07-01T10:52:45.371Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:52:45.373Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=2ms
+ℹ️  INFO [2026-07-01T10:52:45.373Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
+🐛 DEBUG [2026-07-01T10:52:45.392Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:45.396Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:45.397Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:46.317Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:46.318Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:52:46.405Z] Using raw terminal output for process 56635
+ℹ️  INFO [2026-07-01T10:52:46.696Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.696Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.741Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.789Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.814Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.917Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.917Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.919Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:46.973Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.026Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.032Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.062Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.106Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.106Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.146Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.168Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.211Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.253Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.291Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.429Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.429Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.429Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.430Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.493Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.505Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.544Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.629Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.643Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.659Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.692Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.750Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.815Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.816Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.841Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.880Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.914Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:47.955Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.009Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.029Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.118Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.119Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.172Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.232Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.232Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.232Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.254Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.286Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.335Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.363Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.475Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.476Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.485Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:52:48.490Z] Emitting event for messageId: steering_1782903168487_7be47c93-, type: messageResponse, listeners: 0
+message received in chat socket form user {
+  event: [32m'CHAT_MESSAGE_RECEIVED'[39m,
+  data: {
+    data: { text: [32m'do not run bubuild'[39m },
+    id: [32m'1b79c5bb-5803-4cfb-9781-5894a840a9cd'[39m,
+    message: {
+      actions: [],
+      activeFile: [32m''[39m,
+      controlFiles: [],
+      currentFile: [32m''[39m,
+      feedbackMessage: [32m''[39m,
+      isSteeringMessage: [33mtrue[39m,
+      links: [],
+      mentionedAgents: [],
+      mentionedFiles: [],
+      mentionedFolders: [],
+      mentionedMCPs: [],
+      mentionedMultiFile: [],
+      messageId: [32m'steering_msg_1782903168489_8365e8e8-'[39m,
+      openedFiles: [],
+      processId: [32m''[39m,
+      selectedAgent: [36m[Object][39m,
+      steeringInstruction: [32m'do not run bubuild'[39m,
+      templateType: [32m'userChat'[39m,
+      terminalMessage: [32m''[39m,
+      threadId: [32m'62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76'[39m,
+      timestamp: [32m'2026-07-01T16:22:48.489493+05:30'[39m,
+      type: [32m'messageResponse'[39m,
+      uploadedImages: [],
+      userMessage: [32m'do not run bubuild'[39m
+    },
+    messageId: [32m'steering_1782903168487_7be47c93-'[39m,
+    sender: { senderInfo: {}, senderType: [32m'user'[39m },
+    templateType: [32m'userChat'[39m,
+    timestamp: [32m'2026-07-01T16:22:48.489493+05:30'[39m,
+    type: [32m'messageResponse'[39m
+  }
+}
+ℹ️  INFO [2026-07-01T10:52:48.492Z] Using threadId: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76 (from message: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76)
+ℹ️  INFO [2026-07-01T10:52:48.498Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:48.498Z] [MessageRouter] Routing message: type=messageResponse, isSteeringMessage=true, hasEnvironment=false, remoteEnv=false, hasEnvironmentProvider=false, parentRuntimeId=, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:48.498Z] [SteeringMessageHandler] canHandle check: isSteeringMessage=true, type=messageResponse
+ℹ️  INFO [2026-07-01T10:52:48.498Z] [SteeringMessageHandler] canHandle check: isSteeringMessage=true, type=messageResponse
+ℹ️  INFO [2026-07-01T10:52:48.498Z] [MessageRouter] Message handled by: SteeringMessageHandler canHandle=true
+ℹ️  INFO [2026-07-01T10:52:48.499Z] [SteeringMessageHandler] Handling steering message for thread 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:48.499Z] [SteeringMessageHandler] Instruction: "do not run bubuild"
+ℹ️  INFO [2026-07-01T10:52:48.499Z] [SteeringMessageHandler] SteeringStepId: undefined
+ℹ️  INFO [2026-07-01T10:52:48.499Z] [SteeringMessageHandler] Found 1 running process(es) for thread 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:52:48.499Z] [SteeringMessageHandler] Target agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9, instanceId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon
+ℹ️  INFO [2026-07-01T10:52:48.499Z] [SteeringMessageHandler] Sending steering event to agent event queue...
+🐛 DEBUG [2026-07-01T10:52:48.499Z] [AgentEventQueueSocket] Sent UI update: eventDelivered
+🐛 DEBUG [2026-07-01T10:52:48.499Z] [AgentEventQueueStore] Marked event 6a44b774-2cce-4117-b819-ce8f064defce as delivered
+ℹ️  INFO [2026-07-01T10:52:48.499Z] [AgentEventQueueCliService] Delivered event 6a44b774-2cce-4117-b819-ce8f064defce to agent c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+ℹ️  INFO [2026-07-01T10:52:48.501Z] [AgentEventQueueStore] Added event 6a44b774-2cce-4117-b819-ce8f064defce for agent c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (type: steering, priority: high)
+⚠️  WARN [2026-07-01T10:52:48.501Z] [AgentEventQueueStore] Cannot mark delivered: event 6a44b774-2cce-4117-b819-ce8f064defce not in pending queue
+ℹ️  INFO [2026-07-01T10:52:48.501Z] [AgentEventQueueCliService] Delivered event 6a44b774-2cce-4117-b819-ce8f064defce to agent c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:52:48.501Z] [AgentEventQueueSocket] Sent UI update: eventAdded
+ℹ️  INFO [2026-07-01T10:52:48.501Z] [SteeringMessageHandler] Steering event queued successfully: eventId=6a44b774-2cce-4117-b819-ce8f064defce, targetAgent=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+ℹ️  INFO [2026-07-01T10:52:48.516Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:48.549Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.297Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.298Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.299Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.352Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.391Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.406Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.438Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.539Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.539Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.558Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.565Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.631Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.638Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.667Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.746Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.749Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.778Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.852Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.852Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.889Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:49.942Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.063Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.064Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.143Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.144Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.144Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.144Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.367Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.367Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.367Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.367Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.367Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.374Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.421Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.469Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.500Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+🐛 DEBUG [2026-07-01T10:52:50.508Z] Using raw terminal output for process 56635
+ℹ️  INFO [2026-07-01T10:52:50.694Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.chunk, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.763Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.reply, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:52:50.797Z] AI response saved: ai_1782903170778_pg7t6td for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=aiResponse
+🐛 DEBUG [2026-07-01T10:52:55.516Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:52:55.751Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+🐛 DEBUG [2026-07-01T10:52:55.833Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: Message types:  [ 'terminalCommandWaitResponse' ]
+🐛 DEBUG [2026-07-01T10:53:00.583Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:00.628Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:00.659Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:00.761Z] Cleaned up orphaned message queue for non-existent process 56507
+ℹ️  INFO [2026-07-01T10:53:00.761Z] Periodic cleanup: removed 4 stale messages from message queues
+🐛 DEBUG [2026-07-01T10:53:00.780Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:04.151Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:04.223Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:04.265Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:04.274Z] Using raw terminal output for process 56635
+🐛 DEBUG [2026-07-01T10:53:04.386Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:53:04.740Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:53:04.962Z] [PROCESS MANAGER] Stopping 1 processes
+ℹ️  INFO [2026-07-01T10:53:04.982Z] [AGENT STOP] Attempting to stop process: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (agentId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9, instanceId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon)
+🐛 DEBUG [2026-07-01T10:53:04.983Z] [AGENT STOP] Sending SIGTERM to process tree: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (pid: 55816)
+
+Received TUI_EXIT. Shutting down...
+🐛 DEBUG [2026-07-01T10:53:05.165Z] Closed log buffer for process 56635
+ℹ️  INFO [2026-07-01T10:53:05.165Z] Cleared message queues for 1 processes during cleanup
+ℹ️  INFO [2026-07-01T10:53:05.165Z] Stopped periodic message queue cleanup interval
+ℹ️  INFO [2026-07-01T10:53:05.165Z] Stopped periodic wsPtyMap cleanup interval
+ℹ️  INFO [2026-07-01T10:53:05.196Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] Process exited with code null after 110754ms (instanceId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon)
+ℹ️  INFO [2026-07-01T10:53:05.211Z] Updated agent execution status: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon -> failed
+ℹ️  INFO [2026-07-01T10:53:05.221Z] Ended debug session: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon with status failed
+ℹ️  INFO [2026-07-01T10:53:05.224Z] [AgentProcessManager] Firing agentSessionEnd hook for c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 from completion (instanceId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, cwd: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs)
+ℹ️  INFO [2026-07-01T10:53:05.233Z] [SideExecutionManager] Stopping all side executions for parent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+ℹ️  INFO [2026-07-01T10:53:05.233Z] [SideExecutionManager] Stopped 0 side executions for parent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+ℹ️  INFO [2026-07-01T10:53:05.236Z] [AGENT STOP] Attempting to stop process: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (agentId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9, instanceId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon)
+🐛 DEBUG [2026-07-01T10:53:05.237Z] [AGENT STOP] Sending SIGTERM to process tree: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (pid: 55816)
+ℹ️  INFO [2026-07-01T10:53:05.265Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:53:05.268Z] [AGENT STOP] Process stopped successfully: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (code: null)
+ℹ️  INFO [2026-07-01T10:53:05.271Z] Updated agent execution status: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon -> failed
+ℹ️  INFO [2026-07-01T10:53:05.275Z] [EventFlow][1-Publish] Event published: type=agent:completed, eventId=a42d9d9b-c766-4119-9ea0-4acacee5ec96, source={"agentId":"c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9","threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:53:05.275Z] [EventFlow][1-Publish] Payload keys: agentName, agentType, status
+ℹ️  INFO [2026-07-01T10:53:05.276Z] [AGENT STOP] Process stopped successfully: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (code: null)
+ℹ️  INFO [2026-07-01T10:53:05.280Z] Updated agent execution status: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon -> failed
+ℹ️  INFO [2026-07-01T10:53:05.280Z] [EventFlow][1-Publish] Event published: type=agent:completed, eventId=d07bcd85-6a5f-43f0-9191-a3fa1d53b107, source={"agentId":"c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9","threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:53:05.280Z] [EventFlow][1-Publish] Payload keys: agentName, agentType, status
+ℹ️  INFO [2026-07-01T10:53:05.281Z] [PROCESS MANAGER] All processes stopped successfully
+ℹ️  INFO [2026-07-01T10:53:05.284Z] [executeCommandInShell] PTY exited for "cd /Users/ravirawat/Documents/codeboltai/AiEditor/" exitCode=0, signal=15
+ℹ️  INFO [2026-07-01T10:53:05.286Z] [EventFlow][1-Publish] Event agent:completed dispatched to 0/4 subscriptions
+ℹ️  INFO [2026-07-01T10:53:05.286Z] [EventFlow][1-Publish] Event agent:completed dispatched to 0/4 subscriptions
+🐛 DEBUG [2026-07-01T10:53:05.332Z] [PortScannerService] Ports closed: 2721
+ℹ️  INFO [2026-07-01T10:53:05.486Z] Updated process 56635 status to done
+🐛 DEBUG [2026-07-01T10:53:05.488Z] Closed log buffer for process 56635
+🐛 DEBUG [2026-07-01T10:53:05.490Z] [AgentEventQueueCliService] No active socket for agent c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9, event queued
+ℹ️  INFO [2026-07-01T10:53:05.493Z] [AgentEventQueueStore] Added event 6b7c9680-fbc8-4574-8026-9f6926fed911 for agent c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9 (type: custom, priority: normal)
+🐛 DEBUG [2026-07-01T10:53:05.493Z] [AgentEventQueueCliService] No active socket for agent c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9, event queued
+
+Received SIGINT. Shutting down...
