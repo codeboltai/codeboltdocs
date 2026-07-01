@@ -121,4 +121,4 @@ Some panel picker entries show shortcut labels such as `Ctrl+Shift+C`, `Ctrl+Shi
 
 - [Layout](./02_layout.md)
 - [Workspace and Project Management](../01_workspace-and-project-management/01_overview.md)
-- [Chat Overview](../../../03_chat/01_overview.md)
+- [Chat Overview](../03_chat/01_overview.md)

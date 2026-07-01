@@ -35,6 +35,6 @@ Whichever client you choose, the Get Started guide will take you through:
 ## Where to go next
 
 - [What is Codebolt](./02_what-is-codebolt.md) — understand the bigger picture
-- [Chat](../02_using-codebolt/03_chat/01_overview.md) — @-mentions, context, inline edit
+- [Chat](../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/01_overview.md) — @-mentions, context, inline edit
 - [Agents](../02_using-codebolt/04_agents/01_what-is-an-agent.md) — install and run different agents
 - [Guides](../03_guides/01_overview.md) — step-by-step walkthroughs for specific tasks

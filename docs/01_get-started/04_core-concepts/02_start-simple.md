@@ -32,7 +32,7 @@ An agent can also branch work. It can start a sub-agent as a child run under the
 
 Threads matter because they make work durable. You can come back to a task, inspect what happened, continue from the current state, or roll back to an earlier checkpoint.
 
-Related details: [Chat Overview](../../02_using-codebolt/03_chat/01_overview.md), [Tabs and History](../../02_using-codebolt/03_chat/02_tabs-and-history.md), [Running Parallel Agents](../../02_using-codebolt/07a_parallel-agents/02_running-parallel-agents.md), [Sub Agent](../../02_using-codebolt/07a_parallel-agents/05_sub-agent.md), [Background Agent](../../02_using-codebolt/07a_parallel-agents/04_background-agent.md), and [Thread Panel](../../02_using-codebolt/04_agents/08_thread-panel.md).
+Related details: [Chat Overview](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/01_overview.md), [Tabs and History](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/02_tabs-and-history.md), [Running Parallel Agents](../../02_using-codebolt/07a_parallel-agents/02_running-parallel-agents.md), [Sub Agent](../../02_using-codebolt/07a_parallel-agents/05_sub-agent.md), [Background Agent](../../02_using-codebolt/07a_parallel-agents/04_background-agent.md), and [Thread Panel](../../02_using-codebolt/04_agents/08_thread-panel.md).
 
 ## Agents
 
@@ -51,7 +51,7 @@ A **model** is the LLM the agent calls during the run. You can choose different 
 | Large codebase work | Context size and retrieval quality |
 | Sensitive or local-only work | Provider and environment control |
 
-See [model selection](../../02_using-codebolt/03_chat/06_model-selection.md) and [LLM providers](../../02_using-codebolt/08_integrations/01_llm-providers.md) for setup details.
+See [model selection](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/06_model-selection.md) and [LLM providers](../../02_using-codebolt/08_integrations/01_llm-providers.md) for setup details.
 
 ## Tools
 
@@ -85,6 +85,6 @@ For simple use, the loop is straightforward:
 
 ## See also
 
-- [Chat](../../02_using-codebolt/03_chat/01_overview.md)
+- [Chat](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/01_overview.md)
 - [Running agents](../../02_using-codebolt/04_agents/03_running-agents.md)
-- [Checkpoints and rollback](../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)
+- [Checkpoints and rollback](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md)

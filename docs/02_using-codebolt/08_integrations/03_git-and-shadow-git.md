@@ -21,9 +21,9 @@ But mostly Codebolt **leaves real git alone**. Agent file edits don't automatica
 
 A **parallel** git repo that Codebolt maintains automatically. Every agent write is committed here as it happens. This is what powers:
 
-- [Checkpoints](../03_chat/04_checkpoints-and-rollback.md) — rollback to any prior state.
+- [Checkpoints](../02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md) — rollback to any prior state.
 - [Replay](../07_multi-agent-usage/03_reading-a-flow.md) — view the FS as it was.
-- [Branching](../03_chat/04_checkpoints-and-rollback.md) — start a new chat from a past state.
+- [Branching](../02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md) — start a new chat from a past state.
 
 Shadow git is **invisible** until you want to use it. It's not shown in normal git commands. It's not pushed anywhere. Your real git state is never affected.
 
@@ -114,6 +114,6 @@ Shadow git handles submodules like normal git — each submodule has its own sha
 
 ## See also
 
-- [Checkpoints and rollback](../03_chat/04_checkpoints-and-rollback.md)
+- [Checkpoints and rollback](../02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md)
 - [Checkpoint and rollback (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
 - [Project & Workspace (internals)](../../04_build-on-codebolt/07b_subsystems/10_project-and-workspace.md)

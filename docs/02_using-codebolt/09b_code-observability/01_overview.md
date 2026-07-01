@@ -24,6 +24,5 @@ Codebolt includes code-observability tools for understanding both how a project 
 
 ## Related
 
-- [Debug & Observability](../08c_debug-and-observability/01_overview.md) — environment, plugin, and problems panels
 - [Agent Observability](../05c_agent-observability/01_overview.md) — running processes, log streams, and LLM traces
-- [Code Editor Features](../03b_code-and-terminal/01_overview.md) — editor, terminal, git, and preview
+- [Code Editor Features](../02_surfaces/02_desktop-app/03b_code-and-terminal/01_overview.md) — editor, terminal, git, and preview

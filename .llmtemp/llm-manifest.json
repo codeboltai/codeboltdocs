@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-30T13:11:17.455Z",
+  "generatedAt": "2026-07-01T07:38:29.024Z",
   "sourceCount": 385,
-  "curatedCount": 58,
+  "curatedCount": 62,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 165,
+      "count": 162,
       "order": 1,
       "files": [
         {
@@ -25,31 +25,131 @@
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/get-started.md",
-          "title": "Get Started"
+          "title": "Quick Start"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/workspace-and-projects/workspace-and-projects.md",
-          "title": "Workspace and Projects"
+          "path": "using-codebolt/surfaces/desktop-app/onboarding.md",
+          "title": "Installation and  Onboarding"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/panels-and-layout/using-panels.md",
-          "title": "Panels and Layout"
+          "path": "using-codebolt/surfaces/desktop-app/workspace-and-project-management/overview.md",
+          "title": "Workspace and Project"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/settings-and-profiles/settings-and-profiles.md",
-          "title": "Settings"
+          "path": "using-codebolt/surfaces/desktop-app/workspace-and-project-management/workspaces.md",
+          "title": "Workspaces"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/workspace-and-project-management/creating-projects.md",
+          "title": "Creating Projects"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/application-navigation/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/application-navigation/panels.md",
+          "title": "Panels"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/application-navigation/layout.md",
+          "title": "Layout"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/chat/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/chat/tabs-and-history.md",
+          "title": "Tabs and History"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/chat/context-and-at-mentions.md",
+          "title": "Context and @-mentions"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/chat/checkpoints-and-rollback.md",
+          "title": "Checkpoints and Rollback"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/chat/inline-edit-and-ctrl-k.md",
+          "title": "Inline Edit and Ctrl+K"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/chat/model-selection.md",
+          "title": "Model Selection"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/chat/ai-requests.md",
+          "title": "AI Requests"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/overview.md",
+          "title": "Code & Terminal Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/code-editor.md",
+          "title": "Code Editor"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/terminal.md",
+          "title": "Terminal"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/git-panel.md",
+          "title": "Git Panel"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/preview-browser.md",
+          "title": "Preview & Browser"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/environments/environments.md",
           "title": "Environments"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/themes.md",
-          "title": "Themes"
+          "path": "using-codebolt/surfaces/desktop-app/code-observability/overview.md",
+          "title": "Code Observability Overview"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/settings/settings-and-profiles.md",
-          "title": "Settings"
+          "path": "using-codebolt/surfaces/desktop-app/code-observability/codemap.md",
+          "title": "Codemap"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-observability/narrative-graph.md",
+          "title": "Narrative Graph"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/overview.md",
+          "title": "Settings Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/llm-settings.md",
+          "title": "LLM Settings"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/agent-settings.md",
+          "title": "Agent Settings"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/environment-services.md",
+          "title": "Environment & Services"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/language-servers.md",
+          "title": "Language Servers"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/mcp-servers.md",
+          "title": "MCP Servers"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/appearance.md",
+          "title": "Appearance & Global Settings"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/themes.md",
+          "title": "Themes"
         },
         {
           "path": "using-codebolt/surfaces/cli/cli-interface/get-started.md",
@@ -210,54 +310,6 @@
         {
           "path": "using-codebolt/surfaces/cloud/settings/account-settings.md",
           "title": "Account Settings"
-        },
-        {
-          "path": "using-codebolt/chat/overview.md",
-          "title": "Chat Overview"
-        },
-        {
-          "path": "using-codebolt/chat/tabs-and-history.md",
-          "title": "Tabs and History"
-        },
-        {
-          "path": "using-codebolt/chat/context-and-at-mentions.md",
-          "title": "Context and @-mentions"
-        },
-        {
-          "path": "using-codebolt/chat/checkpoints-and-rollback.md",
-          "title": "Checkpoints and Rollback"
-        },
-        {
-          "path": "using-codebolt/chat/inline-edit-and-ctrl-k.md",
-          "title": "Inline Edit and Ctrl+K"
-        },
-        {
-          "path": "using-codebolt/chat/model-selection.md",
-          "title": "Model Selection"
-        },
-        {
-          "path": "using-codebolt/chat/ai-requests.md",
-          "title": "AI Requests"
-        },
-        {
-          "path": "using-codebolt/code-and-terminal/overview.md",
-          "title": "Code & Terminal Overview"
-        },
-        {
-          "path": "using-codebolt/code-and-terminal/code-editor.md",
-          "title": "Code Editor"
-        },
-        {
-          "path": "using-codebolt/code-and-terminal/terminal.md",
-          "title": "Terminal"
-        },
-        {
-          "path": "using-codebolt/code-and-terminal/git-panel.md",
-          "title": "Git Panel"
-        },
-        {
-          "path": "using-codebolt/code-and-terminal/preview-browser.md",
-          "title": "Preview & Browser"
         },
         {
           "path": "using-codebolt/agents/what-is-an-agent.md",
@@ -604,70 +656,6 @@
           "title": "Building a Channel Plugin"
         },
         {
-          "path": "using-codebolt/account/authentication-and-authorization.md",
-          "title": "Authentication & Authorization"
-        },
-        {
-          "path": "using-codebolt/account/teams.md",
-          "title": "Teams"
-        },
-        {
-          "path": "using-codebolt/account/usage-and-billing.md",
-          "title": "Usage and Billing"
-        },
-        {
-          "path": "using-codebolt/account/workspace.md",
-          "title": "Workspace"
-        },
-        {
-          "path": "using-codebolt/account/application-layout.md",
-          "title": "Application Layout"
-        },
-        {
-          "path": "using-codebolt/account/settings-overview.md",
-          "title": "Settings Overview"
-        },
-        {
-          "path": "using-codebolt/account/llm-settings.md",
-          "title": "LLM Settings"
-        },
-        {
-          "path": "using-codebolt/account/agent-settings.md",
-          "title": "Agent Settings"
-        },
-        {
-          "path": "using-codebolt/account/environment-services.md",
-          "title": "Environment & Services"
-        },
-        {
-          "path": "using-codebolt/account/language-servers.md",
-          "title": "Language Servers"
-        },
-        {
-          "path": "using-codebolt/account/mcp-servers.md",
-          "title": "MCP Servers"
-        },
-        {
-          "path": "using-codebolt/account/appearance.md",
-          "title": "Appearance & Global Settings"
-        },
-        {
-          "path": "using-codebolt/account/problems.md",
-          "title": "Problems"
-        },
-        {
-          "path": "using-codebolt/code-observability/overview.md",
-          "title": "Code Observability Overview"
-        },
-        {
-          "path": "using-codebolt/code-observability/codemap.md",
-          "title": "Codemap"
-        },
-        {
-          "path": "using-codebolt/code-observability/narrative-graph.md",
-          "title": "Narrative Graph"
-        },
-        {
           "path": "using-codebolt/troubleshooting/common-issues.md",
           "title": "Common Issues"
         },
@@ -885,7 +873,7 @@
     },
     {
       "heading": "Build on Codebolt",
-      "count": 159,
+      "count": 162,
       "order": 4,
       "files": [
         {
@@ -1207,6 +1195,18 @@
         {
           "path": "build-on-codebolt/plugins/packaging-and-publishing.md",
           "title": "Packaging and Publishing Plugins"
+        },
+        {
+          "path": "build-on-codebolt/templates/creating-a-template.md",
+          "title": "Creating a Template"
+        },
+        {
+          "path": "build-on-codebolt/templates/publishing-templates.md",
+          "title": "Publishing Templates"
+        },
+        {
+          "path": "build-on-codebolt/templates/overview.md",
+          "title": "Overview"
         },
         {
           "path": "build-on-codebolt/extending-codebolt/overview.md",

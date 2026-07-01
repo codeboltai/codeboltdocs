@@ -74,4 +74,4 @@ If the CLI is installed, Codebolt can open a folder passed from the command line
 
 - [Application Navigation](../02_application-navigation/01_panels.md)
 - [Settings](../Settings/01_overview.md)
-- [Environments](../04_environments/02_environments.md)
+- [Environments](../04b_agent-management-features/04_environments/02_environments.md)

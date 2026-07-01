@@ -111,6 +111,6 @@ Every accepted inline edit creates a checkpoint. You can:
 
 ## See also
 
-- [Inline edit and Ctrl+K (full reference)](../../02_using-codebolt/03_chat/05_inline-edit-and-ctrl-k.md)
-- [Model selection](../../02_using-codebolt/03_chat/06_model-selection.md)
-- [Checkpoints and rollback](../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)
+- [Inline edit and Ctrl+K (full reference)](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/05_inline-edit-and-ctrl-k.md)
+- [Model selection](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/06_model-selection.md)
+- [Checkpoints and rollback](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md)

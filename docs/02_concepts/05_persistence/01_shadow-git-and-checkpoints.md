@@ -56,5 +56,5 @@ Your real git is untouched. Your uncommitted real-git changes are preserved.
 
 ## See also
 
-- [Checkpoints and rollback (using)](../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)
+- [Checkpoints and rollback (using)](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md)
 - [Git and Shadow Git (integrations)](../../02_using-codebolt/08_integrations/03_git-and-shadow-git.md)

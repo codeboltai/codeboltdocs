@@ -99,6 +99,6 @@ Set a higher `max_tokens` for that specific call or agent. Anthropic has generou
 ## See also
 
 - [LLM Providers](../../02_using-codebolt/08_integrations/01_llm-providers.md)
-- [Model selection](../../02_using-codebolt/03_chat/06_model-selection.md)
+- [Model selection](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/06_model-selection.md)
 - [Use OpenAI](./use-openai.md)
 - [Bring your own provider](./byo-provider.md)

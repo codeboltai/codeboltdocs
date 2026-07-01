@@ -193,6 +193,6 @@ Cold start loading the model. Once loaded, subsequent calls are fast. Increase `
 ## See also
 
 - [LLM Providers](./01_llm-providers.md) — the general provider configuration
-- [Model selection](../03_chat/06_model-selection.md)
+- [Model selection](../02_surfaces/02_desktop-app/03_chat/06_model-selection.md)
 - [Guide: connect a local model](../../03_guides/02_first-steps/connect-a-local-model.md)
 - [LLM & Inference (internals)](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

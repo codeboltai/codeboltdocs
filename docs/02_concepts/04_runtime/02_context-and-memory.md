@@ -241,4 +241,4 @@ Bad context = bad answers. A confused agent is almost always a context problem â
 
 - [Context Assembly subsystem](../../04_build-on-codebolt/07b_subsystems/07_context-assembly.md)
 - [Memory subsystems](../../04_build-on-codebolt/07b_subsystems/04_memory.md)
-- [Chat: context and @-mentions](../../02_using-codebolt/03_chat/03_context-and-at-mentions.md)
+- [Chat: context and @-mentions](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/03_context-and-at-mentions.md)

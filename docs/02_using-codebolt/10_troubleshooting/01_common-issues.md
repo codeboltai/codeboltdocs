@@ -41,7 +41,7 @@ The instruction probably wasn't in the assembled prompt.
 2. Look at the assembled messages. If your instruction was compressed away, that's the root cause.
 3. Fix by either: pinning the instruction via an @-mention, adding a context rule, or shortening the conversation and starting fresh.
 
-See [Context and @-mentions](../03_chat/03_context-and-at-mentions.md).
+See [Context and @-mentions](../02_surfaces/02_desktop-app/03_chat/03_context-and-at-mentions.md).
 
 ### "Agent calls the same tool over and over"
 `LoopDetectionModifier` should catch this. If it doesn't:

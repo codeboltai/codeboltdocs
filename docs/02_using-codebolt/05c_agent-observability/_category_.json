@@ -2,5 +2,8 @@
   "label": "Agent Observability",
   "position": 5.2,
   "collapsible": true,
-  "collapsed": true
+  "collapsed": true,
+  "customProps": {
+    "sectionLabel": "Observability"
+  }
 }

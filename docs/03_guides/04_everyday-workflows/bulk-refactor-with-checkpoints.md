@@ -97,6 +97,6 @@ If 90% of the refactor was right but one subdirectory was botched, you can use t
 
 ## See also
 
-- [Checkpoints and rollback](../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)
+- [Checkpoints and rollback](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md)
 - [Running agents](../../02_using-codebolt/04_agents/03_running-agents.md)
 - [Built-in agents](../../02_using-codebolt/04_agents/02_built-in-agents.md) — the `refactor` agent

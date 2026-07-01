@@ -27,7 +27,7 @@ The same project, the same agents, the same memory — only the client differs. 
 
 ## What varies
 
-- **Chat ergonomics** — multi-tab in the desktop, interactive or one-shot in the CLI, browser-based in Cloud. See [Chat](../03_chat/01_overview.md).
+- **Chat ergonomics** — multi-tab in the desktop, interactive or one-shot in the CLI, browser-based in Cloud. See [Chat](./02_desktop-app/03_chat/01_overview.md).
 - **Context affordances** — `@mentions`, panel pickers, and inline previews are desktop-only.
 - **Inline editing** — Ctrl+K-style inline edits are desktop-only.
 - **Multi-pane diffs** — visual diffs are richest in the desktop app.

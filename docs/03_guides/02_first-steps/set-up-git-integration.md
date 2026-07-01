@@ -98,10 +98,10 @@ Agents don't need to be in this loop. They produce changes; you decide what to k
 
 ## Rollback without losing real git state
 
-Codebolt's checkpoint rollback uses shadow git, never real git. You can have uncommitted changes in real git and still roll back shadow git — the two are independent. See [Checkpoints and rollback](../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md).
+Codebolt's checkpoint rollback uses shadow git, never real git. You can have uncommitted changes in real git and still roll back shadow git — the two are independent. See [Checkpoints and rollback](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md).
 
 ## See also
 
 - [Git and Shadow Git](../../02_using-codebolt/08_integrations/03_git-and-shadow-git.md)
-- [Checkpoints and rollback](../../02_using-codebolt/03_chat/04_checkpoints-and-rollback.md)
+- [Checkpoints and rollback](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md)
 - [Guardrails & Eval (internals)](../../04_build-on-codebolt/07b_subsystems/09_guardrails-and-eval.md)

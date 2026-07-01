@@ -37,5 +37,5 @@ Some affordances only exist in the desktop client (see the [Platform Overview](.
 ## See also
 
 - [Platform Overview](../../02_using-codebolt/02_surfaces/01_overview.md) - compare all clients
-- [Chat](../../02_using-codebolt/03_chat/01_overview.md)
+- [Chat](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/01_overview.md)
 - [Agents](../../02_using-codebolt/04_agents/01_what-is-an-agent.md)

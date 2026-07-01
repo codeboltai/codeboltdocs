@@ -150,30 +150,8 @@ const config: Config = {
             const sidebarItems = await defaultSidebarItemsGenerator({ item, ...args });
             if (item.dirName !== '02_using-codebolt' && item.dirName !== '04_build-on-codebolt') return sidebarItems;
 
-            const desktopAppChildLabels = new Set([
-              'Chat',
-              'Code Editor Features',
-              'Application & Account',
-              'Code Observability',
-            ]);
-            const desktopAppChildItems = sidebarItems.filter(
-              (sidebarItem) => sidebarItem.type === 'category' && desktopAppChildLabels.has(sidebarItem.label),
-            );
-            const cliInterfaceItem = sidebarItems.find(
-              (sidebarItem) => sidebarItem.type === 'category' && sidebarItem.label === 'CLI Interface',
-            );
-
             const result: typeof sidebarItems = [];
             for (const sidebarItem of sidebarItems) {
-              if (
-                item.dirName === '02_using-codebolt'
-                &&
-                sidebarItem.type === 'category'
-                && (desktopAppChildLabels.has(sidebarItem.label) || sidebarItem.label === 'CLI Interface')
-              ) {
-                continue;
-              }
-
               const label = (sidebarItem as any).customProps?.sectionLabel;
               if (sidebarItem.type === 'category' && label) {
                 result.push({
@@ -183,32 +161,7 @@ const config: Config = {
                 } as any);
 
                 if (label === 'Platforms' && sidebarItem.label === 'Clients') {
-                  const flattenedPlatformItems = sidebarItem.items.map((platformItem) => {
-                    if (platformItem.type === 'category' && platformItem.label === 'CLI' && cliInterfaceItem) {
-                      return {
-                        ...platformItem,
-                        items: [...platformItem.items, cliInterfaceItem],
-                      };
-                    }
-
-                    if (platformItem.type !== 'category' || platformItem.label !== 'Desktop App') {
-                      return platformItem;
-                    }
-
-                    const settingsItems = platformItem.items.filter(
-                      (desktopItem) => desktopItem.type === 'category' && desktopItem.label === 'Settings',
-                    );
-                    const desktopItemsWithoutSettings = platformItem.items.filter(
-                      (desktopItem) => !(desktopItem.type === 'category' && desktopItem.label === 'Settings'),
-                    );
-
-                    return {
-                      ...platformItem,
-                      items: [...desktopItemsWithoutSettings, ...desktopAppChildItems, ...settingsItems],
-                    };
-                  });
-
-                  result.push(...flattenedPlatformItems);
+                  result.push(...sidebarItem.items);
                   continue;
                 }
               }

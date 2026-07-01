@@ -39,6 +39,4 @@ Other views that live alongside the agent lifecycle:
 ## Related
 
 - [Guardrails & Settings](../05b_guardrails-and-settings/01_guardrails.md) — constrains what agents can do
-- [Debug & Observability](../08c_debug-and-observability/01_overview.md) — environment, plugin, and problems panels
 - [Code Observability](../09b_code-observability/01_overview.md) — codemap, narrative graph, and structural execution views
-- [Execution & Tracking](../08b_execution-and-tracking/01_overview.md) — jobs queue and chat canvas

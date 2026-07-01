@@ -231,5 +231,5 @@ Expected. Local open-weight models trail frontier closed models. Mitigate with:
 
 - [Local models (overview)](../../02_using-codebolt/08_integrations/02_local-models.md)
 - [LLM Providers](../../02_using-codebolt/08_integrations/01_llm-providers.md)
-- [Model selection](../../02_using-codebolt/03_chat/06_model-selection.md)
+- [Model selection](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/06_model-selection.md)
 - [LLM & Inference (internals)](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

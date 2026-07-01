@@ -134,7 +134,7 @@ This file documents all issues found during a cross-reference audit of the docum
 **Status: FIXED**
 
 ### 20. `AtFileProcessorModifier` and `ResponseModifier` Do Not Exist
-**Files affected:** `02_using-codebolt/03_chat/03_context-and-at-mentions.md`, `04_agents/07_debugging-an-agent.md`
+**Files affected:** `02_using-codebolt/02_surfaces/02_desktop-app/03_chat/03_context-and-at-mentions.md`, `04_agents/07_debugging-an-agent.md`
 **Claim:** These classes exist
 **Actual:** Neither exists in the codebase
 **Status: FIXED**

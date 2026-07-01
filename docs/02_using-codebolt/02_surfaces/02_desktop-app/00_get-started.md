@@ -47,4 +47,4 @@ When an agent makes a change, review the updated files and diffs before you cont
 
 That's the core loop. Every other feature builds on this.
 
-**Next:** [Workspace and Project Management](./01_workspace-and-project-management/01_overview.md) · [Chat](../../03_chat/01_overview.md) · [Agents](../../04_agents/01_what-is-an-agent.md)
+**Next:** [Workspace and Project Management](./01_workspace-and-project-management/01_overview.md) · [Chat](./03_chat/01_overview.md) · [Agents](../../04_agents/01_what-is-an-agent.md)

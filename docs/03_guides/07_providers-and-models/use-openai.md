@@ -86,6 +86,6 @@ Very large contexts can time out on some models. Either use a model with a large
 ## See also
 
 - [LLM Providers](../../02_using-codebolt/08_integrations/01_llm-providers.md)
-- [Model selection](../../02_using-codebolt/03_chat/06_model-selection.md)
+- [Model selection](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/06_model-selection.md)
 - [Use Anthropic](./use-anthropic.md)
 - [Bring your own provider](./byo-provider.md)
