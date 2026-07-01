@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: Calendar
 description: Use scheduled events as time-based deposition handoffs for agents and users.
 ---
@@ -26,4 +26,3 @@ The desktop calendar includes month, week, day, hour, and schedule-style views.
 
 - [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
 - [Calendar & Scheduled Events](../../../08d_auto-interactivity/03_calendar-events.md)
-

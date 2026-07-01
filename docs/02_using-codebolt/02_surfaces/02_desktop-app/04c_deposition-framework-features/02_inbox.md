@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Inbox
 description: Use Inbox messages as durable agent-to-user escalations and pickup notes.
 ---
@@ -29,4 +29,3 @@ Open via: **Tools menu -> Inbox** or the Panel Selector.
 
 - [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
 - [Mail & Inbox](../../../07c_agent-coordination/03_mail-inbox.md)
-

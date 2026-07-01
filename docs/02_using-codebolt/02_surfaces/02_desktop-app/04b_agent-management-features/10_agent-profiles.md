@@ -19,5 +19,4 @@ The **Agent Profile** panel shows profile-level context for an agent. It is open
 
 - [Running Agents](./01_running-agents.md)
 - [Background Agents](./02_background-agents.md)
-- [Agent Deliberation](./09_agent-deliberation.md)
-
+- [Agent Deliberation](../04c_deposition-framework-features/02_agent-deliberation.md)

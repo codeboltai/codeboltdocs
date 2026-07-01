@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Auto Testing
 description: Use test suites, cases, runs, step statuses, and logs as durable evidence for later pickup.
 ---
@@ -26,5 +26,4 @@ Auto Testing stores test plans, run state, statuses, and logs. It does not execu
 ## See also
 
 - [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
-- [Agent Deliberation](../04b_agent-management-features/09_agent-deliberation.md)
-
+- [Agent Deliberation](./02_agent-deliberation.md)
