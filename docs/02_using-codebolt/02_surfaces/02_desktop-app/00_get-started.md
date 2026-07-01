@@ -12,12 +12,12 @@ Get the desktop app installed and configured, then run your first agent task. Ab
 
 ## Setup Path
 
-1. [Download and install](https://codebolt.ai) the Desktop App for your operating system.
+1. [Download and install](https://codebolt.ai) the Desktop App
 2. [Complete onboarding](./01_onboarding.md).
 3. Open a project.
 4. Run your first agent.
 
-Use the macOS, Windows, or Linux package from the [Codebolt website](https://codebolt.ai). On first launch, Codebolt starts the local server and opens the sign-in flow.
+Use the macOS, Windows, or Linux package from the [Codebolt website](https://codebolt.ai). On first launch, Codebolt starts the local instance and opens the sign-in flow.
 
 ## Open A Project
 
@@ -27,15 +27,15 @@ Codebolt opens the project in the default development layout with the code edito
 
 ## Run Your First Agent
 
-A chat panel opens. Ask the agent to understand your codebase first:
+Use the chat panel to ask the agent for any task you want to run.
 
-<TryItCard prompt="Read the codebase and give me a one-paragraph summary of what this project does." />
+<TryItCard prompt="Review this project and help me with the next task." />
 
-Watch it read files in real time. Then try something that makes a change:
+You can ask for code changes, explanations, setup help, debugging, tests, documentation, or project review.
 
-<TryItCard prompt="Add a short CONTRIBUTING.md explaining how to run the project locally." />
+<TryItCard prompt="Help me improve this project." />
 
-The agent reads your existing README, writes the file, and shows you the diff.
+If the agent changes files, review the generated diff before continuing.
 
 ## Review And Continue
 

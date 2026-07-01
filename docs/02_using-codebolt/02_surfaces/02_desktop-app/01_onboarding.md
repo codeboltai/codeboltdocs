@@ -16,27 +16,26 @@ New users are taken into the setup wizard. Returning users go straight to the pr
 
 ## Provider Selection
 
-The wizard opens to **Select Default AI Models**. Pick the provider that fits you best:
+The wizard opens to **Select Default AI Models**. Pick the provider type that fits you best:
 
-| Provider | What you need |
+| Provider type | What you need |
 |---|---|
-| **CodeBolt AI** | Nothing - built-in, no key required when available on your plan |
-| OpenAI / Anthropic / Gemini / Groq / Mistral / DeepSeek / OpenRouter | API key from the provider's console |
-| Ollama / LM Studio | Local URL - the model server must be running |
-| AWS Bedrock | Access key, secret, and region |
-| HuggingFace / Cloudflare AI / Replicate | API token or account details |
+| Built-in provider | No key required when available on your plan |
+| Hosted model provider | API key from the provider's console |
+| Local model provider | Local URL - the model server must be running |
+| Enterprise or cloud provider | Access credentials, region, account details, or API token |
 
 Click your provider, enter the key or URL, then select an **LLM model** and an **Embedding model**. Both must be selected before you can continue.
 
-If your team needs a provider that is not listed, see [Custom LLM Provider](../../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md) for the build path. For day-to-day provider configuration, see [LLM Settings](./Settings/02_llm-settings.md).
+If your team needs a provider that is not listed, see [Custom LLM Provider](../../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md) for the build path. For provider configuration, see [LLM Settings](./Settings/02_llm-settings.md).
 
 ## Workspace And Theme
 
 The **Review Settings** screen lets you configure:
 
-- **Default workspace** - defaults to your Desktop. Click **Browse** to change it.
+- **Default workspace** - defaults to your Desktop. Click **Browse** to change it. See [Workspaces](./01_workspace-and-project-management/02_workspaces.md) for workspace behavior and project organization.
 - **CLI installation** - click **Install** to add `codebolt` to your PATH. You can skip and install later from Settings.
-- **Theme** - choose the starting app theme.
+- **Theme** - choose the starting app theme. See [Themes](./Settings/08_themes.md) for built-in themes and customization.
 
 ## Default Agent
 
