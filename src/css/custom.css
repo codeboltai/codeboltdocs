@@ -446,15 +446,9 @@ div[class*="searchResults"] {
   background-color: transparent !important;
   border-right: 1px solid var(--cb-border) !important;
   padding: 0 0.75rem 0.75rem 1rem !important;
-  overflow-x: hidden;
 }
 
 @media (min-width: 997px) {
-  .theme-doc-sidebar-container,
-  aside.theme-doc-sidebar-container {
-    overflow-x: hidden;
-  }
-
   .theme-doc-sidebar-container nav.menu {
     max-height: calc(100vh - var(--ifm-navbar-height));
     overflow-y: auto;
