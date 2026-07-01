@@ -58,7 +58,7 @@ The CLI also mounts separate command groups:
 |---|---|
 | `codebolt action ...` | Create, publish, and list extension types like tools, providers, plugins, skills, capabilities, executors, and action blocks |
 | `codebolt agent ...` | Top-level agent extension commands. This same group is also mounted under `codebolt action agent ...` |
-| `codebolt command ...` | Connect to a running server and run modules like `threads`, `tasks`, `jobs`, `agents`, `git`, `system`, `projects`, `chat`, `todos`, and `llm` |
+| `codebolt command ...` | Connect to a running server and run modules like `threads`, `tasks`, `jobs`, `agents`, `git`, `system`, `projects`, `chat`, `todos`, `llm`, and `mcp` |
 
 For the exact subcommand and flag reference, use [Reference → Codebolt CLI](../../../../05_reference/06_codebolt-cli/01_overview.md).
 
@@ -104,6 +104,7 @@ codebolt agent create --name my-agent --framework
 codebolt command threads list
 codebolt command git status
 codebolt command llm providers
+codebolt command mcp available
 ```
 
 ## CLI vs neighboring surfaces

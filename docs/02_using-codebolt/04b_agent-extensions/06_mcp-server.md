@@ -4,79 +4,205 @@ title: MCP Server
 description: Install, configure, enable, inspect, and troubleshoot MCP servers in Codebolt.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # MCP Server
 
-<!-- ![MCP Server](/productImages/agent_extensions/install_mcp_server.png)
+MCP servers extend Codebolt agents with tools from local binaries, private services, cloud services, and registry integrations. Use this page to understand how MCP servers fit into Codebolt's agent extension model.
 
-MCP servers extend agents with tools from local binaries, private services, or marketplace integrations. Codebolt stores MCP server configuration in `mcp_servers.json` under the Codebolt config directory and manages installed servers through the product MCP surfaces and the `/mcp` route group. -->
-## What is Mcp 
-    TODO:add details also add link to know more https://modelcontextprotocol.io/docs/getting-started/intro
+For the Desktop App settings workflow, see [MCP Servers in Settings](../02_surfaces/02_desktop-app/Settings/06_mcp-servers.md).
 
+## What is MCP
 
-# How to install MCP Server
+Model Context Protocol (MCP) is a standard way for an AI application to connect to external tools and data sources. An MCP server exposes one or more tools with structured input schemas, and Codebolt agents can call those tools during a task.
 
-    option 1 : from codebolt registory 
-             TODO:add detail about codebolt registery and then specefic structure for each platform in tabs for deskpopt, using command line 
-             also lets add link to the refer to the mcp management in cloud includ how to create and upload your custom mcp to codebolt registory
-   option 2: custom MCP servers
-          TODO: add deattil about custom mcp server and variaous third party places where user can find mcp 
+An MCP server can expose tools for:
 
-    option 3: using adding to json file and adding to .codebolt/mcp folder 
-              link to doucumentation creating custom mcp servers      
+- source control systems
+- issue trackers
+- databases
+- local project automation
+- browser automation
+- internal APIs
+- vendor services
 
+Learn more in the official MCP introduction: [Model Context Protocol docs](https://modelcontextprotocol.io/docs/getting-started/intro).
 
-  # MCP server management 
+## How to install MCP Server
 
-       TODO:
-       tabs:using desktop ,cli ,api
+<details open>
+<summary><strong>From Codebolt Registry</strong></summary>
 
-  # MCP server uses
-      
-      TODO:
+Use the Codebolt registry when you want to install an MCP server that is already listed in Codebolt. The registry has an **All** view for discovering public items and a **My** view for managing items you have published. For MCP publishing and broader registry management, see [Cloud Portal](../02_surfaces/06_cloud/02_cloud-portal.md) and [Marketplace Publishing](../02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md).
 
-     tabs:from agent code , indirectly using agent tool search , mentioned mcp from chat box     
+<Tabs groupId="mcp-registry-install">
+<TabItem value="desktop" label="Desktop App" default>
 
+1. Open **Settings → MCP Servers**.
+2. Open the **Available** tab.
+3. Search for a server by name, description, or category.
+4. Review the server README and metadata.
+5. Click **Install MCP**.
+6. Provide any required configuration such as keys, paths, or URLs.
 
+During installation, Codebolt reads the registry entry, uses the server README to build the config, writes the server to `mcp_servers.json`, tests whether the server returns tools, caches the discovered tools, and enables the server only when discovery succeeds.
 
-  # MCP scopes 
-      TODO
-     global and project level    
+</TabItem>
+<TabItem value="cli" label="CLI">
 
-       
+Install a registry MCP server from a running Codebolt server:
 
+```bash
+codebolt command mcp install --id <mcpId>
+codebolt command mcp install --name <registryName>
+```
 
-<!-- ## What you can manage
+Command reference: [`install --id`](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#install-registry-mcp), [`install --name`](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#install-registry-mcp)
 
-Codebolt's current server-backed MCP model covers:
+</TabItem>
+<TabItem value="api" label="API">
 
-- configured MCP server entries
-- enabled or disabled state
-- available marketplace and local MCP metadata
-- cached tools from enabled MCP servers
-- browser navigation helpers used by MCP-related flows
+List registry MCPs:
 
-It does not expose the older tool lifecycle, log streaming, or update route family described in earlier drafts. -->
+```http
+GET /mcp/available/list
+```
 
- 
+Read one registry entry:
 
-<!-- ## Install from the product UI
+```http
+GET /mcp/available/list/detail/:mcpId
+```
 
-Use the MCP server or Tools install surface exposed by your build. Review the server description and permissions, then install it.
-
-Behind the scenes, Codebolt resolves the marketplace item, asks the MCP installer flow to configure it, writes the result into `mcp_servers.json`, tests that the server returns tools, caches those tools, and enables the server only when the tool check succeeds.
-
-## Install from the MCP API
-
-Install a marketplace MCP server:
+Install a registry MCP:
 
 ```http
 POST /mcp/install
 Content-Type: application/json
 
-{ "mcpId": "marketplace-server-id" }
+{ "mcpId": "registry-mcp-id" }
 ```
 
-For local MCP definitions discovered by the server, pass the local name:
+Refresh the registry index:
+
+```http
+POST /mcp/refreshIndex
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+<details>
+<summary><strong>Custom MCP Servers</strong></summary>
+
+Use a custom MCP server when the server is not listed in Codebolt's registry or when it belongs to your team, product, or internal infrastructure.
+
+<Tabs groupId="mcp-custom-install">
+<TabItem value="where" label="Where to Find" default>
+
+Common sources for custom and third-party MCP servers include:
+
+- vendor documentation
+- GitHub repositories
+- npm packages
+- internal company repositories
+- official MCP community resources
+
+Review the server's README before installing it. Confirm the command, required arguments, required environment variables, and transport mode.
+
+</TabItem>
+<TabItem value="desktop" label="Desktop App">
+
+Use **Configure** in the installed MCP list or **Open MCP Config** in the chat MCP picker. Add a server entry with a command, optional args, and optional environment values.
+
+</TabItem>
+<TabItem value="config" label="Config JSON">
+
+Most custom MCP servers are configured with a command, optional arguments, and optional environment variables:
+
+```json
+{
+  "command": "npx",
+  "args": ["-y", "@example/my-mcp-server"],
+  "env": {
+    "API_KEY": "set-this-from-your-secure-env"
+  }
+}
+```
+
+Use custom MCP servers for private integrations, local development servers, internal APIs, or service-specific tools that are not available in the registry.
+
+For a step-by-step guide, see [Install a Third-Party MCP Server](../../03_guides/05_mcp-and-tools/install-a-third-party-mcp-server.md).
+
+</TabItem>
+</Tabs>
+
+</details>
+
+<details>
+<summary><strong>Local Project Tool</strong></summary>
+
+Use a local project tool when the tool should belong to the current workspace and be versioned with the project.
+
+<Tabs groupId="mcp-local-install">
+<TabItem value="structure" label="Project Structure" default>
+
+The current application code discovers local MCP-style project tools from:
+
+```text
+.codebolt/tools/<tool-name>/codebolttool.yaml
+.codebolt/tools/<tool-name>/index.js
+```
+
+`codebolttool.yaml` defines the tool metadata:
+
+```yaml
+name: My Tool
+uniqueName: my-tool
+version: 1.0.0
+description: Runs project-specific automation
+```
+
+</TabItem>
+<TabItem value="generated-config" label="Generated Config">
+
+Codebolt converts this local tool into an MCP config:
+
+```json
+{
+  "my-tool": {
+    "command": "node",
+    "args": ["/path/to/project/.codebolt/tools/my-tool/index.js"]
+  }
+}
+```
+
+The app code scans `.codebolt/tools` for project-level local tools. It does not currently scan `.codebolt/mcp`.
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Install a local project MCP by its `uniqueName`:
+
+```bash
+codebolt command mcp install-local --name <uniqueName>
+```
+
+Command reference: [`install-local`](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#install-local-mcp)
+
+</TabItem>
+<TabItem value="api" label="API">
+
+List local project MCPs:
+
+```http
+GET /mcp/localMcp/list
+```
+
+Install a local MCP by unique name:
 
 ```http
 POST /mcp/install
@@ -85,16 +211,179 @@ Content-Type: application/json
 { "isLocal": true, "uniqueName": "my-local-server" }
 ```
 
-Useful discovery routes:
+Open the config path for a local MCP:
 
 ```http
-GET /mcp/available/list
-GET /mcp/available/list/detail/:mcpId
-GET /mcp/available/all
-GET /mcp/localMcp/list
-GET /mcp/getMcpConfig/Path
-POST /mcp/refreshIndex
-``` -->
+GET /mcp/getMcpConfig/Path?mcpId=my-local-server&isLocal=true
+```
+
+</TabItem>
+</Tabs>
+
+For the full structure, see [Quickstart: Local MCP Server](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/02_quickstart-local-mcp.md) and [Custom Tools](./07_custom-tools.md).
+
+</details>
+
+## MCP server management
+
+<Tabs groupId="mcp-management">
+<TabItem value="desktop" label="Using Desktop" default>
+
+The Desktop App exposes MCP management through:
+
+- **Settings → MCP Servers**
+- **Bottom bar → Agents → MCP**
+
+Use these surfaces to:
+
+- install registry MCP servers
+- search installed and available servers
+- enable or disable a server
+- configure command, args, and environment values
+- inspect README and server metadata
+- select a whole MCP server or individual MCP tools for a chat
+- open the MCP config file
+- create a custom MCP scaffold
+
+For the detailed Desktop App flow, see [MCP Servers in Settings](../02_surfaces/02_desktop-app/Settings/06_mcp-servers.md).
+
+</TabItem>
+<TabItem value="cli" label="CLI">
+
+Use `codebolt command mcp` for runtime MCP management:
+
+| Command | Reference |
+|---|---|
+| `codebolt command mcp list` | [List installed MCPs](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#list-installed-mcps) |
+| `codebolt command mcp tools` | [List MCP tools](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#list-mcp-tools) |
+| `codebolt command mcp refresh` | [Refresh MCP tools](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#refresh-mcp-tools) |
+| `codebolt command mcp enable --name <serverName>` | [Enable or disable MCP](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#enable-or-disable-mcp) |
+| `codebolt command mcp disable --name <serverName>` | [Enable or disable MCP](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#enable-or-disable-mcp) |
+
+Use `codebolt action tool` for builder-side tool extension work:
+
+| Command | Reference |
+|---|---|
+| `codebolt action tool create --name my-tool` | [Build and publish tool extensions](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#build-and-publish-tool-extensions) |
+| `codebolt action tool publish --path ./my-tool` | [Build and publish tool extensions](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#build-and-publish-tool-extensions) |
+| `codebolt action tool list` | [Build and publish tool extensions](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#build-and-publish-tool-extensions) |
+
+See [Tool Commands](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md).
+
+</TabItem>
+<TabItem value="api" label="API">
+
+Codebolt exposes MCP management through the `/mcp` route group and the client SDK `client.mcp` API.
+
+| Action | Endpoint |
+|---|---|
+| List installed servers | `GET /mcp` |
+| Read one server config | `GET /mcp/:serverName` |
+| Configure all servers | `POST /mcp/configure` |
+| Configure one server | `POST /mcp/configure/:serverName` |
+| Enable or disable a server | `POST /mcp/toggle` |
+| List registry MCPs | `GET /mcp/available/list` |
+| Read registry MCP details | `GET /mcp/available/list/detail/:mcpId` |
+| Install an MCP | `POST /mcp/install` |
+| Create a custom MCP scaffold | `POST /mcp/create` |
+| List local project MCPs | `GET /mcp/localMcp/list` |
+| Read cached configured MCP tools | `GET /mcp/configured/mcps` |
+| Refresh registry index | `POST /mcp/refreshIndex` |
+| Refresh MCP tools cache | `POST /mcp/tools/update` |
+| Open config file path | `GET /mcp/getMcpConfig/Path` |
+
+For typed SDK methods, see [MCP Client SDK Reference](../../05_reference/04_client-sdk/02_api-reference/mcp/index.md).
+
+</TabItem>
+</Tabs>
+
+## MCP server uses
+
+<Tabs groupId="mcp-use">
+<TabItem value="agent-code" label="From Agent Code" default>
+
+Agents and agent flows can call MCP tools directly. The server registers a core callable named:
+
+```text
+mcp.executeTool
+```
+
+It accepts a tool name and parameters. Internally, MCP tools are namespaced by server using the format:
+
+```text
+server-name--tool-name
+```
+
+The runtime uses this qualified name to route execution to the correct MCP server. User-facing UI can show shorter server and tool labels.
+
+For builder APIs, see [MCP Tools Overview](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md) and [CodeboltJS MCP API](../../05_reference/02_codeboltjs/10_api-access/mcp/index.md).
+
+</TabItem>
+<TabItem value="tool-search" label="Indirectly Using Tool Search">
+
+Codebolt caches tools returned by configured MCP servers in `mcp_tools.json`. The chat MCP picker, MCP suggestions, and server-tool registry read from that cache.
+
+This lets agents and agent-flow nodes discover available MCP capabilities before calling a specific tool. Codebolt includes nodes and APIs for:
+
+- listing enabled MCP servers
+- listing MCP tools
+- searching available MCP servers
+- configuring MCP servers
+- executing MCP tools
+
+</TabItem>
+<TabItem value="chat-mention" label="Mentioned From Chat Box">
+
+When writing a prompt, you can select MCP context from the chat MCP picker or MCP mention UI.
+
+Selecting a whole server stores:
+
+```text
+server-name.*
+```
+
+Selecting one tool stores:
+
+```text
+server-name.tool-name
+```
+
+Codebolt stores those values in `mentionedMCPs` and sends them with the chat message. The receiving agent can use that context when deciding which MCP tools to call.
+
+For related chat behavior, see [Context and At-Mentions](../02_surfaces/02_desktop-app/03_chat/03_context-and-at-mentions.md).
+
+</TabItem>
+</Tabs>
+
+## MCP scopes
+
+<Tabs groupId="mcp-scopes">
+<TabItem value="global" label="Global" default>
+
+Global MCP state is stored under the Codebolt config directory.
+
+| File | Purpose |
+|---|---|
+| `mcp_servers.json` | Installed server configs and enabled server list |
+| `mcp.json` | Cached Codebolt registry index |
+| `mcp_tools.json` | Cached tools returned by configured MCP servers |
+
+Use global MCPs for shared services and integrations that can be reused across projects.
+
+</TabItem>
+<TabItem value="project" label="Project Level">
+
+Project-level MCP-style tools live inside the active workspace:
+
+```text
+.codebolt/tools/<tool-name>/codebolttool.yaml
+.codebolt/tools/<tool-name>/index.js
+```
+
+These are useful for project-specific automation and tools that should travel with the repository. Codebolt reads the active project path, scans `.codebolt/tools`, and converts each valid local tool into an MCP server config for the active workspace.
+
+</TabItem>
+</Tabs>
 
 ## Manual configuration
 
@@ -157,7 +446,7 @@ GET /mcp/configured/mcps
 GET /mcp/getMcpConfig/Path
 ```
 
-Use `GET /mcp` for the installed server list, `GET /mcp/:serverName` for one stored config, and `GET /mcp/configured/mcps` for the currently cached tools.
+Use `GET /mcp` for the installed server list, `GET /mcp/:serverName` for one stored config, and `GET /mcp/configured/mcps` for currently cached tools.
 
 ## Enable or disable a server
 
@@ -181,6 +470,34 @@ POST /mcp/tools/update
 ```
 
 If the server returns tools, those tools become available to agents that are allowed to use them.
+
+## Registry and local discovery routes
+
+Use these routes to inspect what can be installed:
+
+```http
+GET /mcp/available/list
+GET /mcp/available/list/detail/:mcpId
+GET /mcp/available/all
+GET /mcp/localMcp/list
+POST /mcp/refreshIndex
+```
+
+Install a registry or local MCP:
+
+```http
+POST /mcp/install
+Content-Type: application/json
+
+{ "mcpId": "registry-mcp-id" }
+```
+
+```http
+POST /mcp/install
+Content-Type: application/json
+
+{ "isLocal": true, "uniqueName": "my-local-server" }
+```
 
 ## Troubleshooting
 
@@ -207,5 +524,9 @@ An MCP server runs code on your machine or calls a remote service using your cre
 
 - [Agent Extensions Overview](./01_overview.md)
 - [Custom Tools](./07_custom-tools.md)
+- [Desktop App MCP Settings](../02_surfaces/02_desktop-app/Settings/06_mcp-servers.md)
+- [Install a Third-Party MCP Server](../../03_guides/05_mcp-and-tools/install-a-third-party-mcp-server.md)
+- [Build Your First MCP Server](../../03_guides/05_mcp-and-tools/build-your-first-mcp-server.md)
 - [MCP Tools for Builders](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md)
 - [MCP and Tools Internals](../../04_build-on-codebolt/07b_subsystems/02_mcp-and-tools.md)
+- [MCP Client SDK Reference](../../05_reference/04_client-sdk/02_api-reference/mcp/index.md)
