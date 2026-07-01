@@ -91,7 +91,7 @@ That unlocks a different way to build agents:
 
 | Instead of building this into every agent app | Codebolt provides it through the runtime | Your agent controls |
 |---|---|---|
-| Tool runners, MCP wiring, and service routing | [Tools and MCP](../../02_using-codebolt/05a_tools-and-mcp/01_overview.md), [MCP servers](../../02_using-codebolt/04b_agent-extensions/06_installing-mcp-servers.md) | Which tools to call and how to interpret results |
+| Tool runners, MCP wiring, and service routing | [Custom Tools](../../02_using-codebolt/04b_agent-extensions/07_custom-tools.md), [MCP servers](../../02_using-codebolt/04b_agent-extensions/06_mcp-server.md) | Which tools to call and how to interpret results |
 | Project context, history, memory, and event state | [Memory](../../02_using-codebolt/07_memory/01_overview.md), [Context Assembly](../../02_using-codebolt/07_memory/03_context-assembly.md) | What context to request, compress, or ignore |
 | Verification, guardrails, evals, and approval checks | [Guardrails](../../02_using-codebolt/05b_guardrails-and-settings/01_guardrails.md), [Eval and Optimization](../../02_using-codebolt/05e_eval-and-optimization/01_overview.md) | When to continue, retry, stop, or ask for help |
 | Local and remote execution environments | [Local Scaling](./06_local-scaling.md), [Cloud Scaling](./07_cloud-scaling.md), [Environment Providers](../../02_using-codebolt/08a_environments/03_environment-providers.md) | Where the work should run for a task |

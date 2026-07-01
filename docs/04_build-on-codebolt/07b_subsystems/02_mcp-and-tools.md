@@ -57,7 +57,7 @@ The agent doesn't know — and shouldn't care — whether `codebolt_fs.read_file
 
 ## Built-in tool families
 
-These ship with the server. Each gets a reference page under [Build Tools → Reference](../../02_using-codebolt/05_tools-and-mcp/04_built-in-tools.md).
+These ship with the server. See [Built-in tools](../../02_using-codebolt/04b_agent-extensions/07_custom-tools.md#built-in-tools) for the user-facing overview.
 
 - `codebolt_fs` — filesystem read/write/search/grep
 - `codebolt_git` — full git surface plus shadow git

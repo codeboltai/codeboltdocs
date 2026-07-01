@@ -41,7 +41,7 @@ Everything to do with running AI agents — what they are, where they run, what 
 <DocCardGrid columns={3} items={[
   { label: 'Agents', title: 'Agents', description: 'Install, run, debug, and manage AI agents and portfolios.', href: '../02_using-codebolt/04_agents/01_what-is-an-agent' },
   { label: 'Env', title: 'Environments', description: 'Run agents locally, in Docker, E2B, Daytona, or on a remote server.', href: '../02_using-codebolt/08a_environments/01_overview' },
-  { label: 'Tools', title: 'Agent Tools', description: 'Built-in tool families and panel tools available to every agent.', href: '../02_using-codebolt/05a_tools-and-mcp/01_overview' },
+  { label: 'Tools', title: 'Custom Tools', description: 'Built-in tools, reusable custom tools, and agent-specific tools.', href: '../02_using-codebolt/04b_agent-extensions/07_custom-tools' },
   { label: 'Mem', title: 'Memory & Context', description: 'How agents remember and retrieve information across sessions.', href: '../02_using-codebolt/07_memory/01_overview' },
   { label: 'Multi', title: 'Multi-Agent Usage', description: 'Run swarms and flows, review outputs, trace execution.', href: '../02_using-codebolt/07_multi-agent-usage/01_overview' },
 ]} />

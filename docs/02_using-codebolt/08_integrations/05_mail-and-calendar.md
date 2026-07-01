@@ -137,6 +137,6 @@ Mail providers have send limits (Gmail: ~500/day for free accounts, more for Wor
 
 ## See also
 
-- [Tools & MCP Overview](../05a_tools-and-mcp/01_overview.md)
+- [Custom Tools](../04b_agent-extensions/07_custom-tools.md)
 - [Communication (internals)](../../04_build-on-codebolt/07b_subsystems/11_communication.md)
 - [Hooks](../../04_build-on-codebolt/05_plugins/01_overview.md)

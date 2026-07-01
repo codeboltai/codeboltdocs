@@ -73,6 +73,6 @@ Codebolt can open the current app in a browser for visual inspection while you u
 
 ## See also
 
-- [Tools & MCP Overview](../05a_tools-and-mcp/01_overview.md)
-- [Built-in Tools](../05a_tools-and-mcp/02_built-in-tools.md)
+- [Custom Tools](../04b_agent-extensions/07_custom-tools.md)
+- [Built-in tools](../04b_agent-extensions/07_custom-tools.md#built-in-tools)
 - [Hooks (for restricting browser access)](../../04_build-on-codebolt/05_plugins/01_overview.md)

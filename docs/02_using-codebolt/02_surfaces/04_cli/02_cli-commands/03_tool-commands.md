@@ -39,5 +39,4 @@ Use the desktop or CLI interface product surfaces for runtime MCP installation a
 
 ## See also
 
-- [Installing MCP Servers](../../../04b_agent-extensions/06_installing-mcp-servers.md)
-- [Managing MCP Servers](../../../04b_agent-extensions/07_managing-mcp-servers.md)
+- [MCP Server](../../../04b_agent-extensions/06_mcp-server.md)

@@ -98,7 +98,7 @@ MCP (Model Context Protocol) servers expose tools agents can call — file searc
 
 Publishing an MCP from the portal: fill in the connection details (URL or local command), the capability list, and authentication method. Users install it and it appears in **Settings → MCP Servers**.
 
-See [Installing MCP Servers](../../../04b_agent-extensions/06_installing-mcp-servers.md) for the install flow.
+See [MCP Server](../../../04b_agent-extensions/06_mcp-server.md) for the install flow.
 
 </AccordionItem>
 

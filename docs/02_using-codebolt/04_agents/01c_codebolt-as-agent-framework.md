@@ -199,7 +199,7 @@ The same SDK exposes everything else the server runs: tasks, jobs, swarms, vecto
 When your Next.js app talks to a Codebolt server, it inherits — without writing any of it — the runtime features the desktop and CLI use:
 
 - **Persistent memory** — KV, JSON, vector, knowledge graph, episodic, [event log](../07_memory/07_event-log.md) ([Memory & Context](../07_memory/01_overview.md)).
-- **Tools and MCP** — built-in tool families plus any [MCP server](../05a_tools-and-mcp/01_overview.md) you install.
+- **Tools and MCP** — [built-in and custom tools](../04b_agent-extensions/07_custom-tools.md) plus any [MCP server](../04b_agent-extensions/06_mcp-server.md) you install.
 - **Multi-agent coordination** — [jobs, swarms, deliberation, stigmergic primitives](../07c_agent-coordination/01_overview.md).
 - **Observability** — [Agent Debug](../05c_agent-observability/02_agent-debug.md), [AI Debug](../05c_agent-observability/03_ai-debug-and-console.md), [event log](../07_memory/07_event-log.md).
 - **Environments** — run agent code [locally, in Docker, E2B, Daytona, or remote](../08a_environments/01_overview.md).

@@ -142,6 +142,6 @@ For deeper customisation, clone `packages/chat-widget` and modify.
 
 ## See also
 
-- [Tools & MCP Overview](../05_tools-and-mcp/01_overview.md)
+- [Custom Tools](../04b_agent-extensions/07_custom-tools.md)
 - [Custom Agents Overview](../../04_build-on-codebolt/02_creating-agents/01_overview.md) — for building the backing agent
 - [Self-Hosting → Security Hardening](../../04_build-on-codebolt/11_agent-infrastructure/06_security-hardening.md) — for anonymous token management

@@ -57,6 +57,6 @@ Agents declare which tools they're allowed to call. The default is **deny**. Thi
 
 ## See also
 
-- [Tools and MCP in Using Codebolt](../../02_using-codebolt/05_tools-and-mcp/01_overview.md)
+- [Custom Tools in Using Codebolt](../../02_using-codebolt/04b_agent-extensions/07_custom-tools.md)
 - [MCP Tools](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/01_overview.md)
-- [Built-in tools reference](../../02_using-codebolt/05_tools-and-mcp/04_built-in-tools.md)
+- [Built-in tools](../../02_using-codebolt/04b_agent-extensions/07_custom-tools.md#built-in-tools)

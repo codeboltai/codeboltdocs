@@ -12,7 +12,7 @@ Model Context Protocol (MCP) servers extend what agents can do by exposing addit
 
 Open via: **Settings → MCP Servers** or **Bottom bar → Agents → MCP**
 
-For a broader introduction to MCP see [Tools & MCP](../../../05a_tools-and-mcp/01_overview.md).
+For a broader introduction to MCP see [MCP Server](../../../04b_agent-extensions/06_mcp-server.md).
 
 ## Installed tab
 

@@ -16,7 +16,7 @@ There are two ways to connect agents to project tools:
 
 The simplest path is an **MCP server** for the tool. MCP servers expose tool capabilities that agents can call directly — `create_issue`, `list_prs`, `update_page`, etc. Install the relevant MCP server and the agent gains access to the tool's API without any custom code.
 
-See [Tools & MCP → Installing MCP Servers](../05_tools-and-mcp/02_installing-mcp-servers.md) for setup instructions. Popular MCP servers include:
+See [Agent Extensions → MCP Server](../04b_agent-extensions/06_mcp-server.md) for setup instructions. Popular MCP servers include:
 
 | Tool | MCP server |
 |---|---|

@@ -64,5 +64,5 @@ These mechanisms let you shape how work happens without forcing every user to re
 
 - [Build your first agent](../../03_guides/02_first-steps/build-your-first-agent.md)
 - [Agent Extensions](../../02_using-codebolt/04b_agent-extensions/01_overview.md)
-- [Installing MCP servers](../../02_using-codebolt/04b_agent-extensions/06_installing-mcp-servers.md)
+- [MCP Server](../../02_using-codebolt/04b_agent-extensions/06_mcp-server.md)
 - [Capabilities](../../02_using-codebolt/04b_agent-extensions/02_capabilities.md)
