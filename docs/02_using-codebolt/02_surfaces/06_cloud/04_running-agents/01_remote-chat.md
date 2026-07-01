@@ -131,6 +131,40 @@ The cloud plugin reconnects automatically with exponential backoff if the connec
 
 ---
 
+## Artifacts menu
+
+Remote Chat includes an **Artifacts** menu in the chat header. Open it to review outputs created by the active thread, such as generated apps, static sites, reports, or other files the agent publishes as artifacts.
+
+When you open the menu, the portal loads artifacts for the current thread and keeps them updated from live chat events. Each artifact card shows:
+
+- **Name and type** — the artifact title and artifact type, such as `static_site` or another provider-specific type.
+- **File count and status** — how many files belong to the artifact and whether the artifact is still being generated or is ready.
+- **Preview controls** — start, stop, and provider selection controls for compatible preview providers.
+- **Links** — direct artifact URLs, runtime URLs, or live preview URLs when available.
+- **Context** — the agent, runtime, entrypoint, and last updated time.
+
+### Previewing an artifact
+
+1. Click the **Artifacts** button in the Remote Chat header.
+2. Find the artifact you want to inspect.
+3. If multiple preview providers are available, choose one from the **Preview** dropdown.
+4. Click the **Play** button to start a preview.
+5. Use the opened preview tab, the preview URL, or the embedded preview panel to inspect the artifact.
+
+The portal connects to the preview service over the artifact preview WebSocket. Preview status moves through `starting`, `acknowledged`, `ready`, `stopping`, `stopped`, or `error`. If the preview returns a URL, the portal opens it in a new tab; if the browser blocks the tab, the portal shows an **Open preview** notification instead.
+
+### Opening or stopping previews
+
+- **Open externally** — click the external-link button or URL to open an artifact or preview in a new browser tab.
+- **Stop preview** — click the stop button to end a live preview session. This stops only the preview session; it does not stop the runtime or delete the artifact.
+- **Provider preference** — the selected preview provider is remembered per artifact type in browser storage, so future artifacts of the same type use the same provider by default.
+
+:::tip
+If the menu says there are no artifacts, continue the thread until the agent publishes one. Artifacts are scoped to the active thread, so switching threads changes the menu contents.
+:::
+
+---
+
 ## Selecting the agent
 
 The model selector in the chat input picks which agent handles your next message. Changing the agent mid-thread is allowed; the new agent picks up on the next message.

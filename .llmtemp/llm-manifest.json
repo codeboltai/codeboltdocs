@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-01T07:38:29.024Z",
-  "sourceCount": 385,
-  "curatedCount": 62,
+  "generatedAt": "2026-07-01T10:32:24.505Z",
+  "sourceCount": 433,
+  "curatedCount": 68,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 162,
+      "count": 210,
       "order": 1,
       "files": [
         {
@@ -49,7 +49,7 @@
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/application-navigation/panels.md",
-          "title": "Panels"
+          "title": "Tiled View"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/application-navigation/layout.md",
@@ -104,20 +104,184 @@
           "title": "Preview & Browser"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/environments/environments.md",
-          "title": "Environments"
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/overview.md",
+          "title": "Overview"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/code-observability/overview.md",
-          "title": "Code Observability Overview"
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/tasks.md",
+          "title": "Tasks"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/code-observability/codemap.md",
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/roadmap.md",
+          "title": "Roadmap"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/specs.md",
+          "title": "Specs"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/ui-flow.md",
+          "title": "UI Flow"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/action-plans.md",
+          "title": "Action Plans"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/requirement-plan.md",
+          "title": "Requirement Plan"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/project-structure.md",
+          "title": "Project Structure"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/codemap.md",
           "title": "Codemap"
         },
         {
-          "path": "using-codebolt/surfaces/desktop-app/code-observability/narrative-graph.md",
-          "title": "Narrative Graph"
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/running-agents.md",
+          "title": "Running Agents"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/background-agents.md",
+          "title": "Background Agents"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/kanban-board.md",
+          "title": "Kanban Board"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/capabilities.md",
+          "title": "Capabilities"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/action-block.md",
+          "title": "Action Block"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/jobs.md",
+          "title": "Jobs"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/swarm-management.md",
+          "title": "Swarm Management"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/orchestrator-management.md",
+          "title": "Orchestrator Management"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/eval.md",
+          "title": "Eval"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/agent-profiles.md",
+          "title": "Agent Profiles"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/guardrails.md",
+          "title": "Guardrails"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/review-merge-requests.md",
+          "title": "Review Merge Requests"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/agent-deliberation.md",
+          "title": "Agent Deliberation"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/inbox.md",
+          "title": "Inbox"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/calendar.md",
+          "title": "Calendar"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/auto-testing.md",
+          "title": "Auto Testing"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/artifacts.md",
+          "title": "Artifacts"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/event-log.md",
+          "title": "Event Log"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/update-project-structure-request.md",
+          "title": "Update Project Structure Request"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/deposition-framework-features/changes-summary.md",
+          "title": "Changes Summary"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-orchestrations/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-orchestrations/proxy-execution.md",
+          "title": "Proxy Execution"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-orchestrations/routing-gateway.md",
+          "title": "Routing Gateway"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/agent-orchestrations/environments.md",
+          "title": "Environments"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/overview.md",
+          "title": "Overview"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/memory.md",
+          "title": "Memory"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/persistent-memory.md",
+          "title": "Persistent Memory"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/memory-ingestion.md",
+          "title": "Memory Ingestion"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/context-assembly.md",
+          "title": "Context Assembly"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/context-compaction.md",
+          "title": "Context Compaction"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/vector-db.md",
+          "title": "Vector DB"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/knowledge.md",
+          "title": "Knowledge"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/knowledge-graph.md",
+          "title": "Knowledge Graph"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/panels/memory-features/kv-store.md",
+          "title": "KV Store"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/settings/overview.md",
@@ -654,6 +818,34 @@
         {
           "path": "using-codebolt/external-integrations/building-a-channel-plugin.md",
           "title": "Building a Channel Plugin"
+        },
+        {
+          "path": "using-codebolt/code-observability/overview.md",
+          "title": "Code Observability Overview"
+        },
+        {
+          "path": "using-codebolt/code-observability/codemap.md",
+          "title": "Codemap"
+        },
+        {
+          "path": "using-codebolt/code-observability/narrative-graph.md",
+          "title": "Narrative Graph"
+        },
+        {
+          "path": "using-codebolt/application-observability/overview.md",
+          "title": "Application Observability Overview"
+        },
+        {
+          "path": "using-codebolt/application-observability/plugin-debug.md",
+          "title": "Plugin Debug"
+        },
+        {
+          "path": "using-codebolt/application-observability/action-block-debug.md",
+          "title": "Action Block Degub"
+        },
+        {
+          "path": "using-codebolt/application-observability/environment-debug.md",
+          "title": "Environment Debug"
         },
         {
           "path": "using-codebolt/troubleshooting/common-issues.md",

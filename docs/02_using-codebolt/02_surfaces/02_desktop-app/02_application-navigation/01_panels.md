@@ -1,10 +1,10 @@
 ---
 sidebar_position: 1
-title: Panels
+title: Tiled View
 description: "Open, search, and switch panels in the Codebolt desktop app."
 ---
 
-# Panels
+# Tiled View
 
 The Desktop App uses dockable panels for code, chat, terminals, previews, settings, environments, debugging tools, and workflow-specific views.
 
