@@ -45,7 +45,7 @@ The biggest variable cost. Codebolt computes it from:
 - Tokens reported by the LLM provider
 - Your configured per-token rates (auto-updated from the provider's pricing for official providers; set manually for custom providers)
 
-Shown in **Settings → AI Requests → Aggregate** and the status bar.
+Shown in the [AI Requests](../03_chat/07_ai-requests.md) debug view when response token and pricing data is available.
 
 ### Reducing LLM cost
 

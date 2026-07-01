@@ -1,10 +1,10 @@
 ---
 sidebar_position: 1
-title: Chat Overview
+title:  Overview
 description: The chat panel is the primary way most people interact with Codebolt. You pick an agent, type a message, watch it work, review the result
 ---
 
-# Chat Overview
+#  Overview
 
 ![Chat Overview](/productImages/chat/overview.gif)
 

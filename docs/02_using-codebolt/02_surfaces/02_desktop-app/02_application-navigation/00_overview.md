@@ -8,6 +8,8 @@ description: "How panel management and application layout work in the Codebolt d
 
 Application Navigation covers how you move around the Codebolt desktop app: using the top header, bottom footer, panel menus, panel tabs, and saved layouts.
 
+![Application layout](/layout/layout.png)
+
 ## Top header
 
 The top header gives you project-level navigation and global commands.

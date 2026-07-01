@@ -14,9 +14,19 @@ The project dashboard exposes three project entry points:
 | **Quick Create** | Creates a new empty project in the selected workspace. |
 | **Create via Template** | Creates a new project, then downloads a selected template archive into that project folder. |
 
+## Open Project
+
+Use **Open project** when you already have a project folder on disk.
+
+![Open project](/img/open-project.png)
+
+Select the folder you want to open. Codebolt registers it as a project and opens it in the desktop workspace.
+
 ## Quick Create
 
 Use **Quick Create** when you want an empty project folder.
+
+![Quick Create](/img/quick-create.png)
 
 Enter a project name, choose the workspace, and create the project.
 
@@ -27,6 +37,8 @@ The new folder includes Codebolt's local project metadata so the app can remembe
 Use **Create via Template** when you want a starter project.
 
 To prepare your own starter project, see [Creating a Template](./04_creating-a-template.md).
+
+![Create via Template](/img/template.png)
 
 The modal has two tabs:
 

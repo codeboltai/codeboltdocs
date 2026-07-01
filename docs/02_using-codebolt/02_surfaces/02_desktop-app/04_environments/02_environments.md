@@ -50,6 +50,8 @@ Each environment row shows its current state. Common states include:
 
 Click **Add** in the Environments panel to create an environment. The create dialog lets you choose a provider or runtime option, name the environment, and provide the required configuration.
 
+
+
 Cloud runtime options can include providers such as E2B, Modal, Sprites, Runloop, Daytona, or custom providers, depending on what is available in your app configuration.
 
 ## Start, stop, and restart

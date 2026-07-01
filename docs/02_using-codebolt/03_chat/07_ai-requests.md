@@ -1,113 +1,147 @@
 ---
 sidebar_position: 7
 title: AI Requests
-description: "A unified view of every LLM call Codebolt has made: which agent, which model, how many tokens, how much it cost, how long it took"
+description: "Inspect the model requests created by chat: live request status, streaming responses, request payloads, response payloads, token usage, and cost estimates."
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # AI Requests
 
-A unified view of every LLM call Codebolt has made: which agent, which model, how many tokens, how much it cost, how long it took. Used for debugging, cost tracking, and spotting performance issues.
+AI requests are the model calls created while an agent is working in chat. Codebolt shows them in two places:
 
-The underlying data is the event log (`type == llm.chat`). Every surface is just a different lens on it.
+- inline in the chat transcript as request and streaming-response cards
+- in the **AI Debug** panel, where you can inspect request and response payloads
 
-## Viewing AI requests
+Use this when you need to understand what the agent sent to the model, what came back, which thread or agent produced the call, and how many tokens or estimated cost were attached to the response.
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
+## In Chat
 
-**Settings → AI Requests** or click the status-bar token counter. Sortable table, filter sidebar, click any row for full payload.
+During a run, chat can show two AI request-related message types.
 
-</TabItem>
-<TabItem value="cli" label="CLI">
+| Card | What it shows |
+|---|---|
+| **AI Request** | A compact clickable row for a model request. It shows the request label and a status icon. |
+| **AI Stream** | The live model output. It shows whether the model is generating, thinking, complete, or failed. |
 
-The current CLI does not expose the older reporting command families from previous drafts. Use the desktop AI Requests view for usage and request inspection.
+The compact **AI Request** row uses these states:
 
-</TabItem>
-</Tabs>
+- pending or sending
+- request succeeded
+- request failed
 
-## What's shown
+Click an **AI Request** row to open the **AI Debug** panel and focus the matching request.
 
-```
-Time      Agent       Model               Tokens       Cost     Duration   Run
---------- ----------- ------------------- ------------ -------- ---------- --------
-14:23:05  generalist  claude-sonnet-4-6   4.2k / 850   $0.018   2.1s       run_abc
-14:23:10  generalist  claude-sonnet-4-6   5.1k / 120   $0.017   1.4s       run_abc
-14:23:15  reviewer    gpt-5               3.8k / 340   $0.021   2.8s       run_def
-```
+## Streaming Responses
 
-Each row:
-- **Time** — when the call was made.
-- **Agent** — which agent requested it.
-- **Model** — which model answered.
-- **Tokens** — input / output.
-- **Cost** — computed from per-token rates.
-- **Duration** — wall time from request to response.
-- **Run** — the agent run ID; click through to the full trace.
+When the model streams output, Codebolt renders an **AI Stream** card in chat.
 
-## Filtering
+The stream header can show:
 
-Filter by:
-- Agent
-- Model
-- Provider
-- Date range
-- Run
-- Cost threshold (`> $0.10`)
-- Duration threshold (`> 5s`)
+- **Generating** while normal response content is streaming
+- **Thinking** while reasoning content is streaming
+- **AI Response Complete** when the request succeeds
+- **AI Request Failed** when the request fails
+- the model name when the message includes one
 
-Useful for finding the slow or expensive calls.
+If reasoning is present, it appears in a collapsible **Reasoning** section above the response body. Failed requests show the error message in the stream body.
 
-## Aggregate view
+## AI Debug Panel
 
-Toggle from "list" to "aggregate" to see totals:
+Open **AI Debug** from the Debug menu, or click an AI request row in chat.
 
-- Cost per agent (which agents are expensive?)
-- Cost per model (which models dominate spend?)
-- Cost per day / week / month
-- Request count per agent
-- Average duration per agent
+The panel title is **Debug AI Request**. It loads AI request history and also listens for live debug events while agents are running.
 
-## Per-project cost tracking
+Each request entry can include:
 
-Costs are tagged with the project the run was in. The aggregate view can group by project for chargeback or attribution.
+- request preview
+- timestamp
+- model
+- thread
+- agent
+- agent instance
+- environment type
+- request id
+- error state, when the response failed
+
+Click an entry to inspect the full detail.
+
+## Detail Tabs
+
+The request detail view has three tabs:
+
+| Tab | What it contains |
+|---|---|
+| **AI Request** | The raw agent/model request payload. |
+| **AI Response** | The raw model response payload. |
+| **Info** | Token usage, estimated input/output cost, total estimated cost, or error details. |
+
+The JSON views include copy buttons. Use them when you need to share the exact request or response while debugging.
+
+## Tokens And Cost
+
+The AI Debug header shows the accumulated token count and total estimated cost for the loaded response summaries.
+
+Hover the token/cost summary to see:
+
+- input tokens
+- output tokens
+- input cost
+- output cost
+
+Individual request details can show:
+
+- total tokens
+- prompt/input tokens
+- cached input tokens
+- completion/output tokens
+- reasoning tokens when available
+- total, input, and output price estimates
+
+Cost values depend on pricing data attached to the response. If the response does not include pricing, the panel shows zero for that request.
+
+## Filtering And Grouping
+
+Use the filter button in **AI Debug** to narrow the request list by:
+
+- thread
+- agent instance
+- agent type: orchestrator, swarm, agent, or system
+
+Use the grouping menu to group requests by:
+
+- time
+- thread
+- agent
+- model
+- environment
+- agent instance
+
+The default grouping is time. Time groups are shown as **Today**, **Yesterday**, **This Week**, **This Month**, and **Older**.
+
+## Layout Modes
+
+AI Debug supports two inspection layouts:
+
+| Mode | Behavior |
+|---|---|
+| **Side panel** | Select a request on the left and inspect details in a resizable panel on the right. |
+| **Accordion** | Expand request details inline inside the request list. |
+
+The refresh button reloads request history. When there are more results, the list loads more entries as you scroll.
 
 ## Spotting issues
 
 Patterns to watch for:
 
-- **An agent making many short calls** — should it be batching?
-- **Very long single calls (>30s)** — usually a heavily context-loaded planner; check if the context can be trimmed.
-- **High output token counts** — the agent is generating long responses; consider tightening prompts.
-- **Recent cost spike** — a specific agent started burning more tokens; diff recent changes to that agent's config.
-- **Failed requests** — rate limits, auth errors. Check provider health.
-
-## Exporting
-
-<Tabs groupId="surface">
-<TabItem value="cli" label="CLI" default>
-
-The current CLI does not expose a dedicated AI Requests export command.
-
-</TabItem>
-<TabItem value="desktop" label="Desktop">
-
-Settings → AI Requests → **Export** button. CSV or JSON. Honours the active filters.
-
-</TabItem>
-</Tabs>
-
-Full data for all LLM calls (subject to retention). Pipe into your analytics tool of choice.
-
-## Relationship to the event log
-
-AI Requests is the user-facing surface for inspecting LLM request activity. In current builds, rely on that UI rather than the removed event-query CLI examples from older drafts.
+- **Failed requests** — open the **AI Response** tab and check the error type, message, parameter, code, provider, and status.
+- **Unexpected answer** — compare **AI Request** with **AI Response** to see the exact prompt and model output.
+- **High token usage** — check the **Info** tab for prompt, completion, cached, and reasoning token counts.
+- **Unexpected cost** — use the header total and per-request cost fields to identify which responses contributed most.
+- **Wrong agent or thread** — group or filter by thread, agent, environment, or agent instance.
 
 ## See also
 
 - [Chat Overview](./01_overview.md)
+- [AI Debug & Console](../05c_agent-observability/03_ai-debug-and-console.md)
+- [Agent Debug](../05c_agent-observability/02_agent-debug.md)
 - [LLM Providers](../08_integrations/01_llm-providers.md)
-- [Query the event log](../../03_guides/07_advanced/query-the-event-log.md)
 - [LLM & Inference (internals)](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

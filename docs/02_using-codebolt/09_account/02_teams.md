@@ -133,5 +133,5 @@ For OIDC-managed teams, removing a member from the OIDC group is usually suffici
 ## See also
 
 - [Authentication & Authorization](./01_authentication-and-authorization.md)
-- [Workspace](./03_workspace.md)
+- [Workspaces](../02_surfaces/02_desktop-app/01_workspace-and-project-management/02_workspaces.md)
 - [Usage and Billing](./03_usage-and-billing.md)

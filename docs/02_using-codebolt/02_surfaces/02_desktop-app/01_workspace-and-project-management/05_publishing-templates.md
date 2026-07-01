@@ -14,6 +14,8 @@ The CLI does not currently publish or upload project template archives. Host the
 
 In the portal, open **Templates -> My Templates**, then use **Add Templates** to create a listing. The current portal form includes:
 
+![My Templates](/img/mytemplates.png)
+
 | Field | Meaning |
 |---|---|
 | **Template Title** | Name shown in template lists. |

@@ -12,11 +12,15 @@ Onboarding configures the desktop app for agent runs.
 
 Open Codebolt. Click **Sign In** - a browser window opens to the Codebolt portal. Log in or create a free account. The token is picked up automatically.
 
+![Codebolt welcome screen](/img/get_started.png)
+
 New users are taken into the setup wizard. Returning users go straight to the project dashboard.
 
 ## Provider Selection
 
 The wizard opens to **Select Default AI Models**. Pick the provider type that fits you best:
+
+![Select default AI models](/img/onboarding-default-models.png)
 
 | Provider type | What you need |
 |---|---|
@@ -32,6 +36,8 @@ If your team needs a provider that is not listed, see [Custom LLM Provider](../.
 ## Workspace And Theme
 
 The **Review Settings** screen lets you configure:
+
+![Review settings](/img/onboarding-review-settings.png)
 
 - **Default workspace** - defaults to your Desktop. Click **Browse** to change it. See [Workspaces](./01_workspace-and-project-management/02_workspaces.md) for workspace behavior and project organization.
 - **CLI installation** - click **Install** to add `codebolt` to your PATH. You can skip and install later from Settings.
