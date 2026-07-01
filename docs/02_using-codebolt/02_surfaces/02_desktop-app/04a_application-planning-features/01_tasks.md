@@ -22,4 +22,4 @@ Open via: **Plan menu -> Tasks** or the Panel Selector.
 - [Action Plans](./05_action-plans.md) break work into ordered task steps.
 - [Requirement Plan](./06_requirement-plan.md) can package tasks with specs and UI flows.
 - [Jobs](../04b_agent-management-features/06_jobs.md) distribute work across coordinating agents.
-- [Environments](../04b_agent-management-features/04_environments/02_environments.md) show where task work runs.
+- [Environments](../04d_agent-orchestrations/03_environments.md) show where task work runs.

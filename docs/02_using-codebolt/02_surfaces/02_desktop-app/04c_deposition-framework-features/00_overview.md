@@ -26,7 +26,7 @@ A deposition can be a review request, inbox message, scheduled event, test run, 
 
 ## Related context infrastructure
 
-Persistent Memory, Memory Ingestion, Vector DB, Knowledge, Knowledge Graph, and KV Store also persist context, but they belong to the desktop app's Context menu. Use those pages as supporting infrastructure for deposition workflows rather than primary deposition handoff surfaces.
+Persistent Memory, Memory Ingestion, Vector DB, Knowledge, Knowledge Graph, KV Store, Context Assembly, Context Compaction, and Memory also persist context, but they belong to the desktop app's [Memory](../04e_memory-features/00_overview.md) category. Use those pages as supporting infrastructure for deposition workflows rather than primary deposition handoff surfaces.
 
 ## See also
 
