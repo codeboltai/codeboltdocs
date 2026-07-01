@@ -1,9 +1,0 @@
-{
-  "label": "Command Mode",
-  "position": 3,
-  "collapsible": true,
-  "collapsed": true,
-  "customProps": {
-    "sectionLabel": "Command Mode"
-  }
-}

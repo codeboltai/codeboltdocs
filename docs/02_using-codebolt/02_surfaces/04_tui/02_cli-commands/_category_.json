@@ -1,9 +1,0 @@
-{
-  "label": "CLI Commands",
-  "position": 2,
-  "collapsible": true,
-  "collapsed": true,
-  "customProps": {
-    "sectionLabel": "CLI Commands"
-  }
-}
