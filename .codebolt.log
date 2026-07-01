@@ -196335,3 +196335,395 @@ Chat added successfully: threadId=97cb3509-d2f5-4272-872f-3251903af199, agentIns
 🐛 DEBUG [2026-06-30T12:50:35.801Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
 🐛 DEBUG [2026-06-30T12:50:45.795Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
 🐛 DEBUG [2026-06-30T12:50:45.799Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+Starting CodeBolt server on port 2721...
+Project path: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs
+Web frontend: /opt/homebrew/lib/node_modules/codebolt/dist/web
+🐛 DEBUG [2026-07-01T10:50:30.638Z] [ApplicationEventBus] New subscription: trigger:contextCompaction:auto, subId: 3de513c2-2776-43db-ae93-c90d8b1536c2, eventTypes: context:added
+🐛 DEBUG [2026-07-01T10:50:30.698Z] [Environment Lifecycle] Started health check monitoring (interval: 30000ms)
+ℹ️  INFO [2026-07-01T10:50:30.755Z] Started periodic message queue cleanup interval
+ℹ️  INFO [2026-07-01T10:50:30.755Z] Started periodic wsPtyMap cleanup interval
+ℹ️  INFO [2026-07-01T10:50:32.881Z] TaskManager initialized successfully
+ℹ️  INFO [2026-07-01T10:50:32.882Z] Database services initialized successfully
+ℹ️  INFO [2026-07-01T10:50:32.883Z] debugManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:32.908Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:50:32.908Z] chatManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:32.909Z] [EventActionManager] Initializing for project: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt
+ℹ️  INFO [2026-07-01T10:50:32.909Z] [EventActionLoader] Loaded 0 eventActions from /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/eventactions
+ℹ️  INFO [2026-07-01T10:50:32.909Z] [HookManager] Initializing for project: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt
+ℹ️  INFO [2026-07-01T10:50:32.910Z] [EventActionLoader] Watching eventActions directory: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/eventactions
+🐛 DEBUG [2026-07-01T10:50:32.910Z] [EventActionManager] Registered 0 eventAction trigger(s)
+🐛 DEBUG [2026-07-01T10:50:32.910Z] [EventActionManager] Event listeners set up
+ℹ️  INFO [2026-07-01T10:50:32.910Z] [EventActionManager] Initialized with 0 eventActions
+ℹ️  INFO [2026-07-01T10:50:32.910Z] EventActionManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:32.911Z] [Environment Initialization] Loading existing environments...
+ℹ️  INFO [2026-07-01T10:50:32.915Z] [Environment Lifecycle] Registered environment: cloudprovider-auto-sync (Cloud Provider Runtime Sync)
+ℹ️  INFO [2026-07-01T10:50:32.915Z] [Environment Provider Start] Initiating provider startup - providerId: cloudprovider, providerName: Cloud Provider, environmentId: cloudprovider-auto-sync
+ℹ️  INFO [2026-07-01T10:50:32.923Z] Synced 1 stale environment debug sessions (marked as stopped)
+ℹ️  INFO [2026-07-01T10:50:32.923Z] [Environment Lifecycle] Environment cloudprovider-auto-sync state changed: created -> starting
+ℹ️  INFO [2026-07-01T10:50:32.924Z] Started environment debug session: cloudprovider-auto-sync (Cloud Provider Runtime Sync)
+🐛 DEBUG [2026-07-01T10:50:32.924Z] [Environment Provider Start] Using local provider path: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/providers/cloudprovider
+🐛 DEBUG [2026-07-01T10:50:32.924Z] [Agent Start] Using main field from package.json: dist/index.js
+ℹ️  INFO [2026-07-01T10:50:32.924Z] [Environment Provider Start] Provider path resolved successfully - providerId: cloudprovider, providerPath: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/providers/cloudprovider, indexPath: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/providers/cloudprovider/dist/index.js
+🐛 DEBUG [2026-07-01T10:50:32.924Z] [Environment Provider Start] Provider entry point validation successful: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/providers/cloudprovider/dist/index.js
+🐛 DEBUG [2026-07-01T10:50:32.924Z] [Environment Provider Start] Creating UtilityProcess.fork - indexPath: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/providers/cloudprovider/dist/index.js, cwd: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/providers/cloudprovider, socketPort: 0
+🐛 DEBUG [2026-07-01T10:50:32.927Z] [Environment Provider Start] Storing provider process in map with environmentId: cloudprovider-auto-sync
+🐛 DEBUG [2026-07-01T10:50:32.927Z] [Environment Lifecycle] Set process for environment cloudprovider-auto-sync (PID: 55363)
+ℹ️  INFO [2026-07-01T10:50:32.955Z] [Environment Provider cloudprovider] Process spawned successfully on port 0 in 40ms
+🐛 DEBUG [2026-07-01T10:50:32.956Z] [ActionBlockRegistry] Discovered 0 built-in ActionBlocks from /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/actionblocks
+🐛 DEBUG [2026-07-01T10:50:32.959Z] [ActionBlockRegistry] Discovered 1 global ActionBlocks
+🐛 DEBUG [2026-07-01T10:50:32.964Z] [ActionBlockRegistry] Discovered 4 project ActionBlocks
+ℹ️  INFO [2026-07-01T10:50:32.964Z] [ActionBlockRegistry] Total discovered ActionBlocks: 5
+ℹ️  INFO [2026-07-01T10:50:32.964Z] [ActionBlockRegistry] Initialized with project path: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt
+⚠️  WARN [2026-07-01T10:50:32.965Z] [HookLoader] Invalid hook configuration in /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/hooks/test-build.hook
+ℹ️  INFO [2026-07-01T10:50:32.965Z] [HookLoader] Loaded 0 hook(s) from /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/hooks
+ℹ️  INFO [2026-07-01T10:50:32.965Z] [HookLoader] Watching hooks directory: /Users/ravirawat/Documents/codeboltai/AiEditor/CodeBolt/.codebolt/hooks
+ℹ️  INFO [2026-07-01T10:50:32.965Z] [HookManager] Initialized with 0 hook(s)
+ℹ️  INFO [2026-07-01T10:50:32.965Z] HookManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:32.965Z] [INIT] Overrode projectSetting.user_active_project_path with startup path: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs
+📝 LOG [2026-07-01T10:50:32.965Z] 🔍 Detailed Event: SERVICE_INIT {
+  message: [32m'setting service init'[39m,
+  logLevel: [32m'log'[39m,
+  distinctId: [32m'CONSOLE_USER'[39m,
+  properties: {},
+  timestamp: [32m'2026-07-01T10:50:32.965Z'[39m
+}
+ℹ️  INFO [2026-07-01T10:50:32.966Z] [CLI Bootstrap] Reusing existing user: I78QLYLcsjdLEv9ZPEEobcDffrU2
+ℹ️  INFO [2026-07-01T10:50:32.966Z] [CLI Bootstrap] Registered project: codeboltdocs (id=51)
+ℹ️  INFO [2026-07-01T10:50:33.004Z] debugManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.004Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:50:33.004Z] chatManager initialized for project
+🐛 DEBUG [2026-07-01T10:50:33.004Z] [EventActionManager] Already initialized for this project
+🐛 DEBUG [2026-07-01T10:50:33.004Z] [HookManager] Already initialized for this project
+ℹ️  INFO [2026-07-01T10:50:33.004Z] EventActionManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.004Z] HookManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.031Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:50:33.065Z] debugManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.066Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:50:33.066Z] chatManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [EventActionManager] Shutting down
+🐛 DEBUG [2026-07-01T10:50:33.066Z] [EventActionManager] Event listeners removed
+🐛 DEBUG [2026-07-01T10:50:33.066Z] [EventActionLoader] Stopped watching eventActions directory
+🐛 DEBUG [2026-07-01T10:50:33.066Z] [EventActionRegistry] Cleared all eventActions
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [EventActionManager] Shutdown complete
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [HookManager] Shutting down
+🐛 DEBUG [2026-07-01T10:50:33.066Z] [HookLoader] Stopped watching hooks directory
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [EventActionManager] Initializing for project: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [EventActionLoader] Loaded 0 eventActions from /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/eventactions
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [HookManager] Initializing for project: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [EventActionLoader] Watching eventActions directory: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/eventactions
+🐛 DEBUG [2026-07-01T10:50:33.066Z] [EventActionManager] Registered 0 eventAction trigger(s)
+🐛 DEBUG [2026-07-01T10:50:33.066Z] [EventActionManager] Event listeners set up
+ℹ️  INFO [2026-07-01T10:50:33.066Z] [EventActionManager] Initialized with 0 eventActions
+ℹ️  INFO [2026-07-01T10:50:33.066Z] EventActionManager initialized for project
+🐛 DEBUG [2026-07-01T10:50:33.066Z] [ActionBlockRegistry] Discovered 0 built-in ActionBlocks from /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/actionblocks
+🐛 DEBUG [2026-07-01T10:50:33.067Z] [ActionBlockRegistry] Discovered 1 global ActionBlocks
+🐛 DEBUG [2026-07-01T10:50:33.067Z] [ActionBlockRegistry] Discovered 0 project ActionBlocks
+ℹ️  INFO [2026-07-01T10:50:33.067Z] [ActionBlockRegistry] Total discovered ActionBlocks: 1
+ℹ️  INFO [2026-07-01T10:50:33.067Z] [ActionBlockRegistry] Initialized with project path: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs
+ℹ️  INFO [2026-07-01T10:50:33.067Z] [HookLoader] Loaded 0 hook(s) from /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/hooks
+ℹ️  INFO [2026-07-01T10:50:33.067Z] [HookLoader] Watching hooks directory: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/hooks
+ℹ️  INFO [2026-07-01T10:50:33.067Z] [HookManager] Initialized with 0 hook(s)
+ℹ️  INFO [2026-07-01T10:50:33.067Z] HookManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.070Z] [ApplicationEventBus] Loaded 0 subscription(s) from file
+ℹ️  INFO [2026-07-01T10:50:33.070Z] [ApplicationEventBus] Initialized for project: /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs, loaded 0 persisted subscription(s), preserved 1 runtime subscription(s)
+ℹ️  INFO [2026-07-01T10:50:33.070Z] [ChannelStore] Initialized with 0 channels
+ℹ️  INFO [2026-07-01T10:50:33.070Z] [ChannelManager] Initialized with 0 channels
+ℹ️  INFO [2026-07-01T10:50:33.072Z] [CLI Bootstrap] Full project activation complete
+ℹ️  INFO [2026-07-01T10:50:33.072Z] [CLI Bootstrap] Complete — project ready at /Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs
+ℹ️  INFO [2026-07-01T10:50:33.076Z] Server started on port 2721
+🐛 DEBUG [2026-07-01T10:50:33.079Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+CodeBolt server running at http://localhost:2721
+Web UI available at http://localhost:2721
+Open http://localhost:2721 in your browser for the web UI.
+Launching TUI: /opt/homebrew/lib/node_modules/codebolt/node_modules/@codebolt/gotui-darwin-arm64/bin/gotui
+⚠️  WARN [2026-07-01T10:50:33.081Z] [Server Init] AgentFlow runtime setup failed (non-blocking): AgentFlow runtime is incomplete at /opt/homebrew/lib/node_modules/codebolt/dist/assets/agentflow-runtime. Missing: dist/index.cjs, dist/data.json
+ℹ️  INFO [2026-07-01T10:50:33.082Z] [PluginService] Discovered plugin: anthropic-plugin (/Users/ravirawat/.codebolt/plugins/anthropic-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.083Z] [PluginService] Discovered plugin: artifact-listener-plugin (/Users/ravirawat/.codebolt/plugins/artifact-listener-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.083Z] [PluginService] Discovered plugin: cloud-plugin (/Users/ravirawat/.codebolt/plugins/cloud-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.084Z] [PluginService] Discovered plugin: codex-plugin (/Users/ravirawat/.codebolt/plugins/codex-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.085Z] [PluginService] Discovered plugin: feedback-form-plugin (/Users/ravirawat/.codebolt/plugins/feedback-form-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.085Z] [PluginService] Discovered plugin: linear-agent-plugin (/Users/ravirawat/.codebolt/plugins/linear-agent-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.087Z] [PluginService] Discovered plugin: telegram-channel (/Users/ravirawat/.codebolt/plugins/telegram-channel)
+ℹ️  INFO [2026-07-01T10:50:33.087Z] [PluginService] Discovered plugin: @codebolt/remote-execution-plugin (/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs/.codebolt/plugins/codebolt-remote-execution-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.087Z] [PluginService] Loaded 8 plugin(s)
+ℹ️  INFO [2026-07-01T10:50:33.088Z] [PluginService] Triggers set up for all plugins
+ℹ️  INFO [2026-07-01T10:50:33.089Z] [PluginProcessManager] Starting plugin: anthropic-plugin (anthropic-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.090Z] [PluginProcessManager] Plugin anthropic-plugin spawned in 1ms
+ℹ️  INFO [2026-07-01T10:50:33.153Z] [Environment Provider cloudprovider] Process exited with code 0 after 238ms
+🐛 DEBUG [2026-07-01T10:50:33.154Z] [Environment Lifecycle] Cleared process for environment cloudprovider-auto-sync
+ℹ️  INFO [2026-07-01T10:50:33.154Z] [Environment Lifecycle] Environment cloudprovider-auto-sync state changed: starting -> stopped
+ℹ️  INFO [2026-07-01T10:50:33.155Z] Ended environment debug session: cloudprovider-auto-sync with status stopped
+🐛 DEBUG [2026-07-01T10:50:33.155Z] [cloudprovider] Auto sync provider startup skipped: Error: Provider process exited with code 0 before becoming ready
+🐛 DEBUG [2026-07-01T10:50:33.157Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+ℹ️  INFO [2026-07-01T10:50:33.157Z] [Environment Lifecycle] Registered environment: cloud:0af759f6-1164-4d4f-bb61-88a5f99aaa06 (CodeBolt)
+⚠️  WARN [2026-07-01T10:50:33.157Z] Environment debug session not found for state update: cloud:0af759f6-1164-4d4f-bb61-88a5f99aaa06
+ℹ️  INFO [2026-07-01T10:50:33.157Z] [Environment Lifecycle] Environment cloud:0af759f6-1164-4d4f-bb61-88a5f99aaa06 state changed: created -> stopped
+🐛 DEBUG [2026-07-01T10:50:33.157Z] [Environment Initialization] Registered environment: CodeBolt (cloud:0af759f6-1164-4d4f-bb61-88a5f99aaa06)
+ℹ️  INFO [2026-07-01T10:50:33.158Z] [Environment Lifecycle] Registered environment: cloud:49098d4c-1ada-4123-b95e-c821f19745bb (CodeBolt 2)
+ℹ️  INFO [2026-07-01T10:50:33.158Z] [Environment Lifecycle] Environment cloud:49098d4c-1ada-4123-b95e-c821f19745bb state changed: created -> stopped
+🐛 DEBUG [2026-07-01T10:50:33.158Z] [Environment Initialization] Registered environment: CodeBolt 2 (cloud:49098d4c-1ada-4123-b95e-c821f19745bb)
+ℹ️  INFO [2026-07-01T10:50:33.158Z] [Environment Lifecycle] Registered environment: cloud:db78efa7-4bf7-4f13-822e-6d1ba522a804 (codeboltjs)
+⚠️  WARN [2026-07-01T10:50:33.158Z] Environment debug session not found for state update: cloud:db78efa7-4bf7-4f13-822e-6d1ba522a804
+ℹ️  INFO [2026-07-01T10:50:33.158Z] [Environment Lifecycle] Environment cloud:db78efa7-4bf7-4f13-822e-6d1ba522a804 state changed: created -> stopped
+🐛 DEBUG [2026-07-01T10:50:33.158Z] [Environment Initialization] Registered environment: codeboltjs (cloud:db78efa7-4bf7-4f13-822e-6d1ba522a804)
+ℹ️  INFO [2026-07-01T10:50:33.158Z] [Environment Initialization] Completed. Registered 3 environments, 0 candidates for auto-reconnect.
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:50:33.228Z] [Multiplexed] Client connected
+Socket route: plugin
+ℹ️  INFO [2026-07-01T10:50:33.228Z] [pluginSocket] Plugin connected: anthropic-plugin (total pluginConnections: 1, keys: [anthropic-plugin])
+ℹ️  INFO [2026-07-01T10:50:33.229Z] [pluginSocket] Sent pluginStartMessage to plugin: anthropic-plugin
+ℹ️  INFO [2026-07-01T10:50:33.232Z] [Multiplexed] Received message: channel=main, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:33.232Z] [Multiplexed] Client subscribed to channel: main
+ℹ️  INFO [2026-07-01T10:50:33.232Z] [Multiplexed] Received message: channel=systemAlert, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:33.232Z] [Multiplexed] Client subscribed to channel: systemAlert
+ℹ️  INFO [2026-07-01T10:50:33.239Z] Synced 5 stale plugin debug sessions (marked as cancelled)
+ℹ️  INFO [2026-07-01T10:50:33.240Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.register, pluginId=anthropic-plugin
+ℹ️  INFO [2026-07-01T10:50:33.240Z] [llmProvider] Plugin anthropic-plugin registered provider "claudeoauth"
+ℹ️  INFO [2026-07-01T10:50:33.242Z] debugManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.242Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:50:33.242Z] chatManager initialized for project
+🐛 DEBUG [2026-07-01T10:50:33.242Z] [EventActionManager] Already initialized for this project
+🐛 DEBUG [2026-07-01T10:50:33.242Z] [HookManager] Already initialized for this project
+ℹ️  INFO [2026-07-01T10:50:33.243Z] debugManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.243Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:50:33.243Z] chatManager initialized for project
+🐛 DEBUG [2026-07-01T10:50:33.243Z] [EventActionManager] Already initialized for this project
+🐛 DEBUG [2026-07-01T10:50:33.243Z] [HookManager] Already initialized for this project
+ℹ️  INFO [2026-07-01T10:50:33.243Z] EventActionManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.243Z] HookManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.243Z] EventActionManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:33.243Z] HookManager initialized for project
+👤 User identified: {
+  id: [32m'Z1pSFyfUrqSPU4uS972vJlUFo1E3'[39m,
+  email: [90mundefined[39m,
+  name: [90mundefined[39m
+}
+ℹ️  INFO [2026-07-01T10:50:33.588Z] [PluginProcessManager] Starting plugin: artifact-listener-plugin (artifact-listener-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.589Z] [PluginProcessManager] Plugin artifact-listener-plugin spawned in 1ms
+ℹ️  INFO [2026-07-01T10:50:33.589Z] [PluginProcessManager] Plugin started: anthropic-plugin (instanceId: plugin_anthropic-plugin_1782903033089_3y74mhex)
+ℹ️  INFO [2026-07-01T10:50:33.591Z] Started plugin debug session: plugin_anthropic-plugin_1782903033089_3y74mhex (anthropic-plugin)
+ℹ️  INFO [2026-07-01T10:50:33.591Z] [PluginService] Plugin started as child process: anthropic-plugin (instanceId: plugin_anthropic-plugin_1782903033089_3y74mhex)
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:50:33.927Z] [Multiplexed] Client connected
+Socket route: plugin
+ℹ️  INFO [2026-07-01T10:50:33.929Z] [pluginSocket] Plugin connected: artifact-listener-plugin (total pluginConnections: 2, keys: [anthropic-plugin, artifact-listener-plugin])
+ℹ️  INFO [2026-07-01T10:50:33.929Z] [pluginSocket] Sent pluginStartMessage to plugin: artifact-listener-plugin
+ℹ️  INFO [2026-07-01T10:50:33.929Z] [Multiplexed] Received message: channel=main, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:33.929Z] [Multiplexed] Client subscribed to channel: main
+ℹ️  INFO [2026-07-01T10:50:33.929Z] [Multiplexed] Received message: channel=systemAlert, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:33.929Z] [Multiplexed] Client subscribed to channel: systemAlert
+ℹ️  INFO [2026-07-01T10:50:33.934Z] [Multiplexed] Received message: channel=artifact, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:33.934Z] [Multiplexed] Client subscribed to channel: artifact
+ℹ️  INFO [2026-07-01T10:50:33.935Z] [Multiplexed] Received message: channel=artifact, action=send
+ℹ️  INFO [2026-07-01T10:50:33.935Z] [Multiplexed] handleSend: channel=artifact, hasPayload=true
+ℹ️  INFO [2026-07-01T10:50:33.935Z] [Multiplexed] handleSend: socketServer found for artifact, hasHandleMessage=true
+ℹ️  INFO [2026-07-01T10:50:34.088Z] [PluginProcessManager] Starting plugin: cloud-plugin (cloud-plugin)
+ℹ️  INFO [2026-07-01T10:50:34.089Z] [PluginProcessManager] Plugin cloud-plugin spawned in 1ms
+ℹ️  INFO [2026-07-01T10:50:34.090Z] [PluginProcessManager] Plugin started: artifact-listener-plugin (instanceId: plugin_artifact-listener-plugin_1782903033588_f2muwuyg)
+ℹ️  INFO [2026-07-01T10:50:34.093Z] Started plugin debug session: plugin_artifact-listener-plugin_1782903033588_f2muwuyg (artifact-listener-plugin)
+ℹ️  INFO [2026-07-01T10:50:34.093Z] [PluginService] Plugin started as child process: artifact-listener-plugin (instanceId: plugin_artifact-listener-plugin_1782903033588_f2muwuyg)
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:50:34.227Z] [Multiplexed] Client connected
+Socket route: plugin
+ℹ️  INFO [2026-07-01T10:50:34.227Z] [pluginSocket] Plugin connected: cloud-plugin (total pluginConnections: 3, keys: [anthropic-plugin, artifact-listener-plugin, cloud-plugin])
+ℹ️  INFO [2026-07-01T10:50:34.227Z] [pluginSocket] Sent pluginStartMessage to plugin: cloud-plugin
+ℹ️  INFO [2026-07-01T10:50:34.228Z] [Multiplexed] Received message: channel=main, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:34.228Z] [Multiplexed] Client subscribed to channel: main
+ℹ️  INFO [2026-07-01T10:50:34.228Z] [Multiplexed] Received message: channel=systemAlert, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:34.228Z] [Multiplexed] Client subscribed to channel: systemAlert
+❌ ERROR [2026-07-01T10:50:34.235Z] [Plugin:cloud-plugin] stderr: (node:55402) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+🐛 DEBUG [2026-07-01T10:50:34.256Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+ℹ️  INFO [2026-07-01T10:50:34.267Z] [pluginHandleCliMessages] Routing executionGateway message: type=executionGateway.subscribe, pluginId=cloud-plugin
+ℹ️  INFO [2026-07-01T10:50:34.267Z] [pluginHandleCliMessages] executionGateway response: {"type":"executionGatewaySubscribeResponse","success":true,"data":{"subscribed":true,"pluginId":"cloud-plugin"},"requestId":"e525265f-dee2-48a4-9f7f-fc88b249caac","timestamp":"2026-07-01T10:50:34.267Z"}
+🐛 DEBUG [2026-07-01T10:50:34.277Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] Received message: channel=artifact, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] Client subscribed to channel: artifact
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] Received message: channel=artifact, action=send
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] handleSend: channel=artifact, hasPayload=true
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] handleSend: socketServer found for artifact, hasHandleMessage=true
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] Received message: channel=inbox, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] Client subscribed to channel: inbox
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] Received message: channel=inbox, action=send
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] handleSend: channel=inbox, hasPayload=true
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [Multiplexed] handleSend: socketServer found for inbox, hasHandleMessage=true
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [pluginHandleCliMessages] Routing applicationEvents message: type=applicationEvents.subscribe, pluginId=cloud-plugin
+🐛 DEBUG [2026-07-01T10:50:34.280Z] [ApplicationEventBus] New subscription: trigger:plugin:cloud-plugin:runtime:fca9c721-8010-4967-adb4-9f228c139110, subId: 381e1206-0e9f-43c6-976b-7e1ded74330c, eventTypes: thread:created,thread:updated,thread:completed
+ℹ️  INFO [2026-07-01T10:50:34.280Z] [applicationEventsHandler] Plugin cloud-plugin subscribed to thread:created,thread:updated,thread:completed (plugin:cloud-plugin:runtime:fca9c721-8010-4967-adb4-9f228c139110)
+ℹ️  INFO [2026-07-01T10:50:34.281Z] [pluginHandleCliMessages] Routing applicationEvents message: type=applicationEvents.subscribe, pluginId=cloud-plugin
+🐛 DEBUG [2026-07-01T10:50:34.281Z] [ApplicationEventBus] New subscription: trigger:plugin:cloud-plugin:runtime:579c186b-5cc3-46a9-8dce-747fc186edb9, subId: d5a1ba44-1366-4791-a4df-6273ba43132e, eventTypes: task:created,task:updated,task:started,task:completed,task:failed,task:deleted
+ℹ️  INFO [2026-07-01T10:50:34.281Z] [applicationEventsHandler] Plugin cloud-plugin subscribed to task:created,task:updated,task:started,task:completed,task:failed,task:deleted (plugin:cloud-plugin:runtime:579c186b-5cc3-46a9-8dce-747fc186edb9)
+ℹ️  INFO [2026-07-01T10:50:34.281Z] [pluginHandleCliMessages] Routing applicationEvents message: type=applicationEvents.subscribe, pluginId=cloud-plugin
+🐛 DEBUG [2026-07-01T10:50:34.281Z] [ApplicationEventBus] New subscription: trigger:plugin:cloud-plugin:runtime:5fa76488-2bea-4b67-b4fd-0250c0db5927, subId: a57e9e7d-8e2c-41f6-8a0f-fa6e20225ec7, eventTypes: reviewMergeRequest:created,reviewMergeRequest:updated,reviewMergeRequest:deleted,reviewMergeRequest:reviewAdded,reviewMergeRequest:statusChanged,reviewMergeRequest:merged
+ℹ️  INFO [2026-07-01T10:50:34.281Z] [applicationEventsHandler] Plugin cloud-plugin subscribed to reviewMergeRequest:created,reviewMergeRequest:updated,reviewMergeRequest:deleted,reviewMergeRequest:reviewAdded,reviewMergeRequest:statusChanged,reviewMergeRequest:merged (plugin:cloud-plugin:runtime:5fa76488-2bea-4b67-b4fd-0250c0db5927)
+Socket route: chat
+Socket route: structuredLog
+ℹ️  INFO [2026-07-01T10:50:34.588Z] [PluginProcessManager] Starting plugin: codex-plugin (codex-plugin)
+ℹ️  INFO [2026-07-01T10:50:34.591Z] [PluginProcessManager] Plugin codex-plugin spawned in 2ms
+ℹ️  INFO [2026-07-01T10:50:34.591Z] [PluginProcessManager] Plugin started: cloud-plugin (instanceId: plugin_cloud-plugin_1782903034088_lf4yo253)
+ℹ️  INFO [2026-07-01T10:50:34.593Z] Started plugin debug session: plugin_cloud-plugin_1782903034088_lf4yo253 (cloud-plugin)
+ℹ️  INFO [2026-07-01T10:50:34.593Z] [PluginService] Plugin started as child process: cloud-plugin (instanceId: plugin_cloud-plugin_1782903034088_lf4yo253)
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:50:34.729Z] [Multiplexed] Client connected
+Socket route: plugin
+ℹ️  INFO [2026-07-01T10:50:34.730Z] [pluginSocket] Plugin connected: codex-plugin (total pluginConnections: 4, keys: [anthropic-plugin, artifact-listener-plugin, cloud-plugin, codex-plugin])
+ℹ️  INFO [2026-07-01T10:50:34.730Z] [pluginSocket] Sent pluginStartMessage to plugin: codex-plugin
+ℹ️  INFO [2026-07-01T10:50:34.731Z] [Multiplexed] Received message: channel=main, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:34.731Z] [Multiplexed] Client subscribed to channel: main
+ℹ️  INFO [2026-07-01T10:50:34.731Z] [Multiplexed] Received message: channel=systemAlert, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:34.731Z] [Multiplexed] Client subscribed to channel: systemAlert
+ℹ️  INFO [2026-07-01T10:50:35.088Z] [PluginProcessManager] Starting plugin: @codebolt/remote-execution-plugin (@codebolt/remote-execution-plugin)
+ℹ️  INFO [2026-07-01T10:50:35.092Z] [PluginProcessManager] Plugin @codebolt/remote-execution-plugin spawned in 3ms
+ℹ️  INFO [2026-07-01T10:50:35.092Z] [PluginProcessManager] Plugin started: codex-plugin (instanceId: plugin_codex-plugin_1782903034588_hapqll8u)
+ℹ️  INFO [2026-07-01T10:50:35.097Z] Started plugin debug session: plugin_codex-plugin_1782903034588_hapqll8u (codex-plugin)
+ℹ️  INFO [2026-07-01T10:50:35.097Z] [PluginService] Plugin started as child process: codex-plugin (instanceId: plugin_codex-plugin_1782903034588_hapqll8u)
+Socket route: multiplexed
+ℹ️  INFO [2026-07-01T10:50:35.260Z] [Multiplexed] Client connected
+Socket route: plugin
+ℹ️  INFO [2026-07-01T10:50:35.261Z] [pluginSocket] Plugin connected: @codebolt/remote-execution-plugin (total pluginConnections: 5, keys: [anthropic-plugin, artifact-listener-plugin, cloud-plugin, codex-plugin, @codebolt/remote-execution-plugin])
+ℹ️  INFO [2026-07-01T10:50:35.261Z] [pluginSocket] Sent pluginStartMessage to plugin: @codebolt/remote-execution-plugin
+ℹ️  INFO [2026-07-01T10:50:35.262Z] [Multiplexed] Received message: channel=main, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:35.262Z] [Multiplexed] Client subscribed to channel: main
+ℹ️  INFO [2026-07-01T10:50:35.262Z] [Multiplexed] Received message: channel=systemAlert, action=subscribe
+ℹ️  INFO [2026-07-01T10:50:35.262Z] [Multiplexed] Client subscribed to channel: systemAlert
+⚠️  WARN [2026-07-01T10:50:35.376Z] [Plugin:codex-plugin] stderr: [CodexPlugin] Dynamic model discovery failed, using fallback list: Model discovery failed: 403 {"error":"You have insufficient permissions for this operation. Missing scopes: api.model.read. Check that you have the correct role in your organization (Reader, Writer, Owner) and project (Viewer, Member, Owner), and if you're using a restricted API key, that it has the necessary scopes."}
+ℹ️  INFO [2026-07-01T10:50:35.377Z] [pluginHandleCliMessages] Routing llmProvider message: type=llmProvider.register, pluginId=codex-plugin
+ℹ️  INFO [2026-07-01T10:50:35.377Z] [llmProvider] Plugin codex-plugin registered provider "openaicodex"
+ℹ️  INFO [2026-07-01T10:50:35.593Z] [PluginProcessManager] Plugin started: @codebolt/remote-execution-plugin (instanceId: plugin_@codebolt/remote-execution-plugin_1782903035088_bzoiuyse)
+ℹ️  INFO [2026-07-01T10:50:35.607Z] Started plugin debug session: plugin_@codebolt/remote-execution-plugin_1782903035088_bzoiuyse (@codebolt/remote-execution-plugin)
+ℹ️  INFO [2026-07-01T10:50:35.607Z] [PluginService] Plugin started as child process: @codebolt/remote-execution-plugin (instanceId: plugin_@codebolt/remote-execution-plugin_1782903035088_bzoiuyse)
+ℹ️  INFO [2026-07-01T10:50:43.057Z] debugManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:43.058Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:50:43.058Z] chatManager initialized for project
+🐛 DEBUG [2026-07-01T10:50:43.058Z] [EventActionManager] Already initialized for this project
+🐛 DEBUG [2026-07-01T10:50:43.058Z] [HookManager] Already initialized for this project
+ℹ️  INFO [2026-07-01T10:50:43.058Z] EventActionManager initialized for project
+ℹ️  INFO [2026-07-01T10:50:43.058Z] HookManager initialized for project
+🐛 DEBUG [2026-07-01T10:50:44.273Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:50:44.286Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+🐛 DEBUG [2026-07-01T10:50:54.276Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:50:54.290Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+🐛 DEBUG [2026-07-01T10:51:04.288Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:51:04.297Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+🐛 DEBUG [2026-07-01T10:51:14.272Z] [cloudprovider] Built-in cloudprovider is not available for auto sync startup
+🐛 DEBUG [2026-07-01T10:51:14.278Z] [cloudprovider] Using fallback cloudprovider metadata for runtime sync: Error: Built-in cloudprovider was not found
+🐛 DEBUG [2026-07-01T10:51:14.373Z] Emitting event for messageId: 55e3045c-41ac-455b-a6f5-5c9c9a25dc14, type: messageResponse, listeners: 0
+message received in chat socket form user {
+  event: [32m'CHAT_MESSAGE_RECEIVED'[39m,
+  data: {
+    data: {
+      text: [32m'can you check when scrolling page whey left navigation also scrolling with page?'[39m
+    },
+    default_llm: { model: [32m'gpt-5.5'[39m, provider: [36m[Object][39m },
+    id: [32m'9d3443ae-b998-443e-9fcd-4f7dcfe17a76'[39m,
+    message: {
+      default_llm: [36m[Object][39m,
+      messageId: [32m'55e3045c-41ac-455b-a6f5-5c9c9a25dc14'[39m,
+      selectedAgent: [36m[Object][39m,
+      selectedModel: [36m[Object][39m,
+      threadId: [32m'62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76'[39m,
+      userMessage: [32m'can you check when scrolling page whey left navigation also scrolling with page?'[39m
+    },
+    messageId: [32m'55e3045c-41ac-455b-a6f5-5c9c9a25dc14'[39m,
+    selectedModel: {
+      id: [32m'gpt-5.5'[39m,
+      model: [32m'gpt-5.5'[39m,
+      name: [32m'gpt-5.5'[39m,
+      provider: [32m'OpenAI Codex'[39m
+    },
+    templateType: [32m'userChat'[39m,
+    timestamp: [32m'1782903074372'[39m,
+    type: [32m'messageResponse'[39m
+  }
+}
+ℹ️  INFO [2026-07-01T10:51:14.375Z] [EventFlow][1-Publish] Event published: type=thread:created, eventId=8949eeb2-35c1-430b-b4d0-19302fd6fcb4, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:14.375Z] [EventFlow][1-Publish] Payload keys: thread, threadType, creatorType, parentThreadId
+ℹ️  INFO [2026-07-01T10:51:14.375Z] [EventFlow][1-Publish] Event published: type=conversation:started, eventId=f9acf429-bdfa-4149-baf3-0fd2acc99b19, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:14.375Z] [EventFlow][1-Publish] Payload keys: thread, threadType, creatorType, parentThreadId
+ℹ️  INFO [2026-07-01T10:51:14.376Z] Created thread 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76 in threadFileStore
+ℹ️  INFO [2026-07-01T10:51:14.376Z] Using threadId: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76 (from message: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76)
+ℹ️  INFO [2026-07-01T10:51:14.382Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:14.385Z] [MessageRouter] Routing message: type=messageResponse, isSteeringMessage=undefined, hasEnvironment=false, remoteEnv=false, hasEnvironmentProvider=false, parentRuntimeId=, threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:14.385Z] [SteeringMessageHandler] canHandle check: isSteeringMessage=false, type=messageResponse
+ℹ️  INFO [2026-07-01T10:51:14.385Z] [MessageRouter] Message handled by: AgentMessageHandler canHandle=true
+selectedAgent {
+  agentDetails: [32m'Codebolt Dev, is  a highly skilled software developer with extensive knowledge in many programming languages, frameworks, design patterns, and best practices.'[39m,
+  id: [32m'act'[39m,
+  name: [32m'Act'[39m
+}
+ℹ️  INFO [2026-07-01T10:51:14.408Z] Sending message to UI: [object Object] for agent: Act
+🐛 DEBUG [2026-07-01T10:51:14.408Z] UI socket status: 1
+ℹ️  INFO [2026-07-01T10:51:14.413Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:14.413Z] [IconView] Unmapped template/action: templateType=undefined, actionType=sendMessage, type=startAgentConversation
+ℹ️  INFO [2026-07-01T10:51:14.423Z] Generated new token for threadId 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76: 25b2007d-b6b1-4835-a955-e8b6714105a8
+ℹ️  INFO [2026-07-01T10:51:14.432Z] [Narrative] Transport binary info: {"binaryPath":"/Applications/CodeBolt.app/Contents/Resources/node_modules/@codebolt/narrative-darwin-arm64/bin/codebolt-narrative","args":["--environment-id","local","--workspace","/Users/ravirawat/Documents/codeboltai/AiEditor/codeboltdocs"]}
+ℹ️  INFO [2026-07-01T10:51:14.440Z] [AGENT START] Initiating agent startup - agentId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9, name: Act
+ℹ️  INFO [2026-07-01T10:51:14.442Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+📝 LOG [2026-07-01T10:51:14.442Z] 🔍 Detailed Event: [Agent Path] agent path is {
+  message: [32m'/Users/ravirawat/.codebolt/agents/c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9/index.js'[39m,
+  logLevel: [32m'log'[39m,
+  distinctId: [32m'Z1pSFyfUrqSPU4uS972vJlUFo1E3'[39m,
+  properties: {},
+  timestamp: [32m'2026-07-01T10:51:14.442Z'[39m
+}
+ℹ️  INFO [2026-07-01T10:51:14.451Z] Started tracking agent execution: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:14.464Z] Started debug session: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon (individual)
+ℹ️  INFO [2026-07-01T10:51:14.468Z] [AgentMessageHandler] Created step 033c71c6-fe28-4389-9386-82021b14cd42 for message type agent_messageResponse in thread 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:14.468Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] Process spawned successfully in 26ms
+ℹ️  INFO [2026-07-01T10:51:14.470Z] Updated agent execution status: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon -> running
+ℹ️  INFO [2026-07-01T10:51:14.480Z] [EventFlow][1-Publish] Event conversation:started dispatched to 0/4 subscriptions
+ℹ️  INFO [2026-07-01T10:51:14.481Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:plugin:cloud-plugin:runtime:fca9c721-8010-4967-adb4-9f228c139110, subId=381e1206-0e9f-43c6-976b-7e1ded74330c, eventType=thread:created
+ℹ️  INFO [2026-07-01T10:51:14.484Z] [EventFlow][1-Publish] Handler completed: subId=381e1206-0e9f-43c6-976b-7e1ded74330c, eventType=thread:created, duration=2ms
+ℹ️  INFO [2026-07-01T10:51:14.484Z] [EventFlow][1-Publish] Event thread:created dispatched to 1/4 subscriptions
+⚠️  WARN [2026-07-01T10:51:14.689Z] [Agent Update] Background update check failed for c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9: AxiosError: Request failed with status code 404
+Socket route: codebolt
+🐛 DEBUG [2026-07-01T10:51:14.784Z] Retrieved threadId 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76 for token 25b2007d-b6b1-4835-a955-e8b6714105a8
+ℹ️  INFO [2026-07-01T10:51:14.784Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] Thread ID 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76 retrieved successfully
+ℹ️  INFO [2026-07-01T10:51:14.785Z] [AGENT START] Process started successfully: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+ℹ️  INFO [2026-07-01T10:51:14.785Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:14.786Z] [EventFlow][1-Publish] Event published: type=agent:started, eventId=60c97c36-6624-4875-9b0d-5b43bde09a80, source={"agentId":"c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9","threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:14.786Z] [EventFlow][1-Publish] Payload keys: agentName, agentType
+ℹ️  INFO [2026-07-01T10:51:14.787Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:14.787Z] [AgentEventQueueSocket] Initialized
+ℹ️  INFO [2026-07-01T10:51:14.789Z] Added new chat message to thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+ℹ️  INFO [2026-07-01T10:51:14.792Z] debugManager initialized for project
+ℹ️  INFO [2026-07-01T10:51:14.792Z] ChatManager initialized (delegating to ThreadFileStore)
+ℹ️  INFO [2026-07-01T10:51:14.792Z] chatManager initialized for project
+🐛 DEBUG [2026-07-01T10:51:14.792Z] [EventActionManager] Already initialized for this project
+🐛 DEBUG [2026-07-01T10:51:14.792Z] [HookManager] Already initialized for this project
+ℹ️  INFO [2026-07-01T10:51:14.792Z] EventActionManager initialized for project
+ℹ️  INFO [2026-07-01T10:51:14.792Z] HookManager initialized for project
+find_and_start_agent: 409.692ms
+ℹ️  INFO [2026-07-01T10:51:14.796Z] [Agent] Marking task as in progress for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76
+🐛 DEBUG [2026-07-01T10:51:14.796Z] Tasks and threads are separate - thread 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76 activity does not affect tasks
+🐛 DEBUG [2026-07-01T10:51:14.797Z] Message routing info - threadId: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentId: act, socketId: undefined
+🐛 DEBUG [2026-07-01T10:51:14.797Z] Retrying to find target socket (attempt 2/5) after 50ms delay
+🐛 DEBUG [2026-07-01T10:51:14.797Z] [AgentEventQueueStore] Created queue for agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:51:14.797Z] [AgentEventQueueStore] Created queue for agent: act
+ℹ️  INFO [2026-07-01T10:51:14.797Z] [AgentEventQueueStore] Loaded 6 events from persistence
+ℹ️  INFO [2026-07-01T10:51:14.797Z] [AgentEventQueueCliService] Loaded 6 pending events from storage
+🐛 DEBUG [2026-07-01T10:51:14.797Z] [AgentEventQueueCliService] Event listeners configured
+ℹ️  INFO [2026-07-01T10:51:14.797Z] [AgentEventQueueCliService] Initialized successfully
+ℹ️  INFO [2026-07-01T10:51:14.798Z] [EventFlow][1-Publish] Event agent:started dispatched to 0/4 subscriptions
+🐛 DEBUG [2026-07-01T10:51:14.847Z] Retrying to find target socket (attempt 3/5) after 50ms delay
+🐛 DEBUG [2026-07-01T10:51:14.898Z] Retrying to find target socket (attempt 4/5) after 50ms delay
+🐛 DEBUG [2026-07-01T10:51:14.949Z] Retrying to find target socket (attempt 5/5) after 50ms delay
+⚠️  WARN [2026-07-01T10:51:14.960Z] [Narrative] Summary API call failed for objective:62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76: Request failed with status code 500
+ℹ️  INFO [2026-07-01T10:51:14.969Z] [EventFlow][1-Publish] Event published: type=thread:updated, eventId=46012a91-faa4-4831-9ced-6f1b0c2ffa5b, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:14.969Z] [EventFlow][1-Publish] Payload keys: thread, changedFields, threadType, status, parentThreadId
+ℹ️  INFO [2026-07-01T10:51:14.969Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:plugin:cloud-plugin:runtime:fca9c721-8010-4967-adb4-9f228c139110, subId=381e1206-0e9f-43c6-976b-7e1ded74330c, eventType=thread:updated
+ℹ️  INFO [2026-07-01T10:51:14.969Z] [EventFlow][1-Publish] Handler completed: subId=381e1206-0e9f-43c6-976b-7e1ded74330c, eventType=thread:updated, duration=0ms
+ℹ️  INFO [2026-07-01T10:51:14.969Z] [EventFlow][1-Publish] Event thread:updated dispatched to 1/4 subscriptions
+⚠️  WARN [2026-07-01T10:51:15.000Z] Failed to find target socket after 5 attempts
+🐛 DEBUG [2026-07-01T10:51:15.000Z] No active agent found
+🐛 DEBUG [2026-07-01T10:51:15.000Z] Sending message to fallback codeboltSocketConnection
+🐛 DEBUG [2026-07-01T10:51:15.005Z] [AGENT c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9] stdout: [act-updated] Agent started, received message: "can you check when scrolling page whey left navigation also scrolling with page?"
+Chat added successfully: threadId=62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agentInstanceId=c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9_1782903074440_pnvslykfxon, messageType=agentMessage
+ℹ️  INFO [2026-07-01T10:51:15.081Z] [EventFlow][1-Publish] Event published: type=context:added, eventId=2bdbf9f3-5ee3-4abf-8663-b17020f7852c, source={"threadId":"62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76"}
+ℹ️  INFO [2026-07-01T10:51:15.081Z] [EventFlow][1-Publish] Payload keys: threadId, reason, messageCount, hasSummary, hasCompactedContext
+ℹ️  INFO [2026-07-01T10:51:15.082Z] AI response saved: ai_1782903075081_hr3w1xs for thread: 62ac3c36-8eb2-4b1d-aa19-8d83f3b28c76, agent: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
+🐛 DEBUG [2026-07-01T10:51:15.083Z] [IconView] Unmapped template/action: templateType=aiStream, actionType=aiStream, type=aiStream
+🐛 DEBUG [2026-07-01T10:51:15.083Z] [llmProvider] Forwarded stream e06433e5-8c58-4fbe-af3e-d719b8e1fb55 to plugin codex-plugin (openaicodex)
+ℹ️  INFO [2026-07-01T10:51:15.084Z] [EventFlow][1-Publish] Notifying handler: subscriberId=trigger:contextCompaction:auto, subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added
+ℹ️  INFO [2026-07-01T10:51:15.086Z] [EventFlow][1-Publish] Handler completed: subId=3de513c2-2776-43db-ae93-c90d8b1536c2, eventType=context:added, duration=2ms
+ℹ️  INFO [2026-07-01T10:51:15.086Z] [EventFlow][1-Publish] Event context:added dispatched to 1/4 subscriptions
