@@ -195,9 +195,16 @@ const config: Config = {
                       return platformItem;
                     }
 
+                    const settingsItems = platformItem.items.filter(
+                      (desktopItem) => desktopItem.type === 'category' && desktopItem.label === 'Settings',
+                    );
+                    const desktopItemsWithoutSettings = platformItem.items.filter(
+                      (desktopItem) => !(desktopItem.type === 'category' && desktopItem.label === 'Settings'),
+                    );
+
                     return {
                       ...platformItem,
-                      items: [...platformItem.items, ...desktopAppChildItems],
+                      items: [...desktopItemsWithoutSettings, ...desktopAppChildItems, ...settingsItems],
                     };
                   });
 

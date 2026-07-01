@@ -80,4 +80,4 @@ If you need the fullest panel ecosystem or richer visual UI affordances, the des
 
 - [Command Mode Overview](../02_cli-commands/01_overview.md)
 - [Headless CLI](../03_cli-headless/01_overview.md)
-- [Desktop App](../../02_desktop-app/01_workspace-and-projects/02_workspace-and-projects.md)
+- [Desktop App](../../02_desktop-app/01_workspace-and-project-management/01_overview.md)

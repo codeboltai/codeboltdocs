@@ -30,7 +30,7 @@ The interfaces you interact with day-to-day — where you write, run commands, a
 <DocCardGrid columns={3} items={[
   { label: 'Chat', title: 'Chat', description: 'Conversations with agents, @-mentions, checkpoints, and inline editing.', href: '../02_using-codebolt/03_chat/01_overview' },
   { label: 'Code', title: 'Code Editor Features', description: 'Code editor, terminal, git panel, and preview browser.', href: '../02_using-codebolt/03b_code-and-terminal/01_overview' },
-  { label: 'App', title: 'Application Features', description: 'Authentication, teams, billing, and application layout.', href: '../02_using-codebolt/09_account/01_authentication-and-authorization' },
+  { label: 'App', title: 'Application Features', description: 'Authentication, teams, billing, workspace, and account settings.', href: '../02_using-codebolt/09_account/01_authentication-and-authorization' },
   { label: 'Obs', title: 'Code Observability', description: 'Codemap, narrative graph, and structural execution views for understanding project architecture and run flow.', href: '../02_using-codebolt/09b_code-observability/01_overview' },
 ]} />
 

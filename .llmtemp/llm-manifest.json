@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-30T11:50:13.169Z",
-  "sourceCount": 384,
+  "generatedAt": "2026-06-30T13:11:17.455Z",
+  "sourceCount": 385,
   "curatedCount": 58,
   "sections": [
     {
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 164,
+      "count": 165,
       "order": 1,
       "files": [
         {
@@ -46,6 +46,10 @@
         {
           "path": "using-codebolt/surfaces/desktop-app/themes.md",
           "title": "Themes"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/settings/settings-and-profiles.md",
+          "title": "Settings"
         },
         {
           "path": "using-codebolt/surfaces/cli/cli-interface/get-started.md",

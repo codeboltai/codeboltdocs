@@ -101,4 +101,4 @@ That active workspace is then used by the landing page and project creation flow
 
 - [Teams](./02_teams.md)
 - [Usage and Billing](./03_usage-and-billing.md)
-- [Application Layout](./04_application-layout.md)
+- [Desktop Layout](../02_surfaces/02_desktop-app/02_application-navigation/02_layout.md)
