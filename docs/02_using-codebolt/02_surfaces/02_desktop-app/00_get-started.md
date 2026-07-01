@@ -1,12 +1,12 @@
 ---
 sidebar_position: 0
-title: Getting Started
+title: Quick Start
 description: Install the desktop app, complete onboarding, and run your first agent task.
 ---
 
 import { TryItCard } from '@site/src/components/TryItCard';
 
-# Desktop App - Getting Started
+# Desktop App - Quick Start
 
 Get the desktop app installed and configured, then run your first agent task. About 5-10 minutes end to end.
 

@@ -36,7 +36,7 @@ The new folder includes Codebolt's local project metadata so the app can remembe
 
 Use **Create via Template** when you want a starter project.
 
-To prepare your own starter project, see [Creating a Template](./04_creating-a-template.md).
+To prepare your own starter project, see [Creating a Template](/docs/04_build-on-codebolt/05b_templates/04_creating-a-template.md).
 
 ![Create via Template](/img/template.png)
 
@@ -59,5 +59,5 @@ Codebolt downloads the URL as a ZIP file and extracts it into the destination pr
 
 ## See Also
 
-- [Creating a Template](./04_creating-a-template.md)
-- [Publishing Templates](./05_publishing-templates.md)
+- [Creating a Template](04_creating-a-template.md)
+- [Publishing Templates](05_publishing-templates.md)

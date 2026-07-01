@@ -105,5 +105,5 @@ Before publishing the template listing:
 
 ## See Also
 
-- [Creating Projects](./03_creating-projects.md)
-- [Publishing Templates](./05_publishing-templates.md)
+- [Creating Projects](03_creating-projects.md)
+- [Publishing Templates](05_publishing-templates.md)

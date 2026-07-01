@@ -1,10 +1,10 @@
 ---
 sidebar_position: 0.5
-title: Onboarding
+title: Installation and  Onboarding
 description: Sign in, choose providers, configure workspace defaults, install the CLI, and pick a default agent.
 ---
 
-# Onboarding
+# Installation and  Onboarding
 
 Onboarding configures the desktop app for agent runs.
 

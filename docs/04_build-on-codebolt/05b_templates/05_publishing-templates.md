@@ -3,7 +3,6 @@ sidebar_position: 5
 title: Publishing Templates
 description: "Publish project template listings from the portal and understand current CLI support."
 ---
-
 # Publishing Templates
 
 Project template publishing is handled through the Codebolt portal.
@@ -68,6 +67,6 @@ The Desktop App creates the project first, then downloads the template `url` int
 
 ## See Also
 
-- [Creating Projects](./03_creating-projects.md)
-- [Creating a Template](./04_creating-a-template.md)
-- [Marketplace Publishing](../../06_cloud/03_registry/02_marketplace-publishing.md)
+- [Creating Projects](03_creating-projects.md)
+- [Creating a Template](04_creating-a-template.md)
+- [Marketplace Publishing](02_marketplace-publishing.md)

@@ -90,5 +90,5 @@ Codebolt stores:
 ## See Also
 
 - [Creating Projects](./03_creating-projects.md)
-- [Creating a Template](./04_creating-a-template.md)
-- [Publishing Templates](./05_publishing-templates.md)
+- [Creating a Template](04_creating-a-template.md)
+- [Publishing Templates](05_publishing-templates.md)

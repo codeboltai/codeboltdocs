@@ -55,8 +55,8 @@ Project templates are downloadable archives registered in the template marketpla
 See:
 
 - [Workspaces](./02_workspaces.md)
-- [Creating a Template](./04_creating-a-template.md)
-- [Publishing Templates](./05_publishing-templates.md)
+- [Creating a Template](04_creating-a-template.md)
+- [Publishing Templates](05_publishing-templates.md)
 
 ## Removing a project from the dashboard
 
