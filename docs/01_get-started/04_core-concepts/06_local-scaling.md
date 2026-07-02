@@ -98,7 +98,7 @@ If you need multiple machines, managed sandboxes, team-visible runtimes, or remo
 - [Environments](../../02_using-codebolt/08a_environments/01_overview.md)
 - [Environment providers](../../02_using-codebolt/08a_environments/03_environment-providers.md)
 - [Local models](../../02_using-codebolt/08_integrations/02_local-models.md)
-- [Routing gateway](../../02_using-codebolt/05b_guardrails-and-settings/03_routing-gateway.md)
+- [Routing gateway](../../02_using-codebolt/08e_external-integrations/02_routing-gateway.md)
 - [Background Agents](../../02_using-codebolt/07a_parallel-agents/04_background-agent.md)
 - [Event Log](../../02_using-codebolt/07_memory/07_event-log.md)
 - [Run It Longer](./03_run-it-longer.md)

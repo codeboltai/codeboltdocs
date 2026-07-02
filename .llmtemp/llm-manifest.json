@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-01T13:13:25.744Z",
+  "generatedAt": "2026-07-02T06:14:33.061Z",
   "sourceCount": 432,
   "curatedCount": 67,
   "sections": [
@@ -537,7 +537,7 @@
         },
         {
           "path": "using-codebolt/agent-extensions/mcp-server.md",
-          "title": "Mcp Server"
+          "title": "MCP Server"
         },
         {
           "path": "using-codebolt/agent-extensions/custom-tools.md",
@@ -548,8 +548,8 @@
           "title": "Guardrails"
         },
         {
-          "path": "using-codebolt/guardrails-and-settings/routing-gateway.md",
-          "title": "Routing Gateway"
+          "path": "using-codebolt/guardrails-and-settings/proxy-execution.md",
+          "title": "Proxy Execution"
         },
         {
           "path": "using-codebolt/agent-observability/overview.md",
@@ -585,7 +585,7 @@
         },
         {
           "path": "using-codebolt/planning/overview.md",
-          "title": "Planning"
+          "title": "Planning Overview"
         },
         {
           "path": "using-codebolt/planning/roadmap.md",
@@ -721,7 +721,7 @@
         },
         {
           "path": "using-codebolt/plugins/overview.md",
-          "title": "What are Plugins"
+          "title": "Plugins Overview"
         },
         {
           "path": "using-codebolt/plugins/installing-plugins.md",

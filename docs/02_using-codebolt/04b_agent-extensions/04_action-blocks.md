@@ -81,3 +81,13 @@ When an action block runs, it receives:
 - Conversation messages up to the invocation point
 
 This gives action blocks enough context to act on the current state of the project without needing full agent reasoning.
+
+## Action Block Debug
+
+![ActionBlock Debug](/productImages/agent_extensions/action-block-debug.png)
+
+ActionBlock Debug shows the side executions produced by action blocks and skill executors. Use it when you need to inspect whether an action block started, how long it ran, which thread invoked it, and what it logged while executing.
+
+The left side lists action block sessions with their run ID, timestamp, and log count. Select a session to inspect the run details on the right, including status, duration, thread ID, structured log events, normalized invocation parameters, progress updates, and returned message types.
+
+This view is useful when an action block completes without the expected effect, fails before returning a result, or needs to be traced back to the agent thread that launched it.

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: What are Plugins
+title: Plugins Overview
 ---
 
 # What are Plugins

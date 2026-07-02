@@ -37,4 +37,4 @@ The Routing Gateway is the shared delivery layer. Every auto-triggered message p
 - **Which thread** to use — a new thread per message, a shared thread per user, a single global thread, or an existing thread
 - **How to reply** — if a webhook provides a `targetUrl`, the agent's response is POSTed back to it
 
-See [Guardrails & Settings → Routing Gateway](../09a_guardrails-and-settings/03_routing-gateway.md) for gateway configuration.
+See [External Integrations → Routing Gateway](../08e_external-integrations/02_routing-gateway.md) for gateway configuration.

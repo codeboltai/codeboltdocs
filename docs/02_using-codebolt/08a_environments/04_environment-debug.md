@@ -13,6 +13,8 @@ Environment debugging in Codebolt is about understanding two things:
 
 The Environments panel shows the user-facing state. Provider debug and logs show what happened during provider startup, cloud runtime sync, and message forwarding.
 
+![Environment Debug](/productImages/environments/environment-debug.png)
+
 ## What to inspect first
 
 When an environment behaves unexpectedly, check:

@@ -6,9 +6,9 @@ description: Guardrails are rules that constrain what agents are allowed to do d
 
 # Guardrails
 
-![Guardrails](/productImages/guardrails/guardrails.png)
 
 Guardrails are rules that constrain what agents are allowed to do during a run. They are evaluated at runtime — before a tool call executes or a file is written — and can block, warn, or log when an agent is about to take a restricted action.
+![Guardrails](/productImages/guardrails/guardrails.png)
 
 Open via: **System Settings dropdown → Guardrails**
 
