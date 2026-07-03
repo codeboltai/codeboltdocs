@@ -15,6 +15,8 @@ An artifact is not only a file. It can be a generated website, a running app pre
 
 Use artifacts when an output should survive beyond a chat message.
 
+For a phase-by-phase workflow, see [Artifact Management](../../03_guides/07a_multi-step-phase/0_artifact-management).
+
 ## What Is an Artifact?
 
 An artifact is a saved result from a task. Codebolt stores enough information about that result to reopen it, preview it, associate it with the thread that produced it, and pass it into later review or collaboration flows.
@@ -306,6 +308,7 @@ See also:
 
 - [Cloud Artifact previews](../02_surfaces/06_cloud/04_running-agents/10_artifacts.md)
 - [Preview Provider Settings](../02_surfaces/06_cloud/05_settings/06_preview-provider-settings.md)
+- [Artifact Management guide](../../03_guides/07a_multi-step-phase/0_artifact-management)
 - [Build plugins](../../04_build-on-codebolt/05_plugins/01_overview.md)
 
 ## How To Use Artifacts
