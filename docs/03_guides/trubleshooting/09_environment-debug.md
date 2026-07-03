@@ -1,6 +1,6 @@
 ---
-sidebar_position: 4
-title: Manage and Troubleshoot Environments
+sidebar_position: 1
+title: Troubleshoot Environments
 description: Use environment status, provider logs, refresh actions, and debug details to fix common environment issues.
 ---
 
