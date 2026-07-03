@@ -1,115 +1,122 @@
 ---
 sidebar_position: 4
-title: Environment Debug
-description: Use environment debug views and provider logs to understand startup, runtime sync, cloudprovider, and provider connection issues.
+title: Manage and Troubleshoot Environments
+description: Use environment status, provider logs, refresh actions, and debug details to fix common environment issues.
 ---
 
-# Environment Debug
+# Manage and Troubleshoot Environments
 
-Environment debugging in Codebolt is about understanding two things:
-
-1. The normalized environment record Codebolt is using.
-2. The provider or runtime events that explain the current state.
-
-The Environments panel shows the user-facing state. Provider debug and logs show what happened during provider startup, cloud runtime sync, and message forwarding.
+When an environment behaves unexpectedly, start with the Environments panel. It shows the state Codebolt currently believes: running, starting, stopped, error, or disconnected.
 
 ![Environment Debug](/productImages/environments/environment-debug.png)
 
-## What to inspect first
+> **Image placeholder:** Add an annotated version of the Environment Debug screenshot that labels state, provider, runtime ID, path, sync mode, parent metadata, and logs.
 
-When an environment behaves unexpectedly, check:
+## What to check first
 
-| Item | Why it matters |
+| Check | Why it matters |
 |---|---|
-| Environment state | Confirms whether Codebolt thinks the runtime is `starting`, `running`, `stopped`, or `error`. |
-| Provider display name | Confirms whether this is local, cloudprovider, a cloud runtime provider, or a runner node. |
-| Runtime ID | Required for cloud, runner, and virtual cloud environments. |
-| Runtime provider ID | Shows the actual cloud backend, for example `e2b-remote` or `runloop-remote`. |
-| Paths | Confirms which project path the runtime is using. |
-| Parent metadata | Explains nesting and child environment routing. |
-| Sync mode and merge strategy | Explains how changes should move between local/project/cloud runtime. |
+| **State** | Shows whether Codebolt thinks the runtime is ready, starting, stopped, or failed. |
+| **Provider** | Confirms whether this is local, cloudprovider, a cloud runtime provider, a runner, or custom. |
+| **Runtime ID** | Required for cloud, runner, and virtual cloud environments. |
+| **Path** | Confirms where the environment is actually running. |
+| **Sync mode** | Explains whether changes move through Git, workspace sync, or not at all. |
+| **Parent metadata** | Explains why a child environment appears under a parent, or why it does not. |
 
-## Provider debug lifecycle
+Most issues can be diagnosed from those fields before reading logs.
 
-When Codebolt starts a normal provider, it creates an environment debug session and records:
+## Common tasks
+
+| Task | What to do |
+|---|---|
+| Check if an environment is usable | Look for `running` state. |
+| Refresh cloud or runner data | Use refresh so connected providers send fresh runtime data. |
+| Fix a stale connection | Use reconnect if the provider is running but messages are not flowing. |
+| Fix a stuck provider | Stop, then start the environment again. |
+| Confirm the working folder | Check `requestedPath`, `resolvedPath`, `environmentPath`, and `workspacePath`. |
+| Confirm child nesting | Check `parentRuntimeId`, `parentEnvironmentId`, and `parentProjectPath`. |
+
+## Common problems and fixes
+
+> **Image placeholder:** Add a troubleshooting flowchart that starts from the visible state (`starting`, `error`, `disconnected`, or stale UI) and points to the first field or log to inspect.
+
+| Problem | Likely cause | First fix |
+|---|---|---|
+| Stuck in `starting` | Provider process started but did not report ready. | Open provider debug logs and look for missing `providerStartResponse`. |
+| Goes to `error` on start | Provider path, entrypoint, dependency, auth, or cloud API failed. | Check provider logs and verify credentials. |
+| Stops immediately | Provider exited before readiness or runtime was inactive. | Restart and inspect the first provider error. |
+| Cloud runtimes are missing | Cloudprovider has stale data or cannot list runtimes. | Refresh connected providers and check cloud auth/workspace. |
+| Runner environments are missing | Runner node is not visible to cloudprovider. | Confirm the runner is connected and appears as `runner-node:<nodeId>`. |
+| Wrong project path | Path was overridden or provider returned a different path. | Inspect path fields and `pathSource`. |
+| Child appears at root | Parent metadata does not match a visible parent. | Check parent runtime/environment IDs and parent path. |
+| UI looks stale | Backend has newer state than the current panel. | Refresh the environment list or reload the panel. |
+
+## Debug provider startup
+
+When Codebolt starts a normal provider, it creates a debug session and records:
 
 - Provider ID and provider name.
 - Environment ID and environment name.
 - Provider stdout and stderr.
-- Provider process spawn events.
-- Provider readiness from `providerStartResponse`.
+- Process spawn events.
+- Readiness from `providerStartResponse`.
 - Provider exit code.
-- Final status: stopped or error.
+- Final status.
 
-Provider stdout and stderr are also sent to the UI as provider debug events so you can inspect startup failures without leaving Codebolt.
+Useful log signals:
 
-## Common states and causes
-
-| State | Common cause |
+| Log signal | Meaning |
 |---|---|
-| `starting` for too long | Provider process started but never sent `providerStartResponse`, or cloudprovider is waiting on cloud registration. |
-| `error` | Provider entrypoint missing, provider process crashed, auth token missing, cloud runtime create failed, or cloud API returned an error. |
-| `stopped` immediately after start | Provider exited before readiness, cloud runtime was inactive, or stop was requested. |
-| `disconnected` | A runtime or provider had a known resource ID but no active connection. |
-| `unconnectable` | Codebolt has metadata for the runtime but cannot establish a provider/runtime connection. |
-| `not_available` | The runtime belongs to another workspace, project scope, or unavailable provider state. |
+| `Provider path resolved successfully` | Codebolt found the provider package and entrypoint. |
+| `Process spawned successfully` | The provider child process started. |
+| `providerStartResponse received` | The provider is ready and the environment can run work. |
+| `Provider process exited` | The provider stopped or crashed. |
 
-## Debugging cloudprovider
+If startup hangs, the provider likely connected but never completed the readiness handshake, or it never connected back to Codebolt.
 
-`cloudprovider` has two communication paths:
+## Debug cloudprovider
+
+Cloudprovider uses two paths:
 
 | Path | Used for |
 |---|---|
-| Cloud HTTP API | Create, list, stop runtimes; list threads; load thread messages. |
-| Cloud WebSocket proxy | Register local Codebolt, receive runtime events, forward messages to runtimes, receive connection snapshots. |
+| Cloud HTTP API | Create, list, stop, and restart runtimes; list threads; load thread messages. |
+| Cloud WebSocket proxy | Register local Codebolt, receive runtime events, forward messages, and receive connection snapshots. |
 
-Check these details:
+Check:
 
-| Check | Expected |
+- You are signed in or have a cloud auth token.
+- Workspace ID and workspace type match the selected workspace.
+- Cloud HTTP and WebSocket URLs are configured or using defaults.
+- The environment has a runtime ID after creation.
+- Sync mode is correct, usually `git` for cloud runtimes.
+
+If listing works but live updates do not, HTTP is probably working and the WebSocket registration or connection snapshot path is the issue.
+
+## Debug path issues
+
+Path fields explain where Codebolt thinks the runtime lives.
+
+| Field | Meaning |
 |---|---|
-| Auth token | A signed-in Codebolt session or configured cloud auth token exists. |
-| Workspace | Workspace ID matches the selected workspace. |
-| Cloud HTTP URL | Defaults to the Codebolt worker HTTP URL unless overridden. |
-| Cloud WebSocket URL | Defaults to the Codebolt worker WebSocket URL unless overridden. |
-| Runtime ID | Present after runtime creation or attach. |
-| Sync mode | Usually `git` for cloud runtimes. |
+| `requestedPath` | Path requested by the user or provider. |
+| `resolvedPath` | Path Codebolt resolved after applying defaults. |
+| `environmentPath` | Working path used by the environment. |
+| `workspacePath` | Workspace path used by UI and provider integrations. |
+| `pathSource` | Whether the path came from the user, provider, existing runtime, or fallback. |
 
-If cloud runtime listing works but live updates do not, the HTTP path is working but the WebSocket registration or connection snapshot path is likely failing.
+Common `pathSource` values:
 
-## Debugging path issues
-
-If an environment opens the wrong project path:
-
-1. Check `requestedPath`.
-2. Check `resolvedPath`.
-3. Check `environmentPath`.
-4. Check `workspacePath`.
-5. Check `pathSource`.
-
-Interpretation:
-
-| `pathSource` | Meaning |
+| Value | Meaning |
 |---|---|
 | `user_override` | A user or request explicitly set the path. |
-| `provider_proposed` | The provider or cloud runtime service proposed the path. |
-| `existing` | The path came from an existing environment/runtime record. |
+| `provider_proposed` | The provider or cloud service proposed it. |
+| `existing` | It came from an existing environment/runtime record. |
 | `auto_default` | Codebolt generated a fallback path. |
 
-For child environments, also inspect `parentProjectPath`; child placement may be derived from the parent.
+For child environments, also check `parentProjectPath`; Codebolt may use it to place or group the child.
 
-## Debugging UI refresh
-
-The Environments panel updates from:
-
-- An initial `fetchEnvironments()` call.
-- WebSocket messages of type `environmentRuntimeSync`.
-- WebSocket messages of type `environmentRuntimeStatusUpdate`.
-- Document events named `environmentRuntimeUpdate`.
-- Manual refresh from connected providers.
-
-If the backend state is correct but the UI looks stale, refresh connected providers or reload the panel. If provider events contain only partial data, the UI falls back to refetching the full environment list.
-
-## Debugging child environments
+## Debug child environments
 
 Child environments should include:
 
@@ -122,40 +129,27 @@ Child environments should include:
 }
 ```
 
-If a child appears at the root of the tree instead of under its parent, one of these values is missing or does not match any visible parent environment. Codebolt also uses runtime IDs and normalized paths as fallback parent-resolution keys.
+The UI uses those values, plus runtime IDs and normalized paths, to place the child under its parent.
 
-## Debugging runner environments
+## Debug runner environments
 
-Runner environments depend on cloudprovider discovering connected runner nodes. If runner environments do not appear:
+Runner environments depend on cloudprovider discovering connected runner nodes.
+
+If runner environments do not appear:
 
 1. Refresh connected providers.
 2. Confirm cloudprovider can list runtimes.
-3. Confirm the runner node appears in the cloud runtime list.
-4. Check that the runtime/provider ID is shaped like `runner-node:<nodeId>`.
-5. Confirm the runner has a base path or project path.
+3. Confirm the runner appears in the runtime list.
+4. Check that the provider ID is shaped like `runner-node:<nodeId>`.
+5. Confirm the runner has path metadata for created child work.
 
-Runner roots only appear in the UI when there are child environments under that runner.
+Runner roots usually appear only when there are child environments under that runner.
 
-## Useful log signals
+## Recovery checklist
 
-Look for messages like:
-
-| Log signal | Meaning |
-|---|---|
-| `Provider path resolved successfully` | Codebolt found the provider package and entrypoint. |
-| `Process spawned successfully` | The provider child process started. |
-| `providerStartResponse received` | The provider is ready and the environment can be marked running. |
-| `Direct cloud runtime create sending` | Codebolt is creating a cloud runtime directly. |
-| `Direct cloud runtime create accepted` | Cloud runtime creation returned a runtime ID. |
-| `cloud socket message received` | cloudprovider is receiving WebSocket events. |
-| `forward_to_runtime sending` | A local message is being forwarded to a cloud runtime. |
-| `providerLazyResponse` | A lazy cloudprovider operation returned. |
-
-## Recovery steps
-
-- For provider startup failures, verify the provider path, package entrypoint, and provider dependencies.
-- For cloud failures, verify sign-in, workspace scope, and cloud runtime provider selection.
-- For stale cloud lists, use **Refresh environments from connected providers**.
-- For stuck local providers, stop and restart the environment.
-- For wrong nesting, inspect parent runtime/environment IDs and paths.
-- For missing thread replies from cloud runtimes, attach or refresh the thread so cloudprovider subscribes to live thread events.
+- Restart the environment if state is stale or stuck.
+- Refresh connected providers if cloud or runner data is stale.
+- Verify provider path, package entrypoint, and dependencies for provider startup failures.
+- Verify sign-in, cloud workspace, and credentials for cloud failures.
+- Inspect parent IDs and paths if nesting is wrong.
+- Attach or refresh the cloud thread if messages from a cloud runtime are missing.

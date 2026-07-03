@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Multi-Agent Usage Overview
+title:  Overview
 description: This section covers running multi-agent work as a user, with the current product surface centered on the desktop UI rather than the older flow/swarm CLI commands.
 ---
 

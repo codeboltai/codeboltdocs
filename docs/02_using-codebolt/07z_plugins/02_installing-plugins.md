@@ -1,99 +1,141 @@
 ---
 sidebar_position: 2
-title: Installing Plugins
+title: Install Plugins
+description: Install plugins from the Extensions panel and choose whether they are available app-wide or only inside one project.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+# Install Plugins
 
-# Installing Plugins
+You can install and update plugins from the **Extensions** panel. After installation, the plugin appears in the **Plugins** panel, where you can reload, start, stop, and open plugin UI if it has one.
 
-Plugins can be installed from the marketplace or from a local directory. Once installed they appear in the **Plugins panel** where you can start, stop, reload, and configure them.
+![Extensions panel showing installed plugins](/productImages/plugins/install-plugin.png)
 
-## From the marketplace
+The **Installed** tab shows plugins already available in your app or project.
 
-<Tabs groupId="codebolt-interface">
-<TabItem value="desktop" label="Desktop App" default>
+## Choose an install scope
 
-1. Open the **Plugins panel** — bottom bar → **Plugins** dropdown, or **View → Plugins**.
-2. Click **Browse Marketplace** at the top of the panel.
-3. Search or browse by category (LLM Providers, Chat Gateways, Execution, UI).
-4. Click a plugin card to see its description, required configuration, and reviews.
-5. Click **Install**. Codebolt downloads the plugin into `~/.codebolt/plugins/` and starts it automatically if it has a `startup` trigger.
+Before installing, decide where the plugin should live.
 
-</TabItem>
-</Tabs>
+| Scope | Install location | Use it when |
+|---|---|---|
+| **App** | `~/.codebolt/plugins` | You want the plugin available across projects. |
+| **Project** | `<project>/.codebolt/plugins` | The plugin belongs to one project, workspace, or repository. |
 
-## From a local directory
+Project plugins take priority over app-level plugins with the same plugin ID.
 
-If you have a plugin as a local folder (downloaded manually, shared by a colleague, or one you're developing):
+## Install from the Extensions panel
 
-```bash
-# Copy to global plugins directory
-cp -r ./my-plugin ~/.codebolt/plugins/my-plugin
+Use the Extensions panel when you want Codebolt to download and install a marketplace plugin for you.
 
-# Or copy to the current project only
-cp -r ./my-plugin ./.codeboltPlugins/my-plugin
-```
+1. Open the **Extensions** panel.
+2. Select the **Plugin** extension type.
+3. Use **Installed** to see plugins already available.
+4. Use **Marketplace** to browse plugins you can install.
+5. Choose **Install to App** or **Install to Project** when installing from marketplace.
+6. Click **Install** or **Update**.
 
-Then open the Plugins panel and click **Reload** to discover the new plugin.
+When you install a plugin from the marketplace, Codebolt:
 
-## Configuring a plugin after install
+1. Downloads the plugin archive.
+2. Extracts it into the selected app or project plugin folder.
+3. Replaces an older installed copy if this is an update.
+4. Runs `npm install --production` for plugin dependencies.
+5. Reloads the plugin list.
+6. Starts the plugin when possible.
+7. Refreshes provider lists so plugin LLM and web search providers can appear without restarting Codebolt.
 
-Most plugins require some configuration before they work — an API key, a bot token, a server URL. After installation:
+## After install
 
-1. Find the plugin in the **Plugins panel**.
-2. Click the **Configure** (gear) icon.
-3. Fill in the required fields. These are stored securely in Codebolt's key-value store — not in plain files.
-4. Click **Save**, then **Start** if the plugin doesn't start automatically.
+After installation:
 
-For chat gateway plugins, a configuration UI panel opens directly inside Codebolt where you enter your platform credentials.
+1. Open the **Plugins** panel.
+2. Select **Reload** if the plugin does not appear.
+3. Check the plugin state.
+4. Select **Start** if it is not already started.
+5. Open the plugin UI if the plugin provides one.
 
-## Managing installed plugins
+If the plugin registers an LLM provider or web search provider, open settings and refresh the provider list if it does not appear immediately.
 
-The **Plugins panel** shows all discovered plugins with their status:
+## Manage installed plugins
 
-| Status | Meaning |
+Use the **Plugins** panel to manage plugins that are already installed on disk. The Plugins panel is for runtime management: discovery, state, start, stop, and plugin UI.
+
+> **Image placeholder:** Add a screenshot of the Plugins panel showing installed plugins, state badges, reload, start, stop, and open UI buttons.
+
+Each plugin card shows:
+
+- Plugin name
+- Version
+- Description
+- Current state
+- Install folder
+- Error message, if startup failed
+- Open UI button, if the plugin provides a UI
+- Start or stop action
+
+## Reload plugins
+
+Use **Reload** when:
+
+- You installed a plugin manually.
+- You updated plugin files while developing.
+- A plugin does not appear after installation.
+- You changed active project and want to refresh project plugins.
+
+Reload scans:
+
+- `~/.codebolt/plugins`
+- `<project>/.codebolt/plugins`
+
+## Start and stop plugins
+
+Starting a plugin launches its `main` entrypoint as a child process. The plugin then connects back to Codebolt and registers its capabilities.
+
+Stopping a plugin asks it to shut down and then terminates the child process if needed. Codebolt also cleans up plugin UI panels, event subscriptions, registered tools, plugin providers, preview providers, and execution gateway claims.
+
+## Plugin states
+
+| State | Meaning |
 |---|---|
-| `running` | Plugin process is active and connected |
-| `stopped` | Plugin is installed but not running |
-| `error` | Plugin crashed or failed to connect |
-| `loading` | Plugin process is starting up |
+| `loaded` | Codebolt discovered the plugin on disk. |
+| `initialized` | Legacy initialization state; most child-process plugins start directly. |
+| `started` | Plugin process is running and connected. |
+| `stopped` | Plugin is installed but not running. |
+| `error` | Plugin failed to start, crashed, or exited unexpectedly. |
 
-**Actions available per plugin:**
+## Open plugin UI
 
-- **Start / Stop** — manually control the plugin process
-- **Reload** — stop, rebuild detection, and restart (useful during development)
-- **Configure** — open the settings form or UI panel
-- **Uninstall** — remove the plugin files from the plugin directory
-- **View logs** — open the [Plugin Debug](../08c_debug-and-observability/01_overview.md) panel for this plugin's WebSocket traffic and errors
+Some plugins include a UI file. If a plugin has UI, the Plugins panel shows an open UI action.
 
-## Scoping a plugin to one project
+When you open a plugin UI, Codebolt:
 
-By default, installing a plugin puts it in `~/.codebolt/plugins/` where it's active globally. To scope it to a single project, move the plugin folder manually:
+1. Starts the plugin if it is not already running.
+2. Serves the plugin HTML from the plugin folder.
+3. Injects a small bridge script.
+4. Opens the plugin UI inside a Codebolt panel.
 
-```bash
-mv ~/.codebolt/plugins/my-plugin ./.codeboltPlugins/my-plugin
+## Debug plugin problems
+
+Use **Plugin Debug** when a plugin does not start, does not register its capability, crashes, or disconnects.
+
+Plugin debug data is stored in the active project:
+
+```text
+<project>/.codebolt/plugindebug
 ```
 
-Project-scoped plugins override global plugins of the same name.
+Common checks:
 
-## Updating plugins
+| Problem | What to check |
+|---|---|
+| Plugin does not appear | Install path and `package.json` `codebolt.plugin`. |
+| Plugin starts then goes to `error` | stderr logs, missing entrypoint, missing dependencies. |
+| Plugin remains `loaded` | Start action or startup trigger. |
+| Provider does not appear | Plugin state, registration logs, provider settings refresh. |
+| Plugin UI does not open | `codebolt.plugin.ui.path` and UI file path. |
+| Project plugin does not start | Active project and `<project>/.codebolt/plugins`. |
 
-<Tabs groupId="codebolt-interface">
-<TabItem value="desktop" label="Desktop App" default>
+## Related pages
 
-In the Plugins panel, plugins with available updates show an **Update** badge. Click it to update. Or update all at once: **Plugins panel → ⋯ menu → Update all**.
-
-</TabItem>
-</Tabs>
-
-## Uninstalling
-
-<Tabs groupId="codebolt-interface">
-<TabItem value="desktop" label="Desktop App" default>
-
-Plugins panel → plugin card → **⋯ menu → Uninstall**. This stops the process and removes the plugin directory.
-
-</TabItem>
-</Tabs>
+- [Plugin Marketplace](./03_plugin-marketplace.md)
+- [Build a Plugin](./04_building-plugins.md)

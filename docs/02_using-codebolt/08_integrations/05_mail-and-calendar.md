@@ -1,142 +1,137 @@
 ---
 sidebar_position: 5
 title: Mail and Calendar
-description: Codebolt has first-class integrations for email and calendar. Agents can read inboxes, send messages, schedule meetings, and trigger off of incoming mail
+description: Codebolt includes project-local mail and calendar systems for agent coordination, scheduled events, reminders, and time-based agent workflows.
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Mail and Calendar
 
+Codebolt includes built-in **Mail** and **Calendar** systems for coordinating agents, users, and scheduled work inside a project.
+
+In the current application, Mail and Calendar are local Codebolt coordination systems stored inside the active project.
+
+Use them when you need:
+
+- agents to send asynchronous messages to users or other agents
+- persistent threaded communication outside a single chat
+- scheduled reminders and time-based work
+- calendar events that notify participants when they are due
+- agents to query triggered events and mark them complete
+- file reservation messages for multi-agent coordination
+
 ![Mail and Calendar](/productImages/integrations/calender.png)
 
-Codebolt has first-class integrations for email and calendar. Agents can read inboxes, send messages, schedule meetings, and trigger off of incoming mail. Used for:
+## Mail
 
-- Automating repetitive email workflows (triage, follow-ups, responses).
-- Scheduling work around team availability.
-- Receiving webhook-equivalent data from senders without a webhook endpoint.
+Mail is a project-local threaded messaging system. It works like email at the product level, but messages stay inside Codebolt.
 
-## Supported providers
+Open it from the Mail panel. Threads have a subject, participants, message history, unread state, and status.
 
-- **Gmail / Google Calendar** — OAuth
-- **Microsoft 365 / Outlook** — OAuth
-- **IMAP + SMTP** — for self-hosted or other mail systems
-- **CalDAV** — generic calendar support
+Mail can be used for:
 
-## Connecting an account
+- agent-to-agent messages
+- agent-to-user messages
+- group threads
+- reports or summaries sent asynchronously
+- acknowledgements for important messages
+- file references attached to a message
+- file reservations and conflict checks between agents
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
+### Agent mail actions
 
-**Settings → Integrations → Mail** (and **Calendar**). Click **Connect**, choose the provider, OAuth flow opens in a browser, you authorize, the account appears in the list.
+Agents can use mail through Codebolt's agent service layer. Common actions include:
 
-</TabItem>
-<TabItem value="config" label="Config file">
+- register or list mail agents
+- create, find, list, update, or archive threads
+- send or reply to messages
+- fetch an agent inbox
+- mark messages as read
+- acknowledge messages
+- search messages
+- summarize a thread
+- reserve files, release reservations, force reservations, and check conflicts
 
-For IMAP/SMTP or self-hosted CalDAV, you can configure directly:
+This makes Mail useful for multi-agent work where agents need to coordinate without sharing the same chat turn.
 
-```yaml
-# .codebolt/integrations.yaml
-mail:
-  - name: work
-    type: imap
-    host: imap.my-org.com
-    user: me@my-org.com
-    password_env: WORK_MAIL_PW
-calendar:
-  - name: work
-    type: caldav
-    url: https://caldav.my-org.com
-    user_env: WORK_CAL_USER
-    password_env: WORK_CAL_PW
+## Calendar
+
+Calendar is a project-local scheduled event system. Events are stored inside the active project and can be created from the Calendar panel or by agents.
+
+Calendar supports:
+
+- one-time events
+- instant events, where start and end time are the same
+- duration-based events
+- all-day events
+- event types such as `generic`, `note`, `meeting`, `system-check`, and agent-oriented task events
+- participants
+- RSVP state
+- reminders
+- tags and search
+- completion state
+- triggered-event queries for agents
+
+### How calendar works
+
+At a high level:
+
+1. A user or agent creates a calendar event.
+2. Codebolt stores the event in the active project.
+3. Codebolt updates the calendar index.
+4. The calendar scheduler checks events every minute.
+5. When a reminder is due, Codebolt sends a Mail message to the event participants.
+6. When an event starts, Codebolt sends a Mail message, emits calendar events, and publishes an application event.
+
+```text
+<project>/.codebolt/calendar/
+  calendar-index.json
+  events/
 ```
 
-</TabItem>
-</Tabs>
+### Agent calendar actions
 
-## Mail tools
+Agents can use calendar through Codebolt's agent service layer. Common actions include:
 
-- `codebolt_mail.list_inbox` — list recent messages
-- `codebolt_mail.read_message` — read a specific message
-- `codebolt_mail.send_message` — send a new message
-- `codebolt_mail.reply` — reply to a thread
-- `codebolt_mail.mark_read`, `codebolt_mail.archive`, `codebolt_mail.label`
+- create an event
+- update or delete an event
+- get one event
+- list events with filters
+- get events in a date range
+- get upcoming events
+- get triggered events
+- get triggered events and mark them complete
+- mark one or more events complete
+- RSVP to an event
+- get scheduler status
 
-All permission-gated. By default, no agent has mail write access.
+## How mail and calendar work together
 
-## Calendar tools
+Calendar uses Mail for participant notifications.
 
-- `codebolt_calendar.list_events` — upcoming events
-- `codebolt_calendar.create_event` — schedule something
-- `codebolt_calendar.update_event`, `delete_event`
-- `codebolt_calendar.find_availability` — "when are X and Y both free?"
+When a reminder is due, the scheduler sends a Mail thread from **Calendar System**. When an event starts, it sends another Mail message to the creator and participants.
 
-Backed by `calendarSchedulerService` for the availability math.
+This means agents can use Mail as the human-readable record of calendar activity, while Calendar remains the structured source of scheduled events.
 
-## Triggering an agent from incoming mail
-
-Useful for "when an email arrives matching X, run agent Y". Configure in an agent manifest:
-
-```yaml
-# .codebolt/agents/support-triage/agent.yaml
-triggers:
-  - type: mail
-    match:
-      from: "*@customer-domain.com"
-      subject_contains: ["bug", "issue", "problem"]
+```text
+Calendar event
+  -> reminder becomes a Mail message
+  -> event start becomes a Mail message
+  -> event start emits an application event
+  -> agents can query triggered events and mark them complete
 ```
 
-When a matching email arrives, the agent is spawned with the email as input. The agent can reply, label, archive, or escalate depending on its prompt.
+## Current scope
 
-## Scheduling agents around meetings
+This page covers Codebolt's built-in project-local Mail and Calendar systems. It does not describe external account sync or third-party mail/calendar providers.
 
-An agent can check your calendar before doing work that might conflict:
+Recurring fields and cron expressions are stored and validated, but the current calendar storage service does not generate recurring event instances by itself.
 
-```
-user: run the nightly build if I'm free tonight
-
-agent:
-  → calendar.find_availability(after: 19:00, duration: 2h)
-  → found free slot 20:00-22:00
-  → scheduling build for 20:00
-```
-
-Background agents can also self-schedule — a cron trigger can be combined with a calendar check to avoid running during "do not disturb" periods.
-
-## Security and scope
-
-Mail and calendar access is sensitive. Best practices:
-
-- **Scope OAuth tightly.** Grant only the permissions you need (read-only if the agent doesn't need to send).
-- **Allowlist agents carefully.** Don't blanket-allow `codebolt_mail.*` to every agent.
-- **Audit send actions.** Route every outgoing email through a review hook so you see what agents are sending.
-- **Dry-run for new agents.** Test mail-sending agents in a dry-run mode that logs what they would send without actually sending.
-
-```yaml
-# .codebolt/hooks/audit-mail.ts
-export default {
-  phase: "before_tool_call",
-  match: { tool: "codebolt_mail.send_message" },
-  handler: async (ctx) => {
-    ctx.log.info("agent sending mail", { to: ctx.args.to, subject: ctx.args.subject });
-    // You could also require human approval here:
-    // return { verdict: "deny", reason: "mail send requires human approval" };
-    return { verdict: "allow" };
-  },
-};
-```
-
-## Rate limits
-
-Mail providers have send limits (Gmail: ~500/day for free accounts, more for Workspace). Agents that send mail should be aware:
-
-- Don't run mail-sending agents in tight loops.
-- Batch sends where possible.
-- Monitor provider quotas through the provider and usage surfaces your build exposes.
+There is also a calendar gateway bridge for routing `agent-task` calendar events into the routing gateway, but the bridge must be started by server startup code to be active.
 
 ## See also
 
+- [Mail & Inbox](../07c_agent-coordination/03_mail-inbox.md)
+- [Calendar & Scheduled Events](../08d_auto-interactivity/03_calendar-events.md)
 - [Custom Tools](../04b_agent-extensions/07_custom-tools.md)
-- [Communication (internals)](../../04_build-on-codebolt/07b_subsystems/11_communication.md)
-- [Hooks](../../04_build-on-codebolt/05_plugins/01_overview.md)
+- [Communication Internals](../../04_build-on-codebolt/07b_subsystems/11_communication.md)
+- [Hooks](../08d_auto-interactivity/04_hooks.md)

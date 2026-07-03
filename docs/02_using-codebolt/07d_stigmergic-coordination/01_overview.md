@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
-title: Stigmergic Coordination Overview
+title:  Overview
 description: When several agents work on the same project — jobs, review requests, file edits — they need a way to stay out of each other's way and signal intent to each.
 ---
 
 # Stigmergic Coordination
 
-When several agents work on the same project — jobs, review requests, file edits — they need a way to stay out of each other's way and signal intent to each other *without* requiring a central orchestrator or direct agent-to-agent messages. Codebolt's answer is a set of **stigmergic primitives**: signals and reservations that live on the shared entity itself.
+When several agents work on the same project in parallel — jobs, review requests, file edits — they need a way to stay out of each other's way and signal intent to each other *without* requiring a central orchestrator or direct agent-to-agent messages. Codebolt's answer is a set of **stigmergic primitives**: signals and reservations that live on the shared entity itself.
 
 The name comes from biology: ants coordinate through pheromones deposited in the environment, not by talking to each other. In Codebolt, agents deposit **pheromones** on jobs and review requests, acquire **locks** on entities they are actively working on, and raise **unlock requests** when they need an entity that someone else holds. Any agent reading the entity sees the current signals and decides what to do.
 

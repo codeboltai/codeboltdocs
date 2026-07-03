@@ -1,138 +1,150 @@
 ---
 sidebar_position: 1
-title: Environments Overview
-description: Environments are Codebolt's saved handles for local, cloud, runner, and child execution contexts.
+title: What are Environments?
+description: "Environments are where Codebolt and agents do work: local projects, worktrees, cloud sandboxes, runners, or child workspaces."
 ---
 
-# Environments
+# What are Environments?
 
-An **environment** is Codebolt's saved handle for an execution context. It tells Codebolt where work should run, which provider controls that runtime, which project path is active, how changes are synced, and how the runtime should be started, stopped, or reconnected.
+An **environment** is where Codebolt does work for a project. When you ask an agent to read files, run commands, make changes, or test something, Codebolt needs to know which workspace or runtime the work should happen in. That target is the environment.
 
-The important distinction is:
+The simple model is:
 
-| Concept | Meaning |
+| Concept | Plain meaning |
 |---|---|
-| **Environment** | The Codebolt record you see in the Environments panel. It stores the provider, launch config, runtime identity, paths, state, and metadata. |
-| **Provider** | The adapter that knows how to create, attach to, start, stop, and communicate with an execution target. |
-| **Runtime** | The actual place where work runs: the local project, a local worktree, a cloud sandbox, a runner node, or a child environment. |
+| **Agent** | Who does the work. |
+| **Environment** | Where the work runs. |
+| **Provider** | How Codebolt creates, connects to, starts, stops, and talks to that place. |
 
-This separation lets the same agent and task model run against different execution surfaces without changing the agent.
 
-## What an environment stores
 
-Every environment has a stable record with:
+For example, the same agent can work in your local project, in a separate local worktree, in a cloud sandbox, or on a runner machine. The environment tells Codebolt which one to use.
 
-| Field | Purpose |
+```text
+Your message
+  -> Agent: who works on it
+  -> Environment: where the work happens
+  -> Provider: how Codebolt connects to that place
+```
+
+## Why environments exist
+
+Environments give you control over where work happens and how isolated it is.
+
+Use environments when you want to:
+
+- Keep experimental changes away from your main project folder.
+- Run work in a clean cloud sandbox.
+- Use a runner machine that has special tools, credentials, or hardware.
+- Let multiple agents work in separate workspaces at the same time.
+- Create child environments for subtasks without losing the parent project context.
+- Track runtime status, paths, sync mode, and provider logs in one place.
+
+Without environments, every agent action would have to run in the same local workspace. That is simple, but it becomes risky when you want parallel work, isolated changes, or remote execution.
+
+## Which environment should I use?
+
+| Use case | Environment to choose |
 |---|---|
-| `id` | Local Codebolt environment ID. Cloud runtime rows may use `cloud:<runtimeId>`. |
-| `name` | Display name in the Environments panel. |
-| `provider` | Provider metadata, including provider ID, display name, local/provider path, and supported agent settings. |
-| `config` | Launch config: runtime IDs, paths, sync mode, merge strategy, parent metadata, cloud workspace, and provider-specific settings. |
-| `state` | Current lifecycle state such as `running`, `starting`, `stopped`, or `error`. |
-| `isActive` | Whether the backing runtime is considered active. |
-| `createdAt` / `updatedAt` | Timestamps for the local record. |
+| Work directly on the open project | **Local** environment |
+| Try changes without touching the main folder | **Local worktree** or **child** environment |
+| Run in a clean remote sandbox | **Cloud sandbox** environment |
+| Use your own remote machine or infrastructure | **Runner** environment |
+| Split a larger task into isolated follow-up work | **Child** environment under the parent runtime |
 
-The `config` field is the most important part. Codebolt normalizes it before use so each environment has a consistent launch shape even if the provider supplies different raw fields.
+If you are not sure, start with the local environment. Move to a cloud, runner, or child environment when you need isolation or remote execution.
 
-## Runtime origins
+## Common environment types
 
-Codebolt classifies environments by origin:
-
-| Origin | Meaning |
+| Type | What it means |
 |---|---|
-| `manual_started` | A normal environment created directly by the user. |
-| `cloud_started` | A cloud sandbox or cloud runtime started through Codebolt Cloud. |
-| `runner_started` | A runtime backed by a user runner node connected to Codebolt Cloud. |
-| `child_environment` | An environment created under a parent runtime, usually for isolated sub-work or nested execution. |
+| **Local** | Work happens in the active project on your machine. |
+| **Local worktree** | Codebolt creates a separate local path for isolated work. |
+| **Cloud sandbox** | Codebolt starts or connects to a remote runtime through Codebolt Cloud. |
+| **Runner** | Work runs on a user-connected runner node. |
+| **Child environment** | Work runs under an existing parent environment, usually for a subtask or isolated branch of work. |
 
-The origin controls default sync behavior, UI grouping, parent-child relationships, and merge ownership.
+The Environments panel groups these types into a tree so you can see parent and child relationships.
 
-## Sync and merge modes
+## What an environment remembers
 
-Environments can describe how project state moves into and out of the runtime:
+Codebolt stores an environment record for each created or discovered environment. This record lets Codebolt reconnect to it, show it in the UI, and route agent work correctly.
 
-| Mode | Meaning |
-|---|---|
-| `none` | No automatic project sync or merge behavior. Common for manually started local contexts. |
-| `git` | The runtime is created or synchronized through Git. This is the default for cloud runtimes. |
-| `workspace_sync` | Workspace state is synchronized directly instead of through Git. |
+An environment remembers:
 
-`mergeStrategy` usually follows `syncMode`:
+- Its name and current state.
+- Which provider controls it.
+- The project or workspace path.
+- Whether it is local, cloud, runner-backed, or child-owned.
+- How project files are synced.
+- Runtime IDs used by cloud or runner systems.
+- Parent environment metadata, if it is a child environment.
 
-| Sync mode | Default merge strategy |
-|---|---|
-| `none` | `none` |
-| `git` | `git` |
-| `workspace_sync` | `workspace_sync` |
+Most users do not need to edit these fields manually. They are useful when debugging or when building custom providers.
 
-## Environment paths
-
-Codebolt tracks several path fields because local, cloud, runner, and child environments may describe the same workspace differently.
-
-| Field | Meaning |
-|---|---|
-| `requestedPath` | The path requested by the user or provider. |
-| `resolvedPath` | The path Codebolt resolved after applying defaults or provider suggestions. |
-| `environmentPath` | The working path used by the environment. |
-| `workspacePath` | Workspace path alias used by UI and provider integrations. |
-| `pathSource` | Where the path came from: `user_override`, `provider_proposed`, `existing`, or `auto_default`. |
-
-For cloud and runner environments, Codebolt can ask the cloud runtime service for a prospective path before creating the environment. If that fails, it falls back to a deterministic default.
-
-## Lifecycle states
-
-The Environments panel and backend lifecycle manager use these states:
-
-| State | Meaning |
-|---|---|
-| `created` | The environment record exists but is not running. |
-| `starting` | Codebolt is starting the provider or remote runtime. |
-| `running` | The provider/runtime is active and available. |
-| `stopping` | Codebolt is shutting down the provider or runtime. |
-| `stopped` | The environment is not active. |
-| `restarting` | Codebolt is stopping and starting the runtime. |
-| `error` | Startup, runtime, provider, or health check failed. |
-| `unconnectable` | Codebolt knows about the environment but cannot connect to it. |
-| `disconnected` | A previously connected runtime/provider is no longer connected. |
-| `not_available` | The runtime is unavailable in the current workspace or provider state. |
-| `archived` | The environment has been archived from normal active use. |
-
-## How the environment panel is organized
-
-The Environments panel groups environments into a tree:
-
-| Section | Contains |
-|---|---|
-| **Local** | The default local project plus local child/worktree environments. |
-| **Cloud Sandboxed Environments** | Cloud runtimes started through a cloud runtime provider. |
-| **Self Started Environments** | Existing runtimes that Codebolt attached to or discovered. |
-| **User Runner Environments** | Environments backed by a connected runner node. |
-
-Parent-child nesting is resolved from `parentEnvironmentId`, `parentRuntimeId`, and path metadata. This is how child environments appear under the parent runtime that created them.
-
-## End-to-end flow
+## How creation works
 
 At a high level:
 
-1. You create or select an environment.
-2. Codebolt resolves the provider and normalizes the launch config.
-3. Codebolt stores the environment record locally.
-4. Codebolt starts a provider process or asks `cloudprovider` to start a runtime.
-5. The provider creates or attaches to the actual runtime.
-6. Runtime events flow back into Codebolt.
-7. The UI receives `environmentRuntimeSync` or `environmentRuntimeStatusUpdate` events and refreshes the tree.
+> **Image placeholder:** Add a creation-flow diagram or annotated UI screenshot showing **New Environment**, provider selection, path/sync defaults, save, provider start, and running status.
+
+1. You choose **New Environment**.
+2. You select a provider.
+3. Codebolt asks the provider or cloud service for defaults, such as a path and sync mode.
+4. Codebolt saves the environment record.
+5. Codebolt starts the provider or remote runtime.
+6. The provider reports back when the runtime is ready.
+7. The Environments panel updates with the current state.
 
 ```text
-Codebolt UI
-  -> Codebolt server environment service
-  -> Provider or cloudprovider bridge
-  -> Runtime
-  -> Events/status/logs back to Codebolt
+Create environment
+  -> choose provider
+  -> resolve path and sync settings
+  -> save environment record
+  -> start provider or runtime
+  -> show status in the UI
 ```
+
+## Lifecycle states
+
+The Environments panel shows whether an environment is ready or needs attention.
+
+| State | Meaning |
+|---|---|
+| `created` | The environment record exists but is not running yet. |
+| `starting` | Codebolt is starting the provider or runtime. |
+| `running` | The environment is active and ready. |
+| `stopping` | Codebolt is shutting it down. |
+| `stopped` | The environment is not active. |
+| `restarting` | Codebolt is stopping and starting it again. |
+| `error` | Startup, provider, cloud, or health check failed. |
+| `disconnected` | Codebolt has metadata, but the active connection is gone. |
+| `not_available` | The runtime is not available in the current project, workspace, or provider state. |
+
+## Advanced details
+
+Internally, Codebolt classifies environments by origin:
+
+| Origin | Meaning |
+|---|---|
+| `manual_started` | Created directly by the user. |
+| `cloud_started` | Started through Codebolt Cloud. |
+| `runner_started` | Backed by a connected runner node. |
+| `child_environment` | Created under a parent runtime or environment. |
+
+Codebolt also tracks sync and merge mode:
+
+| Mode | Meaning |
+|---|---|
+| `none` | No automatic sync behavior. |
+| `git` | Project state moves through Git. Common for cloud runtimes. |
+| `workspace_sync` | Workspace state is synchronized directly. |
+
+Path fields such as `requestedPath`, `resolvedPath`, `environmentPath`, and `workspacePath` explain where the environment actually runs. You usually only need these when troubleshooting path or nesting issues.
 
 ## See also
 
-- [Configuring Environments](./02_configuring-environments.md)
+- [Create and Manage Environments](./02_configuring-environments.md)
 - [Environment Providers](./03_environment-providers.md)
-- [Environment Debug](./04_environment-debug.md)
+- [Manage and Troubleshoot Environments](./04_environment-debug.md)
 - [Cloud runtimes and providers](../02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)

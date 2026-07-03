@@ -99,9 +99,9 @@ Connect agents to external platforms — chat apps, project tools, and any custo
 
 <DocCardGrid columns={3} items={[
   { label: 'GW', title: 'Routing Gateway', description: 'Central message router — rules, thread strategies, and activity log.', href: '../02_using-codebolt/08e_external-integrations/02_routing-gateway' },
-  { label: 'Chat', title: 'Chat Platforms', description: 'Connect agents to Telegram, Slack, Discord, Teams, and WhatsApp via plugins.', href: '../02_using-codebolt/08e_external-integrations/03_chat-platforms' },
+  { label: 'Chat', title: 'Chat Platforms', description: 'Connect agents to installed chat and message channel plugins.', href: '../02_using-codebolt/08e_external-integrations/03_chat-platforms' },
   { label: 'Tools', title: 'Project Tools', description: 'Integrate with Linear, GitHub, Jira, and Notion via MCP servers or webhooks.', href: '../02_using-codebolt/08e_external-integrations/04_project-tools' },
-  { label: 'Plugin', title: 'Building a Channel Plugin', description: 'Connect any custom platform to the gateway with a WebSocket plugin.', href: '../02_using-codebolt/08e_external-integrations/05_building-a-channel-plugin' },
+  { label: 'Plugin', title: 'Building a Channel Plugin', description: 'Learn when a custom channel plugin is needed and where to find the implementation guide.', href: '../02_using-codebolt/08e_external-integrations/05_building-a-channel-plugin' },
 ]} />
 
 <p class="uc-section-label">Automation</p>

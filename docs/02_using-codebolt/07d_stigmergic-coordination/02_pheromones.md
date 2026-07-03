@@ -6,25 +6,25 @@ description: A pheromone is a typed signal that an agent or user deposits on a s
 
 # Pheromones
 
-![Pheromones](/productImages/StigmergicCoordination/pheromones.png)
 
 A **pheromone** is a typed signal that an agent or user deposits on a shared entity (a job, a review request, etc.) to influence what other agents do next. Any agent reading the entity sees the current pheromone load and reacts — there is no central scheduler.
 
-Internally, pheromones are stored inline on the entity (e.g., `Job.pheromones`) and managed by a shared `coordinationService` on the server. All pheromone configuration is persisted under `.codebolt/coordination/pheromoneTypes.json` in the project.
+Pheromone types are project-level coordination settings. The default types are available automatically, and custom types can be added from **Settings -> Pheromones** when your team needs a project-specific signal.
 
-## Anatomy of a pheromone
+![Pheromones](/productImages/StigmergicCoordination/pheromones.png)
 
-Each deposit has:
 
-| Field | Meaning |
+## What a pheromone contains
+
+A pheromone deposit is a signal with a type, strength, owner, and lifetime:
+
+| Part | Meaning |
 |---|---|
-| `type` | One of the registered pheromone types (e.g., `saturation`, `importance`) |
-| `intensity` | A number from **0 to 10** — how strongly the depositor is signalling (default `1`) |
-| `depositedBy` | Agent or user ID that deposited it |
-| `depositedByName` | Optional display name of the depositor |
-| `depositedAt` | ISO timestamp when it was deposited |
-| `decayRate` | Optional override of the type's default decay rate |
-| `expiresAt` | Optional hard expiration timestamp |
+| Type | What the signal means, such as `importance`, `saturation`, or a custom type. |
+| Intensity | How strong the signal is, from 0 to 10. Higher values should mean stronger intent. |
+| Depositor | The user or agent that added the signal. |
+| Time | When the signal was deposited. |
+| Decay | Whether the signal fades over time or stays until removed. |
 
 A single agent can hold **one deposit per type per entity** — depositing again of the same type from the same agent updates the existing deposit rather than stacking.
 
@@ -72,6 +72,82 @@ The server ships nine default types. They cover the common coordination scenario
 
 `saturation` is the signal to reach for when an entity is "full" — enough agents are already on it and new arrivals should pick something else. It decays slowly so it lingers past the moment of deposit but still fades if the work wraps up.
 
+## Custom pheromone types
+
+Use a custom pheromone type when the default signals do not describe the coordination state your project needs.
+
+For example, a project might add:
+
+| Custom type | Why it exists |
+|---|---|
+| `needs_security_review` | Marks work that should wait for a security-focused pass. |
+| `customer_blocker` | Marks work that is blocking a customer-facing issue. |
+| `docs_needed` | Marks implementation work that still needs documentation. |
+
+A custom type defines the vocabulary of the signal. It does not deposit the signal by itself. After the type exists, users and agents can deposit it on jobs and review requests just like a default pheromone.
+
+### Why create one
+
+Create a custom type when:
+
+- The signal is repeated across many jobs or review requests.
+- Agents should be able to react to the signal consistently.
+- The signal is not just a one-off comment.
+- The team needs a visible badge, color, and shared name for that state.
+
+Do not create a custom type for every small note. Use comments or job descriptions for one-off context.
+
+### Create a custom type from the UI
+
+![Add custom pheromone type](/productImages/StigmergicCoordination/add-custom-pheromones.png)
+
+1. Open **Settings**.
+2. Select **Pheromones**.
+3. Click **Add Type**.
+4. Enter a **Name**. This is the identifier, for example `needs_security_review`.
+5. Enter a **Display Name**. This is what users see in the UI, for example `Needs Security Review`.
+6. Add an optional **Description**.
+7. Pick a **Color** for the badge.
+8. Click **Add Type**.
+
+Codebolt normalizes the name to a lowercase identifier with underscores. Default types are locked and cannot be removed. Custom types appear under **Custom Types** and can be removed from the same settings screen.
+
+### Use the custom type
+
+After creating the type:
+
+1. Open a job or review request.
+2. Find the **Pheromones** section.
+3. Click the add/deposit control.
+4. Select your custom type.
+5. Choose an intensity.
+6. Deposit the pheromone.
+
+The custom signal appears in the pheromone badges, job list summaries, and heatmap views wherever pheromones are shown.
+
+### Create a custom type with the API
+
+For automation, the same type management is available through the jobs API:
+
+```http
+GET    /jobs/pheromone-types
+POST   /jobs/pheromone-types
+DELETE /jobs/pheromone-types/:name
+```
+
+Create a type with:
+
+```json
+{
+  "name": "needs_security_review",
+  "displayName": "Needs Security Review",
+  "description": "Flag work that needs a security-focused pass",
+  "color": "#DC2626"
+}
+```
+
+The normal UI/API path uses `name`, `displayName`, `description`, and `color`. Open job views receive the updated type list automatically.
+
 ## Depositing, viewing, and removing
 
 ### From the UI
@@ -103,25 +179,6 @@ The SDKs wrap the same calls — see [`jobs.depositPheromone`](../../05_referenc
 ## Querying by pheromone
 
 Need a list of entities matching a signal? The server exposes `GET /jobs/pheromones/:type/jobs` to list jobs that currently carry a given pheromone. Combine with the UI filter bar to build views like *"all jobs tagged `importance >= 5`"* or *"everything with `task_not_ready` right now"*.
-
-## Registering a custom pheromone type
-
-The default nine cover most flows. If you need a project-specific signal, register it:
-
-```http
-POST /jobs/pheromone-types
-{
-  "name": "needs_security_review",
-  "displayName": "Needs Security Review",
-  "description": "Flag when security-sensitive files changed",
-  "color": "#DC2626",
-  "defaultDecayRate": 0
-}
-```
-
-Custom types persist to `.codebolt/coordination/pheromoneTypes.json` and appear in the UI alongside the defaults. Default types cannot be removed; custom ones can be via `DELETE /jobs/pheromone-types/:name`.
-
-The same `POST /pheromone-types` route is available on each coordinated entity's router, but pheromone types are **shared across entities** — a type registered via `/jobs/pheromone-types` is equally available on review-merge requests.
 
 ## Good stigmergic signals
 

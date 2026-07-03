@@ -45,5 +45,5 @@ Use the **Type** filter to show only specific message types (e.g., only `chatMes
 
 - [Chat Widget](./06_chat-widget.md) — a common plugin that shows up here
 - [Chat Platforms](../08e_external-integrations/03_chat-platforms.md) — plugin-backed integrations routed through the gateway
-- [Building a Channel Plugin](../08e_external-integrations/05_building-a-channel-plugin.md) — author a plugin that will appear in this panel
+- [Building a Channel Plugin](../08e_external-integrations/05_building-a-channel-plugin.md) — when to build a custom channel plugin and where to find the implementation guide
 - [Environment Debug](../08a_environments/04_environment-debug.md) — companion panel for resolved environment variables

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-02T06:14:33.061Z",
-  "sourceCount": 432,
-  "curatedCount": 67,
+  "generatedAt": "2026-07-03T09:37:06.051Z",
+  "sourceCount": 428,
+  "curatedCount": 64,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 209,
+      "count": 204,
       "order": 1,
       "files": [
         {
@@ -80,6 +80,10 @@
           "title": "Model Selection"
         },
         {
+          "path": "using-codebolt/surfaces/desktop-app/chat/steps-steering.md",
+          "title": "Steps and Steering"
+        },
+        {
           "path": "using-codebolt/surfaces/desktop-app/chat/ai-requests.md",
           "title": "AI Requests"
         },
@@ -102,6 +106,14 @@
         {
           "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/preview-browser.md",
           "title": "Preview & Browser"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/codemap.md",
+          "title": "Codemap"
+        },
+        {
+          "path": "using-codebolt/surfaces/desktop-app/code-and-terminal/narrative-graph.md",
+          "title": "Narrative Graph"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/panels/application-planning-features/overview.md",
@@ -512,8 +524,16 @@
           "title": "Agent Portfolios"
         },
         {
+          "path": "using-codebolt/agents/agent-debug.md",
+          "title": "Agent Debug"
+        },
+        {
           "path": "using-codebolt/agents/thread-panel.md",
           "title": "Thread Panel"
+        },
+        {
+          "path": "using-codebolt/agents/ai-debug-and-console.md",
+          "title": "AI Debug & Console"
         },
         {
           "path": "using-codebolt/agent-extensions/overview.md",
@@ -548,20 +568,36 @@
           "title": "Guardrails"
         },
         {
-          "path": "using-codebolt/guardrails-and-settings/proxy-execution.md",
-          "title": "Proxy Execution"
+          "path": "using-codebolt/guardrails-and-settings/context-compaction.md",
+          "title": "Context Compaction"
         },
         {
-          "path": "using-codebolt/agent-observability/overview.md",
-          "title": "Agent Observability Overview"
+          "path": "using-codebolt/memory/overview.md",
+          "title": "Memory & Context Overview"
         },
         {
-          "path": "using-codebolt/agent-observability/agent-debug.md",
-          "title": "Agent Debug"
+          "path": "using-codebolt/memory/memory-layers.md",
+          "title": "Memory Layers"
         },
         {
-          "path": "using-codebolt/agent-observability/ai-debug-and-console.md",
-          "title": "AI Debug & Console"
+          "path": "using-codebolt/memory/context-assembly.md",
+          "title": "Context Assembly"
+        },
+        {
+          "path": "using-codebolt/memory/context-rules.md",
+          "title": "Context Rules"
+        },
+        {
+          "path": "using-codebolt/memory/persistent-memory.md",
+          "title": "Persistent Memory"
+        },
+        {
+          "path": "using-codebolt/memory/memory-ingestion.md",
+          "title": "Memory Ingestion"
+        },
+        {
+          "path": "using-codebolt/memory/event-log.md",
+          "title": "Event Log"
         },
         {
           "path": "using-codebolt/eval-and-optimization/overview.md",
@@ -612,32 +648,12 @@
           "title": "Tasks"
         },
         {
-          "path": "using-codebolt/memory/overview.md",
-          "title": "Memory & Context Overview"
+          "path": "using-codebolt/application-logs.md",
+          "title": "Application Logs"
         },
         {
-          "path": "using-codebolt/memory/memory-layers.md",
-          "title": "Memory Layers"
-        },
-        {
-          "path": "using-codebolt/memory/context-assembly.md",
-          "title": "Context Assembly"
-        },
-        {
-          "path": "using-codebolt/memory/context-rules.md",
-          "title": "Context Rules"
-        },
-        {
-          "path": "using-codebolt/memory/persistent-memory.md",
-          "title": "Persistent Memory"
-        },
-        {
-          "path": "using-codebolt/memory/memory-ingestion.md",
-          "title": "Memory Ingestion"
-        },
-        {
-          "path": "using-codebolt/memory/event-log.md",
-          "title": "Event Log"
+          "path": "using-codebolt/deposition-features/artifact.md",
+          "title": "Artifacts"
         },
         {
           "path": "using-codebolt/multi-agent-usage/overview.md",
@@ -765,11 +781,11 @@
         },
         {
           "path": "using-codebolt/environments/overview.md",
-          "title": "Environments Overview"
+          "title": "What are Environments?"
         },
         {
           "path": "using-codebolt/environments/configuring-environments.md",
-          "title": "Configuring Environments"
+          "title": "Create and Manage Environments"
         },
         {
           "path": "using-codebolt/environments/environment-providers.md",
@@ -777,7 +793,11 @@
         },
         {
           "path": "using-codebolt/environments/environment-debug.md",
-          "title": "Environment Debug"
+          "title": "Manage and Troubleshoot Environments"
+        },
+        {
+          "path": "using-codebolt/proxy-execution.md",
+          "title": "Proxy Execution"
         },
         {
           "path": "using-codebolt/auto-interactivity/overview.md",
@@ -814,46 +834,6 @@
         {
           "path": "using-codebolt/external-integrations/building-a-channel-plugin.md",
           "title": "Building a Channel Plugin"
-        },
-        {
-          "path": "using-codebolt/code-observability/overview.md",
-          "title": "Code Observability Overview"
-        },
-        {
-          "path": "using-codebolt/code-observability/codemap.md",
-          "title": "Codemap"
-        },
-        {
-          "path": "using-codebolt/code-observability/narrative-graph.md",
-          "title": "Narrative Graph"
-        },
-        {
-          "path": "using-codebolt/application-observability/overview.md",
-          "title": "Application Observability Overview"
-        },
-        {
-          "path": "using-codebolt/application-observability/plugin-debug.md",
-          "title": "Plugin Debug"
-        },
-        {
-          "path": "using-codebolt/application-observability/action-block-debug.md",
-          "title": "Action Block Degub"
-        },
-        {
-          "path": "using-codebolt/application-observability/environment-debug.md",
-          "title": "Environment Debug"
-        },
-        {
-          "path": "using-codebolt/troubleshooting/common-issues.md",
-          "title": "Common Issues"
-        },
-        {
-          "path": "using-codebolt/troubleshooting/logs-and-diagnostics.md",
-          "title": "Logs and Diagnostics"
-        },
-        {
-          "path": "using-codebolt/troubleshooting/reporting-bugs.md",
-          "title": "Reporting Bugs"
         }
       ]
     },
@@ -934,7 +914,7 @@
     },
     {
       "heading": "Guides",
-      "count": 30,
+      "count": 31,
       "order": 3,
       "files": [
         {
@@ -1044,6 +1024,10 @@
         {
           "path": "guides/providers-and-models/use-openai.md",
           "title": "Use OpenAI"
+        },
+        {
+          "path": "guides/multi-step-phase/artifact-management.md",
+          "title": "Artifact Management"
         },
         {
           "path": "guides/advanced/query-the-event-log.md",

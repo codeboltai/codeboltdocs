@@ -1,74 +1,81 @@
 ---
 sidebar_position: 3
 title: Plugin Marketplace
+description: Use the marketplace to discover, install, and update plugins published for Codebolt.
 ---
 
 # Plugin Marketplace
 
-The Plugin Marketplace is where you find, install, and manage plugins published by the Codebolt team and the community. It is accessible from inside the app and from the Codebolt web portal.
+The **Plugin Marketplace** is where you find plugins built by the Codebolt team, your organization, or the community. Marketplace plugins can be installed into the app scope or into the current project.
 
-## Browsing
+![Extensions panel plugin marketplace](/productImages/plugins/plugin-marketplace.png)
 
-Open the marketplace from the **Plugins panel → Browse Marketplace**, or from the web portal at [codebolt.ai/marketplace](https://codebolt.ai/marketplace) filtered to plugins.
+## What you can find
 
-Plugins are organised by category:
-
-| Category | What you'll find |
+| Plugin category | What it adds |
 |---|---|
-| **LLM Providers** | Custom model providers — private deployments, niche inference APIs, internal servers |
-| **Chat Gateways** | Platform connectors — Slack, Telegram, Discord, WhatsApp, custom webhook receivers |
-| **Execution** | Remote execution routers — cloud VMs, Docker containers, SSH hosts, sandboxed environments |
-| **UI Panels** | Custom interface panels that appear inside the Codebolt desktop app |
-| **Utilities** | Background automation, event-driven integrations, monitoring tools |
+| **Model providers** | Custom LLM providers, internal inference servers, or provider-specific login flows. |
+| **Tools** | New actions agents can discover and call. |
+| **Web search providers** | Search, research, news, or image search backends. |
+| **Channel plugins** | External chat or messaging platforms connected to agents. |
+| **Artifact preview providers** | Preview systems for generated artifacts. |
+| **Execution plugins** | Remote execution or proxy execution behavior. |
+| **UI plugins** | Custom panels inside Codebolt. |
 
-## Plugin cards
+## Install from marketplace
 
-Each plugin listing shows:
+1. Open **Extensions**.
+2. Select **Plugin**.
+3. Open **Marketplace**.
+4. Search or browse for a plugin.
+5. Choose the install scope:
+   - **App** for `~/.codebolt/plugins`
+   - **Project** for `<project>/.codebolt/plugins`
+6. Select **Install**.
 
-- **Name and publisher** — verified publishers show a badge
-- **Type** — LLM Provider, Chat Gateway, Execution, or Generic
-- **Description** — what it does and what platforms/services it connects to
-- **Required configuration** — what credentials or setup you need before it works
-- **Version and last updated**
-- **Install count and community rating**
+After install, Codebolt reloads plugins and attempts to start the plugin so its capabilities become available.
 
-Click a card to open the full detail page with documentation, configuration instructions, and a changelog.
+## Update marketplace plugins
 
-## Trust and security
+The **Installed** tab compares installed plugin versions with marketplace versions. If a newer marketplace version is available, the installed plugin can show an update action.
 
-Plugins run as Node.js processes with the same filesystem access as Codebolt itself. Before installing a plugin:
+When Codebolt updates a plugin, it:
 
-- **Check the publisher** — verified badges indicate publishers who have agreed to Codebolt's security policy and whose code has been reviewed
-- **Read the required permissions** — each plugin listing declares what it accesses (filesystem, network, terminal)
-- **Review the source** — marketplace plugins link to their source repository
+1. Stops the running plugin if it is already active.
+2. Downloads the new archive.
+3. Replaces the old plugin folder.
+4. Runs dependency install for the new version.
+5. Reloads plugins.
+6. Starts the plugin again when possible.
 
-Community plugins (unverified) can be installed but show a warning banner. Use them only if you trust the source.
+## Installed list
 
-## Private registries
+The installed list shows plugins found at app and project level. If the same plugin is installed in both places, the list can show both install scopes.
 
-Organizations can host a private plugin registry accessible only to their team:
+Use the installed list to check:
 
-1. Go to **Settings → Plugins → Registries**
-2. Click **Add Registry** and enter the registry URL and auth token
-3. Plugins from your private registry appear in the marketplace alongside public ones, tagged with your org name
+- Plugin name
+- Version
+- Description
+- Folder path
+- Install scope
+- Whether a marketplace update is available
 
-Private registries are useful for internal tooling — execution plugins that connect to your company's infrastructure, gateway plugins for internal chat systems, or LLM provider plugins for private model deployments.
+## Trust and safety
 
-## Publishing a plugin
+Plugins run as local Node.js processes. They can access the same local project context and network capabilities available to the Codebolt process.
 
-If you've built a plugin and want to share it:
+Before installing a plugin:
 
-```bash
-codebolt action plugin publish --path ./my-plugin
-```
+- Check the publisher.
+- Read what the plugin connects to.
+- Review setup and authentication requirements.
+- Prefer plugins from sources you trust.
+- Use project scope when a plugin is only needed for one workspace.
 
-Before publishing, make sure your plugin passes the pre-publish checklist — see [Building Plugins](./04_building-plugins.md) for the full workflow. Once published, it appears in the marketplace and can be installed by anyone with access to your registry (public or private).
+## Publishing plugins
 
-## Managing your published plugins
+Publishing is covered in the builder docs. Start here if you want to create and publish your own plugin:
 
-From the [Codebolt web portal](https://codebolt.ai):
-
-- **Edit listing** — update description, screenshots, configuration docs
-- **Release a new version** — push an update; existing installs see the update badge
-- **Deprecate** — mark a plugin as no longer maintained; it stays installable but shows a warning
-- **Unpublish** — remove from the marketplace; existing installs continue to work but can't be freshly installed
+- [Build on Codebolt: Plugins Overview](../../04_build-on-codebolt/05_plugins/01_overview.md)
+- [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md)

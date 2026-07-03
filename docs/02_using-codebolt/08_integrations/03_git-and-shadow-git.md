@@ -1,119 +1,124 @@
 ---
 sidebar_position: 3
 title: Git and Shadow Git
-description: "Codebolt has two git repos per project: your real .git/ and a parallel shadow git under .codebolt/shadow-git/. They serve different purposes and rarely interact"
+description: Codebolt uses your real Git repository for source control and uses Shadow Git as an internal checkpoint system for restoring work after agent actions.
 ---
 
 # Git and Shadow Git
 
-Codebolt has two git repos per project: your real `.git/` and a parallel shadow git under `.codebolt/shadow-git/`. They serve different purposes and rarely interact.
+Codebolt uses two Git-related systems while you work on a project:
 
-## Real git
+- **Git** is your real project repository.
+- **Shadow Git** is Codebolt's internal checkpoint system.
 
-This is your normal git repository. Codebolt:
+They are related because both track file states, but they are used for different reasons.
 
-- Reads status, diff, log, branches — agents can see your git state.
-- Writes commits, checkouts, branches, pushes — if an agent uses `codebolt_git.commit` and it's allowed by policy.
+## Git
 
-But mostly Codebolt **leaves real git alone**. Agent file edits don't automatically commit. You decide when and what to commit via normal git workflows.
+Git is the normal `.git` repository inside your project.
 
-## Shadow git
+It is the same Git repository you use from:
 
-A **parallel** git repo that Codebolt maintains automatically. Every agent write is committed here as it happens. This is what powers:
+- the terminal
+- GitHub Desktop or another Git client
+- the Codebolt Source Control panel
+- the Codebolt Git Graph panel
 
-- [Checkpoints](../02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md) — rollback to any prior state.
-- [Replay](../07_multi-agent-usage/03_reading-a-flow.md) — view the FS as it was.
-- [Branching](../02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md) — start a new chat from a past state.
+Use real Git when you want to keep intentional project history:
 
-Shadow git is **invisible** until you want to use it. It's not shown in normal git commands. It's not pushed anywhere. Your real git state is never affected.
+- commit finished work
+- switch branches
+- create branches
+- pull changes
+- push changes
+- review actual commit history
+- collaborate through a remote repository
 
-Add `.codebolt/shadow-git/` to your `.gitignore` — it's huge and not useful outside the server that created it.
+When Codebolt shows Git status, branches, commits, or Git Graph, it is reading this real repository.
 
-## Tools agents use
+When you commit or push from Codebolt, it affects your real Git history.
 
-Read-side tools (always safe):
+## Shadow Git
 
-- `codebolt_git.status`
-- `codebolt_git.diff`
-- `codebolt_git.logs`
-- `codebolt_git.branch` (read current branch)
+Shadow Git is Codebolt's private checkpoint system.
 
-Write-side tools (require explicit allowlist):
+Before Codebolt sends some user actions to an agent, it tries to save a checkpoint of the current project files. That checkpoint is stored in Shadow Git, not in your real Git history.
 
-- `codebolt_git.add`
-- `codebolt_git.commit`
-- `codebolt_git.checkout`
-- `codebolt_git.init`
-- `codebolt_git.clone`
-- `codebolt_git.pull`
-- `codebolt_git.push`
+Codebolt currently creates Shadow Git checkpoints for flows such as:
 
-By default, `commit` and `push` are allowed for agents that need them. `push` is guardrail-restricted: pushing to protected branches (`main`, `master`, anything matching a configurable pattern) is blocked.
+- chat messages
+- task execution
+- scheduled task execution
+- action-plan build execution
+
+The checkpoint hash is attached to the user message. If the agent changes files and the result is not what you wanted, Codebolt can restore the project files back to that checkpoint.
+
+## Why Shadow Git exists
+
+Agents can change many files quickly. Real Git is best for deliberate commits, but it is not ideal for creating a commit before every chat message or agent step.
+
+Shadow Git gives Codebolt a local restore point without polluting your real Git history.
+
+Use Shadow Git when you need to:
+
+- undo changes made after an agent action
+- return files to the state before a message was sent
+- recover from a bad agent edit without creating real Git commits
+
+## Restore from a checkpoint
+
+When a user message has a Shadow Git checkpoint, Codebolt can show a restore control on that message after the agent stops processing.
+
+Restoring a checkpoint:
+
+1. checks that the Shadow Git checkpoint exists
+2. finds which files will change
+3. creates an automatic backup checkpoint of the current state
+4. restores the project files to the selected checkpoint
+5. shows the files changed by the restore
+
+The restore changes files in your active project. It does not add, remove, or rewrite commits in your real Git history.
+
+After a restore, your real Git repository may show file changes if the restored files differ from `HEAD`.
+
+```mdx-code-block
+{/* Add screenshot: Chat message with Shadow Git restore button and restored files list. */}
+```
+
+## Git vs Shadow Git
+
+| Question | Git | Shadow Git |
+| --- | --- | --- |
+| What is it for? | Source control and collaboration | Local checkpoint and restore |
+| Is it your real repository? | Yes | No |
+| Does it create normal commits? | Yes, when you commit | No |
+| Does it appear in Git Graph? | Yes | No |
+| Can it push to a remote? | Yes | No |
+| Is it useful for agent rollback? | Not directly | Yes |
+| Can it change project files? | Yes | Yes, when restoring |
 
 ## Recommended workflow
 
-Most users want agents to *not* commit to real git automatically. The pattern:
+Use both systems together:
 
-1. **Agent makes changes.** Writes files, shadow git commits automatically.
-2. **You review.** Check the diff, test, iterate.
-3. **You commit.** Use your own `git add` / `git commit` in a terminal, or the git panel in the UI.
+1. Let the agent make changes.
+2. Review the changed files.
+3. If the result is wrong, restore from the Shadow Git checkpoint.
+4. If the result is correct, commit the changes to real Git.
+5. Push or sync when you are ready to share the work.
 
-This keeps your git history intentional. Agent-authored commits are easy to spot and review as a batch, rather than mixed in with your own.
+This keeps your real Git history clean while still giving you a fast rollback path for agent work.
 
-To enforce this pattern, deny write-side git tools in most agents' allowlists:
+## Important notes
 
-```yaml
-tools:
-  allow:
-    - codebolt_fs.*
-    - codebolt_git.status
-    - codebolt_git.diff
-    - codebolt_git.logs
-  deny:
-    - codebolt_git.commit
-    - codebolt_git.push
-```
-
-Agents can still read git state, just not modify it.
-
-## When agents should commit
-
-For high-volume or automated workflows (batch migrations, nightly jobs, CI), you may want the agent to commit itself. Allow write tools but guardrail against dangerous operations:
-
-```yaml
-tools:
-  allow:
-    - codebolt_git.add
-    - codebolt_git.commit
-    - codebolt_git.branch
-  deny:
-    - codebolt_git.push        # still no push
-    - codebolt_git.reset       # still no reset
-```
-
-And add guardrails for branch protection, commit message requirements, etc.
-
-## Switching branches with an agent running
-
-If you `git checkout` to a different branch while an agent is running, things get confusing — the agent is working with one file state, you changed it out from under them. Codebolt detects this and:
-
-1. Warns you in the UI.
-2. Optionally suspends the agent until you confirm.
-
-Best practice: don't switch branches with a running agent. Let it finish first.
-
-## The merge case
-
-When you're merging a branch with agent-authored changes, the agent's shadow git history is not brought along — only the real git commits you made. Shadow git is local state only.
-
-If you want to preserve the agent's decision history, export it from the observability surface your build exposes and attach that summary to your PR as context for human reviewers.
-
-## Git submodules
-
-Shadow git handles submodules like normal git — each submodule has its own shadow subrepo. Checkpoints rolling back in a parent project don't automatically rollback submodules; they roll back only the current level.
+- Shadow Git is local Codebolt recovery state.
+- Shadow Git checkpoints are not pushed to your remote.
+- Git Graph shows real Git commits, not Shadow Git checkpoints.
+- A failed Shadow Git checkpoint does not block chat or task execution. Codebolt sends the message without a restore checkpoint.
+- Restoring from Shadow Git affects files on disk, so review the result in real Git before committing.
 
 ## See also
 
 - [Checkpoints and rollback](../02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md)
-- [Checkpoint and rollback (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
-- [Project & Workspace (internals)](../../04_build-on-codebolt/07b_subsystems/10_project-and-workspace.md)
+- [Checkpoint and rollback internals](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/checkpoint-and-rollback.md)
+- [Project and workspace internals](../../04_build-on-codebolt/07b_subsystems/10_project-and-workspace.md)

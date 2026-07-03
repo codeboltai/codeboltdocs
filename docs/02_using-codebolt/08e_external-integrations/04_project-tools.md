@@ -12,6 +12,8 @@ Project tools — issue trackers, code review platforms, and knowledge bases —
 
 There are two ways to connect agents to project tools:
 
+![Project tool integration flow](/diagrams/project-tools-integration-flow.svg)
+
 ### 1. MCP servers (recommended)
 
 The simplest path is an **MCP server** for the tool. MCP servers expose tool capabilities that agents can call directly — `create_issue`, `list_prs`, `update_page`, etc. Install the relevant MCP server and the agent gains access to the tool's API without any custom code.
@@ -35,20 +37,6 @@ For event-driven integrations — where a tool event triggers an agent — use *
 3. The Routing Gateway delivers the payload to your agent
 
 **Example — Linear issue created → agent picks it up:**
-
-```
-Linear issue created
-        │  POST to Codebolt webhook
-        ▼
-Routing Gateway
-        │
-        ▼
-Agent receives: "New Linear issue: [title] — [description]"
-Agent analyses and responds
-        │  POST reply to Linear targetUrl
-        ▼
-Linear receives agent's comment
-```
 
 Configure the Linear webhook to POST to your Codebolt webhook URL. Set the webhook's `targetUrl` to the Linear API endpoint for adding comments, so the agent's reply is posted back to the issue automatically.
 

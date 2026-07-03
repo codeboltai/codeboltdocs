@@ -6,7 +6,7 @@ description: "Agents can control a headless browser via codebolt_browser. Used f
 
 # Browser Control
 
-![Browser Control](/productImages/integrations/browser.png)
+
 
 Agents can control a headless browser via `codebolt_browser`. Used for:
 
@@ -14,6 +14,7 @@ Agents can control a headless browser via `codebolt_browser`. Used for:
 - Scraping documentation or API references during an agent run.
 - Live debugging of running apps.
 - Visual regression checks.
+![Browser Control](/productImages/integrations/browser.png)
 
 ## Prerequisites
 
@@ -67,9 +68,7 @@ For external sites (scraping docs, checking APIs), remember: the browser is maki
 
 Use when diagnosing "why is my frontend test failing" kind of issues.
 
-## Integration with Ctrl+K
 
-Codebolt can open the current app in a browser for visual inspection while you use Ctrl+K to tweak the code. The browser stays in sync with file changes (hot reload permitting).
 
 ## See also
 

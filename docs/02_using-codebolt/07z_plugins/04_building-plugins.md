@@ -1,68 +1,108 @@
 ---
 sidebar_position: 4
-title: Building Plugins
+title: Build a Plugin
+description: Start here if you want to create a plugin, then move into the full Build on Codebolt plugin documentation.
 ---
 
-# Building Plugins
+# Build a Plugin
 
-Building a plugin means writing a Node.js package that connects to the Codebolt server via WebSocket and registers capabilities using the `@codebolt/plugin-sdk`. This page is a brief orientation — the full developer documentation lives in **Build on Codebolt**.
+This section is only a short orientation for users who want to create plugins. The full creation workflow lives in **Build on Codebolt**.
 
-## What you can build
+## Creation docs
 
-| Plugin type | What it does | Guide |
-|---|---|---|
-| **LLM Provider** | Adds a custom AI provider to the model selector | [Custom AI Providers →](../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/01_overview.md) |
-| **Chat Gateway** | Connects an external messaging platform to agents | [Chat Gateway →](../../04_build-on-codebolt/05_plugins/04_chat-gateway/01_overview.md) |
-| **Execution** | Proxies code execution to a remote environment | [Proxy Execution Gateway →](../../04_build-on-codebolt/05_plugins/08_proxy-execution-gateway/01_overview.md) |
-| **UI Panel** | Adds a custom panel inside the Codebolt desktop app | [Dynamic Panel Plugins →](../../04_build-on-codebolt/05_plugins/05_dynamic-panel-plugins.md) |
-| **Generic** | Any other application extension | [Plugins Overview →](../../04_build-on-codebolt/05_plugins/01_overview.md) |
+Use these pages when you are ready to build:
 
-## Quick start
+- [Build on Codebolt: Plugins Overview](../../04_build-on-codebolt/05_plugins/01_overview.md)
+- [SDK and Lifecycle](../../04_build-on-codebolt/05_plugins/02_sdk-and-lifecycle.md)
+- [Plugin Functionalities](../../04_build-on-codebolt/05_plugins/03_functionalities.md)
+- [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md)
 
-```bash
-# 1. Create a plugin folder
-mkdir my-plugin && cd my-plugin
-npm init -y
-npm install @codebolt/plugin-sdk typescript
+For specific plugin types:
 
-# 2. Add the codebolt.plugin field to package.json
-# (see Build on Codebolt → Plugins for the full manifest reference)
+- [Chat Gateway Plugins](../../04_build-on-codebolt/05_plugins/04_chat-gateway/01_overview.md)
+- [Dynamic Panel Plugins](../../04_build-on-codebolt/05_plugins/05_dynamic-panel-plugins.md)
+- [Custom AI Providers](../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/01_overview.md)
+- [Proxy Execution Gateway](../../04_build-on-codebolt/05_plugins/08_proxy-execution-gateway/01_overview.md)
 
-# 3. Write src/index.ts
+## Minimal plugin shape
+
+A plugin is a Node.js package with a `package.json` that includes `codebolt.plugin`.
+
+At minimum, a plugin package needs:
+
+- `package.json`
+- a `codebolt.plugin` field in `package.json`
+- a valid `main` entrypoint
+- runtime dependencies installed or bundled
+
+```json
+{
+  "name": "my-plugin",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "codebolt": {
+    "plugin": {
+      "scope": "project",
+      "triggers": [{ "type": "startup" }]
+    }
+  }
+}
+```
+
+The runtime plugin ID is the `name` from `package.json`.
+
+## Minimal SDK example
+
+Most plugins use `@codebolt/plugin-sdk`.
+
+```ts
 import plugin from '@codebolt/plugin-sdk';
 
-plugin.onStart(async (ctx) => {
-  console.log('Plugin started:', ctx.pluginId);
-  // register capabilities here
+plugin.onStart(async (context) => {
+  console.log('Plugin started:', context.pluginId);
 });
 
 plugin.onStop(async () => {
-  // clean up
+  console.log('Plugin stopped');
 });
-
-# 4. Build and install locally for testing
-npx tsc
-cp -r . ~/.codebolt/plugins/my-plugin
-
-# 5. In Codebolt: Plugins panel → Reload → Start
 ```
 
-## Developer documentation
+Inside `onStart`, a real plugin usually registers one or more capabilities:
 
-Everything you need to build and publish a plugin:
+- plugin tools
+- custom LLM providers
+- web search providers
+- artifact preview providers
+- execution gateway behavior
+- external channel routing
+- UI panels
+- event listeners
 
-- [Plugins Overview](../../04_build-on-codebolt/05_plugins/01_overview.md) — architecture, plugin types, manifest reference, full SDK module list
-- [SDK and Lifecycle](../../04_build-on-codebolt/05_plugins/02_sdk-and-lifecycle.md) — lifecycle hooks, environment variables, start triggers
-- [Major Functionalities](../../04_build-on-codebolt/05_plugins/03_functionalities.md) — filesystem, chat, LLM, knowledge, UI, and storage modules
-- [Dynamic Panel Plugins](../../04_build-on-codebolt/05_plugins/05_dynamic-panel-plugins.md) — building custom UI panels
-- [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md) — pre-publish checklist, local dev loop, `codebolt action plugin publish`
+For LLM provider plugins, the plugin registers a provider manifest and then handles completion, streaming, and login requests from Codebolt. Build details are covered in [Custom LLM Provider](../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md).
 
-## Publishing to the marketplace
+## Local development loop
 
-When your plugin is ready:
+The typical local loop is:
+
+1. Create the plugin package.
+2. Add the `codebolt.plugin` field.
+3. Write the plugin with `@codebolt/plugin-sdk`.
+4. Build it.
+5. Copy it into `~/.codebolt/plugins` or `<project>/.codebolt/plugins`.
+6. Open the **Plugins** panel.
+7. Select **Reload**.
+8. Start the plugin.
+9. Use **Plugin Debug** to inspect logs.
 
 ```bash
-codebolt action plugin publish --path ./my-plugin
+cp -R ./my-plugin ~/.codebolt/plugins/my-plugin
 ```
 
-After publishing, it appears in the [Plugin Marketplace](./03_plugin-marketplace.md) and can be installed by others. See the [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md) guide for the full checklist.
+## Publishing
+
+Publishing uses the marketplace extension flow. The publishing metadata is described by `codeboltplugin.yaml`, while runtime discovery uses `package.json`.
+
+Start with:
+
+- [Packaging and Publishing](../../04_build-on-codebolt/05_plugins/99_packaging-and-publishing.md)
+- [Plugin Marketplace](./03_plugin-marketplace.md)
