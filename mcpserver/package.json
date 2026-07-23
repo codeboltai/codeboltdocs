@@ -1,0 +1,24 @@
+{
+  "name": "@codebolt/docs-mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local MCP server for CodeBolt API documentation lookup.",
+  "bin": {
+    "codebolt-docs-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.4.5"
+  }
+}
