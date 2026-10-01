@@ -22,6 +22,15 @@ function indexPath() {
 function manifestPath() {
     return process.env.CODEBOLT_DOCS_MANIFEST ? path.resolve(process.env.CODEBOLT_DOCS_MANIFEST) : undefined;
 }
+function knowledgeIndexPath() {
+    const configured = process.env.CODEBOLT_KNOWLEDGE_INDEX;
+    if (!configured)
+        throw new Error("CODEBOLT_KNOWLEDGE_INDEX is required for local knowledge search mode.");
+    return path.resolve(configured);
+}
+function knowledgeManifestPath() {
+    return process.env.CODEBOLT_KNOWLEDGE_MANIFEST ? path.resolve(process.env.CODEBOLT_KNOWLEDGE_MANIFEST) : undefined;
+}
 function dtsDir() {
     return process.env.CODEBOLT_DOCS_DTS_DIR ? path.resolve(process.env.CODEBOLT_DOCS_DTS_DIR) : undefined;
 }
@@ -77,6 +86,82 @@ function scoreRecord(record, queryTokens) {
     }
     return score;
 }
+function knowledgeRecordText(record) {
+    return [
+        record.id,
+        record.title,
+        record.description,
+        record.kind,
+        record.section,
+        record.sourcePath,
+        ...(record.headings || []),
+        ...(record.tags || []),
+        ...(record.audience || []),
+        record.content,
+    ].filter(Boolean).join(" ");
+}
+function matchesKnowledgeFilters(record, params) {
+    if (params.mode && params.mode !== "auto" && params.mode !== record.kind)
+        return false;
+    if (params.audience && record.audience?.length && !record.audience.map(normalize).includes(normalize(params.audience)))
+        return false;
+    return true;
+}
+function scoreKnowledgeRecord(record, params, queryTokens) {
+    const haystack = new Set(tokenize(knowledgeRecordText(record)));
+    let score = 0;
+    for (const token of queryTokens) {
+        if (haystack.has(token))
+            score += 6;
+        if (normalize(record.title).includes(token))
+            score += 12;
+        if (normalize(record.id).includes(token))
+            score += 8;
+        if (normalize(record.description).includes(token))
+            score += 6;
+        if ((record.tags || []).some((tag) => normalize(tag).includes(token)))
+            score += 10;
+        if ((record.headings || []).some((heading) => normalize(heading).includes(token)))
+            score += 8;
+    }
+    if (params.mode && params.mode !== "auto" && params.mode === record.kind)
+        score += 20;
+    if (params.audience && (record.audience || []).map(normalize).includes(normalize(params.audience)))
+        score += 10;
+    return score;
+}
+function createSnippet(content, queryTokens) {
+    const normalizedContent = content.replace(/\s+/g, " ").trim();
+    if (!normalizedContent)
+        return "";
+    const lowerContent = normalizedContent.toLowerCase();
+    const matchIndex = queryTokens.map((token) => lowerContent.indexOf(token)).filter((index) => index >= 0).sort((left, right) => left - right)[0] ?? 0;
+    const start = Math.max(0, matchIndex - 120);
+    const end = Math.min(normalizedContent.length, matchIndex + 280);
+    const prefix = start > 0 ? "…" : "";
+    const suffix = end < normalizedContent.length ? "…" : "";
+    return `${prefix}${normalizedContent.slice(start, end)}${suffix}`;
+}
+function emptyKnowledgeResults() {
+    return { manual: [], skills: [], docs: [], api: [], examples: [], troubleshooting: [] };
+}
+function groupKnowledgeResults(results, apiResults = []) {
+    const grouped = emptyKnowledgeResults();
+    grouped.api = apiResults;
+    for (const result of results) {
+        if (result.kind === "manual")
+            grouped.manual.push(result);
+        if (result.kind === "skill")
+            grouped.skills.push(result);
+        if (result.kind === "docs")
+            grouped.docs.push(result);
+        if (result.kind === "examples")
+            grouped.examples.push(result);
+        if (result.kind === "troubleshooting")
+            grouped.troubleshooting.push(result);
+    }
+    return grouped;
+}
 function dtsFileName(moduleName) {
     const normalized = moduleName.trim();
     if (/^(agent|agent-core|agent-base|agent-services|agent-unified|agent-framework)$/i.test(normalized))
@@ -120,6 +205,37 @@ async function searchLocal(params) {
         .slice(0, limit)
         .map(({ record, score }) => ({ ...record, score }));
 }
+async function loadLocalKnowledgeRecords() {
+    const content = await fsp.readFile(knowledgeIndexPath(), "utf8");
+    return content.split(/\r?\n/).map((line) => line.trim()).filter(Boolean).map((line) => JSON.parse(line));
+}
+async function searchKnowledgeRecordsLocal(params) {
+    const records = await loadLocalKnowledgeRecords();
+    const queryTokens = tokenize(params.query);
+    const limit = Math.max(1, Math.min(Number(params.maxResults || 8), 30));
+    return records
+        .filter((record) => record.kind !== "api")
+        .filter((record) => matchesKnowledgeFilters(record, params))
+        .map((record) => ({ record, score: scoreKnowledgeRecord(record, params, queryTokens) }))
+        .filter((item) => queryTokens.length === 0 || item.score > 0)
+        .sort((left, right) => right.score - left.score || left.record.id.localeCompare(right.record.id))
+        .slice(0, limit)
+        .map(({ record, score }) => ({
+        ...record,
+        content: undefined,
+        score,
+        snippet: createSnippet(record.content, queryTokens),
+    }));
+}
+async function searchKnowledgeLocal(params) {
+    const mode = params.mode || "auto";
+    const maxResults = Math.max(1, Math.min(Number(params.maxResults || 8), 30));
+    const shouldSearchKnowledge = mode !== "api";
+    const shouldSearchApi = mode === "api" || mode === "auto";
+    const knowledgeResults = shouldSearchKnowledge ? await searchKnowledgeRecordsLocal({ ...params, mode }) : [];
+    const apiResults = shouldSearchApi ? await searchLocal({ query: params.query, limit: mode === "api" ? maxResults : Math.max(3, Math.ceil(maxResults / 2)), includeDocs: true }) : [];
+    return groupKnowledgeResults(knowledgeResults, apiResults);
+}
 async function getSpecLocal(ids) {
     const records = await loadLocalRecords();
     const byId = new Map(records.map((record) => [record.id, record]));
@@ -154,6 +270,12 @@ async function getManifestLocal() {
         return { source: "local", indexPath: indexPath() };
     return JSON.parse(await fsp.readFile(filePath, "utf8"));
 }
+async function getKnowledgeManifestLocal() {
+    const filePath = knowledgeManifestPath();
+    if (!filePath)
+        return { source: "local", indexPath: knowledgeIndexPath() };
+    return JSON.parse(await fsp.readFile(filePath, "utf8"));
+}
 function textResult(value) {
     return { content: [{ type: "text", text: typeof value === "string" ? value : JSON.stringify(value, null, 2) }] };
 }
@@ -185,4 +307,14 @@ server.tool("codebolt_docs_get_module_dts", "Get TypeScript declarations for Cod
 server.tool("codebolt_docs_manifest", "Get CodeBolt docs manifest metadata.", {
     source: z.enum(["auto", "web", "local"]).optional(),
 }, async (params) => textResult(await withSource(docsSource(params.source), () => callWeb("/v1/manifest"), getManifestLocal)));
+server.tool("codebolt_knowledge_search", "Search CodeBolt agent knowledge, product docs, skills, examples, troubleshooting, and API reference.", {
+    query: z.string(),
+    mode: z.enum(["auto", "manual", "docs", "api", "skill", "examples", "troubleshooting"]).optional(),
+    audience: z.enum(["agent", "developer", "user"]).optional(),
+    maxResults: z.number().optional(),
+    source: z.enum(["auto", "web", "local"]).optional(),
+}, async (params) => textResult(await withSource(docsSource(params.source), () => callWeb("/v1/knowledge/search", { method: "POST", body: JSON.stringify(params) }), () => searchKnowledgeLocal(params))));
+server.tool("codebolt_knowledge_manifest", "Get CodeBolt knowledge manifest metadata.", {
+    source: z.enum(["auto", "web", "local"]).optional(),
+}, async (params) => textResult(await withSource(docsSource(params.source), () => callWeb("/v1/knowledge/manifest"), getKnowledgeManifestLocal)));
 await server.connect(new StdioServerTransport());

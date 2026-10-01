@@ -17,6 +17,7 @@ const SECTION_CONFIG = [
   { prefix: '02_concepts/', heading: 'Concepts', order: 2 },
   { prefix: '03_guides/', heading: 'Guides', order: 3 },
   { prefix: '04_build-on-codebolt/', heading: 'Build on Codebolt', order: 4 },
+  { prefix: 'agent/', heading: 'Agent Knowledge', order: 5 },
 ];
 
 const EXCLUDE_SUBSTRINGS = [
@@ -66,6 +67,8 @@ function isCuratedForIndex(relativePath) {
   const slugName = basename.replace(/^\d+[a-z]?_/, '');
 
   if (normalized === '1_index.md') return true;
+  if (normalized === 'agent/codebolt-agent-manual.md') return true;
+  if (normalized.startsWith('agent/skills/')) return true;
   if (slugName === 'overview') return true;
   if (/^quickstart/i.test(slugName)) return true;
 

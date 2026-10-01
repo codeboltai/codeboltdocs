@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-03T09:37:06.051Z",
-  "sourceCount": 428,
-  "curatedCount": 64,
+  "generatedAt": "2026-09-30T13:40:57.173Z",
+  "sourceCount": 443,
+  "curatedCount": 71,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,7 +16,7 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 204,
+      "count": 210,
       "order": 1,
       "files": [
         {
@@ -657,7 +657,7 @@
         },
         {
           "path": "using-codebolt/multi-agent-usage/overview.md",
-          "title": "Multi-Agent Usage Overview"
+          "title": "Overview"
         },
         {
           "path": "using-codebolt/multi-agent-usage/running-a-swarm.md",
@@ -697,7 +697,7 @@
         },
         {
           "path": "using-codebolt/agent-coordination/overview.md",
-          "title": "Coordination Overview"
+          "title": "Overview"
         },
         {
           "path": "using-codebolt/agent-coordination/jobs.md",
@@ -721,7 +721,7 @@
         },
         {
           "path": "using-codebolt/stigmergic-coordination/overview.md",
-          "title": "Stigmergic Coordination Overview"
+          "title": "Overview"
         },
         {
           "path": "using-codebolt/stigmergic-coordination/pheromones.md",
@@ -737,11 +737,11 @@
         },
         {
           "path": "using-codebolt/plugins/overview.md",
-          "title": "Plugins Overview"
+          "title": "Overview"
         },
         {
           "path": "using-codebolt/plugins/installing-plugins.md",
-          "title": "Installing Plugins"
+          "title": "Install Plugins"
         },
         {
           "path": "using-codebolt/plugins/plugin-marketplace.md",
@@ -749,7 +749,7 @@
         },
         {
           "path": "using-codebolt/plugins/building-plugins.md",
-          "title": "Building Plugins"
+          "title": "Build a Plugin"
         },
         {
           "path": "using-codebolt/integrations/llm-providers.md",
@@ -788,12 +788,36 @@
           "title": "Create and Manage Environments"
         },
         {
+          "path": "using-codebolt/environments/environment-management.md",
+          "title": "Environment Management"
+        },
+        {
           "path": "using-codebolt/environments/environment-providers.md",
           "title": "Environment Providers"
         },
         {
-          "path": "using-codebolt/environments/environment-debug.md",
-          "title": "Manage and Troubleshoot Environments"
+          "path": "using-codebolt/environments/code-sync.md",
+          "title": "Code Sync Between Environments"
+        },
+        {
+          "path": "using-codebolt/environments/data-flow.md",
+          "title": "Data Flow In Environments"
+        },
+        {
+          "path": "using-codebolt/environments/architecture.md",
+          "title": "Architectute"
+        },
+        {
+          "path": "using-codebolt/environments/environment-types/local-child-environments.md",
+          "title": "Local child environments"
+        },
+        {
+          "path": "using-codebolt/environments/environment-types/cloud-environments.md",
+          "title": "Cloud  Environments"
+        },
+        {
+          "path": "using-codebolt/environments/environment-types/runner-hosted-environments.md",
+          "title": "Runner Hosted Environments"
         },
         {
           "path": "using-codebolt/proxy-execution.md",
@@ -817,7 +841,7 @@
         },
         {
           "path": "using-codebolt/external-integrations/overview.md",
-          "title": "External Integrations Overview"
+          "title": "Overview"
         },
         {
           "path": "using-codebolt/external-integrations/routing-gateway.md",
@@ -914,7 +938,7 @@
     },
     {
       "heading": "Guides",
-      "count": 31,
+      "count": 32,
       "order": 3,
       "files": [
         {
@@ -1040,6 +1064,10 @@
         {
           "path": "guides/advanced/self-host-for-a-team.md",
           "title": "Self-Host for a Team"
+        },
+        {
+          "path": "guides/trubleshooting/environment-debug.md",
+          "title": "Troubleshoot Environments"
         }
       ]
     },
@@ -1695,6 +1723,45 @@
         {
           "path": "build-on-codebolt/agent-infrastructure/remote-execution.md",
           "title": "Remote Execution"
+        }
+      ]
+    },
+    {
+      "heading": "Agent Knowledge",
+      "count": 8,
+      "order": 5,
+      "files": [
+        {
+          "path": "agent/codebolt-agent-manual.md",
+          "title": "Codebolt Agent Manual"
+        },
+        {
+          "path": "agent/examples/minimal-custom-tool.md",
+          "title": "Minimal custom tool workflow"
+        },
+        {
+          "path": "agent/skills/build-custom-agent.md",
+          "title": "Build a custom Codebolt agent"
+        },
+        {
+          "path": "agent/skills/create-custom-tool.md",
+          "title": "Create a custom Codebolt tool"
+        },
+        {
+          "path": "agent/skills/debug-tool-call.md",
+          "title": "Debug a failed tool call"
+        },
+        {
+          "path": "agent/skills/use-execution-plans.md",
+          "title": "Use execution plans"
+        },
+        {
+          "path": "agent/skills/use-mcp-tools.md",
+          "title": "Use MCP tools"
+        },
+        {
+          "path": "agent/troubleshooting/tool-registration-failures.md",
+          "title": "Tool registration failures"
         }
       ]
     },
