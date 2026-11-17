@@ -8,6 +8,8 @@ import SystemArchitecture from '@site/src/components/diagrams/SystemArchitecture
 
 # Build on Codebolt
 
+Browse [Developer capabilities](../02_using-codebolt/01_features-overview.md#developer-capabilities) for custom agents, applications, interfaces, and providers. The [Features overview](../02_using-codebolt/01_features-overview.md) also links to builder guides alongside each shared capability, including skills, tools, plugins, memory, and orchestration.
+
 This section is for developers extending Codebolt. If you want to *use* Codebolt, start at [Get Started](../01_get-started/01_overview.md). If you want to follow a specific how-to, try [Guides](../03_guides/01_overview.md). Everything here is for people writing code that plugs into the server.
 
 If you are new to the builder-facing architecture, read [Architecture for Builders](./02_architecture/01_architecture-for-builders.md) first. It explains how the server, clients, agents, plugins, and agent extensions fit together.
