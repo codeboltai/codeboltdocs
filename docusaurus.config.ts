@@ -1,6 +1,15 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import { generateSidebarItems } from './sidebarItemsGenerator';
+
+const excludedDocs = ['Issue.md', 'sortspec.md', 'Excalidraw/**'];
+const generatedReference = [
+  '05_reference/02_codeboltjs/{09_type-reference,10_api-access,11_mcp-access,12_utility-functions,pseudo_cli}/**',
+  '05_reference/03_plugin-sdk/{02_api-reference,type-reference}/**',
+  '05_reference/04_client-sdk/{02_api-reference,03_event-reference,type-reference}/**',
+  '05_reference/05_agent-framework/type-reference/**',
+];
 
 const config: Config = {
   title: 'CodeBolt',
@@ -137,38 +146,11 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Exclude auto-generated reference from the dev server file watcher.
-          // 05_reference/ contains ~4500 TypeDoc-generated files that cause the
-          // watcher to re-index on every save and make hot reload unusably slow.
-          // They are still included in production builds — remove this line to
-          // regenerate a full build locally.
+          // Keep the reference landing pages and CLI docs available locally.
           exclude: process.env.NODE_ENV === 'development'
-            ? ['05_reference/**']
-            : ['Issue.md', 'sortspec.md', 'Excalidraw/**'],
-          // editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          async sidebarItemsGenerator({ defaultSidebarItemsGenerator, item, ...args }) {
-            const sidebarItems = await defaultSidebarItemsGenerator({ item, ...args });
-            if (item.dirName !== '02_using-codebolt' && item.dirName !== '04_build-on-codebolt') return sidebarItems;
-
-            const result: typeof sidebarItems = [];
-            for (const sidebarItem of sidebarItems) {
-              const label = (sidebarItem as any).customProps?.sectionLabel;
-              if (sidebarItem.type === 'category' && label) {
-                result.push({
-                  type: 'html',
-                  value: `<div class="sidebar-section-label"><span>${label}</span></div>`,
-                  defaultStyle: false,
-                } as any);
-
-                if (label === 'Platforms' && sidebarItem.label === 'Clients') {
-                  result.push(...sidebarItem.items);
-                  continue;
-                }
-              }
-              result.push(sidebarItem);
-            }
-            return result;
-          },
+            ? [...excludedDocs, ...generatedReference]
+            : excludedDocs,
+          sidebarItemsGenerator: generateSidebarItems,
         },
         blog: {
           showReadingTime: true,
@@ -218,66 +200,12 @@ const config: Config = {
         src: 'img/logo.jpg',
       },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'getStartedSidebar',
-          position: 'left',
-          label: 'Get Started',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'usingCodeboltSidebar',
-          position: 'left',
-          label: 'Using Codebolt',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'conceptsSidebar',
-          position: 'left',
-          label: 'Concepts',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'buildSidebar',
-          position: 'left',
-          label: 'Build on Codebolt',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'guidesSidebar',
-          position: 'left',
-          label: 'Guides',
-        },
-        // Reference sidebar is excluded in dev (05_reference files not watched).
-        // In dev we show a plain href so the navbar doesn't break.
-        ...(process.env.NODE_ENV === 'development'
-          ? [{ type: 'html' as const, value: '<span class="navbar__item navbar__link" style="opacity:0.4;cursor:default">Reference</span>', position: 'left' as const }]
-          : [{ type: 'docSidebar' as const, sidebarId: 'referenceSidebar', position: 'left' as const, label: 'Reference' }]
-        ),
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'devSidebar',
-        //   position: 'left',
-        //   label: 'Developer Guide',
-        // },
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'toolSidebar',
-        //   position: 'left',
-        //   label: 'Tools',
-        // },
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'appSidebar',
-        //   position: 'left',
-        //   label: 'Apps',
-        // },
-        {
-          to: '/blog',
-          label: 'Blog',
-          position: 'left'
-        },
-
+        { type: 'docSidebar', sidebarId: 'getStartedSidebar', label: 'Get Started', position: 'left' },
+        { type: 'docSidebar', sidebarId: 'usingCodeboltSidebar', label: 'Using Codebolt', position: 'left' },
+        { type: 'docSidebar', sidebarId: 'buildSidebar', label: 'Build with Agents', position: 'left' },
+        { type: 'docSidebar', sidebarId: 'scalingSidebar', label: 'Scaling Agents', position: 'left' },
+        { type: 'docSidebar', sidebarId: 'configurationSidebar', label: 'Configuration', position: 'left' },
+        { type: 'docSidebar', sidebarId: 'referenceSidebar', label: 'Reference', position: 'left' },
       ],
     },
     prism: {
