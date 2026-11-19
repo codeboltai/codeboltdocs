@@ -1,23 +1,16 @@
 ---
 sidebar_position: 1
 title: Automation Overview
-description: Automation covers everything that causes agents to act automatically — without a user typing a message
+description: Run reusable actions manually, at scheduled times, or in response to events.
 ---
 
 # Automation
 
-Automation covers everything that causes agents to act *automatically* — without a user typing a message. Instead of you starting a conversation, a system event, an incoming HTTP request, a scheduled time, or a code lifecycle event starts it for you.
+Automations run reusable actions such as sending a notification, starting an agent, or running an action block. Start them manually, schedule them, or have them respond to events.
 
 ## How it works
 
-All automatic triggers ultimately route through the same central mechanism: the **Routing Gateway**. It receives a message from a source, decides which agent and thread to use, and delivers the message.
-
-```
-External HTTP request  ──▶ Webhooks ──┐
-Scheduled time         ──▶ Calendar ──┤
-File / git / agent event ─▶ Hooks ────┤──▶ Routing Gateway ──▶ Agent
-Application event      ──▶ Pipelines ─┘
-```
+Open **Automations** in the desktop panel selector. Each automation has a **Trigger** that determines when it runs and an **Action** that determines what it does.
 
 ## Tools in this section
 
@@ -27,11 +20,17 @@ Application event      ──▶ Pipelines ─┘
 | [Calendar & Scheduled Events](./03_calendar-events.md) | A scheduled time or cron expression | Gateway notifies participants, optionally triggers an agent |
 | [Hooks](./04_hooks.md) | File saved, git commit, agent completed, etc. | An agent, action block, or shell command runs |
 
-Every automatic trigger is recorded to the append-only [Event Log](../07_memory/07_event-log.md), which lives alongside the memory layers — use it to audit or debug what actually fired.
+## Manual & Scheduled Automations
+
+Choose **Manual** as the trigger for an automation you start on demand with **Run**. Choose **Schedule** to run it once at a set time, at a repeating interval, or on a cron schedule. Save the trigger and action, then enable the automation for scheduled execution. For hosted runs, see [Cloud Scheduled Tasks](../02_surfaces/06_cloud/04_running-agents/07_scheduled-tasks.md).
+
+## Event Triggers
+
+Choose **Event** as the trigger and select the event that should start the automation. Save and enable it to run the configured action when that event occurs. See [Hooks](./04_hooks.md#trigger-events) for lifecycle events that can trigger hooks.
 
 ## The Routing Gateway
 
-The Routing Gateway is the shared delivery layer. Every auto-triggered message passes through it. It decides:
+For incoming messages such as webhooks, the Routing Gateway can decide:
 
 - **Which agent** receives the message (based on source configuration)
 - **Which thread** to use — a new thread per message, a shared thread per user, a single global thread, or an existing thread

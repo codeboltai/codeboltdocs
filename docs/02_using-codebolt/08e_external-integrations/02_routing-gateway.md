@@ -92,6 +92,12 @@ A routing rule is a condition → action pair. Rules are evaluated in order from
 | `threadId` | Specific existing thread to route to when using `existing` |
 | `instruction` | Fixed instruction to prepend before passing the message to the agent |
 
+## Routing Profiles
+
+A routing profile defines which values an integration sends with each message and how those values determine its environment and thread. For example, partition threads by channel to keep conversations separate while sharing an execution environment.
+
+Open **Routing Profiles** in the desktop panel selector. Define the accepted scopes, set the environment and thread policies, and choose **Save revision**. A policy can share resources, partition them by scope, allocate a new resource per message, or reuse a resource until it is idle. [Virtual Workers](../07a_parallel-agents/06_virtual-workers.md) can accept messages routed through these profiles.
+
 ## Thread strategies
 
 The thread strategy tells the gateway how to map incoming messages to Codebolt threads.

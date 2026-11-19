@@ -20,12 +20,22 @@ Codebolt includes a set of built-in planning tools that live alongside your code
 | **[Requirement Plan](./05_requirement-plan.md)** | Aggregated documents linking specs, flows, and action plans | Aggregation |
 | **[Action Plan](./06_action-plan.md)** | Structured execution plans with tasks, dependencies, and parallel groups | Execution |
 | **[Tasks](./07_tasks.md)** | Individual work items with status, priority, and sub-task hierarchy | Operational |
+| **[Feature Plans](#feature-plans)** | Organize a feature's notes, canvases, and execution plans | Feature |
+| **[Notes & Canvas](#notes--canvas)** | Record decisions and sketch the work | Planning context |
 
 ## How they fit together
 
 <PlanningOverview />
 
 The tools are independent — you can use any one without the others. But they're designed to compose: a Roadmap feature can become a Task; a Requirement Plan can pull together a Spec, a UI Flow, and an Action Plan into one document.
+
+## Feature Plans
+
+Open **Feature Plan** from the desktop panel selector to create or open a plan for a feature. Add Markdown or code sections for context and use **Note Link**, **Canvas Link**, or **Execution Plan Link** to connect related planning material.
+
+## Notes & Canvas
+
+Use **Note** for written decisions and requirements, and **Canvas** for visual planning. Open either panel from the desktop panel selector or open a linked note or canvas directly from its feature plan.
 
 ## Where planning tools live
 

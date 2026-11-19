@@ -86,7 +86,6 @@ const sidebars = {
       doc('Inline Edit and Ctrl+K', `${chat}/inline-edit-and-ctrl-k`),
       doc('Model Selection', `${chat}/model-selection`),
       doc('AI Requests', `${chat}/ai-requests`),
-      doc('Steps and Steering', `${chat}/steps-steering`),
     ]),
     group('Code Editor Features', [
       doc('Code & Terminal Overview', `${editor}/overview`),
@@ -101,7 +100,7 @@ const sidebars = {
       doc('Workspace', `${desktop}/workspace-and-project-management/overview`),
       doc('Usage and Billing', `${cloud}/settings/subscription-plans-usage-billing`),
       doc('Application Layout Mode', `${desktop}/application-navigation/layout`),
-      ref('Settings Overview', `${settings}/overview`),
+      doc('Settings Overview', `${settings}/overview`),
       ref('LLM Settings', `${settings}/llm-settings`),
       ref('Agent Settings', `${settings}/agent-settings`),
       ref('Environment & Services', `${settings}/environment-services`),
@@ -141,7 +140,6 @@ const sidebars = {
     group('Agent Tools', [
       doc('Agent Tools Overview', 'concepts/the-agent/tools-and-mcp'),
       jump('Built-in Tools', `${build}/07b_subsystems/mcp-and-tools`, 'built-in-tool-families'),
-      doc('Custom Tools', `${extensions}/custom-tools`),
     ]),
     group('Agent Observability', [
       doc('Agent Observability Overview', `${use}/06a_application-logs`),
@@ -153,9 +151,11 @@ const sidebars = {
       doc('Guardrails', guardrails),
       ref('App & Project Settings', `${settings}/app-and-project-settings`),
       doc('Routing Gateway', gateway),
-      jump('Tool Permissions', guardrails, 'guardrail-types'),
-      jump('Approval Requests', guardrails, 'actions'),
+      jump('Policy Profiles', guardrails, 'policy-profiles'),
+      jump('Tool Permissions', guardrails, 'tool-permissions'),
+      jump('Approval Requests', guardrails, 'approval-requests'),
       jump('Routing Rules & Webhooks', gateway, 'routing-rules'),
+      jump('Routing Profiles', gateway, 'routing-profiles'),
     ]),
     group('Memory & Context', [
       doc('Memory & Context Overview', `${memory}/overview`),
@@ -174,15 +174,16 @@ const sidebars = {
       doc('Key-Value Store', `${memoryPanels}/kv-store`),
     ]),
     group('Planning', [
-      doc('Planning Overview', `${use}/planning/overview`),
+      doc('Planning', `${use}/planning/overview`),
       doc('Roadmap', `${use}/planning/roadmap`),
       doc('Specs', `${use}/planning/specs`),
       doc('UI Flow', `${use}/planning/ui-flow`),
       doc('Requirement Plan', `${use}/planning/requirement-plan`),
       doc('Action Plan', `${use}/planning/action-plan`),
       doc('Tasks', `${use}/planning/tasks`),
+      jump('Feature Plans', `${use}/planning/overview`, 'feature-plans'),
       doc('Execution Plans', `${panels}/04a_application-planning-features/action-plans`),
-      ref('Chat Canvas', `${parallel}/chat-canvas`),
+      jump('Notes & Canvas', `${use}/planning/overview`, 'notes--canvas'),
       group('Project Structure & Update Requests', [
         doc('Project Structure', `${panels}/04a_application-planning-features/project-structure`),
         doc('Project Structure Update Requests', `${deposition}/update-project-structure-request`),
@@ -193,8 +194,8 @@ const sidebars = {
       doc('Webhooks', `${automation}/webhooks`),
       doc('Calendar & Scheduled Events', `${automation}/calendar-events`),
       doc('Hooks', `${automation}/hooks`),
-      doc('Scheduled Automations', `${cloud}/running-agents/scheduled-tasks`),
-      jump('Event Triggers', `${automation}/hooks`, 'trigger-events'),
+      jump('Manual & Scheduled Automations', `${automation}/overview`, 'manual--scheduled-automations'),
+      jump('Event Triggers', `${automation}/overview`, 'event-triggers'),
     ]),
     group('Eval & Optimization', [
       doc('Eval & Optimization Overview', `${evals}/overview`),
@@ -220,6 +221,7 @@ const sidebars = {
       doc('Level 2 Separate App with Local Server', `${apps}/standalone-server-connected-apps`),
       ref('Level 3 Hosted Runtimes', `${build}/08b_cloud/intro-to-cloud`),
       doc('Choosing the Right Architecture', `${apps}/application-shapes`),
+      doc('Mini Apps', `${apps}/mini-apps`),
     ]),
     group('Plugins', [
       doc('What Are Plugins?', `${use}/07z_plugins/overview`),
@@ -227,8 +229,6 @@ const sidebars = {
       doc('Plugin Marketplace', `${use}/07z_plugins/plugin-marketplace`),
       doc('Building Plugins', `${use}/07z_plugins/building-plugins`),
     ]),
-    group('More Product Documentation', [remaining('02_using-codebolt')]),
-    group('Guides', [remaining('03_guides')]),
   ],
 
   buildSidebar: [
@@ -271,14 +271,14 @@ const sidebars = {
     group('Providers', [
       doc('Environment Providers', `${build}/08a_multi-environment-orchestration/creating-a-custom-provider`),
       doc('Model Providers', `${build}/plugins/custom-ai-providers/overview`),
-      ref('Preview Providers', `${cloud}/settings/preview-provider-settings`),
+      jump('Preview Providers', 'reference/cloud-sdk/overview', 'preview-providers'),
     ]),
     group('External Integrations', [
       doc('Connect External Agents', `${create}/third-party-agents`),
       jump('CodeBolt as an MCP Server', `${extend}/mcp-tools/quickstart-local-mcp`, 'approach-2-mcp-server-via-codeboltjs-api'),
       doc('Client SDK Integration', `${build}/custom-uis/client-sdk`),
+      ref('Cloud SDK Integration', 'reference/cloud-sdk/overview'),
     ]),
-    group('More Development Topics', [remaining('04_build-on-codebolt')]),
   ],
 
   scalingSidebar: [
@@ -288,10 +288,9 @@ const sidebars = {
       doc('Subagents', `${parallel}/sub-agent`),
       doc('Subagent Selection', `${extend}/subagents`),
       doc('Threads & Background Agents', `${parallel}/background-agent`),
-      doc('Chat Canvas', `${parallel}/chat-canvas`),
+      doc('Virtual Workers', `${parallel}/virtual-workers`),
     ]),
     group('Multi-agent Collaboration', [
-      doc('Multi-agent Usage', `${use}/multi-agent-usage/overview`),
       doc('Swarms', `${use}/multi-agent-usage/running-a-swarm`),
       doc('Swarm Configuration', `${collaboration}/swarm-management`),
       jump('Teams & Roles', `${collaboration}/swarm-management`, 'role-management'),
@@ -321,7 +320,6 @@ const sidebars = {
         doc('Debate', `${orchestration}/patterns/debate`),
         doc('Plan–Execute–Review', `${orchestration}/patterns/plan-execute-review`),
       ]),
-      doc('Agent Flows', `${orchestration}/agent-flows`),
     ]),
     group('Local & Cloud Scaling', [
       doc('Local Scaling', 'get-started/core-concepts/local-scaling'),
@@ -346,7 +344,6 @@ const sidebars = {
       jump('Default Agent', `${settings}/app-and-project-settings`, 'agent-defaults'),
       doc('Editor & Language Servers', `${settings}/language-servers`),
       doc('Appearance & Layouts', `${settings}/appearance`),
-      doc('Desktop Settings', `${settings}/overview`),
     ]),
     group('Models & Inference', [
       doc('Model Connections', `${settings}/llm-settings`),
@@ -362,7 +359,6 @@ const sidebars = {
       doc('Environments & Services', `${settings}/environment-services`),
       doc('Environment Provider Settings', `${environments}/configuring-environments`),
       jump('Web Search Providers', `${use}/07z_plugins/installing-plugins`, 'after-install'),
-      doc('Preview Provider Settings', `${cloud}/settings/preview-provider-settings`),
     ]),
     group('Collaboration & Review', [
       ref('Swarm Configuration', `${collaboration}/swarm-management`),
@@ -378,13 +374,24 @@ const sidebars = {
       group('Agent SDK', [directory('05_reference/05_agent-framework')]),
       group('Client SDK', [directory('05_reference/04_client-sdk')]),
       group('Plugin SDK', [directory('05_reference/03_plugin-sdk')]),
+      doc('Cloud SDK', 'reference/cloud-sdk/overview'),
+      doc('External SDK', 'reference/external-sdk/overview'),
     ]),
     group('CLI', [
       ref('CLI Setup', 'get-started/02f_platforms/cli'),
-      doc('Command Reference', 'reference/codebolt-cli/overview'),
+      group('Command Reference', [
+        doc('CLI Overview', 'reference/codebolt-cli/overview'),
+        remaining('05_reference/06_codebolt-cli'),
+      ]),
       doc('MCP Server Commands', `${cli}/tool-commands`),
-      remaining('05_reference/06_codebolt-cli'),
     ]),
+  ],
+
+  // Preserve navigation for linked articles outside the whiteboard menus.
+  supportingDocsSidebar: [
+    group('Product Documentation', [remaining('02_using-codebolt')]),
+    group('Developer Documentation', [remaining('04_build-on-codebolt')]),
+    group('Guides', [remaining('03_guides')]),
   ],
 } satisfies SidebarsConfig;
 

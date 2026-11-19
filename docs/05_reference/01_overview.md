@@ -16,6 +16,8 @@ The reference is organized by **SDK**, since each targets a different developer:
 | **Agent Framework** | Framework internals — processor pipeline, tool system, multi-agent teams | [Agent Framework Reference](./05_agent-framework/01_overview.md) |
 | **Plugin SDK** | Plugin authors — hooks, UI panels, providers, commands | [Plugin SDK Reference](./03_plugin-sdk/01_overview.md) |
 | **Client SDK** | UI / integration authors — bots, IDE extensions, CI runners | [Client SDK Reference](./04_client-sdk/01_overview.md) |
+| **Cloud SDK** | Runtime and preview-provider developers connecting to CodeBolt Cloud | [Cloud SDK](./07_cloud-sdk/01_overview.md) |
+| **External SDK** | Node.js integration developers connecting to a direct execution gateway | [External SDK](./08_external-sdk/01_overview.md) |
 
 ## Which reference for which job
 

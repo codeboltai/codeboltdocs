@@ -107,6 +107,18 @@ Restrict git operations:
 | `log` | The operation proceeds but is flagged in the Event Log |
 | `pause` | The agent is paused; the user must resume manually |
 
+## Policy Profiles
+
+A policy profile groups tool permission rules and a fallback decision. Open **Policy Profiles** to create a profile, edit its rules, or choose a default with **Make default**. Select the profile for a run when configuring its guardrails.
+
+## Tool Permissions
+
+A permission rule names a tool type and the decision to apply when the rule matches. For example, you can allow file reads and require approval for tools that write to files. The profile's fallback decision applies when no rule matches.
+
+## Approval Requests
+
+An approval request asks you to review a proposed action before it runs. Check the action and its arguments in the request, then approve or deny it. An active profile can require approval for writes, network requests, or other tool types.
+
 ## Scope
 
 Guardrails can be scoped to:
