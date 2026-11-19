@@ -19,18 +19,57 @@ const ACTION_FILES = [
   'executor.ts',
 ];
 
-const COMMAND_FILES = [
-  'threads.ts',
-  'tasks.ts',
-  'jobs.ts',
-  'agents.ts',
-  'git.ts',
-  'system.ts',
-  'projects.ts',
-  'chat.ts',
-  'todos.ts',
-  'llm.ts',
-];
+// Keep the existing reference URLs while using the current command namespaces.
+const COMMAND_NAMESPACES = {
+  agents: 'agent',
+  threads: 'thread',
+  tasks: 'task',
+  jobs: 'job',
+  git: 'git',
+  projects: 'project',
+  todos: 'todo',
+  llm: 'llm',
+};
+
+function loadGatewayCommandSpecs() {
+  const registryPath = path.join(COMMANDS_SRC_DIR, 'generated', 'gateway-tool-command-specs.ts');
+  const source = fs.readFileSync(registryPath, 'utf8');
+  const declaration = 'export const gatewayToolCommandSpecs: GatewayToolCommandSpec[] = ';
+  const start = source.indexOf(declaration);
+  if (start < 0) throw new Error(`Could not find the CLI command registry in ${registryPath}`);
+  return JSON.parse(source.slice(start + declaration.length).trim().replace(/;$/, ''));
+}
+
+function markdownCell(text) {
+  return text.replace(/&/g, '&amp;')
+    .replace(/[|<>{}]/g, character => `&#${character.charCodeAt(0)};`)
+    .replace(/\s+/g, ' ');
+}
+
+function renderGatewayReference(namespace, specs) {
+  const title = `${humanize(namespace)} Gateway Commands`;
+  const rows = specs.map(spec => {
+    const flags = spec.required.map(name =>
+      '--' + name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/[_\s.]+/g, '-').toLowerCase()
+    );
+    const help = `codebolt command ${namespace} ${spec.commandName} --help`;
+    return `| \`${spec.commandName}\` | ${markdownCell(spec.description)} | ${flags.map(flag => `\`${flag}\``).join(', ') || 'None'} | \`${help}\` |`;
+  }).join('\n');
+
+  return `---\ntitle: ${yamlQuote(title)}\n---\n\nUse \`codebolt command ${namespace}\` against a running server. Pass \`--help\` to a subcommand for its full options and accepted values.\n\n| Subcommand | Purpose | Required flags | Help |\n| --- | --- | --- | --- |\n${rows}\n`;
+}
+
+function renderGatewayIndex(specs) {
+  const filenames = Object.fromEntries(Object.entries(COMMAND_NAMESPACES).map(([filename, namespace]) => [namespace, filename]));
+  const counts = new Map();
+  for (const spec of specs) counts.set(spec.namespace, (counts.get(spec.namespace) || 0) + 1);
+  const rows = [...counts.keys()].sort().map(namespace => {
+    const filename = filenames[namespace];
+    const label = filename ? `[\`${namespace}\`](./${filename}.md)` : `\`${namespace}\``;
+    return `| ${label} | ${counts.get(namespace)} |`;
+  }).join('\n');
+  return `---\nsidebar_label: Overview\nsidebar_position: 1\ntitle: Gateway Commands\n---\n\nThe CLI registers commands from the built-in gateway tool registry. Start the CodeBolt server, then use \`codebolt command --help\` to list the namespaces available in your CLI. Use \`--cli-connect-port\` to select the server port, \`--host\` for the gateway host, or \`--json\` for raw output.\n\nThe low-level API is available through \`codebolt command api --help\`.\n\n| Namespace | Subcommands |\n| --- | ---: |\n${rows}\n`;
+}
 
 const TITLE_MAP = {
   llm: 'LLM',
@@ -48,19 +87,6 @@ function humanize(name) {
 
 function yamlQuote(value) {
   return JSON.stringify(value);
-}
-
-function ensureCleanDirectory(dir) {
-  fs.mkdirSync(dir, { recursive: true });
-  for (const entry of fs.readdirSync(dir)) {
-    const full = path.join(dir, entry);
-    const stat = fs.statSync(full);
-    if (stat.isDirectory()) {
-      fs.rmSync(full, { recursive: true, force: true });
-    } else if (entry.endsWith('.md') || entry === '_category_.json') {
-      fs.rmSync(full, { force: true });
-    }
-  }
 }
 
 function parseQuoted(line, methodName) {
@@ -192,23 +218,13 @@ function syntaxSuffix(command) {
   return parts.length > 0 ? ` ${parts.join(' ')}` : '';
 }
 
-function renderGroupDoc(kind, group) {
-  const basePrefix = kind === 'action'
-    ? `codebolt action ${group.name}`
-    : `codebolt command ${group.name}`;
-
+function renderActionDoc(group) {
+  const basePrefix = `codebolt action ${group.name}`;
   const introLines = [
-    group.description ? group.description : `Reference for the \`${basePrefix}\` command group.`,
+    group.description || `Reference for the \`${basePrefix}\` command group.`,
+    '',
+    'These commands manage CodeBolt extensions. Most of them create a temporary local server context through `executeAction()` before calling the extension endpoints.',
   ];
-
-  if (kind === 'action') {
-    introLines.push('', 'These commands manage CodeBolt extensions. Most of them create a temporary local server context through `executeAction()` before calling the extension endpoints.');
-    if (group.name === 'agent') {
-      introLines.push('', 'This same command group is also mounted at the top level as `codebolt agent ...`.');
-    }
-  } else {
-    introLines.push('', 'These commands connect to a running CodeBolt server. All subcommands inherit the global `codebolt command` options `--port <number>`, `--host <string>`, and `--json`.');
-  }
 
   const summaryRows = group.subcommands
     .map(command => `| \`${command.name}\` | ${command.description || '-'} | ${command.arguments.length} | ${command.options.length} |`)
@@ -222,7 +238,6 @@ function renderGroupDoc(kind, group) {
       '',
       '```text',
       `${basePrefix} ${command.name}${syntaxSuffix(command)}`,
-      kind === 'action' && group.name === 'agent' ? `codebolt agent ${command.name}${syntaxSuffix(command)}` : '',
       '```',
       '',
       '### Arguments',
@@ -240,14 +255,11 @@ function renderGroupDoc(kind, group) {
   return `---\nsidebar_label: ${yamlQuote(group.title)}\ntitle: ${yamlQuote(`${group.title} CLI`)}\ndescription: ${yamlQuote(`Reference for the ${basePrefix} command group.`)}\n---\n\n${introLines.join('\n')}\n\n## Subcommands\n\n| Subcommand | Description | Args | Options |\n| --- | --- | ---: | ---: |\n${summaryRows}\n\n${sections}\n`;
 }
 
-function renderIndex(kind, groups) {
-  const title = kind === 'action' ? 'Action Commands' : 'Server Command Modules';
-  const description = kind === 'action'
-    ? 'Reference for `codebolt action ...` command groups.'
-    : 'Reference for `codebolt command ...` modules.';
-  const prefix = kind === 'action' ? './' : './';
+function renderActionIndex(groups) {
+  const title = 'Action Commands';
+  const description = 'Reference for `codebolt action ...` command groups.';
   const rows = groups
-    .map(group => `| [\`${group.name}\`](${prefix}${group.name}.md) | ${group.subcommands.length} | ${group.description || '-'} |`)
+    .map(group => `| [\`${group.name}\`](./${group.name}.md) | ${group.subcommands.length} | ${group.description || '-'} |`)
     .join('\n');
 
   return `---\nsidebar_label: "Overview"\nsidebar_position: 1\ntitle: ${yamlQuote(title)}\ndescription: ${yamlQuote(description)}\n---\n\n| Group | Subcommands | Description |\n| --- | ---: | --- |\n${rows}\n`;
@@ -255,10 +267,15 @@ function renderIndex(kind, groups) {
 
 function main() {
   const actionGroups = ACTION_FILES.map(file => parseGroupFile(path.join(ACTIONS_SRC_DIR, file)));
-  const commandGroups = COMMAND_FILES.map(file => parseGroupFile(path.join(COMMANDS_SRC_DIR, file)));
+  const commandSpecs = loadGatewayCommandSpecs().filter(spec => !spec.chatOnly);
+  const commandGroups = Object.entries(COMMAND_NAMESPACES).map(([filename, namespace]) => {
+    const specs = commandSpecs.filter(spec => spec.namespace === namespace);
+    if (!specs.length) throw new Error(`No registered CLI commands for ${namespace}`);
+    return {filename, namespace, specs};
+  });
 
-  ensureCleanDirectory(ACTIONS_DOCS_DIR);
-  ensureCleanDirectory(COMMANDS_DOCS_DIR);
+  fs.mkdirSync(ACTIONS_DOCS_DIR, {recursive: true});
+  fs.mkdirSync(COMMANDS_DOCS_DIR, {recursive: true});
 
   fs.writeFileSync(
     path.join(ACTIONS_DOCS_DIR, '_category_.json'),
@@ -278,7 +295,7 @@ function main() {
   fs.writeFileSync(
     path.join(COMMANDS_DOCS_DIR, '_category_.json'),
     JSON.stringify({
-      label: 'Server Commands',
+      label: 'Gateway Commands',
       position: 4,
       collapsible: true,
       collapsed: false,
@@ -290,15 +307,15 @@ function main() {
     }, null, 2) + '\n'
   );
 
-  fs.writeFileSync(path.join(ACTIONS_DOCS_DIR, 'index.md'), renderIndex('action', actionGroups));
-  fs.writeFileSync(path.join(COMMANDS_DOCS_DIR, 'index.md'), renderIndex('command', commandGroups));
+  fs.writeFileSync(path.join(ACTIONS_DOCS_DIR, 'index.md'), renderActionIndex(actionGroups));
+  fs.writeFileSync(path.join(COMMANDS_DOCS_DIR, 'index.md'), renderGatewayIndex(commandSpecs));
 
   for (const group of actionGroups) {
-    fs.writeFileSync(path.join(ACTIONS_DOCS_DIR, `${group.name}.md`), renderGroupDoc('action', group));
+    fs.writeFileSync(path.join(ACTIONS_DOCS_DIR, `${group.name}.md`), renderActionDoc(group));
   }
 
   for (const group of commandGroups) {
-    fs.writeFileSync(path.join(COMMANDS_DOCS_DIR, `${group.name}.md`), renderGroupDoc('command', group));
+    fs.writeFileSync(path.join(COMMANDS_DOCS_DIR, `${group.filename}.md`), renderGatewayReference(group.namespace, group.specs));
   }
 
   console.log(`Generated Codebolt CLI docs for ${actionGroups.length} action groups and ${commandGroups.length} command modules.`);

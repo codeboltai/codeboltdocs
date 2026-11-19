@@ -44,11 +44,9 @@ The current `packages/cli` implementation does not expose the older dedicated mu
 What the current CLI *does* expose is limited server-backed inspection such as:
 
 ```bash
-codebolt command agents running
-codebolt command threads list
-codebolt command threads steps <threadId>
-codebolt command jobs list
-codebolt command todos list
+codebolt command thread list
+codebolt command job list
+codebolt command todo list
 ```
 
 That makes the CLI useful for supporting inspection, but not as a full replacement for the older flow and swarm control docs.
@@ -60,17 +58,13 @@ Start with the desktop execution surfaces. That is where the current product exp
 The current CLI can still help with adjacent inspection:
 
 ```bash
-codebolt command agents running
-codebolt command threads messages <threadId>
-codebolt command threads steps <threadId>
-codebolt command jobs get <id>
+codebolt command thread get-messages --thread-id THREAD_ID
+codebolt command job get --job-id JOB_ID
 ```
 
 ## Stopping multi-agent work
 
-Use the desktop execution surfaces that your build exposes for flow or swarm stop controls.
-
-The current CLI only documents `codebolt command agents stop --id <agentId>` for stopping a running agent process. It does not expose the older recursive flow or swarm stop commands.
+Use the stop control in chat or open **Execution → Running Agent** to stop the relevant execution.
 
 ## When multi-agent is hurting more than helping
 

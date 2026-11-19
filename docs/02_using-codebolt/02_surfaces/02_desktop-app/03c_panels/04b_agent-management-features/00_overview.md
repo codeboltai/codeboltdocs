@@ -21,7 +21,7 @@ Open these panels from the bottom bar menus, the panel-header **+** menu, or the
 | [Action Block](./05_action-block.md) | Manage reusable action blocks that agents, hooks, and automations can execute. |
 | [Jobs](./06_jobs.md) | Manage the work queue used by swarms, orchestrators, and coordinating agents. |
 | [Swarm Management](./07_swarm-management.md) | Create swarms, manage agents, teams, roles, vacancies, and swarm execution. |
-| [Orchestrator Management](./08_orchestrator-management.md) | Monitor orchestrators, worker agents, combined chat, and orchestrator settings. |
+| [Thread Coordination](./08_orchestrator-management.md) | Inspect parent and child threads and their executions. |
 | [Eval](./09_eval.md) | Run and inspect agent evaluations for prompts, tools, and task behavior. |
 | [Agent Profiles](./10_agent-profiles.md) | Review agent profile detail such as overview, talent, karma, testimonials, and conversations. |
 | [Guardrails](./11_guardrails.md) | Configure and inspect agent guardrails before tool calls or risky actions execute. |

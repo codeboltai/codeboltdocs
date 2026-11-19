@@ -7,7 +7,7 @@ description: The codebolt command mode is the command-line entry point for runni
 
 # Overview
 
-The `codebolt` command mode is the command-line entry point for running the Codebolt server, launching the CLI interface, connecting to an existing server, running headless prompts, and executing command groups like `action`, `agent`, and `command`.
+The `codebolt` command mode is the command-line entry point for running the Codebolt server, launching the CLI interface, connecting to an existing server, running headless prompts, and executing command groups such as `action`, `command`, and `mcp`.
 
 This page is about command mode itself. The interactive terminal interface is documented separately under [CLI Interface Overview](../01_cli-interface/01_overview.md).
 
@@ -44,7 +44,7 @@ Without a subcommand, the CLI runs one of its runtime modes depending on the fla
 | `--api-url <url>` | Custom provider API base URL |
 | `--embedding-provider <name>` | Embedding provider override |
 | `--embedding-model <name>` | Embedding model override |
-| `--auth-token <token>` | Authentication token |
+| `--team <username>` | Scope cloud synchronization to a team workspace |
 | `--web` | Require the web frontend to be present |
 | `--debug` | Enable debug mode |
 | `--version` / `-v` | Print version |
@@ -57,8 +57,9 @@ The CLI also mounts separate command groups:
 | Command | Purpose |
 |---|---|
 | `codebolt action ...` | Create, publish, and list extension types like tools, providers, plugins, skills, capabilities, executors, and action blocks |
-| `codebolt agent ...` | Top-level agent extension commands. This same group is also mounted under `codebolt action agent ...` |
-| `codebolt command ...` | Connect to a running server and run modules like `threads`, `tasks`, `jobs`, `agents`, `git`, `system`, `projects`, `chat`, `todos`, `llm`, and `mcp` |
+| `codebolt action agent ...` | Create, remix, publish, or list agent extensions |
+| `codebolt command ...` | Connect to a running server and run registered gateway tools such as `thread`, `agent`, `git`, and `mcp` |
+| `codebolt mcp start` | Expose CodeBolt tools to an MCP client |
 
 For the exact subcommand and flag reference, use [Reference → Codebolt CLI](../../../../05_reference/06_codebolt-cli/01_overview.md).
 
@@ -95,16 +96,16 @@ codebolt --prompt "add a /health endpoint" --agent generalist
 ```bash
 codebolt action tool create --name my-tool
 codebolt action plugin list
-codebolt agent create --name my-agent --framework
+codebolt action agent create --name my-agent --framework
 ```
 
 ### Query a running server
 
 ```bash
-codebolt command threads list
+codebolt command thread list
 codebolt command git status
-codebolt command llm providers
-codebolt command mcp available
+codebolt command llm get-configured-providers
+codebolt command mcp list-servers
 ```
 
 ## CLI vs neighboring surfaces

@@ -1,51 +1,13 @@
 ---
 sidebar_label: "System"
 title: "System CLI"
-description: "Reference for the codebolt command system command group."
+description: Inspect a running CodeBolt server through CLI discovery.
 ---
 
-System status and utilities
+# Runtime and Gateway Discovery
 
-These commands connect to a running CodeBolt server. All subcommands inherit the global `codebolt command` options `--port <number>`, `--host <string>`, and `--json`.
+Use the [root command](../02_root-command.md) to start the server and the [gateway reference](./index.md) to discover available tools. To inspect the project attached to a running server:
 
-## Subcommands
-
-| Subcommand | Description | Args | Options |
-| --- | --- | ---: | ---: |
-| `health` | Check if the server is healthy | 0 | 0 |
-| `check-cli` | Check CLI installation status | 0 | 0 |
-| `open-folder` | Open a folder in the file manager | 1 | 1 |
-
-## `health`
-Check if the server is healthy
-```text
-codebolt command system health
+```bash
+codebolt command project get-path
 ```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
-
-## `check-cli`
-Check CLI installation status
-```text
-codebolt command system check-cli
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
-
-## `open-folder`
-Open a folder in the file manager
-```text
-codebolt command system open-folder [path] [options]
-```
-### Arguments
-| Argument | Description |
-| --- | --- |
-| `[path]` | Folder path |
-### Options
-| Flags | Required | Description |
-| --- | --- | --- |
-| `--path <path>` | No | Folder path |

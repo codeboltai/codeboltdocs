@@ -1,105 +1,38 @@
 ---
 sidebar_position: 2
 title: Agent Commands
-description: The current CLI splits agent work across headless prompt execution, server-backed inspection commands, and extension authoring commands.
+description: Run a headless prompt, use agent gateway tools, or author an agent extension.
 ---
 
 # Agent Commands
 
-The current CLI does not use the older task-oriented agent runtime command family from previous drafts.
-
-Agent-related work is split across three surfaces:
-
-- `codebolt --prompt ...` for one-shot headless execution
-- `codebolt command agents ...` for server-backed inspection and process control
-- `codebolt agent ...` or `codebolt action agent ...` for authoring and publishing agent extensions
-
-## Run a one-shot prompt
-
-Use headless prompt mode when you want to send a single prompt to an agent and exit:
+## Run a headless prompt
 
 ```bash
-codebolt --prompt "Explain this codebase in 3 bullet points"
-codebolt --prompt "Add a /health endpoint" --agent generalist
-codebolt --prompt "Review the current project" --project /path/to/project
+codebolt --project /path/to/project --prompt "Summarize this project"
 ```
 
-The prompt response is streamed to stdout. See [Headless Prompt](../03_cli-headless/03_headless-prompt.md#get-the-response-back) for how to capture it in scripts.
+Pass `--agent <name>` to select an agent or read [Headless Prompt](../03_cli-headless/03_headless-prompt.md) for provider and output options.
 
-You can also pass provider settings at launch time:
+## Agent and thread commands
+
+Start a CodeBolt server before using gateway commands. Use the agent ID returned by `agent list` when starting a task through the gateway.
 
 ```bash
-codebolt --prompt "Summarize the repo" \
-  --agent generalist \
-  --provider openai \
-  --model gpt-5 \
-  --api-key "$OPENAI_API_KEY"
+codebolt command agent list
+codebolt command agent start --agent-id AGENT_ID --task "Summarize this project"
+codebolt command thread list
+codebolt command thread get-messages --thread-id THREAD_ID
 ```
 
-## Inspect and manage installed agents
+Open **Execution → Running Agent** in the desktop app to stop a running execution.
 
-When a Codebolt server is already running, use `codebolt command agents`:
+## Author agent extensions
 
 ```bash
-codebolt command agents list
-codebolt command agents running
-codebolt command agents local
-codebolt command agents featured
-codebolt command agents recommended
-codebolt command agents config <name>
+codebolt action agent create --framework --name my-agent
+codebolt action agent create --remix
+codebolt action agent list
 ```
 
-The current process control commands are:
-
-```bash
-codebolt command agents start --id <agentId> [--name <name>]
-codebolt command agents stop --id <agentId>
-```
-
-These commands manage installed or running agent processes through the server. They are not a replacement for the older task-oriented runtime flow documented in previous drafts.
-
-## Inspect related runtime data
-
-Other useful server-backed command groups:
-
-```bash
-codebolt command threads list
-codebolt command threads messages <threadId>
-codebolt command threads steps <threadId>
-
-codebolt command chat list
-codebolt command chat messages <threadId>
-codebolt command chat steps <threadId>
-
-codebolt command jobs list
-codebolt command todos list
-codebolt command projects threads
-```
-
-Use `--json` with `codebolt command ...` when you need structured output.
-
-## Build and publish agent extensions
-
-The `codebolt agent` command family is currently for agent extension authoring:
-
-```bash
-codebolt agent create --framework --name my-agent
-codebolt agent create --remix
-codebolt agent publish --path ./my-agent
-codebolt agent list
-codebolt agent create-remote --name my-remote-agent --execution-mode selfExecuted
-```
-
-The same commands are also available under `codebolt action agent ...`.
-
-## Current limitation
-
-The current `packages/cli` implementation does not expose the older run-tracing, runtime install, portfolio, and delegation subcommands that existed in previous documentation drafts.
-
-For task execution, use `codebolt --prompt ...`. For richer agent management and observability, use the desktop UI and CLI interface surfaces.
-
-## See also
-
-- [Command Mode Overview](./01_overview.md)
-- [Headless CLI](../03_cli-headless/01_overview.md)
-- [Running agents](../../../04_agents/03_running-agents.md)
+See [Agent Action Commands](../../../../05_reference/06_codebolt-cli/actions/agent.md) for authoring and publishing.

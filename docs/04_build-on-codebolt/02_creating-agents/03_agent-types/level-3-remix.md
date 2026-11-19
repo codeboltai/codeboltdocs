@@ -67,7 +67,7 @@ There's no forked code. A bug fix to the parent's tool handling, an improvement 
 ## Finding a parent to remix
 
 ```bash
-codebolt agent list
+codebolt action agent list
 ```
 
 Shows every installed agent. The built-in ones (`generalist`, `planner`, `reviewer`, etc.) are the safest to remix because they're maintained as part of Codebolt itself. Marketplace agents can also be remixed, but their authors may break you with updates.
@@ -83,7 +83,7 @@ Prints the full resolved manifest including defaults.
 ## Scaffolding
 
 ```bash
-codebolt agent create --remix
+codebolt action agent create --remix
 ```
 
 This starts an interactive flow: select the agent to remix, enter a name, description, and custom instructions. Creates a `.codebolt/agents/remix/<name>.md` file with the remix config. Edit it to customise further.

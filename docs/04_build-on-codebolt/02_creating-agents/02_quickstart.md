@@ -19,7 +19,7 @@ The cheapest thing that counts as a custom agent: take an existing one and chang
 From a terminal in your project:
 
 ```bash
-codebolt agent create --remix
+codebolt action agent create --remix
 ```
 
 This starts an interactive flow:
@@ -74,7 +74,7 @@ When you need more than a prompt override — custom tool logic, structured outp
 ### Step 1 — scaffold
 
 ```bash
-codebolt agent create --framework --name my-planner
+codebolt action agent create --framework --name my-planner
 ```
 
 The `--framework` flag tells the CLI to use the agent framework template from the Codebolt registry. It downloads the template and scaffolds a project with `codeboltagent.yaml` (manifest), `index.ts` (handler entry point), `package.json`, and `tsconfig.json`.
@@ -82,7 +82,7 @@ The `--framework` flag tells the CLI to use the agent framework template from th
 You can also pass `--description` and `--path` to customise:
 
 ```bash
-codebolt agent create --framework --name my-planner --description "Produces a structured plan" --path ./my-planner
+codebolt action agent create --framework --name my-planner --description "Produces a structured plan" --path ./my-planner
 ```
 
 ### Step 2 — customise the manifest and handler
@@ -122,7 +122,7 @@ Codebolt launches and manages the agent process for you. You provide the **full 
 **From the CLI:**
 
 ```bash
-codebolt agent create-remote --name my-remote-agent --execution-mode codeboltExecuted --remote-path /absolute/path/to/agent
+codebolt action agent create-remote --name my-remote-agent --execution-mode codeboltExecuted --remote-path /absolute/path/to/agent
 ```
 
 **From the desktop app:** Open the agent creation panel → select `Create Remote Agent` → enter a name and description → choose `Executed by CodeBolt` → provide the full absolute path of the remote agent → click `Create Remote Agent`.
@@ -142,7 +142,7 @@ You run the agent yourself from your own terminal, CI job, container, or another
 **From the CLI:**
 
 ```bash
-codebolt agent create-remote --name my-remote-agent --execution-mode selfExecuted
+codebolt action agent create-remote --name my-remote-agent --execution-mode selfExecuted
 ```
 
 **From the desktop app:** Open the agent creation panel → select `Create Remote Agent` → enter a name and description → choose `Self-executed` → click `Create Remote Agent`.

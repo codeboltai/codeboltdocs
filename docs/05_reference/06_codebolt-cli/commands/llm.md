@@ -1,110 +1,15 @@
 ---
-sidebar_label: "LLM"
-title: "LLM CLI"
-description: "Reference for the codebolt command llm command group."
+title: "LLM Gateway Commands"
 ---
 
-Manage LLM providers and models
+Use `codebolt command llm` against a running server. Pass `--help` to a subcommand for its full options and accepted values.
 
-These commands connect to a running CodeBolt server. All subcommands inherit the global `codebolt command` options `--port <number>`, `--host <string>`, and `--json`.
-
-## Subcommands
-
-| Subcommand | Description | Args | Options |
-| --- | --- | ---: | ---: |
-| `providers` | List available LLM providers | 0 | 0 |
-| `models` | List all models | 0 | 0 |
-| `get-models` | Get models for a provider | 0 | 1 |
-| `set-default` | Set default LLM | 0 | 2 |
-| `update-key` | Update API key for a provider | 0 | 2 |
-| `pricing` | Show model pricing info | 0 | 0 |
-| `local-models` | List downloaded local models | 0 | 0 |
-| `embedding-providers` | List embedding-capable providers | 0 | 0 |
-
-## `providers`
-List available LLM providers
-```text
-codebolt command llm providers
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
-
-## `models`
-List all models
-```text
-codebolt command llm models
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
-
-## `get-models`
-Get models for a provider
-```text
-codebolt command llm get-models [options]
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-| Flags | Required | Description |
-| --- | --- | --- |
-| `--provider <name>` | Yes | Provider name |
-
-## `set-default`
-Set default LLM
-```text
-codebolt command llm set-default [options]
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-| Flags | Required | Description |
-| --- | --- | --- |
-| `--provider <name>` | Yes | Provider name |
-| `--model <model>` | Yes | Model name |
-
-## `update-key`
-Update API key for a provider
-```text
-codebolt command llm update-key [options]
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-| Flags | Required | Description |
-| --- | --- | --- |
-| `--provider <name>` | Yes | Provider name |
-| `--key <key>` | Yes | API key |
-
-## `pricing`
-Show model pricing info
-```text
-codebolt command llm pricing
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
-
-## `local-models`
-List downloaded local models
-```text
-codebolt command llm local-models
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
-
-## `embedding-providers`
-List embedding-capable providers
-```text
-codebolt command llm embedding-providers
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
+| Subcommand | Purpose | Required flags | Help |
+| --- | --- | --- | --- |
+| `agent-get-llm-roles` | Lists the resolved LLM provider/model used by an agent for default inference and each overrideable llmrole. If agentId is omitted, uses the current running agent. | None | `codebolt command llm agent-get-llm-roles --help` |
+| `delete-role` | Deletes a global or agent-specific LLM role mapping by name. Deleting an agent role does not delete a same-name global fallback role. | `--name` | `codebolt command llm delete-role --help` |
+| `get-config` | Gets the model configuration for a specific model or the default application model. If modelId is provided, returns configuration for that specific model. If modelId is not provided, returns the default application LLM configuration. | None | `codebolt command llm get-config --help` |
+| `get-configured-providers` | Lists configured LLM providers. By default the response only includes provider id/name/configured. To get live models, pass a provider filter; when provider is provided, the response includes that provider with its live models list. Use this before setting runtime llm provider/model overrides on agent_start, thread_create_start, thread_create_background, capability execution tools, or actionBlock_start. | None | `codebolt command llm get-configured-providers --help` |
+| `inference` | Sends an inference request to the LLM using OpenAI message format with tools support. The model is selected based on the provided llmrole. Returns the LLM's completion response. | `--messages` | `codebolt command llm inference --help` |
+| `list-roles` | Lists global LLM role mappings or an agent-specific role mapping set. For agent scope, also returns effective roles with global fallback unless includeEffective is false. | None | `codebolt command llm list-roles --help` |
+| `set-role` | Creates or updates a global or agent-specific LLM role mapping. Provider and model default to "default" when omitted. | `--name` | `codebolt command llm set-role --help` |

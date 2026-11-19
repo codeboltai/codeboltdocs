@@ -26,10 +26,8 @@ The current CLI does not expose the older dedicated flow-inspection and replay c
 Use the CLI only for adjacent server-backed inspection such as:
 
 ```bash
-codebolt command agents running
-codebolt command threads list
-codebolt command threads steps <threadId>
-codebolt command jobs list
+codebolt command thread list
+codebolt command job list
 ```
 
 </TabItem>

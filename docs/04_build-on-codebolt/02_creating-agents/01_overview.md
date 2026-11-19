@@ -56,7 +56,7 @@ There are six ways to bring an agent into Codebolt, from lowest to highest autho
 The simplest possible agent — listens for a user message and replies:
 
 ```bash
-codebolt agent create --framework --name hello-world
+codebolt action agent create --framework --name hello-world
 ```
 
 Open `hello-world/src/index.ts` and replace its contents with:
@@ -145,7 +145,7 @@ Agents are programs; test them like programs.
 When you're ready, your agent can be:
 
 - **Private to your project** — lives in `.codebolt/agents/`. No publishing needed.
-- **Published to the CodeBolt registry** — `codebolt agent publish`. See [Publishing](./99_publishing.md).
+- **Published to the CodeBolt registry** — `codebolt action agent publish`. See [Publishing](./99_publishing.md).
 
 ## See also
 

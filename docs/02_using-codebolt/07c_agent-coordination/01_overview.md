@@ -18,7 +18,7 @@ These tools are designed to be used together — an orchestrator assigns jobs, a
 | [Mail & Inbox](./03_mail-inbox.md) | Threaded messaging between agents and users |
 | [Agent Deliberation](./04_agent-deliberation.md) | Voting and consensus mechanisms for shared decisions |
 | [Swarm Management](./05_swarm-management.md) | Create and manage groups of agents working toward a shared goal |
-| [Orchestrator Management](./06_orchestrator-management.md) | Route tasks across agents via an orchestrator layer |
+| [Thread Coordination](./06_orchestrator-management.md#follow-delegated-work) | Inspect related threads and child executions |
 
 ## How the tools relate
 
@@ -39,4 +39,4 @@ Underneath all of these sits a set of shared primitives — **pheromones** and *
 
 ## Opening coordination panels
 
-All panels are accessible from the **Agents** dropdown in the bottom bar. Each panel connects to the server over WebSocket and updates in real time as agents act.
+Open **Execution → Thread Coordination** to inspect related threads. Use the desktop panel selector to find Jobs, Agent Deliberation, Swarm Management, and Inbox.

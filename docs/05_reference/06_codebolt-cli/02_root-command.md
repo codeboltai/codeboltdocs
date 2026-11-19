@@ -40,7 +40,7 @@ The root command supports four main operating modes:
 | `--api-url <url>` | Custom API base URL | Also supported through `CODEBOLT_API_URL` |
 | `--embedding-provider <name>` | Embedding provider | Also supported through `CODEBOLT_EMBEDDING_PROVIDER` |
 | `--embedding-model <name>` | Embedding model | Also supported through `CODEBOLT_EMBEDDING_MODEL` |
-| `--auth-token <token>` | Authentication token for headless login | Also supported through `CODEBOLT_AUTH_TOKEN` |
+| `--team <username>` | Scope cloud sync to a team workspace | The `team:` prefix is optional |
 | `--debug` | Enable debug mode | Exposes additional debug behavior in the launched runtime |
 | `-v, --version` | Show CLI version | Provided by Commander |
 
@@ -49,7 +49,7 @@ The root command supports four main operating modes:
 | Command | Purpose |
 |---|---|
 | [`codebolt action`](./actions/index.md) | Manage extensions such as agents, tools, providers, plugins, skills, capabilities, executors, and action blocks |
-| [`codebolt agent`](./actions/agent.md) | Top-level alias for the same command group as `codebolt action agent` |
+| [`codebolt mcp start`](../../02_using-codebolt/02_surfaces/04_cli/02_cli-commands/03_tool-commands.md) | Start the external MCP server |
 | [`codebolt command`](./commands/index.md) | Connect to a running server and execute server-backed command modules |
 
 ## Examples

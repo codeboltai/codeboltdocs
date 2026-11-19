@@ -58,21 +58,7 @@ Rare. The agent's deliberation phase is thinking but hasn't reached the LLM call
 
 ## 2. Stop the agent
 
-Graceful stop first:
-
-```bash
-codebolt agent stop <run-id>
-```
-
-Waits for the current phase to finish then exits cleanly. Usually works within 10-30 seconds.
-
-If graceful stop doesn't work:
-
-```bash
-codebolt agent kill <run-id>
-```
-
-Force-kill. Run ends with status `killed`, reason `forced`.
+Use the stop control in the active chat or open **Execution → Running Agent** and stop the execution there.
 
 ## 3. Figure out why
 

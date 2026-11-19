@@ -28,7 +28,7 @@ Whichever client you choose, the Get Started guide will take you through:
 2. **Sign in** — connect your CodeBolt account
 3. **Choose an AI provider** — built-in CodeBolt AI (no key needed) or your own OpenAI / Anthropic / local model
 4. **Run your first agent** — open a project and send a real task
-5. **Review and roll back** — checkpoints keep every change safe
+5. **Review and roll back** — use an available checkpoint to restore project files
 
 ---
 

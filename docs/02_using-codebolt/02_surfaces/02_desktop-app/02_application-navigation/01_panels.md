@@ -25,7 +25,7 @@ The bottom bar is the fastest mouse path for common panels. It has direct button
 | **Agents** | Group menu | Agent List, Capabilities, Action Block, MCP, Plugins, Eval. |
 | **Plan** | Group menu | Tasks, Action Plan, Specs, UI Flow, Requirement Plan, Roadmap. |
 | **Tools** | Group menu | Chat, Browser, Terminal, Code, Jobs, Inbox, Calendar. |
-| **Execution** | Group menu | Tracking and orchestration panels such as Thread Panel, Environment, Running Agent, Chat Canvas, Background Agents, Artifacts, Auto Testing, Orchestrator Management, Swarm Management, Review Merge Request, Agent Deliberation, and Update Project Structure Request. |
+| **Execution** | Group menu | Tracking and orchestration panels such as Thread Panel, Environment, Running Agent, Chat Canvas, Background Agents, Artifacts, Auto Testing, Thread Coordination, Swarm Management, Review Merge Request, Agent Deliberation, and Update Project Structure Request. |
 | **Debug** | Group menu | Agent Debug, Environment Debug, Plugin Debug, ActionBlock Debug, AI Debug, Preview, Console, Codemap, Problems, Narrative Graph. |
 | **Context** | Group menu | Vector DB, Knowledge, Knowledge Graph, Persistent Memory, KV Store, Event Log, Memory Ingestion, Context Assembly, Context Compaction, Memory. |
 | **System** | Group menu | Settings, App Settings, Project Structure, Guardrails, Proxy Execution, Routing Gateway, Extensions. |

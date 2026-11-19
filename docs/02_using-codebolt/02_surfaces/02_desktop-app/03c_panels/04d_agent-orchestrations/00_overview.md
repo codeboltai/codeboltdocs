@@ -20,4 +20,4 @@ Open these panels from the bottom bar menus, the panel-header **+** menu, the Pa
 
 ## Related agent features
 
-Running Agents, Background Agents, Jobs, Swarm Management, Orchestrator Management, Agent Profiles, Kanban, Capabilities, Action Block, Eval, and Guardrails are documented in [Agent Management Features](../04b_agent-management-features/00_overview.md).
+Running Agents, Background Agents, Jobs, Swarm Management, Thread Coordination, Agent Profiles, Kanban, Capabilities, Action Block, Eval, and Guardrails are documented in [Agent Management Features](../04b_agent-management-features/00_overview.md).

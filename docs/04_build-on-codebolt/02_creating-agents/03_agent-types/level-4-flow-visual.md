@@ -35,13 +35,7 @@ Flow agents and code agents are fully interchangeable from the server's perspect
 
 ### From the CLI
 
-```bash
-codebolt agent create --flow --name my-flow-agent
-```
-
-This creates the `.agentflow` file and a `codeboltagent.yaml` manifest with `type: flowAgent`.
-
----
+Create and edit visual flows in the desktop AgentFlow editor.
 
 ## The editor
 

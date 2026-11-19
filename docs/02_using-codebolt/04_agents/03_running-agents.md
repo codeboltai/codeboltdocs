@@ -23,46 +23,13 @@ You see the steps inline as the run progresses.
 
 ## Starting from the CLI
 
-The CLI supports two practical patterns:
-
-1. Headless prompt execution with `--prompt`
-2. Agent process management through `codebolt command agents ...`
-
-### Headless agent prompt
+Use a headless prompt to run one task:
 
 ```bash
-codebolt --prompt "rename getUser to fetchUser everywhere" --agent generalist
+codebolt --prompt "Rename getUser to fetchUser" --project /path/to/project
 ```
 
-Relevant options from `packages/cli/src/index.ts`:
-
-```bash
-codebolt --prompt "..." \
-  --agent <name> \
-  --project /path/to/project \
-  --provider <provider> \
-  --model <model> \
-  --api-key <key> \
-  --api-url <url>
-```
-
-This opens the normal runtime in headless mode, sends one prompt over WebSocket, and streams agent output to stdout.
-
-### Agent management commands
-
-The structured CLI agent commands live under `codebolt command agents`, not `codebolt agent`.
-
-`codebolt agent` is a different command family used for agent extension creation and publishing.
-
-```bash
-codebolt command agents list
-codebolt command agents running
-codebolt command agents start --id <agentId> [--name <name>]
-codebolt command agents stop --id <agentId>
-codebolt command agents config <name>
-```
-
-Those commands talk to a running server and manage agent processes. They do not accept task text like `--task`, and they do not provide `watch`, `detach`, or `history` flags.
+For a running server, use [Agent Commands](../02_surfaces/04_cli/02_cli-commands/02_agent-commands.md) to list available agents and start an agent task through the gateway.
 
 ## Interrupting to add information
 
@@ -76,29 +43,11 @@ If the agent is mid-task and you need to add context, send another message in th
 
 ## Stopping a running agent
 
-Use the stop controls in the active chat or run UI.
-
-The current command router supports:
-
-```bash
-codebolt command agents stop --id <agentId>
-```
-
-The CLI code in `packages/cli` does not currently expose a separate `kill` command for agent runs.
+Use the stop control in chat or open **Execution → Running Agent** and stop the active execution.
 
 ## Agent discovery from the CLI
 
-To find agent IDs and inspect what is available from the current server:
-
-```bash
-codebolt command agents list
-codebolt command agents local
-codebolt command agents featured
-codebolt command agents recommended
-codebolt command agents running
-```
-
-These commands are implemented in `packages/cli/src/commands/agents.ts`.
+Run `codebolt command agent list` against a running CodeBolt server.
 
 ## Current limitation
 

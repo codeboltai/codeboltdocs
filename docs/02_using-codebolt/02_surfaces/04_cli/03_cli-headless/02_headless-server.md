@@ -51,9 +51,9 @@ Provider setup runs only when both `--provider` and `--api-key` are supplied. If
 Once the server is running, use `codebolt command ...` from another terminal:
 
 ```bash
-codebolt command --port 3457 system health
-codebolt command --port 3457 agents list
-codebolt command --port 3457 threads list --json
+codebolt command --cli-connect-port 3457 project get-path
+codebolt command --cli-connect-port 3457 agent list
+codebolt command --cli-connect-port 3457 --json thread list
 ```
 
 `codebolt command` supports:
@@ -61,7 +61,7 @@ codebolt command --port 3457 threads list --json
 | Option | What it does |
 |---|---|
 | `--host <string>` | Server host. Default: `localhost`. |
-| `--port <number>` | Server port. Default: `2719`. |
+| `--cli-connect-port <number>` | Server port. Default: `2719`. |
 | `--json` | Prints raw JSON instead of formatted tables. |
 
 ## Connect with the Client SDK

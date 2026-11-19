@@ -64,7 +64,7 @@ The default set that ships with Codebolt:
 | **debugger** | Runs and inspects | ✓ | ✓ | Tracking down a failing test or bug |
 | **explainer** | Reads and narrates | ✓ | ✗ | "What does this code do?", onboarding |
 
-The exact lineup may change in newer versions — check `codebolt command agents list` for what's installed on the current server.
+The exact lineup may change in newer versions — check `codebolt command agent list` for what's installed on the current server.
 
 ## Picking an agent for a task
 

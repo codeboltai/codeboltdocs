@@ -21,7 +21,7 @@ Take an agent from your project and make it installable by anyone.
 
 ```bash
 cd .codebolt/agents/my-agent
-codebolt agent publish
+codebolt action agent publish
 ```
 
 The dry-run validates everything without actually publishing. Real publish requires confirmation.
@@ -57,9 +57,7 @@ The manifest is validated, the bundle is signed, and it's uploaded.
 
 Verify by installing your own agent fresh:
 
-```bash
-codebolt agent install marketplace/my-agent --version 0.1.0
-```
+Use the desktop Marketplace to install a published agent.
 
 Confirm it works in a clean environment.
 

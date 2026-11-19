@@ -21,13 +21,10 @@ The simplest pattern. Open multiple chat tabs, pick a different agent (or the sa
 
 ## Child agents — programmatic delegation
 
-An agent can spawn sub-agents from within its own code using `codebolt_agent.start`. The child runs as a nested run under the parent. Results are returned to the parent when the child finishes.
+An agent can spawn sub-agents from within its own code using `codebolt.agent.startAgent`. The child runs as a nested run under the parent. Results are returned to the parent when the child finishes.
 
 ```ts
-const result = await codebolt.agents.start('specialist', {
-  task: 'Write unit tests for the auth module',
-  project: currentProject,
-});
+const result = await codebolt.agent.startAgent(agentId, 'Write unit tests for the auth module');
 ```
 
 The child appears in the **Running Agent panel** alongside the parent. Both are monitored in real time.
@@ -97,8 +94,4 @@ If you hit concurrency limits, new runs queue until a slot opens. See [Self-host
 
 ## Stopping parallel runs
 
-Stop individual runs from the Running Agent panel, or from the chat tab. To stop all runs in a swarm:
-
-```bash
-codebolt command agents stop --id <agentId>
-```
+Use the stop control in the chat tab or open **Execution → Running Agent** and stop the relevant execution.

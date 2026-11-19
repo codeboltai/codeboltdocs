@@ -16,7 +16,7 @@ When the server starts, it initializes:
 
 - Express API routes for chat, agents, jobs, tasks, environments, memory, evals, auto testing, guardrails, plugins, and more
 - WebSocket routes for chat, shell, jobs, swarm, background agents, event logs, context assembly, plugins, and debug streams
-- SQLite-backed application state through TypeORM migrations and seeders
+- JSON-backed stores for workspaces, projects, and application records
 - project-scoped runtime data under the active project, including agent execution records
 - MCP, LSP, provider, plugin, and AgentFlow runtime setup in the background
 - a host bridge supplied by the desktop app or CLI for process spawning, PTY, filesystem, and native host operations
@@ -100,5 +100,5 @@ If you need multiple machines, managed sandboxes, team-visible runtimes, or remo
 - [Local models](../../02_using-codebolt/08_integrations/02_local-models.md)
 - [Routing gateway](../../02_using-codebolt/08e_external-integrations/02_routing-gateway.md)
 - [Background Agents](../../02_using-codebolt/07a_parallel-agents/04_background-agent.md)
-- [Event Log](../../02_using-codebolt/07_memory/07_event-log.md)
+- [Event Log](../../02_using-codebolt/05d_memory/07_event-log.md)
 - [Run It Longer](./03_run-it-longer.md)

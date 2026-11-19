@@ -20,7 +20,7 @@ No publishing needed. The agent lives in `.codebolt/agents/` and is committed to
 ### 2. Publish to the CodeBolt registry
 
 ```bash
-codebolt agent publish --path /path/to/your/agent
+codebolt action agent publish --path /path/to/your/agent
 ```
 
 This publishes the agent folder to the public CodeBolt registry. If `--path` is omitted, the current directory is used.
@@ -38,13 +38,13 @@ For agents that run outside of Codebolt's process manager:
 
 ```bash
 # Self-executed: you start the process yourself
-codebolt agent create-remote \
+codebolt action agent create-remote \
   --name "My Remote Agent" \
   --execution-mode selfExecuted \
   --description "An agent I run from my own terminal"
 
 # CodeBolt-executed: Codebolt starts the process from a path you provide
-codebolt agent create-remote \
+codebolt action agent create-remote \
   --name "My Remote Agent" \
   --execution-mode codeboltExecuted \
   --remote-path /absolute/path/to/agent
@@ -65,19 +65,19 @@ Checklist:
 
 ## CLI reference
 
-### codebolt agent create
+### codebolt action agent create
 
 Scaffold a new agent from a template:
 
 ```bash
 # Create from the default template
-codebolt agent create --name my-agent
+codebolt action agent create --name my-agent
 
 # Create a framework agent (uses the Agent template)
-codebolt agent create --name my-agent --framework
+codebolt action agent create --name my-agent --framework
 
 # Create a remix interactively (select an agent to remix)
-codebolt agent create --remix
+codebolt action agent create --remix
 ```
 
 Options:
@@ -93,32 +93,32 @@ Options:
 | `--framework` | Use the framework agent template |
 | `--remix` | Interactive remix of an existing agent |
 
-### codebolt agent publish
+### codebolt action agent publish
 
 Publish an agent to the CodeBolt registry:
 
 ```bash
-codebolt agent publish --path /path/to/agent
+codebolt action agent publish --path /path/to/agent
 ```
 
 | Flag | Description |
 |---|---|
 | `--path <path>` | Path to agent directory (default: current directory) |
 
-### codebolt agent list
+### codebolt action agent list
 
 List all published agents:
 
 ```bash
-codebolt agent list
+codebolt action agent list
 ```
 
-### codebolt agent create-remote
+### codebolt action agent create-remote
 
 Create a remote agent:
 
 ```bash
-codebolt agent create-remote --name "Agent Name" --execution-mode selfExecuted
+codebolt action agent create-remote --name "Agent Name" --execution-mode selfExecuted
 ```
 
 | Flag | Description |
@@ -138,7 +138,7 @@ The `--remix` flag launches an interactive flow:
 4. Writes a `.md` file to `.codebolt/agents/remix/` in your project.
 
 ```bash
-codebolt agent create --remix --project /path/to/project
+codebolt action agent create --remix --project /path/to/project
 ```
 
 The resulting file looks like:

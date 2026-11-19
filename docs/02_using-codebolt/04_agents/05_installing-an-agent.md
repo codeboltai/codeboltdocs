@@ -74,13 +74,7 @@ You can install everything at once or pause and handle dependencies manually.
 
 ## Checking install state
 
-The current CLI exposes inspection commands through `codebolt command agents`, for example:
-
-```bash
-codebolt command agents list
-codebolt command agents local
-codebolt command agents config <name>
-```
+Use the desktop agent picker or run `codebolt command agent list` against the running server.
 
 ## Updating
 

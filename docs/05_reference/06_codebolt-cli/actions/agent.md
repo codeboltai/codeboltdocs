@@ -8,8 +8,6 @@ Manage agent extensions
 
 These commands manage CodeBolt extensions. Most of them create a temporary local server context through `executeAction()` before calling the extension endpoints.
 
-This same command group is also mounted at the top level as `codebolt agent ...`.
-
 ## Subcommands
 
 | Subcommand | Description | Args | Options |
@@ -23,7 +21,6 @@ This same command group is also mounted at the top level as `codebolt agent ...`
 Create a new agent from a template
 ```text
 codebolt action agent create [options]
-codebolt agent create [options]
 ```
 ### Arguments
 This command takes no positional arguments.
@@ -44,7 +41,6 @@ This command takes no positional arguments.
 Publish an agent to the CodeBolt registry
 ```text
 codebolt action agent publish [options]
-codebolt agent publish [options]
 ```
 ### Arguments
 This command takes no positional arguments.
@@ -58,7 +54,6 @@ This command takes no positional arguments.
 List all published agents
 ```text
 codebolt action agent list
-codebolt agent list
 ```
 ### Arguments
 This command takes no positional arguments.
@@ -69,7 +64,6 @@ This command takes no options.
 Create a remote agent (self-executed or CodeBolt-executed)
 ```text
 codebolt action agent create-remote [options]
-codebolt agent create-remote [options]
 ```
 ### Arguments
 This command takes no positional arguments.

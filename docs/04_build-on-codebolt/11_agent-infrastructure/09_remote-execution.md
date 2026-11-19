@@ -146,9 +146,7 @@ For Kubernetes, you can also use `kubectl` directly to inspect the pod.
 
 ## Stopping a remote run
 
-`codebolt agent stop <run_id>` works the same way. The server sends a graceful stop signal; if the agent doesn't comply within the timeout, the server asks the provider to kill the sandbox.
-
-Force-kill via `codebolt agent kill <run_id>`.
+Use **Execution → Running Agent** in the desktop app to request a stop for a running execution.
 
 ## Network and firewall
 

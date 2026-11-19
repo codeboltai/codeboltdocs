@@ -36,13 +36,7 @@ codebolt --prompt "Review the project" --agent generalist
 
 ## System commands
 
-When a server is already running, use:
-
-```bash
-codebolt command system health
-codebolt command system check-cli
-codebolt command system open-folder /path/to/folder
-```
+Use `codebolt command project get-path` to inspect the project a running server is serving. For the available namespaces, run `codebolt command --help`.
 
 ## Current limitation
 

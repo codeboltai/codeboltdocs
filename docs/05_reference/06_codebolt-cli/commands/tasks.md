@@ -1,80 +1,15 @@
 ---
-sidebar_label: "Tasks"
-title: "Tasks CLI"
-description: "Reference for the codebolt command tasks command group."
+title: "Task Gateway Commands"
 ---
 
-Manage tasks
+Use `codebolt command task` against a running server. Pass `--help` to a subcommand for its full options and accepted values.
 
-These commands connect to a running CodeBolt server. All subcommands inherit the global `codebolt command` options `--port <number>`, `--host <string>`, and `--json`.
-
-## Subcommands
-
-| Subcommand | Description | Args | Options |
-| --- | --- | ---: | ---: |
-| `list` | List / search tasks | 0 | 2 |
-| `get` | Get task details by ID | 1 | 0 |
-| `create` | Create a new task | 0 | 3 |
-| `delete` | Delete a task by ID | 1 | 0 |
-| `stats` | Show task statistics | 0 | 0 |
-
-## `list`
-List / search tasks
-```text
-codebolt command tasks list [options]
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-| Flags | Required | Description |
-| --- | --- | --- |
-| `--status <status>` | No | Filter by status |
-| `--limit <number>` | No | Max results |
-
-## `get`
-Get task details by ID
-```text
-codebolt command tasks get <id>
-```
-### Arguments
-| Argument | Description |
-| --- | --- |
-| `<id>` | Task ID |
-### Options
-This command takes no options.
-
-## `create`
-Create a new task
-```text
-codebolt command tasks create [options]
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-| Flags | Required | Description |
-| --- | --- | --- |
-| `--title <title>` | Yes | Task title |
-| `--description <text>` | No | Task description |
-| `--priority <level>` | No | Task priority |
-
-## `delete`
-Delete a task by ID
-```text
-codebolt command tasks delete <id>
-```
-### Arguments
-| Argument | Description |
-| --- | --- |
-| `<id>` | Task ID |
-### Options
-This command takes no options.
-
-## `stats`
-Show task statistics
-```text
-codebolt command tasks stats
-```
-### Arguments
-This command takes no positional arguments.
-### Options
-This command takes no options.
+| Subcommand | Purpose | Required flags | Help |
+| --- | --- | --- | --- |
+| `assign` | Assigns an agent to a task. | `--task-id`, `--agent-id` | `codebolt command task assign --help` |
+| `create` | Creates a new task. | `--title` | `codebolt command task create --help` |
+| `delete` | Deletes a task. | `--task-id` | `codebolt command task delete --help` |
+| `execute` | Executes a task with a specific agent. | `--task-id`, `--agent-id` | `codebolt command task execute --help` |
+| `get` | Retrieves details of a specific task. | `--task-id` | `codebolt command task get --help` |
+| `list` | Retrieves a list of all tasks. | None | `codebolt command task list --help` |
+| `update` | Updates an existing task. | `--task-id` | `codebolt command task update --help` |

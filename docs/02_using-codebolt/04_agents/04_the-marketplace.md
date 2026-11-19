@@ -28,25 +28,7 @@ Open the **Agents** panel and switch to the **Marketplace** tab. The same market
 
 ## Browsing from command mode
 
-```bash
-codebolt command agents featured
-codebolt command agents recommended
-codebolt command agents list
-codebolt command agents config <name>
-```
-
-The current CLI does not expose a dedicated `marketplace` command family. In practice, the available agent discovery commands are the `featured`, `recommended`, `list`, and `config` commands under `codebolt command agents`.
-
-In the current desktop UI, the marketplace is an in-app agent browser rather than a separate browser page. You can:
-
-- Browse marketplace agents in a list.
-- Open an agent to view its description and install state.
-- Install directly from the card or from the detail view.
-- Switch between **Installed**, **Marketplace**, and **My Agents** in the Agents surface.
-
-The current `packages/ui` marketplace components do not expose the old browser-style search box, filter sidebar, or sort dropdown described in earlier drafts.
-
-**Read the README before installing.** It should tell you what the agent is for, what tools it needs, what its blast radius is (read-only? write-capable? shell access?).
+Use the desktop Marketplace to browse and install registry entries. To list agents visible to a running server, use `codebolt command agent list`.
 
 ## Installing
 

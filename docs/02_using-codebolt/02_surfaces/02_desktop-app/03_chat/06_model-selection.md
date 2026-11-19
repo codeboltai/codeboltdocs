@@ -50,9 +50,7 @@ codebolt --prompt "Explain this project" --agent my-agent --model claude-sonnet-
 
 Or set per-project default:
 
-```bash
-codebolt command llm set-default --provider anthropic --model claude-sonnet-4-6
-```
+Set the default in **Settings → LLMs**.
 
 </TabItem>
 </Tabs>

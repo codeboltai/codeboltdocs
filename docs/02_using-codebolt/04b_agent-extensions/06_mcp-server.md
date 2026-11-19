@@ -45,18 +45,6 @@ Use the Codebolt registry when you want to install an MCP server that is already
 During installation, Codebolt reads the registry entry, uses the server README to build the config, writes the server to `mcp_servers.json`, tests whether the server returns tools, caches the discovered tools, and enables the server only when discovery succeeds.
 
 </TabItem>
-<TabItem value="cli" label="CLI">
-
-Install a registry MCP server from a running Codebolt server:
-
-```bash
-codebolt command mcp install --id <mcpId>
-codebolt command mcp install --name <registryName>
-```
-
-Command reference: [`install --id`](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#install-registry-mcp), [`install --name`](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#install-registry-mcp)
-
-</TabItem>
 <TabItem value="api" label="API">
 
 List registry MCPs:
@@ -174,13 +162,8 @@ Codebolt converts this local tool into an MCP config:
 
 The app code scans `.codebolt/tools` for project-level local tools. It does not currently scan `.codebolt/mcp`.
 
-Install a local project MCP by its `uniqueName`:
+Use the **MCP Servers** panel to install a local project tool. Its `uniqueName` identifies the tool in the project.
 
-```bash
-codebolt command mcp install-local --name <uniqueName>
-```
-
-Command reference: [`install-local`](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#install-local-mcp)
 
 ### Programmatic CodeboltJS MCP server
 
@@ -272,15 +255,7 @@ For the detailed Desktop App flow, see [MCP Servers in Settings](../02_surfaces/
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-Use `codebolt command mcp` for runtime MCP management:
-
-| Command | Reference |
-|---|---|
-| `codebolt command mcp list` | [List installed MCPs](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#list-installed-mcps) |
-| `codebolt command mcp tools` | [List MCP tools](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#list-mcp-tools) |
-| `codebolt command mcp refresh` | [Refresh MCP tools](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#refresh-mcp-tools) |
-| `codebolt command mcp enable --name <serverName>` | [Enable or disable MCP](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#enable-or-disable-mcp) |
-| `codebolt command mcp disable --name <serverName>` | [Enable or disable MCP](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#enable-or-disable-mcp) |
+List configured servers with `codebolt command mcp list-servers` and inspect discovered tools with `codebolt command mcp get-tools`. Use the desktop panel to enable, disable, or refresh an integration.
 
 Use `codebolt action tool` for builder-side tool extension work:
 
@@ -290,7 +265,7 @@ Use `codebolt action tool` for builder-side tool extension work:
 | `codebolt action tool publish --path ./my-tool` | [Build and publish tool extensions](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#build-and-publish-tool-extensions) |
 | `codebolt action tool list` | [Build and publish tool extensions](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md#build-and-publish-tool-extensions) |
 
-See [Tool Commands](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md).
+See [MCP Server Commands](../02_surfaces/04_cli/02_cli-commands/03_tool-commands.md).
 
 </TabItem>
 <TabItem value="api" label="API">

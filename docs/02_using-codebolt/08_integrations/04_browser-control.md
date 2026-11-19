@@ -48,13 +48,7 @@ By default, only `generalist` and `debugger` have browser access. Other built-in
 
 ## Security considerations
 
-Browser access is powerful — an agent with it can visit any URL, interact with any page, exfiltrate content. Restrict it:
-
-- **Scope by URL** — use a hook to deny `browser_action` with URLs outside an allowlist.
-- **No authentication surfaces** — don't let agents navigate to login pages; credentials should be injected before the browser phase.
-- **No private IPs** — guardrails should deny access to localhost, 169.254.169.254 (cloud metadata), and private IP ranges unless explicitly allowed.
-
-Default guardrails include these restrictions. Customise in `.codebolt/guardrails.yaml`.
+Browser tools make real requests and can interact with pages. Review the thread's active [policy profile](../05b_guardrails-and-settings/01_guardrails.md#policy-profiles) and its browser tool permissions before granting browser access to an agent.
 
 ## Local vs remote pages
 

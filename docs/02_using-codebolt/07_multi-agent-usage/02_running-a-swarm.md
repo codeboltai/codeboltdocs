@@ -34,10 +34,8 @@ The current CLI does not expose dedicated swarm tree or swarm watch commands.
 What it can provide is limited supporting inspection:
 
 ```bash
-codebolt command agents running
-codebolt command threads list
-codebolt command threads steps <threadId>
-codebolt command jobs list
+codebolt command thread list
+codebolt command job list
 ```
 
 </TabItem>
@@ -54,26 +52,9 @@ Swarm-style coordination can involve direct messages, shared state, or indirect 
 
 The current CLI does not expose the older event-stream commands from previous drafts.
 
-## Stopping a swarm
+## Stopping a swarm execution
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
-Use the stop controls provided by the desktop execution surfaces for the orchestrator or top-level run.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose dedicated swarm stop commands.
-
-The only documented stop control in `packages/cli` is:
-
-```bash
-codebolt command agents stop --id <agentId>
-```
-
-</TabItem>
-</Tabs>
+Use the stop control in the active chat or open **Execution → Running Agent** and stop the relevant run.
 
 ## Failed workers and policies
 

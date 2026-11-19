@@ -49,17 +49,13 @@ See [Local models](./02_local-models.md) for local setup.
 </TabItem>
 <TabItem value="cli" label="CLI">
 
-The current CLI does not expose the older end-user provider setup commands from previous drafts.
-
-What it does expose through a running server is:
+Inspect the configured providers through a running CodeBolt server:
 
 ```bash
-codebolt command llm providers
-codebolt command llm models
-codebolt command llm get-models --provider openai
-codebolt command llm update-key --provider openai --key sk-...
-codebolt command llm set-default --provider openai --model gpt-5
+codebolt command llm get-configured-providers
 ```
+
+Set a headless run's provider with `--provider` and `--model`. Save credentials and default selections in **Settings → LLMs**.
 
 </TabItem>
 <TabItem value="config" label="Config file">

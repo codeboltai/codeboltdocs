@@ -23,7 +23,7 @@ A **PR reviewer agent** tuned for your project's conventions. By the end you'll 
 
 ```bash
 cd /path/to/your/project
-codebolt agent create --name my-pr-reviewer --template reviewer
+codebolt action agent create --name my-pr-reviewer --template reviewer
 ```
 
 This creates `.codebolt/agents/remix/my-pr-reviewer.md` — a Markdown file with YAML frontmatter.
