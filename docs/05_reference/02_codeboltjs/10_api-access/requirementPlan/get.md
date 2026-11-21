@@ -1,222 +1,143 @@
 ---
 name: get
+description: Get a feature plan by file path.
 cbbaseinfo:
-  description: Retrieves a requirement plan document by its file path, including all sections and metadata.
-cbparameters:
-  parameters:
-    - name: filePath
-      typeName: string
-      description: Path to the plan file
-  returns:
-    signatureTypeName: "Promise<RequirementPlanGetResponse>"
-    description: A promise that resolves to the plan document
+  description: Get a feature plan by file path.
 data:
   name: get
   category: requirementPlan
   link: get.md
 ---
+
 # get
 
-```typescript
-codebolt.requirementPlan.get(filePath: string): Promise<RequirementPlanGetResponse>
+```text
+codebolt.featurePlan.get(filePath: string): Promise<FeaturePlanGetResponse>
 ```
 
-Retrieves a requirement plan document by its file path, including all sections and metadata.
-### Parameters
+Get a feature plan by file path
 
-- **`filePath`** (string): Path to the plan file
+## Parameters
 
-### Returns
+- `filePath` — Path to the plan file
 
-- **`Promise<[RequirementPlanGetResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/RequirementPlanGetResponse)>`**: A promise that resolves to the plan document
+## Returns
 
-### Parameter Details
+Promise resolving to the plan document
 
-- **`filePath`** (string, required): Path to the requirement plan file
+## When to use it
 
-### Response Structure
+Read a feature plan by path before displaying its sections or updating its content.
 
-```typescript
-interface RequirementPlanGetResponse {
-  type: 'requirementPlanGetResponse';
-  success: boolean;
-  data?: RequirementPlanDocument;
-  filePath?: string;
-  error?: string;
-  requestId?: string;
-}
+## Examples
 
-interface RequirementPlanDocument {
-  version: string;
-  title: string;
-  description?: string;
-  createdAt: string;
-  updatedAt: string;
-  sections: RequirementPlanSection[];
-}
-```
+### Basic Retrieval
 
-### Examples
-
-#### 1. Basic Retrieval
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Get a requirement plan
-const result = await codebolt.requirementPlan.get('plans/project-requirements.plan');
+codebolt.onReady(async () => {
+  // Get a requirement plan
+  const result = await codebolt.featurePlan.get('plans/project-requirements.plan');
 
-if (result.success && result.data) {
-  const plan = result.data;
-  console.log('Title:', plan.title);
-  console.log('Version:', plan.version);
-  console.log('Sections:', plan.sections.length);
-}
+  if (result.success && result.data) {
+    const plan = result.data;
+    console.log('Title:', plan.title);
+    console.log('Version:', plan.version);
+    console.log('Sections:', plan.sections.length);
+  }
+});
 ```
 
-#### 2. Display Plan Details
+### Display Plan Details
+
 ```typescript
-// Retrieve and display plan information
-const result = await codebolt.requirementPlan.get('plans/api-requirements.plan');
+import codebolt from '@codebolt/codeboltjs';
 
-if (result.success && result.data) {
-  const plan = result.data;
+codebolt.onReady(async () => {
+  // Retrieve and display plan information
+  const result = await codebolt.featurePlan.get('plans/api-requirements.plan');
 
-  console.log('=== Requirement Plan ===');
-  console.log('Title:', plan.title);
-  console.log('Version:', plan.version);
+  if (result.success && result.data) {
+    const plan = result.data;
 
-  if (plan.description) {
-    console.log('Description:', plan.description);
-  }
+    console.log('=== Requirement Plan ===');
+    console.log('Title:', plan.title);
+    console.log('Version:', plan.version);
 
-  console.log('Created:', new Date(plan.createdAt).toLocaleString());
-  console.log('Updated:', new Date(plan.updatedAt).toLocaleString());
-  console.log('\nSections:');
-
-  plan.sections.forEach((section, index) => {
-    console.log(`${index + 1}. ${section.title || 'Untitled'} (${section.type})`);
-  });
-}
-```
-
-#### 3. Iterate Through Sections
-```typescript
-// Get plan and process each section
-const result = await codebolt.requirementPlan.get('plans/project.plan');
-
-if (result.success && result.data) {
-  const plan = result.data;
-
-  for (const section of plan.sections) {
-    console.log(`\n## ${section.title || 'Untitled'}`);
-    console.log(`Type: ${section.type}`);
-
-    switch (section.type) {
-      case 'markdown':
-        if (section.content) {
-          console.log('Content:', section.content.substring(0, 100) + '...');
-        }
-        break;
-
-      case 'specs-link':
-      case 'actionplan-link':
-      case 'uiflow-link':
-        if (section.linkedFile) {
-          console.log('Linked File:', section.linkedFile);
-        }
-        break;
-
-      case 'code-block':
-        if (section.content) {
-          console.log('Code:', section.content.substring(0, 50) + '...');
-        }
-        break;
-    }
-  }
-}
-```
-
-#### 4. Find Specific Section
-```typescript
-// Get plan and find a specific section
-const result = await codebolt.requirementPlan.get('plans/project.plan');
-
-if (result.success && result.data) {
-  const overviewSection = result.data.sections.find(
-    section => section.title === 'Overview'
-  );
-
-  if (overviewSection) {
-    console.log('Found Overview section:');
-    console.log(overviewSection.content);
-  } else {
-    console.log('Overview section not found');
-  }
-}
-```
-
-#### 5. Get and Validate Plan
-```typescript
-// Get plan and validate its structure
-async function getAndValidatePlan(filePath: string) {
-  const result = await codebolt.requirementPlan.get(filePath);
-
-  if (!result.success) {
-    throw new Error(result.error || 'Failed to get plan');
-  }
-
-  const plan = result.data!;
-
-  // Validate required fields
-  if (!plan.title) {
-    console.warn('Plan missing title');
-  }
-
-  if (plan.sections.length === 0) {
-    console.warn('Plan has no sections');
-  }
-
-  // Validate sections
-  for (const section of plan.sections) {
-    if (!section.id) {
-      console.warn(`Section missing ID: ${section.title}`);
+    if (plan.description) {
+      console.log('Description:', plan.description);
     }
 
-    if (section.type === 'specs-link' && !section.linkedFile) {
-      console.warn(`Specs link missing file: ${section.title}`);
+    console.log('Created:', new Date(plan.createdAt).toLocaleString());
+    console.log('Updated:', new Date(plan.updatedAt).toLocaleString());
+    console.log('\nSections:');
+
+    plan.sections.forEach((section, index) => {
+      console.log(`${index + 1}. ${section.title || 'Untitled'} (${section.type})`);
+    });
+  }
+});
+```
+
+### Find Specific Section
+
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Get plan and find a specific section
+  const result = await codebolt.featurePlan.get('plans/project.plan');
+
+  if (result.success && result.data) {
+    const overviewSection = result.data.sections.find(
+      section => section.title === 'Overview'
+    );
+
+    if (overviewSection) {
+      console.log('Found Overview section:');
+      console.log(overviewSection.content);
+    } else {
+      console.log('Overview section not found');
     }
   }
-
-  return plan;
-}
+});
 ```
 
-#### 6. Get and Transform Plan
+### Get and Transform Plan
+
 ```typescript
-// Get plan and transform for display
-const result = await codebolt.requirementPlan.get('plans/project.plan');
+import codebolt from '@codebolt/codeboltjs';
 
-if (result.success && result.data) {
-  const displayData = {
-    title: result.data.title,
-    sectionCount: result.data.sections.length,
-    sections: result.data.sections.map(section => ({
-      title: section.title || 'Untitled',
-      type: section.type,
-      hasContent: !!section.content,
-      hasLink: !!section.linkedFile
-    }))
-  };
+codebolt.onReady(async () => {
+  // Get plan and transform for display
+  const result = await codebolt.featurePlan.get('plans/project.plan');
 
-  console.log(JSON.stringify(displayData, null, 2));
-}
+  if (result.success && result.data) {
+    const displayData = {
+      title: result.data.title,
+      sectionCount: result.data.sections.length,
+      sections: result.data.sections.map(section => ({
+        title: section.title || 'Untitled',
+        type: section.type,
+        hasContent: !!section.content,
+        hasLink: !!section.linkedFile
+      }))
+    };
+
+    console.log(JSON.stringify(displayData, null, 2));
+  }
+});
 ```
 
-#### 7. Get and Export Plan
+### Get and Export Plan
+
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Get plan and export as JSON
 async function exportPlan(filePath: string) {
-  const result = await codebolt.requirementPlan.get(filePath);
+  const result = await codebolt.featurePlan.get(filePath);
 
   if (result.success && result.data) {
     const exported = {
@@ -242,63 +163,42 @@ async function exportPlan(filePath: string) {
 }
 ```
 
-#### 8. Get and Compare Versions
+### Error Handling
+
 ```typescript
-// Compare two plans
-async function comparePlans(filePath1: string, filePath2: string) {
-  const [plan1, plan2] = await Promise.all([
-    codebolt.requirementPlan.get(filePath1),
-    codebolt.requirementPlan.get(filePath2)
-  ]);
+import codebolt from '@codebolt/codeboltjs';
 
-  if (plan1.success && plan1.data && plan2.success && plan2.data) {
-    console.log('Comparing plans:');
-    console.log(`Plan 1 sections: ${plan1.data.sections.length}`);
-    console.log(`Plan 2 sections: ${plan2.data.sections.length}`);
+codebolt.onReady(async () => {
+  // Handle retrieval errors
+  const result = await codebolt.featurePlan.get('nonexistent.plan');
 
-    const diff = {
-      onlyInPlan1: plan1.data.sections.filter(s1 =>
-        !plan2.data.sections.some(s2 => s2.id === s1.id)
-      ),
-      onlyInPlan2: plan2.data.sections.filter(s2 =>
-        !plan1.data.sections.some(s1 => s1.id === s2.id)
-      )
-    };
+  if (!result.success) {
+    console.error('Failed to get plan');
 
-    console.log('Only in Plan 1:', diff.onlyInPlan1.length);
-    console.log('Only in Plan 2:', diff.onlyInPlan2.length);
-  }
-}
-```
-
-#### 9. Error Handling
-```typescript
-// Handle retrieval errors
-const result = await codebolt.requirementPlan.get('nonexistent.plan');
-
-if (!result.success) {
-  console.error('Failed to get plan');
-
-  if (result.error) {
-    if (result.error.includes('file not found')) {
-      console.error('Plan file does not exist');
-    } else if (result.error.includes('invalid format')) {
-      console.error('Plan file is corrupted or invalid');
-    } else if (result.error.includes('access denied')) {
-      console.error('No permission to read file');
-    } else {
-      console.error('Error:', result.error);
+    if (result.error) {
+      if (result.error.includes('file not found')) {
+        console.error('Plan file does not exist');
+      } else if (result.error.includes('invalid format')) {
+        console.error('Plan file is corrupted or invalid');
+      } else if (result.error.includes('access denied')) {
+        console.error('No permission to read file');
+      } else {
+        console.error('Error:', result.error);
+      }
     }
   }
-}
+});
 ```
 
-#### 10. Get with Retry
+### Get with Retry
+
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Get plan with retry logic
 async function getPlanWithRetry(filePath: string, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
-    const result = await codebolt.requirementPlan.get(filePath);
+    const result = await codebolt.featurePlan.get(filePath);
 
     if (result.success) {
       return result.data;
@@ -314,13 +214,12 @@ async function getPlanWithRetry(filePath: string, maxRetries = 3) {
 }
 ```
 
-### Common Use Cases
-
-**Display Plan Table of Contents:**
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Generate table of contents
 async function generateTOC(filePath: string) {
-  const result = await codebolt.requirementPlan.get(filePath);
+  const result = await codebolt.featurePlan.get(filePath);
 
   if (result.success && result.data) {
     console.log(`# Table of Contents: ${result.data.title}\n`);
@@ -334,11 +233,12 @@ async function generateTOC(filePath: string) {
 }
 ```
 
-**Validate Linked Files:**
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Check if linked files exist
 async function validateLinks(filePath: string) {
-  const result = await codebolt.requirementPlan.get(filePath);
+  const result = await codebolt.featurePlan.get(filePath);
 
   if (result.success && result.data) {
     const linkSections = result.data.sections.filter(s =>
@@ -357,11 +257,12 @@ async function validateLinks(filePath: string) {
 }
 ```
 
-**Get Plan Statistics:**
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Calculate plan statistics
 async function getPlanStats(filePath: string) {
-  const result = await codebolt.requirementPlan.get(filePath);
+  const result = await codebolt.featurePlan.get(filePath);
 
   if (result.success && result.data) {
     const stats = {
@@ -381,16 +282,3 @@ async function getPlanStats(filePath: string) {
   }
 }
 ```
-
-### Notes
-
-- Returns complete document with all sections
-- Sections are ordered by their `order` property
-- All section content is included in the response
-- Use `list()` to get available plans without loading full content
-- File path is case-sensitive on some systems
-- Returns error if file doesn't exist or is invalid
-- Large documents may take longer to load
-- Consider caching results if accessed frequently
-- Sections include both content and link types
-- Created and updated timestamps are in ISO 8601 format

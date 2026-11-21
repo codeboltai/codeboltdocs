@@ -1,71 +1,75 @@
 ---
 name: list
+description: List all rule engines.
 cbbaseinfo:
-  description: Lists all available rule engines.
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: "Promise<ContextRuleEngineListResponse>"
-    description: A promise that resolves with an array of all rule engines.
+  description: List all rule engines.
 data:
   name: list
   category: contextRuleEngine
   link: list.md
 ---
+
 # list
 
-```typescript
+```text
 codebolt.contextRuleEngine.list(): Promise<ContextRuleEngineListResponse>
 ```
 
-Lists all available rule engines.
-### Returns
+List all rule engines
 
-- **`Promise<[ContextRuleEngineListResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ContextRuleEngineListResponse)>`**: A promise that resolves with an array of all rule engines.
+## Examples
 
-### Examples
+### List All Rule Engines
 
-#### Example 1: List All Rule Engines
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.list();
 
-const result = await codebolt.contextRuleEngine.list();
+  if (result.data == null) throw new Error('The response is missing data.');
+  console.log(`Found ${result.data.ruleEngines.length} rule engines`);
 
-console.log(`Found ${result.data.ruleEngines.length} rule engines`);
-
-result.data.ruleEngines.forEach(engine => {
-  console.log(`- ${engine.name} (${engine.id})`);
-  console.log(`  Enabled: ${engine.enabled}`);
-  console.log(`  Rules: ${engine.rules.length}`);
+  result.data.ruleEngines.forEach(engine => {
+    console.log(`- ${engine.name} (${engine.id})`);
+    console.log(`  Enabled: ${engine.enabled}`);
+    console.log(`  Rules: ${engine.rules.length}`);
+  });
 });
 ```
 
-#### Example 2: Find Enabled Engines
+### Find Enabled Engines
+
 ```javascript
-const result = await codebolt.contextRuleEngine.list();
+import codebolt from '@codebolt/codeboltjs';
 
-const enabledEngines = result.data.ruleEngines.filter(e => e.enabled);
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.list();
 
-console.log(`Active engines: ${enabledEngines.length}`);
+  if (result.data == null) throw new Error('The response is missing data.');
+  const enabledEngines = result.data.ruleEngines.filter(e => e.enabled);
+
+  console.log(`Active engines: ${enabledEngines.length}`);
+});
 ```
 
-#### Example 3: Find Engine by Name
+### Find Engine by Name
+
 ```javascript
-const result = await codebolt.contextRuleEngine.list();
+import codebolt from '@codebolt/codeboltjs';
 
-const engine = result.data.ruleEngines.find(
-  e => e.name === 'task-rules'
-);
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.list();
 
-if (engine) {
-  console.log('Found engine:', engine.id);
-} else {
-  console.log('Engine not found');
-}
+  if (result.data == null) throw new Error('The response is missing data.');
+  const engine = result.data.ruleEngines.find(
+    e => e.name === 'task-rules'
+  );
+
+  if (engine) {
+    console.log('Found engine:', engine.id);
+  } else {
+    console.log('Engine not found');
+  }
+});
 ```
-
-### Notes
-- Returns all engines regardless of enabled status
-- Use get() for detailed engine information

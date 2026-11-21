@@ -1,60 +1,38 @@
 ---
 name: acknowledge
+description: Acknowledges receipt of a message to confirm delivery.
 cbbaseinfo:
   description: Acknowledges receipt of a message to confirm delivery.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: IAcknowledgeParams
-      description: Parameters including the messageId to acknowledge.
-  returns:
-    signatureTypeName: "Promise<IAcknowledgeResponse>"
-    description: A promise that resolves when the message is acknowledged.
 data:
   name: acknowledge
   category: mail
   link: acknowledge.md
 ---
+
 # acknowledge
 
-```typescript
+```text
 codebolt.mail.acknowledge(params: IAcknowledgeParams): Promise<IAcknowledgeResponse>
 ```
 
 Acknowledges receipt of a message to confirm delivery.
-### Parameters
 
-- **`params`** (IAcknowledgeParams): Parameters including the messageId to acknowledge.
+## When to use it
 
-### Returns
+Record receipt when a sender requests acknowledgement for a handoff.
 
-- **`Promise<IAcknowledgeResponse>`**: A promise that resolves when the message is acknowledged.
+## Example
 
-### Examples
+### Acknowledge a message addressed to the agent
 
-#### Example 1: Acknowledge Message Receipt
-
-```typescript
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.mail.acknowledge({
-  messageId: 'msg-123'
+codebolt.onReady(async () => {
+  const result = await codebolt.mail.acknowledge({
+    messageId: 'message-id',
+    agentId: 'docs-reviewer-id',
+  });
+  console.log(result.success);
 });
-
-if (result.success) {
-  console.log('Message acknowledged');
-}
 ```
-
-### Common Use Cases
-
-- **Delivery Confirmation**: Confirm message receipt
-- **Workflow Triggers**: Trigger next steps after acknowledgment
-- **Tracking**: Track message processing
-
-### Notes
-
-- Confirms message was received and processed
-- Different from markRead (acknowledges processing)

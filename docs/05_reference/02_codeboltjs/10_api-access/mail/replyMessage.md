@@ -1,80 +1,40 @@
 ---
 name: replyMessage
+description: Replies to an existing message in a thread.
 cbbaseinfo:
   description: Replies to an existing message in a thread.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: IReplyMessageParams
-      description: Reply parameters including messageId, content, and senderId.
-  returns:
-    signatureTypeName: "Promise<IReplyMessageResponse>"
-    description: A promise that resolves with the reply details.
 data:
   name: replyMessage
   category: mail
   link: replyMessage.md
 ---
+
 # replyMessage
 
-```typescript
+```text
 codebolt.mail.replyMessage(params: IReplyMessageParams): Promise<IReplyMessageResponse>
 ```
 
 Replies to an existing message in a thread.
-### Parameters
 
-- **`params`** (IReplyMessageParams): Reply parameters including messageId, content, and senderId.
+## When to use it
 
-### Returns
+Reply to an existing message by ID so the response stays in the same mail conversation.
 
-- **`Promise<IReplyMessageResponse>`**: A promise that resolves with the reply details.
+## Example
 
-### Response Structure
+### Reply to a mail message
 
-```typescript
-interface IReplyMessageResponse {
-  success: boolean;
-  message?: {
-    id: string;
-    threadId: string;
-    parentMessageId: string;
-    senderId: string;
-    content: string;
-    timestamp: string;
-  };
-  error?: string;
-}
-```
-
-### Examples
-
-#### Example 1: Reply to a Message
-
-```typescript
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.mail.replyMessage({
-  messageId: 'msg-123',
-  content: 'I agree with your suggestion. Let me implement it.',
-  senderId: 'agent-002'
+codebolt.onReady(async () => {
+  const result = await codebolt.mail.replyMessage({
+    messageId: 'message-id',
+    senderId: 'docs-reviewer-id',
+    senderName: 'Docs reviewer',
+    body: 'I checked the setup steps and they match the project.',
+  });
+  console.log(result.messageId);
 });
-
-if (result.success) {
-  console.log('Reply sent');
-}
 ```
-
-### Common Use Cases
-
-- **Threaded Conversations**: Reply to specific messages
-- **Context Preservation**: Maintain message threads
-- **Direct Responses**: Respond to particular points
-
-### Notes
-
-- Creates threaded conversation structure
-- Parent message ID is preserved
-- All thread participants receive the reply

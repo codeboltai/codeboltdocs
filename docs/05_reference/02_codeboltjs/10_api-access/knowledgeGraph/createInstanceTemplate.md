@@ -1,369 +1,246 @@
 ---
 name: createInstanceTemplate
+description: Create a new instance template.
 cbbaseinfo:
-  description: Creates a new instance template that defines the schema for knowledge graph structures including record kinds and edge types.
-cbparameters:
-  parameters:
-    - name: config
-      typeName: CreateKGInstanceTemplateParams
-      description: Template configuration object.
-      nested:
-        - name: name
-          typeName: string
-          description: "The name of the template (required)."
-        - name: description
-          typeName: "string | undefined"
-          description: "Optional description of the template's purpose."
-        - name: record_kinds
-          typeName: "KGRecordKind[]"
-          description: "Array of record kind definitions (node types)."
-        - name: edge_types
-          typeName: "KGEdgeType[]"
-          description: "Array of edge type definitions (relationship types)."
-  returns:
-    signatureTypeName: "Promise<KGInstanceTemplateResponse>"
-    description: A promise that resolves to the created template details.
-    typeArgs: []
+  description: Create a new instance template.
 data:
   name: createInstanceTemplate
   category: knowledgeGraph
   link: createInstanceTemplate.md
 ---
+
 # createInstanceTemplate
 
-```typescript
+```text
 codebolt.knowledgeGraph.createInstanceTemplate(config: CreateKGInstanceTemplateParams): Promise<KGInstanceTemplateResponse>
 ```
 
-Creates a new instance template that defines the schema for knowledge graph structures including record kinds and edge types.
-### Parameters
+Create a new instance template
 
-- **`config`** ([CreateKGInstanceTemplateParams](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/CreateKGInstanceTemplateParams)): Template configuration object.
+## Parameters
 
-### Returns
+- `config` — Template configuration
 
-- **`Promise<[KGInstanceTemplateResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/KGInstanceTemplateResponse)>`**: A promise that resolves to the created template details.
+## When to use it
 
-### Examples
+Define a reusable graph structure that multiple instances can share.
 
-#### Create Simple Person Template
+## Examples
 
-```js
-import codebolt from '@codebolt/codeboltjs';
-
-// Wait for connection
-await codebolt.waitForReady();
-
-// Create a template for tracking people
-const template = await codebolt.knowledgeGraph.createInstanceTemplate({
-    name: 'Person Directory',
-    description: 'Simple template for person records',
-    record_kinds: [
-        {
-            name: 'person',
-            label: 'Person',
-            description: 'A person entity',
-            attributes: {
-                name: { type: 'string', required: true },
-                email: { type: 'string' },
-                age: { type: 'number' }
-            }
-        }
-    ],
-    edge_types: []
-});
-
-if (template.success) {
-    console.log('✅ Template created:', template.data.id);
-    console.log('Template name:', template.data.name);
-}
-```
-
-#### Create Social Network Template
+### Create Simple Person Template
 
 ```js
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  // Create a template for tracking people
+  const template = await codebolt.knowledgeGraph.createInstanceTemplate({
+      name: 'Person Directory',
+      description: 'Simple template for person records',
+      record_kinds: [
+          {
+              name: 'person',
+              label: 'Person',
+              description: 'A person entity',
+              attributes: {
+                  name: { type: 'string', required: true },
+                  email: { type: 'string' },
+                  age: { type: 'number' }
+              }
+          }
+      ],
+      edge_types: []
+  });
 
-// Create a comprehensive social network template
-const template = await codebolt.knowledgeGraph.createInstanceTemplate({
-    name: 'Social Network',
-    description: 'Template for social relationships and interactions',
-    record_kinds: [
-        {
-            name: 'person',
-            label: 'Person',
-            description: 'A person in the network',
-            attributes: {
-                name: { type: 'string', required: true },
-                handle: { type: 'string' },
-                bio: { type: 'string' },
-                joined_date: { type: 'date' },
-                verified: { type: 'boolean', default: false }
-            }
-        },
-        {
-            name: 'post',
-            label: 'Post',
-            description: 'A social media post',
-            attributes: {
-                content: { type: 'string', required: true },
-                timestamp: { type: 'date' },
-                likes: { type: 'number', default: 0 }
-            }
-        },
-        {
-            name: 'group',
-            label: 'Group',
-            description: 'A group or community',
-            attributes: {
-                name: { type: 'string', required: true },
-                description: { type: 'string' },
-                member_count: { type: 'number' }
-            }
-        }
-    ],
-    edge_types: [
-        {
-            name: 'follows',
-            label: 'Follows',
-            description: 'Person follows another person',
-            from_kinds: ['person'],
-            to_kinds: ['person']
-        },
-        {
-            name: 'authored',
-            label: 'Authored',
-            description: 'Person created a post',
-            from_kinds: ['person'],
-            to_kinds: ['post']
-        },
-        {
-            name: 'member_of',
-            label: 'Member Of',
-            description: 'Person is a member of a group',
-            from_kinds: ['person'],
-            to_kinds: ['group']
-        }
-    ]
+  if (template.success) {
+      if (template.data == null) throw new Error('The response is missing data.');
+      console.log('✅ Template created:', template.data.id);
+      console.log('Template name:', template.data.name);
+  }
 });
-
-console.log('Social network template created with',
-    template.data.record_kinds.length, 'node types and',
-    template.data.edge_types.length, 'relationship types');
 ```
 
-#### Create Project Management Template
+### Create Social Network Template
 
 ```js
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  // Create a comprehensive social network template
+  const template = await codebolt.knowledgeGraph.createInstanceTemplate({
+      name: 'Social Network',
+      description: 'Template for social relationships and interactions',
+      record_kinds: [
+          {
+              name: 'person',
+              label: 'Person',
+              description: 'A person in the network',
+              attributes: {
+                  name: { type: 'string', required: true },
+                  handle: { type: 'string' },
+                  bio: { type: 'string' },
+                  joined_date: { type: 'date' },
+                  verified: { type: 'boolean', default: false }
+              }
+          },
+          {
+              name: 'post',
+              label: 'Post',
+              description: 'A social media post',
+              attributes: {
+                  content: { type: 'string', required: true },
+                  timestamp: { type: 'date' },
+                  likes: { type: 'number', default: 0 }
+              }
+          },
+          {
+              name: 'group',
+              label: 'Group',
+              description: 'A group or community',
+              attributes: {
+                  name: { type: 'string', required: true },
+                  description: { type: 'string' },
+                  member_count: { type: 'number' }
+              }
+          }
+      ],
+      edge_types: [
+          {
+              name: 'follows',
+              label: 'Follows',
+              description: 'Person follows another person',
+              from_kinds: ['person'],
+              to_kinds: ['person']
+          },
+          {
+              name: 'authored',
+              label: 'Authored',
+              description: 'Person created a post',
+              from_kinds: ['person'],
+              to_kinds: ['post']
+          },
+          {
+              name: 'member_of',
+              label: 'Member Of',
+              description: 'Person is a member of a group',
+              from_kinds: ['person'],
+              to_kinds: ['group']
+          }
+      ]
+  });
 
-// Template for project management
-const template = await codebolt.knowledgeGraph.createInstanceTemplate({
-    name: 'Project Management',
-    description: 'Track projects, tasks, and resources',
-    record_kinds: [
-        {
-            name: 'project',
-            label: 'Project',
-            attributes: {
-                name: { type: 'string', required: true },
-                description: { type: 'string' },
-                status: { type: 'string' },
-                budget: { type: 'number' },
-                start_date: { type: 'date' },
-                end_date: { type: 'date' }
-            }
-        },
-        {
-            name: 'task',
-            label: 'Task',
-            attributes: {
-                title: { type: 'string', required: true },
-                description: { type: 'string' },
-                status: { type: 'string' },
-                priority: { type: 'number' },
-                estimated_hours: { type: 'number' }
-            }
-        },
-        {
-            name: 'resource',
-            label: 'Resource',
-            attributes: {
-                name: { type: 'string', required: true },
-                type: { type: 'string' },
-                availability: { type: 'number' },
-                cost_per_hour: { type: 'number' }
-            }
-        }
-    ],
-    edge_types: [
-        {
-            name: 'contains',
-            label: 'Contains',
-            from_kinds: ['project'],
-            to_kinds: ['task']
-        },
-        {
-            name: 'requires',
-            label: 'Requires',
-            from_kinds: ['task'],
-            to_kinds: ['resource']
-        },
-        {
-            name: 'depends_on',
-            label: 'Depends On',
-            from_kinds: ['task'],
-            to_kinds: ['task']
-        }
-    ]
+  if (template.data == null) throw new Error('The response is missing data.');
+  console.log('Social network template created with',
+      template.data.record_kinds.length, 'node types and',
+      template.data.edge_types.length, 'relationship types');
 });
-
-console.log('✅ Project management template created');
 ```
 
-#### Create Knowledge Graph with JSON Attributes
+### Create Project Management Template
 
 ```js
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  // Template for project management
+  const template = await codebolt.knowledgeGraph.createInstanceTemplate({
+      name: 'Project Management',
+      description: 'Track projects, tasks, and resources',
+      record_kinds: [
+          {
+              name: 'project',
+              label: 'Project',
+              attributes: {
+                  name: { type: 'string', required: true },
+                  description: { type: 'string' },
+                  status: { type: 'string' },
+                  budget: { type: 'number' },
+                  start_date: { type: 'date' },
+                  end_date: { type: 'date' }
+              }
+          },
+          {
+              name: 'task',
+              label: 'Task',
+              attributes: {
+                  title: { type: 'string', required: true },
+                  description: { type: 'string' },
+                  status: { type: 'string' },
+                  priority: { type: 'number' },
+                  estimated_hours: { type: 'number' }
+              }
+          },
+          {
+              name: 'resource',
+              label: 'Resource',
+              attributes: {
+                  name: { type: 'string', required: true },
+                  type: { type: 'string' },
+                  availability: { type: 'number' },
+                  cost_per_hour: { type: 'number' }
+              }
+          }
+      ],
+      edge_types: [
+          {
+              name: 'contains',
+              label: 'Contains',
+              from_kinds: ['project'],
+              to_kinds: ['task']
+          },
+          {
+              name: 'requires',
+              label: 'Requires',
+              from_kinds: ['task'],
+              to_kinds: ['resource']
+          },
+          {
+              name: 'depends_on',
+              label: 'Depends On',
+              from_kinds: ['task'],
+              to_kinds: ['task']
+          }
+      ]
+  });
 
-// Template with complex nested data
-const template = await codebolt.knowledgeGraph.createInstanceTemplate({
-    name: 'Document Repository',
-    record_kinds: [
-        {
-            name: 'document',
-            label: 'Document',
-            attributes: {
-                title: { type: 'string', required: true },
-                metadata: { type: 'json' },
-                tags: { type: 'json' }
-            }
-        }
-    ],
-    edge_types: [
-        {
-            name: 'references',
-            label: 'References',
-            from_kinds: ['document'],
-            to_kinds: ['document'],
-            attributes: {
-                context: { type: 'string' },
-                confidence: { type: 'number' }
-            }
-        }
-    ]
+  console.log('✅ Project management template created');
 });
-
-console.log('Document repository template created');
 ```
 
-#### Error Handling
+### Create Knowledge Graph with JSON Attributes
 
 ```js
 import codebolt from '@codebolt/codeboltjs';
 
-async function createTemplateWithErrorHandling(config) {
-    await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  // Template with complex nested data
+  const template = await codebolt.knowledgeGraph.createInstanceTemplate({
+      name: 'Document Repository',
+      record_kinds: [
+          {
+              name: 'document',
+              label: 'Document',
+              attributes: {
+                  title: { type: 'string', required: true },
+                  metadata: { type: 'json' },
+                  tags: { type: 'json' }
+              }
+          }
+      ],
+      edge_types: [
+          {
+              name: 'references',
+              label: 'References',
+              from_kinds: ['document'],
+              to_kinds: ['document'],
+              attributes: {
+                  context: { type: 'string' },
+                  confidence: { type: 'number' }
+              }
+          }
+      ]
+  });
 
-    try {
-        // Validate configuration
-        if (!config.name) {
-            throw new Error('Template name is required');
-        }
-
-        if (!config.record_kinds || config.record_kinds.length === 0) {
-            throw new Error('At least one record kind is required');
-        }
-
-        // Check for duplicate record kind names
-        const kindNames = config.record_kinds.map(k => k.name);
-        if (new Set(kindNames).size !== kindNames.length) {
-            throw new Error('Duplicate record kind names detected');
-        }
-
-        const template = await codebolt.knowledgeGraph.createInstanceTemplate(config);
-
-        if (!template.success) {
-            console.error('Template creation failed:', template.error);
-            return null;
-        }
-
-        console.log('✅ Template created successfully');
-        return template.data;
-
-    } catch (error) {
-        console.error('Error creating template:', error.message);
-        return null;
-    }
-}
-
-// Usage
-const template = await createTemplateWithErrorHandling({
-    name: 'Test Template',
-    record_kinds: [
-        {
-            name: 'entity',
-            label: 'Entity',
-            attributes: { name: { type: 'string' } }
-        }
-    ],
-    edge_types: []
+  console.log('Document repository template created');
 });
 ```
-
-### Response Structure
-
-```js
-{
-    type: 'kg.createInstanceTemplate',
-    success: boolean,
-    data?: {
-        id: string,
-        name: string,
-        description?: string,
-        record_kinds: KGRecordKind[],
-        edge_types: KGEdgeType[],
-        createdAt: string,
-        updatedAt: string
-    },
-    message?: string,
-    error?: string,
-    timestamp: string,
-    requestId: string
-}
-```
-
-### Common Use Cases
-
-**1. Domain Modeling**
-Create templates that model real-world domains and relationships.
-
-**2. Data Organization**
-Define schemas for organizing complex interconnected data.
-
-**3. Relationship Tracking**
-Model and track various types of relationships between entities.
-
-**4. Knowledge Representation**
-Build structured representations of knowledge and information.
-
-**5. Social Networks**
-Model social structures, connections, and interactions.
-
-### Notes
-
-- Template names must be unique
-- Record kind names must be unique within a template
-- Edge types can only connect record kinds that exist in the same template
-- Attribute types are: string, number, boolean, date, or json
-- Required attributes must be provided when creating records
-- Default values are used when attributes are not provided
-- Edge types can have their own attributes for storing relationship metadata
-- Templates cannot be modified after creation (create a new one instead)
-- Consider your schema carefully before creating templates

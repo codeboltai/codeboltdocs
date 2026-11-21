@@ -1,67 +1,39 @@
 ---
 name: delete
+description: Delete a rule engine.
 cbbaseinfo:
-  description: Deletes a rule engine.
-cbparameters:
-  parameters:
-    - name: id
-      type: string
-      required: true
-      description: The unique identifier of the rule engine.
-  returns:
-    signatureTypeName: "Promise<ContextRuleEngineDeleteResponse>"
-    description: A promise that resolves with deletion status.
+  description: Delete a rule engine.
 data:
   name: delete
   category: contextRuleEngine
   link: delete.md
 ---
+
 # delete
 
-```typescript
-codebolt.contextRuleEngine.delete(id: undefined): Promise<ContextRuleEngineDeleteResponse>
+```text
+codebolt.contextRuleEngine.delete(id: string): Promise<ContextRuleEngineDeleteResponse>
 ```
 
-Deletes a rule engine.
-### Parameters
+Delete a rule engine
 
-- **`id`** (unknown): The unique identifier of the rule engine.
+## Parameters
 
-### Returns
+- `id` — Rule engine ID
 
-- **`Promise<[ContextRuleEngineDeleteResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ContextRuleEngineDeleteResponse)>`**: A promise that resolves with deletion status.
+## Example
 
-### Examples
+### Delete Rule Engine
 
-#### Example 1: Delete Rule Engine
 ```javascript
-const result = await codebolt.contextRuleEngine.delete('engine-id-123');
+import codebolt from '@codebolt/codeboltjs';
 
-if (result.success && result.data.deleted) {
-  console.log('Rule engine deleted');
-}
-```
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.delete('engine-id-123');
 
-#### Example 2: Delete with Confirmation
-```javascript
-async function deleteWithConfirmation(engineId) {
-  const engine = await codebolt.contextRuleEngine.get(engineId);
-
-  console.log(`Delete engine "${engine.data.ruleEngine.name}"?`);
-  console.log(`Rules: ${engine.data.ruleEngine.rules.length}`);
-
-  // Confirm before deleting
-  const confirmed = true;
-
-  if (confirmed) {
-    const result = await codebolt.contextRuleEngine.delete(engineId);
-    return result.data.deleted;
+  if (result.data == null) throw new Error('The response is missing data.');
+  if (result.success && result.data.deleted) {
+    console.log('Rule engine deleted');
   }
-
-  return false;
-}
+});
 ```
-
-### Notes
-- Permanent deletion, use with caution
-- Consider disabling instead of deleting for testing

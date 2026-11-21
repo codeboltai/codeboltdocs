@@ -1,260 +1,241 @@
 ---
 name: start
+description: Start an ActionBlock by name.
 cbbaseinfo:
-  description: Starts execution of an ActionBlock by name with optional parameters.
-cbparameters:
-  parameters:
-    - name: actionBlockName
-      typeName: string
-      description: The name of the ActionBlock to start.
-    - name: params
-      typeName: "Record<string, any>"
-      description: Optional parameters to pass to the ActionBlock.
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<StartActionBlockResponse>"
-    description: A promise that resolves to the execution result.
-    typeArgs: []
+  description: Start an ActionBlock by name.
 data:
   name: start
   category: actionBlock
   link: start.md
 ---
+
 # start
 
-```typescript
-codebolt.actionBlock.start(actionBlockName: string, params: Record<string, any>): Promise<StartActionBlockResponse>
+```text
+codebolt.actionBlock.start(actionBlockName: string, params?: Record<string, any>, options?: StartActionBlockOptions): Promise<StartActionBlockResponse>
 ```
 
-Starts execution of an ActionBlock by name with optional parameters.
-### Parameters
+Start an ActionBlock by name
 
-- **`actionBlockName`** (string): The name of the ActionBlock to start.
-- **`params`** (`Record<string, any>`, optional): Optional parameters to pass to the ActionBlock.
+## Parameters
 
-### Returns
+- `actionBlockName` — Name of the ActionBlock to start
+- `params` — Optional parameters to pass to the ActionBlock
+- `options` — Optional execution controls
 
-- **`Promise<[StartActionBlockResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/StartActionBlockResponse)>`**: A promise that resolves to the execution result.
+## Returns
 
-### Response Structure
+Promise resolving to execution result
 
-Returns [`StartActionBlockResponse`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/StartActionBlockResponse) with execution result.
+## When to use it
 
-**Response Properties:**
-- `type` (string): Always "startActionBlockResponse"
-- `success` (boolean): Operation success status
-- `sideExecutionId` (string, optional): Execution ID for tracking
-- `result` (any, optional): Execution result data
-- `error` (string, optional): Error details if failed
-- `requestId` (string, optional): Unique request identifier
+Run a named block after you know its expected inputs. Use side execution when your caller has a block directory path or needs inline code.
 
-### Examples
-
-#### Example 1: Execute Simple ActionBlock
+## Example
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-const result = await codebolt.actionBlock.start('file-reader', {
-  path: '/path/to/file.txt'
-});
-
-if (result.success) {
-  console.log('File content:', result.result);
-} else {
-  console.error('Execution failed:', result.error);
-}
-```
-
-#### Example 2: Execute with Multiple Parameters
-
-```typescript
-const result = await codebolt.actionBlock.start('data-processor', {
-  input: 'raw-data.csv',
-  output: 'processed-data.json',
-  transformations: ['clean', 'normalize', 'validate'],
-  options: {
-    skipErrors: true,
-    maxRows: 10000
-  }
-});
-
-console.log('Processing complete:', result.sideExecutionId);
-```
-
-#### Example 3: Chain ActionBlocks
-
-```typescript
-// Execute a workflow using multiple ActionBlocks
-const workflow = async (inputFile: string) => {
-  // Step 1: Read file
-  const step1 = await codebolt.actionBlock.start('file-reader', {
-    path: inputFile
-  });
-
-  if (!step1.success) throw new Error('Failed to read file');
-
-  // Step 2: Process data
-  const step2 = await codebolt.actionBlock.start('data-transformer', {
-    data: step1.result,
-    transform: 'normalize'
-  });
-
-  if (!step2.success) throw new Error('Failed to transform data');
-
-  // Step 3: Save result
-  const step3 = await codebolt.actionBlock.start('file-writer', {
-    path: 'output.json',
-    data: step2.result
-  });
-
-  return step3;
-};
-
-const result = await workflow('input.csv');
-```
-
-#### Example 4: Error Handling
-
-```typescript
-const executeWithErrorHandling = async (
-  actionBlockName: string,
-  params: Record<string, any>
-) => {
-  try {
-    const result = await codebolt.actionBlock.start(actionBlockName, params);
-
-    if (!result.success) {
-      console.error('Execution failed:', result.error);
-      return null;
-    }
-
-    console.log('Execution ID:', result.sideExecutionId);
-    return result.result;
-  } catch (error) {
-    console.error('Unexpected error:', error);
-    return null;
-  }
-};
-
-const result = await executeWithErrorHandling('file-reader', { path: 'data.txt' });
-```
-
-#### Example 5: Parallel Execution
-
-```typescript
-const processMultipleFiles = async (files: string[]) => {
-  const results = await Promise.allSettled(
-    files.map(file =>
-      codebolt.actionBlock.start('file-reader', { path: file })
-    )
-  );
-
-  results.forEach((result, index) => {
-    if (result.status === 'fulfilled' && result.value.success) {
-      console.log(`File ${index}: OK`);
-    } else {
-      console.error(`File ${index}: Failed`);
+codebolt.onReady(async () => {
+  const result = await codebolt.actionBlock.start('data-processor', {
+    input: 'raw-data.csv',
+    output: 'processed-data.json',
+    transformations: ['clean', 'normalize', 'validate'],
+    options: {
+      skipErrors: true,
+      maxRows: 10000
     }
   });
 
-  return results;
-};
-
-const results = await processMultipleFiles(['file1.txt', 'file2.txt', 'file3.txt']);
+  console.log('Processing complete:', result.sideExecutionId);
+});
 ```
 
-#### Example 6: Conditional Execution
+## More examples
+
+### Execute Simple ActionBlock
 
 ```typescript
-const smartProcessor = async (file: string) => {
-  // Detect file type
-  const detect = await codebolt.actionBlock.start('file-type-detector', {
-    path: file
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.actionBlock.start('file-reader', {
+    path: '/path/to/file.txt'
   });
 
-  const fileType = detect.result?.type;
-
-  // Choose appropriate processor
-  if (fileType === 'image') {
-    return await codebolt.actionBlock.start('image-processor', { file });
-  } else if (fileType === 'document') {
-    return await codebolt.actionBlock.start('document-processor', { file });
-  } else if (fileType === 'data') {
-    return await codebolt.actionBlock.start('data-processor', { file });
+  if (result.success) {
+    console.log('File content:', result.result);
   } else {
-    throw new Error(`Unsupported file type: ${fileType}`);
+    console.error('Execution failed:', result.error);
   }
-};
-```
-
-### Common Use Cases
-
-#### File Operations
-
-```typescript
-// Read file
-const content = await codebolt.actionBlock.start('file-reader', {
-  path: 'data.json'
-});
-
-// Write file
-await codebolt.actionBlock.start('file-writer', {
-  path: 'output.json',
-  data: { key: 'value' }
-});
-
-// Delete file
-await codebolt.actionBlock.start('file-deleter', {
-  path: 'temp.txt'
 });
 ```
 
-#### Data Processing
+### Chain ActionBlocks
 
 ```typescript
-// Process data
-const result = await codebolt.actionBlock.start('data-processor', {
-  input: rawData,
-  operations: ['filter', 'sort', 'transform']
-});
+import codebolt from '@codebolt/codeboltjs';
 
-// Validate data
-const validation = await codebolt.actionBlock.start('data-validator', {
-  data: result,
-  schema: 'user-schema'
-});
-```
-
-#### Batch Operations
-
-```typescript
-const batchProcess = async (items: any[]) => {
-  const batchSize = 10;
-
-  for (let i = 0; i < items.length; i += batchSize) {
-    const batch = items.slice(i, i + batchSize);
-
-    await codebolt.actionBlock.start('batch-processor', {
-      items: batch,
-      operation: 'transform'
+codebolt.onReady(async () => {
+  // Execute a workflow using multiple ActionBlocks
+  const workflow = async (inputFile: string) => {
+    // Step 1: Read file
+    const step1 = await codebolt.actionBlock.start('file-reader', {
+      path: inputFile
     });
 
-    console.log(`Processed batch ${i / batchSize + 1}`);
-  }
-};
+    if (!step1.success) throw new Error('Failed to read file');
+
+    // Step 2: Process data
+    const step2 = await codebolt.actionBlock.start('data-transformer', {
+      data: step1.result,
+      transform: 'normalize'
+    });
+
+    if (!step2.success) throw new Error('Failed to transform data');
+
+    // Step 3: Save result
+    const step3 = await codebolt.actionBlock.start('file-writer', {
+      path: 'output.json',
+      data: step2.result
+    });
+
+    return step3;
+  };
+
+  const result = await workflow('input.csv');
+});
 ```
 
-### Notes
+### Error Handling
 
-- ActionBlock names are case-sensitive
-- Parameters must match the ActionBlock's expected input schema
-- Use `getDetail()` to understand required parameters
-- Execution returns immediately with an execution ID for async operations
-- Some ActionBlocks may execute synchronously
-- Consider error handling for robust workflows
-- ActionBlocks can be chained together for complex workflows
-- Multiple ActionBlocks can execute in parallel
-- Use meaningful parameter names for better debugging
-- Large data should use file references rather than inline values
-- Execution IDs can be used for tracking and monitoring
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const executeWithErrorHandling = async (
+    actionBlockName: string,
+    params: Record<string, any>
+  ) => {
+    try {
+      const result = await codebolt.actionBlock.start(actionBlockName, params);
+
+      if (!result.success) {
+        console.error('Execution failed:', result.error);
+        return null;
+      }
+
+      console.log('Execution ID:', result.sideExecutionId);
+      return result.result;
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      return null;
+    }
+  };
+
+  const result = await executeWithErrorHandling('file-reader', { path: 'data.txt' });
+});
+```
+
+### Parallel Execution
+
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const processMultipleFiles = async (files: string[]) => {
+    const results = await Promise.allSettled(
+      files.map(file =>
+        codebolt.actionBlock.start('file-reader', { path: file })
+      )
+    );
+
+    results.forEach((result, index) => {
+      if (result.status === 'fulfilled' && result.value.success) {
+        console.log(`File ${index}: OK`);
+      } else {
+        console.error(`File ${index}: Failed`);
+      }
+    });
+
+    return results;
+  };
+
+  const results = await processMultipleFiles(['file1.txt', 'file2.txt', 'file3.txt']);
+});
+```
+
+### Conditional Execution
+
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const smartProcessor = async (file: string) => {
+    // Detect file type
+    const detect = await codebolt.actionBlock.start('file-type-detector', {
+      path: file
+    });
+
+    const fileType = detect.result?.type;
+
+    // Choose appropriate processor
+    if (fileType === 'image') {
+      return await codebolt.actionBlock.start('image-processor', { file });
+    } else if (fileType === 'document') {
+      return await codebolt.actionBlock.start('document-processor', { file });
+    } else if (fileType === 'data') {
+      return await codebolt.actionBlock.start('data-processor', { file });
+    } else {
+      throw new Error(`Unsupported file type: ${fileType}`);
+    }
+  };
+});
+```
+
+### File Operations
+
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Read file
+  const content = await codebolt.actionBlock.start('file-reader', {
+    path: 'data.json'
+  });
+
+  // Write file
+  await codebolt.actionBlock.start('file-writer', {
+    path: 'output.json',
+    data: { key: 'value' }
+  });
+
+  // Delete file
+  await codebolt.actionBlock.start('file-deleter', {
+    path: 'temp.txt'
+  });
+});
+```
+
+### Batch Operations
+
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const batchProcess = async (items: any[]) => {
+    const batchSize = 10;
+
+    for (let i = 0; i < items.length; i += batchSize) {
+      const batch = items.slice(i, i + batchSize);
+
+      await codebolt.actionBlock.start('batch-processor', {
+        items: batch,
+        operation: 'transform'
+      });
+
+      console.log(`Processed batch ${i / batchSize + 1}`);
+    }
+  };
+});
+```

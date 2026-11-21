@@ -1,63 +1,43 @@
 ---
 name: waitforReply
+description: Waits for a reply to a sent message.
 cbbaseinfo:
   description: Waits for a reply to a sent message.
-cbparameters:
-  parameters:
-    - name: message
-      typeName: string
-      description: The message for which a reply is expected.
-  returns:
-    signatureTypeName: Promise
-    description: A promise that resolves with the reply.
-    typeArgs:
-      - type: intrinsic
-        name: string
 data:
   name: waitforReply
   category: chat
   link: waitforReply.md
 ---
+
 # waitforReply
 
-```typescript
-codebolt.chat.waitforReply(message: string): Promise<string>
+```text
+codebolt.chat.waitforReply(message: string): Promise<UserMessage>
 ```
 
-Waits for a reply to a sent message. 
- ### Parameters
+Waits for a reply to a sent message.
 
-- **`message`** (string): The message for which a reply is expected.
+## Parameters
 
-### Returns
+- `message` — The message for which a reply is expected.
 
-- **`Promise<string>`**: A promise that resolves with the reply.
+## Returns
 
-### Response Structure
+A promise that resolves with the reply.
 
-The method returns a Promise that resolves to a `UserMessage` object with the following properties:
+## When to use it
 
-- **`type`** (string): The type of the WebSocket response.
-- **`id`** (string): Unique identifier for the message.
-- **`content`** (string): The actual message content/text from the user.
-- **`sender`** (string): Always "user" for this response.
-- **`timestamp`** (string): When the message was sent (ISO 8601 format).
-- **`text`** (string, optional): The text content of the message.
-- **`images`** (array, optional): Any images included in the message.
-- **`success`** (boolean, optional): Indicates if the operation was successful.
-- **`message`** (string, optional): A message with additional information.
-- **`error`** (string, optional): Error details if the operation failed.
-- **`messageId`** (string, optional): A unique identifier for the message.
-- **`threadId`** (string, optional): The thread identifier.
+Ask for a file path or another missing input when the agent needs an answer before it can continue.
 
-### Example: 
+## Example
 
-```js
+### Ask a question and wait for the reply
 
-const message = await codebolt.chat.waitforReply(message: string)
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
+codebolt.onMessage(async () => {
+  const reply = await codebolt.chat.waitforReply('Which file should I review?');
+  console.log(reply);
+});
 ```
-
-### Explaination 
-
-The codebolt.chat.waitforReply(message: string) function is used to send a message  on the codebolt chat and wait for the reply. This function enables real-time communication by allowing the script to send text messages on the codebolt chat. This function returns the reply message, which we can store in a variable and use.

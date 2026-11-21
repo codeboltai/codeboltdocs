@@ -1,171 +1,293 @@
----
-name: Job Module
-cbbaseinfo:
-  description: "The Job module provides comprehensive job management functionality including CRUD operations, dependencies, labels, pheromone-based coordination, split proposals, locking, bidding, and blocker management."
----
+# Job
 
-# Job Module
+Manage jobs, dependencies, assignments, locks, bids, and pheromones.
 
-The Job module (`codebolt.job`) provides a complete solution for managing jobs in a distributed agent environment. Jobs can represent tasks, issues, features, or any work units that need to be tracked and coordinated.
+## Example
 
-## Core Features
-
-### Basic Job Management
-- Create, read, update, and delete jobs
-- Bulk delete operations
-- Job listing with filters
-- Job groups for organization
-
-### Dependencies
-- Add and remove job dependencies
-- Track blocking and related jobs
-- Get ready and blocked jobs based on dependencies
-
-### Labels
-- Tag jobs with labels for categorization
-- List, add, and remove labels
-
-## Advanced Features
-
-### Pheromone System
-Pheromones provide a stigmergic coordination mechanism for agents:
-- **Pheromone Types**: Define custom pheromone types with display names and colors
-- **Deposit/Remove**: Agents can deposit or remove pheromones on jobs
-- **Aggregation**: Get aggregated pheromone data across depositors
-- **Decay**: Time-based decay support for pheromone intensity
-- **Search**: Find jobs by pheromone type and intensity
-
-### Split Proposals
-For complex jobs that need to be broken down:
-- Propose splitting a job into multiple sub-jobs
-- Accept or delete split proposals
-
-### Job Locking
-Prevent concurrent work on the same job:
-- Acquire and release locks
-- Check lock status
-- Request unlock from lock holder
-
-### Job Bidding
-Competitive assignment of jobs:
-- Agents can bid on jobs with priority and reason
-- Accept or withdraw bids
-- List all bids on a job
-
-### Job Blockers
-Track explicit blockers on jobs:
-- Add blockers with descriptions
-- Link blockers to other jobs
-- Resolve or remove blockers
-
-## Usage Example
+### Usage Example
 
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-// Create a job group
-const groupResult = await codebolt.job.createJobGroup({
-  shortName: 'PROJ',
-  name: 'My Project'
+codebolt.onReady(async () => {
+  // Create a job group
+  const groupResult = await codebolt.job.createJobGroup({
+    shortName: 'PROJ',
+    name: 'My Project'
+  });
+
+  // Create a job in the group
+  const jobResult = await codebolt.job.createJob(groupResult.group.id, {
+    name: 'Implement feature X',
+    type: 'feature',
+    priority: 3,
+    description: 'Detailed description...'
+  });
+
+  // Deposit a pheromone to indicate interest
+  await codebolt.job.depositPheromone(jobResult.job.id, {
+    type: 'interested',
+    intensity: 0.8,
+    depositedBy: 'agent-123'
+  });
+
+  // Lock the job before working
+  await codebolt.job.lockJob(jobResult.job.id, 'agent-123', 'My Agent');
+
+  // When done, unlock
+  await codebolt.job.unlockJob(jobResult.job.id, 'agent-123');
 });
-
-// Create a job in the group
-const jobResult = await codebolt.job.createJob(groupResult.group.id, {
-  name: 'Implement feature X',
-  type: 'feature',
-  priority: 3,
-  description: 'Detailed description...'
-});
-
-// Deposit a pheromone to indicate interest
-await codebolt.job.depositPheromone(jobResult.job.id, {
-  type: 'interested',
-  intensity: 0.8,
-  depositedBy: 'agent-123'
-});
-
-// Lock the job before working
-await codebolt.job.lockJob(jobResult.job.id, 'agent-123', 'My Agent');
-
-// When done, unlock
-await codebolt.job.unlockJob(jobResult.job.id, 'agent-123');
 ```
 
-## Available Methods
+## SDK methods
 
-### CRUD Operations
-| Method | Description |
-|--------|-------------|
-| `createJob(groupId, data)` | Create a new job |
-| `getJob(jobId)` | Get job details |
-| `updateJob(jobId, data)` | Update a job |
-| `deleteJob(jobId)` | Delete a job |
-| `deleteJobs(jobIds)` | Bulk delete jobs |
-| `listJobs(filters)` | List jobs with optional filters |
-| `createJobGroup(data)` | Create a job group |
+### createJob
 
-### Dependencies
-| Method | Description |
-|--------|-------------|
-| `addDependency(jobId, targetId, type)` | Add a dependency |
-| `removeDependency(jobId, targetId)` | Remove a dependency |
-| `getReadyJobs(filters)` | Get jobs ready to start |
-| `getBlockedJobs(filters)` | Get blocked jobs |
+[`createJob`](createJob.md)
 
-### Labels
-| Method | Description |
-|--------|-------------|
-| `addLabel(label)` | Add a label |
-| `removeLabel(label)` | Remove a label |
-| `listLabels()` | List all labels |
+### getJob
 
-### Pheromones
-| Method | Description |
-|--------|-------------|
-| `getPheromoneTypes()` | List pheromone types |
-| `addPheromoneType(data)` | Add a pheromone type |
-| `removePheromoneType(name)` | Remove a pheromone type |
-| `depositPheromone(jobId, deposit)` | Deposit pheromone |
-| `removePheromone(jobId, type, depositedBy)` | Remove pheromone |
-| `getPheromones(jobId)` | List pheromones on a job |
-| `getPheromonesAggregated(jobId)` | Get aggregated pheromones |
-| `listJobsByPheromone(type, minIntensity)` | Search by pheromone |
-| `getPheromonesWithDecay(jobId)` | Get with decay applied |
-| `getPheromonesAggregatedWithDecay(jobId)` | Aggregated with decay |
+```text
+codebolt.job.getJob(jobId: string): Promise<JobShowResponse>
+```
 
-### Split Proposals
-| Method | Description |
-|--------|-------------|
-| `addSplitProposal(jobId, proposal)` | Propose split |
-| `deleteSplitProposal(jobId, proposalId)` | Delete proposal |
-| `acceptSplitProposal(jobId, proposalId)` | Accept proposal |
+### updateJob
 
-### Locking
-| Method | Description |
-|--------|-------------|
-| `lockJob(jobId, agentId, agentName)` | Acquire lock |
-| `unlockJob(jobId, agentId)` | Release lock |
-| `isJobLocked(jobId)` | Check lock status |
+```text
+codebolt.job.updateJob(jobId: string, data: UpdateJobData): Promise<JobUpdateResponse>
+```
 
-### Unlock Requests
-| Method | Description |
-|--------|-------------|
-| `addUnlockRequest(jobId, request)` | Request unlock |
-| `approveUnlockRequest(jobId, requestId, respondedBy)` | Approve request |
-| `rejectUnlockRequest(jobId, requestId, respondedBy)` | Reject request |
-| `deleteUnlockRequest(jobId, requestId)` | Delete request |
+### deleteJob
 
-### Bidding
-| Method | Description |
-|--------|-------------|
-| `addBid(jobId, bid)` | Add a bid |
-| `withdrawBid(jobId, bidId)` | Withdraw a bid |
-| `acceptBid(jobId, bidId)` | Accept a bid |
-| `listBids(jobId)` | List all bids |
+```text
+codebolt.job.deleteJob(jobId: string): Promise<JobDeleteResponse>
+```
 
-### Blockers
-| Method | Description |
-|--------|-------------|
-| `addBlocker(jobId, blocker)` | Add a blocker |
-| `removeBlocker(jobId, blockerId)` | Remove a blocker |
-| `resolveBlocker(jobId, blockerId, resolvedBy)` | Resolve a blocker |
+### deleteJobs
+
+```text
+codebolt.job.deleteJobs(jobIds: string[]): Promise<JobDeleteBulkResponse>
+```
+
+### listJobs
+
+```text
+codebolt.job.listJobs(filters?: JobListFilters): Promise<JobListResponse>
+```
+
+### createJobGroup
+
+```text
+codebolt.job.createJobGroup(data: CreateJobGroupData): Promise<JobGroupCreateResponse>
+```
+
+### addDependency
+
+```text
+codebolt.job.addDependency(jobId: string, targetId: string, type?: DependencyType): Promise<JobDependencyResponse>
+```
+
+### removeDependency
+
+```text
+codebolt.job.removeDependency(jobId: string, targetId: string): Promise<JobDependencyResponse>
+```
+
+### getReadyJobs
+
+```text
+codebolt.job.getReadyJobs(filters?: JobListFilters): Promise<JobReadyBlockedResponse>
+```
+
+### getBlockedJobs
+
+```text
+codebolt.job.getBlockedJobs(filters?: JobListFilters): Promise<JobReadyBlockedResponse>
+```
+
+### addLabel
+
+```text
+codebolt.job.addLabel(label: string): Promise<JobLabelsResponse>
+```
+
+### removeLabel
+
+```text
+codebolt.job.removeLabel(label: string): Promise<JobLabelsResponse>
+```
+
+### listLabels
+
+```text
+codebolt.job.listLabels(): Promise<JobLabelsResponse>
+```
+
+### getPheromoneTypes
+
+```text
+codebolt.job.getPheromoneTypes(): Promise<JobPheromoneTypesResponse>
+```
+
+### addPheromoneType
+
+```text
+codebolt.job.addPheromoneType(data: AddPheromoneTypeData): Promise<JobPheromoneTypeResponse>
+```
+
+### removePheromoneType
+
+```text
+codebolt.job.removePheromoneType(name: string): Promise<JobPheromoneTypeResponse>
+```
+
+### depositPheromone
+
+```text
+codebolt.job.depositPheromone(jobId: string, deposit: DepositPheromoneData): Promise<JobPheromoneDepositResponse>
+```
+
+### removePheromone
+
+```text
+codebolt.job.removePheromone(jobId: string, type: string, depositedBy?: string): Promise<JobPheromoneRemoveResponse>
+```
+
+### getPheromones
+
+```text
+codebolt.job.getPheromones(jobId: string): Promise<JobPheromoneListResponse>
+```
+
+### getPheromonesAggregated
+
+```text
+codebolt.job.getPheromonesAggregated(jobId: string): Promise<JobPheromoneAggregatedResponse>
+```
+
+### listJobsByPheromone
+
+```text
+codebolt.job.listJobsByPheromone(type: string, minIntensity?: number): Promise<JobPheromoneSearchResponse>
+```
+
+### getPheromonesWithDecay
+
+```text
+codebolt.job.getPheromonesWithDecay(jobId: string): Promise<JobPheromoneListResponse>
+```
+
+### getPheromonesAggregatedWithDecay
+
+```text
+codebolt.job.getPheromonesAggregatedWithDecay(jobId: string): Promise<JobPheromoneAggregatedResponse>
+```
+
+### addSplitProposal
+
+```text
+codebolt.job.addSplitProposal(jobId: string, proposal: AddSplitProposalData): Promise<JobSplitProposeResponse>
+```
+
+### deleteSplitProposal
+
+```text
+codebolt.job.deleteSplitProposal(jobId: string, proposalId: string): Promise<JobSplitDeleteResponse>
+```
+
+### acceptSplitProposal
+
+```text
+codebolt.job.acceptSplitProposal(jobId: string, proposalId: string): Promise<JobSplitAcceptResponse>
+```
+
+### lockJob
+
+```text
+codebolt.job.lockJob(jobId: string, agentId: string, agentName?: string): Promise<JobLockAcquireResponse>
+```
+
+### unlockJob
+
+```text
+codebolt.job.unlockJob(jobId: string, agentId: string): Promise<JobLockReleaseResponse>
+```
+
+### isJobLocked
+
+```text
+codebolt.job.isJobLocked(jobId: string): Promise<JobLockCheckResponse>
+```
+
+### addUnlockRequest
+
+```text
+codebolt.job.addUnlockRequest(jobId: string, request: AddUnlockRequestData): Promise<JobUnlockRequestAddResponse>
+```
+
+### approveUnlockRequest
+
+```text
+codebolt.job.approveUnlockRequest(jobId: string, unlockRequestId: string, respondedBy: string): Promise<JobUnlockRequestApproveResponse>
+```
+
+### rejectUnlockRequest
+
+```text
+codebolt.job.rejectUnlockRequest(jobId: string, unlockRequestId: string, respondedBy: string): Promise<JobUnlockRequestRejectResponse>
+```
+
+### deleteUnlockRequest
+
+```text
+codebolt.job.deleteUnlockRequest(jobId: string, unlockRequestId: string): Promise<JobUnlockRequestDeleteResponse>
+```
+
+### addBid
+
+```text
+codebolt.job.addBid(jobId: string, bid: AddBidData): Promise<JobBidAddResponse>
+```
+
+### withdrawBid
+
+```text
+codebolt.job.withdrawBid(jobId: string, bidId: string): Promise<JobBidWithdrawResponse>
+```
+
+### acceptBid
+
+```text
+codebolt.job.acceptBid(jobId: string, bidId: string): Promise<JobBidAcceptResponse>
+```
+
+### listBids
+
+```text
+codebolt.job.listBids(jobId: string): Promise<JobBidListResponse>
+```
+
+### addBlocker
+
+```text
+codebolt.job.addBlocker(jobId: string, blocker: AddBlockerData): Promise<JobBlockerAddResponse>
+```
+
+### removeBlocker
+
+```text
+codebolt.job.removeBlocker(jobId: string, blockerId: string): Promise<JobBlockerRemoveResponse>
+```
+
+### resolveBlocker
+
+```text
+codebolt.job.resolveBlocker(jobId: string, blockerId: string, resolvedBy: string): Promise<JobBlockerResolveResponse>
+```
+
+## Related pages
+
+- [Bidding](./bidding.md)
+- [Blockers](./blockers.md)
+- [Locking](./locking.md)
+- [Pheromones](./pheromones.md)

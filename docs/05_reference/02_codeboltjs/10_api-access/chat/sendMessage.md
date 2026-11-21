@@ -1,57 +1,47 @@
 ---
 name: sendMessage
+description: Sends a message and optional payload to the Codebolt chat UI.
 cbbaseinfo:
-  description: Sends a message through the WebSocket connection.
-cbparameters:
-  parameters:
-    - name: message
-      typeName: string
-      description: The message to be sent.
-    - name: payload
-      typeName: any
-      description: Additional data to send along with the message.
-  returns:
-    signatureTypeName: void
-    description: "' '"
-    typeArgs: []
+  description: Sends a message and optional payload to the Codebolt chat UI.
 data:
   name: sendMessage
   category: chat
   link: sendMessage.md
 ---
+
 # sendMessage
 
-```typescript
-codebolt.chat.sendMessage(message: string, payload: any): void
+```text
+codebolt.chat.sendMessage(message: string, payload?: object): void
 ```
 
-Sends a message through the WebSocket connection. 
-### Parameters
+Sends a message and optional payload to the Codebolt chat UI. The method returns immediately.
 
-- **`message`** (string): The message to be sent.
-- **`payload`** (any): Additional data to send along with the message.
+## Example
 
-### Returns
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-- **`void`**: ' '
-
-### Response Structure
-
-This method returns `void` and does not provide a response. The message is sent immediately when the method is called.
-
-### Examples
-
-```js
-// Example 1: Send a simple text message
-codebolt.chat.sendMessage("Hello, CodeBolt!");
-
-// Example 3: Send a message with payload data
-codebolt.chat.sendMessage("File processing complete", {
-    timestamp: new Date().toISOString(),
-    source: 'codeboltjs-script',
-    fileCount: 5,
-    status: 'success'
+codebolt.onReady(() => {
+  codebolt.chat.sendMessage('Looking at the project files now.');
 });
 ```
 
-![sendMessage](/img/processStarted.png)
+## More examples
+
+```js
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(() => {
+  // Example 1: Send a simple text message
+  codebolt.chat.sendMessage("Hello, CodeBolt!");
+
+  // Example 3: Send a message with payload data
+  codebolt.chat.sendMessage("File processing complete", {
+      timestamp: new Date().toISOString(),
+      source: 'codeboltjs-script',
+      fileCount: 5,
+      status: 'success'
+  });
+});
+```

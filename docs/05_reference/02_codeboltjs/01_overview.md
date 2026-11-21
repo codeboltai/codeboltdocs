@@ -21,7 +21,7 @@ Every capability is available in three forms depending on who is consuming it:
 
 | Section | What it covers |
 |---|---|
-| [Direct API Access](./10_api-access/1-index.md) | Every `ctx.*` method — `fs`, `git`, `browser`, `memory`, `llm`, and 60+ more |
+| [Direct API Access](./10_api-access/1-index.md) | Methods available on the `codebolt` SDK instance, including `fs`, `git`, `memory`, and `llm` |
 | [MCP Access](./11_mcp-access/1-index.md) | The same APIs exposed as MCP tools for non-codeboltjs agents |
 | [Pseudo CLI](./pseudo_cli/index.md) | Command-shaped SDK access for intercepted `execute_command` calls |
 | [Type Reference](./09_type-reference/index.md) | Full TypeScript types — codeboltjs classes, providers, shared types |

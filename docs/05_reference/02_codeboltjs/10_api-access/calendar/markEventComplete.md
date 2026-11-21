@@ -1,148 +1,76 @@
 ---
 name: markEventComplete
+description: Mark a single event as complete.
 cbbaseinfo:
-  description: Marks a single calendar event as complete, recording the completion timestamp and updating the event status.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: IMarkEventCompleteParams
-      description: Parameters containing the eventId to mark as complete
-  returns:
-    signatureTypeName: "Promise<IMarkEventCompleteResponse>"
-    description: A promise that resolves to the completed event data
+  description: Mark a single event as complete.
 data:
   name: markEventComplete
   category: calendar
   link: markEventComplete.md
 ---
+
 # markEventComplete
 
-```typescript
+```text
 codebolt.calendar.markEventComplete(params: IMarkEventCompleteParams): Promise<IMarkEventCompleteResponse>
 ```
 
-Marks a single calendar event as complete, recording the completion timestamp and updating the event status.
-### Parameters
+Mark a single event as complete
 
-- **`params`** ([IMarkEventCompleteParams](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IMarkEventCompleteParams)): Parameters containing the eventId to mark as complete
+## Parameters
 
-### Returns
+- `params` — Parameters including eventId
 
-- **`Promise<[IMarkEventCompleteResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IMarkEventCompleteResponse)>`**: A promise that resolves to the completed event data
+## Returns
 
-### Parameter Details
+Promise resolving to the completed event
 
-The [`IMarkEventCompleteParams`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IMarkEventCompleteParams) interface includes:
-- **`eventId`** (string, required): The unique identifier of the event to mark as complete
+## When to use it
 
-### Response Structure
+Mark a scheduled check or task event complete after its work finishes.
 
-```typescript
-interface IMarkEventCompleteResponse {
-  success: boolean;
-  code: string;
-  message: string;
-  data?: {
-    event: CalendarEvent;
-  };
-  error?: {
-    code: string;
-    message: string;
-    details?: any;
-  };
-}
-```
+## Example
 
-### Examples
-
-#### 1. Basic Completion
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Mark an event as complete
-const result = await codebolt.calendar.markEventComplete({
-  eventId: 'evt_task_001'
+codebolt.onReady(async () => {
+  // Complete a task event
+  async function finishTask(taskEventId: string) {
+    await codebolt.calendar.markEventComplete({
+      eventId: taskEventId
+    });
+    console.log('Task marked as complete');
+  }
 });
-
-if (result.success && result.data) {
-  const event = result.data.event;
-  console.log(`Event "${event.title}" marked as complete`);
-  console.log(`Completed at: ${new Date(event.completedAt!).toLocaleString()}`);
-}
 ```
 
-#### 2. Complete Task After Work
-```typescript
-// Mark a task event as complete after finishing work
-async function completeTask(taskId: string) {
-  console.log('Marking task as complete...');
+## More examples
 
+### Basic Completion
+
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Mark an event as complete
   const result = await codebolt.calendar.markEventComplete({
-    eventId: taskId
+    eventId: 'evt_task_001'
   });
 
-  if (result.success) {
-    console.log('✅ Task completed successfully');
-
-    // Update related systems
-    await updateTaskStatus(taskId, 'completed');
-    await notifyTeam(taskId, 'completed');
-  } else {
-    console.error('Failed to mark task complete:', result.error?.message);
+  if (result.success && result.data) {
+    const event = result.data.event;
+    console.log(`Event "${event.title}" marked as complete`);
+    console.log(`Completed at: ${new Date(event.completedAt!).toLocaleString()}`);
   }
-}
-
-// Usage
-await completeTask('evt_task_abc123');
+});
 ```
 
-#### 3. Complete Triggered Check
+### Batch Complete by Type
+
 ```typescript
-// Process and complete a triggered check event
-async function processCheckEvent(eventId: string) {
-  // Get event details
-  const eventResult = await codebolt.calendar.getEvent({ eventId });
+import codebolt from '@codebolt/codeboltjs';
 
-  if (!eventResult.success || !eventResult.data) {
-    return;
-  }
-
-  const event = eventResult.data.event;
-
-  if (event.eventType !== 'check' || !event.checkType) {
-    return;
-  }
-
-  // Perform the check
-  let checkPassed = false;
-  switch (event.checkType) {
-    case 'api':
-      checkPassed = await performApiCheck(event.metadata);
-      break;
-    case 'website':
-      checkPassed = await performWebsiteCheck(event.metadata);
-      break;
-    case 'email':
-      checkPassed = await performEmailCheck(event.metadata);
-      break;
-    case 'file':
-      checkPassed = await performFileCheck(event.metadata);
-      break;
-  }
-
-  // Mark as complete regardless of result
-  const result = await codebolt.calendar.markEventComplete({
-    eventId
-  });
-
-  if (result.success) {
-    console.log(`Check "${event.title}" completed: ${checkPassed ? 'PASSED' : 'FAILED'}`);
-  }
-}
-```
-
-#### 4. Batch Complete by Type
-```typescript
 // Complete all triggered events of a specific type
 async function completeTriggeredChecks() {
   const triggered = await codebolt.calendar.getTriggeredEvents({
@@ -171,110 +99,51 @@ async function completeTriggeredChecks() {
 }
 ```
 
-#### 5. Complete Meeting After Follow-up
+### Error Handling
+
 ```typescript
-// Complete meeting after creating follow-up tasks
-async function closeMeeting(eventId: string) {
-  const eventResult = await codebolt.calendar.getEvent({ eventId });
+import codebolt from '@codebolt/codeboltjs';
 
-  if (eventResult.success && eventResult.data) {
-    const meeting = eventResult.data.event;
+codebolt.onReady(async () => {
+  // Handle completion errors
+  const result = await codebolt.calendar.markEventComplete({
+    eventId: 'evt_abc123'
+  });
 
-    // Create follow-up tasks from agenda
-    if (meeting.agenda) {
-      const agendaItems = parseAgenda(meeting.agenda);
+  if (!result.success) {
+    console.error('Failed to mark event as complete');
 
-      for (const item of agendaItems) {
-        await codebolt.calendar.createEvent({
-          title: `Follow-up: ${item}`,
-          eventType: 'reminder',
-          startTime: new Date(Date.now() + 86400000).toISOString(), // Tomorrow
-          reminder: { enabled: true, minutesBefore: 60 }
-        });
-      }
-    }
-
-    // Mark meeting as complete
-    const result = await codebolt.calendar.markEventComplete({
-      eventId
-    });
-
-    if (result.success) {
-      console.log(`Meeting "${meeting.title}" closed and follow-ups created`);
-    }
-  }
-}
-```
-
-#### 6. Complete Deadline
-```typescript
-// Mark deadline as complete after deliverable is submitted
-async function submitAndCompleteDeadline(deadlineId: string, deliverable: any) {
-  // Submit deliverable
-  const submitted = await submitDeliverable(deliverable);
-
-  if (submitted) {
-    // Mark deadline event as complete
-    const result = await codebolt.calendar.markEventComplete({
-      eventId: deadlineId
-    });
-
-    if (result.success) {
-      console.log('✅ Deadline met and deliverable submitted');
-
-      // Get completion info
-      const deadline = result.data.event;
-      const completedAt = new Date(deadline.completedAt!);
-      const dueDate = new Date(deadline.startTime);
-
-      if (completedAt <= dueDate) {
-        console.log('✨ Completed on time!');
-      } else {
-        const daysLate = Math.ceil((completedAt.getTime() - dueDate.getTime()) / 86400000);
-        console.log(`⚠️  Completed ${daysLate} days late`);
+    if (result.error) {
+      switch (result.error.code) {
+        case 'EVENT_NOT_FOUND':
+          console.error('Event does not exist');
+          break;
+        case 'ALREADY_COMPLETED':
+          console.error('Event is already completed');
+          // Get the event to see when it was completed
+          const eventResult = await codebolt.calendar.getEvent({
+            eventId: 'evt_abc123'
+          });
+          if (eventResult.success && eventResult.data?.event.completedAt) {
+            console.log('Completed at:', eventResult.data.event.completedAt);
+          }
+          break;
+        case 'ACCESS_DENIED':
+          console.error('You do not have permission to complete this event');
+          break;
+        default:
+          console.error('Error:', result.error.message);
       }
     }
   }
-}
-```
-
-#### 7. Error Handling
-```typescript
-// Handle completion errors
-const result = await codebolt.calendar.markEventComplete({
-  eventId: 'evt_abc123'
 });
-
-if (!result.success) {
-  console.error('Failed to mark event as complete');
-
-  if (result.error) {
-    switch (result.error.code) {
-      case 'EVENT_NOT_FOUND':
-        console.error('Event does not exist');
-        break;
-      case 'ALREADY_COMPLETED':
-        console.error('Event is already completed');
-        // Get the event to see when it was completed
-        const eventResult = await codebolt.calendar.getEvent({
-          eventId: 'evt_abc123'
-        });
-        if (eventResult.success && eventResult.data?.event.completedAt) {
-          console.log('Completed at:', eventResult.data.event.completedAt);
-        }
-        break;
-      case 'ACCESS_DENIED':
-        console.error('You do not have permission to complete this event');
-        break;
-      default:
-        console.error('Error:', result.error.message);
-    }
-  }
-}
 ```
 
-#### 8. Verify Completion
+### Verify Completion
+
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Mark complete and verify
 async function markCompleteAndVerify(eventId: string) {
   const result = await codebolt.calendar.markEventComplete({
@@ -303,69 +172,9 @@ async function markCompleteAndVerify(eventId: string) {
 }
 ```
 
-#### 9. Conditional Completion
 ```typescript
-// Only complete if certain conditions are met
-async function conditionalComplete(eventId: string, conditions: any) {
-  // Check conditions first
-  const prerequisitesMet = await checkPrerequisites(conditions);
+import codebolt from '@codebolt/codeboltjs';
 
-  if (!prerequisitesMet) {
-    console.log('Prerequisites not met, cannot complete event');
-    return false;
-  }
-
-  // Proceed with completion
-  const result = await codebolt.calendar.markEventComplete({
-    eventId
-  });
-
-  if (result.success) {
-    console.log('✅ Event completed after verifying prerequisites');
-    return true;
-  }
-
-  return false;
-}
-```
-
-### Common Use Cases
-
-**Task Completion:**
-```typescript
-// Complete a task event
-async function finishTask(taskEventId: string) {
-  await codebolt.calendar.markEventComplete({
-    eventId: taskEventId
-  });
-  console.log('Task marked as complete');
-}
-```
-
-**Process Triggered Events:**
-```typescript
-// Process all triggered events
-async function processTriggeredEvents() {
-  const triggered = await codebolt.calendar.getTriggeredEvents({
-    includeCompleted: false
-  });
-
-  if (triggered.success && triggered.data) {
-    for (const event of triggered.data.events) {
-      // Handle event based on type
-      await handleEvent(event);
-
-      // Mark as complete
-      await codebolt.calendar.markEventComplete({
-        eventId: event.id
-      });
-    }
-  }
-}
-```
-
-**Complete with Notes:**
-```typescript
 // Add completion notes via metadata update
 async function completeWithNotes(eventId: string, notes: string) {
   // First add notes to metadata
@@ -385,16 +194,3 @@ async function completeWithNotes(eventId: string, notes: string) {
   return result.success;
 }
 ```
-
-### Notes
-
-- Completion is irreversible - once marked complete, it stays complete
-- Automatically sets `completed` to true and records `completedAt` timestamp
-- Can be called on already-completed events (idempotent operation)
-- Use `markEventsComplete` for batch operations on multiple events
-- Consider using `updateEvent` if you need to add completion notes
-- Completion timestamp is automatically set to current time
-- Completed events can still be retrieved with filters
-- Use `getTriggeredEventsAndMarkComplete` for one-step retrieval and completion
-- Does not delete the event - just marks it as completed
-- Useful for tracking task completion, meeting attendance, etc.

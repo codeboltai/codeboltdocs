@@ -1,52 +1,37 @@
 ---
 name: endorseTalent
+description: Endorse a talent skill.
 cbbaseinfo:
-  description: "Endorses a talent skill to validate its quality and verify the agent's expertise."
-cbparameters:
-  parameters:
-    - name: talentId
-      typeName: string
-      description: The ID of the talent to endorse.
-  returns:
-    signatureTypeName: "Promise<EndorseTalentResponse>"
-    description: A promise that resolves when talent is endorsed.
-    typeArgs: []
+  description: Endorse a talent skill.
 data:
   name: endorseTalent
   category: agentPortfolio
   link: endorseTalent.md
 ---
+
 # endorseTalent
 
-```typescript
+```text
 codebolt.agentPortfolio.endorseTalent(talentId: string): Promise<EndorseTalentResponse>
 ```
 
-Endorses a talent skill to validate its quality and verify the agent's expertise.
-### Parameters
+Endorse a talent skill
 
-- **`talentId`** (string): The ID of the talent to endorse.
+## Parameters
 
-### Returns
+- `talentId` — The ID of the talent to endorse
 
-- **`Promise<[EndorseTalentResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/EndorseTalentResponse)>`**: A promise that resolves when talent is endorsed.
+## Returns
 
-### Examples
+Promise resolving to the endorsement result
 
-```typescript
-// Endorse a talent
-await codebolt.agentPortfolio.endorseTalent('talent-456');
+## Example
 
-// Multiple endorsements
-const talents = await codebolt.agentPortfolio.getTalents('agent-123');
-for (const talent of talents.data?.talents || []) {
-  await codebolt.agentPortfolio.endorseTalent(talent.id);
-}
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.agentPortfolio.endorseTalent('talent-456');
+  console.log(result);
+});
 ```
-
-### Notes
-
-- Only endorse talents you have direct experience with
-- Endorsements verify skill quality
-- Multiple endorsements increase talent credibility
-- Consider the impact of endorsements on reputation

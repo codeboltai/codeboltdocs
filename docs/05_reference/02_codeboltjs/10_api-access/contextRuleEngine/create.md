@@ -1,201 +1,209 @@
 ---
 name: create
+description: Create a new rule engine.
 cbbaseinfo:
-  description: Creates a new context rule engine with rules for memory inclusion/exclusion.
-cbparameters:
-  parameters:
-    - name: config
-      type: CreateContextRuleEngineParams
-      required: true
-      description: Rule engine configuration including name, description, rules, and enabled status.
-  returns:
-    signatureTypeName: "Promise<ContextRuleEngineResponse>"
-    description: A promise that resolves with the created rule engine details.
+  description: Create a new rule engine.
 data:
   name: create
   category: contextRuleEngine
   link: create.md
 ---
+
 # create
 
-```typescript
-codebolt.contextRuleEngine.create(config: undefined): Promise<ContextRuleEngineResponse>
+```text
+codebolt.contextRuleEngine.create(config: CreateContextRuleEngineParams): Promise<ContextRuleEngineResponse>
 ```
 
-Creates a new context rule engine with rules for memory inclusion/exclusion.
-### Parameters
+Create a new rule engine
 
-- **`config`** (unknown): Rule engine configuration including name, description, rules, and enabled status.
+## Parameters
 
-### Returns
+- `config` — Rule engine configuration
 
-- **`Promise<[ContextRuleEngineResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ContextRuleEngineResponse)>`**: A promise that resolves with the created rule engine details.
+## When to use it
 
-### Examples
+Define when a set of memories should be considered for context assembly.
 
-#### Example 1: Create Basic Rule Engine
+## Example
+
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.contextRuleEngine.create({
-  name: 'task-rules',
-  description: 'Rules for task-based memory selection',
-  rules: [
-    {
-      name: 'Debugging task',
-      conditions: [
-        { variable: 'task_type', operator: 'eq', value: 'debugging' }
-      ],
-      action: 'include',
-      action_config: {
-        memory_ids: ['error_logs', 'recent_commits']
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.create({
+    name: 'flexible-rules',
+    rules: [
+      {
+        name: 'Important tasks',
+        conditions: [
+          { variable: 'priority', operator: 'in', value: ['high', 'urgent'] }
+        ],
+        condition_logic: 'or',
+        action: 'include',
+        action_config: { memory_ids: ['priority_docs'] }
       }
-    }
-  ],
-  enabled: true
-});
-
-console.log('Created:', result.data.ruleEngine.id);
-```
-
-#### Example 2: Create with Multiple Rules
-```javascript
-const result = await codebolt.contextRuleEngine.create({
-  name: 'comprehensive-rules',
-  description: 'Comprehensive rule set for context selection',
-  rules: [
-    {
-      name: 'High priority',
-      conditions: [
-        { variable: 'priority', operator: 'eq', value: 'high' }
-      ],
-      action: 'force_include',
-      action_config: { memory_ids: ['urgent_docs'] },
-      order: 1
-    },
-    {
-      name: 'Development task',
-      conditions: [
-        { variable: 'task_type', operator: 'eq', value: 'development' }
-      ],
-      action: 'include',
-      action_config: { memory_ids: ['codebase', 'api_docs'] },
-      order: 2
-    },
-    {
-      name: 'Exclude archived',
-      conditions: [
-        { variable: 'status', operator: 'eq', value: 'archived' }
-      ],
-      action: 'exclude',
-      action_config: { memory_ids: ['archived_data'] },
-      order: 3
-    }
-  ]
+    ]
+  });
 });
 ```
 
-#### Example 3: Create with OR Logic
-```javascript
-const result = await codebolt.contextRuleEngine.create({
-  name: 'flexible-rules',
-  rules: [
-    {
-      name: 'Important tasks',
-      conditions: [
-        { variable: 'priority', operator: 'in', value: ['high', 'urgent'] }
-      ],
-      condition_logic: 'or',
-      action: 'include',
-      action_config: { memory_ids: ['priority_docs'] }
-    }
-  ]
-});
-```
+## More examples
 
-#### Example 4: Create Priority Rule
+### Create Basic Rule Engine
+
 ```javascript
-const result = await codebolt.contextRuleEngine.create({
-  name: 'priority-engine',
-  rules: [
-    {
-      name: 'Boost recent code',
-      conditions: [
-        { variable: 'task_type', operator: 'eq', value: 'debugging' }
-      ],
-      action: 'set_priority',
-      action_config: {
-        memory_ids: ['recent_commits', 'recent_changes'],
-        priority: 10
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.create({
+    name: 'task-rules',
+    description: 'Rules for task-based memory selection',
+    rules: [
+      {
+        name: 'Debugging task',
+        conditions: [
+          { variable: 'task_type', operator: 'eq', value: 'debugging' }
+        ],
+        action: 'include',
+        action_config: {
+          memory_ids: ['error_logs', 'recent_commits']
+        }
       }
-    }
-  ]
+    ],
+    enabled: true
+  });
+
+  if (result.data == null) throw new Error('The response is missing data.');
+  console.log('Created:', result.data.ruleEngine.id);
 });
 ```
 
-#### Example 5: Create with Complex Conditions
+### Create with Multiple Rules
+
 ```javascript
-const result = await codebolt.contextRuleEngine.create({
-  name: 'advanced-rules',
-  rules: [
-    {
-      name: 'Expert debugging',
-      conditions: [
-        { variable: 'task_type', operator: 'eq', value: 'debugging' },
-        { variable: 'user_level', operator: 'eq', value: 'expert' }
-      ],
-      action: 'include',
-      action_config: {
-        memory_ids: ['advanced_debugging', 'system_logs', 'performance_metrics']
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.create({
+    name: 'comprehensive-rules',
+    description: 'Comprehensive rule set for context selection',
+    rules: [
+      {
+        name: 'High priority',
+        conditions: [
+          { variable: 'priority', operator: 'eq', value: 'high' }
+        ],
+        action: 'force_include',
+        action_config: { memory_ids: ['urgent_docs'] },
+        order: 1
+      },
+      {
+        name: 'Development task',
+        conditions: [
+          { variable: 'task_type', operator: 'eq', value: 'development' }
+        ],
+        action: 'include',
+        action_config: { memory_ids: ['codebase', 'api_docs'] },
+        order: 2
+      },
+      {
+        name: 'Exclude archived',
+        conditions: [
+          { variable: 'status', operator: 'eq', value: 'archived' }
+        ],
+        action: 'exclude',
+        action_config: { memory_ids: ['archived_data'] },
+        order: 3
       }
-    },
-    {
-      name: 'Beginner debugging',
-      conditions: [
-        { variable: 'task_type', operator: 'eq', value: 'debugging' },
-        { variable: 'user_level', operator: 'eq', value: 'beginner' }
-      ],
-      action: 'include',
-      action_config: {
-        memory_ids: ['tutorials', 'examples', 'basic_debugging']
-      }
-    }
-  ]
+    ]
+  });
 });
 ```
 
-#### Example 6: Create Disabled Engine
+### Create Priority Rule
+
 ```javascript
-const result = await codebolt.contextRuleEngine.create({
-  name: 'experimental-rules',
-  description: 'Experimental rules for testing',
-  rules: [
-    {
-      name: 'Test rule',
-      conditions: [
-        { variable: 'test', operator: 'eq', value: 'true' }
-      ],
-      action: 'include',
-      action_config: { memory_ids: ['test_memory'] }
-    }
-  ],
-  enabled: false  // Disabled by default
-});
+import codebolt from '@codebolt/codeboltjs';
 
-console.log('Engine created but disabled');
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.create({
+    name: 'priority-engine',
+    rules: [
+      {
+        name: 'Boost recent code',
+        conditions: [
+          { variable: 'task_type', operator: 'eq', value: 'debugging' }
+        ],
+        action: 'set_priority',
+        action_config: {
+          memory_ids: ['recent_commits', 'recent_changes'],
+          priority: 10
+        }
+      }
+    ]
+  });
+});
 ```
 
-### Common Use Cases
-**Task Routing**: Include different memories based on task type.
-**Priority Handling**: Force include critical memories for high-priority tasks.
-**User Adaptation**: Adjust context based on user expertise level.
-**Conditional Logic**: Apply complex business rules to memory selection.
+### Create with Complex Conditions
 
-### Notes
-- Rules are evaluated in order (use order field)
-- Multiple rules can match the same context
-- Later rules can override earlier ones
-- Use descriptive names for debugging
-- Test rules with `evaluate` before production use
+```javascript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.create({
+    name: 'advanced-rules',
+    rules: [
+      {
+        name: 'Expert debugging',
+        conditions: [
+          { variable: 'task_type', operator: 'eq', value: 'debugging' },
+          { variable: 'user_level', operator: 'eq', value: 'expert' }
+        ],
+        action: 'include',
+        action_config: {
+          memory_ids: ['advanced_debugging', 'system_logs', 'performance_metrics']
+        }
+      },
+      {
+        name: 'Beginner debugging',
+        conditions: [
+          { variable: 'task_type', operator: 'eq', value: 'debugging' },
+          { variable: 'user_level', operator: 'eq', value: 'beginner' }
+        ],
+        action: 'include',
+        action_config: {
+          memory_ids: ['tutorials', 'examples', 'basic_debugging']
+        }
+      }
+    ]
+  });
+});
+```
+
+### Create Disabled Engine
+
+```javascript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.create({
+    name: 'experimental-rules',
+    description: 'Experimental rules for testing',
+    rules: [
+      {
+        name: 'Test rule',
+        conditions: [
+          { variable: 'test', operator: 'eq', value: 'true' }
+        ],
+        action: 'include',
+        action_config: { memory_ids: ['test_memory'] }
+      }
+    ],
+    enabled: false  // Disabled by default
+  });
+
+  console.log('Engine created but disabled');
+});
+```

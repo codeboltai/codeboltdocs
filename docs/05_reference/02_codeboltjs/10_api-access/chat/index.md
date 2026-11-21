@@ -1,181 +1,142 @@
----
-cbapicategory:
-  - name: getChatHistory
-    link: /docs/api/apiaccess/chat/getChatHistory
-    description: Retrieves the chat history from the server for a specific thread.
-  - name: sendMessage
-    link: /docs/api/apiaccess/chat/sendMessage
-    description: Sends a message through the WebSocket connection to the chat server.
-  - name: setRequestHandler
-    link: /docs/api/apiaccess/chat/setRequestHandler
-    description: Sets a global request handler for all incoming chat messages.
-  - name: waitforReply
-    link: /docs/api/apiaccess/chat/waitforReply
-    description: Waits for a reply to a sent message from the server.
-  - name: processStarted
-    link: /docs/api/apiaccess/chat/processStarted
-    description: Notifies the server that a process has started and sets up stop handlers.
-  - name: stopProcess
-    link: /docs/api/apiaccess/chat/stopProcess
-    description: Stops the ongoing process by sending a stop signal to the server.
-  - name: processFinished
-    link: /docs/api/apiaccess/chat/processFinished
-    description: Notifies the server that a process has finished execution.
-  - name: sendConfirmationRequest
-    link: /docs/api/apiaccess/chat/sendConfirmationRequest
-    description: Sends a confirmation request to the server with customizable buttons.
-  - name: askQuestion
-    link: /docs/api/apiaccess/chat/askQuestion
-    description: Asks a question to the user with customizable button options.
-  - name: sendNotificationEvent
-    link: /docs/api/apiaccess/chat/sendNotificationEvent
-    description: Sends a notification event to the server with a specific type.
-  - name: userMessageListener
-    link: /docs/api/apiaccess/chat/userMessageListener
-    description: Sets up a listener for incoming WebSocket messages and emits custom events.
+# Chat
 
----
-# Chat API
+Send messages to the Codebolt chat UI and request user input or confirmation.
 
-The Chat API provides real-time messaging and communication capabilities, enabling agents to interact with users, send messages, wait for responses, and manage process states.
+Register `codebolt.onMessage` to receive incoming messages in an agent. Use `codebolt.chat` to send chat output and interact with the user.
 
-## Overview
+## When to use it
 
-The chat module enables you to:
-- **Send Messages**: Exchange messages with users and other agents
-- **Chat History**: Retrieve and manage conversation history
-- **Request Handling**: Set up handlers for incoming messages
-- **Process Management**: Control process lifecycle (start, stop, finish)
-- **User Interaction**: Request confirmations and ask questions
-- **Notifications**: Send notifications of various types
+Send progress messages to the current chat, ask the user for input, or inspect messages by thread ID.
 
-## Quick Start Example
+## Examples
+
+### Quick Start Example
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Wait for connection
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  // Send a message
+  codebolt.chat.sendMessage('Hello! I\'m ready to help.');
 
-// Send a message
-codebolt.chat.sendMessage('Hello! I\'m ready to help.');
+  // Wait for a reply
+  const reply = await codebolt.chat.waitforReply('What would you like me to do?');
+  console.log('User replied:', reply.message);
 
-// Wait for a reply
-const reply = await codebolt.chat.waitforReply('What would you like me to do?');
-console.log('User replied:', reply.message);
-
-// Ask for confirmation
-const confirmed = await codebolt.chat.sendConfirmationRequest(
-  'Should I proceed with the task?',
-  ['Yes, proceed', 'No, cancel']
-);
-
-if (confirmed === 'Yes, proceed') {
-  // Start a process
-  const processControl = codebolt.chat.processStarted(() => {
-    console.log('User clicked stop!');
-  });
-
-  // Do some work...
-
-  // Notify when finished
-  codebolt.chat.processFinished();
-}
-```
-
-## Response Structure
-
-Chat API functions return various response structures:
-
-```typescript
-// Chat history response
-interface ChatMessage {
-  threadId: string;
-  messages: Array<{
-    role: string;
-    content: string;
-    timestamp: string;
-  }>;
-}
-
-// Reply response
-interface UserMessage {
-  message: string;
-  timestamp: string;
-  metadata?: any;
-}
-
-// Confirmation response
-interface ConfirmationResponse {
-  choice: string;
-  feedback?: string;
-}
-```
-
-## Common Use Cases
-
-### Interactive Task Execution
-
-```typescript
-// Ask user what to do
-const task = await codebolt.chat.askQuestion(
-  'What task would you like me to perform?',
-  ['Code Review', 'Bug Fix', 'Feature Implementation']
-);
-
-// Start the process
-codebolt.chat.processStarted();
-
-try {
-  // Execute the task
-  await executeTask(task);
-
-  // Send completion notification
-  codebolt.chat.sendNotificationEvent(
-    'Task completed successfully!',
-    'terminal'
+  // Ask for confirmation
+  const confirmed = await codebolt.chat.sendConfirmationRequest(
+    'Should I proceed with the task?',
+    ['Yes, proceed', 'No, cancel']
   );
-} finally {
-  codebolt.chat.processFinished();
-}
-```
 
-### Setting Up Message Handlers
+  if (confirmed === 'Yes, proceed') {
+    // Start a process
+    const processControl = codebolt.chat.processStarted(() => {
+      console.log('User clicked stop!');
+    });
 
-```typescript
-// Set up a handler for incoming messages
-codebolt.chat.setRequestHandler(async (request, respond) => {
-  console.log('Received request:', request);
+    // Do some work...
 
-  // Process the request
-  const result = await processRequest(request);
-
-  // Send response
-  respond({
-    success: true,
-    data: result
-  });
+    // Notify when finished
+    codebolt.chat.processFinished();
+  }
 });
 ```
 
 ### Sending Notifications
 
 ```typescript
-// Send different types of notifications
-codebolt.chat.sendNotificationEvent(
-  'Starting build process...',
-  'terminal'
-);
+import codebolt from '@codebolt/codeboltjs';
 
-codebolt.chat.sendNotificationEvent(
-  'Git repository updated',
-  'git'
-);
+codebolt.onReady(() => {
+  // Send different types of notifications
+  codebolt.chat.sendNotificationEvent(
+    'Starting build process...',
+    'terminal'
+  );
 
-codebolt.chat.sendNotificationEvent(
-  'Browser automation started',
-  'browser'
-);
+  codebolt.chat.sendNotificationEvent(
+    'Git repository updated',
+    'git'
+  );
+
+  codebolt.chat.sendNotificationEvent(
+    'Browser automation started',
+    'browser'
+  );
+});
 ```
 
-<CBAPICategory />
+## SDK methods
+
+### getChatHistory
+
+[`getChatHistory`](getChatHistory.md) · Retrieves the chat history from the server.
+
+### setRequestHandler
+
+[`setRequestHandler`](setRequestHandler.md) · Sets a global request handler for all incoming messages.
+
+### sendMessage
+
+[`sendMessage`](sendMessage.md) · Sends a message through the WebSocket connection.
+
+### waitforReply
+
+[`waitforReply`](waitforReply.md) · Waits for a reply to a sent message.
+
+### processStarted
+
+[`processStarted`](processStarted.md) · Notifies the server that a process has started and sets up a listener for stopProcessClicked events.
+
+### stopProcess
+
+[`stopProcess`](stopProcess.md) · Stops the ongoing process.
+
+### processFinished
+
+[`processFinished`](processFinished.md) · Stops the ongoing process.
+
+### sendConfirmationRequest
+
+[`sendConfirmationRequest`](sendConfirmationRequest.md) · Sends a confirmation request to the server with two options: Yes or No.
+
+### askUser
+
+Ask structured questions and wait for explicit submission.
+
+```text
+codebolt.chat.askUser(options: AskUserOptions): Promise<UserQuestionResult>
+```
+
+### askQuestion
+
+[`askQuestion`](askQuestion.md) · Legacy question API uses the inline card, retaining the feedback response shape.
+
+### sendNotificationEvent
+
+[`sendNotificationEvent`](sendNotificationEvent.md) · Sends a notification event to the server.
+
+### sendLocalToolExecutionUpdate
+
+Publishes the lifecycle of an agent-local tool to the chat UI.
+
+```text
+codebolt.chat.sendLocalToolExecutionUpdate(update: { toolUseId: string; toolName: string; params: Record<string, unknown>; state: "EXECUTING" | "EXECUTION_SUCCESS" | "EXECUTION_ERROR"; result?: unknown; }): void
+```
+
+### checkForSteeringMessage
+
+Checks if any steering message has been received.
+
+```text
+codebolt.chat.checkForSteeringMessage(): SteeringMessage | null
+```
+
+### onSteeringMessageReceived
+
+Waits for a steering message.
+
+```text
+codebolt.chat.onSteeringMessageReceived(): Promise<SteeringMessage | null>
+```

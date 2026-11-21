@@ -43,9 +43,11 @@ The default export exposes runtime APIs for files, Git, models, chat, and tools.
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-const status = await codebolt.git.status();
-const { data } = await codebolt.tools.listRuntimeTools();
+codebolt.onMessage(async () => {
+  const status = await codebolt.git.status();
+  const { data } = await codebolt.tools.listRuntimeTools();
+  console.log(status, data.tools);
+});
 ```
 
 Use [Tool Discovery](../../07b_subsystems/02_mcp-and-tools.md) to select and call a tool by its catalog name and source.
@@ -59,14 +61,10 @@ import codebolt from '@codebolt/codeboltjs';
 
 codebolt.onMessage(async message => {
   const { completion } = await codebolt.llm.inference({
-    messages: [{ role: 'user', content: message.userMessage ?? '' }],
-    full: true
+    input: [{ type: 'message', role: 'user', content: message.userMessage ?? '' }]
   });
 
-  const reply = completion?.choices?.[0]?.message?.content;
-  if (typeof reply === 'string') {
-    codebolt.chat.sendMessage(reply);
-  }
+  return completion.output_text;
 });
 ```
 

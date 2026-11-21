@@ -1,180 +1,72 @@
 ---
 name: evaluateRules
+description: Evaluate rules only without fetching memory content.
 cbbaseinfo:
-  description: Evaluates context rules without fetching memory content.
-cbparameters:
-  parameters:
-    - name: request
-      type: ContextAssemblyRequest
-      required: true
-      description: Context assembly request with scope variables.
-    - name: ruleEngineIds
-      type: string[]
-      required: false
-      description: Optional specific rule engine IDs to evaluate.
-  returns:
-    signatureTypeName: "Promise<RuleEvaluationResponse>"
-    description: A promise that resolves with rule evaluation results.
+  description: Evaluate rules only without fetching memory content.
 data:
   name: evaluateRules
   category: contextAssembly
   link: evaluateRules.md
 ---
+
 # evaluateRules
 
-```typescript
-codebolt.contextAssembly.evaluateRules(request: undefined, ruleEngineIds: undefined): Promise<RuleEvaluationResponse>
+```text
+codebolt.contextAssembly.evaluateRules(request: ContextAssemblyRequest, ruleEngineIds?: string[]): Promise<RuleEvaluationResponse>
 ```
 
-Evaluates context rules without fetching memory content.
-### Parameters
+Evaluate rules only without fetching memory content
 
-- **`request`** (unknown): Context assembly request with scope variables.
-- **`ruleEngineIds`** (unknown): Optional specific rule engine IDs to evaluate.
+## Parameters
 
-### Returns
+- `request` — Context assembly request
+- `ruleEngineIds` — Optional specific rule engine IDs to evaluate
 
-- **`Promise<[RuleEvaluationResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/RuleEvaluationResponse)>`**: A promise that resolves with rule evaluation results.
+## When to use it
 
-### Response Structure
+Preview rule selection for a request when you need to understand which memories would be included before running retrieval.
 
-```typescript
-{
-  type: 'contextAssembly.evaluateRules',
-  success: boolean,
-  data?: {
-    matched_rules: string[];
-    excluded_memories: string[];
-    included_memories: string[];
-    forced_memories: string[];
-  }
-}
-```
+## Examples
 
-### Examples
+### Evaluate All Rules
 
-#### Example 1: Evaluate All Rules
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.contextAssembly.evaluateRules({
-  scope_variables: {
-    input: 'Debug the authentication bug',
-    task_type: 'debugging',
-    priority: 'high'
-  }
-});
-
-console.log('Matched rules:', result.data.matched_rules);
-console.log('Included memories:', result.data.included_memories);
-console.log('Excluded memories:', result.data.excluded_memories);
-console.log('Forced memories:', result.data.forced_memories);
-```
-
-#### Example 2: Evaluate Specific Rule Engines
-```javascript
-const result = await codebolt.contextAssembly.evaluateRules(
-  {
-    scope_variables: {
-      input: 'Fix the API endpoint',
-      task_type: 'development'
-    }
-  },
-  ['debugging-rules', 'development-rules']
-);
-
-console.log('Applied rules:', result.data.matched_rules);
-```
-
-#### Example 3: Test Rule Logic
-```javascript
-async function testRuleLogic(taskType, priority) {
+codebolt.onReady(async () => {
   const result = await codebolt.contextAssembly.evaluateRules({
     scope_variables: {
-      input: 'Test',
-      task_type: taskType,
-      priority: priority
+      input: 'Debug the authentication bug',
+      task_type: 'debugging',
+      priority: 'high'
     }
   });
 
-  return {
-    taskType,
-    priority,
-    includedMemories: result.data.included_memories,
-    excludedMemories: result.data.excluded_memories
-  };
-}
-
-const test1 = await testRuleLogic('debugging', 'high');
-const test2 = await testRuleLogic('development', 'normal');
-
-console.log('Debugging includes:', test1.includedMemories);
-console.log('Development includes:', test2.includedMemories);
-```
-
-#### Example 4: Decision Support
-```javascript
-async function whatMemoriesToUse(taskContext) {
-  const result = await codebolt.contextAssembly.evaluateRules({
-    scope_variables: taskContext
-  });
-
-  console.log(`For task "${taskContext.input}":`);
-  console.log(`  Include: ${result.data.included_memories.join(', ')}`);
-  console.log(`  Exclude: ${result.data.excluded_memories.join(', ')}`);
-
-  if (result.data.forced_memories.length > 0) {
-    console.log(`  Forced: ${result.data.forced_memories.join(', ')}`);
-  }
-
-  return result.data.included_memories;
-}
-
-const memories = await whatMemoriesToUse({
-  input: 'Review the code changes',
-  task_type: 'review'
+  if (result.data == null) throw new Error('The response is missing data.');
+  console.log('Matched rules:', result.data.matched_rules);
+  console.log('Included memories:', result.data.included_memories);
+  console.log('Excluded memories:', result.data.excluded_memories);
+  console.log('Forced memories:', result.data.forced_memories);
 });
 ```
 
-#### Example 5: Compare Rule Results
+### Evaluate Specific Rule Engines
+
 ```javascript
-async function compareRuleContexts(context1, context2) {
-  const [result1, result2] = await Promise.all([
-    codebolt.contextAssembly.evaluateRules({ scope_variables: context1 }),
-    codebolt.contextAssembly.evaluateRules({ scope_variables: context2 })
-  ]);
+import codebolt from '@codebolt/codeboltjs';
 
-  return {
-    context1: {
-      included: result1.data.included_memories,
-      excluded: result1.data.excluded_memories
+codebolt.onReady(async () => {
+  const result = await codebolt.contextAssembly.evaluateRules(
+    {
+      scope_variables: {
+        input: 'Fix the API endpoint',
+        task_type: 'development'
+      }
     },
-    context2: {
-      included: result2.data.included_memories,
-      excluded: result2.data.excluded_memories
-    },
-    diff: {
-      onlyIn1: result1.data.included_memories.filter(
-        m => !result2.data.included_memories.includes(m)
-      ),
-      onlyIn2: result2.data.included_memories.filter(
-        m => !result1.data.included_memories.includes(m)
-      )
-    }
-  };
-}
+    ['debugging-rules', 'development-rules']
+  );
+
+  if (result.data == null) throw new Error('The response is missing data.');
+  console.log('Applied rules:', result.data.matched_rules);
+});
 ```
-
-### Common Use Cases
-**Rule Testing**: Test rule logic without fetching data.
-**Decision Support**: Understand what memories will be included.
-**Debugging**: Debug why certain memories are included/excluded.
-**Rule Comparison**: Compare rule behavior across different contexts.
-
-### Notes
-- Doesn't fetch actual memory content
-- Faster than full context assembly
-- Use to understand rule behavior
-- Helpful for debugging and testing

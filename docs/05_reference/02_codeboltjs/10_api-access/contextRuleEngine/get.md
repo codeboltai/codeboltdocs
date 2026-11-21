@@ -1,80 +1,62 @@
 ---
 name: get
+description: Get a rule engine by ID.
 cbbaseinfo:
-  description: Gets details of a specific rule engine.
-cbparameters:
-  parameters:
-    - name: id
-      type: string
-      required: true
-      description: The unique identifier of the rule engine.
-  returns:
-    signatureTypeName: "Promise<ContextRuleEngineResponse>"
-    description: A promise that resolves with the rule engine details.
+  description: Get a rule engine by ID.
 data:
   name: get
   category: contextRuleEngine
   link: get.md
 ---
+
 # get
 
-```typescript
-codebolt.contextRuleEngine.get(id: undefined): Promise<ContextRuleEngineResponse>
+```text
+codebolt.contextRuleEngine.get(id: string): Promise<ContextRuleEngineResponse>
 ```
 
-Gets details of a specific rule engine.
-### Parameters
+Get a rule engine by ID
 
-- **`id`** (unknown): The unique identifier of the rule engine.
+## Parameters
 
-### Returns
+- `id` — Rule engine ID
 
-- **`Promise<[ContextRuleEngineResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ContextRuleEngineResponse)>`**: A promise that resolves with the rule engine details.
+## Examples
 
-### Examples
+### Get Rule Engine
 
-#### Example 1: Get Rule Engine
 ```javascript
-const result = await codebolt.contextRuleEngine.get('engine-id-123');
+import codebolt from '@codebolt/codeboltjs';
 
-const engine = result.data.ruleEngine;
-console.log('Engine:', engine.name);
-console.log('Description:', engine.description);
-console.log('Enabled:', engine.enabled);
-console.log('Rules:', engine.rules.length);
-```
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.get('engine-id-123');
 
-#### Example 2: Display Rule Details
-```javascript
-const result = await codebolt.contextRuleEngine.get('engine-id-123');
-
-result.data.ruleEngine.rules.forEach(rule => {
-  console.log(`Rule: ${rule.name}`);
-  console.log(`  Conditions: ${rule.conditions.length}`);
-  console.log(`  Action: ${rule.action}`);
-  console.log(`  Logic: ${rule.condition_logic || 'and'}`);
-  if (rule.action_config) {
-    console.log(`  Config:`, rule.action_config);
-  }
+  if (result.data == null) throw new Error('The response is missing data.');
+  const engine = result.data.ruleEngine;
+  console.log('Engine:', engine.name);
+  console.log('Description:', engine.description);
+  console.log('Enabled:', engine.enabled);
+  console.log('Rules:', engine.rules.length);
 });
 ```
 
-#### Example 3: Check Engine Status
+### Display Rule Details
+
 ```javascript
-async function isEngineEnabled(engineId) {
-  const result = await codebolt.contextRuleEngine.get(engineId);
-  return result.data.ruleEngine.enabled;
-}
+import codebolt from '@codebolt/codeboltjs';
 
-const enabled = await isEngineEnabled('engine-id-123');
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.get('engine-id-123');
 
-if (enabled) {
-  console.log('Engine is active');
-} else {
-  console.log('Engine is disabled');
-}
+  if (result.data == null) throw new Error('The response is missing data.');
+  result.data.ruleEngine.rules.forEach(rule => {
+    console.log(`Rule: ${rule.name}`);
+    console.log(`  Conditions: ${rule.conditions.length}`);
+    console.log(`  Action: ${rule.action}`);
+    console.log(`  Logic: ${rule.condition_logic || 'and'}`);
+    if (rule.action_config) {
+      console.log(`  Config:`, rule.action_config);
+    }
+  });
+});
 ```
-
-### Notes
-- Returns complete rule engine configuration
-- Use to inspect rules before evaluation

@@ -1,66 +1,39 @@
 ---
 name: listPowers
+description: List all available powers.
 cbbaseinfo:
-  description: "Lists all available powers. This is a convenience method that filters capabilities by type 'power'."
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: "Promise<ListCapabilitiesResponse>"
-    description: A promise that resolves to a list of all powers.
-    typeArgs: []
+  description: List all available powers.
 data:
   name: listPowers
   category: capability
   link: listPowers.md
 ---
+
 # listPowers
 
-```typescript
+```text
 codebolt.capability.listPowers(): Promise<ListCapabilitiesResponse>
 ```
 
-Lists all available powers. This is a convenience method that filters capabilities by type 'power'.
-### Returns
+List all available powers
 
-- **`Promise<[ListCapabilitiesResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListCapabilitiesResponse)>`**: A promise that resolves to a list of all powers.
+## Returns
 
-### Response Structure
+Promise resolving to list of powers
 
-Returns a [`ListCapabilitiesResponse`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListCapabilitiesResponse) with an array of power capabilities.
+Requirements: 9.1
 
-### Examples
+## When to use it
 
-#### List All Powers
+Find installed powers for a workflow before inspecting or starting one.
 
-```typescript
-const powers = await codebolt.capability.listPowers();
-console.log('Available powers:', powers.capabilities);
-```
-
-#### Find Advanced Capabilities
+## Example
 
 ```typescript
-const allPowers = await codebolt.capability.listPowers();
-const mlPowers = allPowers.capabilities.filter(p =>
-  p.tags?.includes('ml') || p.tags?.includes('ai')
-);
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const powers = await codebolt.capability.listPowers();
+  console.log('Available powers:', powers.capabilities);
+});
 ```
-
-### Common Use Cases
-
-#### Power Discovery
-
-```typescript
-const discoverPowers = async () => {
-  const result = await codebolt.capability.listPowers();
-  return result.capabilities.filter(p =>
-    p.tags?.includes('advanced')
-  );
-};
-```
-
-### Notes
-
-- Equivalent to `listCapabilities({ type: 'power' })`
-- Powers are more resource-intensive than skills
-- Suitable for complex operations

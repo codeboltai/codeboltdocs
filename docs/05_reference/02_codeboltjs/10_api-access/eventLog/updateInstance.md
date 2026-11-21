@@ -1,59 +1,51 @@
 ---
 name: updateInstance
+description: Update an event log instance.
 cbbaseinfo:
-  description: Updates the name or description of an event log instance.
-cbparameters:
-  parameters:
-    - name: instanceId
-      type: string
-      required: true
-      description: The unique identifier of the event log instance.
-    - name: updates
-      type: UpdateEventLogInstanceParams
-      required: true
-      description: Object containing name and/or description to update.
-  returns:
-    signatureTypeName: "Promise<EventLogInstanceResponse>"
-    description: A promise that resolves with the updated instance details.
+  description: Update an event log instance.
 data:
   name: updateInstance
   category: eventLog
   link: updateInstance.md
 ---
+
 # updateInstance
 
-```typescript
-codebolt.eventLog.updateInstance(instanceId: undefined, updates: undefined): Promise<EventLogInstanceResponse>
+```text
+codebolt.eventLog.updateInstance(instanceId: string, updates: UpdateEventLogInstanceParams): Promise<EventLogInstanceResponse>
 ```
 
-Updates the name or description of an event log instance.
-### Parameters
+Update an event log instance
 
-- **`instanceId`** (unknown): The unique identifier of the event log instance.
-- **`updates`** (unknown): Object containing name and/or description to update.
+## Parameters
 
-### Returns
+- `instanceId` — Instance ID
+- `updates` — Update parameters
 
-- **`Promise<[EventLogInstanceResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/EventLogInstanceResponse)>`**: A promise that resolves with the updated instance details.
+## Example
 
-### Examples
-
-#### Example 1: Update Instance Name
 ```javascript
-const result = await codebolt.eventLog.updateInstance(
-  'log-instance-id',
-  { name: 'production-user-activity' }
-);
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.eventLog.updateInstance(
+    'log-instance-id',
+    { description: 'Updated description reflecting new usage patterns' }
+  );
+});
 ```
 
-#### Example 2: Update Description
+## More examples
+
+### Update Instance Name
+
 ```javascript
-const result = await codebolt.eventLog.updateInstance(
-  'log-instance-id',
-  { description: 'Updated description reflecting new usage patterns' }
-);
-```
+import codebolt from '@codebolt/codeboltjs';
 
-### Notes
-- Only name and description can be updated
-- Instance data (events) is not affected
+codebolt.onReady(async () => {
+  const result = await codebolt.eventLog.updateInstance(
+    'log-instance-id',
+    { name: 'production-user-activity' }
+  );
+});
+```

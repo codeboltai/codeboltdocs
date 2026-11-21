@@ -1,44 +1,37 @@
 ---
 name: getPortfoliosByProject
+description: Get portfolios by project.
 cbbaseinfo:
-  description: Gets all portfolios associated with a specific project.
-cbparameters:
-  parameters:
-    - name: projectId
-      typeName: string
-      description: The project ID.
-  returns:
-    signatureTypeName: "Promise<GetPortfoliosByProjectResponse>"
-    description: A promise that resolves to the list of portfolios.
-    typeArgs: []
+  description: Get portfolios by project.
 data:
   name: getPortfoliosByProject
   category: agentPortfolio
   link: getPortfoliosByProject.md
 ---
+
 # getPortfoliosByProject
 
-```typescript
+```text
 codebolt.agentPortfolio.getPortfoliosByProject(projectId: string): Promise<GetPortfoliosByProjectResponse>
 ```
 
-Gets all portfolios associated with a specific project.
-### Parameters
+Get portfolios by project
 
-- **`projectId`** (string): The project ID.
+## Parameters
 
-### Returns
+- `projectId` — The project ID
 
-- **`Promise<[GetPortfoliosByProjectResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/GetPortfoliosByProjectResponse)>`**: A promise that resolves to the list of portfolios.
+## Returns
 
-### Examples
+Promise resolving to the list of portfolios for the project
 
-```typescript
-const portfolios = await codebolt.agentPortfolio.getPortfoliosByProject('project-456');
-console.log(`Project has ${portfolios.data?.portfolios.length} agents`);
+## Example
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.agentPortfolio.getPortfoliosByProject('project-456');
+  console.log(result);
+});
 ```
-
-### Notes
-
-- Returns all agents who worked on the project
-- Useful for project retrospective and team evaluation

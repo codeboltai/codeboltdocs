@@ -1,68 +1,54 @@
 ---
 name: listSkills
+description: List all available skills.
 cbbaseinfo:
-  description: "Lists all available skills. This is a convenience method that filters capabilities by type 'skill'."
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: "Promise<ListCapabilitiesResponse>"
-    description: A promise that resolves to a list of all skills.
-    typeArgs: []
+  description: List all available skills.
 data:
   name: listSkills
   category: capability
   link: listSkills.md
 ---
+
 # listSkills
 
-```typescript
+```text
 codebolt.capability.listSkills(): Promise<ListCapabilitiesResponse>
 ```
 
-Lists all available skills. This is a convenience method that filters capabilities by type 'skill'.
-### Returns
+List all available skills
 
-- **`Promise<[ListCapabilitiesResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListCapabilitiesResponse)>`**: A promise that resolves to a list of all skills.
+## Returns
 
-### Response Structure
+Promise resolving to list of skills
 
-Returns a [`ListCapabilitiesResponse`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListCapabilitiesResponse) with an array of skill capabilities.
+Requirements: 9.1
 
-### Examples
+## When to use it
 
-#### List All Skills
+Find available skills before choosing one for a task.
 
-```typescript
-const skills = await codebolt.capability.listSkills();
-console.log('Available skills:', skills.capabilities);
-```
-
-#### Find Specific Skills
+## Example
 
 ```typescript
-const allSkills = await codebolt.capability.listSkills();
-const dataSkills = allSkills.capabilities.filter(s =>
-  s.name.includes('data')
-);
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const skills = await codebolt.capability.listSkills();
+  console.log('Available skills:', skills.capabilities);
+});
 ```
 
-### Common Use Cases
+## More examples
 
-#### Skill Discovery
+### Find Specific Skills
 
 ```typescript
-const discoverSkills = async () => {
-  const result = await codebolt.capability.listSkills();
-  return result.capabilities.map(skill => ({
-    name: skill.name,
-    description: skill.description,
-    tags: skill.tags
-  }));
-};
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const allSkills = await codebolt.capability.listSkills();
+  const dataSkills = allSkills.capabilities.filter(s =>
+    s.name.includes('data')
+  );
+});
 ```
-
-### Notes
-
-- Equivalent to `listCapabilities({ type: 'skill' })`
-- Skills are typically lightweight operations
-- Use for browsing available functionality

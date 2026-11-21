@@ -1,65 +1,50 @@
 ---
 name: createCase
+description: Creates a new test case with steps, labels, and priority.
 cbbaseinfo:
   description: Creates a new test case with steps, labels, and priority.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: ICreateCaseParams
-      description: Parameters for creating the test case including key, name, steps, and labels.
-  returns:
-    signatureTypeName: "Promise<ICreateCaseResponse>"
-    description: A promise that resolves to the created test case.
-    typeArgs: []
 data:
   name: createCase
   category: autoTesting
   link: createCase.md
 ---
+
 # createCase
 
-```typescript
+```text
 codebolt.autoTesting.createCase(params: ICreateCaseParams): Promise<ICreateCaseResponse>
 ```
 
 Creates a new test case with steps, labels, and priority.
-### Parameters
 
-- **`params`** ([ICreateCaseParams](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ICreateCaseParams)): Parameters for creating the test case including key, name, steps, and labels.
+## When to use it
 
-### Returns
+Create a repeatable check inside a suite. Describe the target, expected result, and flow steps in the testing plan.
 
-- **`Promise<[ICreateCaseResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ICreateCaseResponse)>`**: A promise that resolves to the created test case.
+## Example
 
-### Examples
+### Create a login case in an existing suite
 
-```typescript
-// Create a simple test case
-const testCase = await codebolt.autoTesting.createCase({
-  key: 'TEST-001',
-  name: 'Login Test',
-  description: 'Verify user can login',
-  steps: [
-    { content: 'Go to login page', order: 1 },
-    { content: 'Enter credentials', order: 2 },
-    { content: 'Click submit', order: 3 },
-    { content: 'Verify success', order: 4 }
-  ],
-  priority: 'high',
-  labels: ['authentication', 'smoke']
-});
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-// Create with minimal details
-const simple = await codebolt.autoTesting.createCase({
-  key: 'TEST-002',
-  name: 'Simple Test',
-  steps: [{ content: 'Run test', order: 1 }]
+codebolt.onReady(async () => {
+  const result = await codebolt.autoTesting.createCase({
+    suiteId: 'suite-id',
+    key: 'LOGIN-001',
+    name: 'Open the login page',
+    testingPlan: {
+      specVersion: 'agent-check/v1',
+      kind: 'TestingPlan',
+      metadata: { id: 'login-page', title: 'Open the login page' },
+      target: { appRef: 'web-app' },
+      intent: {
+        summary: 'Verify that a visitor can reach the login form.',
+        acceptance: ['The page displays the sign-in form.'],
+      },
+      flow: [{ id: 'open-login', goal: 'Open the login page and look for the form.' }],
+    },
+  });
+  console.log(result);
 });
 ```
-
-### Notes
-
-- Steps are executed in order
-- Priorities: low, medium, high, automated
-- Labels help categorize tests
-- Keys should be unique

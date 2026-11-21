@@ -1,51 +1,40 @@
 ---
 name: pdfToText
+description: Converts the PDF content of the current page to text.
 cbbaseinfo:
   description: Converts the PDF content of the current page to text.
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: void
-    description: "' '"
-    typeArgs: []
 data:
   name: pdfToText
   category: browser
   link: pdfToText.md
 ---
+
 # pdfToText
 
-```typescript
-codebolt.browser.pdfToText(): void
+```text
+codebolt.browser.pdfToText(options?: BrowserOperationOptions): Promise<void>
 ```
 
-Converts the PDF content of the current page to text. 
- ### Returns
+Converts the PDF content of the current page to text.
 
-- **`void`**: ' '
+## Parameters
 
-### Response Structure
+- `options` — Optional browser operation options
 
-This method returns `void` and does not provide a response. The PDF to text conversion is initiated immediately when the method is called.
-
-### Example
+## Example
 
 ```js
-// Navigate to the page containing the PDF document
-await codebolt.browser.goToPage("https://example.com/report.pdf");
+import codebolt from '@codebolt/codeboltjs';
 
-// Wait for PDF to load
-await new Promise(resolve => setTimeout(resolve, 3000));
+codebolt.onReady(async () => {
+  // Navigate to the page containing the PDF document
+  await codebolt.browser.goToPage("https://example.com/report.pdf");
 
-// Convert the PDF content to text
-codebolt.browser.pdfToText();
-console.log('✅ PDF to text conversion initiated');
+  // Wait for PDF to load
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
+  // Convert the PDF content to text
+  codebolt.browser.pdfToText();
+  console.log('✅ PDF to text conversion initiated');
+});
 ```
-
-### Notes
-
-- This method does not return a Promise and executes immediately
-- The PDF to text conversion is initiated without waiting for confirmation
-- This function is particularly useful when dealing with PDF documents in web automation or data extraction scenarios
-- Ensure the PDF is fully loaded before calling this method for best results
-- The converted text is typically processed by the underlying system for further use

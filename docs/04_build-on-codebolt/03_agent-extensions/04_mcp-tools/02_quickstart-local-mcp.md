@@ -112,18 +112,19 @@ List the available tools and select the greeting tool by its catalog name. Pass 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-const { data } = await codebolt.tools.listRuntimeTools();
-const greeting = data.tools.find(tool => tool.toolName === 'hello');
+codebolt.onMessage(async () => {
+  const { data } = await codebolt.tools.listRuntimeTools();
+  const greeting = data.tools.find(tool => tool.toolName === 'hello');
 
-if (!greeting) {
-  throw new Error('The hello tool is not available in the current project.');
-}
+  if (!greeting) {
+    throw new Error('The hello tool is not available in the current project.');
+  }
 
-const result = await codebolt.tools.execute(greeting.name, { name: 'Alice' }, {
-  sourceId: greeting.sourceId
+  const result = await codebolt.tools.execute(greeting.name, { name: 'Alice' }, {
+    sourceId: greeting.sourceId
+  });
+  return result.success ? String(result.result ?? '') : result.error || 'The greeting tool failed.';
 });
-console.log(result);
 ```
 
 ### Step 6 — Test from chat

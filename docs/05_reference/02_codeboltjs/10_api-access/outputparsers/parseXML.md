@@ -1,77 +1,54 @@
 ---
 name: parseXML
+description: Parses XML string and returns a result object.
 cbbaseinfo:
-  description: Parses XML string and returns a result object with success flag and parsed data.
-cbparameters:
-  parameters:
-    - name: xmlString
-      typeName: string
-      description: The XML string to parse.
-  returns:
-    signatureTypeName: Object
-    description: An object with success flag and parsed XML data.
-    typeArgs: []
+  description: Parses XML string and returns a result object.
 data:
   name: parseXML
   category: outputparsers
   link: parseXML.md
 ---
+
 # parseXML
 
-```typescript
-codebolt.outputparsers.parseXML(xmlString: string): Object
+```text
+codebolt.outputparsers.parseXML(xmlString: string): ParseResult<{ rootElement: string; [key: string]: unknown; }>
 ```
 
-Parses XML string and returns a result object with success flag and parsed data. 
-### Parameters
+Parses XML string and returns a result object.
 
-- **`xmlString`** (string): The XML string to parse.
+## Parameters
 
-### Returns
+- `xmlString` — The XML string to parse.
 
-- **`Object`**: An object with success flag and parsed XML data.
+## Returns
 
-## Response Structure
+An object with success flag and parsed data.
 
-The method returns an object with the following structure:
+## Example
 
-### Success Response
 ```javascript
-{
-  success: true,
-  parsed: {
-    rootElement: "<xml_content>"
-  }
-}
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const invalidXml = 'not valid xml';
+  const result = await codebolt.outputparsers.parseXML(invalidXml);
+  console.log(result);
+  // Output: { success: false, parsed: undefined }
+});
 ```
 
-### Error Response
-```javascript
-{
-  success: false,
-  parsed: undefined
-}
-```
-
-## Examples
+## More examples
 
 ### Valid XML Parsing
-```javascript
-const xmlData = '<root><item id="1">Test Item</item><item id="2">Another Item</item></root>';
-const result = await codebolt.outputparsers.parseXML(xmlData);
-console.log(result);
-// Output: {
-//   success: true,
-//   parsed: {
-//     rootElement: '<root><item id="1">Test Item</item><item id="2">Another Item</item></root>'
-//   }
-// }
-```
 
-### Invalid XML Parsing
 ```javascript
-const invalidXml = 'not valid xml';
-const result = await codebolt.outputparsers.parseXML(invalidXml);
-console.log(result);
-// Output: { success: false, parsed: undefined }
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const xmlData = '<root><item id="1">Test Item</item><item id="2">Another Item</item></root>';
+  const result = await codebolt.outputparsers.parseXML(xmlData);
+  console.log(result);
+  // }
+});
 ```

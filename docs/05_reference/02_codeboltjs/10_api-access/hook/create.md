@@ -1,144 +1,88 @@
 ---
 name: create
+description: Create a new hook.
 cbbaseinfo:
-  description: Creates a new hook with the specified configuration for automated event handling.
-cbparameters:
-  parameters:
-    - name: config
-      typeName: HookConfig
-      description: Hook configuration including name, events, filters, actions, and settings.
-  returns:
-    signatureTypeName: "Promise<HookResponse>"
-    description: A promise that resolves with the created hook details.
+  description: Create a new hook.
 data:
   name: create
   category: hook
   link: create.md
 ---
+
 # create
 
-```typescript
-codebolt.hook.create(config: HookConfig): Promise<HookResponse>
+```text
+codebolt.hooks.create(config: HookConfig): Promise<HookResponse>
 ```
 
-Creates a new hook with the specified configuration for automated event handling.
-### Parameters
+Create a new hook.
 
-- **`config`** ([HookConfig](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/HookConfig)): Hook configuration including name, events, filters, actions, and settings.
+## When to use it
 
-### Returns
+Register a handler for a supported agent lifecycle event, such as a check before an operation proceeds.
 
-- **`Promise<[HookResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/HookResponse)>`**: A promise that resolves with the created hook details.
+## Examples
 
-### Response Structure
-
-```typescript
-interface HookResponse {
-  success: boolean;
-  hookId: string;
-  hook?: {
-    id: string;
-    name: string;
-    description?: string;
-    events: string[];
-    filter?: any;
-    action: any;
-    enabled: boolean;
-    createdAt: string;
-  };
-  error?: string;
-}
-```
-
-### Examples
-
-#### Example 1: Create Simple File Watch Hook
+### Create Git Hook
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  const hook = await codebolt.hooks.create({
+    name: 'pre-commit-tests',
+    description: 'Run tests before committing',
+    events: ['git.pre-commit'],
+    action: {
+      type: 'command',
+      command: 'npm test',
+      timeout: 60000
+    },
+    enabled: true
+  });
 
-const hook = await codebolt.hook.create({
-  name: 'run-linter',
-  description: 'Run linter when JavaScript files change',
-  events: ['file.save'],
-  filter: {
-    pattern: '**/*.js'
-  },
-  action: {
-    type: 'command',
-    command: 'eslint --fix {{file}}'
-  },
-  enabled: true
+  console.log('Pre-commit hook created');
 });
-
-console.log('Hook created:', hook.hookId);
 ```
 
-#### Example 2: Create Git Hook
+### Create Build Hook
 
 ```typescript
-const hook = await codebolt.hook.create({
-  name: 'pre-commit-tests',
-  description: 'Run tests before committing',
-  events: ['git.pre-commit'],
-  action: {
-    type: 'command',
-    command: 'npm test',
-    timeout: 60000
-  },
-  enabled: true
-});
+import codebolt from '@codebolt/codeboltjs';
 
-console.log('Pre-commit hook created');
+codebolt.onReady(async () => {
+  const hook = await codebolt.hooks.create({
+    name: 'build-on-dependency-change',
+    description: 'Rebuild when package.json changes',
+    events: ['file.save'],
+    filter: {
+      pattern: 'package.json'
+    },
+    action: {
+      type: 'command',
+      command: 'npm run build'
+    },
+    enabled: true
+  });
+});
 ```
 
-#### Example 3: Create Build Hook
+### Create Notification Hook
 
 ```typescript
-const hook = await codebolt.hook.create({
-  name: 'build-on-dependency-change',
-  description: 'Rebuild when package.json changes',
-  events: ['file.save'],
-  filter: {
-    pattern: 'package.json'
-  },
-  action: {
-    type: 'command',
-    command: 'npm run build'
-  },
-  enabled: true
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const hook = await codebolt.hooks.create({
+    name: 'error-notifications',
+    description: 'Notify when errors occur',
+    events: ['error.occurred'],
+    action: {
+      type: 'notification',
+      message: 'Error occurred in {{file}}: {{error}}',
+      level: 'error'
+    },
+    enabled: true
+  });
 });
 ```
-
-#### Example 4: Create Notification Hook
-
-```typescript
-const hook = await codebolt.hook.create({
-  name: 'error-notifications',
-  description: 'Notify when errors occur',
-  events: ['error.occurred'],
-  action: {
-    type: 'notification',
-    message: 'Error occurred in {{file}}: {{error}}',
-    level: 'error'
-  },
-  enabled: true
-});
-```
-
-### Common Use Cases
-
-- **Automated Testing**: Run tests on file changes
-- **Code Quality**: Run linters and formatters
-- **Build Automation**: Trigger builds on dependency changes
-- **Notifications**: Send alerts for specific events
-- **Git Hooks**: Pre-commit, pre-push workflows
-
-### Notes
-
-- Hook must be enabled to trigger
-- Events can be file changes, git events, or custom events
-- Filters allow targeting specific files or patterns
-- Actions can be commands, notifications, or custom functions

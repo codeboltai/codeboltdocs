@@ -1,66 +1,39 @@
 ---
 name: listTalents
+description: List all available talents.
 cbbaseinfo:
-  description: "Lists all available talents. This is a convenience method that filters capabilities by type 'talent'."
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: "Promise<ListCapabilitiesResponse>"
-    description: A promise that resolves to a list of all talents.
-    typeArgs: []
+  description: List all available talents.
 data:
   name: listTalents
   category: capability
   link: listTalents.md
 ---
+
 # listTalents
 
-```typescript
+```text
 codebolt.capability.listTalents(): Promise<ListCapabilitiesResponse>
 ```
 
-Lists all available talents. This is a convenience method that filters capabilities by type 'talent'.
-### Returns
+List all available talents
 
-- **`Promise<[ListCapabilitiesResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListCapabilitiesResponse)>`**: A promise that resolves to a list of all talents.
+## Returns
 
-### Response Structure
+Promise resolving to list of talents
 
-Returns a [`ListCapabilitiesResponse`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListCapabilitiesResponse) with an array of talent capabilities.
+Requirements: 9.1
 
-### Examples
+## When to use it
 
-#### List All Talents
+Discover installed talents before choosing one for a specialized task.
 
-```typescript
-const talents = await codebolt.capability.listTalents();
-console.log('Available talents:', talents.capabilities);
-```
-
-#### Find Domain-Specific Talents
+## Example
 
 ```typescript
-const allTalents = await codebolt.capability.listTalents();
-const legalTalents = allTalents.capabilities.filter(t =>
-  t.tags?.includes('legal')
-);
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const talents = await codebolt.capability.listTalents();
+  console.log('Available talents:', talents.capabilities);
+});
 ```
-
-### Common Use Cases
-
-#### Talent Discovery
-
-```typescript
-const discoverTalents = async (domain: string) => {
-  const result = await codebolt.capability.listTalents();
-  return result.capabilities.filter(t =>
-    t.tags?.includes(domain)
-  );
-};
-```
-
-### Notes
-
-- Equivalent to `listCapabilities({ type: 'talent' })`
-- Talents are specialized for specific domains
-- Use for industry-specific functionality

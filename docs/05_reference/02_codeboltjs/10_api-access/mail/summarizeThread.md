@@ -1,62 +1,35 @@
 ---
 name: summarizeThread
+description: Generates a summary of a mail thread's conversation.
 cbbaseinfo:
-  description: "Generates a summary of a mail thread's conversation."
-cbparameters:
-  parameters:
-    - name: params
-      typeName: ISummarizeThreadParams
-      description: Parameters including the threadId to summarize.
-  returns:
-    signatureTypeName: "Promise<ISummarizeThreadResponse>"
-    description: A promise that resolves with the thread summary.
+  description: Generates a summary of a mail thread's conversation.
 data:
   name: summarizeThread
   category: mail
   link: summarizeThread.md
 ---
+
 # summarizeThread
 
-```typescript
+```text
 codebolt.mail.summarizeThread(params: ISummarizeThreadParams): Promise<ISummarizeThreadResponse>
 ```
 
 Generates a summary of a mail thread's conversation.
-### Parameters
 
-- **`params`** (ISummarizeThreadParams): Parameters including the threadId to summarize.
+## When to use it
 
-### Returns
+Summarize an existing mail conversation before handing the work to another agent.
 
-- **`Promise<ISummarizeThreadResponse>`**: A promise that resolves with the thread summary.
+## Example
 
-### Examples
-
-#### Example 1: Summarize Thread
-
-```typescript
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.mail.summarizeThread({
-  threadId: 'thread-123'
+codebolt.onReady(async () => {
+  const result = await codebolt.mail.summarizeThread({
+    threadId: 'thread-123'
+  });
+  console.log(result);
 });
-
-if (result.success) {
-  console.log('Thread Summary:', result.summary);
-  console.log('Key Points:', result.keyPoints);
-}
 ```
-
-### Common Use Cases
-
-- **Quick Overview**: Get thread summary without reading all messages
-- **Meeting Prep**: Prepare for discussions based on thread content
-- **Documentation**: Generate documentation from conversations
-
-### Notes
-
-- AI-powered summarization
-- Extracts key points and decisions
-- Useful for long conversations

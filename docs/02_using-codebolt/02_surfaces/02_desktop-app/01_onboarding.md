@@ -6,19 +6,23 @@ description: Install Codebolt Desktop, sign in, choose a model, and configure yo
 
 # Installation and Onboarding
 
-[Download and install Codebolt Desktop](https://codebolt.ai/download/) for your operating system. You can also find macOS and Windows installers in the [GitHub release assets](https://github.com/codeboltai/codebolt/releases). Onboarding configures the app for agent runs.
+## Install Codebolt Desktop
 
-## Sign In
+Start on the [Codebolt download page](https://codebolt.ai/download/). On [GitHub Releases](https://github.com/codeboltai/codebolt/releases), expand **Assets** for a release and choose the installer that matches your operating system and processor. Available installers vary by release. For example, the macOS `.dmg` files use `arm64` for Apple Silicon and `x64` for Intel.
 
-Open Codebolt. Click **Sign In** - a browser window opens to the Codebolt portal. Log in or create a free account. The token is picked up automatically.
+Open the installer and follow the prompts. When installation finishes, open Codebolt.
+
+## Sign in
+
+If the welcome screen appears, click **Sign In**. Sign in or create a Codebolt account in your browser, then return to the app.
 
 ![Codebolt welcome screen](/img/get_started.png)
 
-If you already have a workspace configured, Codebolt can take you directly to the project dashboard. Otherwise it opens the setup wizard.
+If you see **Open project** on the project dashboard, you can continue to the [Quickstart](../../../01_get-started/03_quickstart.md#open-a-project). If Codebolt opens the setup wizard, choose a default model.
 
-## Provider Selection
+## Choose a model {#provider-selection}
 
-The wizard opens to **Select Default AI Models**. Pick the provider type that fits you best:
+On **Select Default AI Models**, click **Select** beside **LLM Model**. Choose a provider, supply any credentials or server URL it requires, and select a model.
 
 ![Select default AI models](/img/onboarding-default-models.png)
 
@@ -26,25 +30,24 @@ The wizard opens to **Select Default AI Models**. Pick the provider type that fi
 |---|---|
 | Built-in provider | No key required when available on your plan |
 | Hosted model provider | API key from the provider's console |
-| Local model provider | Local URL - the model server must be running |
+| Local model provider | URL for a running local model server |
 | Enterprise or cloud provider | Access credentials, region, account details, or API token |
 
-Click **Select** next to **LLM Model**. Choose a provider, supply any credentials or server URL it requires, then select your model and click **Continue**. You can also choose an **Embedding Model** for features that use embeddings.
+Once your model name appears under **LLM Model**, click **Continue**. Choose an **Embedding Model** now or later in Settings if you use features that need embeddings.
 
 If your team needs a provider that is not listed, see [Custom LLM Provider](../../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md) for the build path. For provider configuration, see [LLM Settings](./Settings/02_llm-settings.md).
 
-## Workspace And Theme
+## Review workspace settings {#workspace-and-theme}
 
-The **Review Settings** screen lets you configure:
+On **Review Settings**, confirm the **Default Workspace** folder. Use **Browse** or **Change** to choose where you organize projects. [Workspaces](./01_workspace-and-project-management/02_workspaces.md)
 
 ![Review settings](/img/onboarding-review-settings.png)
 
-- **Default workspace**. Use **Browse** or **Change** to select the folder where you organize projects. See [Workspaces](./01_workspace-and-project-management/02_workspaces.md).
-- **Open From Terminal**. Click **Install** to add `codebolt` to your `PATH`. This is optional and can be done later in Settings.
-- **Theme**. Choose the starting app theme. See [Themes](./Settings/08_themes.md).
+- **Open From Terminal** is optional. Click **Install** if you want to open a folder in Desktop with `codebolt .`.
+- **Theme** sets the app's appearance. [Themes](./Settings/08_themes.md)
 
-Click **Continue** to save the workspace and open the project dashboard.
+Click **Continue** to save the settings. When the project dashboard shows **Open project**, you're ready to start.
 
 ## Next
 
-Continue to [Open a project](./00_get-started.md#open-a-project) to run your first agent task.
+Continue to [Open a project](../../../01_get-started/03_quickstart.md#open-a-project) to run your first agent task.

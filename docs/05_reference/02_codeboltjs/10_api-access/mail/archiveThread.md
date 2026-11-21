@@ -46,15 +46,15 @@ interface IArchiveThreadResponse {
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  const result = await codebolt.mail.archiveThread({
+    threadId: 'thread-123'
+  });
 
-const result = await codebolt.mail.archiveThread({
-  threadId: 'thread-123'
+  if (result.success) {
+    console.log('Thread archived successfully');
+  }
 });
-
-if (result.success) {
-  console.log('Thread archived successfully');
-}
 ```
 
 ### Common Use Cases

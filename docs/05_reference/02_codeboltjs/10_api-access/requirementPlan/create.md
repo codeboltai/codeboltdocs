@@ -1,246 +1,200 @@
 ---
 name: create
+description: Create a new feature plan file.
 cbbaseinfo:
-  description: Creates a new requirement plan file with the specified filename. The file is initialized with an empty document structure.
-cbparameters:
-  parameters:
-    - name: fileName
-      typeName: string
-      description: "Name for the new plan file (without .plan extension)"
-  returns:
-    signatureTypeName: "Promise<RequirementPlanCreateResponse>"
-    description: A promise that resolves to creation result with file path
+  description: Create a new feature plan file.
 data:
   name: create
   category: requirementPlan
   link: create.md
 ---
+
 # create
 
-```typescript
-codebolt.requirementPlan.create(fileName: string): Promise<RequirementPlanCreateResponse>
+```text
+codebolt.featurePlan.create(fileName: string): Promise<FeaturePlanCreateResponse>
 ```
 
-Creates a new requirement plan file with the specified filename. The file is initialized with an empty document structure.
-### Parameters
+Create a new feature plan file
 
-- **`fileName`** (string): Name for the new plan file (without .plan extension)
+## Parameters
 
-### Returns
+- `fileName` — Name for the new plan file (without .plan extension)
 
-- **`Promise<[RequirementPlanCreateResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/RequirementPlanCreateResponse)>`**: A promise that resolves to creation result with file path
+## Returns
 
-### Parameter Details
+Promise resolving to creation result with file path
 
-- **`fileName`** (string, required): Name for the new plan file. The `.plan` extension is added automatically. Should not include path or extension.
+## When to use it
 
-### Response Structure
+Create a feature plan before adding requirements and reference sections.
 
-```typescript
-interface RequirementPlanCreateResponse {
-  type: 'requirementPlanCreateResponse';
-  success: boolean;
-  filePath?: string;          // Full path to created file
-  error?: string;             // Error message if creation failed
-  requestId?: string;         // Request identifier for tracking
-}
-```
+## Examples
 
-### Examples
+### Create Basic Plan
 
-#### 1. Create Basic Plan
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Create a new requirement plan
-const result = await codebolt.requirementPlan.create('project-requirements');
-
-if (result.success) {
-  console.log('Plan created at:', result.filePath);
-  // Output: Plan created at: /path/to/project-requirements.plan
-} else {
-  console.error('Failed to create plan:', result.error);
-}
-```
-
-#### 2. Create Plan with Descriptive Name
-```typescript
-// Create plan with descriptive filename
-const result = await codebolt.requirementPlan.create('ecommerce-platform-requirements-v1');
-
-if (result.success) {
-  console.log('Requirements document created');
-  console.log('File:', result.filePath);
-
-  // Now add sections to the plan
-  await codebolt.requirementPlan.addSection(
-    result.filePath,
-    {
-      type: 'markdown',
-      title: 'Overview',
-      content: '# E-Commerce Platform Requirements\n\n...'
-    }
-  );
-}
-```
-
-#### 3. Create Multiple Plans
-```typescript
-// Create separate plans for different components
-const plans = [
-  'frontend-requirements',
-  'backend-requirements',
-  'api-requirements',
-  'database-requirements'
-];
-
-for (const planName of plans) {
-  const result = await codebolt.requirementPlan.create(planName);
+codebolt.onReady(async () => {
+  // Create a new requirement plan
+  const result = await codebolt.featurePlan.create('project-requirements');
 
   if (result.success) {
-    console.log(`✓ Created: ${planName}`);
+    console.log('Plan created at:', result.filePath);
+    // Output: Plan created at: /path/to/project-requirements.plan
   } else {
-    console.error(`✗ Failed: ${planName} - ${result.error}`);
+    console.error('Failed to create plan:', result.error);
   }
-}
+});
 ```
 
-#### 4. Create and Initialize Plan
+### Create Multiple Plans
+
 ```typescript
-// Create plan and immediately add initial sections
-async function createInitializedPlan(fileName: string, title: string, overview: string) {
-  // Create the plan
-  const createResult = await codebolt.requirementPlan.create(fileName);
+import codebolt from '@codebolt/codeboltjs';
 
-  if (!createResult.success) {
-    throw new Error(`Failed to create plan: ${createResult.error}`);
-  }
+codebolt.onReady(async () => {
+  // Create separate plans for different components
+  const plans = [
+    'frontend-requirements',
+    'backend-requirements',
+    'api-requirements',
+    'database-requirements'
+  ];
 
-  const planPath = createResult.filePath!;
+  for (const planName of plans) {
+    const result = await codebolt.featurePlan.create(planName);
 
-  // Add overview section
-  await codebolt.requirementPlan.addSection(
-    planPath,
-    {
-      type: 'markdown',
-      title: 'Overview',
-      content: `# ${title}\n\n${overview}`
+    if (result.success) {
+      console.log(`✓ Created: ${planName}`);
+    } else {
+      console.error(`✗ Failed: ${planName} - ${result.error}`);
     }
-  );
-
-  console.log(`Plan created and initialized: ${planPath}`);
-  return planPath;
-}
-
-// Usage
-const planPath = await createInitializedPlan(
-  'user-auth-requirements',
-  'User Authentication Requirements',
-  'This document outlines the requirements for user authentication and authorization.'
-);
+  }
+});
 ```
 
-#### 5. Create Plan for Project Phase
+### Create and Initialize Plan
+
 ```typescript
-// Create requirement plans for each project phase
-const phases = [
-  { name: 'phase1-discovery', title: 'Phase 1: Discovery' },
-  { name: 'phase2-design', title: 'Phase 2: Design' },
-  { name: 'phase3-development', title: 'Phase 3: Development' },
-  { name: 'phase4-testing', title: 'Phase 4: Testing' }
-];
+import codebolt from '@codebolt/codeboltjs';
 
-for (const phase of phases) {
-  const result = await codebolt.requirementPlan.create(phase.name);
+codebolt.onReady(async () => {
+  // Create plan and immediately add initial sections
+  async function createInitializedPlan(fileName: string, title: string, overview: string) {
+    // Create the plan
+    const createResult = await codebolt.featurePlan.create(fileName);
 
-  if (result.success) {
-    // Add phase-specific sections
-    await codebolt.requirementPlan.addSection(
-      result.filePath!,
+    if (!createResult.success) {
+      throw new Error(`Failed to create plan: ${createResult.error}`);
+    }
+
+    const planPath = createResult.filePath!;
+
+    // Add overview section
+    await codebolt.featurePlan.addSection(
+      planPath,
       {
         type: 'markdown',
-        title: 'Phase Overview',
-        content: `# ${phase.title}\n\nRequirements for this phase...`
+        title: 'Overview',
+        content: `# ${title}\n\n${overview}`
       }
     );
 
-    console.log(`Created plan for ${phase.title}`);
+    console.log(`Plan created and initialized: ${planPath}`);
+    return planPath;
   }
-}
+
+  // Usage
+  const planPath = await createInitializedPlan(
+    'user-auth-requirements',
+    'User Authentication Requirements',
+    'This document outlines the requirements for user authentication and authorization.'
+  );
+});
 ```
 
-#### 6. Error Handling
+### Create Plan for Project Phase
+
 ```typescript
-// Handle creation errors
-const result = await codebolt.requirementPlan.create('existing-plan');
+import codebolt from '@codebolt/codeboltjs';
 
-if (!result.success) {
-  console.error('Creation failed');
+codebolt.onReady(async () => {
+  // Create requirement plans for each project phase
+  const phases = [
+    { name: 'phase1-discovery', title: 'Phase 1: Discovery' },
+    { name: 'phase2-design', title: 'Phase 2: Design' },
+    { name: 'phase3-development', title: 'Phase 3: Development' },
+    { name: 'phase4-testing', title: 'Phase 4: Testing' }
+  ];
 
-  if (result.error) {
-    if (result.error.includes('already exists')) {
-      console.error('A plan with this name already exists');
-      // Handle by loading existing or using a different name
-    } else if (result.error.includes('invalid filename')) {
-      console.error('Invalid filename format');
-    } else if (result.error.includes('permission denied')) {
-      console.error('No permission to create file');
-    } else {
-      console.error('Error:', result.error);
+  for (const phase of phases) {
+    const result = await codebolt.featurePlan.create(phase.name);
+
+    if (result.success) {
+      // Add phase-specific sections
+      await codebolt.featurePlan.addSection(
+        result.filePath!,
+        {
+          type: 'markdown',
+          title: 'Phase Overview',
+          content: `# ${phase.title}\n\nRequirements for this phase...`
+        }
+      );
+
+      console.log(`Created plan for ${phase.title}`);
     }
   }
-}
+});
 ```
 
-#### 7. Create with Validation
+### Error Handling
+
 ```typescript
-// Validate filename before creating
-async function createValidPlan(fileName: string) {
-  // Validate filename
-  const validName = fileName
-    .toLowerCase()
-    .replace(/[^a-z0-9-]/g, '-')  // Replace invalid chars with hyphens
-    .replace(/-+/g, '-')           // Replace multiple hyphens with single
-    .replace(/^-|-$/g, '');        // Remove leading/trailing hyphens
+import codebolt from '@codebolt/codeboltjs';
 
-  if (validName.length === 0) {
-    throw new Error('Invalid filename');
+codebolt.onReady(async () => {
+  // Handle creation errors
+  const result = await codebolt.featurePlan.create('existing-plan');
+
+  if (!result.success) {
+    console.error('Creation failed');
+
+    if (result.error) {
+      if (result.error.includes('already exists')) {
+        console.error('A plan with this name already exists');
+        // Handle by loading existing or using a different name
+      } else if (result.error.includes('invalid filename')) {
+        console.error('Invalid filename format');
+      } else if (result.error.includes('permission denied')) {
+        console.error('No permission to create file');
+      } else {
+        console.error('Error:', result.error);
+      }
+    }
   }
-
-  console.log(`Creating plan: ${validName}`);
-
-  const result = await codebolt.requirementPlan.create(validName);
-
-  if (result.success) {
-    return result.filePath;
-  }
-
-  throw new Error(result.error);
-}
-
-// Usage
-try {
-  const path = await createValidPlan('My Project Requirements!');
-  console.log('Created:', path);
-} catch (error) {
-  console.error('Error:', error.message);
-}
+});
 ```
 
-#### 8. Create Plan with Metadata
-```typescript
-// Create plan and store metadata
-async function createTrackedPlan(fileName: string, metadata: any) {
-  const result = await codebolt.requirementPlan.create(fileName);
+### Create Plan with Metadata
 
-  if (result.success) {
-    // Add metadata section
-    await codebolt.requirementPlan.addSection(
-      result.filePath!,
-      {
-        type: 'markdown',
-        title: 'Metadata',
-        content: `
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Create plan and store metadata
+  async function createTrackedPlan(fileName: string, metadata: any) {
+    const result = await codebolt.featurePlan.create(fileName);
+
+    if (result.success) {
+      // Add metadata section
+      await codebolt.featurePlan.addSection(
+        result.filePath!,
+        {
+          type: 'markdown',
+          title: 'Metadata',
+          content: `
 ## Document Information
 
 - Created: ${new Date().toISOString()}
@@ -249,28 +203,28 @@ async function createTrackedPlan(fileName: string, metadata: any) {
 - Status: ${metadata.status}
 - Tags: ${metadata.tags?.join(', ') || 'none'}
         `.trim()
-      }
-    );
+        }
+      );
 
-    return result.filePath;
+      return result.filePath;
+    }
+
+    throw new Error(result.error);
   }
 
-  throw new Error(result.error);
-}
-
-// Usage
-const planPath = await createTrackedPlan('api-requirements', {
-  author: 'John Doe',
-  version: '1.0.0',
-  status: 'draft',
-  tags: ['api', 'backend', 'priority']
+  // Usage
+  const planPath = await createTrackedPlan('api-requirements', {
+    author: 'John Doe',
+    version: '1.0.0',
+    status: 'draft',
+    tags: ['api', 'backend', 'priority']
+  });
 });
 ```
 
-### Common Use Cases
-
-**Project Initialization:**
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Create requirement plans when initializing a project
 async function initializeProjectRequirements(projectName: string) {
   const plans = [
@@ -283,7 +237,7 @@ async function initializeProjectRequirements(projectName: string) {
   const createdPaths: string[] = [];
 
   for (const planName of plans) {
-    const result = await codebolt.requirementPlan.create(planName);
+    const result = await codebolt.featurePlan.create(planName);
     if (result.success && result.filePath) {
       createdPaths.push(result.filePath);
     }
@@ -293,21 +247,22 @@ async function initializeProjectRequirements(projectName: string) {
 }
 ```
 
-**Template Creation:**
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Create a plan from template
 async function createFromTemplate(templateName: string, targetName: string) {
   // Create new plan
-  const result = await codebolt.requirementPlan.create(targetName);
+  const result = await codebolt.featurePlan.create(targetName);
 
   if (result.success && result.filePath) {
     // Copy template content
-    const template = await codebolt.requirementPlan.get(
+    const template = await codebolt.featurePlan.get(
       `templates/${templateName}.plan`
     );
 
     if (template.success && template.data) {
-      await codebolt.requirementPlan.update(
+      await codebolt.featurePlan.update(
         result.filePath,
         template.data
       );
@@ -319,16 +274,3 @@ async function createFromTemplate(templateName: string, targetName: string) {
   throw new Error('Failed to create from template');
 }
 ```
-
-### Notes
-
-- The `.plan` extension is added automatically
-- Filename should be simple (no special characters except hyphens)
-- File is created with empty structure (no sections initially)
-- Returns full path to the created file
-- Use the returned path for subsequent operations
-- Plan files are typically stored in project root or plans directory
-- Duplicate filenames will result in an error
-- Initial document has empty sections array
-- Version field defaults to "1.0.0"
-- Created and updated timestamps are set automatically

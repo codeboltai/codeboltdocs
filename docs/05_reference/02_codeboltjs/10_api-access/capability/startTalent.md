@@ -1,141 +1,111 @@
 ---
 name: startTalent
+description: Start a talent execution.
 cbbaseinfo:
-  description: Starts execution of a talent with optional parameters and timeout settings. Talents are specialized capabilities for specific domains.
-cbparameters:
-  parameters:
-    - name: talentName
-      typeName: string
-      description: The name of the talent to execute.
-    - name: params
-      typeName: "Record<string, any>"
-      description: Optional parameters to pass to the talent execution.
-      isOptional: true
-    - name: timeout
-      typeName: number
-      description: "Optional execution timeout in milliseconds. If not provided, uses the talent's default timeout."
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<StartCapabilityResponse>"
-    description: A promise that resolves to the execution response containing the execution ID and initial status.
-    typeArgs: []
+  description: Start a talent execution.
 data:
   name: startTalent
   category: capability
   link: startTalent.md
 ---
+
 # startTalent
 
-```typescript
-codebolt.capability.startTalent(talentName: string, params: Record<string, any>, timeout: number): Promise<StartCapabilityResponse>
+```text
+codebolt.capability.startTalent(talentName: string, params?: Record<string, any>, timeout?: number): Promise<StartCapabilityResponse>
 ```
 
-Starts execution of a talent with optional parameters and timeout settings. Talents are specialized capabilities for specific domains.
-### Parameters
+Start a talent execution
 
-- **`talentName`** (string): The name of the talent to execute.
-- **`params`** (`Record<string, any>`, optional): Optional parameters to pass to the talent execution.
-- **`timeout`** (number, optional): Optional execution timeout in milliseconds. If not provided, uses the talent's default timeout.
+## Parameters
 
-### Returns
+- `talentName` — Name of the talent to execute
+- `params` — Optional parameters to pass to the talent
+- `timeout` — Optional execution timeout in milliseconds
 
-- **`Promise<[StartCapabilityResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/StartCapabilityResponse)>`**: A promise that resolves to the execution response containing the execution ID and initial status.
+## Returns
 
-### Response Structure
+Promise resolving to execution ID
 
-The method returns a Promise that resolves to a [`StartCapabilityResponse`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/StartCapabilityResponse) object.
+Requirements: 9.4
 
-**Response Properties:**
-- `type` (string): Always "startCapabilityResponse"
-- `success` (boolean): Indicates if the execution started successfully
-- `executionId` (string, optional): Unique identifier for the execution instance
-- `status` (string, optional): Initial execution status
-- `result` (any, optional): Immediate result if execution completed synchronously
-- `error` (string, optional): Error details if the operation failed
+## When to use it
 
-### Examples
+Start a specific talent after checking that its declared inputs and output suit the task.
 
-#### Example 1: Execute a Talent
+## Example
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-const result = await codebolt.capability.startTalent('code-reviewer', {
-  repository: 'https://github.com/user/repo',
-  branch: 'main'
-});
+codebolt.onReady(async () => {
+  // Use industry-specific talents
+  const legalAnalysis = await codebolt.capability.startTalent('legal-analyzer', {
+    document: 'contract.pdf'
+  });
 
-if (result.success) {
-  console.log('Talent execution started:', result.executionId);
-}
-```
-
-#### Example 2: Specialized Domain Processing
-
-```typescript
-const analysis = await codebolt.capability.startTalent(
-  'financial-analyzer',
-  {
-    data: 'financial-data.json',
-    reportType: 'detailed',
-    includeCharts: true
-  },
-  45000
-);
-
-console.log('Financial analysis started:', analysis.executionId);
-```
-
-#### Example 3: Domain-Specific Workflow
-
-```typescript
-// Legal document analysis
-const legalReview = await codebolt.capability.startTalent('legal-doc-analyzer', {
-  document: 'contract.pdf',
-  jurisdiction: 'US',
-  checkClauses: ['liability', 'termination', 'confidentiality']
-});
-
-// Medical text processing
-const medicalExtract = await codebolt.capability.startTalent('medical-entity-extractor', {
-  text: 'Patient medical record text...',
-  extractEntities: ['diagnoses', 'medications', 'procedures']
+  const medicalAnalysis = await codebolt.capability.startTalent('medical-analyzer', {
+    records: 'patient-data.json'
+  });
 });
 ```
 
-### Common Use Cases
+## More examples
 
-#### Domain-Specific Analysis
+### Execute a Talent
 
 ```typescript
-const analyzeWithTalent = async (talent: string, data: any) => {
-  const result = await codebolt.capability.startTalent(talent, { data });
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.capability.startTalent('code-reviewer', {
+    repository: 'https://github.com/user/repo',
+    branch: 'main'
+  });
 
   if (result.success) {
-    const status = await codebolt.capability.getExecutionStatus(result.executionId);
-    return status.data?.result;
+    console.log('Talent execution started:', result.executionId);
   }
-};
+});
 ```
 
-#### Specialized Processing
+### Specialized Domain Processing
 
 ```typescript
-// Use industry-specific talents
-const legalAnalysis = await codebolt.capability.startTalent('legal-analyzer', {
-  document: 'contract.pdf'
-});
+import codebolt from '@codebolt/codeboltjs';
 
-const medicalAnalysis = await codebolt.capability.startTalent('medical-analyzer', {
-  records: 'patient-data.json'
+codebolt.onReady(async () => {
+  const analysis = await codebolt.capability.startTalent(
+    'financial-analyzer',
+    {
+      data: 'financial-data.json',
+      reportType: 'detailed',
+      includeCharts: true
+    },
+    45000
+  );
+
+  console.log('Financial analysis started:', analysis.executionId);
 });
 ```
 
-### Notes
+### Domain-Specific Workflow
 
-- Talents are specialized for specific domains or industries
-- Often include domain-specific knowledge and rules
-- May require specialized parameters relevant to the domain
-- Typically designed for professional use cases
-- Can be industry-specific (legal, medical, financial, etc.)
-- Use when you need domain expertise built into the capability
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Legal document analysis
+  const legalReview = await codebolt.capability.startTalent('legal-doc-analyzer', {
+    document: 'contract.pdf',
+    jurisdiction: 'US',
+    checkClauses: ['liability', 'termination', 'confidentiality']
+  });
+
+  // Medical text processing
+  const medicalExtract = await codebolt.capability.startTalent('medical-entity-extractor', {
+    text: 'Patient medical record text...',
+    extractEntities: ['diagnoses', 'medications', 'procedures']
+  });
+});
+```

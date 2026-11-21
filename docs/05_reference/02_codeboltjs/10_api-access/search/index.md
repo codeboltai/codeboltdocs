@@ -1,80 +1,34 @@
----
-cbapicategory:
-  - name: init
-    link: /docs/api/apiaccess/search/init
-    description: Initializes the search module with a specified search engine.
-  - name: search
-    link: /docs/api/apiaccess/search/execute
-    description: Performs a search operation for a given query string.
-  - name: get_first_link
-    link: /docs/api/apiaccess/search/get_first_link
-    description: Retrieves the first search result link for a query.
----
+# Search
 
-# Search API
+The legacy search object returns placeholder strings. Use Web Search for real queries.
 
-The Search API provides web search capabilities, allowing you to perform searches using different search engines and retrieve search results programmatically.
+Use the built-in [Web Search](../webSearch/index.md) tool for web results, or [Codebase Search](../codebaseSearch/index.md) for project files.
 
-## Overview
+## Run a web search
 
-The search module enables you to:
-- **Initialize Search**: Configure the search engine to use (default: Bing)
-- **Perform Searches**: Execute search queries and retrieve results
-- **Quick Links**: Get the first search result link directly
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-## Quick Start Example
-
-```js
-// Initialize the search module
-await codebolt.search.init();
-
-// Perform a search
-const results = await codebolt.search.search('TypeScript tutorials');
-console.log('Search results:', results);
-
-// Get the first link
-const firstLink = await codebolt.search.get_first_link('best JavaScript frameworks');
-console.log('First result:', firstLink);
+codebolt.onReady(async () => {
+  const result = await codebolt.tools.execute(
+    'search_web',
+    { query: 'TypeScript handbook', count: 3 },
+    { sourceId: 'codebolt' },
+  );
+  console.log(result.success ? result.result : result.error);
+});
 ```
 
-## Common Use Cases
+## SDK methods
 
-### Web Research
-Automate web research by searching for topics and extracting the most relevant results:
+### init
 
-```js
-async function researchTopic(topic) {
-  await codebolt.search.init();
+[`init`](init.md)
 
-  // Get general search results
-  const results = await codebolt.search.search(topic);
+### search
 
-  // Get top resource
-  const topResource = await codebolt.search.get_first_link(topic);
+[`search`](execute.md)
 
-  return { results, topResource };
-}
-```
+### get_first_link
 
-### Link Discovery
-Find relevant links for specific queries:
-
-```js
-async function findDocumentation(query) {
-  await codebolt.search.init('google');
-  const docsLink = await codebolt.search.get_first_link(`${query} documentation`);
-  return docsLink;
-}
-```
-
-## Response Structure
-
-Search API functions return responses with different structures:
-
-**search() returns:**
-- String containing search results
-
-**get_first_link() returns:**
-- String containing the first search result URL
-
-<CBAPICategory />
+[`get_first_link`](get_first_link.md)

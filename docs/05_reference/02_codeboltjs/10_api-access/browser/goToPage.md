@@ -1,72 +1,53 @@
 ---
 name: goToPage
+description: Navigates to a specified URL.
 cbbaseinfo:
-  description: Navigates the browser to a specific URL.
-cbparameters:
-  parameters:
-    - name: url
-      typeName: string
-      description: "The URL to navigate to (must include protocol like https://)."
-  returns:
-    signatureTypeName: "Promise<GoToPageResponse>"
-    description: A promise that resolves when navigation is initiated with page information.
-    typeArgs: []
+  description: Navigates to a specified URL.
 data:
   name: goToPage
   category: browser
   link: goToPage.md
 ---
+
 # goToPage
 
-```typescript
-codebolt.browser.goToPage(url: string): Promise<GoToPageResponse>
+```text
+codebolt.browser.goToPage(url: string, options?: BrowserOperationOptions): Promise<GoToPageResponse>
 ```
 
-Navigates the browser to a specific URL. 
-### Parameters
+Navigates to a specified URL.
 
-- **`url`** (string): The URL to navigate to (must include protocol like https://).
+## Parameters
 
-### Returns
+- `url` — The URL to navigate to.
+- `options` — Optional browser operation options
 
-- **`Promise<GoToPageResponse>`**: A promise that resolves when navigation is initiated with page information.
+## Returns
 
-### Example
+A promise that resolves when navigation is complete.
+
+## Example
 
 ```js
-// Wait for connection and create a new page
-await codebolt.waitForReady();
-await codebolt.browser.newPage();
+import codebolt from '@codebolt/codeboltjs';
 
-// Navigate to a webpage
-const goToResult = await codebolt.browser.goToPage('https://example.com');
-console.log('✅ Navigated to page:', goToResult);
+codebolt.onReady(async () => {
+  // Wait for connection and create a new page
+  await codebolt.browser.newPage();
 
-// Wait for the page to fully load
-await new Promise(resolve => setTimeout(resolve, 2000));
+  // Navigate to a webpage
+  const goToResult = await codebolt.browser.goToPage('https://example.com');
+  console.log('✅ Navigated to page:', goToResult);
 
-// Verify the navigation was successful
-const currentUrl = await codebolt.browser.getUrl();
-console.log('✅ Current URL after navigation:', currentUrl);
+  // Wait for the page to fully load
+  await new Promise(resolve => setTimeout(resolve, 2000));
 
-// Example with different websites
-await codebolt.browser.goToPage('https://www.google.com');
-await codebolt.browser.goToPage('https://github.com');
+  // Verify the navigation was successful
+  const currentUrl = await codebolt.browser.getUrl();
+  console.log('✅ Current URL after navigation:', currentUrl);
+
+  // Example with different websites
+  await codebolt.browser.goToPage('https://www.google.com');
+  await codebolt.browser.goToPage('https://github.com');
+});
 ```
-
-### Response Structure
-
-The method returns a Promise that resolves to a [`GoToPageResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/GoToPageResponse) object with the following properties:
-
-**Response Properties:**
-- `type`: Always "goToPageResponse"
-- `url`: Optional string containing the URL that was navigated to
-- `success`: Optional boolean indicating if the navigation was successful
-- `message`: Optional string with additional information
-- `error`: Optional string containing error details if the operation failed
-- `messageId`: Optional unique identifier for the message
-- `threadId`: Optional thread identifier
-
-### Explanation
-
-The `codebolt.browser.goToPage(url)` function navigates the browser to a specified URL. This is one of the most fundamental browser automation functions, allowing you to load different web pages programmatically.

@@ -1,91 +1,88 @@
 ---
 name: update
+description: Update a rule engine.
 cbbaseinfo:
-  description: Updates an existing rule engine.
-cbparameters:
-  parameters:
-    - name: id
-      type: string
-      required: true
-      description: The unique identifier of the rule engine.
-    - name: updates
-      type: UpdateContextRuleEngineParams
-      required: true
-      description: "Updated engine configuration (name, description, rules, enabled)."
-  returns:
-    signatureTypeName: "Promise<ContextRuleEngineResponse>"
-    description: A promise that resolves with the updated rule engine.
+  description: Update a rule engine.
 data:
   name: update
   category: contextRuleEngine
   link: update.md
 ---
+
 # update
 
-```typescript
-codebolt.contextRuleEngine.update(id: undefined, updates: undefined): Promise<ContextRuleEngineResponse>
+```text
+codebolt.contextRuleEngine.update(id: string, updates: UpdateContextRuleEngineParams): Promise<ContextRuleEngineResponse>
 ```
 
-Updates an existing rule engine.
-### Parameters
+Update a rule engine
 
-- **`id`** (unknown): The unique identifier of the rule engine.
-- **`updates`** (unknown): Updated engine configuration (name, description, rules, enabled).
+## Parameters
 
-### Returns
+- `id` — Rule engine ID
+- `updates` — Update parameters
 
-- **`Promise<[ContextRuleEngineResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ContextRuleEngineResponse)>`**: A promise that resolves with the updated rule engine.
+## Example
 
-### Examples
-
-#### Example 1: Enable/Disable Engine
 ```javascript
-// Disable engine
-const result1 = await codebolt.contextRuleEngine.update(
-  'engine-id-123',
-  { enabled: false }
-);
+import codebolt from '@codebolt/codeboltjs';
 
-// Enable engine
-const result2 = await codebolt.contextRuleEngine.update(
-  'engine-id-123',
-  { enabled: true }
-);
+codebolt.onReady(async () => {
+  const result = await codebolt.contextRuleEngine.update(
+    'engine-id-123',
+    {
+      description: 'Updated description reflecting new rules'
+    }
+  );
+});
 ```
 
-#### Example 2: Update Rules
+## More examples
+
+### Enable/Disable Engine
+
 ```javascript
-const current = await codebolt.contextRuleEngine.get('engine-id-123');
+import codebolt from '@codebolt/codeboltjs';
 
-const updated = await codebolt.contextRuleEngine.update(
-  'engine-id-123',
-  {
-    rules: [
-      ...current.data.ruleEngine.rules,
-      {
-        name: 'New rule',
-        conditions: [
-          { variable: 'new_var', operator: 'eq', value: 'test' }
-        ],
-        action: 'include',
-        action_config: { memory_ids: ['new_memory'] }
-      }
-    ]
-  }
-);
+codebolt.onReady(async () => {
+  // Disable engine
+  const result1 = await codebolt.contextRuleEngine.update(
+    'engine-id-123',
+    { enabled: false }
+  );
+
+  // Enable engine
+  const result2 = await codebolt.contextRuleEngine.update(
+    'engine-id-123',
+    { enabled: true }
+  );
+});
 ```
 
-#### Example 3: Update Description
+### Update Rules
+
 ```javascript
-const result = await codebolt.contextRuleEngine.update(
-  'engine-id-123',
-  {
-    description: 'Updated description reflecting new rules'
-  }
-);
-```
+import codebolt from '@codebolt/codeboltjs';
 
-### Notes
-- Can update name, description, rules, or enabled status
-- Replaces rules entirely with new rules array
-- Use get() first to preserve existing rules when adding new ones
+codebolt.onReady(async () => {
+  const current = await codebolt.contextRuleEngine.get('engine-id-123');
+
+  if (current.data == null) throw new Error('The response is missing data.');
+  const updated = await codebolt.contextRuleEngine.update(
+    'engine-id-123',
+    {
+      rules: [
+        ...current.data.ruleEngine.rules,
+        {
+          name: 'New rule',
+          conditions: [
+            { variable: 'new_var', operator: 'eq', value: 'test' }
+          ],
+          action: 'include',
+          action_config: { memory_ids: ['new_memory'] }
+        }
+      ]
+    }
+  );
+});
+```

@@ -1,82 +1,61 @@
 ---
 name: listInstances
+description: List all event log instances.
 cbbaseinfo:
-  description: Lists all available event log instances.
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: "Promise<EventLogInstanceListResponse>"
-    description: A promise that resolves with an array of all event log instances.
+  description: List all event log instances.
 data:
   name: listInstances
   category: eventLog
   link: listInstances.md
 ---
+
 # listInstances
 
-```typescript
+```text
 codebolt.eventLog.listInstances(): Promise<EventLogInstanceListResponse>
 ```
 
-Lists all available event log instances.
-### Returns
+List all event log instances
 
-- **`Promise<[EventLogInstanceListResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/EventLogInstanceListResponse)>`**: A promise that resolves with an array of all event log instances.
+## When to use it
 
-### Response Structure
+Discover log instances before selecting one for a query or a reporting view.
 
-```typescript
-{
-  type: 'eventLog.listInstances',
-  success: boolean,
-  data?: {
-    instances: Array<{
-      id: string;
-      name: string;
-      description?: string;
-      createdAt: string;
-      updatedAt: string;
-    }>
-  }
-}
-```
+## Examples
 
-### Examples
+### List All Instances
 
-#### Example 1: List All Instances
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  const result = await codebolt.eventLog.listInstances();
 
-const result = await codebolt.eventLog.listInstances();
-
-if (result.success) {
-  console.log(`Found ${result.data.instances.length} instances`);
-  result.data.instances.forEach(instance => {
-    console.log(`- ${instance.name} (${instance.id})`);
-  });
-}
+  if (result.success) {
+    if (result.data == null) throw new Error('The response is missing data.');
+    console.log(`Found ${result.data.instances.length} instances`);
+    result.data.instances.forEach(instance => {
+      console.log(`- ${instance.name} (${instance.id})`);
+    });
+  }
+});
 ```
 
-#### Example 2: Find Instance by Name
+### Find Instance by Name
+
 ```javascript
-const result = await codebolt.eventLog.listInstances();
+import codebolt from '@codebolt/codeboltjs';
 
-const instance = result.data.instances.find(
-  i => i.name === 'user-activity'
-);
+codebolt.onReady(async () => {
+  const result = await codebolt.eventLog.listInstances();
 
-if (instance) {
-  console.log('Found instance:', instance.id);
-}
+  if (result.data == null) throw new Error('The response is missing data.');
+  const instance = result.data.instances.find(
+    i => i.name === 'user-activity'
+  );
+
+  if (instance) {
+    console.log('Found instance:', instance.id);
+  }
+});
 ```
-
-### Common Use Cases
-**Instance Discovery**: Find available instances.
-**Inventory Management**: Get a complete list for administration.
-**Instance Selection**: Browse instances to choose the right one.
-
-### Notes
-- Returns all instances regardless of size or activity
-- Use getInstance for detailed information about a specific instance

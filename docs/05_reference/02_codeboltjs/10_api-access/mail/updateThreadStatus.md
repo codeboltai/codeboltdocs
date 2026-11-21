@@ -51,16 +51,16 @@ interface IUpdateThreadStatusResponse {
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  const result = await codebolt.mail.updateThreadStatus({
+    threadId: 'thread-123',
+    status: 'closed'
+  });
 
-const result = await codebolt.mail.updateThreadStatus({
-  threadId: 'thread-123',
-  status: 'closed'
+  if (result.success) {
+    console.log('Thread closed');
+  }
 });
-
-if (result.success) {
-  console.log('Thread closed');
-}
 ```
 
 #### Example 2: Archive Completed Thread

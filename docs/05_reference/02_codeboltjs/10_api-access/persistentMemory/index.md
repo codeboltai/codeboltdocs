@@ -1,132 +1,102 @@
----
-cbapicategory:
-  - name: create
-    link: /docs/api/apiaccess/persistentmemory/create
-    description: Creates a new persistent memory configuration.
-  - name: get
-    link: /docs/api/apiaccess/persistentmemory/get
-    description: Gets a persistent memory by ID.
-  - name: list
-    link: /docs/api/apiaccess/persistentmemory/list
-    description: Lists persistent memories with optional filters.
-  - name: update
-    link: /docs/api/apiaccess/persistentmemory/update
-    description: Updates a persistent memory configuration.
-  - name: delete
-    link: /docs/api/apiaccess/persistentmemory/delete
-    description: Deletes a persistent memory.
-  - name: executeRetrieval
-    link: /docs/api/apiaccess/persistentmemory/executeRetrieval
-    description: Executes memory retrieval pipeline.
-  - name: validate
-    link: /docs/api/apiaccess/persistentmemory/validate
-    description: Validates a memory configuration.
-  - name: getStepSpecs
-    link: /docs/api/apiaccess/persistentmemory/getStepSpecs
-    description: Gets available step specifications.
----
-# Persistent Memory API
+# Persistent Memory
 
-The Persistent Memory API provides configurable memory retrieval and storage capabilities, enabling agents to access and utilize persistent knowledge across sessions through customizable pipelines.
+Create and query persistent memory stores.
 
-## Overview
+## Example
 
-The persistent memory module enables you to:
-- **Memory Configurations**: Create configurable memory access patterns
-- **Retrieval Pipelines**: Define how data is retrieved from various sources
-- **Contribution Formats**: Control how data is formatted and returned
-- **Multi-Source**: Access vector databases, KV stores, event logs, and knowledge graphs
-- **Validation**: Test and validate memory configurations before deployment
-
-## Quick Start Example
+### Quick Start Example
 
 ```js
-// Wait for connection
-await codebolt.waitForReady();
+import codebolt from '@codebolt/codeboltjs';
 
-// Create a persistent memory configuration
-const memory = await codebolt.persistentMemory.create({
-    label: 'Code Context Memory',
-    description: 'Retrieves relevant code context for development tasks',
-    inputs_scope: ['codebolt.project', 'codebolt.file'],
-    retrieval: {
-        source_type: 'vectordb',
-        source_id: 'code-vectors',
-        query_template: 'Find relevant code for {context}',
-        limit: 10
-    },
-    contribution: {
-        format: 'markdown',
-        template: '## Relevant Code\n\n{results}',
-        max_tokens: 2000
-    }
+codebolt.onReady(async () => {
+  // Create a persistent memory configuration
+  const memory = await codebolt.persistentMemory.create({
+      label: 'Code Context Memory',
+      description: 'Retrieves relevant code context for development tasks',
+      inputs_scope: ['codebolt.project', 'codebolt.file'],
+      retrieval: {
+          source_type: 'vectordb',
+          source_id: 'code-vectors',
+          query_template: 'Find relevant code for {context}',
+          limit: 10
+      },
+      contribution: {
+          format: 'markdown',
+          template: '## Relevant Code\n\n{results}',
+          max_tokens: 2000
+      }
+  });
+
+  // Execute retrieval with context
+  if (memory.data == null) throw new Error('The response is missing data.');
+  const result = await codebolt.persistentMemory.executeRetrieval(
+      memory.data.memory.id,
+      {
+          query: 'How is authentication implemented?',
+          context: { task: 'code_review' }
+      }
+  );
+
+  if (result.data == null) throw new Error('The response is missing data.');
+  console.log('Retrieved memory:', result.data.result);
 });
-
-// Execute retrieval with context
-const result = await codebolt.persistentMemory.executeRetrieval(
-    memory.data.memory.id,
-    {
-        query: 'How is authentication implemented?',
-        context: { task: 'code_review' }
-    }
-);
-
-console.log('Retrieved memory:', result.data.result);
 ```
 
-## Response Structure
+## SDK methods
 
-All persistent memory API functions return responses with a consistent structure:
+### create
 
-```js
-{
-    type: string,
-    success: boolean,
-    data?: {
-        memory: {
-            id: string,
-            label: string,
-            description?: string,
-            status: 'active' | 'disabled' | 'draft',
-            inputs_scope: string[],
-            retrieval: RetrievalConfig,
-            contribution: ContributionConfig,
-            createdAt: string,
-            updatedAt: string
-        },
-        result?: any
-    },
-    message?: string,
-    error?: string,
-    timestamp: string,
-    requestId: string
-}
+[`create`](create.md) · Create a new persistent memory configuration.
+
+### get
+
+Get a persistent memory by ID.
+
+```text
+codebolt.persistentMemory.get(memoryId: string): Promise<PersistentMemoryResponse>
 ```
 
-## Key Concepts
+### list
 
-### Memory Configuration
-Defines how agents access persistent knowledge through configurable pipelines.
+List persistent memories.
 
-### Retrieval Sources
-- **vectordb**: Vector similarity search
-- **kv**: Key-value store lookup
-- **eventlog**: Event log queries
-- **kg**: Knowledge graph queries
+```text
+codebolt.persistentMemory.list(filters?: ListPersistentMemoryParams): Promise<PersistentMemoryListResponse>
+```
 
-### Input Scope
-Defines which inputs the memory configuration applies to (e.g., specific project types).
+### update
 
-### Contribution Format
-Controls how retrieved data is formatted:
-- **text**: Plain text output
-- **json**: Structured JSON
-- **markdown**: Markdown formatted
+Update a persistent memory.
 
-### Pipeline Execution
-Retrieval is triggered by execution intents with context, keywords, and queries.
+```text
+codebolt.persistentMemory.update(memoryId: string, updates: UpdatePersistentMemoryParams): Promise<PersistentMemoryResponse>
+```
 
-### Validation
-Test configurations before activating to ensure they work correctly.
+### delete
 
-<CBAPICategory />
+Delete a persistent memory.
+
+```text
+codebolt.persistentMemory.delete(memoryId: string): Promise<PersistentMemoryResponse>
+```
+
+### executeRetrieval
+
+[`executeRetrieval`](executeRetrieval.md) · Execute memory retrieval pipeline.
+
+### validate
+
+Validate a memory configuration.
+
+```text
+codebolt.persistentMemory.validate(memory: CreatePersistentMemoryParams): Promise<PersistentMemoryValidateResponse>
+```
+
+### getStepSpecs
+
+Get available step specifications.
+
+```text
+codebolt.persistentMemory.getStepSpecs(): Promise<PersistentMemoryStepSpecsResponse>
+```

@@ -1,92 +1,45 @@
 ---
 name: getInstance
+description: Get an event log instance by ID.
 cbbaseinfo:
-  description: Gets details of a specific event log instance.
-cbparameters:
-  parameters:
-    - name: instanceId
-      type: string
-      required: true
-      description: The unique identifier of the event log instance.
-  returns:
-    signatureTypeName: "Promise<EventLogInstanceResponse>"
-    description: A promise that resolves with the instance details.
+  description: Get an event log instance by ID.
 data:
   name: getInstance
   category: eventLog
   link: getInstance.md
 ---
+
 # getInstance
 
-```typescript
-codebolt.eventLog.getInstance(instanceId: undefined): Promise<EventLogInstanceResponse>
+```text
+codebolt.eventLog.getInstance(instanceId: string): Promise<EventLogInstanceResponse>
 ```
 
-Gets details of a specific event log instance.
-### Parameters
+Get an event log instance by ID
 
-- **`instanceId`** (unknown): The unique identifier of the event log instance.
+## Parameters
 
-### Returns
+- `instanceId` — Instance ID
 
-- **`Promise<[EventLogInstanceResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/EventLogInstanceResponse)>`**: A promise that resolves with the instance details.
+## When to use it
 
-### Response Structure
+Read an instance's metadata before querying or updating it.
 
-```typescript
-{
-  type: 'eventLog.getInstance',
-  success: boolean,
-  data?: {
-    instance: {
-      id: string;
-      name: string;
-      description?: string;
-      createdAt: string;
-      updatedAt: string;
-    }
-  }
-}
-```
+## Example
 
-### Examples
+### Get Instance Details
 
-#### Example 1: Get Instance Details
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  const result = await codebolt.eventLog.getInstance('log-instance-id');
 
-const result = await codebolt.eventLog.getInstance('log-instance-id');
-
-if (result.success) {
-  const { id, name, description, createdAt } = result.data.instance;
-  console.log(`Instance: ${name} (${id})`);
-  console.log(`Created: ${new Date(createdAt).toLocaleString()}`);
-}
-```
-
-#### Example 2: Verify Instance Before Use
-```javascript
-async function safeAppendEvent(instanceId, event) {
-  const checkResult = await codebolt.eventLog.getInstance(instanceId);
-
-  if (!checkResult.success) {
-    throw new Error(`Instance not found: ${instanceId}`);
+  if (result.success) {
+    if (result.data == null) throw new Error('The response is missing data.');
+    const { id, name, description, createdAt } = result.data.instance;
+    console.log(`Instance: ${name} (${id})`);
+    console.log(`Created: ${new Date(createdAt).toLocaleString()}`);
   }
-
-  return await codebolt.eventLog.appendEvent({
-    instanceId,
-    ...event
-  });
-}
+});
 ```
-
-### Common Use Cases
-**Instance Verification**: Check if an instance exists before operations.
-**Metadata Display**: Show instance information in dashboards.
-**Instance Discovery**: Retrieve instance details by ID.
-
-### Notes
-- Returns instance metadata only, not events
-- Use queryEvents to retrieve actual event data

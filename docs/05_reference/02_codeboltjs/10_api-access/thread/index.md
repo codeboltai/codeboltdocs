@@ -1,165 +1,174 @@
----
-cbapicategory:
-  - name: createThread
-    link: /docs/api/apiaccess/thread/createThread
-    description: Creates a new thread with comprehensive options for conversation management.
-  - name: createAndStartThread
-    link: /docs/api/apiaccess/thread/createAndStartThread
-    description: Creates and immediately starts a new thread in one operation.
-  - name: getThreadList
-    link: /docs/api/apiaccess/thread/getThreadList
-    description: Retrieves a list of threads with optional filtering capabilities.
-  - name: getThreadDetail
-    link: /docs/api/apiaccess/thread/getThreadDetail
-    description: Gets detailed information about a specific thread.
-  - name: startThread
-    link: /docs/api/apiaccess/thread/startThread
-    description: Starts an existing thread to begin or resume conversation.
-  - name: updateThread
-    link: /docs/api/apiaccess/thread/updateThread
-    description: Updates properties of an existing thread.
-  - name: deleteThread
-    link: /docs/api/apiaccess/thread/deleteThread
-    description: Permanently deletes a thread and all its associated data.
-  - name: updateThreadStatus
-    link: /docs/api/apiaccess/thread/updateThreadStatus
-    description: "Updates the status of a thread (e.g., active, archived, closed)."
-  - name: getThreadMessages
-    link: /docs/api/apiaccess/thread/getThreadMessages
-    description: Retrieves all messages from a specific thread.
-  - name: getThreadFileChanges
-    link: /docs/api/apiaccess/thread/getThreadFileChanges
-    description: Gets file changes associated with a specific thread.
-  - name: getThreadFileChangesSummary
-    link: /docs/api/apiaccess/thread/getThreadFileChangesSummary
-    description: Gets a summary of file changes for the ChangesSummaryPanel.
+# Thread
 
----
-# Thread API
+Create and start threads, send messages, and retrieve context and file changes.
 
-The Thread API provides comprehensive conversation thread management capabilities, allowing you to create, manage, and track conversation threads throughout their lifecycle.
+## When to use it
 
-## Overview
+Use threads to track separate work. Create and start a new thread when delegating to another agent and use its ID to read progress or changes.
 
-The thread module enables you to:
-- **Create Threads**: Initialize new conversation threads with custom configurations
-- **Manage Lifecycle**: Start, update, and delete threads
-- **Track Status**: Monitor thread status and progress
-- **Access Messages**: Retrieve messages and thread history
-- **File Changes**: Track file modifications associated with threads
+## Example
 
-## Quick Start Example
+### Create a thread and retrieve its details
 
-```typescript
+```ts
+import { randomUUID } from 'node:crypto';
 import codebolt from '@codebolt/codeboltjs';
 
-// Wait for connection
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  const threadId = randomUUID();
+  const options = {
+    threadId,
+    name: 'README review',
+    title: 'README review',
+    description: 'Track feedback on the project overview.',
+  };
+  const created = await codebolt.thread.createThread(options);
+  if (!created.success) throw new Error(created.error ?? 'Thread creation failed.');
 
-// Create a new thread
-const thread = await codebolt.thread.createThread({
-  title: 'Feature Implementation Discussion',
-  description: 'Discussing the new authentication feature',
-  agentId: 'agent-123',
-  metadata: {
-    priority: 'high',
-    project: 'auth-system'
-  }
+  const lookup = { taskId: threadId, id: threadId };
+  const response = await codebolt.thread.getThreadDetail(lookup);
+  console.log(response.thread);
 });
-
-console.log('Thread created:', thread.threadId);
-
-// Start the thread
-await codebolt.thread.startThread(thread.threadId);
-
-// Get thread details
-const details = await codebolt.thread.getThreadDetail({
-  threadId: thread.threadId
-});
-
-console.log('Thread details:', details);
-
-// List all threads
-const threadList = await codebolt.thread.getThreadList({
-  status: 'active',
-  limit: 10
-});
-
-console.log('Active threads:', threadList.threads);
 ```
 
-## Response Structure
+## SDK methods
 
-All thread API functions return responses with a consistent structure:
+### createThread
 
-```typescript
-{
-  threadId: string;
-  title: string;
-  description?: string;
-  status: 'active' | 'archived' | 'closed';
-  createdAt: string;
-  updatedAt: string;
-  metadata?: Record<string, any>;
-  // ... additional fields based on the specific function
-}
+[`createThread`](createThread.md) · Creates a new thread with comprehensive options.
+
+### createAndStartThread
+
+[`createAndStartThread`](createAndStartThread.md) · Creates and immediately starts a new thread.
+
+### createAndStartThreadAndWait
+
+Creates and starts a thread, then waits for completion.
+
+```text
+codebolt.thread.createAndStartThreadAndWait(options: CreateAndStartThreadOptions): Promise<StartThreadResponse>
 ```
 
-## Common Use Cases
+### waitForThreadCompletion
 
-### Creating and Starting a Thread
+Waits for a previously started thread to complete.
 
-```typescript
-// Create a thread for a specific task
-const thread = await codebolt.thread.createThread({
-  title: 'Bug Fix: Login Issue',
-  description: 'Investigating and fixing the login timeout problem',
-  agentId: 'debugger-agent',
-  metadata: {
-    bugId: 'BUG-123',
-    severity: 'critical'
-  }
-});
-
-// Immediately start working on it
-await codebolt.thread.startThread(thread.threadId);
+```text
+codebolt.thread.waitForThreadCompletion(options: { threadId: string; timeoutMs?: number; }): Promise<WaitForThreadCompletionResponse>
 ```
 
-### Monitoring Thread Progress
+### sendMessage
 
-```typescript
-// Get thread messages to track progress
-const messages = await codebolt.thread.getThreadMessages({
-  threadId: thread.threadId,
-  limit: 50
-});
+Sends a message to an existing thread.
 
-messages.messages.forEach(msg => {
-  console.log(`[${msg.timestamp}] ${msg.role}: ${msg.content}`);
-});
-
-// Get file changes made in the thread
-const fileChanges = await codebolt.thread.getThreadFileChanges(thread.threadId);
-console.log('Files modified:', fileChanges.changes);
+```text
+codebolt.thread.sendMessage(options: SendThreadMessageOptions): Promise<SendMessageResponse>
 ```
 
-### Managing Thread Status
+### sendToParent
 
-```typescript
-// Update thread status when work is complete
-await codebolt.thread.updateThreadStatus(
-  thread.threadId,
-  'completed'
-);
+Sends a message from the current agent thread to its parent thread.
 
-// Archive old threads
-await codebolt.thread.updateThreadStatus(
-  oldThreadId,
-  'archived'
-);
-
-// Delete threads that are no longer needed
-await codebolt.thread.deleteThread(threadId);
+```text
+codebolt.thread.sendToParent(options: SendThreadMessageToParentOptions): Promise<SendMessageResponse>
 ```
 
-<CBAPICategory />
+### createThreadInBackground
+
+Creates a thread in the background and resolves when the agent starts or fails.
+
+```text
+codebolt.thread.createThreadInBackground(options: CreateAndStartThreadOptions): Promise<ThreadAgentStartedResponse | ThreadAgentStartFailedResponse>
+```
+
+### getThreadList
+
+[`getThreadList`](getThreadList.md) · Retrieves a list of threads with optional filtering.
+
+### getThreadDetail
+
+[`getThreadDetail`](getThreadDetail.md) · Retrieves detailed information about a specific thread.
+
+### getThreadCoordination
+
+Retrieves the recursive child-thread and agent-execution coordination tree for a thread.
+
+```text
+codebolt.thread.getThreadCoordination(options: GetThreadCoordinationOptions): Promise<GetThreadCoordinationResponse>
+```
+
+### startThread
+
+[`startThread`](startThread.md) · Starts a thread.
+
+### updateThread
+
+[`updateThread`](updateThread.md) · Updates an existing thread.
+
+### deleteThread
+
+[`deleteThread`](deleteThread.md) · Deletes a thread.
+
+### updateThreadStatus
+
+[`updateThreadStatus`](updateThreadStatus.md) · Updates the status of a thread.
+
+### getThreadMessages
+
+[`getThreadMessages`](getThreadMessages.md) · Retrieves messages for a specific thread.
+
+### getThreadRawConversations
+
+```text
+codebolt.thread.getThreadRawConversations(options: GetThreadRawConversationsOptions): Promise<GetThreadRawConversationsResponse>
+```
+
+### getThreadContext
+
+```text
+codebolt.thread.getThreadContext(options: GetThreadContextOptions): Promise<GetThreadContextResponse>
+```
+
+### getThreadContextCompacted
+
+```text
+codebolt.thread.getThreadContextCompacted(options: GetThreadContextCompactedOptions): Promise<GetThreadContextCompactedResponse>
+```
+
+### getThreadContextSummary
+
+```text
+codebolt.thread.getThreadContextSummary(options: GetThreadContextSummaryOptions): Promise<GetThreadContextSummaryResponse>
+```
+
+### addThreadContext
+
+```text
+codebolt.thread.addThreadContext(options: AddThreadContextOptions): Promise<AddThreadContextResponse>
+```
+
+### saveThreadContext
+
+```text
+codebolt.thread.saveThreadContext(options?: SaveThreadContextOptions): Promise<SaveThreadContextResponse>
+```
+
+### forkContext
+
+```text
+codebolt.thread.forkContext(): Promise<ForkContextResponse>
+```
+
+### getSavedThreadContext
+
+```text
+codebolt.thread.getSavedThreadContext(options: GetSavedThreadContextOptions): Promise<GetSavedThreadContextResponse>
+```
+
+### getThreadFileChanges
+
+[`getThreadFileChanges`](getThreadFileChanges.md) · Retrieves file changes associated with a specific thread.
+
+### getThreadFileChangesSummary
+
+[`getThreadFileChangesSummary`](getThreadFileChangesSummary.md) · Retrieves file changes summary for ChangesSummaryPanel.

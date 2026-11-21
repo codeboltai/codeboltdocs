@@ -1,110 +1,55 @@
+---
+name: getAllPlans
+description: Get all execution plans.
+cbbaseinfo:
+  description: Get all execution plans.
+---
+
 # getAllPlans
 
-Retrieves all action plans in the system.
-
-## Syntax
-
-```javascript
-codebolt.actionPlan.getAllPlans()
+```text
+codebolt.executionPlan.getAllPlans(): Promise<any>
 ```
 
-## Parameters
-
-None
+Get all execution plans
 
 ## Returns
 
-`Promise<Object>` - A promise that resolves with all action plans.
+Promise with all execution plans
 
-### Response Object
+## When to use it
 
-```typescript
-{
-  success: boolean;
-  plans: Array<{
-    planId: string;
-    name: string;
-    description: string;
-    agentId?: string;
-    agentName?: string;
-    status: string;
-    createdAt: Date;
-    updatedAt: Date;
-    tasks: Array<Task>;
-  }>;
-  error?: string;
-}
-```
+Use the returned plans to populate a selection list or choose an existing plan before requesting its details.
 
-## Example
+## Examples
+
+### Syntax
 
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-async function listAllPlans() {
+codebolt.onReady(() => {
+  codebolt.executionPlan.getAllPlans()
+});
+```
+
+### Error Handling
+
+```javascript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
   try {
-    const response = await codebolt.actionPlan.getAllPlans();
-    
-    if (response.success) {
-      console.log(`Found ${response.plans.length} plans`);
-      
-      response.plans.forEach(plan => {
-        console.log(`- ${plan.name}: ${plan.tasks.length} tasks`);
-      });
+    const response = await codebolt.executionPlan.getAllPlans();
+
+    if (!response.success) {
+      console.error('Failed to fetch plans:', response.error);
+      return;
     }
+
+    // Process plans
   } catch (error) {
-    console.error('Error fetching plans:', error);
+    console.error('Network or system error:', error);
   }
-}
+});
 ```
-
-## Use Cases
-
-### Filter Active Plans
-
-```javascript
-const response = await codebolt.actionPlan.getAllPlans();
-const activePlans = response.plans.filter(plan => plan.status === 'active');
-console.log(`Active plans: ${activePlans.length}`);
-```
-
-### Find Plans by Agent
-
-```javascript
-const response = await codebolt.actionPlan.getAllPlans();
-const agentPlans = response.plans.filter(plan => plan.agentId === 'my-agent-id');
-console.log(`Plans for agent: ${agentPlans.length}`);
-```
-
-### Sort Plans by Date
-
-```javascript
-const response = await codebolt.actionPlan.getAllPlans();
-const sortedPlans = response.plans.sort((a, b) => 
-  new Date(b.createdAt) - new Date(a.createdAt)
-);
-console.log('Most recent plan:', sortedPlans[0].name);
-```
-
-## Error Handling
-
-```javascript
-try {
-  const response = await codebolt.actionPlan.getAllPlans();
-  
-  if (!response.success) {
-    console.error('Failed to fetch plans:', response.error);
-    return;
-  }
-  
-  // Process plans
-} catch (error) {
-  console.error('Network or system error:', error);
-}
-```
-
-## Related Methods
-
-- [getPlanDetail](/docs/reference/codeboltjs/api-access/actionPlan/getPlanDetail) - Get details of a specific plan
-- [createActionPlan](/docs/reference/codeboltjs/api-access/actionPlan/createActionPlan) - Create a new plan
-- [updateActionPlan](/docs/reference/codeboltjs/api-access/actionPlan/updateActionPlan) - Update an existing plan

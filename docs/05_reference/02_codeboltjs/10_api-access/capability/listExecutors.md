@@ -1,104 +1,39 @@
 ---
 name: listExecutors
+description: List all available capability executors.
 cbbaseinfo:
-  description: Lists all available capability executors that can run capabilities. Executors are the runtime environments for capabilities.
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: "Promise<ListExecutorsResponse>"
-    description: A promise that resolves to a list of available executors.
-    typeArgs: []
+  description: List all available capability executors.
 data:
   name: listExecutors
   category: capability
   link: listExecutors.md
 ---
+
 # listExecutors
 
-```typescript
+```text
 codebolt.capability.listExecutors(): Promise<ListExecutorsResponse>
 ```
 
-Lists all available capability executors that can run capabilities. Executors are the runtime environments for capabilities.
-### Returns
+List all available capability executors
 
-- **`Promise<[ListExecutorsResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListExecutorsResponse)>`**: A promise that resolves to a list of available executors.
+## Returns
 
-### Response Structure
+Promise resolving to list of executors
 
-Returns a [`ListExecutorsResponse`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/ListExecutorsResponse) with array of executor objects.
+Requirements: 9.3
 
-**Response Properties:**
-- `type` (string): Always "listExecutorsResponse"
-- `success` (boolean): Operation success status
-- `executors` (CapabilityExecutor[]): Array of executors
-  - `id` (string): Executor identifier
-  - `name` (string): Executor name
-  - `type` (string): Executor type (docker, wasm, node, etc.)
-  - `status` (string): Executor status (active, inactive, etc.)
-  - `capabilities` (string[]): Supported capability types
-  - `resources` (object, optional): Resource limits and availability
-- `error` (string, optional): Error details if failed
+## When to use it
 
-### Examples
+Discover executor entries before showing a runtime choice. Executor availability depends on what this project can access.
 
-#### List All Executors
+## Example
 
-```typescript
-const result = await codebolt.capability.listExecutors();
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-if (result.success) {
-  console.log('Available executors:', result.executors);
-  result.executors.forEach(exec => {
-    console.log(`- ${exec.name} (${exec.type}): ${exec.status}`);
-  });
-}
-```
-
-#### Find Active Executors
-
-```typescript
-const executors = await codebolt.capability.listExecutors();
-const active = executors.executors.filter(e => e.status === 'active');
-console.log('Active executors:', active);
-```
-
-#### Check Executor Capabilities
-
-```typescript
-const executors = await codebolt.capability.listExecutors();
-const nodeExecutor = executors.executors.find(e => e.type === 'node');
-console.log('Node executor capabilities:', nodeExecutor?.capabilities);
-```
-
-### Common Use Cases
-
-#### Executor Discovery
-
-```typescript
-const findExecutor = async (type: string) => {
+codebolt.onReady(async () => {
   const result = await codebolt.capability.listExecutors();
-  return result.executors.find(e => e.type === type);
-};
+  console.log(result);
+});
 ```
-
-#### Resource Planning
-
-```typescript
-const checkExecutorResources = async () => {
-  const executors = await codebolt.capability.listExecutors();
-  return executors.executors.map(e => ({
-    name: e.name,
-    resources: e.resources,
-    available: e.status === 'active'
-  }));
-};
-```
-
-### Notes
-
-- Executors manage runtime environments
-- Different capabilities may require different executors
-- Executor status can change dynamically
-- Use to understand available runtime options
-- Consider executor capabilities when starting executions

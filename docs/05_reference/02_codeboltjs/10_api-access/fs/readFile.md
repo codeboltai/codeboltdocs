@@ -1,128 +1,135 @@
 ---
 name: readFile
-cbbaseinfo:
-  description: Reads the content of a file from the specified path. Returns the file content along with metadata about the read operation.
-cbparameters:
-  parameters:
-    - name: filePath
-      typeName: string
-      description: "The path of the file to read. Can be absolute (e.g., '/home/user/file.txt') or relative (e.g., './file.txt')."
-  returns:
-    signatureTypeName: "Promise<ReadFileResponse>"
-    description: A promise that resolves with a `ReadFileResponse` object containing the file content and read operation metadata.
 data:
   name: readFile
   category: fs
   link: readFile.md
 ---
+
 # readFile
 
-```typescript
-codebolt.fs.readFile(filePath: string): Promise<ReadFileResponse>
+```text
+codebolt.fs.readFile(filePath: string, options?: ReadFileOptions): Promise<ReadFileResponse>
 ```
 
-Reads the content of a file from the specified path. Returns the file content along with metadata about the read operation. 
-### Parameters
+Reads a file from the active workspace. `offset` is the starting line (line 1 by default, with 0 also selecting the first line). Set `limit` to cap the number of lines and `lineNumbers` to include line numbers in the returned text. `maxTokens` and `maxSizeBytes` control read limits.
 
-- **`filePath`** (string): The path of the file to read. Can be absolute (e.g., '/home/user/file.txt') or relative (e.g., './file.txt').
+Text is returned in `content`. For an image, inspect `mediaType` and `image`. The service can return `unchanged: true` on a repeated read. Set `bypassUnchanged: true` to request the content again.
 
-### Returns
+## When to use it
 
-- **`Promise<ReadFileResponse>`**: A promise that resolves with a [`ReadFileResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/ReadFileResponse) object containing the file content and read operation metadata.
+Read a configuration or source file before making an edit. Use line ranges for large files, and request the content again when an unchanged response would not be useful.
 
-### Response Structure
+## Example
 
-The method returns a Promise that resolves to a [`ReadFileResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/ReadFileResponse) object with the following properties:
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-- **`type`** (string): Always "readFileResponse".
-- **`content`** (string, optional): The content of the file that was read.
-- **`path`** (string, optional): The path of the file that was read.
-- **`encoding`** (string, optional): The encoding used to read the file (e.g., 'utf8').
-- **`success`** (boolean, optional): Indicates if the operation was successful.
-- **`message`** (string, optional): A message with additional information about the operation.
-- **`error`** (string, optional): Error details if the operation failed.
-- **`messageId`** (string, optional): A unique identifier for the message.
-- **`threadId`** (string, optional): The thread identifier.
+codebolt.onReady(async () => {
+  const result = await codebolt.fs.readFile('README.md', { offset: 0, limit: 30 });
+  if (result.success && typeof result.content === 'string') {
+    console.log(result.content);
+  }
+});
+```
 
-### Examples
+## More examples
 
 ```javascript
-// Example 1: Read a text file
-const result = await codebolt.fs.readFile('./example.txt');
-console.log("Response type:", result.type); // "readFileResponse"
-console.log("File content:", result.content); // The actual file content
-console.log("File path:", result.path); // "./example.txt"
-console.log("Encoding:", result.encoding); // "utf8" (typically)
+import codebolt from '@codebolt/codeboltjs';
 
-// Example 2: Read a configuration file
-const configResult = await codebolt.fs.readFile('./package.json');
-if (configResult.success && configResult.content) {
-    const config = JSON.parse(configResult.content);
-    console.log("Package name:", config.name);
-    console.log("Version:", config.version);
-}
-
-// Example 3: Read a source code file
-const codeResult = await codebolt.fs.readFile('./src/index.js');
-console.log("JavaScript code content:", codeResult.content);
-console.log("File size:", codeResult.content?.length, "characters");
-
-// Example 4: Error handling
-try {
-    const fileResult = await codebolt.fs.readFile('./non-existent-file.txt');
-    
-    if (fileResult.success && fileResult.content) {
-        console.log('✅ File read successfully');
-        console.log('Content length:', fileResult.content.length);
-        console.log('File path:', fileResult.path);
-    } else {
-        console.error('❌ File read failed:', fileResult.error);
-    }
-} catch (error) {
-    console.error('Error reading file:', error);
-}
-
-// Example 5: Read multiple files
-const filesToRead = [
-    './README.md',
-    './package.json',
-    './src/index.js',
-    './docs/api.md'
-];
-
-for (const filePath of filesToRead) {
-    const result = await codebolt.fs.readFile(filePath);
-    if (result.success && result.content) {
-        console.log(`${filePath}: ${result.content.length} characters`);
-    } else {
-        console.log(`${filePath}: failed to read`);
-    }
-}
-
-// Example 6: Process file content
-const markdownResult = await codebolt.fs.readFile('./README.md');
-if (markdownResult.content) {
-    const lines = markdownResult.content.split('\n');
-    const headings = lines.filter(line => line.startsWith('#'));
-    console.log("Markdown headings found:", headings);
-}
+codebolt.onReady(async () => {
+  // Example 2: Read a configuration file
+  const configResult = await codebolt.fs.readFile('./package.json');
+  if (configResult.success && configResult.content) {
+      const config = JSON.parse(configResult.content);
+      console.log("Package name:", config.name);
+      console.log("Version:", config.version);
+  }
+});
 ```
 
-### Common Use Cases
+```javascript
+import codebolt from '@codebolt/codeboltjs';
 
-- **Configuration Reading**: Read config files, environment files, and settings
-- **Source Code Analysis**: Read and analyze source code files
-- **Documentation Processing**: Read README files, documentation, and guides
-- **Data Import**: Read JSON, CSV, XML, and other data files
-- **Template Processing**: Read template files for code generation
+codebolt.onReady(async () => {
+  // Example 3: Read a source code file
+  const codeResult = await codebolt.fs.readFile('./src/index.js');
+  console.log("JavaScript code content:", codeResult.content);
+  console.log("File size:", codeResult.content?.length, "characters");
+});
+```
 
-### Notes
+```javascript
+import codebolt from '@codebolt/codeboltjs';
 
-- The function reads the entire file content into memory as a string.
-- The `content` property contains the actual file content if the read operation was successful.
-- The `path` property confirms which file was read.
-- The `encoding` property indicates how the file was decoded (usually 'utf8' for text files).
-- For binary files, the content may not be readable as text.
-- If the file doesn't exist or cannot be read, the `error` property will contain details.
-- Use error handling to gracefully handle cases where files don't exist or are inaccessible.
-- Large files may take longer to read and consume more memory.
+codebolt.onReady(async () => {
+  // Example 4: Error handling
+  try {
+      const fileResult = await codebolt.fs.readFile('./non-existent-file.txt');
+
+      if (fileResult.success && fileResult.content) {
+          console.log('✅ File read successfully');
+          console.log('Content length:', fileResult.content.length);
+          console.log('File path:', fileResult.path);
+      } else {
+          console.error('❌ File read failed:', fileResult.error);
+      }
+  } catch (error) {
+      console.error('Error reading file:', error);
+  }
+});
+```
+
+```javascript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Example 5: Read multiple files
+  const filesToRead = [
+      './README.md',
+      './package.json',
+      './src/index.js',
+      './docs/api.md'
+  ];
+
+  for (const filePath of filesToRead) {
+      const result = await codebolt.fs.readFile(filePath);
+      if (result.success && result.content) {
+          console.log(`${filePath}: ${result.content.length} characters`);
+      } else {
+          console.log(`${filePath}: failed to read`);
+      }
+  }
+});
+```
+
+```javascript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Example 6: Process file content
+  const markdownResult = await codebolt.fs.readFile('./README.md');
+  if (markdownResult.content) {
+      const lines = markdownResult.content.split('\n');
+      const headings = lines.filter(line => line.startsWith('#'));
+      console.log("Markdown headings found:", headings);
+  }
+});
+```
+
+## Read the first lines of a configuration file
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.fs.readFile('package.json', {
+    offset: 1,
+    limit: 20,
+    lineNumbers: true,
+    bypassUnchanged: true,
+  });
+  if (result.success && typeof result.content === 'string') console.log(result.content);
+});
+```

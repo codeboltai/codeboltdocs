@@ -1,52 +1,38 @@
 ---
 name: getKarmaHistory
+description: Get the karma history of an agent.
 cbbaseinfo:
-  description: Retrieves the karma history of an agent, showing all karma changes over time.
-cbparameters:
-  parameters:
-    - name: agentId
-      typeName: string
-      description: The ID of the agent.
-    - name: limit
-      typeName: number
-      description: Maximum number of entries to return.
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<GetKarmaHistoryResponse>"
-    description: A promise that resolves to the karma history.
-    typeArgs: []
+  description: Get the karma history of an agent.
 data:
   name: getKarmaHistory
   category: agentPortfolio
   link: getKarmaHistory.md
 ---
+
 # getKarmaHistory
 
-```typescript
-codebolt.agentPortfolio.getKarmaHistory(agentId: string, limit: number): Promise<GetKarmaHistoryResponse>
+```text
+codebolt.agentPortfolio.getKarmaHistory(agentId: string, limit?: number): Promise<GetKarmaHistoryResponse>
 ```
 
-Retrieves the karma history of an agent, showing all karma changes over time.
-### Parameters
+Get the karma history of an agent
 
-- **`agentId`** (string): The ID of the agent.
-- **`limit`** (number, optional): Maximum number of entries to return.
+## Parameters
 
-### Returns
+- `agentId` — The ID of the agent
+- `limit` — Maximum number of entries to return
 
-- **`Promise<[GetKarmaHistoryResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/GetKarmaHistoryResponse)>`**: A promise that resolves to the karma history.
+## Returns
 
-### Examples
+Promise resolving to the karma history
 
-```typescript
-const history = await codebolt.agentPortfolio.getKarmaHistory('agent-123', 50);
-history.data?.changes.forEach(change => {
-  console.log(`${change.amount}: ${change.reason} (${change.createdAt})`);
+## Example
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.agentPortfolio.getKarmaHistory('agent-123', 50);
+  console.log(result);
 });
 ```
-
-### Notes
-
-- Shows chronological history of karma changes
-- Useful for tracking reputation trends
-- Both positive and negative changes are shown

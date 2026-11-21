@@ -1,87 +1,58 @@
 ---
 name: scroll
+description: Scrolls the current page in a specified direction by a specified number of pixels.
 cbbaseinfo:
-  description: >-
-    Scrolls the current page in a specified direction by a specified number of
-    pixels.
-cbparameters:
-  parameters:
-    - name: direction
-      typeName: string
-      description: "The direction to scroll (e.g., 'down', 'up', 'left', 'right')."
-    - name: pixels
-      typeName: string
-      description: The number of pixels to scroll.
-  returns:
-    signatureTypeName: "Promise<BrowserActionResponseData>"
-    description: A promise that resolves when the scroll action is complete.
-    typeArgs: []
+  description: Scrolls the current page in a specified direction by a specified number of pixels.
 data:
   name: scroll
   category: browser
   link: scroll.md
 ---
+
 # scroll
 
-```typescript
-codebolt.browser.scroll(direction: string, pixels: string): Promise<BrowserActionResponseData>
+```text
+codebolt.browser.scroll(direction: string, pixels: string, options?: BrowserOperationOptions): Promise<BrowserActionResponseData>
 ```
 
-Scrolls the current page in a specified direction by a specified number of pixels. 
- ### Parameters
+Scrolls the current page in a specified direction by a specified number of pixels.
 
-- **`direction`** (string): The direction to scroll (e.g., 'down', 'up', 'left', 'right').
-- **`pixels`** (string): The number of pixels to scroll.
+## Parameters
 
-### Returns
+- `direction` — The direction to scroll.
+- `pixels` — The number of pixels to scroll.
+- `options` — Optional browser operation options
 
-- **`Promise<BrowserActionResponseData>`**: A promise that resolves when the scroll action is complete.
+## Returns
 
-### Response Structure
+A promise that resolves when the scroll action is complete.
 
-The method returns a Promise that resolves to a [`BrowserActionResponseData`](/docs/reference/codeboltjs/type-reference/types/interfaces/BrowserActionResponseData) object with the following properties:
-
-- **`type`** (string): Always "scrollResponse".
-- **`payload`** (object, optional): Contains the response data including:
-  - **`action`** (string, optional): The action that was performed
-  - **`success`** (boolean, optional): Indicates if the scroll was successful
-  - **`content`** (string, optional): Additional content information
-  - **`viewport`** (object, optional): Updated viewport information after scrolling
-- **`eventId`** (string, optional): Event identifier for the scroll action
-- **`success`** (boolean, optional): Indicates if the operation was successful
-- **`message`** (string, optional): A message with additional information
-- **`error`** (string, optional): Error details if the operation failed
-- **`messageId`** (string, optional): A unique identifier for the message
-- **`threadId`** (string, optional): The thread identifier
-
-### Example
+## Example
 
 ```js
-// Navigate to a page with scrollable content
-await codebolt.browser.goToPage("https://example.com");
+import codebolt from '@codebolt/codeboltjs';
 
-// Wait for page to load
-await new Promise(resolve => setTimeout(resolve, 2000));
+codebolt.onReady(async () => {
+  // Navigate to a page with scrollable content
+  await codebolt.browser.goToPage("https://example.com");
 
-// Scroll down the page by 100 pixels
-const scrollResult = await codebolt.browser.scroll("down", "100");
-console.log('✅ Scrolled:', scrollResult);
+  // Wait for page to load
+  await new Promise(resolve => setTimeout(resolve, 2000));
 
-// Check if the scroll was successful
-if (scrollResult.success) {
-  console.log('Page scrolled successfully');
-} else {
-  console.error('Scroll failed:', scrollResult.error);
-}
+  // Scroll down the page by 100 pixels
+  const scrollResult = await codebolt.browser.scroll("down", "100");
+  console.log('✅ Scrolled:', scrollResult);
 
-// You can also scroll in other directions
-await codebolt.browser.scroll("up", "50");
-await codebolt.browser.scroll("left", "100");
-await codebolt.browser.scroll("right", "100");
+  // Check if the scroll was successful
+  if (scrollResult.success) {
+    console.log('Page scrolled successfully');
+  } else {
+    console.error('Scroll failed:', scrollResult.error);
+  }
+
+  // You can also scroll in other directions
+  await codebolt.browser.scroll("up", "50");
+  await codebolt.browser.scroll("left", "100");
+  await codebolt.browser.scroll("right", "100");
+});
 ```
-
-### Notes
-
-- The `direction` parameter accepts values: "up", "down", "left", "right"
-- The `pixels` parameter should be a string representing the number of pixels to scroll
-- The viewport information in the response reflects the new scroll position

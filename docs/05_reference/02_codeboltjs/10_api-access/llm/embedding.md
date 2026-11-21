@@ -1,25 +1,14 @@
-# Embedding 
+# Embeddings
 
-> **Note**: The embedding API is currently not available in the CodeboltJS.
+`codebolt.llm` exposes [inference](./inference.md) and model configuration. The SDK does not expose an embeddings method on this module. Use [getVector](../vectordb/getVector.md) to generate an embedding with the configured embedding model.
 
-### Planned Embedding API
+## Generate an embedding
 
-The embedding API will allow you to create vector embeddings from text input for use in semantic search, similarity matching, and other AI applications.
-
-```javascript
-// This API is not yet implemented
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-async function main() {
-  // Planned API structure (not currently available)
-  const embedding = await codebolt.llm.embeddings.create({
-    input: "Your text string goes here",
-    encoding_format: "float",
-  });
-
-  console.log(embedding);
-}
+codebolt.onReady(async () => {
+  const result = await codebolt.vectordb.getVector('A short summary to embed.');
+  if (result.success) console.log(result.vector?.length);
+});
 ```
-
-### Status 
-comming soon....

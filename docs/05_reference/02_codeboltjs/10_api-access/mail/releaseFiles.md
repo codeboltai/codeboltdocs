@@ -1,63 +1,38 @@
 ---
 name: releaseFiles
+description: Releases file reservations after collaborative work is complete.
 cbbaseinfo:
   description: Releases file reservations after collaborative work is complete.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: IReleaseFilesParams
-      description: Parameters including agentId and files array to release.
-  returns:
-    signatureTypeName: "Promise<IReleaseFilesResponse>"
-    description: A promise that resolves when files are released.
 data:
   name: releaseFiles
   category: mail
   link: releaseFiles.md
 ---
+
 # releaseFiles
 
-```typescript
+```text
 codebolt.mail.releaseFiles(params: IReleaseFilesParams): Promise<IReleaseFilesResponse>
 ```
 
 Releases file reservations after collaborative work is complete.
-### Parameters
 
-- **`params`** (IReleaseFilesParams): Parameters including agentId and files array to release.
+## When to use it
 
-### Returns
+Release reservations on paths you have finished editing so another agent can claim them.
 
-- **`Promise<IReleaseFilesResponse>`**: A promise that resolves when files are released.
+## Example
 
-### Examples
+### Release a file reservation
 
-#### Example 1: Release Files
-
-```typescript
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.mail.releaseFiles({
-  agentId: 'agent-001',
-  files: ['src/auth/login.ts', 'src/auth/session.ts']
+codebolt.onReady(async () => {
+  const result = await codebolt.mail.releaseFiles({
+    agentId: 'docs-reviewer-id',
+    paths: ['README.md'],
+  });
+  console.log('Released', result.released);
 });
-
-if (result.success) {
-  console.log('Files released successfully');
-  console.log('Other agents can now edit these files');
-}
 ```
-
-### Common Use Cases
-
-- **Task Completion**: Release files after finishing work
-- **Handoff**: Transfer file access to other agents
-- **Cleanup**: Remove reservations when no longer needed
-
-### Notes
-
-- Must be called by the agent that reserved the files
-- Frees files for other agents to reserve
-- Important for workflow continuation

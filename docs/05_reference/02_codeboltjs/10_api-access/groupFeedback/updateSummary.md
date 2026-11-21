@@ -37,11 +37,10 @@ Updates the summary of a feedback session, consolidating key points and action i
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.groupFeedback.updateSummary({
-  feedbackId: 'feedback-123',
-  summary: `Key Points:
+codebolt.onReady(async () => {
+  const result = await codebolt.groupFeedback.updateSummary({
+    feedbackId: 'feedback-123',
+    summary: `Key Points:
 - Code structure is well-organized
 - Security concerns addressed
 - Performance improvements suggested
@@ -50,9 +49,10 @@ Action Items:
 1. Add rate limiting (assigned to John)
 2. Implement caching (assigned to Sarah)
 3. Add unit tests (assigned to Mike)`
-});
+  });
 
-console.log('Summary updated');
+  console.log('Summary updated');
+});
 ```
 
 ### Common Use Cases

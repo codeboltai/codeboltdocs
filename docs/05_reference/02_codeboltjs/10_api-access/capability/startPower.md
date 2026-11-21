@@ -1,151 +1,109 @@
 ---
 name: startPower
+description: Start a power execution.
 cbbaseinfo:
-  description: Starts execution of a power with optional parameters and timeout settings. Powers are advanced capabilities with enhanced functionality.
-cbparameters:
-  parameters:
-    - name: powerName
-      typeName: string
-      description: The name of the power to execute.
-    - name: params
-      typeName: "Record<string, any>"
-      description: Optional parameters to pass to the power execution.
-      isOptional: true
-    - name: timeout
-      typeName: number
-      description: "Optional execution timeout in milliseconds. If not provided, uses the power's default timeout."
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<StartCapabilityResponse>"
-    description: A promise that resolves to the execution response containing the execution ID and initial status.
-    typeArgs: []
+  description: Start a power execution.
 data:
   name: startPower
   category: capability
   link: startPower.md
 ---
+
 # startPower
 
-```typescript
-codebolt.capability.startPower(powerName: string, params: Record<string, any>, timeout: number): Promise<StartCapabilityResponse>
+```text
+codebolt.capability.startPower(powerName: string, params?: Record<string, any>, timeout?: number): Promise<StartCapabilityResponse>
 ```
 
-Starts execution of a power with optional parameters and timeout settings. Powers are advanced capabilities with enhanced functionality.
-### Parameters
+Start a power execution
 
-- **`powerName`** (string): The name of the power to execute.
-- **`params`** (`Record<string, any>`, optional): Optional parameters to pass to the power execution.
-- **`timeout`** (number, optional): Optional execution timeout in milliseconds. If not provided, uses the power's default timeout.
+## Parameters
 
-### Returns
+- `powerName` — Name of the power to execute
+- `params` — Optional parameters to pass to the power
+- `timeout` — Optional execution timeout in milliseconds
 
-- **`Promise<[StartCapabilityResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/StartCapabilityResponse)>`**: A promise that resolves to the execution response containing the execution ID and initial status.
+## Returns
 
-### Response Structure
+Promise resolving to execution ID
 
-The method returns a Promise that resolves to a [`StartCapabilityResponse`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/StartCapabilityResponse) object.
+Requirements: 9.4
 
-**Response Properties:**
-- `type` (string): Always "startCapabilityResponse"
-- `success` (boolean): Indicates if the execution started successfully
-- `executionId` (string, optional): Unique identifier for the execution instance
-- `status` (string, optional): Initial execution status
-- `result` (any, optional): Immediate result if execution completed synchronously
-- `error` (string, optional): Error details if the operation failed
+## When to use it
 
-### Examples
+Start a known power after looking up its input definition. The operations it performs depend on the selected power.
 
-#### Example 1: Execute a Power
+## Example
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-const result = await codebolt.capability.startPower('advanced-processor', {
-  input: 'large-dataset.csv',
-  mode: 'distributed'
-});
+codebolt.onReady(async () => {
+  const processBigData = async (source: string) => {
+    const result = await codebolt.capability.startPower('distributed-processor', {
+      source,
+      nodes: 4,
+      memory: '8GB'
+    });
 
-if (result.success) {
-  console.log('Power execution started:', result.executionId);
-}
+    return result;
+  };
+});
 ```
 
-#### Example 2: Long-Running Power with Timeout
+## More examples
+
+### Execute a Power
 
 ```typescript
-const execution = await codebolt.capability.startPower(
-  'ml-model-trainer',
-  {
-    dataset: 'training-data.csv',
-    algorithm: 'neural-network',
-    epochs: 100
-  },
-  600000 // 10 minutes
-);
+import codebolt from '@codebolt/codeboltjs';
 
-console.log('Training started:', execution.executionId);
-```
+codebolt.onReady(async () => {
+  const result = await codebolt.capability.startPower('advanced-processor', {
+    input: 'large-dataset.csv',
+    mode: 'distributed'
+  });
 
-#### Example 3: Monitor Power Execution
-
-```typescript
-const startPower = await codebolt.capability.startPower('data-miner', {
-  source: 'database',
-  depth: 5
-});
-
-// Monitor progress
-while (true) {
-  const status = await codebolt.capability.getExecutionStatus(startPower.executionId);
-
-  console.log('Progress:', status.data?.progress, 'Status:', status.data?.status);
-
-  if (status.data?.status === 'completed') {
-    console.log('Result:', status.data?.result);
-    break;
-  } else if (status.data?.status === 'failed') {
-    console.error('Failed:', status.data?.error);
-    break;
+  if (result.success) {
+    console.log('Power execution started:', result.executionId);
   }
-
-  await new Promise(resolve => setTimeout(resolve, 5000));
-}
+});
 ```
 
-### Common Use Cases
-
-#### Machine Learning Operations
+### Long-Running Power with Timeout
 
 ```typescript
-const trainModel = async (data: string) => {
-  const training = await codebolt.capability.startPower('ml-trainer', {
-    dataset: data,
-    modelType: 'classification',
-    validationSplit: 0.2
-  });
+import codebolt from '@codebolt/codeboltjs';
 
-  return training.executionId;
-};
+codebolt.onReady(async () => {
+  const execution = await codebolt.capability.startPower(
+    'ml-model-trainer',
+    {
+      dataset: 'training-data.csv',
+      algorithm: 'neural-network',
+      epochs: 100
+    },
+    600000 // 10 minutes
+  );
+
+  console.log('Training started:', execution.executionId);
+});
 ```
 
-#### Advanced Data Processing
+### Machine Learning Operations
 
 ```typescript
-const processBigData = async (source: string) => {
-  const result = await codebolt.capability.startPower('distributed-processor', {
-    source,
-    nodes: 4,
-    memory: '8GB'
-  });
+import codebolt from '@codebolt/codeboltjs';
 
-  return result;
-};
+codebolt.onReady(async () => {
+  const trainModel = async (data: string) => {
+    const training = await codebolt.capability.startPower('ml-trainer', {
+      dataset: data,
+      modelType: 'classification',
+      validationSplit: 0.2
+    });
+
+    return training.executionId;
+  };
+});
 ```
-
-### Notes
-
-- Powers are more resource-intensive than skills
-- Typically require longer timeouts
-- May have higher memory and CPU requirements
-- Use for complex, multi-step operations
-- Monitor execution status regularly for long-running powers

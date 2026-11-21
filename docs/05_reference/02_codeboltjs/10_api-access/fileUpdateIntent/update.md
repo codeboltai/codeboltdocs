@@ -1,76 +1,69 @@
 ---
 name: update
+description: Update an existing intent.
 cbbaseinfo:
-  description: Updates an existing file update intent.
-cbparameters:
-  parameters:
-    - name: id
-      type: string
-      required: true
-      description: The unique identifier of the file update intent.
-    - name: data
-      type: UpdateFileUpdateIntentRequest
-      required: true
-      description: "Updated intent data (files, description, priority, etc.)."
-  returns:
-    signatureTypeName: "Promise<FileUpdateIntent>"
-    description: A promise that resolves with the updated intent.
+  description: Update an existing intent.
 data:
   name: update
   category: fileUpdateIntent
   link: update.md
 ---
+
 # update
 
-```typescript
-codebolt.fileUpdateIntent.update(id: undefined, data: undefined): Promise<FileUpdateIntent>
+```text
+codebolt.fileUpdateIntent.update(id: string, data: UpdateFileUpdateIntentRequest): Promise<FileUpdateIntent>
 ```
 
-Updates an existing file update intent.
-### Parameters
+Update an existing intent
 
-- **`id`** (unknown): The unique identifier of the file update intent.
-- **`data`** (unknown): Updated intent data (files, description, priority, etc.).
+## Example
 
-### Returns
-
-- **`Promise<[FileUpdateIntent](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/FileUpdateIntent)>`**: A promise that resolves with the updated intent.
-
-### Examples
-
-#### Example 1: Update Priority
 ```javascript
-const updated = await codebolt.fileUpdateIntent.update(
-  'intent-id-123',
-  { priority: 9 }
-);
+import codebolt from '@codebolt/codeboltjs';
 
-console.log('New priority:', updated.priority);
+codebolt.onReady(async () => {
+  const updated = await codebolt.fileUpdateIntent.update(
+    'intent-id-123',
+    { description: 'Updated: Additional features added' }
+  );
+});
 ```
 
-#### Example 2: Add Files to Intent
+## More examples
+
+### Update Priority
+
 ```javascript
-const current = await codebolt.fileUpdateIntent.get('intent-id-123');
+import codebolt from '@codebolt/codeboltjs';
 
-const updated = await codebolt.fileUpdateIntent.update(
-  'intent-id-123',
-  {
-    files: [
-      ...current.files,
-      { filePath: '/src/utils/helpers.ts', intentLevel: 2 }
-    ]
-  }
-);
+codebolt.onReady(async () => {
+  const updated = await codebolt.fileUpdateIntent.update(
+    'intent-id-123',
+    { priority: 9 }
+  );
+
+  console.log('New priority:', updated.priority);
+});
 ```
 
-#### Example 3: Update Description
+### Add Files to Intent
+
 ```javascript
-const updated = await codebolt.fileUpdateIntent.update(
-  'intent-id-123',
-  { description: 'Updated: Additional features added' }
-);
-```
+import codebolt from '@codebolt/codeboltjs';
 
-### Notes
-- Only update fields that need to change
-- Cannot update status (use complete/cancel instead)
+codebolt.onReady(async () => {
+  const current = await codebolt.fileUpdateIntent.get('intent-id-123');
+
+  if (current == null) throw new Error('The response is missing current.');
+  const updated = await codebolt.fileUpdateIntent.update(
+    'intent-id-123',
+    {
+      files: [
+        ...current.files,
+        { filePath: '/src/utils/helpers.ts', intentLevel: 2 }
+      ]
+    }
+  );
+});
+```

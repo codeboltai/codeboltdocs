@@ -1,46 +1,29 @@
 ---
 name: listCases
+description: Lists all available test cases.
 cbbaseinfo:
   description: Lists all available test cases.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: IListCasesParams
-      description: Optional parameters for filtering.
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<IListCasesResponse>"
-    description: A promise that resolves to the list of test cases.
-    typeArgs: []
 data:
   name: listCases
   category: autoTesting
   link: listCases.md
 ---
+
 # listCases
 
-```typescript
-codebolt.autoTesting.listCases(params: IListCasesParams): Promise<IListCasesResponse>
+```text
+codebolt.autoTesting.listCases(_params?: IListCasesParams): Promise<IListCasesResponse>
 ```
 
 Lists all available test cases.
-### Parameters
 
-- **`params`** ([IListCasesParams](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IListCasesParams), optional): Optional parameters for filtering.
-
-### Returns
-
-- **`Promise<[IListCasesResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IListCasesResponse)>`**: A promise that resolves to the list of test cases.
-
-### Examples
+## Example
 
 ```typescript
-const cases = await codebolt.autoTesting.listCases();
-console.log('Available test cases:', cases.payload.cases);
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const cases = await codebolt.autoTesting.listCases();
+  console.log('Available test cases:', cases.payload.cases);
+});
 ```
-
-### Notes
-
-- Returns all test cases
-- Useful for browsing available tests
-- Can filter by labels or priority

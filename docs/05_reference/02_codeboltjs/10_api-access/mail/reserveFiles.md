@@ -1,64 +1,41 @@
 ---
 name: reserveFiles
+description: Reserves files for exclusive access during collaborative work.
 cbbaseinfo:
   description: Reserves files for exclusive access during collaborative work.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: IReserveFilesParams
-      description: Parameters including agentId, files array, and threadId.
-  returns:
-    signatureTypeName: "Promise<IReserveFilesResponse>"
-    description: A promise that resolves with the reservation details.
 data:
   name: reserveFiles
   category: mail
   link: reserveFiles.md
 ---
+
 # reserveFiles
 
-```typescript
+```text
 codebolt.mail.reserveFiles(params: IReserveFilesParams): Promise<IReserveFilesResponse>
 ```
 
 Reserves files for exclusive access during collaborative work.
-### Parameters
 
-- **`params`** (IReserveFilesParams): Parameters including agentId, files array, and threadId.
+## When to use it
 
-### Returns
+Declare an editing reservation with a reason and lifetime so cooperating agents can check for conflicts.
 
-- **`Promise<IReserveFilesResponse>`**: A promise that resolves with the reservation details.
+## Example
 
-### Examples
+### Reserve a file before making changes
 
-#### Example 1: Reserve Files
-
-```typescript
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-await codebolt.waitForReady();
-
-const result = await codebolt.mail.reserveFiles({
-  agentId: 'agent-001',
-  files: ['src/auth/login.ts', 'src/auth/session.ts'],
-  threadId: 'thread-123'
+codebolt.onReady(async () => {
+  const result = await codebolt.mail.reserveFiles({
+    agentId: 'docs-reviewer-id',
+    paths: ['README.md'],
+    exclusive: true,
+    ttlSeconds: 120,
+    reason: 'Update the README overview',
+  });
+  console.log('Reserved', result.reserved);
 });
-
-if (result.success) {
-  console.log('Files reserved successfully');
-  console.log('Reservation expires at:', result.expiresAt);
-}
 ```
-
-### Common Use Cases
-
-- **Collaboration Editing**: Prevent conflicts when editing files
-- **Task Assignment**: Reserve files for specific agents
-- **Conflict Prevention**: Coordinate file access
-
-### Notes
-
-- Prevents other agents from modifying reserved files
-- Reservations have expiration time
-- Essential for multi-agent collaboration

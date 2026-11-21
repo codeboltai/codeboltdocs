@@ -1,65 +1,55 @@
 ---
 name: getContent
+description: Retrieves the content of the current page.
 cbbaseinfo:
   description: Retrieves the content of the current page.
-cbparameters:
-  parameters: []
-  returns:
-    signatureTypeName: "Promise<GetContentResponse>"
-    description: "'A promise that resolves with the content of the page.'"
-    typeArgs: []
 data:
   name: getContent
   category: browser
   link: getContent.md
 ---
+
 # getContent
 
-```typescript
-codebolt.browser.getContent(): Promise<GetContentResponse>
+```text
+codebolt.browser.getContent(options?: BrowserOperationOptions): Promise<GetContentResponse>
 ```
 
-Retrieves the content of the current page. 
-### Returns
+Retrieves the content of the current page.
 
-- **`Promise<GetContentResponse>`**: 'A promise that resolves with the content of the page.'
+## Parameters
 
-### Response Structure
+- `options` — Optional browser operation options
 
-The method returns a Promise that resolves to a [`GetContentResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/GetContentResponse) object with the following properties:
+## Returns
 
-**Response Properties:**
-- `type`: Always "getContentResponse"
-- `content`: Optional string containing the page content
-- `html`: Optional string containing the HTML content
-- `text`: Optional string containing the text content
-- `success`: Optional boolean indicating if the operation was successful
-- `message`: Optional string with additional information
-- `error`: Optional string containing error details if the operation failed
-- `messageId`: Optional unique identifier for the message
-- `threadId`: Optional thread identifier
+A promise that resolves with the content.
 
-### Example 
+## Example
 
 ```js 
-// Navigate to the page
-await codebolt.browser.goToPage("https://example.com");
+import codebolt from '@codebolt/codeboltjs';
 
-// Wait for page to load
-await new Promise(resolve => setTimeout(resolve, 2000));
+codebolt.onReady(async () => {
+  // Navigate to the page
+  await codebolt.browser.goToPage("https://example.com");
 
-// Retrieve the content of the current page
-const contentResult = await codebolt.browser.getContent();
-console.log('✅ Content retrieved:', {
-    success: contentResult.success,
-    contentLength: contentResult.content ? contentResult.content.length : 0,
-    hasHtml: !!contentResult.html,
-    hasText: !!contentResult.text
+  // Wait for page to load
+  await new Promise(resolve => setTimeout(resolve, 2000));
+
+  // Retrieve the content of the current page
+  const contentResult = await codebolt.browser.getContent();
+  console.log('✅ Content retrieved:', {
+      success: contentResult.success,
+      contentLength: contentResult.content ? contentResult.content.length : 0,
+      hasHtml: !!contentResult.html,
+      hasText: !!contentResult.text
+  });
+
+  // Access the actual content
+  if (contentResult.success && contentResult.content) {
+      console.log('Page content:', contentResult.content);
+      // Process the content as needed
+  }
 });
-
-// Access the actual content
-if (contentResult.success && contentResult.content) {
-    console.log('Page content:', contentResult.content);
-    // Process the content as needed
-}
 ```

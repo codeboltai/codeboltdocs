@@ -1,145 +1,131 @@
----
-cbapicategory:
-  - name: createMemory
-    link: /docs/api/apiaccess/episodicmemory/createMemory
-    description: Creates a new episodic memory for storing events.
-  - name: listMemories
-    link: /docs/api/apiaccess/episodicmemory/listMemories
-    description: Lists all episodic memories.
-  - name: getMemory
-    link: /docs/api/apiaccess/episodicmemory/getMemory
-    description: Gets a specific episodic memory by ID.
-  - name: appendEvent
-    link: /docs/api/apiaccess/episodicmemory/appendEvent
-    description: Appends an event to an episodic memory.
-  - name: queryEvents
-    link: /docs/api/apiaccess/episodicmemory/queryEvents
-    description: Queries events from an episodic memory with filters.
-  - name: getEventTypes
-    link: /docs/api/apiaccess/episodicmemory/getEventTypes
-    description: Gets unique event types from a memory.
-  - name: getTags
-    link: /docs/api/apiaccess/episodicmemory/getTags
-    description: Gets unique tags from a memory.
-  - name: getAgents
-    link: /docs/api/apiaccess/episodicmemory/getAgents
-    description: Gets unique agent IDs from a memory.
-  - name: archiveMemory
-    link: /docs/api/apiaccess/episodicmemory/archiveMemory
-    description: Archives an episodic memory.
-  - name: unarchiveMemory
-    link: /docs/api/apiaccess/episodicmemory/unarchiveMemory
-    description: Unarchives an episodic memory.
-  - name: updateTitle
-    link: /docs/api/apiaccess/episodicmemory/updateTitle
-    description: Updates the title of an episodic memory.
----
-# Episodic Memory API
+# Episodic Memory
 
-The Episodic Memory API provides time-series event storage and retrieval capabilities, enabling you to track and query sequences of events with temporal context. This is ideal for maintaining conversation histories, audit trails, and event logs.
+Store and retrieve episodes and their events.
 
-## Overview
+## Example
 
-The episodic memory module enables you to:
-- **Memories**: Create and manage time-bound event containers
-- **Events**: Append events with timestamps, types, agents, and tags
-- **Querying**: Filter and retrieve events by various criteria
-- **Metadata**: Extract unique event types, tags, and agents
-- **Lifecycle**: Archive and manage memory lifecycle
-
-## Quick Start Example
+### Quick Start Example
 
 ```js
-// Wait for connection
-await codebolt.waitForReady();
+import codebolt from '@codebolt/codeboltjs';
 
-// Create a new episodic memory
-const memory = await codebolt.episodicMemory.createMemory({
-    title: 'Project Alpha History'
+codebolt.onReady(async () => {
+  // Create a new episodic memory
+  const memory = await codebolt.episodicMemory.createMemory({
+      title: 'Project Alpha History'
+  });
+
+  // Append events to the memory
+  if (memory.data == null) throw new Error('The response is missing data.');
+  await codebolt.episodicMemory.appendEvent({
+      memoryId: memory.data.id,
+      event_type: 'task_created',
+      emitting_agent_id: 'agent-001',
+      tags: ['important', 'backend'],
+      payload: {
+          task: 'Implement user authentication',
+          priority: 'high'
+      }
+  });
+
+  if (memory.data == null) throw new Error('The response is missing data.');
+  await codebolt.episodicMemory.appendEvent({
+      memoryId: memory.data.id,
+      event_type: 'task_completed',
+      emitting_agent_id: 'agent-001',
+      tags: ['backend'],
+      payload: {
+          task: 'Implement user authentication',
+          duration: '4 hours'
+      }
+  });
+
+  // Query events from the last hour
+  if (memory.data == null) throw new Error('The response is missing data.');
+  const events = await codebolt.episodicMemory.queryEvents({
+      memoryId: memory.data.id,
+      lastMinutes: 60
+  });
+
+  if (events.data == null) throw new Error('The response is missing data.');
+  console.log(`Found ${events.data.events.length} events in the last hour`);
 });
-
-// Append events to the memory
-await codebolt.episodicMemory.appendEvent({
-    memoryId: memory.data.id,
-    event_type: 'task_created',
-    emitting_agent_id: 'agent-001',
-    tags: ['important', 'backend'],
-    payload: {
-        task: 'Implement user authentication',
-        priority: 'high'
-    }
-});
-
-await codebolt.episodicMemory.appendEvent({
-    memoryId: memory.data.id,
-    event_type: 'task_completed',
-    emitting_agent_id: 'agent-001',
-    tags: ['backend'],
-    payload: {
-        task: 'Implement user authentication',
-        duration: '4 hours'
-    }
-});
-
-// Query events from the last hour
-const events = await codebolt.episodicMemory.queryEvents({
-    memoryId: memory.data.id,
-    lastMinutes: 60
-});
-
-console.log(`Found ${events.data.events.length} events in the last hour`);
 ```
 
-## Response Structure
+## SDK methods
 
-All episodic memory API functions return responses with a consistent structure:
+### createMemory
 
-```js
-{
-    success: boolean,
-    requestId?: string,
-    data?: {
-        // Response-specific data
-        memory: EpisodicMemory,
-        events: EpisodicEvent[],
-        eventTypes: string[],
-        tags: string[],
-        agents: string[]
-    },
-    error?: {
-        code: string,
-        message: string,
-        details?: any
-    }
-}
+[`createMemory`](createMemory.md) · Create a new episodic memory.
+
+### listMemories
+
+List all episodic memories.
+
+```text
+codebolt.episodicMemory.listMemories(): Promise<IListMemoriesResponse>
 ```
 
-## Key Concepts
+### getMemory
 
-### Episodic Memory
-A memory is a time-ordered collection of events, representing a sequence of activities or a conversation history.
+Get a specific episodic memory by ID.
 
-### Events
-Events are individual records within a memory, containing:
-- **Event Type**: Categorizes the event (e.g., 'message', 'action', 'state_change')
-- **Agent ID**: Which agent generated the event
-- **Team ID**: Optional team context
-- **Tags**: Optional array of tags for filtering
-- **Payload**: Event data (string or object)
-- **Timestamp**: When the event occurred
+```text
+codebolt.episodicMemory.getMemory(params: IGetMemoryParams): Promise<IGetMemoryResponse>
+```
 
-### Querying
-Events can be queried by:
-- Time range (lastMinutes, lastCount, since)
-- Event type
-- Agent ID
-- Team ID
-- Tags
+### appendEvent
 
-### Swarm Integration
-Memories can be associated with swarms, providing event tracking at the swarm level.
+[`appendEvent`](appendEvent.md) · Append an event to an episodic memory.
 
-### Archiving
-Memories can be archived to reduce active storage while preserving historical data.
+### queryEvents
 
-<CBAPICategory />
+[`queryEvents`](queryEvents.md) · Query events from an episodic memory with optional filters.
+
+### getEventTypes
+
+Get unique event types from an episodic memory.
+
+```text
+codebolt.episodicMemory.getEventTypes(params: IGetEventTypesParams): Promise<IGetEventTypesResponse>
+```
+
+### getTags
+
+Get unique tags from an episodic memory.
+
+```text
+codebolt.episodicMemory.getTags(params: IGetTagsParams): Promise<IGetTagsResponse>
+```
+
+### getAgents
+
+Get unique agent IDs from an episodic memory.
+
+```text
+codebolt.episodicMemory.getAgents(params: IGetAgentsParams): Promise<IGetAgentsResponse>
+```
+
+### archiveMemory
+
+Archive an episodic memory.
+
+```text
+codebolt.episodicMemory.archiveMemory(params: IArchiveMemoryParams): Promise<IArchiveMemoryResponse>
+```
+
+### unarchiveMemory
+
+Unarchive an episodic memory.
+
+```text
+codebolt.episodicMemory.unarchiveMemory(params: IUnarchiveMemoryParams): Promise<IUnarchiveMemoryResponse>
+```
+
+### updateTitle
+
+Update the title of an episodic memory.
+
+```text
+codebolt.episodicMemory.updateTitle(params: IUpdateTitleParams): Promise<IUpdateTitleResponse>
+```

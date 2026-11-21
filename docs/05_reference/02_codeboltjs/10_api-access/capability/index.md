@@ -1,174 +1,116 @@
----
-cbapicategory:
-  - name: listCapabilities
-    link: /docs/api/apiaccess/capability/listCapabilities
-    description: Lists all available capabilities with optional filtering by type, tags, or author.
-  - name: listCapabilitiesByType
-    link: /docs/api/apiaccess/capability/listCapabilitiesByType
-    description: "Lists capabilities filtered by a specific capability type (skill, power, talent, etc.)."
-  - name: listSkills
-    link: /docs/api/apiaccess/capability/listSkills
-    description: "Lists all available skills (a shorthand for listing capabilities by type 'skill')."
-  - name: listPowers
-    link: /docs/api/apiaccess/capability/listPowers
-    description: "Lists all available powers (a shorthand for listing capabilities by type 'power')."
-  - name: listTalents
-    link: /docs/api/apiaccess/capability/listTalents
-    description: "Lists all available talents (a shorthand for listing capabilities by type 'talent')."
-  - name: getCapabilityDetail
-    link: /docs/api/apiaccess/capability/getCapabilityDetail
-    description: Retrieves detailed information about a specific capability including metadata and execution details.
-  - name: listExecutors
-    link: /docs/api/apiaccess/capability/listExecutors
-    description: Lists all available capability executors that can run capabilities.
-  - name: startCapability
-    link: /docs/api/apiaccess/capability/startCapability
-    description: Starts execution of a capability with optional parameters and timeout settings.
-  - name: startSkill
-    link: /docs/api/apiaccess/capability/startSkill
-    description: Starts execution of a skill with optional parameters and timeout settings.
-  - name: startPower
-    link: /docs/api/apiaccess/capability/startPower
-    description: Starts execution of a power with optional parameters and timeout settings.
-  - name: startTalent
-    link: /docs/api/apiaccess/capability/startTalent
-    description: Starts execution of a talent with optional parameters and timeout settings.
-  - name: stopCapability
-    link: /docs/api/apiaccess/capability/stopCapability
-    description: Stops a currently running capability execution by execution ID.
-  - name: getExecutionStatus
-    link: /docs/api/apiaccess/capability/getExecutionStatus
-    description: Gets the current status of a capability execution by execution ID.
-  - name: getCapabilitiesByTag
-    link: /docs/api/apiaccess/capability/getCapabilitiesByTag
-    description: Lists capabilities that have a specific tag.
-  - name: getCapabilitiesByAuthor
-    link: /docs/api/apiaccess/capability/getCapabilitiesByAuthor
-    description: Lists capabilities created by a specific author.
----
+# Capability
 
-# Capability API
+Register, find, and manage capabilities.
 
-The Capability API provides comprehensive functionality for managing and executing capabilities in the Codebolt system. Capabilities are reusable units of functionality that can be Skills, Powers, or Talents.
+## When to use it
 
-## Overview
+Discover installed skills, powers, and talents, inspect their declared inputs, then track an execution using its returned ID.
 
-The capability module enables you to:
-- **Discover**: List and search available capabilities by type, tag, or author
-- **Inspect**: Get detailed information about specific capabilities
-- **Execute**: Start and manage capability executions with parameters and timeouts
-- **Monitor**: Track execution status and stop running capabilities
-- **Manage**: Access capability executors and their configurations
+## Examples
 
-## Capability Types
-
-The Codebolt system supports several types of capabilities:
-
-- **Skills**: Basic capabilities that perform specific tasks
-- **Powers**: Advanced capabilities with enhanced functionality
-- **Talents**: Specialized capabilities for specific domains
-- **Custom Types**: Extensible system for additional capability types
-
-## Quick Start Example
+### Discovering Capabilities
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Initialize connection
-await codebolt.waitForReady();
+codebolt.onReady(async () => {
+  // List all capabilities
+  const allCapabilities = await codebolt.capability.listCapabilities();
 
-// List all available skills
-const skills = await codebolt.capability.listSkills();
-console.log('Available skills:', skills);
+  // Filter by type
+  const skills = await codebolt.capability.listSkills();
 
-// Get details about a specific skill
-const skillDetail = await codebolt.capability.getCapabilityDetail('data-processing', 'skill');
-console.log('Skill details:', skillDetail);
+  // Filter by tag
+  const aiCapabilities = await codebolt.capability.getCapabilitiesByTag('ai');
 
-// Execute a skill with parameters
-const execution = await codebolt.capability.startSkill(
-  'data-processing',
-  { input: 'data.csv', format: 'json' },
-  30000 // 30 second timeout
-);
-console.log('Execution started:', execution.executionId);
-
-// Check execution status
-const status = await codebolt.capability.getExecutionStatus(execution.executionId);
-console.log('Execution status:', status);
-
-// Stop the execution if needed
-await codebolt.capability.stopCapability(execution.executionId);
+  // Filter by author
+  const myCapabilities = await codebolt.capability.getCapabilitiesByAuthor('developer-name');
+});
 ```
 
-## Response Structure
-
-All capability API functions return responses with a consistent structure:
+### Executing Capabilities
 
 ```typescript
-{
-  type: 'responseType',
-  success: boolean,
-  data?: any,
-  error?: string,
-  requestId?: string
-}
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Execute a skill with parameters
+  const result = await codebolt.capability.startSkill(
+    'image-resizer',
+    { width: 800, height: 600, quality: 90 }
+  );
+
+  // Execute with custom timeout
+  const longRunning = await codebolt.capability.startPower(
+    'data-processor',
+    { source: 'large-dataset.csv' },
+    120000 // 2 minutes
+  );
+});
 ```
 
-## Common Use Cases
+## SDK methods
 
-### 1. Discovering Capabilities
+### listCapabilities
 
-```typescript
-// List all capabilities
-const allCapabilities = await codebolt.capability.listCapabilities();
+[`listCapabilities`](listCapabilities.md) · List all available capabilities with optional filtering.
 
-// Filter by type
-const skills = await codebolt.capability.listSkills();
+### listCapabilitiesByType
 
-// Filter by tag
-const aiCapabilities = await codebolt.capability.getCapabilitiesByTag('ai');
+List capabilities by type.
 
-// Filter by author
-const myCapabilities = await codebolt.capability.getCapabilitiesByAuthor('developer-name');
+```text
+codebolt.capability.listCapabilitiesByType(capabilityType: CapabilityType): Promise<ListCapabilitiesResponse>
 ```
 
-### 2. Executing Capabilities
+### listSkills
 
-```typescript
-// Execute a skill with parameters
-const result = await codebolt.capability.startSkill(
-  'image-resizer',
-  { width: 800, height: 600, quality: 90 }
-);
+[`listSkills`](listSkills.md) · List all available skills.
 
-// Execute with custom timeout
-const longRunning = await codebolt.capability.startPower(
-  'data-processor',
-  { source: 'large-dataset.csv' },
-  120000 // 2 minutes
-);
-```
+### listPowers
 
-### 3. Monitoring Executions
+[`listPowers`](listPowers.md) · List all available powers.
 
-```typescript
-// Start execution
-const execution = await codebolt.capability.startSkill('task-processor');
+### listTalents
 
-// Poll for status
-const checkStatus = async (id) => {
-  const status = await codebolt.capability.getExecutionStatus(id);
-  if (status.data?.status === 'completed') {
-    console.log('Execution completed:', status.data?.result);
-  } else if (status.data?.status === 'failed') {
-    console.error('Execution failed:', status.data?.error);
-  } else {
-    setTimeout(() => checkStatus(id), 1000);
-  }
-};
+[`listTalents`](listTalents.md) · List all available talents.
 
-checkStatus(execution.executionId);
-```
+### getCapabilityDetail
 
-<CBAPICategory />
+[`getCapabilityDetail`](getCapabilityDetail.md) · Get detailed information about a specific capability.
+
+### listExecutors
+
+[`listExecutors`](listExecutors.md) · List all available capability executors.
+
+### startCapability
+
+[`startCapability`](startCapability.md) · Start a capability execution.
+
+### startSkill
+
+[`startSkill`](startSkill.md) · Start a skill execution.
+
+### startPower
+
+[`startPower`](startPower.md) · Start a power execution.
+
+### startTalent
+
+[`startTalent`](startTalent.md) · Start a talent execution.
+
+### stopCapability
+
+[`stopCapability`](stopCapability.md) · Stop a running capability execution.
+
+### getExecutionStatus
+
+[`getExecutionStatus`](getExecutionStatus.md) · Get the status of a capability execution.
+
+### getCapabilitiesByTag
+
+[`getCapabilitiesByTag`](getCapabilitiesByTag.md) · Get capabilities by tag.
+
+### getCapabilitiesByAuthor
+
+[`getCapabilitiesByAuthor`](getCapabilitiesByAuthor.md) · Get capabilities by author.

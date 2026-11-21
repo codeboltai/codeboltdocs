@@ -1,53 +1,41 @@
 ---
 name: addTalent
+description: Add a talent skill.
 cbbaseinfo:
-  description: Adds a new talent skill to the system. Talents represent specialized skills that can be endorsed.
-cbparameters:
-  parameters:
-    - name: name
-      typeName: string
-      description: The name of the talent.
-    - name: description
-      typeName: string
-      description: Optional description of the talent.
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<AddTalentResponse>"
-    description: A promise that resolves when talent is added.
-    typeArgs: []
+  description: Add a talent skill.
 data:
   name: addTalent
   category: agentPortfolio
   link: addTalent.md
 ---
+
 # addTalent
 
-```typescript
-codebolt.agentPortfolio.addTalent(name: string, description: string): Promise<AddTalentResponse>
+```text
+codebolt.agentPortfolio.addTalent(name: string, description?: string): Promise<AddTalentResponse>
 ```
 
-Adds a new talent skill to the system. Talents represent specialized skills that can be endorsed.
-### Parameters
+Add a talent skill
 
-- **`name`** (string): The name of the talent.
-- **`description`** (string, optional): Optional description of the talent.
+## Parameters
 
-### Returns
+- `name` — The name of the talent
+- `description` — Optional description of the talent
 
-- **`Promise<[AddTalentResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/AddTalentResponse)>`**: A promise that resolves when talent is added.
+## Returns
 
-### Examples
+Promise resolving to the talent creation result
+
+## Example
 
 ```typescript
-// Add new talent
-await codebolt.agentPortfolio.addTalent('React Development', 'Expert in React ecosystem');
+import codebolt from '@codebolt/codeboltjs';
 
-// Add talent without description
-await codebolt.agentPortfolio.addTalent('TypeScript');
+codebolt.onReady(async () => {
+  // Add new talent
+  await codebolt.agentPortfolio.addTalent('React Development', 'Expert in React ecosystem');
+
+  // Add talent without description
+  await codebolt.agentPortfolio.addTalent('TypeScript');
+});
 ```
-
-### Notes
-
-- Talent names should be clear and specific
-- Descriptions help others understand the skill scope
-- Talents can be endorsed to verify expertise

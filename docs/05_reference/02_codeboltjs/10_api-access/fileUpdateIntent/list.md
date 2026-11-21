@@ -1,79 +1,80 @@
 ---
 name: list
+description: List intents.
 cbbaseinfo:
-  description: Lists file update intents with optional filtering.
-cbparameters:
-  parameters:
-    - name: filters
-      type: FileUpdateIntentFilters
-      required: false
-      description: Optional filters for environmentId, status, claimedBy, etc.
-  returns:
-    signatureTypeName: "Promise<FileUpdateIntent[]>"
-    description: A promise that resolves with an array of file update intents.
+  description: List intents.
 data:
   name: list
   category: fileUpdateIntent
   link: list.md
 ---
+
 # list
 
-```typescript
-codebolt.fileUpdateIntent.list(filters: undefined): Promise<FileUpdateIntent[]>
+```text
+codebolt.fileUpdateIntent.list(filters?: FileUpdateIntentFilters): Promise<FileUpdateIntent[]>
 ```
 
-Lists file update intents with optional filtering.
-### Parameters
+List intents
 
-- **`filters`** (unknown): Optional filters for environmentId, status, claimedBy, etc.
+## Example
 
-### Returns
-
-- **`Promise<[FileUpdateIntent](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/FileUpdateIntent)[]>`**: A promise that resolves with an array of file update intents.
-
-### Examples
-
-#### Example 1: List All Intents in Environment
 ```javascript
-const intents = await codebolt.fileUpdateIntent.list({
-  environmentId: 'env-123'
-});
+import codebolt from '@codebolt/codeboltjs';
 
-console.log(`Found ${intents.length} intents`);
+codebolt.onReady(async () => {
+  const intents = await codebolt.fileUpdateIntent.list({
+    environmentId: 'env-123'
+  });
+
+  console.log(`Found ${intents.length} intents`);
+});
 ```
 
-#### Example 2: List Active Intents
+## More examples
+
+### List Active Intents
+
 ```javascript
-const activeIntents = await codebolt.fileUpdateIntent.list({
-  environmentId: 'env-123',
-  status: ['active']
-});
+import codebolt from '@codebolt/codeboltjs';
 
-console.log('Active intents:', activeIntents.length);
+codebolt.onReady(async () => {
+  const activeIntents = await codebolt.fileUpdateIntent.list({
+    environmentId: 'env-123',
+    status: ['active']
+  });
+
+  console.log('Active intents:', activeIntents.length);
+});
 ```
 
-#### Example 3: List by Agent
+### List by Agent
+
 ```javascript
-const agentIntents = await codebolt.fileUpdateIntent.list({
-  environmentId: 'env-123',
-  claimedBy: 'agent-456'
-});
+import codebolt from '@codebolt/codeboltjs';
 
-console.log(`Agent has ${agentIntents.length} intents`);
+codebolt.onReady(async () => {
+  const agentIntents = await codebolt.fileUpdateIntent.list({
+    environmentId: 'env-123',
+    claimedBy: 'agent-456'
+  });
+
+  console.log(`Agent has ${agentIntents.length} intents`);
+});
 ```
 
-#### Example 4: List by File Pattern
+### List by File Pattern
+
 ```javascript
-const allIntents = await codebolt.fileUpdateIntent.list({
-  environmentId: 'env-123'
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const allIntents = await codebolt.fileUpdateIntent.list({
+    environmentId: 'env-123'
+  });
+
+  const buttonIntents = allIntents.filter(intent =>
+    intent.files.some(f => f.filePath.includes('Button'))
+  );
 });
-
-const buttonIntents = allIntents.filter(intent =>
-  intent.files.some(f => f.filePath.includes('Button'))
-);
 ```
-
-### Notes
-- All filters are optional
-- Returns empty array if no intents match
-- Use for discovery and monitoring

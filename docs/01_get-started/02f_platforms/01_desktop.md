@@ -8,13 +8,12 @@ description: Codebolt's full graphical client for daily coding — chat, multi-p
 
 The Codebolt **Desktop App** is the full graphical client. Install it on macOS, Windows, or Linux and you get a docked, multi-panel workspace for daily coding with agents. It is the richest surface: multi-tab chat, visual diffs, `@mentions`, inline editing, and the full panels ecosystem.
 
-Start with the [Desktop Quickstart](../03_quickstart.md) to install the app, run your first agent task, and review a change.
+Follow [Installation and Onboarding](../../02_using-codebolt/02_surfaces/02_desktop-app/01_onboarding.md) to install the app, sign in, and set up your model and workspace. Use the [Desktop Quickstart](../03_quickstart.md#open-a-project) to run your first agent task and review the change.
 
 ## In this section
 
 | Page | What it covers |
 |---|---|
-| **[Get Started](../../02_using-codebolt/02_surfaces/02_desktop-app/00_get-started.md)** | Install, sign in, choose a provider, and run your first agent task |
 | **[Workspace and Project Management](../../02_using-codebolt/02_surfaces/02_desktop-app/01_workspace-and-project-management/01_overview.md)** | The durable containers for your work - how projects open and what Codebolt stores locally |
 | **[Application Navigation](../../02_using-codebolt/02_surfaces/02_desktop-app/02_application-navigation/01_panels.md)** | Opening panels, panel search, resizing, layout presets, and shortcuts |
 | **[Settings](../../02_using-codebolt/02_surfaces/02_desktop-app/Settings/01_overview.md)** | Configure LLMs, agents, environment services, language servers, MCP servers, appearance, and global app options |

@@ -1,127 +1,116 @@
 ---
 name: updateFeature
+description: Update an existing feature.
 cbbaseinfo:
-  description: "Updates an existing feature's information. Only the specified fields are updated; other fields remain unchanged."
-cbparameters:
-  parameters:
-    - name: featureId
-      typeName: string
-      description: The ID of the feature to update
-    - name: data
-      typeName: UpdateFeatureData
-      description: Partial feature data with fields to update
-    - name: projectPath
-      typeName: string
-      description: "Optional project path (uses active project if not provided)"
-  returns:
-    signatureTypeName: "Promise<RoadmapFeatureResponse>"
-    description: A promise that resolves to the updated feature
+  description: Update an existing feature.
 data:
   name: updateFeature
   category: roadmap
   link: updateFeature.md
 ---
+
 # updateFeature
 
-```typescript
-codebolt.roadmap.updateFeature(featureId: string, data: UpdateFeatureData, projectPath: string): Promise<RoadmapFeatureResponse>
+```text
+codebolt.roadmap.updateFeature(featureId: string, data: UpdateFeatureData, projectPath?: string): Promise<RoadmapFeatureResponse>
 ```
 
-Updates an existing feature's information. Only the specified fields are updated; other fields remain unchanged.
-### Parameters
+Update an existing feature
 
-- **`featureId`** (string): The ID of the feature to update
-- **`data`** ([UpdateFeatureData](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/UpdateFeatureData)): Partial feature data with fields to update
-- **`projectPath`** (string): Optional project path (uses active project if not provided)
+## When to use it
 
-### Returns
+Update roadmap metadata when a feature's priority, status, or plan changes.
 
-- **`Promise<[RoadmapFeatureResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/RoadmapFeatureResponse)>`**: A promise that resolves to the updated feature
+## Example
 
-### Parameter Details
-
-- **`featureId`** (string, required): The ID of the feature to update
-- **`data`** (UpdateFeatureData, required): Partial feature data (all fields optional)
-  - **`title`** (string, optional): Updated feature title
-  - **`description`** (string, optional): Updated feature description
-  - **`impact`** (ImpactLevel, optional): Updated impact level
-  - **`difficulty`** (DifficultyLevel, optional): Updated difficulty level
-  - **`priority`** (number, optional): Updated priority
-  - **`tags`** (string[], optional): Updated tags
-  - **`category`** (string, optional): Updated category
-  - **`status`** (FeatureStatus, optional): Updated status
-
-### Response Structure
-
-```typescript
-interface RoadmapFeatureResponse {
-  feature: Feature;
-}
-```
-
-### Examples
-
-#### 1. Update Feature Status
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Update feature status to in-progress
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  status: 'in-progress'
-});
+codebolt.onReady(async () => {
+  // Change feature priority
+  const result = await codebolt.roadmap.updateFeature('feat_001', {
+    priority: 5
+  });
 
-console.log('Feature status updated:', result.feature.status);
+  console.log('Priority updated to:', result.feature.priority);
+});
 ```
 
-#### 2. Update Multiple Fields
-```typescript
-// Update multiple feature properties
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  title: 'User Authentication & Authorization',
-  description: 'Updated: Added OAuth2 support and role-based access control',
-  impact: 'critical',
-  priority: 1
-});
+## More examples
 
-console.log('Feature updated');
+### Update Feature Status
+
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Update feature status to in-progress
+  const result = await codebolt.roadmap.updateFeature('feat_001', {
+    status: 'in-progress'
+  });
+
+  console.log('Feature status updated:', result.feature.status);
+});
 ```
 
-#### 3. Mark Feature as Complete
-```typescript
-// Mark feature as completed
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  status: 'completed'
-});
+### Update Multiple Fields
 
-console.log('Feature completed!');
-console.log('Updated at:', result.feature.updatedAt);
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Update multiple feature properties
+  const result = await codebolt.roadmap.updateFeature('feat_001', {
+    title: 'User Authentication & Authorization',
+    description: 'Updated: Added OAuth2 support and role-based access control',
+    impact: 'critical',
+    priority: 1
+  });
+
+  console.log('Feature updated');
+});
 ```
 
-#### 4. Update Feature Priority
-```typescript
-// Change feature priority
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  priority: 5
-});
+### Mark Feature as Complete
 
-console.log('Priority updated to:', result.feature.priority);
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Mark feature as completed
+  const result = await codebolt.roadmap.updateFeature('feat_001', {
+    status: 'completed'
+  });
+
+  console.log('Feature completed!');
+  console.log('Updated at:', result.feature.updatedAt);
+});
 ```
 
-#### 5. Add Tags to Feature
+### Add Tags to Feature
+
 ```typescript
-// Add tags to existing feature
-const currentFeature = await codebolt.roadmap.getFeatures('phase_001');
-const feature = currentFeature.features.find(f => f.id === 'feat_001');
+import codebolt from '@codebolt/codeboltjs';
 
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  tags: [...(feature.tags || []), 'urgent', 'backend']
+codebolt.onReady(async () => {
+  // Add tags to existing feature
+  const currentFeature = await codebolt.roadmap.getFeatures('phase_001');
+  const feature = currentFeature.features.find(f => f.id === 'feat_001');
+
+  if (feature == null) throw new Error('The response is missing feature.');
+  const result = await codebolt.roadmap.updateFeature('feat_001', {
+    tags: [...(feature.tags || []), 'urgent', 'backend']
+  });
+
+  console.log('Tags updated:', result.feature.tags);
 });
-
-console.log('Tags updated:', result.feature.tags);
 ```
 
-#### 6. Update Feature During Development
+### Update Feature During Development
+
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Progressively update feature as work progresses
 async function updateFeatureProgress(featureId: string) {
   // Start work
@@ -140,22 +129,31 @@ async function updateFeatureProgress(featureId: string) {
 }
 ```
 
-#### 7. Update Impact Assessment
-```typescript
-// Reassess and update impact
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  impact: 'high',
-  difficulty: 'medium'
-});
+### Update Impact Assessment
 
-console.log('Impact and difficulty updated');
+```typescript
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Reassess and update impact
+  const result = await codebolt.roadmap.updateFeature('feat_001', {
+    impact: 'high',
+    difficulty: 'medium'
+  });
+
+  console.log('Impact and difficulty updated');
+});
 ```
 
-#### 8. Update Feature Description
+### Update Feature Description
+
 ```typescript
-// Update with more detailed description
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  description: `
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Update with more detailed description
+  const result = await codebolt.roadmap.updateFeature('feat_001', {
+    description: `
 ## User Authentication
 
 Implement secure user authentication with:
@@ -172,43 +170,37 @@ Implement secure user authentication with:
 - CSRF protection
 - Secure session storage
   `.trim()
-});
+  });
 
-console.log('Description updated with details');
+  console.log('Description updated with details');
+});
 ```
 
-#### 9. Cancel Feature
-```typescript
-// Cancel a feature that's no longer needed
-const result = await codebolt.roadmap.updateFeature('feat_001', {
-  status: 'cancelled',
-  tags: [...(result.feature.tags || []), 'deprecated']
-});
+### Batch Update Features
 
-console.log('Feature cancelled');
-```
-
-#### 10. Batch Update Features
 ```typescript
-// Update multiple features in a phase
-async function batchUpdateFeatures(featureIds: string[], updates: any) {
-  for (const id of featureIds) {
-    await codebolt.roadmap.updateFeature(id, updates);
-    console.log(`✓ Updated: ${id}`);
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  // Update multiple features in a phase
+  async function batchUpdateFeatures(featureIds: string[], updates: any) {
+    for (const id of featureIds) {
+      await codebolt.roadmap.updateFeature(id, updates);
+      console.log(`✓ Updated: ${id}`);
+    }
   }
-}
 
-// Usage - mark all phase features as in-progress
-const phaseFeatures = await codebolt.roadmap.getFeatures('phase_001');
-const featureIds = phaseFeatures.features.map(f => f.id);
+  // Usage - mark all phase features as in-progress
+  const phaseFeatures = await codebolt.roadmap.getFeatures('phase_001');
+  const featureIds = phaseFeatures.features.map(f => f.id);
 
-await batchUpdateFeatures(featureIds, { status: 'in-progress' });
+  await batchUpdateFeatures(featureIds, { status: 'in-progress' });
+});
 ```
 
-### Common Use Cases
-
-**Status Workflow:**
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Standard feature workflow
 async function featureWorkflow(featureId: string) {
   // Pending -> In Progress
@@ -225,8 +217,9 @@ async function featureWorkflow(featureId: string) {
 }
 ```
 
-**Priority Rebalancing:**
 ```typescript
+import codebolt from '@codebolt/codeboltjs';
+
 // Rebalance priorities based on changes
 async function reprioritizeFeatures(featureIds: string[]) {
   for (let i = 0; i < featureIds.length; i++) {
@@ -236,30 +229,3 @@ async function reprioritizeFeatures(featureIds: string[]) {
   }
 }
 ```
-
-**Add Progress Notes:**
-```typescript
-// Append progress notes to description
-async function addProgressNote(featureId: string, note: string) {
-  const feature = await getFeatureDetails(featureId);
-
-  const updatedDesc = `${feature.description}\n\n## Update\n${note}\n*Updated: ${new Date().toISOString()}*`;
-
-  await codebolt.roadmap.updateFeature(featureId, {
-    description: updatedDesc.trim()
-  });
-}
-```
-
-### Notes
-
-- Only specified fields are updated
-- Omitted fields remain unchanged
-- Status transitions can be validated at application level
-- Tags are replaced, not appended (get current tags first if appending)
-- Priority change affects sort order
-- Status changes update the timestamp
-- Feature ID is immutable
-- Phase association cannot be changed (use moveFeature instead)
-- Can be called multiple times for incremental updates
-- Updates are reflected immediately in queries

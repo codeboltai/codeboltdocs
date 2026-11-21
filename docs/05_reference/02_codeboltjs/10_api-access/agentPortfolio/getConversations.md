@@ -1,58 +1,43 @@
 ---
 name: getConversations
+description: Get conversations involving an agent.
 cbbaseinfo:
-  description: Gets conversations involving an agent with pagination support for handling large conversation histories.
-cbparameters:
-  parameters:
-    - name: agentId
-      typeName: string
-      description: The ID of the agent.
-    - name: limit
-      typeName: number
-      description: Maximum number of conversations to return.
-      isOptional: true
-    - name: offset
-      typeName: number
-      description: Offset for pagination.
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<GetConversationsResponse>"
-    description: A promise that resolves to the list of conversations.
-    typeArgs: []
+  description: Get conversations involving an agent.
 data:
   name: getConversations
   category: agentPortfolio
   link: getConversations.md
 ---
+
 # getConversations
 
-```typescript
-codebolt.agentPortfolio.getConversations(agentId: string, limit: number, offset: number): Promise<GetConversationsResponse>
+```text
+codebolt.agentPortfolio.getConversations(agentId: string, limit?: number, offset?: number): Promise<GetConversationsResponse>
 ```
 
-Gets conversations involving an agent with pagination support for handling large conversation histories.
-### Parameters
+Get conversations involving an agent
 
-- **`agentId`** (string): The ID of the agent.
-- **`limit`** (number, optional): Maximum number of conversations to return.
-- **`offset`** (number, optional): Offset for pagination.
+## Parameters
 
-### Returns
+- `agentId` — The ID of the agent
+- `limit` — Maximum number of conversations to return
+- `offset` — Offset for pagination
 
-- **`Promise<[GetConversationsResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/GetConversationsResponse)>`**: A promise that resolves to the list of conversations.
+## Returns
 
-### Examples
+Promise resolving to the list of conversations
+
+## Example
 
 ```typescript
-// Get recent conversations
-const conversations = await codebolt.agentPortfolio.getConversations('agent-123', 10);
+import codebolt from '@codebolt/codeboltjs';
 
-// Paginate through history
-const page1 = await codebolt.agentPortfolio.getConversations('agent-123', 20, 0);
-const page2 = await codebolt.agentPortfolio.getConversations('agent-123', 20, 20);
+codebolt.onReady(async () => {
+  // Get recent conversations
+  const conversations = await codebolt.agentPortfolio.getConversations('agent-123', 10);
+
+  // Paginate through history
+  const page1 = await codebolt.agentPortfolio.getConversations('agent-123', 20, 0);
+  const page2 = await codebolt.agentPortfolio.getConversations('agent-123', 20, 20);
+});
 ```
-
-### Notes
-
-- Use pagination for large conversation histories
-- Conversations are ordered by most recent first

@@ -1,186 +1,33 @@
 ---
 title: Get Browser Instance
 description: Gets detailed information about a specific browser instance.
+name: getBrowserInstance
 ---
 
-# Get Browser Instance
+# getBrowserInstance
 
-Retrieves detailed information about a specific browser instance using its unique identifier.
-
-## Syntax
-
-```js
-const instance = await codebolt.getBrowserInstance(instanceId);
+```text
+codebolt.browser.getBrowserInstance(instanceId: string): Promise<BrowserInstanceInfo | null>
 ```
 
-## Parameters
+Looks up the supplied ID in the SDK’s locally tracked browser instance list and returns the matching entry or `null`.
 
-- **instanceId** (`string`): The unique identifier of the browser instance to retrieve
+## When to use it
 
-## Return Value
+Check whether an ID matches the active instance tracked by this SDK process. Navigation and screenshot results provide live page information.
 
-Returns a promise that resolves to a [`BrowserInstanceInfo`](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/BrowserInstanceInfo) object if found, or `null` if the instance doesn't exist:
+## Example
 
-```js
-{
-  instanceId: "browser-1234567890-abc123",
-  isActive: true,
-  isReady: true,
-  currentUrl: "https://example.com",
-  createdAt: "2023-12-07T10:30:00.000Z",
-  title: "Example Domain"
-}
-```
+### Open a browser instance and look up its ID
 
-Or `null` if the instance is not found.
-
-### BrowserInstanceInfo Properties
-
-- **instanceId** (`string`): Unique identifier for the browser instance
-- **isActive** (`boolean`): Whether this is the currently active instance
-- **isReady** (`boolean`): Whether the instance is ready for operations
-- **currentUrl** (`string`, optional): Current URL of the browser instance
-- **createdAt** (`string`): ISO timestamp when the instance was created
-- **title** (`string`, optional): Page title of the current page
-
-## Examples
-
-### Get Specific Instance
-
-```js
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-const instanceId = "browser-1234567890-abc123";
-const instance = await codebolt.getBrowserInstance(instanceId);
-
-if (instance) {
-  console.log(`Instance found: ${instance.instanceId}`);
-  console.log(`Status: ${instance.isReady ? 'Ready' : 'Not ready'}`);
-  console.log(`Current URL: ${instance.currentUrl}`);
-  console.log(`Page title: ${instance.title}`);
-} else {
-  console.log(`Instance ${instanceId} not found`);
-}
+codebolt.onReady(async () => {
+  const { instanceId } = await codebolt.browser.openNewBrowserInstance();
+  await codebolt.browser.goToPage('https://example.com/', { instanceId });
+  const active = await codebolt.browser.getBrowserInstance(instanceId);
+  console.log('Tracked instance', active?.instanceId);
+  console.log('Tracked instances', await codebolt.browser.listBrowserInstances());
+});
 ```
-
-### Check Instance Status
-
-```js
-async function isInstanceReady(instanceId) {
-  const instance = await codebolt.getBrowserInstance(instanceId);
-  
-  if (!instance) {
-    return { exists: false, ready: false };
-  }
-  
-  return {
-    exists: true,
-    ready: instance.isReady,
-    active: instance.isActive,
-    url: instance.currentUrl
-  };
-}
-
-// Usage
-const status = await isInstanceReady("browser-1234567890-abc123");
-console.log(status);
-// Output: { exists: true, ready: true, active: true, url: "https://example.com" }
-```
-
-### Validate Instance Before Operation
-
-```js
-async function safeBrowserOperation(instanceId, operation) {
-  const instance = await codebolt.getBrowserInstance(instanceId);
-  
-  if (!instance) {
-    throw new Error(`Browser instance ${instanceId} not found`);
-  }
-  
-  if (!instance.isReady) {
-    throw new Error(`Browser instance ${instanceId} is not ready`);
-  }
-  
-  // Perform the operation
-  return await operation(instance);
-}
-
-// Usage
-try {
-  await safeBrowserOperation("browser-1234567890-abc123", async (instance) => {
-    return await codebolt.browser.goToPage('https://example.com', { instanceId });
-  });
-} catch (error) {
-  console.error('Browser operation failed:', error.message);
-}
-```
-
-### Get Instance with Retry
-
-```js
-async function getInstanceWithRetry(instanceId, maxRetries = 3, delay = 1000) {
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    const instance = await codebolt.getBrowserInstance(instanceId);
-    
-    if (instance) {
-      return instance;
-    }
-    
-    if (attempt < maxRetries) {
-      console.log(`Instance not found, retrying in ${delay}ms... (${attempt}/${maxRetries})`);
-      await new Promise(resolve => setTimeout(resolve, delay));
-    }
-  }
-  
-  throw new Error(`Instance ${instanceId} not found after ${maxRetries} attempts`);
-}
-```
-
-## Use Cases
-
-### **Instance Validation**
-Verify an instance exists and is ready before performing operations.
-
-### **Status Monitoring**
-Check the current state of a specific browser instance.
-
-### **Debugging**
-Get detailed information about a specific instance during troubleshooting.
-
-### **Conditional Operations**
-Perform operations only if an instance meets certain criteria.
-
-## Error Handling
-
-```js
-try {
-  const instance = await codebolt.getBrowserInstance(instanceId);
-  
-  if (!instance) {
-    console.log('Instance does not exist');
-    // Handle missing instance
-    return;
-  }
-  
-  // Use instance
-  console.log(`Instance URL: ${instance.currentUrl}`);
-  
-} catch (error) {
-  console.error('Failed to get browser instance:', error);
-  // Handle error
-}
-```
-
-## Notes
-
-- **Null Return**: Returns `null` if instance is not found (doesn't throw error)
-- **Real-time Data**: Returns current status of the instance
-- **Safe Operation**: Read-only operation that doesn't affect the instance
-- **Instance Validation**: Useful for validating instance existence before operations
-
-## Related Functions
-
-- [`listBrowserInstances()`](/docs/reference/codeboltjs/api-access/browser/listInstances) - List all instances
-- [`setActiveBrowserInstance()`](/docs/reference/codeboltjs/api-access/browser/setActiveInstance) - Set active instance
-- [`openNewBrowserInstance()`](/docs/reference/codeboltjs/api-access/browser/openNewInstance) - Create new instance
-- [`closeBrowserInstance()`](/docs/reference/codeboltjs/api-access/browser/closeInstance) - Close instance

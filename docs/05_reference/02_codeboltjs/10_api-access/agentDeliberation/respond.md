@@ -25,11 +25,11 @@ codebolt.agentDeliberation.respond(params: IRespondParams): Promise<IRespondResp
 Submits a response to a deliberation from an agent or user.
 ### Parameters
 
-- **`params`** ([IRespondParams](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IRespondParams)): Parameters including deliberation ID, responder info, and response body.
+- **`params`** ([IRespondParams](/docs/reference/codeboltjs/type-reference/types/interfaces/IRespondParams)) includes the deliberation ID, responder info, and response body.
 
 ### Returns
 
-- **`Promise<[IRespondResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IRespondResponse)>`**: A promise that resolves to the submitted response.
+Resolves to the submitted response. [IRespondResponse](/docs/reference/codeboltjs/type-reference/types/interfaces/IRespondResponse)
 
 ### Examples
 

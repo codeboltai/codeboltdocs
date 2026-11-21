@@ -1,289 +1,129 @@
 ---
 sidebar_label: API Overview
 sidebar_position: 1
-cbapicategory:
-    # ========== Core AI & Machine Learning ==========
-    - name: Swarm
-      link: /docs/api/ApiAccess/swarm
-      description: "Multi-agent swarm coordination with teams, roles, and vacancies for orchestrating complex AI systems"
-    - name: Knowledge Graph
-      link: /docs/api/ApiAccess/knowledgeGraph
-      description: "Graph-based knowledge management with entities, relationships, and pattern matching queries"
-    - name: Episodic Memory
-      link: /docs/api/ApiAccess/episodicMemory
-      description: "Time-series episodic memory for storing and retrieving contextual experiences"
-    - name: Persistent Memory
-      link: /docs/api/ApiAccess/persistentMemory
-      description: "Long-term persistent memory storage for agent knowledge and experiences"
-    - name: Memory Ingestion
-      link: /docs/api/ApiAccess/memoryIngestion
-      description: Automated memory ingestion and processing for building agent knowledge bases
-
-    # ========== Development & Tools ==========
-    - name: Search
-      link: /docs/api/ApiAccess/search
-      description: Advanced codebase search with semantic and pattern matching capabilities
-    - name: Crawler
-      link: /docs/api/ApiAccess/crawler
-      description: Web crawling and content extraction for gathering external data
-    - name: MCP
-      link: /docs/api/ApiAccess/mcp
-      description: Model Context Protocol for managing modular tools and services through WebSocket communication
-    - name: State
-      link: /docs/api/ApiAccess/state
-      description: "Application state management with real-time updates and persistence"
-    - name: Utils
-      link: /docs/api/ApiAccess/utils
-      description: General utility functions and helpers for common operations
-
-    # ========== Agent & Task Management ==========
-    - name: Agent
-      link: /docs/api/ApiAccess/agent
-      description: "Create customized, high-performance agents tailored to specific needs"
-    - name: Agent Portfolio
-      link: /docs/api/ApiAccess/agentPortfolio
-      description: Agent reputation system with karma, testimonials, talents, and rankings
-    - name: Agent Deliberation
-      link: /docs/api/ApiAccess/agentDeliberation
-      description: "Agent decision-making and reasoning capabilities for complex tasks"
-    - name: Action Block
-      link: /docs/api/ApiAccess/actionBlock
-      description: Structured action blocks for organizing and executing agent workflows
-    - name: Auto Testing
-      link: /docs/api/ApiAccess/autoTesting
-      description: Automated testing with test suites, cases, and execution tracking
-    - name: Capability
-      link: /docs/api/ApiAccess/capability
-      description: Define and manage agent capabilities and skill sets
-
-    # ========== Communication & Collaboration ==========
-    - name: Thread
-      link: /docs/api/ApiAccess/thread
-      description: Conversation thread management with messages and file change tracking
-    - name: Mail
-      link: /docs/api/ApiAccess/mail
-      description: Email management and communication capabilities
-    - name: Hook
-      link: /docs/api/ApiAccess/hook
-      description: "Webhook management for event-driven integrations"
-    - name: Group Feedback
-      link: /docs/api/ApiAccess/groupFeedback
-      description: Collaborative feedback collection and management for teams
-    - name: Chat
-      link: /docs/api/ApiAccess/chat
-      description: "Real-time chat interface with message history and user interaction"
-
-    # ========== Project & Planning ==========
-    - name: Calendar
-      link: /docs/api/ApiAccess/calendar
-      description: Event management with scheduling, reminders, and recurring events
-    - name: Requirement Plan
-      link: /docs/api/ApiAccess/requirementPlan
-      description: Project requirement planning and tracking
-    - name: Review Merge Request
-      link: /docs/api/ApiAccess/reviewMergeRequest
-      description: Merge request review and code collaboration
-    - name: Roadmap
-      link: /docs/api/ApiAccess/roadmap
-      description: Project roadmap planning and milestone tracking
-    - name: Task Planner
-      link: /docs/api/ApiAccess/taskplaner
-      description: Task planning and execution orchestration
-
-    # ========== Data & Storage ==========
-    - name: KV Store
-      link: /docs/api/ApiAccess/kvStore
-      description: "Persistent key-value storage with namespaces and querying capabilities"
-    - name: Event Log
-      link: /docs/api/ApiAccess/eventLog
-      description: Event logging and audit trail for system activities
-    - name: File Update Intent
-      link: /docs/api/ApiAccess/fileUpdateIntent
-      description: Track and manage file modification intentions and changes
-    - name: Context Assembly
-      link: /docs/api/ApiAccess/contextAssembly
-      description: Assemble and manage context from multiple memory sources
-
-    # ========== Context & Analysis ==========
-    - name: Context Rule Engine
-      link: /docs/api/ApiAccess/contextRuleEngine
-      description: Dynamic context selection with conditional rules and prioritization
-    - name: Todo
-      link: /docs/api/ApiAccess/todo
-      description: Task management with priorities, tags, and import/export capabilities
-    - name: Side Execution
-      link: /docs/api/ApiAccess/sideExecution
-      description: "Execute code in isolated processes for long-running or intensive tasks"
-
-    # ========== User & Message Management ==========
-    - name: User Message Manager
-      link: /docs/api/ApiAccess/user-message-manager
-      description: Manage user messages and communication workflows
-    - name: User Message Utilities
-      link: /docs/api/ApiAccess/user-message-utilities
-      description: Utility functions for processing and handling user messages
-
-    # ========== Existing Core Modules ==========
-    - name: Browser
-      link: /docs/api/ApiAccess/browser
-      description: Browser automation for web interaction, scraping, and testing
-    - name: Fs
-      link: /docs/api/ApiAccess/fs
-      description: File system operations for reading, writing, and managing files
-    - name: Git
-      link: /docs/api/ApiAccess/git
-      description: Git version control operations for repository management
-    - name: Tool
-      link: /docs/api/ApiAccess/tool
-      description: Tool management and execution framework
-    - name: Cbstate
-      link: /docs/api/ApiAccess/cbstate
-      description: Application state tracking with continuous updates
-    - name: Code Utils
-      link: /docs/api/ApiAccess/codeutils
-      description: Code parsing and manipulation utilities
-    - name: Code Parsers
-      link: /docs/api/ApiAccess/codeparsers
-      description: AST generation and code structure analysis utilities
-    - name: Job
-      link: /docs/api/ApiAccess/job
-      description: Job management and execution tracking
-    - name: Output Parsers
-      link: /docs/api/ApiAccess/outputparsers
-      description: Parse and structure output from various sources
-    - name: Project
-      link: /docs/api/ApiAccess/project
-      description: Project management and configuration
-    - name: Terminal
-      link: /docs/api/ApiAccess/terminal
-      description: "Terminal command execution with support for long-running processes"
-    - name: Codebase Search
-      link: /docs/api/ApiAccess/codebaseSearch
-      description: Search and navigate codebases with advanced queries
-    - name: Codemap
-      link: /docs/api/ApiAccess/codemap
-      description: Visual code mapping and structure analysis
-    - name: Project Structure
-      link: /docs/api/ApiAccess/projectStructure
-      description: Analyze and manage project structure and architecture
-    - name: Project Structure Update Request
-      link: /docs/api/ApiAccess/projectStructureUpdateRequest
-      description: "Multi-agent coordination for proposing and reviewing structural changes"
-    - name: History
-      link: /docs/api/ApiAccess/history
-      description: Chat history management with summarization
-    - name: Db Memory
-      link: /docs/api/ApiAccess/dbmemory
-      description: "Database-backed memory for persistent knowledge storage"
-    - name: Debug
-      link: /docs/api/ApiAccess/debug
-      description: Debugging utilities and logging capabilities
-    - name: LLM
-      link: /docs/api/ApiAccess/llm
-      description: Large Language Model integration and management
-    - name: RAG
-      link: /docs/api/ApiAccess/rag
-      description: "Retrieval-Augmented Generation for enhanced AI responses"
-    - name: Tokenizer
-      link: /docs/api/ApiAccess/tokenizer
-      description: Text tokenization for processing and analysis
-    - name: Vector DB
-      link: /docs/api/ApiAccess/vectordb
-      description: Vector database for embedding storage and similarity search
-
 ---
+
 # Direct API Access
 
-## Overview
+Use the default export from `@codebolt/codeboltjs` to call Codebolt APIs from a JavaScript or TypeScript agent. The SDK opens a connection to Codebolt when it is imported.
 
-Codebolt exposes all the major functions needed to create an AI Agent using the CodeboltJS SDK. The SDK provides a comprehensive set of functions organized into logical categories for creating powerful AI agents. Although these functions can be used in any mode, they are primarily used for Agent creation in Direct Function Mode.
+The signatures on these pages follow the CodeBoltJS 5.1.51 source.
 
-## API Categories
+## Quick start
 
-The Codebolt API is organized into the following categories:
-
-### Core AI & Machine Learning
-Advanced AI capabilities for multi-agent systems, knowledge management, and memory:
-- **Swarm** - Multi-agent coordination with teams, roles, and vacancies
-- **Knowledge Graph** - Graph-based knowledge with entities and relationships
-- **Episodic Memory** - Time-series contextual experiences
-- **Persistent Memory** - Long-term knowledge storage
-- **Memory Ingestion** - Automated knowledge base building
-
-### Development & Tools
-Tools for development, search, and integration:
-- **Search** - Advanced codebase search
-- **Crawler** - Web crawling and data extraction
-- **MCP** - Model Context Protocol for modular tools
-- **State** - Application state management
-- **Utils** - General utility functions
-
-### Agent & Task Management
-Create and manage AI agents and their tasks:
-- **Agent** - Customized agent creation
-- **Agent Portfolio** - Reputation and skill tracking
-- **Agent Deliberation** - Decision-making capabilities
-- **Action Block** - Structured workflows
-- **Auto Testing** - Automated test management
-- **Capability** - Agent skill definitions
-
-### Communication & Collaboration
-Team communication and feedback systems:
-- **Thread** - Conversation management
-- **Mail** - Email integration
-- **Hook** - Webhook management
-- **Group Feedback** - Collaborative feedback
-- **Chat** - Real-time messaging
-
-### Project & Planning
-Project management and planning tools:
-- **Calendar** - Event scheduling and management
-- **Requirement Plan** - Requirements tracking
-- **Review Merge Request** - Code review workflow
-- **Roadmap** - Project milestones
-- **Task Planner** - Task orchestration
-
-### Data & Storage
-Persistent data management:
-- **KV Store** - Key-value storage with querying
-- **Event Log** - Activity logging
-- **File Update Intent** - Change tracking
-- **Context Assembly** - Multi-source context
-
-### Context & Analysis
-Dynamic context and task management:
-- **Context Rule Engine** - Dynamic context selection
-- **Todo** - Task management
-- **Side Execution** - Isolated process execution
-
-### User & Message Management
-User communication handling:
-- **User Message Manager** - Message workflows
-- **User Message Utilities** - Message processing
-
-### Core Infrastructure
-Essential system modules:
-- **Browser** - Web automation
-- **Fs** - File operations
-- **Git** - Version control
-- **Terminal** - Command execution
-- **LLM** - Language model integration
-- **Vector DB** - Embedding storage
-
-All available modules:
-<CBAPICategory />
-
-## Quick Start
-
-```javascript
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-// Initialize connection
-await codebolt.waitForReady();
-
-// Use any module
-const result = await codebolt.swarm.createSwarm({
-  name: 'My Team',
-  description: 'A collaborative agent swarm'
+codebolt.onMessage(async () => {
+  const result = await codebolt.fs.readFile('README.md', { offset: 1, limit: 30 });
+  if (result.success && typeof result.content === 'string') {
+    return result.content;
+  }
+  return 'Could not read README.md.';
 });
 ```
+
+`onMessage` waits for the connection before registering the handler. The reference uses `onReady` for examples that make a request as soon as the SDK connects. See [Client and lifecycle](./client/index.md).
+
+Use [MCP](./mcp/index.md) to find and configure MCP servers. Use [Runtime Tools](./tools/index.md) to discover and call the tools those servers and other sources expose. See [Package exports](./client/index.md#package-exports) for the runtime entry points.
+
+## API modules
+
+### Projects and development
+
+- [`project`](./project/index.md) — Read project settings, paths, sibling directories, and editor file status.
+- [`fs`](./fs/index.md) — Read, write, edit, list, and search files in the workspace.
+- [`git`](./git/index.md) — Run Git operations against the current repository.
+- [`terminal`](./terminal/index.md) — Run commands, stream output, or inspect and stop managed processes.
+- [`browser`](./browser/index.md) — Interact with Codebolt browser instances and their pages.
+- [`computerUse`](./computerUse/index.md) — Send desktop interaction requests to the current Codebolt environment.
+- [`environment`](./environment/index.md) — Inspect and manage environments, providers, and environment runtimes.
+- [`codeutils`](./codeutils/index.md) — Collect source files as Markdown and use the SDK’s code matcher endpoints.
+- [`codebaseSearch`](./codebaseSearch/index.md) — Run semantic codebase search and search for MCP tools.
+- [`codemap`](./codemap/index.md) — Create, read, and edit codemaps.
+- [`projectStructure`](./projectStructure/index.md) — Read and edit the project structure model.
+- [`projectStructureUpdateRequest`](./projectStructureUpdateRequest/index.md) — Submit and review proposed changes to the project structure.
+- [`fileUpdateIntent`](./fileUpdateIntent/index.md) — Record intended file edits and detect overlapping work.
+- [`reviewMergeRequest`](./reviewMergeRequest/index.md) — Create and manage requests to review and merge changes.
+
+### Agents, threads, and planning
+
+- [`agent`](./agent/index.md) — Find, inspect, start, and message agents.
+- [`thread`](./thread/index.md) — Create and start threads, send messages, and retrieve context and file changes.
+- [`backgroundChildThreads`](./backgroundChildThreads/index.md) — Track background child threads and wait for their completion.
+- [`agentEvents`](./agentEvents/index.md) — Emit an event from the current agent or thread.
+- [`agentEventQueue`](./agentEventQueue/index.md) — Consume pending agent events and subscribe to new ones.
+- [`agentExecutionPhase`](./agentExecutionPhase/index.md) — Set, retrieve, and list phases in agent execution.
+- [`asyncTask`](./asyncTask/index.md) — List asynchronous tasks and send task control commands.
+- [`agentDeliberation`](./agentDeliberation/index.md) — Create and manage collaborative agent deliberations.
+- [`agentPortfolio`](./agentPortfolio/index.md) — Read and update agent portfolios, testimonials, and karma.
+- [`actionBlock`](./actionBlock/index.md) — Find Action Blocks and start one by name.
+- [`capability`](./capability/index.md) — Register, find, and manage capabilities.
+- [`swarm`](./swarm/index.md) — Manage swarms, teams, roles, and agent membership.
+- [`job`](./job/index.md) — Manage jobs, dependencies, assignments, locks, bids, and pheromones.
+- [`task`](./taskplaner/index.md) — Create, assign, execute, and inspect tasks.
+- [`todo`](./todo/index.md) — Track todo items and their progress.
+- [`executionPlan`](./executionPlan/index.md) — Create structured execution plans and coordinate work through readiness checks and leases.
+- [`featurePlan`](./featurePlan/index.md) — Create and maintain feature plan documents and their sections.
+- [`roadmap`](./roadmap/index.md) — Manage roadmap phases, features, and related planning records.
+- [`calendar`](./calendar/index.md) — Create and manage Codebolt calendar events and query upcoming events.
+- [`autoTesting`](./autoTesting/index.md) — Manage test suites, cases, steps, and runs.
+- [`sideExecution`](./sideExecution/index.md) — Start and stop side executions and query their status.
+
+### Communication and interface
+
+- [`chat`](./chat/index.md) — Send messages to the Codebolt chat UI and request user input or confirmation.
+- [`userMessage`](./user-message-utilities/index.md) — Read the active user message, attachments, mentions, flags, and session data.
+- [`conversations`](./conversations/index.md) — Create conversations, manage members, and send or list conversation messages.
+- [`mail`](./mail/index.md) — Send and manage messages within Codebolt’s agent mail service.
+- [`recipients`](./recipients/index.md) — List, inspect, and validate recipients for automation actions.
+- [`namedTag`](./namedTag/index.md) — List named tags and send a message to a named recipient.
+- [`groupFeedback`](./groupFeedback/index.md) — Manage feedback groups and their responses.
+- [`dynamicPanel`](./dynamicPanel/index.md) — Open, update, and close HTML panels in Codebolt.
+- [`artifact`](./artifact/index.md) — Create, list, update, and delete artifacts.
+- [`canvas`](./canvas/index.md) — Create canvases and manage their content and artifact links.
+- [`note`](./note/index.md) — Create, search, and edit notes.
+- [`flags`](./flags/index.md) — Manage user, project, and thread flags.
+- [`chatrules`](./chatrules/index.md) — Resolve initial and full chat prompts for a chat rule selection.
+- [`notify`](./notify/index.md) — Emit progress and lifecycle notifications across SDK modules.
+
+### Models, memory, and context
+
+- [`llm`](./llm/index.md) — Run model inference and inspect or configure model roles.
+- [`tokenizer`](./tokenizer/index.md) — Tokenize text and count tokens.
+- [`chatSummary`](./history/index.md) — Summarize chat message arrays.
+- [`dbmemory`](./dbmemory/index.md) — Store and retrieve values in the application memory database.
+- [`memory`](./memory/index.md) — Store, update, and list JSON, Markdown, and todo memory records.
+- [`persistentMemory`](./persistentMemory/index.md) — Create and query persistent memory stores.
+- [`episodicMemory`](./episodicMemory/index.md) — Store and retrieve episodes and their events.
+- [`knowledgeGraph`](./knowledgeGraph/index.md) — Manage graph records and query relationships.
+- [`memoryIngestion`](./memoryIngestion/index.md) — Manage memory ingestion pipelines and run processors.
+- [`contextAssembly`](./contextAssembly/index.md) — Assemble context for an application request.
+- [`contextRuleEngine`](./contextRuleEngine/index.md) — Manage context rules and evaluate conditions.
+- [`contextCompaction`](./contextCompaction/index.md) — Inspect and update compaction state and related context.
+- [`cbstate`](./cbstate/index.md) — Read application, agent, and project state and update state values.
+- [`kvStore`](./kvStore/index.md) — Manage key-value stores and entries.
+- [`eventLog`](./eventLog/index.md) — Create event streams and append or query events.
+- [`vectordb`](./vectordb/index.md) — Add and query vector database items.
+
+### Tools, search, and integrations
+
+- [`mcp`](./mcp/index.md) — Discover and configure Model Context Protocol servers.
+- [`tools`](./tools/index.md) — Discover and invoke callable tools through the runtime gateway.
+- [`marketplace`](./marketplace/index.md) — Find items and manage their installation, configuration, and operation status.
+- [`automations`](./automations/index.md) — Manage automation definitions and inspect their runs.
+- [`hooks`](./hook/index.md) — Create hooks and manage their enabled state.
+- [`searchableAssets`](./searchableAssets/index.md) — Search registered assets and register agent-local runtime tools.
+- [`docs`](./docs/index.md) — Search Codebolt documentation and retrieve SDK specifications and knowledge entries.
+- [`webFetch`](./webFetch/index.md) — Fetch the content of a web page.
+- [`crawler`](./crawler/index.md) — Send crawl start, navigation, scroll, and screenshot events, and await click results.
+- [`outputparsers`](./outputparsers/index.md) — Parse structured output formats.
+- [`debug`](./debug/index.md) — Send debug messages to the application.
+- [`utils`](./utils/index.md) — Apply an edit and diff through the SDK.
+
+For web queries, use the built-in [Web Search tool](./webSearch/index.md) through `codebolt.tools`.
+
+### Legacy SDK entries
+
+- [`search`](./search/index.md) — Returns placeholder strings.
+- [`rag`](./rag/index.md) — Exposes method names with no-op implementations.

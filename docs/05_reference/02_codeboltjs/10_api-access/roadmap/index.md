@@ -3,124 +3,185 @@ sidebar_position: 1
 title: Roadmap Module
 ---
 
-# Roadmap Module
+# Roadmap
 
-The Roadmap module provides comprehensive functionality for managing project roadmaps, including phases, features, and ideas. It enables agents to plan, organize, and track project development.
+Manage roadmap phases, features, and related planning records.
 
-## Overview
+## When to use it
 
-The roadmap module supports:
-- **Phases** - Major milestones or stages of a project
-- **Features** - Specific functionality items within phases
-- **Ideas** - Pre-roadmap suggestions that can be reviewed and promoted to features
+Group features into phases and capture ideas to revisit during planning.
 
-## Quick Start
+## Examples
+
+### Quick Start
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Get the complete roadmap
-const roadmap = await codebolt.roadmap.getRoadmap();
+codebolt.onReady(async () => {
+  // Get the complete roadmap
+  const roadmap = await codebolt.roadmap.getRoadmap();
 
-// Create a new phase
-const phase = await codebolt.roadmap.createPhase({
-  name: 'Phase 1: Foundation',
-  description: 'Core infrastructure and setup',
-  order: 1
-});
+  // Create a new phase
+  const phase = await codebolt.roadmap.createPhase({
+    name: 'Phase 1: Foundation',
+    description: 'Core infrastructure and setup',
+    order: 1
+  });
 
-// Add a feature to the phase
-const feature = await codebolt.roadmap.createFeature(phase.phase.id, {
-  title: 'User Authentication',
-  description: 'Implement OAuth2 login',
-  priority: 1,
-  status: 'pending'
-});
+  // Add a feature to the phase
+  const feature = await codebolt.roadmap.createFeature(phase.phase.id, {
+    title: 'User Authentication',
+    description: 'Implement OAuth2 login',
+    priority: 1,
+    status: 'pending'
+  });
 
-// Create an idea
-const idea = await codebolt.roadmap.createIdea({
-  title: 'Dark Mode Support',
-  description: 'Add toggle for dark mode theme',
-  suggestedImpact: 'medium',
-  suggestedDifficulty: 'easy'
+  // Create an idea
+  const idea = await codebolt.roadmap.createIdea({
+    title: 'Dark Mode Support',
+    description: 'Add toggle for dark mode theme',
+    suggestedImpact: 'medium',
+    suggestedDifficulty: 'easy'
+  });
 });
 ```
-
-## Available Methods
-
-### Roadmap Operations
-| Method | Description |
-|--------|-------------|
-| `getRoadmap()` | Get the complete roadmap for a project |
-
-### Phase Operations
-| Method | Description |
-|--------|-------------|
-| `getPhases()` | Get all phases in the roadmap |
-| `createPhase(data)` | Create a new phase |
-| `updatePhase(phaseId, data)` | Update an existing phase |
-| `deletePhase(phaseId)` | Delete a phase |
-
-### Feature Operations
-| Method | Description |
-|--------|-------------|
-| `getFeatures(phaseId)` | Get features in a specific phase |
-| `getAllFeatures()` | Get all features across all phases |
-| `createFeature(phaseId, data)` | Create a new feature in a phase |
-| `updateFeature(featureId, data)` | Update a feature |
-| `deleteFeature(featureId)` | Delete a feature |
-| `moveFeature(featureId, data)` | Move a feature to a different phase |
-
-### Idea Operations
-| Method | Description |
-|--------|-------------|
-| `getIdeas()` | Get all ideas |
-| `createIdea(data)` | Create a new idea |
-| `updateIdea(ideaId, data)` | Update an idea |
-| `deleteIdea(ideaId)` | Delete an idea |
-| `reviewIdea(ideaId, data)` | Accept or reject an idea |
-| `moveIdeaToRoadmap(ideaId, data)` | Convert an idea to a feature |
-
-## Common Use Cases
 
 ### Project Planning
+
 ```typescript
-// Create project phases
-const phases = ['Research', 'Design', 'Implementation', 'Testing', 'Launch'];
-for (let i = 0; i < phases.length; i++) {
-  await codebolt.roadmap.createPhase({
-    name: phases[i],
-    order: i + 1
-  });
-}
-```
+import codebolt from '@codebolt/codeboltjs';
 
-### Feature Tracking
-```typescript
-// Update feature status as work progresses
-await codebolt.roadmap.updateFeature(featureId, {
-  status: 'in-progress'
-});
-
-// Mark feature as complete
-await codebolt.roadmap.updateFeature(featureId, {
-  status: 'completed'
-});
-```
-
-### Idea Management
-```typescript
-// Review and accept an idea
-await codebolt.roadmap.reviewIdea(ideaId, {
-  status: 'accepted',
-  reviewNotes: 'Great suggestion, adding to Phase 2'
-});
-
-// Move accepted idea to roadmap
-await codebolt.roadmap.moveIdeaToRoadmap(ideaId, {
-  phaseId: 'phase-2-id',
-  featureOverrides: {
-    priority: 5
+codebolt.onReady(async () => {
+  // Create project phases
+  const phases = ['Research', 'Design', 'Implementation', 'Testing', 'Launch'];
+  for (let i = 0; i < phases.length; i++) {
+    await codebolt.roadmap.createPhase({
+      name: phases[i],
+      order: i + 1
+    });
   }
 });
+```
+
+## SDK methods
+
+### getRoadmap
+
+Get the complete roadmap for a project.
+
+```text
+codebolt.roadmap.getRoadmap(projectPath?: string): Promise<RoadmapGetResponse>
+```
+
+### getPhases
+
+Get all phases in the roadmap.
+
+```text
+codebolt.roadmap.getPhases(projectPath?: string): Promise<RoadmapPhasesResponse>
+```
+
+### createPhase
+
+[`createPhase`](createPhase.md) · Create a new phase in the roadmap.
+
+### updatePhase
+
+Update an existing phase.
+
+```text
+codebolt.roadmap.updatePhase(phaseId: string, data: UpdatePhaseData, projectPath?: string): Promise<RoadmapPhaseResponse>
+```
+
+### deletePhase
+
+Delete a phase from the roadmap.
+
+```text
+codebolt.roadmap.deletePhase(phaseId: string, projectPath?: string): Promise<RoadmapDeleteResponse>
+```
+
+### getFeatures
+
+Get features in a specific phase.
+
+```text
+codebolt.roadmap.getFeatures(phaseId: string, projectPath?: string): Promise<RoadmapFeaturesResponse>
+```
+
+### getAllFeatures
+
+Get all features across all phases.
+
+```text
+codebolt.roadmap.getAllFeatures(projectPath?: string): Promise<RoadmapFeaturesResponse>
+```
+
+### createFeature
+
+[`createFeature`](createFeature.md) · Create a new feature in a phase.
+
+### updateFeature
+
+[`updateFeature`](updateFeature.md) · Update an existing feature.
+
+### deleteFeature
+
+Delete a feature.
+
+```text
+codebolt.roadmap.deleteFeature(featureId: string, projectPath?: string): Promise<RoadmapDeleteResponse>
+```
+
+### moveFeature
+
+Move a feature to a different phase.
+
+```text
+codebolt.roadmap.moveFeature(featureId: string, data: MoveFeatureData, projectPath?: string): Promise<RoadmapFeatureResponse>
+```
+
+### getIdeas
+
+Get all ideas (pre-roadmap suggestions).
+
+```text
+codebolt.roadmap.getIdeas(projectPath?: string): Promise<RoadmapIdeasResponse>
+```
+
+### createIdea
+
+[`createIdea`](createIdea.md) · Create a new idea.
+
+### updateIdea
+
+Update an existing idea.
+
+```text
+codebolt.roadmap.updateIdea(ideaId: string, data: UpdateIdeaData, projectPath?: string): Promise<RoadmapIdeaResponse>
+```
+
+### deleteIdea
+
+Delete an idea.
+
+```text
+codebolt.roadmap.deleteIdea(ideaId: string, projectPath?: string): Promise<RoadmapDeleteResponse>
+```
+
+### reviewIdea
+
+Review an idea (accept or reject).
+
+```text
+codebolt.roadmap.reviewIdea(ideaId: string, data: ReviewIdeaData, projectPath?: string): Promise<RoadmapIdeaResponse>
+```
+
+### moveIdeaToRoadmap
+
+Move an accepted idea to the roadmap as a feature.
+
+```text
+codebolt.roadmap.moveIdeaToRoadmap(ideaId: string, data: MoveIdeaToRoadmapData, projectPath?: string): Promise<RoadmapMoveToRoadmapResponse>
 ```

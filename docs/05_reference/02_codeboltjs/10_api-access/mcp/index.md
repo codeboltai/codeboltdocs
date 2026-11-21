@@ -1,117 +1,60 @@
----
-cbapicategory:
-  - name: getEnabledMCPServers
-    link: /docs/api/apiaccess/mcp/getEnabledMCPServers
-    description: Gets the list of currently enabled MCP servers.
-  - name: getLocalMCPServers
-    link: /docs/api/apiaccess/mcp/getLocalMCPServers
-    description: Gets the list of locally available MCP servers.
-  - name: getMentionedMCPServers
-    link: /docs/api/apiaccess/mcp/getMentionedMCPServers
-    description: Gets MCP servers mentioned in a user message.
-  - name: searchAvailableMCPServers
-    link: /docs/api/apiaccess/mcp/searchAvailableMCPServers
-    description: Searches for available MCP servers matching a query.
-  - name: listMcpFromServers
-    link: /docs/api/apiaccess/mcp/listMcpFromServers
-    description: Lists all tools from specified MCP servers.
-  - name: configureMCPServer
-    link: /docs/api/apiaccess/mcp/configureMCPServer
-    description: Configures a specific MCP server with provided configuration.
-  - name: getTools
-    link: /docs/api/apiaccess/mcp/getTools
-    description: Gets detailed information about specific tools.
-  - name: executeTool
-    link: /docs/api/apiaccess/mcp/executeTool
-    description: Executes a specific tool with provided parameters.
-  - name: getMcpTools
-    link: /docs/api/apiaccess/mcp/getMcpTools
-    description: Gets MCP tools from specified servers.
-  - name: getMcpList
-    link: /docs/api/apiaccess/mcp/getMcpList
-    description: Gets the list of available MCP servers.
-  - name: getAllMcpTools
-    link: /docs/api/apiaccess/mcp/getAllMcpTools
-    description: Gets all tools from all enabled MCP servers.
-  - name: getEnabledMcps
-    link: /docs/api/apiaccess/mcp/getEnabledMcps
-    description: Gets the list of enabled MCP servers.
-  - name: configureMcpTool
-    link: /docs/api/apiaccess/mcp/configureMcpTool
-    description: Configures a specific MCP tool with provided configuration.
----
+# MCP
 
-# MCP API
+Discover and configure Model Context Protocol servers.
 
-The MCP (Model Context Protocol) API provides comprehensive access to MCP servers and tools, enabling you to discover, configure, and execute tools across multiple servers.
+Use [Runtime Tools](../tools/index.md) to discover and execute tools contributed by MCP servers.
 
-## Overview
+## When to use it
 
-The MCP module enables you to:
-- **Discover Servers**: Find available and enabled MCP servers
-- **Manage Tools**: List, configure, and execute tools
-- **Search**: Search for servers and tools by query
-- **Configure**: Set up servers and tools with custom configurations
+Use this module to inspect and configure MCP servers. Use [Runtime Tools](../tools/index.md) to select callable tools and invoke them.
 
-## Quick Start Example
+## Example
 
-```js
-// Get enabled MCP servers
-const enabledServers = await codebolt.mcp.getEnabledMCPServers();
-console.log('Enabled servers:', enabledServers);
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-// Get all tools from enabled servers
-const allTools = await codebolt.mcp.getAllMcpTools();
-console.log('Available tools:', allTools);
-
-// Execute a tool
-const result = await codebolt.mcp.executeTool(
-  'server-name',
-  'tool-name',
-  { param1: 'value1' }
-);
-console.log('Execution result:', result);
+codebolt.onReady(async () => {
+  const enabled = await codebolt.mcp.getEnabledMCPServers();
+  console.log(enabled);
+});
 ```
 
-## Common Use Cases
+## SDK methods
 
-### Tool Discovery
-Discover and explore available tools:
+### getEnabledMCPServers
 
-```js
-async function discoverTools() {
-  // Get list of all MCP servers
-  const servers = await codebolt.mcp.getMcpList();
+[`getEnabledMCPServers`](getEnabledMCPServers.md)
 
-  // Get tools from specific servers
-  const tools = await codebolt.mcp.getMcpTools(['server1', 'server2']);
+### getLocalMCPServers
 
-  return { servers, tools };
-}
+```text
+codebolt.mcp.getLocalMCPServers(): Promise<GetLocalToolBoxesResponse>
 ```
 
-### Tool Execution
-Execute tools with parameters:
+### getMentionedMCPServers
 
-```js
-async function runTool(server, tool, params) {
-  const result = await codebolt.mcp.executeTool(server, tool, params);
-  return result;
-}
+```text
+codebolt.mcp.getMentionedMCPServers(userMessage: MCPUserMessage): Promise<GetAvailableToolBoxesResponse>
 ```
 
-## Response Structure
+The current server returns its MCP catalog for this request. For the names mentioned in a message, use [User Message](../user-message-utilities/index.md#getmentionedmcps).
 
-MCP API functions return typed responses:
+### searchAvailableMCPServers
 
-**Server Discovery:**
-- [`GetEnabledMCPSResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/GetEnabledMCPSResponse): List of enabled servers
-- [`GetMcpListResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/GetMcpListResponse): List of all available servers
-- [`GetLocalToolBoxesResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/GetLocalToolBoxesResponse): Local server information
+```text
+codebolt.mcp.searchAvailableMCPServers(query: string): Promise<SearchAvailableToolBoxesResponse>
+```
 
-**Tool Operations:**
-- [`GetAllMCPToolsResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/GetAllMCPToolsResponse): All tools from enabled servers
-- [`ExecuteToolResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/ExecuteToolResponse): Tool execution results
-- [`GetToolsResponse`](/docs/reference/codeboltjs/type-reference/types/interfaces/GetToolsResponse): Detailed tool information
+### configureMCPServer
 
-<CBAPICategory />
+[`configureMCPServer`](configureMCPServer.md)
+
+### getMcpList
+
+[`getMcpList`](getMcpList.md)
+
+### getEnabledMcps
+
+```text
+codebolt.mcp.getEnabledMcps(): Promise<GetEnabledMCPSResponse>
+```

@@ -1,15 +1,16 @@
----
-cbapicategory:
-  - name: getAstTreeInFile
-    link: /docs/api/apiaccess/codeparsers/getAstTreeInFile
-    description: "Generates an Abstract Syntax Tree (AST) for a given file."
-  - name: getClassesInFile
-    link: /docs/api/apiaccess/codeparsers/getClassesInFile
-    description: Retrieves the classes in a given file.
-  - name: getFunctionsinClass
-    link: /docs/api/apiaccess/codeparsers/getFunctionsinClass
-    description: Retrieves the functions in a given class within a file.
+# Code Parsers
 
----
-# codeparsers
-<CBAPICategory />
+The SDK instance has no `codebolt.codeparsers` module. Use [List Code Definition Names](../fs/listCodeDefinitionNames.md) for names identified in workspace files or [Code Utilities](../codeutils/index.md) for the SDK’s source collection and matching methods.
+
+## Example
+
+### List definition names in workspace source files
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const result = await codebolt.fs.listCodeDefinitionNames('./src');
+  if (result.success) console.log(result.definitions ?? result.result);
+});
+```

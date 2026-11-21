@@ -1,192 +1,263 @@
----
-cbapicategory:
-  - name: createSwarm
-    link: /docs/api/apiaccess/swarm/createSwarm
-    description: "Creates a new swarm for multi-agent coordination."
-  - name: listSwarms
-    link: /docs/api/apiaccess/swarm/listSwarms
-    description: Lists all available swarms.
-  - name: getSwarm
-    link: /docs/api/apiaccess/swarm/getSwarm
-    description: Gets details of a specific swarm.
-  - name: getSwarmAgents
-    link: /docs/api/apiaccess/swarm/getSwarmAgents
-    description: Gets all agents in a swarm.
-  - name: registerAgent
-    link: /docs/api/apiaccess/swarm/registerAgent
-    description: Registers an agent to a swarm.
-  - name: unregisterAgent
-    link: /docs/api/apiaccess/swarm/unregisterAgent
-    description: Unregisters an agent from a swarm.
-  - name: createTeam
-    link: /docs/api/apiaccess/swarm/createTeam
-    description: Creates a new team in a swarm.
-  - name: listTeams
-    link: /docs/api/apiaccess/swarm/listTeams
-    description: Lists all teams in a swarm.
-  - name: getTeam
-    link: /docs/api/apiaccess/swarm/getTeam
-    description: Gets details of a specific team.
-  - name: joinTeam
-    link: /docs/api/apiaccess/swarm/joinTeam
-    description: Adds an agent to a team.
-  - name: leaveTeam
-    link: /docs/api/apiaccess/swarm/leaveTeam
-    description: Removes an agent from a team.
-  - name: deleteTeam
-    link: /docs/api/apiaccess/swarm/deleteTeam
-    description: Deletes a team from a swarm.
-  - name: createRole
-    link: /docs/api/apiaccess/swarm/createRole
-    description: Creates a new role in a swarm.
-  - name: listRoles
-    link: /docs/api/apiaccess/swarm/listRoles
-    description: Lists all roles in a swarm.
-  - name: getRole
-    link: /docs/api/apiaccess/swarm/getRole
-    description: Gets details of a specific role.
-  - name: assignRole
-    link: /docs/api/apiaccess/swarm/assignRole
-    description: Assigns a role to an agent.
-  - name: unassignRole
-    link: /docs/api/apiaccess/swarm/unassignRole
-    description: Unassigns a role from an agent.
-  - name: getAgentsByRole
-    link: /docs/api/apiaccess/swarm/getAgentsByRole
-    description: Gets all agents with a specific role.
-  - name: deleteRole
-    link: /docs/api/apiaccess/swarm/deleteRole
-    description: Deletes a role from a swarm.
-  - name: createVacancy
-    link: /docs/api/apiaccess/swarm/createVacancy
-    description: Creates a new vacancy in a swarm.
-  - name: listVacancies
-    link: /docs/api/apiaccess/swarm/listVacancies
-    description: Lists all vacancies in a swarm.
-  - name: applyForVacancy
-    link: /docs/api/apiaccess/swarm/applyForVacancy
-    description: Applies for a vacancy.
-  - name: closeVacancy
-    link: /docs/api/apiaccess/swarm/closeVacancy
-    description: Closes a vacancy.
-  - name: updateAgentStatus
-    link: /docs/api/apiaccess/swarm/updateAgentStatus
-    description: "Updates an agent's status."
-  - name: getSwarmStatusSummary
-    link: /docs/api/apiaccess/swarm/getSwarmStatusSummary
-    description: Gets status summary for a swarm.
-  - name: getDefaultJobGroup
-    link: /docs/api/apiaccess/swarm/getDefaultJobGroup
-    description: Gets the default job group ID for a swarm.
----
-# Swarm API
+# Swarm
 
-The Swarm API provides comprehensive multi-agent swarm coordination capabilities, enabling you to manage swarms, agents, teams, roles, and vacancies. This API allows you to orchestrate complex multi-agent systems with fine-grained control over agent organization and responsibilities.
+Manage swarms, teams, roles, and agent membership.
 
-## Overview
+## Create a swarm and add a team
 
-The swarm module enables you to:
-- **Swarm Management**: Create and manage swarms of AI agents
-- **Agent Registration**: Register and manage agents within swarms
-- **Team Organization**: Create teams to group agents for specific tasks
-- **Role Assignment**: Define roles and assign them to agents
-- **Vacancy Management**: Create and manage job vacancies within swarms
-- **Status Tracking**: Monitor agent status and swarm health
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-## Quick Start Example
+codebolt.onReady(async () => {
+  const created = await codebolt.swarm.createSwarm({
+    name: 'Project maintenance',
+    description: 'Coordinate review and maintenance work.',
+  });
+  const swarmId = created.data?.swarm.id;
+  if (!created.success || !swarmId) {
+    throw new Error(created.error?.message ?? 'Could not create the swarm.');
+  }
 
-```js
-// Wait for connection
-await codebolt.waitForReady();
-
-// Create a new swarm
-const swarm = await codebolt.swarm.createSwarm({
-    name: 'Development Team',
-    description: 'A swarm for coordinating development tasks',
-    allowExternalAgents: false,
-    maxAgents: 10
+  const team = await codebolt.swarm.createTeam(swarmId, { name: 'Documentation', createdBy: 'coordinator-agent-id' });
+  console.log(team);
 });
-console.log('✅ Created swarm:', swarm.data.swarm);
-
-// Register an agent to the swarm
-const agent = await codebolt.swarm.registerAgent(swarm.data.swarm.id, {
-    name: 'Code Reviewer',
-    capabilities: ['code_review', 'testing'],
-    agentType: 'internal',
-    metadata: { version: '1.0.0' }
-});
-console.log('✅ Registered agent:', agent.data);
-
-// Create a team
-const team = await codebolt.swarm.createTeam(swarm.data.swarm.id, {
-    name: 'Frontend Team',
-    description: 'Handles frontend development',
-    maxMembers: 5,
-    createdBy: 'admin'
-});
-console.log('✅ Created team:', team.data);
-
-// Create and assign a role
-const role = await codebolt.swarm.createRole(swarm.data.swarm.id, {
-    name: 'Senior Developer',
-    description: 'Experienced developer role',
-    permissions: ['write', 'review', 'deploy'],
-    maxAssignees: 3,
-    createdBy: 'admin'
-});
-console.log('✅ Created role:', role.data);
-
-// Assign role to agent
-await codebolt.swarm.assignRole(
-    swarm.data.swarm.id,
-    role.data.role.id,
-    agent.data.agentId
-);
-console.log('✅ Role assigned successfully');
 ```
 
-## Response Structure
+## When to use it
 
-All swarm API functions return responses with a consistent structure:
+Create a swarm to organize related agents, then use teams and roles to describe how those agents work together.
 
-```js
-{
-    success: boolean,
-    requestId?: string,
-    data?: {
-        // Response-specific data
-        swarm: Swarm,
-        agents: SwarmAgent[],
-        team: Team,
-        role: Role,
-        // ... etc
-    },
-    error?: {
-        code: string,
-        message: string,
-        details?: any
-    }
-}
+## SDK methods
+
+### createSwarm
+
+[`createSwarm`](createSwarm.md) · Create a new swarm.
+
+### listSwarms
+
+[`listSwarms`](listSwarms.md) · List all available swarms.
+
+### getSwarm
+
+Get details of a specific swarm.
+
+```text
+codebolt.swarm.getSwarm(swarmId: string): Promise<GetSwarmResponse>
 ```
 
-## Key Concepts
+### getSwarmAgents
 
-### Swarms
-A **swarm** is a collection of AI agents working together towards common goals. Each swarm has its own configuration, agents, teams, and roles.
+Get all agents in a swarm.
 
-### Agents
-An **agent** is an AI entity that can perform tasks. Agents can be internal (managed by the system) or external (connected via external endpoints).
+```text
+codebolt.swarm.getSwarmAgents(swarmId: string): Promise<GetSwarmAgentsResponse>
+```
 
-### Teams
-A **team** is a subgroup of agents within a swarm, organized for specific purposes or projects.
+### registerAgent
 
-### Roles
-A **role** defines a set of responsibilities and permissions within a swarm. Agents can be assigned to roles to control their capabilities and access.
+[`registerAgent`](registerAgent.md) · Register an agent to a swarm.
 
-### Vacancies
-A **vacancy** represents an open position within a swarm that agents can apply for, based on their capabilities and role assignments.
+### unregisterAgent
 
-### Status Tracking
-Agents can have different statuses: `active`, `idle`, `busy`, or `offline`. This helps in monitoring and coordinating agent activities.
+Unregister an agent from a swarm.
 
-<CBAPICategory />
+```text
+codebolt.swarm.unregisterAgent(swarmId: string, agentId: string): Promise<UnregisterAgentResponse>
+```
+
+### createTeam
+
+[`createTeam`](createTeam.md) · Create a new team in a swarm.
+
+### listTeams
+
+List all teams in a swarm.
+
+```text
+codebolt.swarm.listTeams(swarmId: string): Promise<ListTeamsResponse>
+```
+
+### getTeam
+
+Get details of a specific team.
+
+```text
+codebolt.swarm.getTeam(swarmId: string, teamId: string): Promise<GetTeamResponse>
+```
+
+### joinTeam
+
+Add an agent to a team.
+
+```text
+codebolt.swarm.joinTeam(swarmId: string, teamId: string, agentId: string): Promise<JoinTeamResponse>
+```
+
+### leaveTeam
+
+Remove an agent from a team.
+
+```text
+codebolt.swarm.leaveTeam(swarmId: string, teamId: string, agentId: string): Promise<LeaveTeamResponse>
+```
+
+### deleteTeam
+
+Delete a team from a swarm.
+
+```text
+codebolt.swarm.deleteTeam(swarmId: string, teamId: string): Promise<DeleteTeamResponse>
+```
+
+### createRole
+
+[`createRole`](createRole.md) · Create a new role in a swarm.
+
+### listRoles
+
+List all roles in a swarm.
+
+```text
+codebolt.swarm.listRoles(swarmId: string): Promise<ListRolesResponse>
+```
+
+### getRole
+
+Get details of a specific role.
+
+```text
+codebolt.swarm.getRole(swarmId: string, roleId: string): Promise<GetRoleResponse>
+```
+
+### assignRole
+
+[`assignRole`](assignRole.md) · Assign a role to an agent.
+
+### unassignRole
+
+Unassign a role from an agent.
+
+```text
+codebolt.swarm.unassignRole(swarmId: string, roleId: string, agentId: string): Promise<UnassignRoleResponse>
+```
+
+### getAgentsByRole
+
+Get all agents with a specific role.
+
+```text
+codebolt.swarm.getAgentsByRole(swarmId: string, roleId: string): Promise<GetAgentsByRoleResponse>
+```
+
+### deleteRole
+
+Delete a role from a swarm.
+
+```text
+codebolt.swarm.deleteRole(swarmId: string, roleId: string): Promise<DeleteRoleResponse>
+```
+
+### createVacancy
+
+Create a new vacancy in a swarm.
+
+```text
+codebolt.swarm.createVacancy(swarmId: string, data: CreateVacancyRequest): Promise<CreateVacancyResponse>
+```
+
+### listVacancies
+
+List all vacancies in a swarm.
+
+```text
+codebolt.swarm.listVacancies(swarmId: string): Promise<ListVacanciesResponse>
+```
+
+### applyForVacancy
+
+Apply for a vacancy.
+
+```text
+codebolt.swarm.applyForVacancy(swarmId: string, vacancyId: string, agentId: string, message?: string): Promise<ApplyForVacancyResponse>
+```
+
+### closeVacancy
+
+Close a vacancy.
+
+```text
+codebolt.swarm.closeVacancy(swarmId: string, vacancyId: string, reason: string): Promise<CloseVacancyResponse>
+```
+
+### updateAgentStatus
+
+[`updateAgentStatus`](updateAgentStatus.md) · Update an agent's status.
+
+### getSwarmStatusSummary
+
+Get status summary for a swarm.
+
+```text
+codebolt.swarm.getSwarmStatusSummary(swarmId: string): Promise<GetStatusSummaryResponse>
+```
+
+### getDefaultJobGroup
+
+Get the default job group ID associated with a swarm.
+
+```text
+codebolt.swarm.getDefaultJobGroup(swarmId: string): Promise<GetDefaultJobGroupResponse>
+```
+
+### getSwarmConfig
+
+Get the configuration for a specific swarm.
+
+```text
+codebolt.swarm.getSwarmConfig(swarmId: string): Promise<GetSwarmConfigResponse>
+```
+
+### updateSwarmConfig
+
+Start a swarm run: spawn the configured agents and hand them the initial prompt.
+
+```text
+codebolt.swarm.updateSwarmConfig(swarmId: string, config: SwarmConfig): Promise<GetSwarmConfigResponse>
+```
+
+### getExecutionStatus
+
+```text
+codebolt.swarm.getExecutionStatus(swarmId: string): Promise<SwarmExecutionStatusResponse>
+```
+
+### getCoordination
+
+```text
+codebolt.swarm.getCoordination(swarmId: string): Promise<SwarmResponse & { data?: any; }>
+```
+
+### addWorkers
+
+```text
+codebolt.swarm.addWorkers(swarmId: string, data: { runId: string; requestId: string; workers: Array<{ agentId: string; count: number; }>; reason: string; causedByEventId?: string; }): Promise<SwarmResponse & { data?: any; }>
+```
+
+### resumeSwarm
+
+Resume interrupted workers in their existing threads with saved context.
+
+```text
+codebolt.swarm.resumeSwarm(swarmId: string): Promise<SwarmResponse & { data?: { status: string; resumedThreads: string[]; reusedThreads: string[]; queuedThreads?: string[]; message?: string; error?: string; }; }>
+```
+
+### stopSwarm
+
+```text
+codebolt.swarm.stopSwarm(swarmId: string): Promise<SwarmResponse>
+```
+
+### startSwarm
+
+```text
+codebolt.swarm.startSwarm(swarmId: string, request?: StartSwarmRequest): Promise<StartSwarmResponse>
+```

@@ -1,46 +1,29 @@
 ---
 name: listSuites
+description: Lists all available test suites.
 cbbaseinfo:
   description: Lists all available test suites.
-cbparameters:
-  parameters:
-    - name: params
-      typeName: IListSuitesParams
-      description: Optional parameters for filtering.
-      isOptional: true
-  returns:
-    signatureTypeName: "Promise<IListSuitesResponse>"
-    description: A promise that resolves to the list of test suites.
-    typeArgs: []
 data:
   name: listSuites
   category: autoTesting
   link: listSuites.md
 ---
+
 # listSuites
 
-```typescript
-codebolt.autoTesting.listSuites(params: IListSuitesParams): Promise<IListSuitesResponse>
+```text
+codebolt.autoTesting.listSuites(_params?: IListSuitesParams): Promise<IListSuitesResponse>
 ```
 
 Lists all available test suites.
-### Parameters
 
-- **`params`** ([IListSuitesParams](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IListSuitesParams), optional): Optional parameters for filtering.
-
-### Returns
-
-- **`Promise<[IListSuitesResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IListSuitesResponse)>`**: A promise that resolves to the list of test suites.
-
-### Examples
+## Example
 
 ```typescript
-const suites = await codebolt.autoTesting.listSuites();
-console.log('Available suites:', suites.payload.suites);
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const suites = await codebolt.autoTesting.listSuites();
+  console.log('Available suites:', suites.payload.suites);
+});
 ```
-
-### Notes
-
-- Returns all test suites
-- Useful for test discovery
-- No filtering currently supported

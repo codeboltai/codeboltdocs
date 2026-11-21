@@ -83,9 +83,13 @@ The description is critical — the LLM decides whether to call your tool based 
 Use `codebolt.mcp` to work with MCP server configuration and `codebolt.tools` to discover and execute callable tools.
 
 ```typescript
-await codebolt.waitForReady();
-const servers = await codebolt.mcp.getEnabledMCPServers();
-const { data } = await codebolt.tools.listRuntimeTools();
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const servers = await codebolt.mcp.getEnabledMCPServers();
+  const { data } = await codebolt.tools.listRuntimeTools();
+  console.log(servers, data.tools);
+});
 ```
 
 ## Tool execution flow
