@@ -26,7 +26,7 @@ Modifies the properties of a phase such as its name, description, or ordering.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

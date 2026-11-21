@@ -26,7 +26,7 @@ job by agents, useful for understanding the job's coordination state.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

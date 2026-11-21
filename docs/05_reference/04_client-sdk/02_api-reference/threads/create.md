@@ -27,7 +27,7 @@ when ready. Use this to set up new execution units.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

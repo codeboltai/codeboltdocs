@@ -27,7 +27,7 @@ present in the environment. The PR details are specified in the request.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

@@ -17,7 +17,7 @@ The chat image above shows the current interface. These are the main areas you w
 - **Tabs** — each tab is a thread with its own history, agent, and model.
 - **Agent + model pickers** — change either at any point; subsequent turns use the new values.
 - **Message stream** — user and assistant messages, with tool calls rendered inline.
-- **Checkpoint controls** — every turn creates a checkpoint you can roll back to. See [Checkpoints](./04_checkpoints-and-rollback.md).
+- **Checkpoint controls**. Restore project files from a checkpoint attached to a chat message. See [Checkpoints](./04_checkpoints-and-rollback.md).
 - **Composer** — where you type. Supports @-mentions, slash commands, file drops.
 
 ## What a turn looks like
@@ -34,7 +34,7 @@ When you send a message:
 8. A final message is streamed back.
 9. A checkpoint is recorded at the end.
 
-All of this is traced — you can dig into any turn to see exactly what happened. See [Agent Debug](../../../05c_agent-observability/02_agent-debug.md).
+All of this is traced — you can dig into any turn to see exactly what happened. See [Agent Debug](../../../04_agents/08_agent-debug.md).
 
 ## Tabs
 
@@ -50,7 +50,7 @@ See [Tabs and history](./02_tabs-and-history.md).
 
 ## The context window
 
-The chat doesn't dump your entire conversation into the LLM every turn. The [context assembler](../../04_build-on-codebolt/07b_subsystems/07_context-assembly.md) picks what goes in, based on:
+The chat doesn't dump your entire conversation into the LLM every turn. The [context assembler](../../../../04_build-on-codebolt/07b_subsystems/07_context-assembly.md) picks what goes in, based on:
 
 - Recent turns (most recent N).
 - Persistent memory relevant to the current task.
@@ -114,4 +114,4 @@ New chat creation, history access, restart, and most thread navigation are curre
 - [Context and @-mentions](./03_context-and-at-mentions.md)
 - [Checkpoints and rollback](./04_checkpoints-and-rollback.md)
 - [Model selection](./06_model-selection.md)
-- [Chat message end-to-end (internals)](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/chat-message-end-to-end.md)
+- [Chat message end-to-end (internals)](../../../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/chat-message-end-to-end.md)

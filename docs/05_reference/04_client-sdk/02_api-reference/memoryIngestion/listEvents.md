@@ -26,7 +26,7 @@ processing metrics, and error details. Useful for monitoring and debugging pipel
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

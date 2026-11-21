@@ -7,7 +7,7 @@ title: ContextRuleEngine API
 Context Rule Engine API
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 ```

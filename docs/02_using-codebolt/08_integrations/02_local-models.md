@@ -132,7 +132,7 @@ ollama pull nomic-embed-text
 
 Then in the provider settings UI, point embeddings at your Ollama instance and pick the embedding model.
 
-Local embeddings are lower-quality than the best remote ones (Voyage, OpenAI text-embedding-3-large), but for most codebase search it's fine. The big win is that your code never leaves your machine.
+Local embeddings are lower-quality than the best remote ones (Voyage, OpenAI text-embedding-3-large), but for most codebase search it's fine. With a local embedding backend, embedding requests run on that backend. Review your model, tools, and connected integrations separately to understand what data they send.
 
 ## Warmup and cold start
 

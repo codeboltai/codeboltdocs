@@ -27,7 +27,7 @@ named MCP server. The server may need to be restarted for changes to take effect
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

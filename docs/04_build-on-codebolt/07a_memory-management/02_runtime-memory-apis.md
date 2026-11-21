@@ -68,7 +68,7 @@ const { specs } = await codebolt.memoryIngestion.getProcessorSpecs();
 
 ## Persistent Memory — `codebolt.persistentMemory`
 
-Create and modify the retrieval pipeline definitions that the Context Assembly Engine runs every turn.
+Create and modify retrieval definitions that context assembly can select for a request.
 
 ```typescript
 // Define a new retrieval pipeline

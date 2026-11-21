@@ -82,7 +82,7 @@ The server scans three locations for plugins:
 
 1. Built-in plugins shipped with Codebolt.
 2. Global plugins at `~/.codebolt/plugins/`.
-3. Per-project plugins at `.codeboltPlugins/`.
+3. Per-project plugins at `.codebolt/plugins/`.
 
 Plugins with `codebolt.plugin.ui.path` in their `package.json` are marked as having a UI.
 

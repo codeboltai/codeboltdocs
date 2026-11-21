@@ -13,7 +13,7 @@ import UserMessageProcessingSwimlane from '@site/src/components/diagrams/UserMes
 
 Codebolt is a platform runtime for building and running coding agents. The core runtime handles the operational layer: interfaces, sockets, threads, project context, model providers, tools, permissions, memory, guardrails, storage, and execution environments.
 
-Agents  sit on top of that runtime. They receive work from Codebolt, use the runtime features through `codeboltjs`, and decide how to run the agentic loop for the task.
+Agents sit on top of that runtime. They receive work from Codebolt, use the runtime features through `codeboltjs`, and decide how to run the agentic loop for the task.
 
 <CodeboltWebAppArchitecture />
 
@@ -39,7 +39,7 @@ Codebolt separates the platform from the agent loop. The runtime owns the shared
 
 This is different from agent applications where the agent loop is built directly into the application. In those systems, the app usually defines one fixed loop and the agent operates inside it.
 
-In Codebolt, the application and runtime expose capabilities to agents, but the complete agentic loop can remain under your control. The `codeboltjs` SDK includes reference implementations and helpers for a loop, context assembly, model calls, and tool execution, but an agent does not have to follow that exact implementation. You can write a simple script, use the reference loop, replace parts of it, or build a completely custom loop around the same runtime APIs.
+In Codebolt, the application and runtime expose capabilities to agents, but the complete agentic loop can remain under your control. The CodeBoltJS SDK exposes runtime APIs. The Agent SDK provides helpers for building a loop and deciding how to use those APIs. You can write a simple script, use the reference loop, replace parts of it, or build a completely custom loop around the same runtime APIs.
 
 ## Runtime capabilities and process control
 
@@ -92,7 +92,7 @@ That unlocks a different way to build agents:
 | Instead of building this into every agent app | Codebolt provides it through the runtime | Your agent controls |
 |---|---|---|
 | Tool runners, MCP wiring, and service routing | [Custom Tools](../../02_using-codebolt/04b_agent-extensions/07_custom-tools.md), [MCP servers](../../02_using-codebolt/04b_agent-extensions/06_mcp-server.md) | Which tools to call and how to interpret results |
-| Project context, history, memory, and event state | [Memory](../../02_using-codebolt/07_memory/01_overview.md), [Context Assembly](../../02_using-codebolt/07_memory/03_context-assembly.md) | What context to request, compress, or ignore |
+| Project context, history, memory, and event state | [Memory](../../02_using-codebolt/05d_memory/01_overview.md), [Context Assembly](../../02_using-codebolt/05d_memory/03_context-assembly.md) | What context to request, compress, or ignore |
 | Verification, guardrails, evals, and approval checks | [Guardrails](../../02_using-codebolt/05b_guardrails-and-settings/01_guardrails.md), [Eval and Optimization](../../02_using-codebolt/05e_eval-and-optimization/01_overview.md) | When to continue, retry, stop, or ask for help |
 | Local and remote execution environments | [Local Scaling](./06_local-scaling.md), [Cloud Scaling](./07_cloud-scaling.md), [Environment Providers](../../02_using-codebolt/08a_environments/03_environment-providers.md) | Where the work should run for a task |
 | Review and merge workflows | [Review and Merge](../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge.md), [Git and Shadow Git](../../02_using-codebolt/08_integrations/03_git-and-shadow-git.md) | What change to propose and what policy to follow |

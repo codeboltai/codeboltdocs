@@ -7,7 +7,7 @@ title: Chat API
 Chat API - thread management, messaging, steps, and steering
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 ```

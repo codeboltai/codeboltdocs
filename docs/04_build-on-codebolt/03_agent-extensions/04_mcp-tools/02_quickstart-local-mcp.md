@@ -9,7 +9,7 @@ description: "Create a local MCP tool, register it with Codebolt, and have an ag
 Create a local MCP tool, register it with Codebolt, and have an agent call it. This covers two approaches:
 
 1. **Local project tool** — place in `.codebolt/tools/` with a YAML config
-2. **MCP server via CodeboltJS** — use `startCodeboltMcpServer()` API
+2. **CodeBolt as an MCP server** — use `codebolt mcp start` with an MCP client.
 
 **You'll need:** Codebolt installed and running, Node.js 18+, a project open.
 
@@ -24,7 +24,8 @@ cd /path/to/your/project
 mkdir -p .codebolt/tools/greet
 cd .codebolt/tools/greet
 npm init -y
-npm install @codebolt/codeboltjs
+npm pkg set type=module
+npm install @modelcontextprotocol/sdk
 ```
 
 ### Step 2 — Create `codebolttool.yaml`
@@ -52,35 +53,38 @@ description: A simple greeting tool that returns friendly messages
 
 ### Step 3 — Write the MCP server
 
-Create `index.js` — this is the entry point that Codebolt runs as an MCP server via `node index.js`:
+Save this as `index.js` in your tool directory.
 
 ```js
-import { createCodeboltMcpServer } from '@codebolt/codeboltjs/mcp-server';
-import { StdioServerTransport } from '@codebolt/codeboltjs/mcp-server';
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
 
-// Create the MCP server with Codebolt's built-in tool registry
-const server = createCodeboltMcpServer({
-  serverName: 'greet',
-  serverVersion: '1.0.0',
-  toolFilter: ['hello'],        // expose only the 'hello' tool
-  toolPrefix: 'greet',          // tools namespaced as greet_hello
+const server = new Server({ name: 'greet', version: '1.0.0' }, {
+  capabilities: { tools: {} }
 });
 
-const transport = new StdioServerTransport();
-await server.connect(transport);
-```
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
+  tools: [{
+    name: 'hello',
+    description: 'Return a greeting for the supplied name.',
+    inputSchema: {
+      type: 'object',
+      properties: { name: { type: 'string' } },
+      required: ['name']
+    }
+  }]
+}));
 
-Alternatively, use `startCodeboltMcpServer()` for a higher-level API that handles transport setup automatically:
-
-```js
-import { startCodeboltMcpServer } from '@codebolt/codeboltjs/mcp-server';
-
-const handle = await startCodeboltMcpServer({
-  transport: 'stdio',
-  serverName: 'greet',
-  toolFilter: ['hello'],
-  toolPrefix: 'greet',
+server.setRequestHandler(CallToolRequestSchema, async request => {
+  const name = request.params.arguments?.name;
+  if (request.params.name !== 'hello' || typeof name !== 'string') {
+    return { isError: true, content: [{ type: 'text', text: 'Expected hello with a name.' }] };
+  }
+  return { content: [{ type: 'text', text: `Hello, ${name}!` }] };
 });
+
+await server.connect(new StdioServerTransport());
 ```
 
 ### Step 4 — How discovery works
@@ -103,103 +107,38 @@ Codebolt automatically discovers your tool:
 
 ### Step 5 — Use from an agent
 
-Your agent can now call the tool:
+List the available tools and select the greeting tool by its catalog name. Pass the catalog's source ID so the runtime routes the call to the correct server.
 
-```ts
+```typescript
 import codebolt from '@codebolt/codeboltjs';
 
-// Execute the tool directly
-const result = await codebolt.mcp.executeTool('greet', 'hello', { name: 'Alice' });
+await codebolt.waitForReady();
+const { data } = await codebolt.tools.listRuntimeTools();
+const greeting = data.tools.find(tool => tool.toolName === 'hello');
 
-// Or list available tools from the server
-const tools = await codebolt.mcp.listMcpFromServers(['greet']);
+if (!greeting) {
+  throw new Error('The hello tool is not available in the current project.');
+}
+
+const result = await codebolt.tools.execute(greeting.name, { name: 'Alice' }, {
+  sourceId: greeting.sourceId
+});
+console.log(result);
 ```
-
-When an LLM agent encounters the tool, it will see it in its tool list and can call it during its reasoning loop.
 
 ### Step 6 — Test from chat
 
-Open a chat tab with an agent. Send: `Please greet me. My name is Alice.`
+Open a chat tab and ask the agent to use the greeting tool. Inspect the tool result in the conversation.
 
-The agent will discover and call the `greet.hello` tool, returning the greeting.
+## Approach 2 — Expose CodeBolt as an MCP server {#approach-2-mcp-server-via-codeboltjs-api}
 
----
+Start a CodeBolt project server. Use the CLI as the MCP client's stdio command, replacing `2719` with the project server's port.
 
-## Approach 2: MCP Server via CodeboltJS API
-
-Use `startCodeboltMcpServer()` to create an MCP server programmatically. This exposes Codebolt's built-in tools (or a filtered subset) as an MCP server.
-
-### Basic example
-
-```ts
-import { startCodeboltMcpServer } from '@codebolt/codeboltjs/mcp-server';
-
-const handle = await startCodeboltMcpServer({
-  transport: 'stdio',       // 'stdio' or 'sse'
-  serverName: 'my-server',
-});
-
-// Server is now running and accepting MCP connections
+```bash
+codebolt mcp start --gateway-port 2719
 ```
 
-### SSE transport (HTTP-based)
-
-```ts
-const handle = await startCodeboltMcpServer({
-  transport: 'sse',
-  port: 3001,                // default: 0 (random available port)
-  hostname: '127.0.0.1',    // default: '127.0.0.1'
-  serverName: 'my-server',
-});
-
-console.log(`MCP server running at ${handle.url}`);
-// Endpoints:
-//   GET  /sse       — SSE event stream
-//   POST /messages  — send messages
-//   GET  /health    — health check
-```
-
-### Filtering tools
-
-Expose only specific tools:
-
-```ts
-const handle = await startCodeboltMcpServer({
-  transport: 'sse',
-  toolFilter: ['read_file', 'write_file', 'search'],  // only these tools
-  toolPrefix: 'codebolt',    // prefix tool names (default: 'codebolt')
-});
-```
-
-### Options reference
-
-| Option | Type | Default | Description |
-|---|---|---|---|
-| `transport` | `'sse' \| 'stdio'` | `'sse'` | Communication transport |
-| `port` | `number` | `0` (random) | Port for SSE transport |
-| `hostname` | `string` | `'127.0.0.1'` | Hostname for SSE transport |
-| `serverName` | `string` | `'codebolt'` | Server name in MCP handshake |
-| `toolFilter` | `string[]` | all tools | Subset of tool names to expose |
-| `toolPrefix` | `string` | `'codebolt'` | Prefix for tool names (set `''` for no prefix) |
-
-### Return value
-
-```ts
-{
-  port: number;       // Actual port (useful when port was 0)
-  url: string;        // Full URL (e.g., 'http://127.0.0.1:3001/sse')
-  server: Server;     // Underlying MCP Server instance
-  close(): Promise<void>;  // Graceful shutdown
-}
-```
-
-### Shutdown
-
-```ts
-await handle.close();  // Gracefully stop the server
-```
-
----
+See [MCP Server Commands](../../../02_using-codebolt/02_surfaces/04_cli/02_cli-commands/03_tool-commands.md) for options.
 
 ## Common pitfalls
 

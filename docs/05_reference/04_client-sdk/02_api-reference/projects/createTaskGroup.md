@@ -25,7 +25,7 @@ Defines a new group that threads can be assigned to for organizational purposes.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

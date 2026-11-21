@@ -32,7 +32,7 @@ The portal spins up a fresh sandbox, installs the Codebolt CLI, and connects you
 4. The portal installs the Codebolt CLI, writes your LLM settings into the sandbox, and starts the server on port 3100.
 5. A WebSocket tunnel connects your browser to the sandbox. Chat behaves exactly like the desktop app.
 
-Every step streams in the sandbox log panel next to the chat — create, clone, install, copy settings, start, ready. First-time startup takes 30–90 s; subsequent chats on the same runtime are instant.
+Every step streams in the sandbox log panel next to the chat — create, clone, install, copy settings, start, ready. Startup time depends on the provider and the work needed to prepare the sandbox.
 
 ### Runtime: existing vs new
 
@@ -46,7 +46,7 @@ Use **New** for a clean environment per task. Use **Existing** to continue a thr
 ### GitHub integration
 
 1. Click **Select repository** in the chat header.
-2. Sign in with GitHub (OAuth) on first use — the token is stored in browser storage only.
+2. Connect GitHub when prompted. The portal can use a saved GitHub connector installation when one is configured.
 3. Pick a repo and optionally a branch.
 4. The portal runs `git clone` inside the sandbox at startup.
 
@@ -123,7 +123,7 @@ Once your local machine is registered:
 
 ### What stays local
 
-The connection is outbound only — no inbound ports are opened on your machine. Your code, files, and credentials never leave your machine unless an agent explicitly writes or uploads them. The cloud relay only sees chat messages and execution event streams, not raw file contents.
+The cloud plugin establishes an outbound connection. The agent executes in the connected environment, and the portal receives chat messages and execution events. When artifact sync is configured, creating or updating an artifact can send its files to the cloud service.
 
 ### Reconnection
 
@@ -169,7 +169,7 @@ If the menu says there are no artifacts, continue the thread until the agent pub
 
 The model selector in the chat input picks which agent handles your next message. Changing the agent mid-thread is allowed; the new agent picks up on the next message.
 
-For **self-executed remote agents**: select the agent, hover the help icon in the selector, copy the thread token, and paste it into the machine running your agent process. See [Authentication → Remote agent](../../../09_account/01_authentication-and-authorization.md#authentication).
+For **self-executed remote agents**: select the agent, hover the help icon in the selector, copy the thread token, and paste it into the machine running your agent process. See [Authentication → Remote agent](../05_settings/07_login-tokens.md).
 
 ---
 
@@ -181,7 +181,7 @@ The left sidebar lists every thread tied to the connected runtime. Thread histor
 
 ## Stopping and cleaning up
 
-**Cloud sandboxes** — closing the browser tab does not terminate the sandbox. Sandboxes auto-terminate after a 1-hour idle window. To stop immediately: **Agents → Environments → Stop**.
+**Cloud sandboxes** — closing the browser tab does not terminate the sandbox. Check your provider's lifecycle settings for timeout and retention behavior. To stop immediately: **Agents → Environments → Stop**.
 
 **Local runtimes** — disconnecting stops the cloud-plugin WebSocket. Your local Codebolt server keeps running. To disconnect: **Settings → Cloud → toggle off**, or stop the server.
 

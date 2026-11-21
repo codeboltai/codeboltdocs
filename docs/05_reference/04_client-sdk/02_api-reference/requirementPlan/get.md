@@ -26,7 +26,7 @@ ID or plan name. If multiple plans match, the most relevant one is returned.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

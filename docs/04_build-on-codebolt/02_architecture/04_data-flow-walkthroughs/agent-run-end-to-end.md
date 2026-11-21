@@ -25,7 +25,7 @@ Something triggers a run:
 | Trigger | Source |
 |---|---|
 | User sends chat message to a new thread | `chatService` → `agentService` |
-| User runs `codebolt agent start X` | CLI → REST `routes/` → `agentService` |
+| User sends a one-shot CLI prompt | CLI starts the runtime and sends the task to the selected agent |
 | Cron / file change fires a background agent | `backgroundAgent` controller |
 | A peer agent delegates via `codebolt_agent.start` | `toolService` → `agentService` |
 | Webhook arrives | `routes/` → `agentService` |
@@ -140,4 +140,4 @@ This is what lets you ask, a month later: "Why did the reviewer agent reject thi
 - [Tool call end-to-end](./tool-call-end-to-end.md) — one tool call in detail
 - [Agent Subsystem](../../07b_subsystems/01_agent-subsystem.md)
 - [Planning Hierarchy](../../07b_subsystems/08_planning-hierarchy.md) — how replan works
-- [Replay an agent run (guide)](../../../03_guides/07_advanced/replay-an-agent-run.md)
+- [Replay an agent run (guide)](../../../03_guides/08_advanced/replay-an-agent-run.md)

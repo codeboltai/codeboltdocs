@@ -101,7 +101,7 @@ ollama pull nomic-embed-text
 
 **Settings → Providers → Embeddings → Ollama** → pick `nomic-embed-text`.
 
-Quality is lower than remote flagships but adequate for most codebase search. The privacy win is complete: no code (or code-derived vectors) ever leaves your machine.
+Quality is lower than remote flagships but adequate for most codebase search. With a local embedding backend, embedding requests stay with that backend. Other providers or integrations can send data when used.
 
 **Important:** if you switch embedding models, the existing vector index uses the old model's vectors. Re-index:
 

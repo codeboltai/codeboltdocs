@@ -16,9 +16,7 @@ The `telegram-channel` plugin connects a Telegram bot to Codebolt using [`grammy
 
 ## Installation
 
-```bash
-codebolt plugin install telegram-channel
-```
+Open **Marketplace → Plugins** and select the Telegram channel plugin if it is available for your workspace.
 
 ## Configuration
 

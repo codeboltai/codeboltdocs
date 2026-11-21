@@ -15,7 +15,7 @@ Codebolt supports four ways to run agents concurrently. Each has a different lev
 
 The simplest pattern. Open multiple chat tabs, pick a different agent (or the same one) in each, and run them simultaneously. Each tab is fully independent — separate threads, separate context, separate checkpoints.
 
-**Desktop:** `Cmd/Ctrl+T` to open a new tab. The agent picker in each tab is independent.
+**Desktop:** Click **New Chat** in the Chat header and choose an agent for the new thread.
 
 **Use this when:** you want to run two unrelated tasks at the same time, or compare how two agents handle the same prompt.
 

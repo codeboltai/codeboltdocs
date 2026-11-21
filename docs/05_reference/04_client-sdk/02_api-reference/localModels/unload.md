@@ -26,7 +26,7 @@ and can be loaded again later. Use this to free resources when a model is no lon
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

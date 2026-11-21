@@ -1,33 +1,15 @@
 ---
 sidebar_position: 5
 title: Data Flow In Environments
-description: Data flow in codebolt environments local and cloud system.
+description: Follow project files and agent results across CodeBolt environments.
 ---
 
+# Data Flow in Environments
 
+When you send a task, the selected environment determines where the agent runs. The environment's sync mode controls how it receives project files and how work can return to the parent workspace.
 
-codebolt foucusses on providing full visibility and direct access to any environment in any place for same project 
+1. **Start with the project.** Choose an existing environment or use a provider to create one for that project.
+2. **Send work to the environment.** The agent executes there. The thread shows messages and results returned by the runtime.
+3. **Review what changed.** Check the destination before applying changes from a review request or pull request. With no sync, work stays in that environment until you transfer it.
 
-
-[image] remote childs - parent cloud   parent remote system  
-
-
-let look at data flow happen from the view of 
-
-## A local instance of codebolt 
-
-1. local instance  to local environment
-2. local instance to local sub child environments
-3. local instance to local thredpool (worktree)
-4. local to cloud environments [diagram]
-5. local to runner child environment
-
-[image] goes through local provder 
-
-## from the view of user in cloud platform 
-
-  1. direct connected local env
-  2. child env of direct connected local env
-  3. cloud env
-  4. runner connected environments
-  
+The **Environments** and **Environment Debug** panels help identify the provider, runtime, and sync mode. See [Code Sync Between Environments](./04_code-sync.md) for the paths changes can take.

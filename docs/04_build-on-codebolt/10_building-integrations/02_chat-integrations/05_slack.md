@@ -18,9 +18,7 @@ The `slack-channel` plugin connects a Slack app to Codebolt using [`@slack/bolt`
 
 ## Installation
 
-```bash
-codebolt plugin install slack-channel
-```
+Open **Marketplace → Plugins** and select the Slack channel plugin if it is available for your workspace.
 
 ## Configuration
 

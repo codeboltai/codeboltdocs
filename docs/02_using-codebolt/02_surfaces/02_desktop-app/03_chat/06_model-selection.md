@@ -82,19 +82,19 @@ Local models (via Ollama, llama.cpp, or another local runner) trade off differen
 | Quality | Higher (flagship models are better than anything you can run locally) | Lower |
 | Latency | ~200-2000ms per call, network-dependent | Depends on hardware; first-call warmup is slow |
 | Cost | Per-token | Fixed (hardware + power) |
-| Privacy | Your prompts + code go to the provider | Nothing leaves your machine |
+| Model requests | Prompts and included context go to the configured provider | Inference runs on the configured local model server |
 | Offline | No | Yes |
 
 Use local when privacy or offline is a hard requirement, or when cost at volume dominates. Use remote when quality matters more than the other factors (which, for coding, is usually).
 
-See [Local models](../08_integrations/02_local-models.md) for setup.
+See [Local models](../../../08_integrations/02_local-models.md) for setup.
 
 ## Picking per agent
 
 Different agents in the same tab can want different models. You can't switch mid-agent-call, but you can:
 
 - **Set a different default per agent** in each agent's manifest.
-- **Use a flow** that routes stages to different models — e.g. flagship for planning, mid-tier for execution, different family for review. See [Pipeline](../../04_build-on-codebolt/08_multi-agent-orchestration/03_patterns/pipeline.md).
+- **Use a flow** that routes stages to different models — e.g. flagship for planning, mid-tier for execution, different family for review. See [Pipeline](../../../../04_build-on-codebolt/08_multi-agent-orchestration/03_patterns/pipeline.md).
 - **Override in the tab** when you want to experiment.
 
 A common setup:
@@ -129,7 +129,7 @@ Reasons:
 
 - **Agent constraints.** The current agent's manifest restricts models, and no allowed model has a configured provider. Either configure a provider for an allowed model or pick a different agent.
 - **Mid-turn.** You can't change model while a turn is in progress. Wait for it to finish or stop it (Esc).
-- **No providers configured.** Go to Settings → Providers.
+- **No providers configured.** Open **Settings → LLMs**.
 
 ## What the LLM actually receives
 
@@ -141,11 +141,11 @@ What does vary by model:
 - **Context window size.** Older models have smaller windows, so compression kicks in earlier.
 - **Streaming behaviour.** Some models stream token-by-token, some emit chunks.
 
-None of these are things you manage — they're handled by [`llmService`](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md).
+None of these are things you manage — they're handled by [`llmService`](../../../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md).
 
 ## See also
 
 - [Chat Overview](./01_overview.md)
-- [LLM Providers](../08_integrations/01_llm-providers.md)
-- [Local models](../08_integrations/02_local-models.md)
-- [LLM & Inference internals](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)
+- [LLM Providers](../../../08_integrations/01_llm-providers.md)
+- [Local models](../../../08_integrations/02_local-models.md)
+- [LLM & Inference internals](../../../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

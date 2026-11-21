@@ -6,19 +6,17 @@ description: Choose your Codebolt client, run your first agent task, and explore
 
 # Get Started
 
-Codebolt brings agents, coding tools, and execution environments into one workspace. Start by choosing a client, opening a project, and running your first task.
+Codebolt brings coding agents, project tools, and execution environments into one workspace.
 
 ## Run your first task
 
-Follow the [quickstart](./03_quickstart.md) to choose Desktop, CLI, or Cloud, complete setup, connect a model provider, and run an agent.
+Start with the [Quickstart](./03_quickstart.md) to set up Codebolt Desktop, ask an agent about a project, and review a small change.
 
-| Client | Start here |
-|---|---|
-| Desktop | [Install and start the desktop app](../02_using-codebolt/02_surfaces/02_desktop-app/00_get-started.md) |
-| CLI | [Start from your terminal](../02_using-codebolt/02_surfaces/04_cli/01_cli-interface/00_get-started.md) |
-| Cloud | [Start from the cloud portal](../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md) |
-
-After the agent finishes, review its changes. Learn how to [use checkpoints and rollback](../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/04_checkpoints-and-rollback.md) before starting a larger task.
+| Client | When to use it | First task |
+|---|---|---|
+| Desktop | Work in the editor with chat and visual diffs. | [Desktop Quickstart](./03_quickstart.md) |
+| CLI | Work from your terminal. | [CLI Quickstart](../02_using-codebolt/02_surfaces/04_cli/01_cli-interface/00_get-started.md) |
+| Cloud | Run an agent from your browser. | [Cloud Quickstart](../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md) |
 
 ## Explore Codebolt
 

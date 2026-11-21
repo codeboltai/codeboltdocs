@@ -35,13 +35,11 @@ AI Debug shows a **token budget bar** for each call — how much of the model's 
 
 ### Comparing calls
 
-Click **Compare** (top toolbar) to select two LLM calls and view them side-by-side. Useful for comparing how a prompt change affected the output, or for seeing how context grew across turns.
+Open each call and compare its request and response payloads.
 
-### Export
+### Inspect and copy a payload
 
-Click **Export** → **CSV** or **JSON** to download all LLM calls from the current session. The export includes all fields for each call — useful for cost analysis or building a dataset from a real agent run.
-
----
+Open an AI Debug entry to inspect its request or response. Use the JSON view to expand fields or view formatted JSON. Use the copy control next to the payload to save it for comparison.
 
 ## Console {#console}
 

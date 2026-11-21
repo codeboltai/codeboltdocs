@@ -1,21 +1,15 @@
 ---
 sidebar_position: 4
 title: Local child environments
-description: Local child environments let you run sandboxed work inside your project while keeping a single source of truth in your parent environment.
+description: Run agent work in a child environment associated with a parent project.
 ---
 
+# Local Child Environments
 
+A child environment is started from a parent environment for a project. Use one when a task needs a separate execution location and you want to track that work alongside the parent project.
 
-these are environments that are created by local system . the point these environmnts directly report to the local codeboltbolt application which has started these environments 
-[imagePlaceholder] for flow [localsystem]-user-message-[environemnt]-agent -[execution_result]-> [parent_env]-[parent_environment]
+1. Open **Environments** from the desktop panel selector and create an environment.
+2. Select an available provider and review the proposed path and sync mode. Provider settings determine which options are available.
+3. Run the task in the child environment. Check the thread for results and use the configured review or Git workflow to bring changes back.
 
-# Location
-these environment can be either could be started in 1. local system (docker, worktree) these env also can be started from 2 .cloud sandbox
-
-or 3.can be started from remote system that is connected to your local networks 
-
-
-link for creating environment providers to build on codebolt
-
-
-# how code sync happen file based or git base
+See [Code Sync Between Environments](../04_code-sync.md) to choose a sync mode and [Creating a Custom Provider](../../../04_build-on-codebolt/08a_multi-environment-orchestration/03_creating-a-custom-provider.md) to extend where CodeBolt can run work.

@@ -16,8 +16,6 @@ Environment record
   -> Runtime
 ```
 
-> **Image placeholder:** Add a provider-relationship diagram that labels the saved environment record, provider adapter, and runtime, with examples such as local, cloudprovider, runner, and custom provider.
-
 ## What providers do
 
 A provider can:
@@ -101,8 +99,6 @@ Codebolt
   -> Codebolt Cloud
   -> cloud sandbox or runner
 ```
-
-> **Image placeholder:** Add a cloudprovider flow diagram showing Codebolt on the local machine, cloudprovider as the bridge, Codebolt Cloud APIs/WebSocket, and the resulting cloud sandbox or runner runtime.
 
 ## Runner providers
 

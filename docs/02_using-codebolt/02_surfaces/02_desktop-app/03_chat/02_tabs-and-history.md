@@ -35,15 +35,7 @@ Older versions of this page documented a larger keyboard shortcut set for tab ma
 
 ## History
 
-Every tab is backed by a persisted chat thread. **Settings → History** shows all past threads across all projects, searchable:
-
-- By text in messages.
-- By date.
-- By agent.
-- By project.
-- By checkpoint activity (threads that had rollbacks).
-
-Reopen a thread from history to continue an old conversation with full context — all previous turns, tool calls, and checkpoints are restored.
+Chat saves conversations as threads. Open **History** from the Chat header to browse earlier conversations. Use the search field to filter by the user message, then select a thread to reopen it.
 
 ## Session vs thread
 

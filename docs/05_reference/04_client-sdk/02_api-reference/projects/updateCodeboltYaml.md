@@ -26,7 +26,7 @@ permissions, and workflow settings specific to the CodeBolt platform.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

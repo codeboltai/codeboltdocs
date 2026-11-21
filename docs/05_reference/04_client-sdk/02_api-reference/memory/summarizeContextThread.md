@@ -27,7 +27,7 @@ thread. Useful for creating condensed knowledge bases from lengthy conversations
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

@@ -26,7 +26,7 @@ be unloaded from memory before deletion. It can be re-downloaded later if needed
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

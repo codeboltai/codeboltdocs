@@ -26,7 +26,7 @@ its lifecycle, and coordinated with other jobs via dependencies.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

@@ -5,7 +5,7 @@ import { generateSidebarItems } from './sidebarItemsGenerator';
 
 const excludedDocs = ['Issue.md', 'sortspec.md', 'Excalidraw/**'];
 const generatedReference = [
-  '05_reference/02_codeboltjs/{09_type-reference,10_api-access,11_mcp-access,12_utility-functions,pseudo_cli}/**',
+  '05_reference/02_codeboltjs/{09_type-reference,11_mcp-access,12_utility-functions,pseudo_cli}/**',
   '05_reference/03_plugin-sdk/{02_api-reference,type-reference}/**',
   '05_reference/04_client-sdk/{02_api-reference,03_event-reference,type-reference}/**',
   '05_reference/05_agent-framework/type-reference/**',

@@ -19,9 +19,7 @@ The `discord-channel` plugin connects a Discord bot to Codebolt. It uses [`disco
 
 Install the plugin from the Codebolt registry:
 
-```bash
-codebolt plugin install discord-channel
-```
+Open **Marketplace → Plugins** and select the Discord channel plugin if it is available for your workspace.
 
 Or add it to your project's `.codebolt/plugins.yaml`:
 

@@ -17,7 +17,7 @@ Very rarely. Signs you actually need it:
 - **You need low-level APIs** the framework intentionally doesn't expose — raw event stream subscriptions, direct channel access, custom IPC.
 - **Performance matters more than ergonomics** — you're running thousands of agents and the framework's per-call overhead is measurable.
 
-If none of these apply, [level 1](./level-1-framework.md) is the right choice. 99% of custom agents should live at level 1.
+If none of these apply, [level 1](./level-2-framework.md) is the right choice. 99% of custom agents should live at level 1.
 
 ## What you lose by going to level 2
 
@@ -38,99 +38,39 @@ It's possible to get these wrong, and the failures are subtle. If you're not sur
 
 ## What `@codebolt/codeboltjs` gives you
 
-`@codebolt/codeboltjs` is the client SDK for the server. It exports a singleton `codebolt` (the default export). Level-2 agents use it directly. The main surfaces:
+The default export exposes runtime APIs for files, Git, models, chat, and tools. For example:
 
-```ts
-const codebolt = require('@codebolt/codeboltjs').default;
+```typescript
+import codebolt from '@codebolt/codeboltjs';
 
-// LLM access
-const { completion } = await codebolt.llm.inference({ messages, full: true, tools: availableTools });
-
-// File system
-const content = await codebolt.fs.readFile(path);
-
-// Git operations
-const status = await codebolt.git.git_status();
-
-// MCP / tool access
-const [didUserReject, result] = await codebolt.mcp.executeTool('codebolt', 'read_file', args);
-
-// Chat operations
-await codebolt.chat.sendMessage(message, {});
-
-// State management
-await codebolt.cbstate.set(key, value);
-const val = await codebolt.cbstate.get(key);
+await codebolt.waitForReady();
+const status = await codebolt.git.status();
+const { data } = await codebolt.tools.listRuntimeTools();
 ```
 
-See [Reference → SDKs → codeboltjs](../../../../05_reference/01_overview.md) for the full API.
+Use [Tool Discovery](../../07b_subsystems/02_mcp-and-tools.md) to select and call a tool by its catalog name and source.
 
-## A minimal level-2 agent
+## A minimal agent
 
-```ts
+Register a handler that passes the user message to the configured model and sends its reply to Chat.
+
+```typescript
 import codebolt from '@codebolt/codeboltjs';
-import { FlatUserMessage } from '@codebolt/types/sdk';
 
-const systemPrompt = 'You are a helpful coding assistant.';
+codebolt.onMessage(async message => {
+  const { completion } = await codebolt.llm.inference({
+    messages: [{ role: 'user', content: message.userMessage ?? '' }],
+    full: true
+  });
 
-codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
-  const toolsResponse: any = await codebolt.mcp.listMcpFromServers(['codebolt']);
-  const availableTools = toolsResponse?.data?.tools || toolsResponse?.data || [];
-
-  const conversationMessages: any[] = [
-    { role: 'system', content: systemPrompt },
-    { role: 'user', content: reqMessage.userMessage ?? '' },
-  ];
-
-  while (true) {
-    const { completion } = await codebolt.llm.inference({
-      messages: conversationMessages,
-      full: true,
-      tools: availableTools,
-    });
-
-    const assistantMessage = completion?.choices?.[0]?.message;
-    if (!assistantMessage) {
-      throw new Error('LLM did not return a message.');
-    }
-
-    conversationMessages.push(assistantMessage);
-
-    if (!assistantMessage.tool_calls?.length) {
-      const finalReply = assistantMessage.content ?? '';
-      codebolt.chat.sendMessage(finalReply, {});
-      return finalReply;
-    }
-
-    for (const toolCall of assistantMessage.tool_calls) {
-      const toolArguments = JSON.parse(toolCall.function.arguments || '{}');
-      const [didUserReject, toolResult] = await codebolt.mcp.executeTool(
-        'codebolt',
-        toolCall.function.name,
-        toolArguments
-      );
-
-      conversationMessages.push({
-        role: 'tool',
-        tool_call_id: toolCall.id,
-        content: didUserReject
-          ? 'User rejected the tool execution.'
-          : JSON.stringify(toolResult),
-      });
-    }
+  const reply = completion?.choices?.[0]?.message?.content;
+  if (typeof reply === 'string') {
+    codebolt.chat.sendMessage(reply);
   }
 });
 ```
 
-This is deliberately lower-level than level 1:
-
-- You build the message list yourself.
-- You decide which tools to expose to the model.
-- You call `codebolt.llm.inference(...)` yourself.
-- You inspect `tool_calls` yourself.
-- You execute tools and append tool results back into the transcript yourself.
-
-The example above assumes built-in `codebolt` tools for simplicity. Once you need multiple tool servers, custom routing, retries, or compaction, you're rebuilding framework behavior by hand.
+Use the [Agent SDK](./level-2-framework.md) when you want helpers for tool calls and repeated turns.
 
 ## Manifest
 
@@ -218,11 +158,11 @@ jest.mock('@codebolt/codeboltjs', () => ({
 
 ## When to go to level 3
 
-If you need to write your agent in Go, Rust, Python, or anything that isn't JavaScript. Level 2 is JS-only. [Level 3](./level-3-raw-websocket.md) speaks the wire protocol directly and works in any language.
+If you need to write your agent in Go, Rust, Python, or anything that isn't JavaScript. Level 2 is JS-only. [Level 3](../04_third-party-agents.md) speaks the wire protocol directly and works in any language.
 
 ## See also
 
-- [Level 1 — Framework](./level-1-framework.md) — the level most agents should live at
-- [Level 3 — Raw WebSocket](./level-3-raw-websocket.md) — non-JS agents
-- [codeboltjs reference](../../../../05_reference/01_overview.md)
+- [Level 1 — Framework](./level-2-framework.md) — the level most agents should live at
+- [Level 3 — Raw WebSocket](../04_third-party-agents.md) — non-JS agents
+- [codeboltjs reference](../../../05_reference/01_overview.md)
 - [Agent Subsystem internals](../../07b_subsystems/01_agent-subsystem.md)

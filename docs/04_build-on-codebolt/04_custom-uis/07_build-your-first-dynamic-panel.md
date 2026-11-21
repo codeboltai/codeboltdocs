@@ -251,7 +251,7 @@ Copy the plugin to one of the directories Codebolt scans:
 cp -r my-panel-plugin ~/.codebolt/plugins/my-panel-plugin
 
 # Option 2: Per-project plugins (only this project, overrides global)
-cp -r my-panel-plugin <your-project>/.codeboltPlugins/my-panel-plugin
+cp -r my-panel-plugin <your-project>/.codebolt/plugins/my-panel-plugin
 ```
 
 ### Load and start
@@ -295,7 +295,7 @@ curl -X POST http://localhost:2719/plugins/my-panel-plugin/stop
 |---|---|
 | Built-in plugins (shipped with Codebolt) | All projects |
 | `~/.codebolt/plugins/` | All projects (global) |
-| `<project>/.codeboltPlugins/` | Current project only (overrides global) |
+| `<project>/.codebolt/plugins/` | Current project only (overrides global) |
 
 Per-project plugins override global plugins with the same name.
 

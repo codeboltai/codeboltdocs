@@ -26,7 +26,7 @@ Releases the lock on a review request, allowing other agents to modify it again.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

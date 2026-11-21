@@ -5,10 +5,10 @@ sidebar_position: 1
 
 # Client SDK — API Reference
 
-All modules exposed by `@codebolt/clientsdk` via `CodeBoltClient`.
+All modules exposed by `@codebolt/client-sdk` via `CodeBoltClient`.
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient({ baseUrl: 'http://localhost:3000' });
 ```

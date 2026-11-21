@@ -86,8 +86,6 @@ Most users do not need to edit these fields manually. They are useful when debug
 
 At a high level:
 
-> **Image placeholder:** Add a creation-flow diagram or annotated UI screenshot showing **New Environment**, provider selection, path/sync defaults, save, provider start, and running status.
-
 1. You choose **New Environment**.
 2. You select a provider.
 3. Codebolt asks the provider or cloud service for defaults, such as a path and sync mode.
@@ -146,5 +144,5 @@ Path fields such as `requestedPath`, `resolvedPath`, `environmentPath`, and `wor
 
 - [Create and Manage Environments](./02_configuring-environments.md)
 - [Environment Providers](./03_environment-providers.md)
-- [Manage and Troubleshoot Environments](./04_environment-debug.md)
+- [Manage and Troubleshoot Environments](../../03_guides/trubleshooting/09_environment-debug.md)
 - [Cloud runtimes and providers](../02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)

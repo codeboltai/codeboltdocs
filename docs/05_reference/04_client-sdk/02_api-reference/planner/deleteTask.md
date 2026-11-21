@@ -26,7 +26,7 @@ task status to "cancelled" instead if you want to preserve a record of the work.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

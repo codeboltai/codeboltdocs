@@ -27,7 +27,7 @@ Marks the proposed job as approved, making it eligible for conversion into an ac
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

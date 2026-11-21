@@ -42,7 +42,7 @@ When your plugin is ready to share, follow this checklist and publish it to the 
 2. **Install** to a plugin directory:
    ```bash
    # Per-project (for testing)
-   cp -r my-plugin/ <project>/.codeboltPlugins/my-plugin/
+   cp -r my-plugin/ <project>/.codebolt/plugins/my-plugin/
 
    # Or global
    cp -r my-plugin/ ~/.codebolt/plugins/my-plugin/
@@ -53,13 +53,13 @@ When your plugin is ready to share, follow this checklist and publish it to the 
 ## Publish
 
 ```bash
-codebolt plugin publish --path ./my-plugin
+codebolt action plugin publish --path ./my-plugin
 ```
 
 List published plugins:
 
 ```bash
-codebolt plugin list
+codebolt action plugin list
 ```
 
 ## Common Mistakes

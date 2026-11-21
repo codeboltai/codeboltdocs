@@ -26,7 +26,7 @@ together. Create one per logical context (e.g., per agent session or workflow).
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

@@ -26,7 +26,7 @@ restoring it to a clean state. This is a destructive operation that cannot be un
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

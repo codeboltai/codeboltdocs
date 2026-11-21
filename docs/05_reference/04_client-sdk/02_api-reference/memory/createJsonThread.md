@@ -26,7 +26,7 @@ ideal for configuration, structured records, and data that needs programmatic ac
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

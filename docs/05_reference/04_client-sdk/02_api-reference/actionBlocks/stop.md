@@ -26,7 +26,7 @@ to terminate gracefully. Use this to cancel long-running or stuck executions.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

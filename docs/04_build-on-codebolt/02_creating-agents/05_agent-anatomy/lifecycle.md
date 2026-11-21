@@ -44,7 +44,7 @@ Something causes a run to start:
 | Trigger | Source |
 |---|---|
 | User chat message | `chatService` → `agentService.startRun` |
-| CLI `codebolt agent start` | REST route → `agentService` |
+| CLI one-shot prompt | Launch with `codebolt --prompt "<task>" --agent <agent>` |
 | Cron / file change | `backgroundAgent` controller |
 | Another agent calls `codebolt_agent.start` | `toolService` → `agentService` |
 | Flow node execution | `agentFlowRuntimeService` |
@@ -150,13 +150,7 @@ Some common failures, by stage:
 
 ## Debugging lifecycle issues
 
-Every stage emits events. Use the trace:
-
-```bash
-codebolt agent trace <run_id>
-```
-
-You'll see exactly which stage the run reached, which phase it was in when it failed, and what the last tool / LLM / context call was. This is the fastest way to diagnose "my agent just stops".
+Open [Agent Debug](../../../02_using-codebolt/04_agents/08_agent-debug.md) and select the agent execution. Inspect its output and look at the thread's latest messages for any reported failure. An unexpected child-process exit can mark the run as failed.
 
 ## See also
 

@@ -89,7 +89,7 @@ New to Codebolt? Start with the [quickstart](../01_get-started/03_quickstart.md)
 | [Parallel agents](07a_parallel-agents/02_running-parallel-agents.md) | Run multiple agents concurrently. | — |
 | [Chat canvas](07a_parallel-agents/03_chat-canvas.md) | Arrange and coordinate agent conversations visually. | — |
 | [Swarms](07c_agent-coordination/05_swarm-management.md) | Organize agents into teams working toward a shared goal. | [Run a swarm](07_multi-agent-usage/02_running-a-swarm.md) · [Desktop](02_surfaces/02_desktop-app/03c_panels/04b_agent-management-features/07_swarm-management.md) |
-| [Orchestrators](07c_agent-coordination/06_orchestrator-management.md) | Manage coordinators and their worker agents. | [Build](../04_build-on-codebolt/08_multi-agent-orchestration/01_overview.md) |
+| [Orchestration](07c_agent-coordination/06_orchestrator-management.md) | Delegate work to subagents and follow related threads in Thread Coordination. | [Build](../04_build-on-codebolt/08_multi-agent-orchestration/01_overview.md) |
 | [Agent flows](../04_build-on-codebolt/08_multi-agent-orchestration/04_agent-flows.md) | Define coordinated workflows across agents. | [Follow a flow](07_multi-agent-usage/03_reading-a-flow.md) |
 | [Jobs](07c_agent-coordination/02_jobs.md) | Distribute work through a shared agent queue. | [Desktop](02_surfaces/02_desktop-app/03c_panels/04b_agent-management-features/06_jobs.md) |
 | [Agent messaging](07c_agent-coordination/03_mail-inbox.md) | Exchange messages between agents and users. | — |
@@ -97,7 +97,7 @@ New to Codebolt? Start with the [quickstart](../01_get-started/03_quickstart.md)
 | [Pheromones](07d_stigmergic-coordination/02_pheromones.md) | Coordinate agents through shared signals. | [Build](../04_build-on-codebolt/08_multi-agent-orchestration/05_stigmergy-and-reputation.md) |
 | [Locks and unlock requests](07d_stigmergic-coordination/03_locks-and-unlock-requests.md) | Coordinate exclusive access to shared resources. | — |
 | [File update intents](07d_stigmergic-coordination/04_file-update-intents.md) | Make planned file changes visible to other agents. | — |
-| [Drift detection](../04_build-on-codebolt/08_multi-agent-orchestration/06_drift-detection.md) | Detect when agent work moves away from its goal. | — |
+| [Virtual Workers](07a_parallel-agents/06_virtual-workers.md) | Give an agent a persistent identity and route incoming work across threads and environments. | [Routing profiles](08e_external-integrations/02_routing-gateway.md#routing-profiles) |
 
 ## Context and memory
 

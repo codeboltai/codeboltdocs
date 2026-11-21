@@ -36,7 +36,7 @@ client.sockets.contextAssembly.on('contextAssembly:started', (data) => {
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

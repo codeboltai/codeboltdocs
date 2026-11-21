@@ -371,7 +371,7 @@ Copy the plugin to one of the directories Codebolt scans:
 cp -r my-llm-provider ~/.codebolt/plugins/my-llm-provider
 
 # Option 2: Per-project plugins (only this project, overrides global)
-cp -r my-llm-provider <your-project>/.codeboltPlugins/my-llm-provider
+cp -r my-llm-provider <your-project>/.codebolt/plugins/my-llm-provider
 ```
 
 ### Load and start
@@ -428,7 +428,7 @@ After starting the plugin, check the model picker in:
 |---|---|
 | Built-in plugins (shipped with Codebolt) | All projects |
 | `~/.codebolt/plugins/` | All projects (global) |
-| `<project>/.codeboltPlugins/` | Current project only (overrides global) |
+| `<project>/.codebolt/plugins/` | Current project only (overrides global) |
 
 Per-project plugins override global plugins with the same name.
 

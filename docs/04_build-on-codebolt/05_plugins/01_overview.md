@@ -21,7 +21,7 @@ Plugins are different from agent extensions:
 | Directory | Scope |
 |---|---|
 | `~/.codebolt/plugins/` | Global — available in all projects |
-| `<project>/.codeboltPlugins/` | Per-project — overrides global |
+| `<project>/.codebolt/plugins/` | Per-project — overrides global |
 
 ## Types of Plugins
 

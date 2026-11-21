@@ -7,7 +7,7 @@ title: CodeboltTools API
 Codebolt Tools API
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 ```

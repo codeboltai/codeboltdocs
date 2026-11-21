@@ -1,57 +1,37 @@
 ---
 sidebar_position: 0
 title: Get Started
-description: Codebolt's browser-based client — run agents in managed sandboxes or drive your local machine from anywhere via the cloud portal.
+description: Connect a cloud environment and send your first agent task from the Codebolt portal.
 ---
 
-# Cloud — Get Started
+# Cloud Quickstart
 
-The Codebolt **Cloud** is the browser-based way to use Codebolt — nothing to install. Sign in at [portal.codebolt.ai](https://portal.codebolt.ai) and you get a full agent environment in any modern browser. It is the same agent runtime, plugin system, and CLI that power the desktop app; Cloud just controls *where the runtime runs* and *how you interact with it*.
+Run your first agent task in a browser. You'll need a Codebolt account and access to a cloud sandbox provider or an existing environment.
 
-Cloud offers two execution models:
+## 1. Open Remote Chat
 
-- **Cloud sandbox** — the portal spins up an isolated sandbox (E2B, Daytona, Runloop, or a Runner Node) and runs the CodeBolt CLI inside it.
-- **Local runtime** — you connect your own machine with the **cloud plugin**. The agent runs on your hardware with your files and tools, but you drive it from any browser.
+Sign in to the [Codebolt portal](https://portal.codebolt.ai), then open **Agents → Remote Chat** and start a new conversation.
 
-> New here? The platform overview lives at **[Cloud (Platforms)](../../../01_get-started/02f_platforms/04_cloud.md)**.
+## 2. Choose where the agent runs
 
-## How to launch
+1. In the composer, select an existing project or use **Create New: Blank** to create one.
+2. Open the environment picker. Choose an available environment or select **New environment** and pick an enabled cloud sandbox provider.
+3. Choose an **Agent** in the composer.
 
-Open **[portal.codebolt.ai](https://portal.codebolt.ai)** in a browser and sign in with the same account you use for the desktop app, then head to **Agents → Remote Chat**.
+If you need to enable a provider, see [Runtimes & Providers](./04_running-agents/04_runtimes-and-providers.md). To run on your own machine, see [Connect a local runtime](./04_running-agents/01_remote-chat.md#mode-2--local-runtime-connect-your-machine-to-the-cloud).
+
+## 3. Send a task and verify the result
+
+Try this in your first message. It works with a blank project too.
 
 ```text
-https://portal.codebolt.ai
-  → Agents
-    → Remote Chat   (chat against a sandbox or local runtime)
-    → Environments  (your runtime instances)
-    → Runner Nodes  (connected local machines)
+Tell me which directory you're working in and list its top-level files. Do not modify files.
 ```
 
-## What's cloud-only
+Send the message when the connection shows **Live**. If you're starting a new sandbox, Remote Chat provisions it on the first send. Look for the agent's reply in the conversation. It should report a directory and either list the files it found or say the directory is empty.
 
-- **Remote Chat** — talk to an agent running in a managed sandbox or on your machine, from any browser
-- **Managed sandboxes** — spin up clean, isolated E2B / Daytona / Runloop runtimes on demand
-- **Marketplace publishing** — agents, MCPs, skills, plugins, and apps are published through the portal
-- **Runner Nodes** — register and manage connected local machines
-- **Review Merge** — review and merge agent-raised changes from the portal
+## Next steps
 
-## What varies vs the desktop app
-
-The browser client has lighter affordances than the desktop app — no `@mentions`, no Ctrl+K inline editing, no multi-pane visual diffs. Use the **[Desktop App](../02_desktop-app/00_get-started.md)** when you need those. Cloud is additive: your local setup keeps working, and all surfaces share the same account and marketplace.
-
-## In this section
-
-The detailed Cloud documentation lives under **Using Codebolt → Cloud**:
-
-| Page | What it covers |
-|---|---|
-| **[Cloud Portal](./02_cloud-portal.md)** | The browser UI — Registry, Agents, Settings |
-| **[Remote Chat](./04_running-agents/01_remote-chat.md)** | Chat against an agent in a cloud sandbox or on your local machine |
-| **[Runtimes & Providers](./04_running-agents/04_runtimes-and-providers.md)** | Manage runtime instances and bring your own sandbox API key |
-| **[Marketplace Publishing](./03_registry/02_marketplace-publishing.md)** | Publishing agents, MCPs, skills, and plugins |
-
-## See also
-
-- [Cloud (Platforms)](../../../01_get-started/02f_platforms/04_cloud.md) — the platform entry point and architecture
-- [Platform Overview](../01_overview.md) — compare all clients
-- [Headless CLI](../04_cli/03_cli-headless/01_overview.md)
+- [Remote Chat](./04_running-agents/01_remote-chat.md) covers repository setup, threads, artifact previews, and stopping a sandbox.
+- [Cloud Platform](../../../01_get-started/02f_platforms/04_cloud.md) explains cloud sandboxes and connected runtimes.
+- [Marketplace Publishing](./03_registry/02_marketplace-publishing.md) covers publishing agents, plugins, and apps.

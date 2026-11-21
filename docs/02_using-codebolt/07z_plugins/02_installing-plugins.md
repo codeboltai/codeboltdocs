@@ -60,8 +60,6 @@ If the plugin registers an LLM provider or web search provider, open settings an
 
 Use the **Plugins** panel to manage plugins that are already installed on disk. The Plugins panel is for runtime management: discovery, state, start, stop, and plugin UI.
 
-> **Image placeholder:** Add a screenshot of the Plugins panel showing installed plugins, state badges, reload, start, stop, and open UI buttons.
-
 Each plugin card shows:
 
 - Plugin name

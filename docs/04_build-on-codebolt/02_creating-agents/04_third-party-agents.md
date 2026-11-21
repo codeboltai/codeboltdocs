@@ -389,7 +389,7 @@ Forward external events to the running vendor CLI:
 
 ```ts
 const pollTimer = setInterval(async () => {
-  const events = await codebolt.agentEventQueue.getPendingExternalEvents();
+  const events = await codebolt.agentEventQueue.getPendingEvents();
   for (const event of events) {
     if (event.type === 'steering' && event.instruction) {
       handle.sendInput(event.instruction);
@@ -419,6 +419,6 @@ metadata:
 
 ## See also
 
-- [Level 0 — Remix](./03_creation-levels/level-0-remix.md)
-- [Level 1 — Framework](./03_creation-levels/level-1-framework.md)
-- [Level 2 — codeboltjs](./03_creation-levels/level-2-codeboltjs.md)
+- [Level 0 — Remix](./03_agent-types/level-3-remix.md)
+- [Level 1 — Framework](./03_agent-types/level-2-framework.md)
+- [Level 2 — codeboltjs](./03_agent-types/level-1-codeboltjs.md)

@@ -1,180 +1,29 @@
 ---
 sidebar_position: 4
 title: Context Rules
-description: Context rules give you declarative control over what gets included in — or excluded from — the assembled context window. They live in
+description: Select Persistent Memory definitions by matching conditions on a context assembly request.
 ---
 
 # Context Rules
 
-Context rules give you declarative control over what gets included in — or excluded from — the assembled context window. They live in `.codebolt/ContextRuleEngine/` as JSON files and are evaluated every turn before memory retrieval begins.
+Context rule engines add Persistent Memory definitions to a context assembly request when conditions match. Open **Context → Context Assembly** from the desktop bottom bar to view and run rule engines.
 
 ## Rule structure
 
-A rule is a condition → action pair:
+A rule contains conditions and the Persistent Memory definitions to add. All conditions in a rule must match. Use separate rules when different conditions should select the same memory.
 
-```json
-{
-  "name": "include-architecture-on-refactor",
-  "condition": {
-    "field": "task.text",
-    "op": "contains",
-    "value": "refactor"
-  },
-  "action": {
-    "include": "markdown://architecture-decisions"
-  }
-}
-```
-
-If the condition matches, the action fires. Rules are evaluated in the order they appear in the file; the first matching rule for a given memory reference wins.
-
-## Condition operators
-
-| Operator | Matches when… |
-|---|---|
-| `contains` | Field string contains the value (case-insensitive) |
-| `startsWith` | Field string starts with the value |
-| `endsWith` | Field string ends with the value |
-| `matches` | Field matches a regular expression |
-| `equals` | Field equals the value exactly |
-| `not_equals` | Field does not equal the value |
-| `in` | Field value is one of a set |
-| `not_in` | Field value is not in a set |
-| `gt` | Field numeric value is greater than |
-| `lt` | Field numeric value is less than |
-| `gte` | Field numeric value is greater than or equal |
-| `lte` | Field numeric value is less than or equal |
-| `exists` | Field is present and non-null |
-
-Multiple conditions in one rule combine with AND logic — all must match for the rule to fire.
-
-```json
-{
-  "condition": [
-    { "field": "task.text", "op": "contains", "value": "payment" },
-    { "field": "task.text", "op": "not_contains", "value": "refund" }
-  ],
-  "action": { "include": "vector://payment-architecture" }
-}
-```
+For example, add a rule that checks whether `input.text` contains `refactor` and adds a definition for architecture decisions.
 
 ## Condition fields
 
-| Field path | What it refers to |
-|---|---|
-| `task.text` | The current user message / task description |
-| `task.type` | Task type if set (`bug`, `feature`, `refactor`, etc.) |
-| `agent.name` | The name of the running agent |
-| `project.name` | The current project name |
-| `session.turnCount` | How many turns have elapsed this session |
-| `memory.source` | The memory source being evaluated (for per-source cap rules) |
+Use `input.<field>` for request input, `scope.<scope_type>.<variable>` for scope variables, and `addVar.<variable>` for additional variables. For example, `scope.swarm.swarm_id` can select memory for a specific swarm.
 
-## Action types
+## Condition operators
 
-### include
+Use `eq` and `neq` for equality, `exists` and `not_exists` to test presence, and `contains`, `starts_with`, or `ends_with` for text matching. The rule builder also supports membership and numeric comparisons.
 
-Adds a memory reference to the assembly regardless of whether a retrieval pipeline would have fetched it:
+## Test a rule engine
 
-```json
-{ "action": { "include": "kv://user-preferences" } }
-{ "action": { "include": "markdown://coding-standards" } }
-{ "action": { "include": "json://project-config" } }
-```
+Select **Run** for the engine, supply sample input and scope variables, and inspect the trace. Check which rules matched and which definitions contributed to the assembled context.
 
-### exclude
-
-Suppresses a memory reference even if a retrieval pipeline returns it:
-
-```json
-{ "action": { "exclude": "vector://test-history" } }
-```
-
-Useful when a source is relevant in general but noisy for a specific task type.
-
-### cap
-
-Limits how many tokens a source can contribute to the context window:
-
-```json
-{
-  "condition": { "field": "task.text", "op": "contains", "value": "quick question" },
-  "action": { "cap": { "source": "vector://", "tokens": 512 } }
-}
-```
-
-### setPriority
-
-Moves a section's effective priority up or down relative to the default order:
-
-```json
-{ "action": { "setPriority": { "section": "history", "value": "high" } } }
-```
-
-## Rule files
-
-Rules can be split across multiple files in `.codebolt/ContextRuleEngine/`. Files are loaded alphabetically and concatenated before evaluation. Naming files with numeric prefixes gives you explicit ordering:
-
-```
-.codebolt/ContextRuleEngine/
-  01_base-rules.json
-  02_project-rules.json
-  03_agent-overrides.json
-```
-
-## Common patterns
-
-### Always include a style guide
-
-```json
-{
-  "name": "always-style-guide",
-  "condition": { "field": "task.text", "op": "exists" },
-  "action": { "include": "markdown://style-guide" }
-}
-```
-
-### Suppress test files during production refactors
-
-```json
-{
-  "name": "suppress-tests-on-refactor",
-  "condition": [
-    { "field": "task.text", "op": "contains", "value": "refactor" },
-    { "field": "task.text", "op": "not_contains", "value": "test" }
-  ],
-  "action": { "exclude": "vector://test-suite-history" }
-}
-```
-
-### Limit history on quick questions
-
-```json
-{
-  "name": "short-history-for-quick-questions",
-  "condition": { "field": "task.type", "op": "equals", "value": "question" },
-  "action": { "cap": { "section": "history", "tokens": 1000 } }
-}
-```
-
-### Inject agent-specific context
-
-```json
-{
-  "name": "code-agent-context",
-  "condition": { "field": "agent.name", "op": "equals", "value": "code-agent" },
-  "action": { "include": "json://code-agent-config" }
-}
-```
-
-## Testing rules
-
-Rules are evaluated on every turn. To verify a rule is firing:
-
-1. Open the **assembly trace** panel in the Codebolt UI after a turn
-2. Look for the `contextRules` section — it lists which rules matched and what action each took
-3. Check the `included` and `excluded` lists to confirm the expected memory references are present
-
-## See also
-
-- [Context assembly](./03_context-assembly.md) — where rules fit in the pipeline
-- [Persistent memory](./05_persistent-memory.md) — defining what gets retrieved before rules apply
+See [Context Assembly](./03_context-assembly.md) and [Persistent Memory](./05_persistent-memory.md).

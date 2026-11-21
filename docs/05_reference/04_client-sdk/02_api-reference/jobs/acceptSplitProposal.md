@@ -28,7 +28,7 @@ sub-jobs. The original job's status may be updated to reflect the split.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

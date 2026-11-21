@@ -26,7 +26,7 @@ The server may require additional configuration (e.g., API keys) before it can b
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

@@ -14,11 +14,14 @@ const CBAPICategory = () => {
         if (key === "cbapicategory" && value) {
           return (
             <ul>
-              {value.map((item, index) => (
-                <li key={index}>
-                  <a href={item.link}>{item.name}</a> - {item.description}
-                </li>
-              ))}
+              {value.map((item, index) => {
+                const href = item.link.replace(/^\/docs\/api\/apiaccess\//i, '/docs/reference/codeboltjs/api-access/');
+                return (
+                  <li key={index}>
+                    <a href={href}>{item.name}</a> - {item.description}
+                  </li>
+                );
+              })}
             </ul>
           );
         }

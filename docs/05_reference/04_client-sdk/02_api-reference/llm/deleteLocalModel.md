@@ -26,7 +26,7 @@ freeing up disk space. The model can be re-downloaded later if needed.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

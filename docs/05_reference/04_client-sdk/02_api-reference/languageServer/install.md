@@ -26,7 +26,7 @@ downloaded and set up so it can provide LSP features for its supported languages
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

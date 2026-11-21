@@ -26,7 +26,7 @@ load a specific web page. Requires the browser MCP server to be installed and en
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

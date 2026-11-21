@@ -192,7 +192,7 @@ All mutations emit events so that connected clients (e.g., the UI panel) can upd
 ### Create an Instance
 
 ```typescript
-const instance = await codebolt.kvstore.createInstance({
+const instance = await codebolt.kvStore.createInstance({
   name: "my-agent-state",
   description: "Persisted state for my agent"
 });
@@ -201,32 +201,32 @@ const instance = await codebolt.kvstore.createInstance({
 ### Set a Value
 
 ```typescript
-await codebolt.kvstore.set(instance.id, "config", "theme", "dark");
+await codebolt.kvStore.set(instance.id, "config", "theme", "dark");
 ```
 
 ### Get a Value
 
 ```typescript
-const theme = await codebolt.kvstore.get(instance.id, "config", "theme");
+const theme = await codebolt.kvStore.get(instance.id, "config", "theme");
 // "dark"
 ```
 
 ### Delete a Value
 
 ```typescript
-await codebolt.kvstore.delete(instance.id, "config", "theme");
+await codebolt.kvStore.delete(instance.id, "config", "theme");
 ```
 
 ### Delete a Namespace
 
 ```typescript
-const deletedCount = await codebolt.kvstore.deleteNamespace(instance.id, "config");
+const deletedCount = await codebolt.kvStore.deleteNamespace(instance.id, "config");
 ```
 
 ### Query Records
 
 ```typescript
-const results = await codebolt.kvstore.query({
+const results = await codebolt.kvStore.query({
   instance: instance.id,
   namespace: "user-prefs",
   where: [
@@ -240,13 +240,13 @@ const results = await codebolt.kvstore.query({
 ### Get Namespaces
 
 ```typescript
-const namespaces = await codebolt.kvstore.getNamespaces(instance.id);
+const namespaces = await codebolt.kvStore.getNamespaces(instance.id);
 // ["config", "user-prefs"]
 ```
 
 ### Get Record Count
 
 ```typescript
-const total = await codebolt.kvstore.getRecordCount(instance.id);
-const nsCount = await codebolt.kvstore.getRecordCount(instance.id, "config");
+const total = await codebolt.kvStore.getRecordCount(instance.id);
+const nsCount = await codebolt.kvStore.getRecordCount(instance.id, "config");
 ```

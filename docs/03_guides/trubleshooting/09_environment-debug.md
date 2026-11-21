@@ -10,8 +10,6 @@ When an environment behaves unexpectedly, start with the Environments panel. It 
 
 ![Environment Debug](/productImages/environments/environment-debug.png)
 
-> **Image placeholder:** Add an annotated version of the Environment Debug screenshot that labels state, provider, runtime ID, path, sync mode, parent metadata, and logs.
-
 ## What to check first
 
 | Check | Why it matters |
@@ -37,8 +35,6 @@ Most issues can be diagnosed from those fields before reading logs.
 | Confirm child nesting | Check `parentRuntimeId`, `parentEnvironmentId`, and `parentProjectPath`. |
 
 ## Common problems and fixes
-
-> **Image placeholder:** Add a troubleshooting flowchart that starts from the visible state (`starting`, `error`, `disconnected`, or stale UI) and points to the first field or log to inspect.
 
 | Problem | Likely cause | First fix |
 |---|---|---|

@@ -24,7 +24,7 @@ A remix can change any of the following:
 | `metadata` | Name, description, tags, marketplace fields. |
 | `limits` | Per-run budgets (token, time, tool-call count). |
 
-You **cannot** change the loop structure, add new phases, or change what the agent returns. For any of those, graduate to [level 1](./level-1-framework.md).
+You **cannot** change the loop structure, add new phases, or change what the agent returns. For any of those, graduate to [level 1](./level-2-framework.md).
 
 ## The manifest
 
@@ -75,7 +75,7 @@ Shows every installed agent. The built-in ones (`generalist`, `planner`, `review
 To inspect what a parent looks like before remixing:
 
 ```bash
-codebolt agent show generalist
+codebolt command agent list
 ```
 
 Prints the full resolved manifest including defaults.
@@ -114,6 +114,6 @@ Graduating is a one-way move (usually) — a level-1 agent doesn't inherit from 
 
 ## See also
 
-- [Level 1 — Framework](./level-1-framework.md)
+- [Level 1 — Framework](./level-2-framework.md)
 - [Custom Agents Quickstart](../02_quickstart.md)
 - [agent.yaml reference](../05_agent-anatomy/agent-yaml.md)

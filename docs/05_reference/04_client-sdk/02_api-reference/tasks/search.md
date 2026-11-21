@@ -27,7 +27,7 @@ ranges, or custom filters. Returns an empty array if no tasks match.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

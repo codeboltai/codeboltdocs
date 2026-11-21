@@ -221,7 +221,7 @@ Copy the plugin to one of the directories Codebolt scans:
 cp -r my-ui-plugin ~/.codebolt/plugins/my-ui-plugin
 
 # Option 2: Per-project plugins (only this project, overrides global)
-cp -r my-ui-plugin <your-project>/.codeboltPlugins/my-ui-plugin
+cp -r my-ui-plugin <your-project>/.codebolt/plugins/my-ui-plugin
 ```
 
 ### Load and start
@@ -272,7 +272,7 @@ Codebolt scans these directories in order:
 |---|---|
 | Built-in plugins (shipped with Codebolt) | All projects |
 | `~/.codebolt/plugins/` | All projects (global) |
-| `<project>/.codeboltPlugins/` | Current project only (overrides global) |
+| `<project>/.codebolt/plugins/` | Current project only (overrides global) |
 
 Per-project plugins override global plugins with the same name.
 

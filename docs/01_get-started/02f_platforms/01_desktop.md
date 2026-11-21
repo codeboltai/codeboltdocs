@@ -8,11 +8,7 @@ description: Codebolt's full graphical client for daily coding — chat, multi-p
 
 The Codebolt **Desktop App** is the full graphical client. Install it on macOS, Windows, or Linux and you get a docked, multi-panel workspace for daily coding with agents. It is the richest surface: multi-tab chat, visual diffs, `@mentions`, inline editing, and the full panels ecosystem.
 
-> New here? The **[Get Started](../../02_using-codebolt/02_surfaces/02_desktop-app/00_get-started.md)** guide walks you through install, sign-in, provider setup, and your first agent run in about 5-10 minutes.
-
-## How to launch
-
-Open **Codebolt.app** (or your OS launcher), then pick **Open Project** → choose any folder. Codebolt indexes it in seconds and opens a chat panel.
+Start with the [Desktop Quickstart](../03_quickstart.md) to install the app, run your first agent task, and review a change.
 
 ## In this section
 
@@ -22,7 +18,7 @@ Open **Codebolt.app** (or your OS launcher), then pick **Open Project** → choo
 | **[Workspace and Project Management](../../02_using-codebolt/02_surfaces/02_desktop-app/01_workspace-and-project-management/01_overview.md)** | The durable containers for your work - how projects open and what Codebolt stores locally |
 | **[Application Navigation](../../02_using-codebolt/02_surfaces/02_desktop-app/02_application-navigation/01_panels.md)** | Opening panels, panel search, resizing, layout presets, and shortcuts |
 | **[Settings](../../02_using-codebolt/02_surfaces/02_desktop-app/Settings/01_overview.md)** | Configure LLMs, agents, environment services, language servers, MCP servers, appearance, and global app options |
-| **[Environments](../../02_using-codebolt/02_surfaces/02_desktop-app/04_environments/02_environments.md)** | Saved execution contexts - local, cloud, runner, and child runtimes |
+| **[Environments](../../02_using-codebolt/08a_environments/01_overview.md)** | Saved execution contexts for agent runs |
 | **[Themes](../../02_using-codebolt/02_surfaces/02_desktop-app/Settings/08_themes.md)** | Built-in and custom visual themes, the Theme Editor, and writing your own |
 
 ## What's desktop-only

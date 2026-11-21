@@ -26,7 +26,7 @@ and valid ranges. Use this to build dynamic configuration UIs.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

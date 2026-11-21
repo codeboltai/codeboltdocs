@@ -204,12 +204,15 @@ Codebolt scans this directory on startup and registers the tool automatically. S
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-// Execute the tool by name
-const result = await codebolt.mcp.executeTool('codebolt', 'word_count', {
+const { data } = await codebolt.tools.listRuntimeTools();
+const tool = data.tools.find(item => item.toolName === 'word_count');
+if (!tool) throw new Error('The word_count tool is not available.');
+
+const result = await codebolt.tools.execute(tool.name, {
   text: 'Hello world this is a test',
   exclude_stopwords: true,
-});
-console.log(result); // { count: 4, exclude_stopwords: true }
+}, { sourceId: tool.sourceId });
+console.log(result);
 ```
 
 ### Restrict tools available to an agent
@@ -235,7 +238,7 @@ When `allowedTools` is set, the `ToolInjectionModifier` filters out all other to
 
 On each turn, the agent framework:
 
-1. **ToolInjectionModifier** fetches tools from `codebolt.mcp.listMcpFromServers(['codebolt'])` and any mentioned MCP servers
+1. **Tool injection** selects available tools for the model request. Use `codebolt.tools.listRuntimeTools()` to inspect the runtime catalog
 2. Filters tools against the `allowedTools` list (if provided)
 3. Injects tool schemas into the LLM request as function definitions
 4. The LLM decides which tool to call based on the tool's `description`
@@ -245,7 +248,7 @@ On each turn, the agent framework:
 When the LLM responds with a tool call:
 
 1. **ResponseExecutor** parses the tool name (format: `toolbox--toolName`, e.g. `codebolt--word_count`)
-2. Calls `codebolt.mcp.executeTool(toolboxName, toolName, params)`
+2. Calls the tool execution API with the catalog name and arguments
 3. Returns the result to the LLM as a tool response message
 4. The LLM continues reasoning with the tool result
 
@@ -299,25 +302,7 @@ Return `null` for valid params, or an error message string. The error is returne
 
 ## Step 6 — Expose tools via MCP server
 
-To make your custom tools available to external MCP clients, use `startCodeboltMcpServer()`:
-
-```ts
-import { startCodeboltMcpServer } from '@codebolt/codeboltjs/mcp-server';
-
-const handle = await startCodeboltMcpServer({
-  transport: 'sse',
-  port: 3001,
-  serverName: 'my-tools',
-  toolFilter: ['word_count', 'read_file'],  // expose specific tools
-  toolPrefix: 'mytools',                     // tools namespaced as mytools_word_count
-});
-
-console.log(`MCP server at ${handle.url}`);
-```
-
-This exposes registered tools over MCP so any MCP-compatible client can discover and call them.
-
----
+Use [MCP Server Commands](../../../02_using-codebolt/02_surfaces/04_cli/02_cli-commands/03_tool-commands.md) to connect an MCP client to your running CodeBolt server.
 
 ## ToolResult format
 

@@ -1,20 +1,20 @@
 ---
 sidebar_position: 1
-title: Replay an Agent Run
+title: Repeat an Agent Prompt
 description: Re-running an agent with the same or similar prompt to verify that changes to the agent's configuration didn't break its behaviour.
 ---
 
-# Replay an Agent Run
+# Repeat an Agent Prompt
 
 Re-running an agent with the same or similar prompt to verify that changes to the agent's configuration didn't break its behaviour.
 
 **You'll need:** a custom agent with at least one previous run, and a change you want to test.
 
-## Why replay
+## Why compare runs
 
 LLM behaviour isn't deterministic. You change the agent's instructions, test it, and the new run looks fine — but that's one sample. You don't know if you broke a common case until the bad case shows up in production.
 
-Manual replay helps by:
+Comparing runs involves three steps.
 
 1. **Recording** what the agent did in a good run (via the run history).
 2. **Re-running** the agent with the same prompt after your change.
@@ -37,7 +37,7 @@ After the run completes, check the run history in the UI. Note:
 
 Edit your agent — tweak the instructions, update the tool list, change the model, whatever.
 
-## Step 3 — replay
+## Step 3 — run the prompt again
 
 Run the same prompt against the modified agent:
 
@@ -85,6 +85,6 @@ Run these prompts after any agent change to verify nothing broke.
 
 ## See also
 
-- [Agent Debug](../../02_using-codebolt/05c_agent-observability/02_agent-debug.md)
+- [Agent Debug](../../02_using-codebolt/04_agents/08_agent-debug.md)
 - [Running agents](../../02_using-codebolt/04_agents/03_running-agents.md)
 - [Query the event log](./query-the-event-log.md)

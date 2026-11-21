@@ -1,12 +1,12 @@
 ---
 sidebar_position: 0.5
-title: Installation and  Onboarding
-description: Sign in, choose providers, configure workspace defaults, install the CLI, and pick a default agent.
+title: Installation and Onboarding
+description: Install Codebolt Desktop, sign in, choose a model, and configure your workspace.
 ---
 
-# Installation and  Onboarding
+# Installation and Onboarding
 
-Onboarding configures the desktop app for agent runs.
+[Download and install Codebolt Desktop](https://codebolt.ai/download/) for your operating system. You can also find macOS and Windows installers in the [GitHub release assets](https://github.com/codeboltai/codebolt/releases). Onboarding configures the app for agent runs.
 
 ## Sign In
 
@@ -14,7 +14,7 @@ Open Codebolt. Click **Sign In** - a browser window opens to the Codebolt portal
 
 ![Codebolt welcome screen](/img/get_started.png)
 
-New users are taken into the setup wizard. Returning users go straight to the project dashboard.
+If you already have a workspace configured, Codebolt can take you directly to the project dashboard. Otherwise it opens the setup wizard.
 
 ## Provider Selection
 
@@ -29,7 +29,7 @@ The wizard opens to **Select Default AI Models**. Pick the provider type that fi
 | Local model provider | Local URL - the model server must be running |
 | Enterprise or cloud provider | Access credentials, region, account details, or API token |
 
-Click your provider, enter the key or URL, then select an **LLM model** and an **Embedding model**. Both must be selected before you can continue.
+Click **Select** next to **LLM Model**. Choose a provider, supply any credentials or server URL it requires, then select your model and click **Continue**. You can also choose an **Embedding Model** for features that use embeddings.
 
 If your team needs a provider that is not listed, see [Custom LLM Provider](../../../04_build-on-codebolt/05_plugins/06_custom-ai-providers/02_custom-llm-provider.md) for the build path. For provider configuration, see [LLM Settings](./Settings/02_llm-settings.md).
 
@@ -39,16 +39,12 @@ The **Review Settings** screen lets you configure:
 
 ![Review settings](/img/onboarding-review-settings.png)
 
-- **Default workspace** - defaults to your Desktop. Click **Browse** to change it. See [Workspaces](./01_workspace-and-project-management/02_workspaces.md) for workspace behavior and project organization.
-- **CLI installation** - click **Install** to add `codebolt` to your PATH. You can skip and install later from Settings.
-- **Theme** - choose the starting app theme. See [Themes](./Settings/08_themes.md) for built-in themes and customization.
+- **Default workspace**. Use **Browse** or **Change** to select the folder where you organize projects. See [Workspaces](./01_workspace-and-project-management/02_workspaces.md).
+- **Open From Terminal**. Click **Install** to add `codebolt` to your `PATH`. This is optional and can be done later in Settings.
+- **Theme**. Choose the starting app theme. See [Themes](./Settings/08_themes.md).
 
-## Default Agent
-
-On **Select Default Agent**, browse or search the agent grid. Click **Add as Default Agent**. Codebolt installs it and sets it as the default for new projects.
-
-You can change agent settings later from Settings.
+Click **Continue** to save the workspace and open the project dashboard.
 
 ## Next
 
-Continue to [Getting Started](./00_get-started.md) to open a project and run your first agent.
+Continue to [Open a project](./00_get-started.md#open-a-project) to run your first agent task.

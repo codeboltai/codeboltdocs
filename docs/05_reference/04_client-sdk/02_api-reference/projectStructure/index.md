@@ -7,7 +7,7 @@ title: ProjectStructure API
 Project Structure API
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 ```

@@ -26,7 +26,7 @@ Modifies the properties of a feature such as its title, description, status, or 
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

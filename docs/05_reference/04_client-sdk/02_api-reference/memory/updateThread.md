@@ -26,7 +26,7 @@ Modifies an existing thread's properties such as name, tags, or stored data.
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 

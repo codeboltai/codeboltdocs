@@ -24,10 +24,10 @@ Click the branch name to open a branch picker for switching or creating branches
 
 ## Staging and committing
 
-The Git panel's **Changes** tab lists all modified, added, and deleted files. Files are grouped into:
+Click the branch icon in the editor's file sidebar to open **Source Control**. Modified, added, and deleted files appear in two lists.
 
-- **Staged** — included in the next commit
-- **Unstaged** — modified but not yet staged
+- **Staged Changes** contains files included in your next commit.
+- **Changes** contains edits you can review and stage.
 
 Click the **+** next to a file to stage it, or **–** to unstage. Use **Stage All** / **Unstage All** at the top to act on all files at once.
 
@@ -35,7 +35,7 @@ Type your commit message in the text field at the bottom of the panel, then pres
 
 ## Diff view from the Git panel
 
-Click any file in the Changes list to open a split diff view in the Code editor — current file on the left, staged version on the right. Changes are highlighted in green (added) and red (removed).
+Select a file under **Changes** to open its diff in the editor. Additions are highlighted in green and deletions in red.
 
 ## Branches
 

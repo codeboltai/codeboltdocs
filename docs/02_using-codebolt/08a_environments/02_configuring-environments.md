@@ -81,8 +81,6 @@ If you type a custom path, Codebolt treats it as a user override.
 
 Use the environment actions from the panel.
 
-> **Image placeholder:** Add a screenshot of the environment action menu showing Start, Stop, Restart, Reconnect, Refresh, and Delete.
-
 | Action | Use it when | What Codebolt does |
 |---|---|---|
 | **Start** | The environment is stopped and you want to use it. | Starts the provider process or remote runtime. |

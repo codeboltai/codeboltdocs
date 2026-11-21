@@ -27,7 +27,7 @@ Marks the proposed job as rejected, preventing it from being converted into an a
 ## Example
 
 ```typescript
-import { CodeBoltClient } from '@codebolt/clientsdk';
+import { CodeBoltClient } from '@codebolt/client-sdk';
 
 const client = new CodeBoltClient();
 
