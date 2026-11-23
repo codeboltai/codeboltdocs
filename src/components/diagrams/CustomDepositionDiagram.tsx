@@ -1,4 +1,5 @@
 import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import './diagrams.css';
 
 export default function CustomDepositionDiagram() {
@@ -6,7 +7,7 @@ export default function CustomDepositionDiagram() {
     <div className="cb-diagram cb-diagram--while-loop">
       <img
         className="cb-sawl-image"
-        src="/diagrams/custom-deposition.svg"
+        src={useBaseUrl('/diagrams/custom-deposition.svg')}
         alt="Annotated code example showing a custom UI deposition with plugin ID, UI surface, tool results, interaction result, and next action"
       />
     </div>

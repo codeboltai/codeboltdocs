@@ -1,4 +1,5 @@
 import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import './diagrams.css';
 
 export default function MultiAgentSpawnLoopDiagram() {
@@ -6,7 +7,7 @@ export default function MultiAgentSpawnLoopDiagram() {
     <div className="cb-diagram cb-diagram--while-loop">
       <img
         className="cb-sawl-image"
-        src="/diagrams/multiagent-spawn-loop.svg"
+        src={useBaseUrl('/diagrams/multiagent-spawn-loop.svg')}
         alt="Annotated code example showing a coordinator agent spawning child agents and collecting their results"
       />
     </div>

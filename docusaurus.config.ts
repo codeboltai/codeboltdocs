@@ -5,17 +5,17 @@ import { resolveGeneratedReferenceLinks } from './generatedReferenceLinks';
 import { generateSidebarItems } from './sidebarItemsGenerator';
 
 const excludedDocs = ['Issue.md', 'sortspec.md', 'Excalidraw/**'];
+const siteUrl = process.env.CODEBOLT_DOCS_SITE_URL ?? 'https://docs.codebolt.ai';
+const siteBasePath = process.env.CODEBOLT_DOCS_BASE_PATH?.replace(/^\/+|\/+$/g, '');
+const baseUrl = siteBasePath ? `/${siteBasePath}/` : '/';
 
 const config: Config = {
   title: 'CodeBolt',
   tagline: 'AI-native coding environment with multi-agent orchestration, MCP tooling, and extensible agent architecture',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://docs.codebolt.ai',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  url: siteUrl,
+  baseUrl,
 
   trailingSlash: false,
   markdown: {
@@ -63,7 +63,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         name: 'twitter:image',
-        content: 'https://docs.codebolt.ai/img/docusaurus-social-card.jpg',
+        content: `${siteUrl}${baseUrl}img/docusaurus-social-card.jpg`,
       },
     },
     {
@@ -73,7 +73,7 @@ const config: Config = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'CodeBolt Documentation',
-        url: 'https://docs.codebolt.ai',
+        url: `${siteUrl}${baseUrl}`,
         description: 'AI-native coding environment with multi-agent orchestration, MCP tooling, and extensible agent architecture',
       }),
     },

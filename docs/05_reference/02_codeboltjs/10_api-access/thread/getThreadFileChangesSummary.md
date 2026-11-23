@@ -16,7 +16,7 @@ codebolt.thread.getThreadFileChangesSummary(threadId: string): Promise<ThreadFil
 ```
 
 Retrieves file changes summary for ChangesSummaryPanel.
-Returns data in the format: { title, changes, files }
+Returns an object with `title`, `changes`, and `files` fields.
 
 ## Parameters
 

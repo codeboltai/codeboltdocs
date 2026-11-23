@@ -35,13 +35,17 @@ for (const [name, items] of Object.entries(sidebars)) {
   collectAliases(name, items);
 }
 
-export function getSidebarSelection(location: Location, docId?: string) {
+export function getSidebarSelection(location: Location, docId?: string, baseUrl = '/') {
   const key = new URLSearchParams(location.search).get(menuParameter);
   const alias = key ? aliases.get(key) : undefined;
   if (!alias) return undefined;
+  const basePath = baseUrl.replace(/\/$/, '');
+  const pagePath = location.pathname.startsWith(`${basePath}/`)
+    ? location.pathname.slice(basePath.length)
+    : location.pathname;
   const matches = 'docId' in alias
     ? alias.docId === docId
-    : pathname(alias.href) === pathname(location.pathname);
+    : pathname(alias.href) === pathname(pagePath);
   return matches ? alias : undefined;
 }
 
