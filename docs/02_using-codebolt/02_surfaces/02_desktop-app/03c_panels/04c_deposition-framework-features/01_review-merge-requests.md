@@ -26,8 +26,11 @@ Open via: **Execution menu -> Review Merge Request** or from agent-generated rev
 3. Approve, reject, or create follow-up work.
 4. Use the review request as the durable handoff record for the next agent or user.
 
+## Linked jobs and artifacts
+
+Open a review request and expand **Linked Issues** to see its jobs. Use **Link Existing** to enter a job ID, or **View Job** to open an existing link. Expand **Artifacts** and choose **Open artifact** to inspect an output attached to the request.
+
 ## See also
 
-- [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
+- [Deposition Framework](../../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
 - [Jobs](../04b_agent-management-features/06_jobs.md)
-

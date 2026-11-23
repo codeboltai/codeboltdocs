@@ -22,5 +22,5 @@ Open via: **Tools menu -> Jobs** or the Panel Selector.
 
 - [Swarm Management](./07_swarm-management.md)
 - [Thread Coordination](./08_orchestrator-management.md)
-- [Jobs](../../../07c_agent-coordination/02_jobs.md)
+- [Jobs](../../../../07c_agent-coordination/02_jobs.md)
 

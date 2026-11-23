@@ -100,8 +100,8 @@ Common failure patterns:
 
 - [Proxy Execution](./01_proxy-execution.md)
 - [Routing Gateway](./02_routing-gateway.md)
-- [Full Environments reference](../../../08a_environments/01_overview.md)
-- [Configuring Environments](../../../08a_environments/02_configuring-environments.md)
-- [Environment Providers](../../../08a_environments/03_environment-providers.md)
-- [Environment Debug](../../../08a_environments/04_environment-debug.md)
+- [Full Environments reference](../../../../08a_environments/01_overview.md)
+- [Configuring Environments](../../../../08a_environments/02_configuring-environments.md)
+- [Environment Providers](../../../../08a_environments/03_environment-providers.md)
+- [Environment Debug](../../../../../03_guides/trubleshooting/09_environment-debug.md)
 - [Cloud runtimes and providers](../../../06_cloud/04_running-agents/04_runtimes-and-providers.md)

@@ -12,6 +12,10 @@ Locks are the strong, exclusive counterpart to [pheromones](./02_pheromones.md).
 
 Locks are handled by the same `coordinationService` that manages pheromones. Every coordinated entity (jobs, review merge requests) gets an optional `lock` field and an `unlockRequests` list.
 
+## Manage a job lock in the desktop app
+
+Open **Tools → Jobs** and select a job. In **Lock Status**, choose **Lock Job** to claim an unlocked job. If the job is held by another agent, choose **Request Unlock**, enter the reason, and select **Submit Request**. Existing requests appear in **Unlock Requests** with **Approve** and **Reject** actions where available.
+
 ## Acquiring a lock
 
 When an agent starts active work on an entity, it acquires the lock:
@@ -118,8 +122,6 @@ POST   /jobs/:id/unlock-requests/:reqId/approve
 POST   /jobs/:id/unlock-requests/:reqId/reject
 DELETE /jobs/:id/unlock-requests/:reqId
 ```
-
-From the UI, lock controls live in the entity detail panel — a padlock control for lock/unlock, and an **Unlock requests** tab listing the pending requests with approve / reject actions for the lock holder.
 
 ## Related
 

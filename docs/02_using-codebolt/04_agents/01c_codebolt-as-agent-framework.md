@@ -198,10 +198,10 @@ The same SDK exposes everything else the server runs: tasks, jobs, swarms, vecto
 
 When your Next.js app talks to a Codebolt server, it inherits — without writing any of it — the runtime features the desktop and CLI use:
 
-- **Persistent memory** — KV, JSON, vector, knowledge graph, episodic, [event log](../07_memory/07_event-log.md) ([Memory & Context](../07_memory/01_overview.md)).
+- **Persistent memory** — KV, JSON, vector, knowledge graph, episodic, [event log](../05d_memory/07_event-log.md) ([Memory & Context](../05d_memory/01_overview.md)).
 - **Tools and MCP** — [built-in and custom tools](../04b_agent-extensions/07_custom-tools.md) plus any [MCP server](../04b_agent-extensions/06_mcp-server.md) you install.
 - **Multi-agent coordination** — [jobs, swarms, deliberation, stigmergic primitives](../07c_agent-coordination/01_overview.md).
-- **Observability** — [Agent Debug](../05c_agent-observability/02_agent-debug.md), [AI Debug](../05c_agent-observability/03_ai-debug-and-console.md), [event log](../07_memory/07_event-log.md).
+- **Observability** — [Agent Debug](./08_agent-debug.md), [AI Debug](./09_ai-debug-and-console.md), [event log](../05d_memory/07_event-log.md).
 - **Environments** — run agent code [locally, in Docker, E2B, Daytona, or remote](../08a_environments/01_overview.md).
 - **Marketplace** — install, publish, version any agent built on `@codebolt/agent` ([Marketplace Publishing](../02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md)).
 
@@ -215,7 +215,7 @@ When your Next.js app talks to a Codebolt server, it inherits — without writin
 | Switching execution environment | App-level concern | Pick an [environment](../08a_environments/01_overview.md); agent code unchanged |
 | Sharing the agent across apps | Re-import the package, re-wire memory | One server, many client apps via the SDK |
 | Long-running runs / queues | Build it yourself | [Jobs](../07c_agent-coordination/02_jobs.md) and [background agents](./03_running-agents.md) ship with the runtime |
-| Observability of a run | Wire OpenTelemetry / LangSmith / etc. | [Agent Debug](../05c_agent-observability/02_agent-debug.md) and [event log](../07_memory/07_event-log.md) work out of the box |
+| Observability of a run | Wire OpenTelemetry / LangSmith / etc. | [Agent Debug](./08_agent-debug.md) and [event log](../05d_memory/07_event-log.md) work out of the box |
 | Token-overflow on long runs | You handle compaction | Built-in layered compaction with reactive recovery |
 
 The cost is one extra hop: your app → Codebolt server → LLM provider, instead of your app → LLM provider. The win is everything in the right column.

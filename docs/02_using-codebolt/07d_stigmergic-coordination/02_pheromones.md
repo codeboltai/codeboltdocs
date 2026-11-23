@@ -6,6 +6,8 @@ description: A pheromone is a typed signal that an agent or user deposits on a s
 
 # Pheromones
 
+To view a job's signals in the desktop app, open **Tools → Jobs**, select the job, and look under **Pheromones**. To add a signal, open the deposit form, choose a type and intensity, and select **Deposit**.
+
 
 A **pheromone** is a typed signal that an agent or user deposits on a shared entity (a job, a review request, etc.) to influence what other agents do next. Any agent reading the entity sees the current pheromone load and reacts — there is no central scheduler.
 

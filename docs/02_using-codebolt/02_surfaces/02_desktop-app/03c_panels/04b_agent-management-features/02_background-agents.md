@@ -26,5 +26,5 @@ The desktop panel uses `/background-agents`, `/background-agents/start`, `/backg
 ## See also
 
 - [Running Agents](./01_running-agents.md)
-- [Background Agent](../../../07a_parallel-agents/04_background-agent.md)
+- [Background Agent](../../../../07a_parallel-agents/04_background-agent.md)
 

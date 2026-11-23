@@ -19,10 +19,9 @@ Use this page to understand which tool path to use. For implementation details, 
 
 ## Tool types
 
-<details open>
-<summary><strong>Built-in Tools</strong></summary>
+### Built-in Tools
 
-Built-in tools ship with the Codebolt server. They require no installation, but agents can only use the tools allowed by their `tools.allow` policy and guardrails.
+Built-in tools ship with the Codebolt server. The selected agent and active [Policy Profile](../05b_guardrails-and-settings/01_guardrails.md#policy-profiles) determine which tools the agent can use. To see a tool in action, ask your agent to summarize the README in Chat and inspect the recorded file-read activity.
 
 For exact schemas and signatures, see [Reference -> Built-in Tools](../../05_reference/01_overview.md).
 
@@ -41,8 +40,6 @@ Common built-in tool families include:
 | `codebolt_state` | Inspect and modify agent run state. |
 | `codebolt_agent` | Find, list, inspect, and start other agents. |
 | `codebolt_config` | Configure MCP or NRCP settings programmatically. |
-
-</details>
 
 <details>
 <summary><strong>Reusable Custom Tools</strong></summary>

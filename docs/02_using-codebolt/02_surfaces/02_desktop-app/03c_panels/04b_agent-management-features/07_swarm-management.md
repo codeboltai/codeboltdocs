@@ -29,5 +29,5 @@ The desktop panel uses `/swarm/swarms`, `/swarm/swarms/:swarmId/agents`, `/swarm
 
 - [Jobs](./06_jobs.md)
 - [Running Agents](./01_running-agents.md)
-- [Swarm Management](../../../07c_agent-coordination/05_swarm-management.md)
+- [Swarm Management](../../../../07c_agent-coordination/05_swarm-management.md)
 

@@ -96,7 +96,7 @@ MCP (Model Context Protocol) servers expose tools agents can call — file searc
 
 **Portal routes:** `/mcp/all` · `/mcp/mymcp`
 
-Publishing an MCP from the portal: fill in the connection details (URL or local command), the capability list, and authentication method. Users install it and it appears in **Settings → MCP Servers**.
+Publishing an MCP from the portal: fill in the connection details (URL or local command), the capability list, and authentication method. Desktop users can find published MCPs in **System → Marketplace → MCP**.
 
 See [MCP Server](../../../04b_agent-extensions/06_mcp-server.md) for the install flow.
 
@@ -267,7 +267,7 @@ The **My** view of each entity type lets you:
 
 ## Who can publish
 
-Anyone with a signed-in account can publish. Team-owned items on self-hosted deployments can be restricted to team admins — see [Teams → Roles](../../../09_account/02_teams.md#roles).
+Anyone with a signed-in account can publish. Team-owned items on self-hosted deployments can be restricted to team admins — see [Team Settings → Members](../05_settings/09_team-settings.md#members-settingsteammembers).
 
 ---
 

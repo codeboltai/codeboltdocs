@@ -40,4 +40,4 @@ Treat tokens like passwords: scope names to their purpose, prefer short expiries
 
 - [Runner Nodes](../04_running-agents/05_runner-nodes.md) — primary consumer of login tokens
 - [Remote Chat](../04_running-agents/01_remote-chat.md) — the `appToken` env var
-- [Authentication & Authorization](../../../09_account/01_authentication-and-authorization.md)
+- [Sign in to the Cloud portal](../02_cloud-portal.md#sign-in)

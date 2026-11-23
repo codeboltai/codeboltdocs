@@ -45,7 +45,7 @@ Look at the last several events in the run trace (available in the UI). Patterns
 ```
 
 - **Tool is slow.** Some tools (browser, network) can be slow. Give it more time.
-- **Tool is hung.** Check the MCP server status in Settings → Tools.
+- **Tool is hung.** Check the MCP server configuration in **Agents → MCP**.
 - **Endless loop inside the tool.** The tool's own bug. Restart the MCP server.
 
 ### Pattern C: Heartbeat timeout about to fire
@@ -115,7 +115,7 @@ Fix: check provider usage. Switch to a provider with higher limits, or add a fal
 
 A plugin crashed and isn't being restarted fast enough. Tool calls to it hang until the restart completes.
 
-Fix: check MCP server status in Settings → Tools. Restart the server manually if stuck.
+Check the server configuration in **Agents → MCP**. If you run the server separately, inspect its output before restarting it.
 
 ## 5. Prevent recurrence
 

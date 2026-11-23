@@ -1,49 +1,25 @@
 ---
 sidebar_position: 7
 title: Plugin Debug
-description: The Plugin Debug panel shows the WebSocket connection state, incoming/outgoing messages, and errors for every installed plugin — chat-platform plugins, custom.
+description: Inspect plugin instances and Action Block execution logs in Codebolt.
 ---
 
-# Plugin Debug
+# Plugin and Action Block Debugging
 
-The **Plugin Debug** panel shows the WebSocket connection state, incoming/outgoing messages, and errors for every installed plugin — chat-platform plugins, custom node plugins, embedding-provider plugins, and any others connected through the plugin framework.
+## Plugin Debug
 
-Open via: **Debug Tools dropdown → Plugin Debug**
+Open **Debug → Plugin Debug**. Use the status filter to find a recorded plugin instance. Select it to inspect its output in the terminal pane and check its status, start time, and log count.
 
-## What it shows
+If a plugin fails to start, look for the first error in its output and check its configuration under **Agents → Plugins**.
 
-Each plugin appears as a collapsible section with:
+## ActionBlock Debug
 
-| Field | Description |
-|---|---|
-| **Plugin name** | The plugin's identifier |
-| **Status** | `connected`, `disconnected`, `error` |
-| **Connection time** | When the plugin connected |
-| **Message count** | Total messages exchanged this session |
-| **Last message** | Timestamp and type of the most recent message |
+Open **Debug → ActionBlock Debug** after the block runs. Pick its session to see the execution status and available logs. Use **Refresh sessions** if a recent run has not appeared yet.
 
-Expand a plugin section to see the live WebSocket message stream:
+For example, if a block fails while processing an input, choose its failed session and read the output before retrying it.
 
-- **Outgoing** (→) — messages sent from Codebolt to the plugin
-- **Incoming** (←) — messages received from the plugin
-- Each message shows the type, payload (collapsed), and timestamp
+## See also
 
-## Debugging a disconnected plugin
-
-If a plugin shows `disconnected` or `error`:
-
-1. Check the **error message** in the plugin's section (shown in red).
-2. Look for connection refusals (the plugin process crashed or isn't running).
-3. Check the plugin's own log output in the Console panel.
-4. Verify the plugin's configuration in **System Settings → Plugins**.
-
-## Message filtering
-
-Use the **Type** filter to show only specific message types (e.g., only `chatMessage` events from a chat-platform plugin). Reduces noise when diagnosing a specific interaction.
-
-## Related
-
-- [Chat Widget](./06_chat-widget.md) — a common plugin that shows up here
-- [Chat Platforms](../08e_external-integrations/03_chat-platforms.md) — plugin-backed integrations routed through the gateway
-- [Building a Channel Plugin](../08e_external-integrations/05_building-a-channel-plugin.md) — when to build a custom channel plugin and where to find the implementation guide
-- [Environment Debug](../08a_environments/04_environment-debug.md) — companion panel for resolved environment variables
+- [Action Blocks](../04b_agent-extensions/04_action-blocks.md)
+- [Installing Plugins](../07z_plugins/02_installing-plugins.md)
+- [Application Logs](../06a_application-logs.md)

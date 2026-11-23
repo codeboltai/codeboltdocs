@@ -1,62 +1,30 @@
 ---
 sidebar_position: 2
 title: Running Parallel Agents
-description: Codebolt supports four ways to run agents concurrently. Each has a different level of coordination and is suited to different situations.
+description: Run independent threads or coordinate child agents and swarm workers.
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Running Parallel Agents
 
-Codebolt supports four ways to run agents concurrently. Each has a different level of coordination and is suited to different situations.
+Run independent tasks in separate Chat tabs, ask a parent agent to delegate part of a task, or start several workers in a swarm.
 
-## Tabs — independent parallel runs
+## Run two agents in parallel
 
-The simplest pattern. Open multiple chat tabs, pick a different agent (or the same one) in each, and run them simultaneously. Each tab is fully independent — separate threads, separate context, separate checkpoints.
+1. In **Chat**, choose an agent and send a request. For example, ask it to read the README and list missing setup steps.
+2. While that request is running, click **New Chat** in the header. Choose an agent and ask it to list the existing tests for a module.
+3. Use the **Open threads** menu in the Chat header to switch between the two conversations and see which are running. Each conversation has its own messages. If you ask both agents to edit files in the same project, give them different files to work on.
 
-**Desktop:** Click **New Chat** in the Chat header and choose an agent for the new thread.
+## Delegate to a child agent
 
-**Use this when:** you want to run two unrelated tasks at the same time, or compare how two agents handle the same prompt.
+Choose a parent agent that supports delegation. In Chat, ask it to hand a specific part of the work to a subagent. For example, ask the parent to delegate a review of the README while it inspects the test layout. To give the delegated work its own conversation, ask the parent to start a child thread in the background.
 
-## Child agents — programmatic delegation
-
-An agent can spawn sub-agents from within its own code using `codebolt.agent.startAgent`. The child runs as a nested run under the parent. Results are returned to the parent when the child finishes.
-
-```ts
-const result = await codebolt.agent.startAgent(agentId, 'Write unit tests for the auth module');
-```
-
-The child appears in the **Running Agent panel** alongside the parent. Both are monitored in real time.
-
-**Use this when:** an orchestrator agent needs to delegate subtasks to specialists automatically.
-
-See [Sub Agent](./05_sub-agent.md) for the user-facing view of how delegated child runs appear in Codebolt.
-
-## Flows — declared pipelines
-
-A flow is a graph where nodes are agents and edges are data connections. The flow runtime executes agents in dependency order — independent nodes run in parallel automatically.
-
-<Tabs groupId="surface">
-<TabItem value="cli" label="CLI" default>
-
-The current CLI does not expose the older flow-execution commands from previous drafts.
-
-</TabItem>
-<TabItem value="desktop" label="Desktop">
-
-**Flows panel → Run** on a flow card. Inputs are filled from the flow's input schema.
-
-</TabItem>
-</Tabs>
-
-**Use this when:** you have a repeatable multi-agent pattern with a fixed structure. See [Reading a flow](../07_multi-agent-usage/03_reading-a-flow.md).
+See [Subagents](./05_sub-agent.md) for prompts to try in Chat and where to check that the parent started the delegated work.
 
 ## Swarms — dynamic cooperation
 
 A swarm is a group of agents that share a common goal, communicate through a shared memory space, and divide work dynamically without a fixed graph. Agents in a swarm pick up tasks from a shared queue rather than being explicitly assigned them.
 
-The current CLI does not expose the older swarm command family from previous drafts. Use the desktop orchestration surfaces that your build provides.
+Open **Execution → Distributed Swarm Management**. Choose the agents and the number of workers for the swarm.
 
 **Use this when:** the work is large, exploratory, or hard to decompose upfront. See [Running a swarm](../07_multi-agent-usage/02_running-a-swarm.md).
 
@@ -66,7 +34,7 @@ The current CLI does not expose the older swarm command family from previous dra
 
 ### Running Agent panel
 
-Open via **Execution dropdown → Running Agent** in the bottom bar. Shows every active agent process with name, status, duration, token usage, and a stop button. Updates in real time.
+Open **Execution → Running Agent** in the bottom bar to check run status. Use **Hierarchy View** to inspect parent and child agent executions.
 
 ### Background Agents panel
 
@@ -74,23 +42,9 @@ Open via **Execution dropdown → Background Agents**. This is a dedicated panel
 
 See [Background Agent](./04_background-agent.md) for when runs move into this panel and how to monitor them.
 
-### Chat Canvas
-
-The [Chat Canvas](./03_chat-canvas.md) gives you a 2D visual view of all running agent conversations. Best for understanding how agents in a parallel run relate to each other.
-
----
-
 ## Limits
 
-All concurrent runs share server-wide limits:
-
-- **Max concurrent agent processes** — configurable in server settings
-- **Max spawn rate** — prevents runaway delegation loops
-- **Per-agent budgets** — `max_tool_calls`, `max_tokens`, `max_wall_time_seconds`, `max_cost_usd` in the agent manifest
-
-If you hit concurrency limits, new runs queue until a slot opens. See [Self-hosting → Scaling](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md) for raising these limits.
-
----
+For a swarm, set the worker count and concurrency limit in its configuration. The start dialog checks those limits before launching the workers.
 
 ## Stopping parallel runs
 

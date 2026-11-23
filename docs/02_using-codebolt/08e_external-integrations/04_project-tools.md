@@ -1,72 +1,23 @@
 ---
 sidebar_position: 4
 title: Project Tools
-description: Project tools — issue trackers, code review platforms, and knowledge bases — are a natural fit for agent automation
+description: Connect project tools through configured MCP servers and webhooks.
 ---
 
 # Project Tool Integrations
 
-Project tools — issue trackers, code review platforms, and knowledge bases — are a natural fit for agent automation. Agents can read issues from Linear, create pull requests on GitHub, update tickets in Jira, or write to Notion pages as part of their normal task flow.
+Connect an issue tracker, source-control service, or knowledge base with an MCP server or a webhook integration.
 
-## Integration approaches
+## MCP servers
 
-There are two ways to connect agents to project tools:
+Install a server that provides the actions your agent needs, such as listing issues or adding a comment. Configure the credentials that the server requires in its MCP configuration. Tool names and permissions depend on the server you install. See [MCP Server](../04b_agent-extensions/06_mcp-server.md) for setup.
 
-![Project tool integration flow](/diagrams/project-tools-integration-flow.svg)
+## Webhook-driven workflows
 
-### 1. MCP servers (recommended)
+Send events to [Routing Gateway → Webhooks](../08d_auto-interactivity/02_webhooks.md) from a sender that can attach Codebolt's shared-secret header.
 
-The simplest path is an **MCP server** for the tool. MCP servers expose tool capabilities that agents can call directly — `create_issue`, `list_prs`, `update_page`, etc. Install the relevant MCP server and the agent gains access to the tool's API without any custom code.
+For example, use an integration to forward a new issue to a triage agent. Include the issue ID and the requested action in the message. To let the agent update the issue, give it access to a configured issue-tracker tool. A webhook **Target URL** receives Codebolt's signed callback envelope. An adapter can translate that envelope into the issue tracker's API request and supply its credentials.
 
-See [Agent Extensions → MCP Server](../04b_agent-extensions/06_mcp-server.md) for setup instructions. Popular MCP servers include:
+## Scheduled summaries
 
-| Tool | MCP server |
-|---|---|
-| GitHub | `@modelcontextprotocol/server-github` |
-| Linear | `linear-mcp-server` |
-| Jira | `jira-mcp-server` |
-| Notion | `@modelcontextprotocol/server-notion` |
-| GitLab | `gitlab-mcp-server` |
-
-### 2. Webhook-driven workflows
-
-For event-driven integrations — where a tool event triggers an agent — use **webhooks**:
-
-1. Create a Codebolt webhook endpoint (see [Automation → Webhooks](../08d_auto-interactivity/02_webhooks.md))
-2. Configure the external tool to POST to that endpoint when events occur
-3. The Routing Gateway delivers the payload to your agent
-
-**Example — Linear issue created → agent picks it up:**
-
-Configure the Linear webhook to POST to your Codebolt webhook URL. Set the webhook's `targetUrl` to the Linear API endpoint for adding comments, so the agent's reply is posted back to the issue automatically.
-
-## Common patterns
-
-### Auto-triage incoming issues
-
-A Routing Gateway webhook receives new Linear or Jira issues, routes them to a triage agent, and the agent applies labels, sets priority, and adds an initial comment — all without human involvement.
-
-### PR review on push
-
-A GitHub webhook fires when a PR is opened. The agent reads the diff (via the GitHub MCP server), reviews it, and posts a review comment back to the PR.
-
-### Daily standup from task data
-
-A calendar event fires every morning. The agent queries Linear (via MCP) for in-progress issues, formats a standup summary, and posts it to a Slack channel (via a channel plugin).
-
-### Issue-to-task sync
-
-When a Linear issue moves to "In Progress", a webhook triggers an agent that creates a matching Codebolt task and spins up a sub-agent to begin work.
-
-## Authentication
-
-Most project tools use OAuth or personal access tokens. Store credentials as **environment variables** in your project's [Environment configuration](../08a_environments/02_configuring-environments.md) — they are encrypted at rest and injected into the agent process at runtime.
-
-```
-LINEAR_API_KEY=lin_api_...
-GITHUB_TOKEN=ghp_...
-JIRA_API_TOKEN=...
-NOTION_API_KEY=secret_...
-```
-
-MCP servers read these environment variables automatically when they start.
+Create a [scheduled automation](../08d_auto-interactivity/01_overview.md) that starts an agent with a summary instruction. The agent can read project status through a configured MCP server. Set up a channel integration separately if your workflow needs to post the result to a chat platform.

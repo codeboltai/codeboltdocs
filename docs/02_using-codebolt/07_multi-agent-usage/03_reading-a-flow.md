@@ -1,76 +1,22 @@
 ---
 sidebar_position: 3
 title: Reading a Flow
-description: Understand what a multi-stage agent flow is doing while it runs, using the current desktop product surfaces rather than the removed flow CLI commands.
+description: Inspect a visual agent definition and follow its runs in desktop chat.
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Reading a Flow
 
-Understanding what an agent flow is doing while it runs, or after it has finished, is primarily a desktop experience in the current product.
-
-## Viewing a flow run
-
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
-
-When you run a flow, the desktop UI opens a dedicated view with node status, timing, and drill-down into input, output, and related run details.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose the older dedicated flow-inspection and replay command family from previous drafts.
-
-Use the CLI only for adjacent server-backed inspection such as:
-
-```bash
-codebolt command thread list
-codebolt command job list
-```
-
-</TabItem>
-</Tabs>
-
-## The flow view
-
-In the desktop product, a flow view typically lets you inspect:
-
-- node status
-- elapsed time
-- stage relationships
-- per-stage drill-down into related activity
-
-## Node detail
-
-The important user-facing questions remain the same:
-
-- which agent handled the stage
-- what input it received
-- what output it produced
-- whether it spawned additional work
-- where it failed or stalled
+A visual agent's `.agentflow` file defines the nodes and connections for that agent.
 
 ## Understanding flow structure
 
-Flow definitions still live in configuration and orchestration code, but the current CLI does not expose the older flow-definition helper documented in previous drafts.
+Open **Agents**, filter the installed list for **Flow** agents, and choose **Open Flow Editor**. The editor shows the graph and node settings. Use **Properties** for the agent's settings and **Save** after editing the graph.
 
-## Common questions
+## Viewing a flow run
 
-### "Why is it stuck at this node?"
-
-Check the current node state, recent activity, and whether downstream work is waiting on another stage or on user input.
-
-### "Why did it take a different path than I expected?"
-
-Check the previous stage output and the routing logic that connects stages.
-
-### "Why are there so many iterations?"
-
-Feedback loops and retry logic can cause repeated execution. Investigate the stage that keeps re-entering the loop.
+Select the flow agent in the chat composer and send a message. Follow the conversation in Chat. Use [Thread Panel](../04_agents/08_thread-panel.md) and [Agent Debug](../04_agents/08_agent-debug.md) when you need recorded activity or process logs.
 
 ## See also
 
-- [Multi-Agent Usage Overview](./01_overview.md)
 - [Running a Swarm](./02_running-a-swarm.md)
+- [Running Parallel Agents](../07a_parallel-agents/02_running-parallel-agents.md)

@@ -44,14 +44,15 @@ Groups can contain tasks or nested groups.
 
 ## Views
 
-The Action Plan panel has two views:
+The Execution Plan detail panel offers three views.
 
 - **List view** — a hierarchical list of all tasks and groups, collapsible, with inline status editing and drag-to-reorder
+- **Timeline view** — inspect tasks and groups along the plan timeline
 - **Flow view** — a React Flow diagram showing tasks as nodes and dependencies as edges; useful for understanding the execution shape of a complex plan
 
 ## Creating an action plan
 
-Click **+ New Plan** in the Action Plan panel. Add tasks one at a time, or let an agent generate the plan from a description. Agents create Action Plans automatically when they start multi-step work.
+Open **Plan → Execution Plan** and choose **New Plan**. Enter the name and description, then use **Add Task** or **Add Group** to structure the work.
 
 ## Editing tasks
 
@@ -82,18 +83,11 @@ The plan header shows overall progress: total tasks, completed tasks, and a perc
 
 ## Agents and action plans
 
-When an agent creates an Action Plan, it reflects its own work structure. As the agent executes:
-
-1. It marks tasks `in_progress` when it starts them
-2. It marks tasks `completed` or `failed` as it finishes
-3. It updates `waiting_user` when it needs your input
-4. The plan becomes a live audit trail of what the agent did and what's left
-
-You can intervene at any point — edit a task description, change priority, or cancel a task — and the agent respects the updated plan on its next step.
+An agent can create and update execution plans with the [Execution Plan API](../../05_reference/02_codeboltjs/10_api-access/executionPlan/index.md). For example, record prerequisite tasks before starting implementation and update each task as work progresses. How a running agent responds to plan edits depends on its workflow.
 
 ## Persistence
 
-Action Plans are stored in `.codebolt/.action-plans/` as JSON. The last five versions of each plan are kept as backups, written with a 100ms debounce to avoid write thrash during fast agent updates.
+Action Plans are stored in `.codebolt/.execution-plans` as JSON. The last five versions of each plan are kept as backups, written with a 100ms debounce to avoid write thrash during fast agent updates.
 
 ## See also
 

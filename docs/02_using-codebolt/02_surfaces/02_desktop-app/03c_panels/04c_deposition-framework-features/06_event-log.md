@@ -27,6 +27,6 @@ Open via: **Context menu -> Event Log** or from event-log result widgets in chat
 
 ## See also
 
-- [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
+- [Deposition Framework](../../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
 - [Auto Testing](./04_auto-testing.md)
 - [Artifacts](./05_artifacts.md)

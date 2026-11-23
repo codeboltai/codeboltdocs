@@ -1,71 +1,22 @@
 ---
 sidebar_position: 4
 title: Browser Control
-description: "Agents can control a headless browser via codebolt_browser. Used for:"
+description: Use the browser tools available to an agent to inspect pages.
 ---
 
 # Browser Control
 
-
-
-Agents can control a headless browser via `codebolt_browser`. Used for:
-
-- Testing web apps (load a page, check for elements, run interactions).
-- Scraping documentation or API references during an agent run.
-- Live debugging of running apps.
-- Visual regression checks.
 ![Browser Control](/productImages/integrations/browser.png)
 
-## Prerequisites
+An agent with browser tools can open a page, inspect its contents, and capture screenshots. Check the agent's available tools and the active [Policy Profile](../05b_guardrails-and-settings/01_guardrails.md#policy-profiles) before assigning browser work.
 
-Codebolt ships with a bundled headless browser runtime (Chromium-based). No separate install required. First use downloads any missing browser assets.
+## Example
 
-## The tools
+Ask an agent with browser access to open a running local app, check that its main heading renders, and capture a screenshot. Give the agent the address as seen from its runtime. A local server address refers to the machine or environment running the browser.
 
-- `codebolt_browser.browser_action` — the main tool. Takes an action (`navigate`, `click`, `type`, `screenshot`, `get_content`, `evaluate`) and an optional selector.
-- `codebolt_debug.debug_open_browser` — open a browser with devtools enabled for debugging.
-
-Example sequence an agent might run:
-
-```
-browser_action(navigate, url="http://localhost:3000")
-browser_action(get_content, selector="h1")
-browser_action(click, selector="#submit")
-browser_action(screenshot) → returns a PNG inline
-```
-
-## Giving an agent browser access
-
-Add to the agent's allowlist:
-
-```yaml
-tools:
-  allow:
-    - codebolt_browser.*
-```
-
-By default, only `generalist` and `debugger` have browser access. Other built-ins don't need it.
-
-## Security considerations
-
-Browser tools make real requests and can interact with pages. Review the thread's active [policy profile](../05b_guardrails-and-settings/01_guardrails.md#policy-profiles) and its browser tool permissions before granting browser access to an agent.
-
-## Local vs remote pages
-
-For testing your own app, point at `http://localhost:3000` or wherever your dev server runs. Codebolt's browser has network access to your local machine.
-
-For external sites (scraping docs, checking APIs), remember: the browser is making real requests with your IP. Don't let agents hammer a site — add rate limiting via a hook.
-
-## The debug browser
-
-`codebolt_debug.debug_open_browser` opens a visible browser with devtools attached. Unlike `browser_action`, this is interactive — you see what the agent sees.
-
-Use when diagnosing "why is my frontend test failing" kind of issues.
-
-
+Custom agents can use the [CodeboltJS Browser API](../../05_reference/02_codeboltjs/10_api-access/browser/index.md) for page operations such as navigation, reading content, and screenshots.
 
 ## See also
 
+- [Preview & Browser](../02_surfaces/02_desktop-app/03b_code-and-terminal/05_preview-browser.md)
 - [Custom Tools](../04b_agent-extensions/07_custom-tools.md)
-- [Built-in tools](../04b_agent-extensions/07_custom-tools.md#built-in-tools)
-- [Hooks (for restricting browser access)](../../04_build-on-codebolt/05_plugins/01_overview.md)

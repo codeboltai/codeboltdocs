@@ -26,5 +26,5 @@ The desktop panel reads agent execution data from endpoints such as `/agent-exec
 
 - [Background Agents](./02_background-agents.md)
 - [Swarm Management](./07_swarm-management.md)
-- [Agent Observability](../../../05c_agent-observability/01_overview.md)
+- [Agent Observability](../../../../06a_application-logs.md)
 

@@ -70,7 +70,7 @@ Shows all currently running or recently completed side executions with their sta
 Action blocks are invoked in two ways:
 
 1. **By an agent** — the agent calls an action block by name during its task, passing the required inputs. The result is returned asynchronously.
-2. **By a hook** — a hook with `then.type: runActionBlock` fires the action block in response to a system event. See [Hooks](./05_hooks.md).
+2. **By a hook** — a hook with `then.type: runActionBlock` fires the action block in response to a system event. See [Hooks](../08d_auto-interactivity/04_hooks.md).
 
 ## Side execution context
 

@@ -12,6 +12,10 @@ Where a [lock](./03_locks-and-unlock-requests.md) is entity-wide (the whole job,
 
 File update intents are managed by `fileUpdateIntentService` on the server and exposed under `/file-update-intents`. The `files_blocked` pheromone (see [Pheromones](./02_pheromones.md#default-pheromone-types)) is the bridge — when an agent's files are reserved at level 4 by someone else, a `files_blocked` pheromone surfaces that up to the entity level.
 
+## Create an intent in the desktop app
+
+Open **Environment**, open the environment in a panel, and select **File Intents**. Choose **Create**, describe your change, and add the path and intent level for each file. For example, add an advisory intent for a README update so collaborators can see which file you plan to edit. Select **Create** to save it and look for it in the same tab.
+
 ## Anatomy of an intent
 
 ```ts

@@ -141,7 +141,7 @@ Patterns to watch for:
 ## See also
 
 - [Chat Overview](./01_overview.md)
-- [AI Debug & Console](../../../05c_agent-observability/03_ai-debug-and-console.md)
-- [Agent Debug](../../../05c_agent-observability/02_agent-debug.md)
-- [LLM Providers](../08_integrations/01_llm-providers.md)
-- [LLM & Inference (internals)](../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)
+- [AI Debug & Console](../../../04_agents/09_ai-debug-and-console.md)
+- [Agent Debug](../../../04_agents/08_agent-debug.md)
+- [LLM Providers](../../../08_integrations/01_llm-providers.md)
+- [LLM & Inference (internals)](../../../../04_build-on-codebolt/07b_subsystems/03_llm-and-inference.md)

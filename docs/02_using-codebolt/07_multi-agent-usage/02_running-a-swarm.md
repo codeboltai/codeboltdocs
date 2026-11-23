@@ -1,66 +1,32 @@
 ---
 sidebar_position: 2
 title: Running a Swarm
-description: A swarm is a dynamic group of cooperating agents. The current user-facing control surface is the desktop product, not the older swarm CLI commands.
+description: Configure, start, and inspect a swarm in the desktop app.
 ---
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Running a Swarm
 
 ![Running a Swarm](/productImages/multiagentusage/running_swarm.png)
 
-A **swarm** is a dynamic group of agents cooperating on a task. Unlike a fixed flow, a swarm can change shape while it runs.
-
 ## Starting a swarm run
 
-The current user-facing swarm experience is primarily desktop-driven. Use the execution and orchestration surfaces exposed by your build to start and monitor swarm-style work.
-
-The current CLI does not expose the older swarm launch flows documented in earlier drafts.
+1. Open **Execution → Distributed Swarm Management**.
+2. Open a swarm or choose **New** to create one.
+3. In **Config**, add and enable the agents you want to use, then save the configuration.
+4. Select **Start Swarm**, choose the number of instances of each agent, and start the run. The dialog checks the configured concurrency limit.
 
 ## Watching a swarm
 
-<Tabs groupId="surface">
-<TabItem value="desktop" label="Desktop" default>
+Open **Workers** to see its workers and open their threads. Use **Jobs** for the swarm's configured job group. The swarm also has views for activity, spawn requests, and termination requests.
 
-Use the running-agent and related execution surfaces in the desktop app to inspect orchestrators, workers, and nested runs.
-
-</TabItem>
-<TabItem value="cli" label="CLI">
-
-The current CLI does not expose dedicated swarm tree or swarm watch commands.
-
-What it can provide is limited supporting inspection:
+You can also list threads and jobs from the CLI.
 
 ```bash
 codebolt command thread list
 codebolt command job list
 ```
 
-</TabItem>
-<TabItem value="api" label="HTTP API">
-
-If your runtime exposes server APIs for orchestration, use those deployment-specific endpoints rather than the removed CLI examples from older drafts.
-
-</TabItem>
-</Tabs>
-
-## Observing coordination
-
-Swarm-style coordination can involve direct messages, shared state, or indirect coordination through shared artifacts. In the current user-facing product, the best place to observe this is the desktop execution UI and any run-detail panels your build exposes.
-
-The current CLI does not expose the older event-stream commands from previous drafts.
-
-## Stopping a swarm execution
-
-Use the stop control in the active chat or open **Execution → Running Agent** and stop the relevant run.
-
-## Failed workers and policies
-
-Worker failures are handled by the orchestrator or flow logic that owns the swarm. Typical policies still include fail-fast, best-effort, and retry, but the control surface for understanding those outcomes is the desktop UI rather than the removed swarm CLI.
-
 ## See also
 
-- [Multi-Agent Usage Overview](./01_overview.md)
-- [Reading a Flow](./03_reading-a-flow.md)
+- [Swarm Management](../07c_agent-coordination/05_swarm-management.md)
+- [Running Parallel Agents](../07a_parallel-agents/02_running-parallel-agents.md)

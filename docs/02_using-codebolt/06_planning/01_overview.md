@@ -15,9 +15,9 @@ Codebolt includes a set of built-in planning tools that live alongside your code
 | Tool | What it's for | Level |
 |---|---|---|
 | **[Roadmap](./02_roadmap.md)** | Features, phases, and ideas — the product vision | Strategic |
-| **[Specs](./03_specs.md)** | Technical specification documents with rich formatting | Documentation |
+| **[Specs](./03_specs.md)** | Write requirements and acceptance criteria in a note | Documentation |
 | **[UI Flow](./04_ui-flow.md)** | Wireframes and UI mockups on a freehand canvas | Design |
-| **[Requirement Plan](./05_requirement-plan.md)** | Aggregated documents linking specs, flows, and action plans | Aggregation |
+| **[Requirement Plan](./05_requirement-plan.md)** | Organize related materials in a Feature Plan | Aggregation |
 | **[Action Plan](./06_action-plan.md)** | Structured execution plans with tasks, dependencies, and parallel groups | Execution |
 | **[Tasks](./07_tasks.md)** | Individual work items with status, priority, and sub-task hierarchy | Operational |
 | **[Feature Plans](#feature-plans)** | Organize a feature's notes, canvases, and execution plans | Feature |
@@ -39,35 +39,10 @@ Use **Note** for written decisions and requirements, and **Canvas** for visual p
 
 ## Where planning tools live
 
-Every planning tool persists inside the project:
-
-| Tool | Location |
-|---|---|
-| Roadmap | `.codebolt/roadmap/roadmap.json` + `ideation.json` |
-| Specs | `specs/*.specs` |
-| UI Flows | `.codebolt/uiflows/` |
-| Requirement Plans | `plans/*.plan` |
-| Action Plans | `.codebolt/.action-plans/` |
-| Tasks | Indexed in the Codebolt database |
-
-All files (except Tasks) are plain JSON or Markdown on disk. You can check them into version control, diff them, and share them with your team.
+Codebolt stores roadmap data under `.codebolt/roadmap/` in the project. For notes and canvases, use the path shown by the editor or linked from the feature plan.
 
 ## Agents and planning
 
-Agents can read and write every planning tool via the `codeboltjs` SDK:
+Open **Plan → Roadmap** to review the next milestone. In Chat, ask an agent with access to your planning tools to summarize the work still open for that milestone. Use the roadmap to check its summary before deciding what to assign.
 
-```ts
-// Read the roadmap
-const roadmap = await codebolt.roadmap.getRoadmap();
-
-// Create a task
-await codebolt.taskplaner.createTask({ name: 'Fix auth bug', priority: 'high' });
-
-// Update an action plan task status
-await codebolt.actionplan.updateTaskStatus(taskId, 'completed');
-
-// Read a spec
-const spec = await codebolt.specs.get('auth-flow.specs');
-```
-
-This means agents can plan their own work, report progress back into the planning tools, and surface what they've done where you can see it.
+For custom agents, see the [Roadmap API](../../05_reference/02_codeboltjs/10_api-access/roadmap/index.md) and [Task API](../../05_reference/02_codeboltjs/10_api-access/taskplaner/index.md).

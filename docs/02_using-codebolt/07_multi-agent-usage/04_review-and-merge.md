@@ -14,7 +14,9 @@ Open **Review Merge Request** from the desktop panel selector. A request can inc
 2. Record your feedback. Use the status selector to mark the request approved, request changes, or reject it as appropriate.
 3. When an eligible request is approved or its review is complete, select **Merge** to apply the changes. Approval and merge are separate actions in this flow.
 
-For review-and-merge requests, use **Check Conflicts** to inspect merge conflicts before merging.
+## Conflict checks
+
+Open a review-and-merge request and select **Check Conflicts**. Review the reported conflicts before selecting **Merge**. For eligible local Git requests, **Create Review Environment** lets you inspect the retained changes in an environment.
 
 ## The review policy
 
@@ -27,5 +29,5 @@ Project **Merge Config** contains two settings for different workflows:
 
 ## See also
 
-- [Linked jobs and artifacts](../02_surfaces/02_desktop-app/03c_panels/04c_deposition-framework-features/01_review-merge-requests.md)
+- [Linked jobs and artifacts](../02_surfaces/02_desktop-app/03c_panels/04c_deposition-framework-features/01_review-merge-requests.md#linked-jobs-and-artifacts)
 - [Review & Merge Design](../../04_build-on-codebolt/08_multi-agent-orchestration/07_review-and-merge-design.md)

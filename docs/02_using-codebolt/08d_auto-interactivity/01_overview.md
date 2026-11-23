@@ -17,8 +17,8 @@ Open **Automations** in the desktop panel selector. Each automation has a **Trig
 | Tool | What triggers it | What happens |
 |---|---|---|
 | [Webhooks](./02_webhooks.md) | Incoming HTTP POST to a unique URL | Gateway routes the payload to an agent |
-| [Calendar & Scheduled Events](./03_calendar-events.md) | A scheduled time or cron expression | Gateway notifies participants, optionally triggers an agent |
-| [Hooks](./04_hooks.md) | File saved, git commit, agent completed, etc. | An agent, action block, or shell command runs |
+| [Calendar & Scheduled Events](./03_calendar-events.md) | Calendar entries and scheduled automation occurrences | Displays project events and scheduled work |
+| [Hooks](./04_hooks.md) | A configured lifecycle event | Runs the hook handler for that event |
 
 ## Manual & Scheduled Automations
 

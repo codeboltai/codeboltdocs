@@ -1,93 +1,40 @@
 ---
 sidebar_position: 4
 title: The Marketplace
-description: A public catalog of agents, tools, and capabilities that anyone can install into their Codebolt
+description: Browse published agents and install them through the desktop agent picker.
 ---
 
 # The Agent Marketplace
 
-A public catalog of agents, tools, and capabilities that anyone can install into their Codebolt. Think of it as a package registry — npm or PyPI, but for AI agents.
+The Agent Marketplace is the Codebolt catalog of published agents. Entries describe what an agent is designed to do and provide the package the desktop app installs.
 
 ![Agent Marketplace](/productImages/agents/marketplace.png)
 
-## What's on the marketplace
-
-Three kinds of things:
-
-| Kind | What | Examples |
-|---|---|---|
-| **Agents** | Custom agents ready to run | Code reviewers, language-specific specialists, test generators |
-| **Tools / MCP servers** | New capabilities agents can call | Linters, internal API clients, database tools |
-| **Capabilities** | Bundles combining agents + tools + prompts + UI | Full integrations like "Stripe", "Supabase", "Linear" |
-
-All three install through the same UI. From your point of view, installing an agent and installing an MCP server look the same.
-
 ## Browsing from the desktop app
 
-Open the **Agents** panel and switch to the **Marketplace** tab. The same marketplace tab is also available from the **Select your Agent** dialog.
+Open the chat agent picker and select **Marketplace** to browse and install agents. Use **Installed** to select an installed agent or **Local** to find agents provided by the open project.
+
+See [Installing an Agent](./05_installing-an-agent.md) for the install steps. [MCP Servers](../04b_agent-extensions/06_mcp-server.md) and [Capabilities](../04b_agent-extensions/02_capabilities.md) have their own setup flows.
 
 ## Browsing from command mode
 
-Use the desktop Marketplace to browse and install registry entries. To list agents visible to a running server, use `codebolt command agent list`.
-
-## Installing
-
-For the install action across surfaces, see [Installing an agent](./05_installing-an-agent.md). The summary:
-
-Under the hood, regardless of surface:
-
-1. The marketplace manifest is downloaded.
-2. The server checks compatibility (protocol version, required MCP servers, required capabilities).
-3. If dependencies are needed, you're prompted to install them too.
-4. The agent is added to your portfolio and appears in the agent picker.
-
-Installation is per-workspace by default. Use the settings UI when you need to change the effective scope.
+Run `codebolt command agent list` to list agents visible to the connected server.
 
 ## Trust model
 
-Marketplace entries should be treated like third-party packages. Review the manifest, source, required tools, and author before installing. Automated checks may catch obvious packaging problems, but they do not catch:
-
-- Malicious intent disguised as normal behaviour.
-- Subtle security issues (prompt injection vulnerabilities, privilege escalation via tool chains).
-- Quality issues (agent is slow, prompts are bad, memory usage is wasteful).
-
-**Treat marketplace agents like third-party libraries.** Read the manifest. Check the author's track record. Look at the tool allowlist — if an unfamiliar agent wants `codebolt_fs.write_file` + `codebolt_git.push`, think carefully before installing.
-
-## Portfolios
-
-Your workspace has an **agent portfolio** — the curated set of agents actually available in that workspace. Installing doesn't automatically add to the portfolio; you add explicitly. This lets you install several agents to try, decide which are keepers, and remove the rest without them cluttering your picker.
-
-In the current desktop UI, installed agents show up under the **Installed** and **My Agents** tabs, and per-agent portfolio data is available from the agent profile panel.
-
-Teams that self-host often constrain what the portfolio can contain: "only approved agents from our internal registry". See [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md).
+Before installing a third-party agent, review its publisher, source where available, and the tools it needs.
 
 ## Publishing your own
 
-To publish an agent, see [Build on Codebolt -> Publishing](../../04_build-on-codebolt/02_creating-agents/99_publishing.md).
-
-Quick version:
+Use the publish action with your agent directory.
 
 ```bash
 codebolt action agent publish --path ./my-agent
 ```
 
-The first publish of a name reserves it. Subsequent publishes must be from the same account.
-
-## Private registries
-
-Organizations can host their own marketplace. A private registry:
-
-- Has its own namespace (e.g. `my-org/my-agent`).
-- Uses your company's auth.
-- Supports reviewing agents before they become available.
-- Can mirror approved public marketplace entries.
-
-If your build ships a private registry surface, configure it through that settings area. See [Agent Infrastructure](../../04_build-on-codebolt/11_agent-infrastructure/01_overview.md) for self-hosted deployment context.
+See [Publishing](../../04_build-on-codebolt/02_creating-agents/99_publishing.md) for packaging and publication details.
 
 ## See also
 
-- [What is an agent](./01_what-is-an-agent.md)
 - [Running agents](./03_running-agents.md)
-- [Installing an agent](./05_installing-an-agent.md)
 - [Agent portfolios](./06_agent-portfolios.md)
-- [Publishing (for builders)](../../04_build-on-codebolt/02_creating-agents/99_publishing.md)

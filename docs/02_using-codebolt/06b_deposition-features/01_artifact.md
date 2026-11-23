@@ -15,7 +15,7 @@ An artifact is not only a file. It can be a generated website, a running app pre
 
 Use artifacts when an output should survive beyond a chat message.
 
-For a phase-by-phase workflow, see [Artifact Management](../../03_guides/07a_multi-step-phase/0_artifact-management).
+For a phase-by-phase workflow, see [Artifact Management](../../03_guides/07a_multi-step-phase/0_artifact-management.md).
 
 ## What Is an Artifact?
 
@@ -53,83 +53,15 @@ Example workflow:
 
 ## How To Create Artifacts
 
-Artifacts can be created from a prompt, through a discovered artifact tool, or directly from CodeboltJS.
+Ask an agent with artifact tools to publish an output. For example, send this in Chat after an agent generates a report.
 
-<details>
-<summary><strong>Create an artifact with a prompt</strong></summary>
+> Publish the generated report folder as a static site artifact with `index.html` as its entry point, then share the artifact link in this conversation.
 
-Ask the agent to publish the output as an artifact when you want the result to be reusable.
+Use the same workflow for other outputs. If your verification run saved a browser recording, ask the agent to publish the recording as a video artifact. If your app is already hosted, ask the agent to register its preview URL as a URL artifact.
 
-Examples:
+Open the result from Chat or find it in **Execution → Artifacts**. Keep file-backed outputs in the active project. For an external URL artifact, give the agent the absolute URL to publish.
 
-```text
-Create a static site artifact for the generated report folder.
-```
-
-```text
-After testing the page, publish the browser recording as an artifact so I can review it.
-```
-
-```text
-Build the demo app and create an artifact that opens the running preview.
-```
-
-The agent should create or identify the output, place file-backed outputs inside the active project, and then publish the result as an artifact.
-
-</details>
-
-<details>
-<summary><strong>Create an artifact with the artifact tool</strong></summary>
-
-Agents and action blocks can discover the artifact creation tool before using it. This is the preferred tool-driven flow because it works through the same tool routing system as other Codebolt capabilities.
-
-The expected flow is:
-
-1. Search for the artifact creation tool with a query like `artifact_create artifact static_site`.
-2. Use the discovered tool, usually `artifact_create` or `codebolt--artifact_create`.
-3. Pass the artifact type, title, source path or files, and entrypoint.
-4. Use the returned artifact ID or preview URL in the final response.
-
-For file-backed artifacts, the source path should be inside the active project. For URL artifacts, provide an absolute `http` or `https` URL.
-
-</details>
-
-<details>
-<summary><strong>Create an artifact with CodeboltJS</strong></summary>
-
-Custom agents and action blocks can create artifacts through CodeboltJS.
-
-```ts
-const result = await codebolt.artifact.create({
-  type: 'static_site',
-  title: 'Verification Recording',
-  description: 'Browser recording from the verification run.',
-  sourcePath: 'artifacts/verification-recording',
-  entrypoint: 'index.html',
-  threadId,
-});
-```
-
-You can also create artifacts from inline files:
-
-```ts
-const result = await codebolt.artifact.create({
-  type: 'static_site',
-  title: 'Generated Demo',
-  entrypoint: 'index.html',
-  files: [
-    {
-      path: 'index.html',
-      content: '<!doctype html><html><body><h1>Demo</h1></body></html>',
-      encoding: 'utf8',
-    },
-  ],
-});
-```
-
-Use CodeboltJS when you are authoring an agent, action block, or plugin-backed workflow that needs to publish outputs programmatically.
-
-</details>
+For custom implementations, see the [Artifact API](../../05_reference/02_codeboltjs/10_api-access/artifact/index.md).
 
 ## Where You Can View Artifacts
 
@@ -308,7 +240,7 @@ See also:
 
 - [Cloud Artifact previews](../02_surfaces/06_cloud/04_running-agents/10_artifacts.md)
 - [Preview Provider Settings](../02_surfaces/06_cloud/05_settings/06_preview-provider-settings.md)
-- [Artifact Management guide](../../03_guides/07a_multi-step-phase/0_artifact-management)
+- [Artifact Management guide](../../03_guides/07a_multi-step-phase/0_artifact-management.md)
 - [Build plugins](../../04_build-on-codebolt/05_plugins/01_overview.md)
 
 ## How To Use Artifacts

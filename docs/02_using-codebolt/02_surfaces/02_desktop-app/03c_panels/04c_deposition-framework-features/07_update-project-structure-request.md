@@ -27,4 +27,4 @@ Open via: **Execution menu -> Update Project Structure Request**, **Swarm menu -
 ## See also
 
 - [Review Merge Requests](./01_review-merge-requests.md)
-- [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
+- [Deposition Framework](../../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)

@@ -28,5 +28,5 @@ Open via: **Execution menu -> Agent Deliberation** or the Panel Selector.
 
 ## See also
 
-- [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
-- [Agent Deliberation guide](../../../07c_agent-coordination/04_agent-deliberation.md)
+- [Deposition Framework](../../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
+- [Agent Deliberation guide](../../../../07c_agent-coordination/04_agent-deliberation.md)

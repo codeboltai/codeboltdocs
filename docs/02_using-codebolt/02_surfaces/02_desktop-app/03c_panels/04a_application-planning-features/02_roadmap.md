@@ -20,6 +20,6 @@ Open via: **Plan menu -> Roadmap** or the Panel Selector.
 
 ## See also
 
-- [Roadmap planning guide](../../../06_planning/02_roadmap.md)
+- [Roadmap planning guide](../../../../06_planning/02_roadmap.md)
 - [Specs](./03_specs.md)
 - [Requirement Plan](./06_requirement-plan.md)

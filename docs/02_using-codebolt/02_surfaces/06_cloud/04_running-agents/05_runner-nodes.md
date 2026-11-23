@@ -63,13 +63,7 @@ A runner node can host **multiple concurrent runtimes** (unlike single-action cl
 
 ## Stopping a runner
 
-Stop a node by stopping the daemon on the machine:
-
-```bash
-codebolt runner daemon stop
-```
-
-Runtimes hosted by the node stop with it. Thread history and conversation logs are persisted on the portal backend and survive the restart. When you start the daemon again, the node re-registers and its runtimes come back online.
+Press **Ctrl+C** in the terminal running the daemon, or stop it through the service manager if you configured autostart. The daemon stops the runtime processes it launched. Start the daemon again to reconnect the node.
 
 ## See also
 

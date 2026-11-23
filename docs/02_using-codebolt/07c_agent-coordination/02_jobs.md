@@ -8,7 +8,7 @@ description: The Jobs panel is the central work queue for multi-agent coordinati
 
 The Jobs panel is the central work queue for multi-agent coordination. Agents discover, bid on, lock, and complete jobs — and can propose splitting a job into sub-jobs when the scope is too large.
 
-Open via: **Agents dropdown → Jobs**
+Open **Tools → Jobs** in the desktop app.
 
 ## What a job is
 
@@ -68,7 +68,7 @@ Click any job to open its detail view. The detail view shows:
 
 ## Creating jobs
 
-Click **+ New Job** in the toolbar. Set the title, type, priority, and optionally a parent job to nest it in the hierarchy.
+Click **New Job** in the toolbar. Set the title, type, priority, and optionally a parent job to nest it in the hierarchy.
 
 ## Job groups
 

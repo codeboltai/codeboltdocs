@@ -6,9 +6,9 @@ description: Create and inspect execution plans with tasks, groups, flow views, 
 
 # Action Plans
 
-The **Action Plan** panel shows executable plans made of tasks and step groups. Agents can create action plans automatically, and users can inspect or edit them from the desktop.
+The **Execution Plan** panel shows plans made of tasks and step groups. Open a plan to inspect or edit its tasks, or create one from the panel.
 
-Open via: **Plan menu -> Action Plan**, action-plan widgets in chat, or the Panel Selector.
+Open via: **Plan → Execution Plan**, action-plan widgets in chat, or the Panel Selector.
 
 ## What you can do
 
@@ -21,6 +21,6 @@ Open via: **Plan menu -> Action Plan**, action-plan widgets in chat, or the Pane
 
 ## See also
 
-- [Action Plan guide](../../../06_planning/06_action-plan.md)
+- [Action Plan guide](../../../../06_planning/06_action-plan.md)
 - [Tasks](./01_tasks.md)
 - [Requirement Plan](./06_requirement-plan.md)

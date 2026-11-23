@@ -18,7 +18,7 @@ This command uses stdio by default. Use `codebolt mcp start --help` for the gate
 
 ## Runtime tool management
 
-Manage installed integrations from **Settings → MCP Servers** in the desktop app. Use the CLI to inspect the MCP servers and tools visible to a running CodeBolt server:
+Manage installed integrations from **Agents → MCP** in the desktop app. These CLI commands inspect the MCP servers and tools visible to a running CodeBolt server.
 
 ```bash
 codebolt command mcp list-servers

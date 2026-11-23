@@ -95,7 +95,7 @@ const sidebars = {
       doc('Preview & Browser', `${editor}/preview-browser`),
     ]),
     group('Application Features', [
-      doc('Authentication & Authorization', `${cloud}/settings/login-tokens`),
+      jump('Authentication & Authorization', `${cloud}/cloud-portal`, 'sign-in'),
       doc('Teams', `${cloud}/settings/team-settings`),
       doc('Workspace', `${desktop}/workspace-and-project-management/overview`),
       doc('Usage and Billing', `${cloud}/settings/subscription-plans-usage-billing`),
@@ -138,8 +138,8 @@ const sidebars = {
       jump('Managing MCP Servers', `${extensions}/mcp-server`, 'mcp-server-management'),
     ]),
     group('Agent Tools', [
-      doc('Agent Tools Overview', 'concepts/the-agent/tools-and-mcp'),
-      jump('Built-in Tools', `${build}/07b_subsystems/mcp-and-tools`, 'built-in-tool-families'),
+      doc('Agent Tools Overview', `${extensions}/custom-tools`),
+      jump('Built-in Tools', `${extensions}/custom-tools`, 'built-in-tools'),
     ]),
     group('Agent Observability', [
       doc('Agent Observability Overview', `${use}/06a_application-logs`),
@@ -286,7 +286,7 @@ const sidebars = {
     group('Parallel Agents & Workers', [
       doc('Running Parallel Agents', `${parallel}/running-parallel-agents`),
       doc('Subagents', `${parallel}/sub-agent`),
-      doc('Subagent Selection', `${extend}/subagents`),
+      jump('Subagent Selection', `${parallel}/sub-agent`, 'choose-a-subagent'),
       doc('Threads & Background Agents', `${parallel}/background-agent`),
       doc('Virtual Workers', `${parallel}/virtual-workers`),
     ]),
@@ -295,7 +295,7 @@ const sidebars = {
       doc('Swarm Configuration', `${collaboration}/swarm-management`),
       jump('Teams & Roles', `${collaboration}/swarm-management`, 'role-management'),
       jump('Vacancies & Worker Requests', `${collaboration}/swarm-management`, 'swarm-detail'),
-      doc('Thread Coordination', `${collaboration}/overview`),
+      jump('Thread Coordination', `${collaboration}/orchestrator-management`, 'follow-delegated-work'),
       doc('Jobs & Job Groups', `${collaboration}/jobs`),
       jump('Job Coordination', `${collaboration}/jobs`, 'how-agents-interact-with-jobs'),
       doc('Inbox & Agent Mail', `${collaboration}/mail-inbox`),
@@ -307,8 +307,8 @@ const sidebars = {
       ]),
       doc('Review & Merge Requests', `${use}/multi-agent-usage/review-and-merge`),
       jump('Feedback, Approvals & Revisions', `${use}/multi-agent-usage/review-and-merge`, 'reviewing-a-merge-request'),
-      doc('Linked Jobs & Artifacts', `${deposition}/review-merge-requests`),
-      doc('Conflict Checks', `${orchestration}/review-and-merge-design`),
+      jump('Linked Jobs & Artifacts', `${deposition}/review-merge-requests`, 'linked-jobs-and-artifacts'),
+      jump('Conflict Checks', `${use}/multi-agent-usage/review-and-merge`, 'conflict-checks'),
     ]),
     group('Multi-agent Orchestration', [
       doc('When to Use Multiple Agents', `${orchestration}/when-multi-agent`),
@@ -352,7 +352,7 @@ const sidebars = {
       doc('Plugin Model Providers', `${build}/plugins/custom-ai-providers/custom-llm-provider`),
       doc('Agent Behavior', `${settings}/agent-settings`),
       jump('Agent Steps', `${settings}/agent-settings`, 'agent-steps'),
-      ref('Subagent Selection', `${extend}/subagents`),
+      jump('Subagent Selection', `${parallel}/sub-agent`, 'choose-a-subagent'),
       ref('Context Compaction Profiles', compaction),
     ]),
     group('Execution & Services', [

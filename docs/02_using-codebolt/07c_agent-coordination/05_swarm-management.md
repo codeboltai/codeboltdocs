@@ -10,7 +10,7 @@ description: A swarm is a named group of agents configured to work toward a shar
 
 A **swarm** is a named group of agents configured to work toward a shared goal. The Swarm Management panel lets you create swarms, assign roles, monitor their activity, and handle lifecycle requests like agent spawning and termination.
 
-Open via: **Agents dropdown → Swarm Management**
+Open via: **Execution → Distributed Swarm Management**
 
 ## What a swarm is
 
@@ -18,7 +18,7 @@ A swarm groups agents under a shared configuration — a maximum agent count, de
 
 ## Creating a swarm
 
-1. Click **+ New Swarm**
+1. Select **New**
 2. Enter a name and description
 3. Set the maximum number of agents
 4. Save

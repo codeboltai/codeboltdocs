@@ -204,16 +204,18 @@ What's real here compared to the quickstart:
 
 ## Step 3 — register
 
-Register the MCP server via **Settings → Tools → Add MCP Server** with:
+In the Chat MCP picker, select **Open MCP Config**. Add this entry to the existing `mcpServers` object and replace the path with the absolute path to the server script.
 
-```yaml
-servers:
-  weather:
-    command: node
-    args: [".codebolt/tools/weather/server.js"]
+```json
+{
+  "weather": {
+    "command": "node",
+    "args": ["/absolute/path/to/project/.codebolt/tools/weather/server.js"]
+  }
+}
 ```
 
-After saving, check **Settings → Tools** — the weather server should appear and show both tools with their schemas.
+After saving, open **Agents → MCP** and configure the weather server. Refresh the MCP list in Chat and expand the server to see its tools.
 
 ## Step 4 — give an agent access
 

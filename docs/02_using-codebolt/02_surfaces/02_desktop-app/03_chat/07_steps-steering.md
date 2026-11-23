@@ -65,6 +65,6 @@ This lets you write a step as queued work first, then decide to push it into the
 
 ## Related
 
-- [Chat overview](./03_chat/01_overview.md)
-- [Tabs and history](./03_chat/02_tabs-and-history.md)
+- [Chat overview](./01_overview.md)
+- [Tabs and history](./02_tabs-and-history.md)
 - [Running agents](../03c_panels/04b_agent-management-features/01_running-agents.md)

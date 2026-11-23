@@ -67,7 +67,7 @@ Lists all discovered capabilities with their name, type, version, and source. Us
 Shows capabilities of type `skill` from the marketplace. Browse, search by name or author, and download skills directly into your global capabilities directory.
 
 ### Executors tab
-Shows the executor runtimes available for running capabilities. See [Executors](./06_executors.md) for details.
+Shows the executor runtimes available for running capabilities. See [Executors](./05_executors.md) for details.
 
 ## How agents invoke capabilities
 

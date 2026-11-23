@@ -1,48 +1,21 @@
 ---
 sidebar_position: 5
 title: Preview & Browser
-description: "Codebolt includes two embedded web-viewing panels: Preview for live application previews and Browser for general web browsing and agent-driven browser."
+description: Preview a local dev server or open a URL in the desktop Browser.
 ---
 
 # Preview & Browser
 
 ![Browser](/productImages/editor/browser.png)
 
-Codebolt includes two embedded web-viewing panels: **Preview** for live application previews and **Browser** for general web browsing and agent-driven browser automation.
-
 ## Preview panel
 
-The Preview panel renders your running application inside a sandboxed frame. Open it via:
-- Debug Tools dropdown → **Preview**
-- Command Palette → "Preview"
-
-When your project has a dev server running (e.g., `npm run dev`, `vite`, `next dev`), the Preview automatically connects to `localhost` on the configured port. The URL bar at the top of the panel lets you navigate to any local address.
-
-**Live reload** — if your dev server supports hot module replacement (HMR), the Preview refreshes automatically when you save a file. No manual browser refresh needed.
-
-**DevTools** — right-click inside the Preview frame → **Inspect** to open a full browser DevTools panel (Elements, Console, Network) docked alongside the preview.
+Start your project's dev server and open **Debug → Preview**. Select a port in the toolbar or enter a custom port. Preview loads `http://localhost:<port>`. For example, if your terminal reports that the dev server is running on port 5173, enter **5173** and use the refresh button after restarting the server.
 
 ## Browser panel
 
-The Browser panel is a full embedded Chromium browser. Open it via:
-- Tools dropdown → **Browser**
-- Command Palette → "Browser"
-
-Use it to:
-- Look up documentation without leaving the app
-- Test your deployed app against a real URL
-- Let agents perform web research inline
+Open **Tools → Browser** to browse a URL in a desktop panel. Use the Browser for web pages and the Preview panel for an app served on a local port. Both panels can be arranged beside Chat or Code.
 
 ### Agent browser control
 
-Agents with browser access can drive the Browser panel directly — navigating to URLs, clicking elements, filling forms, and taking screenshots. When an agent is controlling the browser, you'll see a **"Agent controlling browser"** indicator in the panel toolbar. You can interrupt at any time by clicking **Stop**.
-
-Browser actions taken by agents are logged to the **Event Log** and visible in the **Agent Debug** panel in real time.
-
-## Switching between Preview and Browser
-
-Both panels use the same panel slot and can be tabbed side-by-side in the Dockview layout. Drag either panel to rearrange its position alongside your code editor and chat.
-
-## Port configuration
-
-If your dev server runs on a non-standard port, update it in **Project Settings** → **Preview Port**. Codebolt will proxy the correct port into the Preview frame.
+Agents with browser tools can navigate, inspect pages, and take screenshots. See [Browser Control](../../../08_integrations/04_browser-control.md) for what to check before assigning browser work.

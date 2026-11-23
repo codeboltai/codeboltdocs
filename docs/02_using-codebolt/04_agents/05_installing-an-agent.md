@@ -1,117 +1,40 @@
 ---
 sidebar_position: 5
 title: Installing an Agent
-description: Adding an agent from the marketplace, a private registry, or a local file. Same process regardless of source — what differs is where the manifest comes from.
+description: Install marketplace agents from the desktop picker or use agents defined in your project.
 ---
 
 # Installing an Agent
 
-Adding an agent from the marketplace, a private registry, or a local file. Same process regardless of source — what differs is where the manifest comes from.
+Install an agent from the desktop agent picker, or open a project that includes its own agent.
 
 ![Installed Agents](/productImages/agents/installed.png)
 
 ## From the marketplace
 
-Open the **Agents** panel and switch to **Marketplace**, or open **Select your Agent** and switch to **Marketplace**. Click an agent to open its details, then choose **Install**.
+1. Open the agent picker in Chat and go to **Marketplace**.
+2. Find the agent and select **Install**.
+3. Go to **Installed** to select the agent for your thread.
 
-The current `packages/cli` implementation does not expose an end-user `agent install` command. Use the desktop UI for marketplace installs, or add a project-local agent under `.codebolt/agents/` when you are working directly in the filesystem.
-
-Under the hood: download, verify signature, check compatibility, install files, add to portfolio.
-
-## From a private registry
-
-If your org runs a private registry, configure and install through the UI surface that is wired to that registry.
-
-Private registries take precedence over the public marketplace when there's a name collision.
+The server downloads and extracts the package into its agents directory, reads `codeboltagent.yaml`, records the installation, and runs the package setup.
 
 ## From a local directory
 
-For agents under development, or agents committed to a project repo:
+Put the agent in a subdirectory of `.codebolt/agents/` in your project, with its manifest at `.codebolt/agents/<agent-directory>/codeboltagent.yaml`. Open that project and use the **Local** tab in the chat agent picker.
 
-Place the agent in the appropriate local agents directory or add it through the product UI.
-
-In the current desktop UI, local imports live under **Agents** → **My Agents** → **Add Agent**.
-
-This adds the local agent to your workspace without publishing it anywhere. Useful for:
-
-- **Project-local agents** — already in `.codebolt/agents/` in the project repo; installed automatically when you open the project.
-- **Development** — iterate on an agent before publishing.
-- **Sharing by email** — someone zipped you an agent directory.
-
-## From a URL
-
-If you are distributing an unpacked agent directly, treat it like a local agent rather than relying on a CLI install command.
-
-## What installation does
-
-1. **Download / copy** the agent to the Codebolt agents directory.
-2. **Validate** the manifest (`agent.yaml`).
-3. **Install dependencies** if it's a framework agent (runs `npm install` inside its directory).
-4. **Check compatibility** with your Codebolt version.
-5. **Register** the agent with the server so it appears in installed-agent surfaces.
-6. **Optionally make it available in the active workspace**.
-
-## Install scopes
-
-- **Workspace** (default) — agent is available in the current workspace only.
-- **User** — available in every workspace.
-- **Project-local** — agent lives in `.codebolt/agents/` and is committed to git; everyone who opens the project gets it.
-
-For a team-shared agent, commit it to the project. For something you use across all your own work, promote to user scope.
-
-## Dependencies
-
-Some agents depend on other extensions — an MCP server, a capability, a specific LLM provider. During install, you're prompted to install the dependencies if they're missing.
-
-```
-my-agent requires:
-  - mcp-server: linter-mcp (not installed) [Install]
-  - capability: ts-analyzer (not installed) [Install]
-  - provider: anthropic (configured ✓)
-```
-
-You can install everything at once or pause and handle dependencies manually.
+For a team-shared agent, commit its source and manifest with the project. See [Build your first agent](../../03_guides/02_first-steps/build-your-first-agent.md) for the agent directory and setup.
 
 ## Checking install state
 
-Use the desktop agent picker or run `codebolt command agent list` against the running server.
-
-## Updating
-
-The current CLI does not expose `agent update` or `agent update-all`. Use the desktop UI for agent updates.
-
-The current `packages/ui` agent marketplace components do not expose a clear desktop update action. Document a specific update flow only for builds that ship one.
-
-## Uninstalling
-
-The current CLI does not expose `agent uninstall`. Use the desktop UI to remove an installed agent.
-
-The current `packages/ui` agent marketplace components do not expose a clear desktop uninstall action.
-
-Removes the files, removes from portfolio, removes from the agent list. Does not delete:
-
-- Historical runs of that agent (still in the event log).
-- Memory the agent wrote (still in persistent memory).
-- Checkpoints taken during its runs.
-
-Purging agent data is an administrative cleanup step handled through the product UI and runtime internals, not the current CLI command set.
+Check **Installed** in the desktop picker or run `codebolt command agent list` against the running server. Use **Local** in the picker to look for an agent provided by the open project.
 
 ## Install troubleshooting
 
-### "Version incompatible"
-The agent requires a newer or older Codebolt than you have. Update Codebolt, or find a compatible version of the agent.
-
-### "Dependency not satisfied"
-Install the missing dependency and retry.
-
-### "Signature invalid"
-The downloaded bundle is either tampered with or from an untrusted publisher. Don't bypass — investigate.
-
-### "Permission denied writing to agents directory"
-Filesystem permission issue. Check ownership of `~/.codebolt/agents/` (or `.codebolt/agents/` for project scope).
+- If a marketplace install fails, check that the registry and package download are reachable.
+- If a project agent is missing, check the manifest filename, ensure the manifest is inside the agent's subdirectory, and confirm you opened the intended project.
 
 ## See also
 
 - [The Marketplace](./04_the-marketplace.md)
 - [Agent Portfolios](./06_agent-portfolios.md)
-- [Publishing (for builders)](../../04_build-on-codebolt/02_creating-agents/99_publishing.md)
+- [Publishing](../../04_build-on-codebolt/02_creating-agents/99_publishing.md)

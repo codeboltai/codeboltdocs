@@ -204,4 +204,4 @@ The left sidebar lists every thread tied to the connected runtime. Thread histor
 
 - [Cloud Get Started](../00_get-started.md)
 - [Runtimes & Providers](./04_runtimes-and-providers.md) — manage sandboxes
-- [Authentication & Authorization](../../../09_account/01_authentication-and-authorization.md)
+- [Sign in to the Cloud portal](../02_cloud-portal.md#sign-in)

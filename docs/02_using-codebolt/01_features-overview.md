@@ -47,8 +47,8 @@ New to Codebolt? Start with the [quickstart](../01_get-started/03_quickstart.md)
 | Feature | What you can do | Related guides |
 |---|---|---|
 | [Run and monitor agents](04_agents/03_running-agents.md) | Start agent tasks and follow execution. | [Built-in agents](04_agents/02_built-in-agents.md) · [Desktop](02_surfaces/02_desktop-app/03c_panels/04b_agent-management-features/01_running-agents.md) |
-| [Agent portfolios](04_agents/06_agent-portfolios.md) | Choose the set of agents available in a workspace. | [Install agents](04_agents/05_installing-an-agent.md) |
-| [Model selection](02_surfaces/02_desktop-app/03_chat/06_model-selection.md) | Choose the model used by a conversation. | [Providers](08_integrations/01_llm-providers.md) · [Local models](08_integrations/02_local-models.md) |
+| [Agent portfolios](04_agents/06_agent-portfolios.md) | Inspect an agent’s profile, history, and feedback. | [Install agents](04_agents/05_installing-an-agent.md) |
+| [Model selection](02_surfaces/02_desktop-app/03_chat/06_model-selection.md) | Configure the application default and agent role models. | [Providers](08_integrations/01_llm-providers.md) · [Local models](08_integrations/02_local-models.md) |
 | [Steps and steering](02_surfaces/02_desktop-app/03_chat/07_steps-steering.md) | Queue follow-up steps or send instructions during a run. | — |
 | [Background agents](07a_parallel-agents/04_background-agent.md) | Start and monitor detached agent work. | [Desktop](02_surfaces/02_desktop-app/03c_panels/04b_agent-management-features/02_background-agents.md) |
 | [Subagents](07a_parallel-agents/05_sub-agent.md) | Delegate a focused task to a child agent. | [Build](../04_build-on-codebolt/03_agent-extensions/08_subagents.md) |
@@ -87,7 +87,7 @@ New to Codebolt? Start with the [quickstart](../01_get-started/03_quickstart.md)
 | Feature | What you can do | Related guides |
 |---|---|---|
 | [Parallel agents](07a_parallel-agents/02_running-parallel-agents.md) | Run multiple agents concurrently. | — |
-| [Chat canvas](07a_parallel-agents/03_chat-canvas.md) | Arrange and coordinate agent conversations visually. | — |
+| [Chat canvas](07a_parallel-agents/03_chat-canvas.md) | View and arrange conversation threads. | — |
 | [Swarms](07c_agent-coordination/05_swarm-management.md) | Organize agents into teams working toward a shared goal. | [Run a swarm](07_multi-agent-usage/02_running-a-swarm.md) · [Desktop](02_surfaces/02_desktop-app/03c_panels/04b_agent-management-features/07_swarm-management.md) |
 | [Orchestration](07c_agent-coordination/06_orchestrator-management.md) | Delegate work to subagents and follow related threads in Thread Coordination. | [Build](../04_build-on-codebolt/08_multi-agent-orchestration/01_overview.md) |
 | [Agent flows](../04_build-on-codebolt/08_multi-agent-orchestration/04_agent-flows.md) | Define coordinated workflows across agents. | [Follow a flow](07_multi-agent-usage/03_reading-a-flow.md) |
@@ -104,7 +104,7 @@ New to Codebolt? Start with the [quickstart](../01_get-started/03_quickstart.md)
 | Feature | What you can do | Related guides |
 |---|---|---|
 | [Context mentions](02_surfaces/02_desktop-app/03_chat/03_context-and-at-mentions.md) | Attach files and project information to a conversation. | — |
-| [Context assembly](05d_memory/03_context-assembly.md) | Select and combine information for each model request. | [Desktop](02_surfaces/02_desktop-app/03c_panels/04e_memory-features/04_context-assembly.md) · [Build](../04_build-on-codebolt/07a_memory-management/02g_context-assembly.md) |
+| [Context assembly](05d_memory/03_context-assembly.md) | Assemble context from selected memory definitions and rules. | [Desktop](02_surfaces/02_desktop-app/03c_panels/04e_memory-features/04_context-assembly.md) · [Build](../04_build-on-codebolt/07a_memory-management/02g_context-assembly.md) |
 | [Context rules](05d_memory/04_context-rules.md) | Control what enters the assembled context. | — |
 | [Context compaction](05b_guardrails-and-settings/02_context-compaction.md) | Manage context size during long-running conversations. | [Desktop](02_surfaces/02_desktop-app/03c_panels/04e_memory-features/05_context-compaction.md) |
 | [Persistent memory](05d_memory/05_persistent-memory.md) | Define durable memory and retrieval behavior. | [Desktop](02_surfaces/02_desktop-app/03c_panels/04e_memory-features/02_persistent-memory.md) · [Build](../04_build-on-codebolt/07a_memory-management/02d_persistent-memory.md) |

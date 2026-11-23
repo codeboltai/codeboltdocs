@@ -1,60 +1,37 @@
 ---
 sidebar_position: 5
 title: Sub Agent
-description: A sub-agent is a child run started by another agent to handle a smaller, focused part of a task
+description: Ask an agent to delegate from Chat and follow the resulting subagent run or child thread.
 ---
 
-# Sub Agent
+# Subagents
 
-A sub-agent is a child run started by another agent to handle a smaller, focused part of a task. The parent agent stays responsible for the overall goal and uses the child run to offload a specific piece of work.
+A subagent is a child agent started by a parent agent to handle part of a task. The parent agent can also delegate work to a child thread with its own conversation and status.
 
-## What sub-agents are good for
+## Choose a subagent
 
-Sub-agents are useful when a parent agent needs to:
+Select a parent agent in Chat that supports delegation. To include a specific agent in your request, type `#` and select that agent from the suggestions. The parent decides how to use the agents you mention.
 
-- Delegate a focused task to a specialist agent
-- Split a large task into parallel pieces
-- Compare two approaches before deciding what to do next
-- Keep the parent focused on orchestration instead of implementation details
+To configure subagents you want available to a remix, open **Agents → Agents → Create Agent → Remix Agent**. Set **Remix From** to a parent agent that supports delegation, choose agents under **Sub Agents**, and use **Custom Instructions** to describe when to delegate to them. Save the remix and select it in Chat.
 
-## How they appear in Codebolt
+## Delegate within the current thread
 
-From the product's current implementation, standard sub-agent execution is tracked as a parent/child relationship on agent executions. The child run is linked back to the parent by `parentAgentInstanceId`, which is what powers the hierarchy views.
+Send the parent a request that identifies the handoff. For example, try this in Chat.
 
-In practice, you will usually see sub-agents in one or more of these places:
+> Ask a subagent to read the README and list missing setup steps. Use its findings to summarize the setup gaps in this conversation.
 
-- The **Running Agent** hierarchy while they are active
-- Execution-tree style views that show parent and child runs together
-- The [Chat Canvas](./03_chat-canvas.md) when you want a visual view of related conversations
+Open **Execution → Running Agent** and select **Hierarchy View**. When the parent starts the subagent, the child execution appears beneath it.
 
-Some delegated work can also be started in a separate child thread through the thread APIs, but that is a different mechanism from the basic sub-agent call path.
+## Delegate to a child thread
 
-## When sub-agents help most
+Use a parent agent with access to create background threads. For example, try this in Chat.
 
-Sub-agents work best when the task can be decomposed cleanly. Common examples:
+> Start a background child thread to list existing tests for the settings module. In this conversation, read the README and summarize how to run the test suite.
 
-- One agent writes tests while another updates docs
-- A reviewer agent checks output from an implementation agent
-- An orchestrator sends separate modules to separate specialists
-
-If the task is short and tightly coupled, a single agent is usually simpler.
-
-## Monitoring delegated work
-
-When a parent agent spawns sub-agents, watch:
-
-- The parent run for delegation events and final synthesis
-- The Running Agent hierarchy for child status and nesting
-- The execution history for the final merged result once the children complete
-
-For a broader view of multiple delegated runs at once, use [Running Parallel Agents](./02_running-parallel-agents.md).
-
-## If you are building agents
-
-This page is about using sub-agents from the product. If you need the implementation APIs for spawning them from agent code, including same-thread calls and separate child-thread APIs, see [Build on Codebolt → Subagents](../../04_build-on-codebolt/03_agent-extensions/08_subagents.md).
+In the parent conversation, open **Agent Threads** in the Chat activity area. When the child thread appears, use **Open thread** to read its messages or **Stop child thread** to stop an active run.
 
 ## See also
 
 - [Running Parallel Agents](./02_running-parallel-agents.md)
 - [Background Agent](./04_background-agent.md)
-- [Chat Canvas](./03_chat-canvas.md)
+- [Implement delegation in a custom agent](../../04_build-on-codebolt/03_agent-extensions/08_subagents.md)

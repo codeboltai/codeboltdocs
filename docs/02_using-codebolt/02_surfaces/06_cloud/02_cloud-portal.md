@@ -10,9 +10,9 @@ The portal at [portal.codebolt.ai](https://portal.codebolt.ai) is the browser UI
 
 ## Sign in
 
-First visit opens a sign-in screen. Use the same account you use for the desktop app — email + password or OAuth (Google / GitHub / Microsoft). On self-hosted deployments, OIDC / SAML / LDAP show up here as configured by your admin.
+Open the [portal sign-in page](https://portal.codebolt.ai/sign-in), enter your Codebolt account email and password, and choose **Sign In**. Use **Forgot Password?** if you need to reset your password.
 
-See [Authentication & Authorization](../../09_account/01_authentication-and-authorization.md) for the full auth story across app, CLI, and remote agents.
+For CLI or runner access, see [Login Tokens](./05_settings/07_login-tokens.md). For shared workspace access, see [Team Settings](./05_settings/09_team-settings.md#members-settingsteammembers).
 
 ## Registry — browse and discover
 
@@ -85,4 +85,4 @@ You rarely touch these directly — the portal handles all of it — but the URL
 ## Related
 
 - [Cloud Get Started](./00_get-started.md)
-- [Authentication & Authorization](../../09_account/01_authentication-and-authorization.md)
+- [Login Tokens](./05_settings/07_login-tokens.md)

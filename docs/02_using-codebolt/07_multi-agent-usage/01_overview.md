@@ -21,7 +21,7 @@ Any of:
 
 ### Flow runs
 
-When you run a flow in the desktop product, you get a dedicated view with node status, timing, and drill-down into the work done at each stage.
+Open the visual agent definition in the Flow Editor. When using the agent in Chat, follow its messages and recorded activity in the thread.
 
 ### Swarm runs
 

@@ -1,27 +1,12 @@
 ---
 sidebar_position: 2
 title: Routing Gateway
-description: The Routing Gateway is Codebolt's central message router for external integrations
+description: Route incoming webhook and channel messages to Codebolt agents.
 ---
 
 # Routing Gateway
 
-
-
-The Routing Gateway is Codebolt's central message router for external integrations. Every message that arrives from an external source — a webhook, a chat platform, a calendar event, or a hook — passes through the gateway before reaching an agent.
-
-
-
-## What the gateway does
-
-The gateway sits between incoming messages and the agents that process them. It handles four things:
-
-1. **Thread resolution** — decides whether an incoming message belongs to an existing thread or needs a new one, based on the thread strategy
-2. **Agent routing** — delivers the message to the right agent, spawning one if none is running
-3. **Rule-based decisions** — evaluates conditions such as source, content, user, or channel before selecting an agent and thread
-4. **Response delivery** — intercepts the agent's reply and routes it back to the originating platform
-
-Without custom routing rules, messages go to the project's default agent in a new thread. Routing rules let you direct different message types to specialised agents and keep related conversations together.
+Open **System → Routing Gateway** to view how webhooks and channel plugins route incoming messages. Each source supplies an agent and a thread strategy. The gateway resolves a thread, delivers the message to an active agent or starts a run, and can forward the reply to the source's configured destination.
 
 ## Gateway panels
 
@@ -44,12 +29,12 @@ Create and manage HTTP webhook endpoints. See [Automation → Webhooks](../08d_a
 
 ### Activity Log tab
 
-A real-time feed of every message the gateway has processed:
+The activity log lists recent routing attempts. Use **Refresh** to reload it.
 
 | Column | Description |
 |---|---|
 | **Timestamp** | When the message arrived |
-| **Source** | `webhook`, `channel`, `hook`, or `calendar` |
+| **Source** | The integration that sent the message |
 | **Action** | `routed-to-running`, `spawned-new`, or `failed` |
 | **Thread ID** | Which thread received the message |
 | **Agent** | Which agent handled it |
@@ -60,37 +45,7 @@ Filter by source type to focus on a specific integration. Clear the log with the
 
 ## Routing rules
 
-A routing rule is a condition → action pair. Rules are evaluated in order from top to bottom. The first rule whose condition matches is applied. If no rule matches, the default agent handles the message in a new thread.
-
-```yaml
-- name: code-questions-to-code-agent
-  condition:
-    type: content_match
-    pattern: "(fix|debug|refactor|explain) .*code"
-  action:
-    agent: code-agent
-    threadStrategy: per-user
-```
-
-### Condition types
-
-| Type | Matches when… |
-|---|---|
-| `content_match` | Message text matches a regex pattern |
-| `source_match` | Message came from a specific platform, such as Slack, Discord, or an API |
-| `user_match` | Message is from a specific user ID |
-| `channel_match` | Message is from a specific channel or room |
-| `keyword` | Message contains one of a list of keywords |
-| `always` | Every message, usually as a fallback rule |
-
-### Action fields
-
-| Field | Description |
-|---|---|
-| `agent` | Agent ID to route to |
-| `threadStrategy` | How to assign threads |
-| `threadId` | Specific existing thread to route to when using `existing` |
-| `instruction` | Fixed instruction to prepend before passing the message to the agent |
+The **Routing Rules** tab summarizes assignments configured on webhooks and channel plugins. Edit a webhook in **Webhooks**. For a channel, configure routing in the channel integration. Use a [routing profile](#routing-profiles) to set environment and thread reuse for a Virtual Worker.
 
 ## Routing Profiles
 
@@ -108,7 +63,6 @@ The thread strategy tells the gateway how to map incoming messages to Codebolt t
 | `per-user` | One thread per `userId` in the message — good for multi-user chat bots |
 | `per-conversation` | One thread per `externalThreadId` — maps a Slack channel or Telegram chat to one thread |
 | `per-message` | Fresh thread for every message — stateless, fire-and-forget tasks |
-| `per-session` | One thread per platform session |
 | `existing` | Route to a specific known thread ID |
 
 ## Gateway message format
@@ -147,20 +101,7 @@ When an agent produces a reply on a gateway-managed thread, the Response Router 
 
 ## Proactive messages
 
-The gateway also handles proactive messages — messages sent by an agent to a user without the user sending anything first. Configure these in routing rules with a `proactive` trigger:
-
-```yaml
-- name: daily-summary
-  trigger:
-    type: schedule
-    cron: "0 9 * * *"
-  action:
-    agent: summary-agent
-    instruction: "Generate today's project summary and send it to the #dev-updates channel."
-    target:
-      platform: slack
-      channel: "#dev-updates"
-```
+The gateway provides a send endpoint for an initialized channel plugin. The sender specifies the destination and the text to send. Use [Automations](../08d_auto-interactivity/01_overview.md) for scheduled work.
 
 ## Proxy Execution
 

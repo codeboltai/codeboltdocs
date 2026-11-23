@@ -59,5 +59,5 @@ Codebolt downloads the URL as a ZIP file and extracts it into the destination pr
 
 ## See Also
 
-- [Creating a Template](04_creating-a-template.md)
-- [Publishing Templates](05_publishing-templates.md)
+- [Creating a Template](../../../../04_build-on-codebolt/05b_templates/04_creating-a-template.md)
+- [Publishing Templates](../../../../04_build-on-codebolt/05b_templates/05_publishing-templates.md)

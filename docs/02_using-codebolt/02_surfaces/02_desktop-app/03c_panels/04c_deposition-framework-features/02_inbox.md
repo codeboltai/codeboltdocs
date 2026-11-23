@@ -27,5 +27,5 @@ Open via: **Tools menu -> Inbox** or the Panel Selector.
 
 ## See also
 
-- [Deposition Framework](../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
-- [Mail & Inbox](../../../07c_agent-coordination/03_mail-inbox.md)
+- [Deposition Framework](../../../../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)
+- [Mail & Inbox](../../../../07c_agent-coordination/03_mail-inbox.md)

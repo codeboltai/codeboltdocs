@@ -19,7 +19,7 @@ Team-level profile and configuration — the team name, identity, and workspace-
 Member management:
 
 - **Invite** teammates by email or username
-- **Roles** — assign roles that control what a member can do (e.g. admin vs. member). On self-hosted deployments, team-owned marketplace items can be restricted to admins — see [Teams → Roles](../../../09_account/02_teams.md#roles).
+- **Roles** — assign roles that control what a member can do (e.g. admin vs. member). On self-hosted deployments, team-owned marketplace items can be restricted to admins.
 - **Remove** members who leave the team
 
 Membership determines visibility: members see team environments, team-published items, and (for billing admins) team billing.
@@ -32,4 +32,3 @@ Every environment is scoped to a workspace — personal or team. The [Cloud Envi
 
 - [Settings Overview](./01_overview.md)
 - [Plans, Usage & Billing](./08_subscription-plans-usage-billing.md) — team billing
-- [Teams](../../../09_account/02_teams.md) — the broader teams guide

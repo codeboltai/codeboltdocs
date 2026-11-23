@@ -19,22 +19,12 @@ The agent has:
 - **A system prompt** — its instructions on how to behave.
 - **A set of tools** — what it's allowed to do (read files, write files, run shells, call APIs).
 - **A default model** — which LLM it uses.
-- **Limits** — how many tool calls, how many tokens, how long it can run.
 
 When you send a message, the agent uses all of these to decide what to do.
 
 ## Where agents come from
 
-Four sources:
-
-| Source | Examples | Notes |
-|---|---|---|
-| **Built-in** | `generalist`, `planner`, `reviewer` | Ship with Codebolt. Always available. Maintained by the Codebolt team. |
-| **Marketplace** | Community-published | Install from the marketplace with one click. See [The Marketplace](./04_the-marketplace.md). |
-| **Custom (project-local)** | Anything in your `.codebolt/agents/` | Project-specific. Travels with the codebase if committed. |
-| **Custom (user-wide)** | Anything in `~/.codebolt/agents/` | Available in all your projects. |
-
-All four kinds of agent work identically from your point of view — they appear in the agent picker and handle chat the same way.
+Use the desktop chat agent picker to choose from **Installed**, **Marketplace**, or **Local**. **Local** finds agents defined in the open project's `.codebolt/agents/` directory. See [Installing an Agent](./05_installing-an-agent.md) for details.
 
 ## What makes agents different from each other
 
@@ -53,73 +43,27 @@ Other knobs (temperature, processors, limits) matter less in practice.
 
 ## The built-in agents
 
-The default set that ships with Codebolt:
-
-| Agent | Role | Read | Write | Best for |
-|---|---|---|---|---|
-| **generalist** | Does anything | ✓ | ✓ | Your default; when you're not sure which to pick |
-| **planner** | Plans without acting | ✓ | ✗ | Breaking down a big task before execution |
-| **reviewer** | Reads critically | ✓ | ✗ | Code review, "is this correct?" questions |
-| **refactor** | Bulk code changes | ✓ | ✓ | Large mechanical refactors |
-| **debugger** | Runs and inspects | ✓ | ✓ | Tracking down a failing test or bug |
-| **explainer** | Reads and narrates | ✓ | ✗ | "What does this code do?", onboarding |
-
-The exact lineup may change in newer versions — check `codebolt command agent list` for what's installed on the current server.
+Check the in-app agent picker or [Built-in Agents](./02_built-in-agents.md) for Codebolt-provided agents. To list agents visible to the connected server, run `codebolt command agent list`.
 
 ## Picking an agent for a task
 
-Rough guide:
-
-- **"Help me understand this code"** → `explainer` or `generalist`
-- **"Plan how to add X"** → `planner`
-- **"Add X"** (having already planned it) → `generalist` or `refactor`
-- **"Review this diff for bugs"** → `reviewer`
-- **"Fix this failing test"** → `debugger`
-- **"Mechanically rename Y to Z everywhere"** → `refactor`
-- **"I'm not sure"** → `generalist`
-
-When in doubt, `generalist` is usually fine. The specialised agents are optimisations — they're better at one thing and worse at others.
+Read the agent's description and choose one suited to the work. For example, choose a reviewing agent to inspect a diff, or a development agent to implement a change.
 
 ## How agents interact with your project
 
-Every agent sees:
-
-- **The codemap** — a compressed architectural summary.
-- **The project structure** — file tree, git state.
-- **Open files** in your editor.
-- **Recent chat turns** in the current thread.
-- **Persistent memory** about this project (decisions, conventions, history).
-- **Context rules** you've defined.
-
-What it *does* depends on its tool allowlist. A read-only agent can search, read, analyze, and talk. A write-capable agent can additionally edit files, run commands, and call git.
+The agent receives the request and the context selections from the composer. Its implementation determines which history or memory it reads and which tools it can call. See [Context and @-mentions](../02_surfaces/02_desktop-app/03_chat/03_context-and-at-mentions.md).
 
 ## Parallel agents
 
-Multiple agents can run at the same time in different tabs — or even as children of each other in a flow. Each one runs in its own process, with its own memory, and can't interfere with the others.
-
-This is why you can have a planner tab, a coder tab, and a reviewer tab all active at once on the same project. They share the workspace files but have independent conversation state.
+Run agents concurrently in separate chat threads or delegate work to child agents. Threads have separate conversation state. Agents running in the same project may work on the same files. See [Parallel Agents](../07a_parallel-agents/01_overview.md).
 
 ## Agents that run on their own
 
-Not every agent is chat-driven. **Background agents** fire on triggers:
-
-- **Scheduled** — run every Monday morning
-- **File change** — run when a specific path changes
-- **Webhook** — run when an external system posts
-
-Background agents have a dedicated tab in the UI showing their recent runs. See [Built-in agents](./02_built-in-agents.md) and custom `triggers:` in [agent.yaml](../../04_build-on-codebolt/02_creating-agents/05_agent-anatomy/agent-yaml.md).
+Use [Background Agents](../07a_parallel-agents/04_background-agent.md) to launch and track a background run. For scheduled or event-driven work, configure an [automation](../08d_auto-interactivity/01_overview.md) with the appropriate trigger.
 
 ## When an agent fails
 
-Agents fail in a few different ways:
-
-- **Stuck in a loop.** Loop detection should catch this; if it doesn't, stop with Esc and tell the agent what it was missing.
-- **Hit a budget.** Token, tool-call, or time limit. Raise the limit in agent settings (per-agent) or the agent's yaml.
-- **Denied by a guardrail.** The agent tried to do something policy disallows. Check the denial reason — the agent will tell you what was blocked.
-- **Provider error.** Rate limit, bad credential, network. Check Settings → Providers → Test.
-- **Abnormal exit.** Crashed. Rare; file a bug via [Reporting bugs](../10_troubleshooting/03_reporting-bugs.md).
-
-See [Agent Debug](../05c_agent-observability/02_agent-debug.md).
+Open [Agent Debug](./08_agent-debug.md) to inspect its process logs. For a provider error, check the configured provider and model in [LLM Settings](../02_surfaces/02_desktop-app/Settings/02_llm-settings.md).
 
 ## See also
 
@@ -127,6 +71,6 @@ See [Agent Debug](../05c_agent-observability/02_agent-debug.md).
 - [Running agents](./03_running-agents.md)
 - [Built-in agents](./02_built-in-agents.md)
 - [The marketplace](./04_the-marketplace.md)
-- [Agent Debug](../05c_agent-observability/02_agent-debug.md)
+- [Agent Debug](./08_agent-debug.md)
 - [Custom Agents (for builders)](../../04_build-on-codebolt/02_creating-agents/01_overview.md)
 - [Agent Subsystem (internals)](../../04_build-on-codebolt/07b_subsystems/01_agent-subsystem.md)

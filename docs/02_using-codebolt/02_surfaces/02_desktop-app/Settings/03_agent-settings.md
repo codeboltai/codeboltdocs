@@ -10,12 +10,11 @@ description: Override the default LLM for a specific installed agent, and assign
 
 ![Agent Settings](/productImages/applicationfeatures/AgentSetting.png)
 
-Override the default LLM for a specific installed agent, and assign different models to each of that agent's LLM roles.
+Open the **Agents** menu in the desktop bottom bar and select **Agents**. Find the installed agent, choose **View Details**, then open **LLM roles**.
 
-1. Select an **Agent** from the dropdown.
-2. Set the **Default Agent LLM** — this model is used for any role that doesn't have its own assignment. Choose **Default Application LLM** to inherit the global setting.
-3. For each **LLM Role** listed (e.g. `planner`, `executor`, `reviewer`), assign a specific model. Hover the help icon to see a description and recommended models for that role.
-4. Click **Update** to save.
+1. Choose a provider and model for **Default Agent LLM**, or choose **Default Application LLM** to inherit the application setting.
+2. Assign models to the roles the agent defines.
+3. Select **Save Agent Roles**.
 
 Roles are defined by the agent itself, so the list varies per agent.
 
@@ -23,18 +22,13 @@ Roles are defined by the agent itself, so the list varies per agent.
 
 ## Universal Agent
 
-Configure a custom or offline endpoint for the Universal Agent — the built-in orchestration agent that Codebolt uses when no other agent is specified.
-
-| Option | Description |
-|---|---|
-| **Enable Custom Universal Agent** | When on, enter a URL for your own agent endpoint. The Universal Agent will send requests there instead of the built-in service. |
-| **Use Offline Universal Agent** | When on, the Universal Agent runs fully locally without any cloud calls. |
+The **Universal Agent** settings screen stores a custom endpoint URL and an offline preference. To configure a locally served model for chat, see [Local Models](../../../08_integrations/02_local-models.md).
 
 ---
 
 ## Agent Steps
 
-Assign specific agents to each phase of the development workflow. When Codebolt runs a workflow step (code generation, testing, etc.), it routes to the agent you've assigned here.
+**Settings → Agent Steps** stores agent selections for development step names. A workflow determines which agents it runs.
 
 | Step | Purpose |
 |---|---|
@@ -45,7 +39,7 @@ Assign specific agents to each phase of the development workflow. When Codebolt 
 | `review` | Code review |
 | `userquestion` | Answering user questions mid-workflow |
 
-For each step you can assign a **primary agent** and optionally one or more **secondary agents**. Set to **Auto** to let Codebolt choose the best agent automatically.
+Select an agent for a step and use **+** to add another when available. **Auto** clears the explicit selection for that row.
 
 ---
 

@@ -25,12 +25,9 @@ Use episodic memory for structured records of events and outcomes you want to pr
 
 ## KV store
 
-The project database stores KV entries. Create or select a KV instance, then use its ID with a namespace and a key.
+Open **Context → KV Store**. Select an instance or create one first. Select **Add key** and enter a namespace, key, and value. For example, enter `preferences`, `language`, and `TypeScript` to record a language preference for a workflow. Select the namespace again to inspect the saved value.
 
-```typescript
-await codebolt.kvStore.set(instanceId, 'preferences', 'language', 'TypeScript');
-const result = await codebolt.kvStore.get(instanceId, 'preferences', 'language');
-```
+Agents can read and write entries through the [KV Store API](../../05_reference/02_codeboltjs/10_api-access/kvStore/index.md).
 
 ## JSON store
 
