@@ -60,7 +60,7 @@ For `remote` and `provider`, you specify the environment or provider ID.
 
 Each task has one or more evaluators that score the subject's output. Evaluators are **weighted** — the final score is a weighted average.
 
-See [Evaluators](./03_evaluators.md) for details on each type.
+See [Evaluators](../../02_using-codebolt/05e_eval-and-optimization/03_evaluators.md) for details on each type.
 
 ## Optimization (Optional)
 
@@ -100,6 +100,6 @@ Use suites to:
 
 ## See Also
 
-- [Evaluators](./03_evaluators.md) — configure scoring methods
+- [Evaluators](../../02_using-codebolt/05e_eval-and-optimization/03_evaluators.md) — configure scoring methods
 - [Optimization Loop](./04_optimization-loop.md) — agent-driven improvement
-- [Running Evals and Results](./05_running-evals-and-results.md) — execute and view results
+- [Running Evals](../../02_using-codebolt/05e_eval-and-optimization/04_running-evals.md) — execute and view results

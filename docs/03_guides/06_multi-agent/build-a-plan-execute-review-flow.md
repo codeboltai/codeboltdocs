@@ -159,5 +159,5 @@ Commit the three agent markdown files to your project repo. Anyone who opens the
 ## See also
 
 - [Build your first agent](../02_first-steps/build-your-first-agent.md)
-- [Code review with an agent](../03_everyday-workflows/code-review-with-an-agent.md)
+- [Code review with an agent](../04_everyday-workflows/code-review-with-an-agent.md)
 - [Custom Agents Overview](../../04_build-on-codebolt/02_creating-agents/01_overview.md)

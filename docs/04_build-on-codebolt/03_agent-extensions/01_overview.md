@@ -18,7 +18,6 @@ The test: *can you change this without rewriting the agent?* If yes, it belongs 
 | **Skills** | Specialised sub-handlers an agent can delegate to for a specific task | Narrow, reusable competencies ("refactor-to-pattern", "write-adr", "summarise-pr") | [Skills](./03_skills/01_overview.md) |
 | **MCP tools** | Tools exposed over the Model Context Protocol | Add MCP tools to a project or build new MCP servers for agents | [MCP Tools](./04_mcp-tools/01_overview.md) |
 | **Action blocks** | Reusable, parameterised step templates registered with the server | Structured multi-step operations (run tests, deploy, open PR) | [Action Blocks](./05_action-blocks/01_overview.md) |
-| **Agent blocks** | In-agent composable units that plug into the loop | Shared phases or mini-pipelines across multiple agents | [Agent Blocks](./06_agent-blocks.md) |
 | **Side execution** | Fire-and-forget / background work spawned alongside a main run | Long-running analyses, parallel scouts, async enrichment | [Side Execution](./07_side-execution.md) |
 | **Subagents** | Delegated child agents called synchronously | Decomposing a large task into typed child tasks with their own loops | [Subagents](./08_subagents.md) |
 

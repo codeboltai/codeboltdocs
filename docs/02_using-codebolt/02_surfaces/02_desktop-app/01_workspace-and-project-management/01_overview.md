@@ -1,7 +1,6 @@
 ---
 sidebar_position: 1
-sidebar_label: Overview
-title: Workspace and Project
+title: Workspace and Project Management
 description: "Use workspaces to group projects, create new projects, and start projects from templates in the Desktop App."
 ---
 

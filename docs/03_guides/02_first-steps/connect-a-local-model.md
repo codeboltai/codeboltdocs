@@ -8,7 +8,7 @@ description: Run an LLM on your own machine instead of calling a remote API. Cov
 
 Run an LLM on your own machine instead of calling a remote API. Covers Ollama (easiest) and the manual path. For the conceptual background, see [Local models](../../02_using-codebolt/08_integrations/02_local-models.md).
 
-**You'll need:** a machine with enough RAM for the model you want to run (see the [requirements table](../../02_using-codebolt/08_integrations/02_local-models.md#hardware-requirements-rough-guide)).
+**You'll need:** a machine with enough RAM for the model you want to run (see the [performance table](#performance)).
 
 ## The easy path: Ollama
 

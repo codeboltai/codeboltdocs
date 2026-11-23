@@ -65,7 +65,7 @@ console.log('Agent started in thread:', response.threadId);
 // Parent continues working while child runs in background
 ```
 
-This also supports **remote environments** (see [Multi-Environment Orchestration](../08a_multi-environment-orchestration/01_overview.md) and [Creating a Custom Provider](../08a_multi-environment-orchestration/05_creating-a-custom-provider.md)):
+This also supports **remote environments** (see [Multi-Environment Orchestration](../08a_multi-environment-orchestration/01_overview.md) and [Creating a Custom Provider](../08a_multi-environment-orchestration/03_creating-a-custom-provider.md)):
 
 ```ts
 const response = await codebolt.thread.createThreadInBackground({

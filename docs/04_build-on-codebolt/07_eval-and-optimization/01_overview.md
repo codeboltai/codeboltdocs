@@ -66,7 +66,7 @@ All eval data is stored as JSON files in `.codebolt/evals/`:
 
 ## See Also
 
-- [Creating Experiments](./02_creating-experiments.md) — define tasks, instructions, environments
-- [Evaluators](./03_evaluators.md) — configure scoring methods
+- [Eval Tasks](../../02_using-codebolt/05e_eval-and-optimization/02_eval-tasks.md) — define tasks, instructions, environments
+- [Evaluators](../../02_using-codebolt/05e_eval-and-optimization/03_evaluators.md) — configure scoring methods
 - [Optimization Loop](./04_optimization-loop.md) — agent-driven iterative improvement
-- [Running Evals and Results](./05_running-evals-and-results.md) — execute runs, view results
+- [Running Evals](../../02_using-codebolt/05e_eval-and-optimization/04_running-evals.md) — execute runs, view results

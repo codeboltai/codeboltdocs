@@ -105,5 +105,5 @@ Before publishing the template listing:
 
 ## See Also
 
-- [Creating Projects](03_creating-projects.md)
+- [Creating Projects](../../02_using-codebolt/02_surfaces/02_desktop-app/01_workspace-and-project-management/03_creating-projects.md)
 - [Publishing Templates](05_publishing-templates.md)

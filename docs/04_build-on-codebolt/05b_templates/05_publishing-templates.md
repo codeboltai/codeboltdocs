@@ -67,6 +67,6 @@ The Desktop App creates the project first, then downloads the template `url` int
 
 ## See Also
 
-- [Creating Projects](03_creating-projects.md)
+- [Creating Projects](../../02_using-codebolt/02_surfaces/02_desktop-app/01_workspace-and-project-management/03_creating-projects.md)
 - [Creating a Template](04_creating-a-template.md)
-- [Marketplace Publishing](02_marketplace-publishing.md)
+- [Marketplace Publishing](../../02_using-codebolt/02_surfaces/06_cloud/03_registry/02_marketplace-publishing.md)

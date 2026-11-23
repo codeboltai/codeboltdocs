@@ -13,7 +13,7 @@ Artifacts are the durable outputs of a phase: generated apps, static sites, scre
 
 Use this guide when a task has more than one step and each step needs a visible result, verification record, or handoff point.
 
-For the complete artifact reference, see [Artifacts](../../02_using-codebolt/06b_deposition-features/01_artifact).
+For the complete artifact reference, see [Artifacts](../../02_using-codebolt/06b_deposition-features/01_artifact.md).
 
 ## When To Use Artifacts
 
@@ -436,6 +436,6 @@ Before ending a multi-step phase, check:
 
 ## Next Steps
 
-- Read the artifact reference: [Artifacts](../../02_using-codebolt/06b_deposition-features/01_artifact)
-- Use artifacts in review flows: [Review & Merge](../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge)
-- Understand desktop artifact viewing: [Desktop App](../../02_using-codebolt/02_surfaces/02_desktop-app/01_overview)
+- Read the artifact reference: [Artifacts](../../02_using-codebolt/06b_deposition-features/01_artifact.md)
+- Use artifacts in review flows: [Review & Merge](../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge.md)
+- Understand desktop artifact viewing: [Desktop App](../../02_using-codebolt/02_surfaces/02_desktop-app/00_get-started.md)

@@ -49,6 +49,6 @@ codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
 
 - [codeboltjs Reference](../02_codeboltjs/01_overview.md) — `ctx.*` API methods agents call
 - [Creating Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md) — authoring guide
-- [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_creation-levels/level-1-framework.md) — how to build agents with the framework
+- [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md) — how to build agents with the framework
 - [Processors](../../04_build-on-codebolt/02_creating-agents/07_processors/01_what-are-processors.md) — processor pipeline docs
 - [Plugin SDK](../03_plugin-sdk/01_overview.md) — extending the Codebolt app

@@ -469,6 +469,6 @@ Body: { filePath: "...", graphData: { ...LiteGraphData }, name: "my-flow" }
 
 ## See also
 
-- [Level 0 — Remix](./level-0-remix.md) — simplest custom agent (prompt only)
-- [Level 1 — Framework](./level-1-framework.md) — code-based agent with full loop
+- [Level 0 — Remix](./level-3-remix.md) — simplest custom agent (prompt only)
+- [Level 1 — Framework](./level-2-framework.md) — code-based agent with full loop
 - [Memory Management & Optimization](../../07a_memory-management/01_overview.md) — using memory nodes effectively in flows

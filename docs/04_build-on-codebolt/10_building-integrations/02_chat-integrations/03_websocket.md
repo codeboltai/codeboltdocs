@@ -131,5 +131,5 @@ The first-party plugins handle chunking automatically. If you write a custom plu
 ## See also
 
 - [Gateway](./02_gateway.md) — thread resolution and routing logic
-- [Plugin SDK — gateway API](../../../../05_reference/03_plugin-sdk/02_api-reference/gateway)
+- [Plugin SDK — gateway API](../../../05_reference/03_plugin-sdk/02_api-reference/gateway/index.md)
 - [Plugin System overview](../../05_plugins/01_overview.md)

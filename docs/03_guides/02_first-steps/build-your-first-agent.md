@@ -104,7 +104,7 @@ All without writing code. Ship this, use it, see what breaks, iterate by editing
 
 Do this part when your rules get complex enough that embedding them in instructions isn't enough — for example, if you want to mechanically verify something, not ask the LLM to check it.
 
-Level 1 agents are framework-based TypeScript projects. See [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_creation-levels/level-1-framework.md) for the full walkthrough on creating framework agents with custom logic, processors, and mechanical checks.
+Level 1 agents are framework-based TypeScript projects. See [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md) for the full walkthrough on creating framework agents with custom logic, processors, and mechanical checks.
 
 ## What you learned
 
@@ -117,10 +117,10 @@ Level 1 agents are framework-based TypeScript projects. See [Level 1 — Framewo
 
 - **Commit your agent** to the project repo so your team gets it automatically. `.codebolt/agents/` should be in git.
 - **Publish it to the marketplace** — see [Publishing](../../04_build-on-codebolt/02_creating-agents/99_publishing.md).
-- **Code review with an agent** — see [Code review guide](../03_everyday-workflows/code-review-with-an-agent.md).
+- **Code review with an agent** — see [Code review guide](../04_everyday-workflows/code-review-with-an-agent.md).
 
 ## See also
 
 - [Custom Agents Overview](../../04_build-on-codebolt/02_creating-agents/01_overview.md)
-- [Level 0 — Remix](../../04_build-on-codebolt/02_creating-agents/03_creation-levels/level-0-remix.md)
-- [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_creation-levels/level-1-framework.md)
+- [Level 0 — Remix](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-3-remix.md)
+- [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md)

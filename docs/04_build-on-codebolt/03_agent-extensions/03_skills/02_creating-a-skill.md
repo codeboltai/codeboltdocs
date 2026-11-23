@@ -13,7 +13,7 @@ The Codebolt desktop app provides a **Capability Panel** where you can browse an
 From the UI you can:
 - **Browse installed skills** — the Installed tab lists all locally discovered capabilities with type badges and source indicators
 - **Install from the marketplace** — the Marketplace tab lets you search, filter, and install published skills directly (see [The Marketplace](../../../02_using-codebolt/04_agents/04_the-marketplace.md))
-- **Manage extensions** — enable/disable installed extensions from the Extensions panel (see [App and Project Settings](../../../02_using-codebolt/09a_guardrails-and-settings/02_app-and-project-settings.md))
+- **Manage extensions** — enable/disable installed extensions from the Extensions panel (see [App and Project Settings](../../../02_using-codebolt/02_surfaces/02_desktop-app/Settings/02_app-and-project-settings.md))
 
 There is no visual skill builder in the UI — to create a new skill from scratch, use the API or manual method below.
 

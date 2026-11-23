@@ -14,7 +14,7 @@ import plugin from '@codebolt/plugin-sdk';
 
 | Method | Description |
 |---|---|
-| [`debug`](./debug) | Sends a log message to the debug websocket and waits for a response. |
+| [`debug`](./debug.md) | Sends a log message to the debug websocket and waits for a response. |
 | [`openDebugBrowser`](./openDebugBrowser) | Requests to open a debug browser at the specified URL and port. |
 
 ## Methods
@@ -36,7 +36,7 @@ Sends a log message to the debug websocket and waits for a response.
 
 **Returns:** `Promise<DebugAddLogResponse>` — A promise that resolves with the response from the debug event.
 
-[Full reference →](./debug)
+[Full reference →](./debug.md)
 
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: debug
+slug: debug
 ---
 
 # `debug`

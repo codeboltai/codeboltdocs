@@ -114,4 +114,4 @@ Those older abstractions do not match the current package.
 - [Processor types](./02_processor-types.md)
 - [Built-in processors](./03_built-in-processors.md)
 - [Writing a custom processor](./04_writing-a-custom-processor.md)
-- [Level 1 — Framework](../03_creation-levels/level-1-framework.md)
+- [Level 1 — Framework](../03_agent-types/level-2-framework.md)

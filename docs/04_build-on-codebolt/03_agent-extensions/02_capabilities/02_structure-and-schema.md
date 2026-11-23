@@ -192,5 +192,5 @@ Calling `refresh()` re-runs steps 2–5 without reinitialising.
 
 ## See also
 
-- [Execution Flow](./03_activation.md)
+- [Execution Flow](./03_activation.mdx)
 - [API Reference](./04_bundling-skills-and-tools.md)

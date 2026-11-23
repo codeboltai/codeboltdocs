@@ -66,7 +66,7 @@ Checkpoints make it practical to let an agent attempt larger changes, inspect th
 ## See also
 
 - [Parallel Agents](../../02_using-codebolt/07a_parallel-agents/01_overview.md)
-- [Memory & Context](../../02_using-codebolt/07_memory/01_overview.md)
+- [Memory & Context](../../02_using-codebolt/05d_memory/01_overview.md)
 - [Guardrails](../../02_using-codebolt/05b_guardrails-and-settings/01_guardrails.md)
 - [Stigmergic Coordination](../../02_using-codebolt/07d_stigmergic-coordination/01_overview.md)
 - [Deposition Framework](../../03_guides/03_loops-and-deposition-engineering/deposition-framework.md)

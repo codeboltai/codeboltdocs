@@ -176,6 +176,6 @@ When the server loads an agent, it caches the manifest. After editing `codebolta
 ## See also
 - [Lifecycle](./lifecycle.md) — what happens after the manifest is loaded
 - [Context](./context.md) — the working state the handler sees
-- [Level 0 — Remix](../03_creation-levels/level-0-remix.md)
-- [Level 1 — Framework](../03_creation-levels/level-1-framework.md)
+- [Level 0 — Remix](../03_agent-types/level-3-remix.md)
+- [Level 1 — Framework](../03_agent-types/level-2-framework.md)
 - [Publishing](../99_publishing.md)

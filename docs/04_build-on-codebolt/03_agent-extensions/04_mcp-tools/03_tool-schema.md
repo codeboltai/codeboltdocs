@@ -238,4 +238,4 @@ For tool families you maintain over time, version them: `greet.v2.hello` alongsi
 - [Parameter validation](./03_tool-schema.md)
 - [Error handling](./06_error-handling.md)
 - [Custom Tools Overview](./01_overview.md)
-- [Reference → Built-in Tools](../../05_reference/01_overview.md) — examples of good schemas
+- [Built-in Tools](../../../02_using-codebolt/04b_agent-extensions/07_custom-tools.md#built-in-tools) — examples of good schemas

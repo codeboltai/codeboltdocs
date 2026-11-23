@@ -98,5 +98,5 @@ const execution = await responseExecutor.executeResponse({
 
 - [CodeboltAgent](./unified-agent.md) — detailed API reference
 - [Processor Pattern](./processor-pattern.md) — customizing the pipeline with processor-pieces
-- [Level 1 — Framework](../03_creation-levels/level-1-framework.md) — full walkthrough
+- [Level 1 — Framework](../03_agent-types/level-2-framework.md) — full walkthrough
 - [Processors](../07_processors/01_what-are-processors.md) — the modifier pipeline

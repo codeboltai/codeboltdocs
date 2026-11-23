@@ -39,7 +39,7 @@ Codebolt ships first-party plugins for the major platforms. Install them from th
 
 ### 2. Write a custom plugin
 
-If your platform isn't covered, implement the plugin yourself. See [Plugin SDK — gateway API](../../../05_reference/03_plugin-sdk/02_api-reference/gateway) for the full `plugin.gateway.*` surface.
+If your platform isn't covered, implement the plugin yourself. See [Plugin SDK — gateway API](../../../05_reference/03_plugin-sdk/02_api-reference/gateway/index.md) for the full `plugin.gateway.*` surface.
 
 The core interface every channel plugin implements:
 

@@ -108,5 +108,4 @@ See [Creating a skill](./02_creating-a-skill.md) for details on both formats.
 ## See also
 
 - [Capabilities](../02_capabilities/01_overview.md)
-- [Agent Blocks](../06_agent-blocks.md)
 - [Subagents](../08_subagents.md)

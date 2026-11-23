@@ -26,7 +26,7 @@ The **Codebolt server** is the execution engine. It owns files, memory, sub-agen
 - **Plugins** — extend the application itself with the [`pluginSdk`](./05_plugins/01_overview.md): gateway integrations, execution plugins, UI extensions, hooks, and custom LLM providers. Plugins live alongside the server and talk to it over the plugin bus.
 - **Remote Environment Providers** — federate across machines. A [remote environment provider](./08a_multi-environment-orchestration/02_remote-environments/01_overview.md) is typically another Codebolt server instance (e.g. `e2b`, a remote sandbox, or a peer workstation) that the local server proxies work to.
 
-Inside the server, you can also extend the agent loop *without* rewriting it — [**capabilities**](./03_agent-extensions/02_capabilities/01_overview.md), [**skills**](./03_agent-extensions/03_skills/01_overview.md), [**action blocks**](./03_agent-extensions/05_action-blocks/01_overview.md), [**agent blocks**](./03_agent-extensions/06_agent-blocks.md), and more are all configurable from the same `.codebolt/` project surface. See [Agent Extensions](./03_agent-extensions/01_overview.md).
+Inside the server, you can also extend the agent loop *without* rewriting it — [**capabilities**](./03_agent-extensions/02_capabilities/01_overview.md), [**skills**](./03_agent-extensions/03_skills/01_overview.md), [**action blocks**](./03_agent-extensions/05_action-blocks/01_overview.md), and more are all configurable from the same `.codebolt/` project surface. See [Agent Extensions](./03_agent-extensions/01_overview.md).
 
 ## The extension surface at a glance
 
@@ -56,7 +56,7 @@ A decision guide:
 - **I want my agents to gain a capability without rewriting them.** → [Agent Extensions](./03_agent-extensions/01_overview.md). Capabilities, skills, MCP tools, action blocks.
 - **I want to give agents access to my internal APIs / databases / tools.** → [Agent Extensions → MCP Tools](./03_agent-extensions/04_mcp-tools/01_overview.md). MCP server is usually the right answer.
 - **I want to run Claude Code (or similar) as a Codebolt agent.** → [Third-Party Agents](./02_creating-agents/04_third-party-agents.md).
-- **I want to build agents using an external framework.** → Use the framework as a library inside a [Level 1 agent](./02_creating-agents/03_creation-levels/level-1-framework.md) handler.
+- **I want to build agents using an external framework.** → Use the framework as a library inside a [Level 1 agent](./02_creating-agents/03_agent-types/level-2-framework.md) handler.
 - **I want a new LLM provider or a local inference backend.** → [Extending Codebolt → Custom LLM Providers](./06_extending-codebolt/02_custom-llm-providers.md).
 - **I want to add a theme, custom command, or UI panel to Codebolt.** → [Extending Codebolt](./06_extending-codebolt/01_overview.md).
 - **I want to intercept or modify application behaviour project-wide** (hooks, execution routing, provider registration). → [Plugins](./05_plugins/01_overview.md).
@@ -75,13 +75,13 @@ Codebolt is designed so you almost never need to modify it to get what you want.
 
 1. **Configuration.** `.codebolt/` files in your project: rules, context rules, hook definitions, flow graphs. Often enough for real use cases. No code at all.
 2. **Install an MCP server or capability.** Every agent in the project gains new tools / behaviour. See [Agent Extensions](./03_agent-extensions/01_overview.md).
-3. **Remix an existing agent.** Change its prompt, tools, or model without forking its code. See [Level 0 — Remix](./02_creating-agents/03_creation-levels/level-0-remix.md).
+3. **Remix an existing agent.** Change its prompt, tools, or model without forking its code. See [Level 0 — Remix](./02_creating-agents/03_agent-types/level-3-remix.md).
 4. **Write a plugin.** Extend one part of the application without forking the server. See [Plugins](./05_plugins/01_overview.md).
 5. **Build a skill or action block.** Reusable competency any agent can call. See [Skills](./03_agent-extensions/03_skills/01_overview.md).
 6. **Build an MCP server.** Give agents new capabilities. Usually a small standalone program.
-7. **Build a custom agent from the framework.** Full control over the loop but with batteries included. See [Level 1 — Framework](./02_creating-agents/03_creation-levels/level-1-framework.md).
-8. **Build on `codeboltjs` directly.** Everything the framework gives you and nothing you don't want. [Level 2](./02_creating-agents/03_creation-levels/level-2-codeboltjs.md).
-9. **Write against the raw WebSocket protocol.** Only if you need something no level above allows. [Level 3](./02_creating-agents/03_creation-levels/level-3-raw-websocket.md).
+7. **Build a custom agent from the framework.** Full control over the loop but with batteries included. See [Level 1 — Framework](./02_creating-agents/03_agent-types/level-2-framework.md).
+8. **Build on `codeboltjs` directly.** Everything the framework gives you and nothing you don't want. [Level 2](./02_creating-agents/03_agent-types/level-1-codeboltjs.md).
+9. **Write against the raw WebSocket protocol.** Only if you need something no level above allows. [Level 3](./02_creating-agents/03_agent-types/level-0-raw-websocket.md).
 
 **Start at the top and stop as soon as you have what you need.** Most extensions live at level 1-6.
 

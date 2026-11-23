@@ -113,6 +113,6 @@ Send a JSON message with an `action` field:
 
 - [Capability API Reference](/docs/reference/codeboltjs/api-access/capability) — full SDK method docs
 - [Side Execution API Reference](/docs/reference/codeboltjs/api-access/sideExecution) — side execution methods
-- [Execution Flow](./03_activation.md)
-- [Capability Executors](./06_executors.md)
+- [Execution Flow](./03_activation.mdx)
+- [Capability Executors](./06_executors.mdx)
 - [Marketplace and Publishing](./05_publishing.md)

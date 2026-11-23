@@ -135,5 +135,5 @@ const agent = createCodeboltAgent({
 
 - [Patterns Overview](./overview.md)
 - [Processor Pattern](./processor-pattern.md) — customizing the pipeline
-- [Level 1 — Framework](../03_creation-levels/level-1-framework.md) — project layout and build
+- [Level 1 — Framework](../03_agent-types/level-2-framework.md) — project layout and build
 - [Built-in Processors](../07_processors/03_built-in-processors.md) — all shipped processors

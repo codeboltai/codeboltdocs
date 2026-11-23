@@ -221,17 +221,17 @@ const status = await codebolt.capability.getExecutionStatus(result.executionId);
 await codebolt.capability.stopCapability(result.executionId);
 ```
 
-The SDK also provides convenience methods: `startSkill()`, `startPower()`, `startTalent()`, `listPowers()`, `listTalents()`, and filtering by tag or author. See the [API Reference](./04_bundling-skills-and-tools.md#codebolt-js-sdk-codeboltjs) for the full SDK documentation.
+The SDK also provides convenience methods: `startSkill()`, `startPower()`, `startTalent()`, `listPowers()`, `listTalents()`, and filtering by tag or author. See the [API Reference](./04_bundling-skills-and-tools.md#codebolt-js-sdk) for the full SDK documentation.
 
 ---
 
 ## In this section
 
 - [Structure and Schema](./02_structure-and-schema.md) — directory layout, `capability.yaml`, `executor.yaml`
-- [Execution Flow](./03_activation.md) — lifecycle, statuses, thread context, error handling
+- [Execution Flow](./03_activation.mdx) — lifecycle, statuses, thread context, error handling
 - [API Reference](./04_bundling-skills-and-tools.md) — REST endpoints, WebSocket events, CLI actions, SDK
 - [Marketplace and Publishing](./05_publishing.md) — browsing, installing, creating, publishing
-- [Capability Executors](./06_executors.md) — what executors are, how they work, how to write one
+- [Capability Executors](./06_executors.mdx) — what executors are, how they work, how to write one
 
 ## See also
 

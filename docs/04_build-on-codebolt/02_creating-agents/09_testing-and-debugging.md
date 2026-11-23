@@ -134,7 +134,7 @@ test('redactor removes emails', async () => {
 
 ## Unit testing external event processors
 
-The external event processor pattern from [Level 1 — Framework](./03_creation-levels/level-1-framework.md#processing-external-events) is also testable in isolation:
+The external event processor pattern from [Level 1 — Framework](./03_agent-types/level-2-framework.md#processing-external-events) is also testable in isolation:
 
 ```ts
 test('steering event is injected into prompt', () => {
@@ -214,6 +214,6 @@ POST /agent-debug/rebuild-index
 
 ## See also
 
-- [Agent Debug (user guide)](../../02_using-codebolt/05c_agent-observability/02_agent-debug.md)
-- [Level 1 — Framework](./03_creation-levels/level-1-framework.md)
+- [Agent Debug (user guide)](../../02_using-codebolt/04_agents/08_agent-debug.md)
+- [Level 1 — Framework](./03_agent-types/level-2-framework.md)
 - [Writing a Custom Processor](./07_processors/04_writing-a-custom-processor.md)

@@ -142,4 +142,4 @@ Codebolt's registry-based design treats every dimension — subject, instruction
 - [Dispute Resolution](../07_multi-agent/03_dispute-resolution.md) — the deliberation primitive reused by the deliberation evaluator
 - [Guardrails](./01_guardrails.md) — runtime guardrails (complementary to offline evals)
 - [Event Log](../05_persistence/02_event-log.md) — where every eval run and iteration is recorded
-- [Replay an agent run (guide)](../../03_guides/07_advanced/replay-an-agent-run.md)
+- [Replay an agent run (guide)](../../03_guides/08_advanced/replay-an-agent-run.md)

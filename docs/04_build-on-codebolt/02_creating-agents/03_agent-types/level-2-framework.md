@@ -16,9 +16,9 @@ This is the default choice for real custom agents. You write TypeScript and cust
 - You want to add, remove, or reorder context modifiers and processors.
 - You need loop detection, compaction, or tool-call hooks.
 - You want a normal Codebolt agent loop without hand-writing the whole thing.
-- [Level 0](./level-0-remix.md) is too limited, but [level 2](./level-2-codeboltjs.md) would be unnecessary control.
+- [Level 0](./level-3-remix.md) is too limited, but [level 2](./level-1-codeboltjs.md) would be unnecessary control.
 
-If you need complete ownership of the loop and runtime wiring, skip to [level 2](./level-2-codeboltjs.md).
+If you need complete ownership of the loop and runtime wiring, skip to [level 2](./level-1-codeboltjs.md).
 
 ## What the framework actually gives you
 
@@ -160,7 +160,7 @@ const execution = await responseExecutor.executeResponse({
 });
 ```
 
-If you need to own the entire loop, event wiring, or low-level SDK interaction yourself, move to [level 2](./level-2-codeboltjs.md).
+If you need to own the entire loop, event wiring, or low-level SDK interaction yourself, move to [level 2](./level-1-codeboltjs.md).
 
 ## Carrying context across calls
 
@@ -566,7 +566,7 @@ module.exports = {
 
 ## When to graduate to level 2
 
-Move to [level 2](./level-2-codeboltjs.md) when:
+Move to [level 2](./level-1-codeboltjs.md) when:
 
 - You need a fully custom agent loop.
 - You need raw `@codebolt/codeboltjs` APIs the framework does not wrap.
@@ -576,7 +576,7 @@ For most code-based agents, level 1 is the right level.
 
 ## See also
 
-- [Level 0 — Remix](./level-0-remix.md)
-- [Level 2 — codeboltjs](./level-2-codeboltjs.md)
+- [Level 0 — Remix](./level-3-remix.md)
+- [Level 2 — codeboltjs](./level-1-codeboltjs.md)
 - [Patterns overview](../06_patterns/overview.md)
 - [Processors](../07_processors/01_what-are-processors.md)

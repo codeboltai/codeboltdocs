@@ -91,4 +91,4 @@ A single agent is asked to argue both sides sequentially, then decide. Cheaper b
 
 - [Plan-execute-review](./plan-execute-review.md) — a more common review pattern
 - [Review & merge design](../07_review-and-merge-design.md)
-- [Guide: build a debate pattern](../../../03_guides/05_multi-agent/design-a-debate-pattern.md)
+- [Guide: build a debate pattern](../../../03_guides/06_multi-agent/design-a-debate-pattern.md)

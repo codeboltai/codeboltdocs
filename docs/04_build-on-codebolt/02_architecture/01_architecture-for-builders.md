@@ -18,7 +18,7 @@ That split is the reason Codebolt has multiple SDKs. Each SDK serves a different
 
 ## The core idea
 
-Codebolt is built around a **central execution server** in [`packages/server`](D:/Codeboltapps/CodeBolt/packages/server).
+Codebolt is built around a **central execution server** in [`packages/server`](./03_process-model.md).
 
 The server owns:
 
@@ -36,9 +36,9 @@ Everything else connects to or extends that server.
 | Piece | What it is | Use it when |
 |---|---|---|
 | **Server** | The central execution runtime in `packages/server` | You are reasoning about how Codebolt works overall |
-| **Client SDK** | [`@codebolt/client-sdk`](D:/Codeboltapps/CodeBolt/packages/clientsdk) | You are building a custom UI, CLI, dashboard, widget, or editor client |
-| **Agent SDK** | [`@codebolt/codeboltjs`](D:/Codeboltapps/CodeBolt/packages/codeboltjs) | You are building an agent that runs as its own process and connects back to the server |
-| **Plugin SDK** | [`@codebolt/plugin-sdk`](D:/Codeboltapps/CodeBolt/packages/pluginSdk) | You are extending the application runtime with providers, gateways, hooks, or embedded panels |
+| **Client SDK** | [`@codebolt/client-sdk`](../../05_reference/04_client-sdk/01_overview.md) | You are building a custom UI, CLI, dashboard, widget, or editor client |
+| **Agent SDK** | [`@codebolt/codeboltjs`](../../05_reference/02_codeboltjs/01_overview.md) | You are building an agent that runs as its own process and connects back to the server |
+| **Plugin SDK** | [`@codebolt/plugin-sdk`](../../05_reference/03_plugin-sdk/01_overview.md) | You are extending the application runtime with providers, gateways, hooks, or embedded panels |
 | **Agent extensions** | Capabilities, skills, MCP tools, blocks | You want to extend what agents can do without building a new runtime |
 
 ## What runs where
@@ -79,14 +79,14 @@ Instead, an agent can run as its own process and connect to the server. That giv
 - multiple runtimes: native Codebolt agents, wrapped third-party agents, and non-JS agents can all connect to the same system
 - cleaner architecture: the server remains the control and execution core, while agent behavior lives at the edge
 
-This is the reason [`@codebolt/codeboltjs`](D:/Codeboltapps/CodeBolt/packages/codeboltjs) matters so much: it is the main SDK for building those external agent runtimes.
+This is the reason [`@codebolt/codeboltjs`](../../05_reference/02_codeboltjs/01_overview.md) matters so much: it is the main SDK for building those external agent runtimes.
 
 ## Which SDK should I choose?
 
-- Build a **custom UI**: use [`@codebolt/client-sdk`](D:/Codeboltapps/CodeBolt/packages/clientsdk) and start at [Custom Interfaces](./04_custom-uis/01_overview.md).
-- Build a **custom agent**: use [`@codebolt/codeboltjs`](D:/Codeboltapps/CodeBolt/packages/codeboltjs) and start at [Creating Agents](./02_creating-agents/01_overview.md).
-- Extend the **application runtime**: use [`@codebolt/plugin-sdk`](D:/Codeboltapps/CodeBolt/packages/pluginSdk) and start at [Plugins](./05_plugins/01_overview.md).
-- Extend **agent capabilities without a new runtime**: start at [Agent Extensions](./03_agent-extensions/01_overview.md).
+- Build a **custom UI**: use [`@codebolt/client-sdk`](../../05_reference/04_client-sdk/01_overview.md) and start at [Custom Interfaces](../04_custom-uis/01_overview.md).
+- Build a **custom agent**: use [`@codebolt/codeboltjs`](../../05_reference/02_codeboltjs/01_overview.md) and start at [Creating Agents](../02_creating-agents/01_overview.md).
+- Extend the **application runtime**: use [`@codebolt/plugin-sdk`](../../05_reference/03_plugin-sdk/01_overview.md) and start at [Plugins](../05_plugins/01_overview.md).
+- Extend **agent capabilities without a new runtime**: start at [Agent Extensions](../03_agent-extensions/01_overview.md).
 
 ## How this relates to Internals
 
@@ -103,9 +103,9 @@ Read this page first. Read Internals when you need to understand how the server 
 
 ## See also
 
-- [Build on Codebolt](./01_overview.md)
+- [Build on Codebolt](../01_overview.md)
 - [Architecture Overview](./02_architecture-overview.md)
 - [Process Model](./03_process-model.md)
-- [Creating Agents](./02_creating-agents/01_overview.md)
-- [Custom Interfaces](./04_custom-uis/01_overview.md)
-- [Plugins](./05_plugins/01_overview.md)
+- [Creating Agents](../02_creating-agents/01_overview.md)
+- [Custom Interfaces](../04_custom-uis/01_overview.md)
+- [Plugins](../05_plugins/01_overview.md)

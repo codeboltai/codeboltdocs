@@ -163,5 +163,5 @@ Focus on runtime bugs and convention violations.
 
 - [agent.yaml](./05_agent-anatomy/agent-yaml.md) — manifest reference
 - [Testing and debugging](./09_testing-and-debugging.md)
-- [Level 0 — Remix](./03_creation-levels/level-0-remix.md)
-- [Level 1 — Framework](./03_creation-levels/level-1-framework.md)
+- [Level 0 — Remix](./03_agent-types/level-3-remix.md)
+- [Level 1 — Framework](./03_agent-types/level-2-framework.md)

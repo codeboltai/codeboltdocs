@@ -113,6 +113,6 @@ The subject's config is updated with the `optimizedAgentPath` pointing to this c
 
 ## See Also
 
-- [Evaluators](./03_evaluators.md) — evaluator scores drive the optimization loop
-- [Creating Experiments](./02_creating-experiments.md) — enable optimization on tasks
-- [Running Evals and Results](./05_running-evals-and-results.md) — view optimization timeline
+- [Evaluators](../../02_using-codebolt/05e_eval-and-optimization/03_evaluators.md) — evaluator scores drive the optimization loop
+- [Eval Tasks](../../02_using-codebolt/05e_eval-and-optimization/02_eval-tasks.md) — enable optimization on tasks
+- [Running Evals](../../02_using-codebolt/05e_eval-and-optimization/04_running-evals.md) — view optimization timeline

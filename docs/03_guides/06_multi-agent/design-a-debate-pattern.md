@@ -191,6 +191,6 @@ Skip the `debate-judge` agent and read the transcript yourself. Use when the que
 
 ## See also
 
-- [Code review with an agent](../03_everyday-workflows/code-review-with-an-agent.md)
+- [Code review with an agent](../04_everyday-workflows/code-review-with-an-agent.md)
 - [Build a code-review swarm](./build-a-code-review-swarm.md) — parallel specialists instead of debate
 - [Custom Agents Overview](../../04_build-on-codebolt/02_creating-agents/01_overview.md)

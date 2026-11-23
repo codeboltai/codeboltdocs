@@ -1,15 +1,10 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import { resolveGeneratedReferenceLinks } from './generatedReferenceLinks';
 import { generateSidebarItems } from './sidebarItemsGenerator';
 
 const excludedDocs = ['Issue.md', 'sortspec.md', 'Excalidraw/**'];
-const generatedReference = [
-  '05_reference/02_codeboltjs/{09_type-reference,11_mcp-access,12_utility-functions,pseudo_cli}/**',
-  '05_reference/03_plugin-sdk/{02_api-reference,type-reference}/**',
-  '05_reference/04_client-sdk/{02_api-reference,03_event-reference,type-reference}/**',
-  '05_reference/05_agent-framework/type-reference/**',
-];
 
 const config: Config = {
   title: 'CodeBolt',
@@ -146,11 +141,9 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Keep the reference landing pages and CLI docs available locally.
-          exclude: process.env.NODE_ENV === 'development'
-            ? [...excludedDocs, ...generatedReference]
-            : excludedDocs,
+          exclude: excludedDocs,
           sidebarItemsGenerator: generateSidebarItems,
+          beforeDefaultRemarkPlugins: [resolveGeneratedReferenceLinks],
         },
         blog: {
           showReadingTime: true,

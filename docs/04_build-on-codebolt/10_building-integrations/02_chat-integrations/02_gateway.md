@@ -148,4 +148,4 @@ The server looks up which plugin owns the channel and delivers the message via `
 ## See also
 
 - [WebSocket protocol](./03_websocket.md) — how plugins connect and send messages
-- [Plugin SDK — gateway API](../../../../05_reference/03_plugin-sdk/02_api-reference/gateway)
+- [Plugin SDK — gateway API](../../../05_reference/03_plugin-sdk/02_api-reference/gateway/index.md)

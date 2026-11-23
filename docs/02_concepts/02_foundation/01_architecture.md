@@ -30,9 +30,9 @@ Every action an agent takes flows through these planes in order: the executive p
 
 ## Server subsystems
 
-Inside the server, the planes are implemented by 12 subsystems — context assembly, memory ingestion, guardrails & eval, the deliberation loop, the tool runtime, etc. Each is documented under [Build on Codebolt → Internals → Subsystems](../../04_build-on-codebolt/08_internals/03_subsystems/01_agent-subsystem.md).
+Inside the server, the planes are implemented by 12 subsystems — context assembly, memory ingestion, guardrails & eval, the deliberation loop, the tool runtime, etc. Each is documented under [Build on Codebolt → Internals → Subsystems](../../04_build-on-codebolt/07b_subsystems/01_agent-subsystem.md).
 
 ## See also
 
-- [Process model](../../04_build-on-codebolt/08_internals/02_process-model.md) — what runs where (server, plugins, agents)
-- [Agent run end-to-end](../../04_build-on-codebolt/08_internals/04_data-flow-walkthroughs/agent-run-end-to-end.md) — a full request traced through every plane
+- [Process model](../../04_build-on-codebolt/02_architecture/03_process-model.md) — what runs where (server, plugins, agents)
+- [Agent run end-to-end](../../04_build-on-codebolt/02_architecture/04_data-flow-walkthroughs/agent-run-end-to-end.md) — a full request traced through every plane

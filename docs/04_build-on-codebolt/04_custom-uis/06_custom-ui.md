@@ -159,7 +159,7 @@ await codebolt.disconnectAll();
 
 ## See Also
 
-- [Build Your First Custom UI](./07_build-your-first-custom-ui.md) — step-by-step tutorial
+- [Build Your First Custom UI](./06_build-your-first-custom-ui.md) — step-by-step tutorial
 - [API Reference](../../05_reference/04_client-sdk/02_api-reference/index.md) — all 72 HTTP API modules
 - [Event Reference](../../05_reference/04_client-sdk/03_event-reference/index.md) — all 34 WebSocket event modules
 - [Client SDK Overview](../../05_reference/04_client-sdk/01_overview.md) — SDK overview

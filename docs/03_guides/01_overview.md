@@ -30,40 +30,40 @@ Things everyone should try once.
 ### Everyday workflows
 Real tasks people actually do with Codebolt.
 
-- [Code review with an agent](./03_everyday-workflows/code-review-with-an-agent.md)
-- [Bulk refactor with checkpoints](./03_everyday-workflows/bulk-refactor-with-checkpoints.md)
-- [Write tests from a spec](./03_everyday-workflows/write-tests-from-a-spec.md)
-- [Debug a hung agent](./03_everyday-workflows/debug-a-hung-agent.md)
-- [Use Ctrl+K for inline edits](./03_everyday-workflows/use-ctrl-k-for-inline-edits.md)
+- [Code review with an agent](./04_everyday-workflows/code-review-with-an-agent.md)
+- [Bulk refactor with checkpoints](./04_everyday-workflows/bulk-refactor-with-checkpoints.md)
+- [Write tests from a spec](./04_everyday-workflows/write-tests-from-a-spec.md)
+- [Debug a hung agent](./04_everyday-workflows/debug-a-hung-agent.md)
+- [Use Ctrl+K for inline edits](./04_everyday-workflows/use-ctrl-k-for-inline-edits.md)
 
 ### MCP & tools
 Extending what agents can do.
 
-- [Install a third-party MCP server](./04_mcp-and-tools/install-a-third-party-mcp-server.md)
-- [Build your first MCP server](./04_mcp-and-tools/build-your-first-mcp-server.md)
-- [Write a simple hook](./04_mcp-and-tools/write-a-simple-hook.md)
+- [Install a third-party MCP server](./05_mcp-and-tools/install-a-third-party-mcp-server.md)
+- [Build your first MCP server](./05_mcp-and-tools/build-your-first-mcp-server.md)
+- [Write a simple hook](./05_mcp-and-tools/write-a-simple-hook.md)
 
 ### Multi-agent
 Patterns in practice.
 
-- [Build a code-review swarm](./05_multi-agent/build-a-code-review-swarm.md)
-- [Build a plan-execute-review flow](./05_multi-agent/build-a-plan-execute-review-flow.md)
-- [Design a debate pattern](./05_multi-agent/design-a-debate-pattern.md)
+- [Build a code-review swarm](./06_multi-agent/build-a-code-review-swarm.md)
+- [Build a plan-execute-review flow](./06_multi-agent/build-a-plan-execute-review-flow.md)
+- [Design a debate pattern](./06_multi-agent/design-a-debate-pattern.md)
 
 ### Providers and models
 Getting your LLMs set up.
 
-- [Use OpenAI](./06_providers-and-models/use-openai.md)
-- [Use Anthropic](./06_providers-and-models/use-anthropic.md)
-- [Use Ollama locally](./06_providers-and-models/use-ollama-locally.md)
-- [Bring your own provider](./06_providers-and-models/byo-provider.md)
+- [Use OpenAI](./07_providers-and-models/use-openai.md)
+- [Use Anthropic](./07_providers-and-models/use-anthropic.md)
+- [Use Ollama locally](./07_providers-and-models/use-ollama-locally.md)
+- [Bring your own provider](./07_providers-and-models/byo-provider.md)
 
 ### Advanced
 For when you're ready to dig in.
 
-- [Replay an agent run](./07_advanced/replay-an-agent-run.md)
-- [Query the event log](./07_advanced/query-the-event-log.md)
-- [Self-host for a team](./07_advanced/self-host-for-a-team.md)
+- [Replay an agent run](./08_advanced/replay-an-agent-run.md)
+- [Query the event log](./08_advanced/query-the-event-log.md)
+- [Self-host for a team](./08_advanced/self-host-for-a-team.md)
 
 ## Suggesting a guide
 

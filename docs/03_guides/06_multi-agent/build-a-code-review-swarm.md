@@ -177,6 +177,6 @@ Not worth it for small, low-risk changes. Use a single generalist there.
 
 ## See also
 
-- [Code review with an agent](../03_everyday-workflows/code-review-with-an-agent.md) — the single-agent version
+- [Code review with an agent](../04_everyday-workflows/code-review-with-an-agent.md) — the single-agent version
 - [Custom Agents Overview](../../04_build-on-codebolt/02_creating-agents/01_overview.md)
-- [Level 0 — Remix](../../04_build-on-codebolt/02_creating-agents/03_creation-levels/level-0-remix.md)
+- [Level 0 — Remix](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-3-remix.md)

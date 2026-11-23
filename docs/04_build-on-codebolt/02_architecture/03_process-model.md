@@ -56,7 +56,7 @@ All subsystems communicate through `applicationEventBus` inside the server proce
 - The event log captures everything.
 - Hooks fire at well-defined moments.
 
-A single bus makes the system replayable: if you record every bus event, you can reconstruct exactly what happened in a run. That's what `eventLogDataService` does, and it's what powers [replay](../../03_guides/07_advanced/replay-an-agent-run.md).
+A single bus makes the system replayable: if you record every bus event, you can reconstruct exactly what happened in a run. That's what `eventLogDataService` does, and it's what powers [replay](../../03_guides/08_advanced/replay-an-agent-run.md).
 
 ## See also
 

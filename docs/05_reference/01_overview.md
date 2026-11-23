@@ -47,4 +47,4 @@ Most of this reference is generated from TypeScript source — TypeDoc for class
 ## See also
 
 - [Build on Codebolt](../04_build-on-codebolt/01_overview.md) — the guides that the reference complements
-- [System Internals](../04_build-on-codebolt/09_internals/01_architecture-overview.md) — the mental model
+- [System Internals](../04_build-on-codebolt/02_architecture/02_architecture-overview.md) — the mental model

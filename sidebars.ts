@@ -95,10 +95,8 @@ const sidebars = {
       doc('Preview & Browser', `${editor}/preview-browser`),
     ]),
     group('Application Features', [
-      jump('Authentication & Authorization', `${cloud}/cloud-portal`, 'sign-in'),
-      doc('Teams', `${cloud}/settings/team-settings`),
-      doc('Workspace', `${desktop}/workspace-and-project-management/overview`),
-      doc('Usage and Billing', `${cloud}/settings/subscription-plans-usage-billing`),
+      doc('Application Navigation', `${desktop}/application-navigation/overview`),
+      doc('Workspace and Project Management', `${desktop}/workspace-and-project-management/overview`),
       doc('Application Layout Mode', `${desktop}/application-navigation/layout`),
       doc('Settings Overview', `${settings}/overview`),
       ref('LLM Settings', `${settings}/llm-settings`),
@@ -108,6 +106,9 @@ const sidebars = {
       doc('MCP Servers', `${settings}/mcp-servers`),
       ref('Appearance & Global Settings', `${settings}/appearance`),
       jump('Problems', `${editor}/code-editor`, 'problems-panel'),
+      jump('Authentication & Authorization', `${cloud}/cloud-portal`, 'sign-in'),
+      doc('Teams', `${cloud}/settings/team-settings`),
+      doc('Usage and Billing', `${cloud}/settings/subscription-plans-usage-billing`),
     ]),
     group('Code Observability', [
       doc('Code Observability Overview', `${use}/multi-agent-usage/observability-and-tracing`),

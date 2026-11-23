@@ -138,7 +138,7 @@ customInstructions: |
 The reviewer is an LLM. It's sometimes wrong. Don't rubber-stamp its comments — read them with skepticism.
 
 ### Reviewing without the plan
-A reviewer that only sees a diff doesn't know what the diff was *supposed* to do. If you wrote the code yourself, include context: "I'm trying to add rate limiting; review whether I did it correctly". Or use [plan-execute-review](../05_multi-agent/build-a-plan-execute-review-flow.md) so the plan is available.
+A reviewer that only sees a diff doesn't know what the diff was *supposed* to do. If you wrote the code yourself, include context: "I'm trying to add rate limiting; review whether I did it correctly". Or use [plan-execute-review](../06_multi-agent/build-a-plan-execute-review-flow.md) so the plan is available.
 
 ### Reviewing with the same model as the coder
 If you used Claude to write the code, use GPT (or Gemini) to review. Same-family models agree too much.
@@ -162,6 +162,6 @@ Treat the reviewer as a tool you iterate on. The first version won't be great; t
 ## See also
 
 - [Build your first agent](../02_first-steps/build-your-first-agent.md)
-- [Build a plan-execute-review flow](../05_multi-agent/build-a-plan-execute-review-flow.md)
+- [Build a plan-execute-review flow](../06_multi-agent/build-a-plan-execute-review-flow.md)
 - [Running agents](../../02_using-codebolt/04_agents/03_running-agents.md)
 - [Review and merge design](../../04_build-on-codebolt/08_multi-agent-orchestration/07_review-and-merge-design.md)

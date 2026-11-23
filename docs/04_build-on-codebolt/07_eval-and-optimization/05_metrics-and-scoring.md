@@ -108,6 +108,6 @@ Access via: `GET /evals/runs/:id/profile/:subjectId`.
 ## See Also
 
 - [Overview](./01_overview.md) — eval and optimization concepts
-- [Creating Experiments](./02_creating-experiments.md) — define what to test
-- [Evaluators](./03_evaluators.md) — how scoring works
+- [Eval Tasks](../../02_using-codebolt/05e_eval-and-optimization/02_eval-tasks.md) — define what to test
+- [Evaluators](../../02_using-codebolt/05e_eval-and-optimization/03_evaluators.md) — how scoring works
 - [Optimization Loop](./04_optimization-loop.md) — automatic improvement

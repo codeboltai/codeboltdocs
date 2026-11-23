@@ -89,6 +89,6 @@ These are stored per-result and visible in the run detail view.
 
 ## See Also
 
-- [Creating Experiments](./02_creating-experiments.md) — add evaluators to tasks
+- [Eval Tasks](../../02_using-codebolt/05e_eval-and-optimization/02_eval-tasks.md) — add evaluators to tasks
 - [Optimization Loop](./04_optimization-loop.md) — evaluator scores drive optimization
-- [Running Evals and Results](./05_running-evals-and-results.md) — view evaluator output
+- [Running Evals](../../02_using-codebolt/05e_eval-and-optimization/04_running-evals.md) — view evaluator output

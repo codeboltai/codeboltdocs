@@ -137,5 +137,5 @@ const updateResult = await codeboltMCP.executeTool(
 ```
 
 :::info
-This functionality is similar to the [rag API](/docs/api/ApiAccess/rag) and provides knowledge retrieval through MCP interface.
+This functionality is similar to the [rag API](../10_api-access/rag/index.md) and provides knowledge retrieval through MCP interface.
 ::: 

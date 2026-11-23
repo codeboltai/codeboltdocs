@@ -42,11 +42,11 @@ There are six ways to bring an agent into Codebolt, from lowest to highest autho
 
 | Path | What you write | Good for |
 |---|---|---|
-| **[Level 0 — Remix](./03_creation-levels/level-0-remix.md)** | A YAML file overriding an existing agent's prompt, model, or tools | Most use cases. Start here. |
-| **[Level 1 — Framework](./03_creation-levels/level-1-framework.md)** | A small TypeScript file using the Codebolt agent framework | Custom behaviour with batteries included |
-| **[Level 2 — codeboltjs](./03_creation-levels/level-2-codeboltjs.md)** | Code directly against the `codeboltjs` SDK | Non-standard loop shape |
-| **[Level 3 — Raw WebSocket](./03_creation-levels/level-3-raw-websocket.md)** | The wire protocol directly | Languages the SDK doesn't cover |
-| **[Flow — Visual Builder](./03_creation-levels/level-flow-visual.md)** | A drag-and-drop node graph in the Agent Flow editor | Prototyping, pipeline agents, non-engineer authoring |
+| **[Level 0 — Remix](./03_agent-types/level-3-remix.md)** | A YAML file overriding an existing agent's prompt, model, or tools | Most use cases. Start here. |
+| **[Level 1 — Framework](./03_agent-types/level-2-framework.md)** | A small TypeScript file using the Codebolt agent framework | Custom behaviour with batteries included |
+| **[Level 2 — codeboltjs](./03_agent-types/level-1-codeboltjs.md)** | Code directly against the `codeboltjs` SDK | Non-standard loop shape |
+| **[Level 3 — Raw WebSocket](./03_agent-types/level-0-raw-websocket.md)** | The wire protocol directly | Languages the SDK doesn't cover |
+| **[Flow — Visual Builder](./03_agent-types/level-4-flow-visual.md)** | A drag-and-drop node graph in the Agent Flow editor | Prototyping, pipeline agents, non-engineer authoring |
 | **[Third-Party Wrapping](./04_third-party-agents.md)** | An adapter around an existing external agent | Running Claude Code / Codex / Cursor etc. as a Codebolt agent |
 
 **The most important thing to know:** level 0 and level 1 cover the vast majority of real use cases. Level 2 is for people building infrastructure on top of Codebolt. Level 3 is for people writing Codebolt agents in Go, Rust, or Python. The visual flow builder is best for pipeline-style agents or rapid prototyping. Don't start higher than you need.
