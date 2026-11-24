@@ -23,6 +23,19 @@ Memory-focused evals treat **retrieval quality** and **context relevance** as th
 
 ---
 
+The examples below call the `/evals` HTTP API on a running Codebolt server. Define this helper once. It returns the JSON envelope from the controller.
+
+```js
+async function evalRequest(path, method = 'GET', body) {
+  const response = await fetch('http://localhost:2719/evals' + path, {
+    method, headers: { 'Content-Type': 'application/json' },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
+  if (!response.ok) throw new Error(await response.text());
+  return response.json();
+}
+```
+
 ## Evaluator types
 
 ### `expected-output`
@@ -37,9 +50,11 @@ Compare the agent's response against a reference answer. Match modes:
 | `semantic` | Response is semantically equivalent (embedding similarity) |
 
 ```typescript
-await codebolt.eval.createEvalTask({
+const { task } = await evalRequest('/tasks', 'POST', {
+  name: 'What database do we use for the knowledge graph?',
   subjectType: 'agent',
-  instructions: 'What database do we use for the knowledge graph?',
+  instruction: { type: 'text', textPrompt: 'What database do we use for the knowledge graph?' },
+  environment: { type: 'local' },
   evaluators: [{
     id: 'ev-kg-answer',
     name: 'KG answer check',
@@ -77,17 +92,13 @@ A separate judge agent evaluates the output against a rubric. Best for nuanced m
 
 ### `script`
 
-Run a shell script that exits 0 (pass) or non-zero (fail) and writes a score to stdout.
+The evaluator exposes the subject’s response in the `EVAL_OUTPUT` environment variable. Print a JSON object with a score from 0 to 100 and a reason.
 
-```typescript
-{
-  type: 'script',
-  script: `
-    RESPONSE="{{output}}"
-    if echo "$RESPONSE" | grep -q "Kuzu"; then echo "100"; exit 0; fi
-    echo "0"; exit 1
-  `
-}
+```js
+const scriptEvaluator = {
+  id: 'mentions-db', name: 'Mentions database', type: 'script', weight: 1,
+  script: `node -e 'const match = process.env.EVAL_OUTPUT.includes("Kuzu"); console.log(JSON.stringify({ score: match ? 100 : 0, reasoning: "Database name check" }))'`,
+};
 ```
 
 ### `deliberation`
@@ -111,10 +122,13 @@ The key is to write tasks that exercise specific retrieval paths, then check whe
 ### Test vector recall
 
 ```typescript
-await codebolt.eval.createEvalTask({
+await evalRequest('/tasks', 'POST', {
+  name: 'Summarise the decisions we made about the payment module in the last sprint.',
   subjectType: 'agent',
-  instructions: 'Summarise the decisions we made about the payment module in the last sprint.',
+  instruction: { type: 'text', textPrompt: 'Summarise the decisions we made about the payment module in the last sprint.' },
+  environment: { type: 'local' },
   evaluators: [{
+    id: 'recall-check', name: 'Recall check', weight: 1,
     type: 'agent-judge',
     judgeAgentId: 'memory-judge',
     judgePrompt: 'Did the answer reference specific decisions from memory? Score 0-100.'
@@ -125,10 +139,13 @@ await codebolt.eval.createEvalTask({
 ### Test knowledge graph recall
 
 ```typescript
-await codebolt.eval.createEvalTask({
+await evalRequest('/tasks', 'POST', {
+  name: 'Which functions call processPayment?',
   subjectType: 'agent',
-  instructions: 'Which functions call processPayment?',
+  instruction: { type: 'text', textPrompt: 'Which functions call processPayment?' },
+  environment: { type: 'local' },
   evaluators: [{
+    id: 'recall-check', name: 'Recall check', weight: 1,
     type: 'expected-output',
     expectedOutput: 'chargeStripe',
     matchMode: 'contains'
@@ -139,10 +156,13 @@ await codebolt.eval.createEvalTask({
 ### Test context rule injection
 
 ```typescript
-await codebolt.eval.createEvalTask({
+await evalRequest('/tasks', 'POST', {
+  name: 'Create a PR for the auth changes following our coding standards.',
   subjectType: 'agent',
-  instructions: 'Create a PR for the auth changes following our coding standards.',
+  instruction: { type: 'text', textPrompt: 'Create a PR for the auth changes following our coding standards.' },
+  environment: { type: 'local' },
   evaluators: [{
+    id: 'recall-check', name: 'Recall check', weight: 1,
     type: 'agent-judge',
     judgeAgentId: 'style-judge',
     judgePrompt: 'Did the PR description follow the style guide? Score 0-100.'
@@ -155,38 +175,20 @@ await codebolt.eval.createEvalTask({
 ## Running an eval suite
 
 ```typescript
-// Define subjects (agents to evaluate)
-const subject = await codebolt.eval.createEvalSubject({
-  type: 'agent',
-  name: 'memory-agent-v2',
-  config: { agentId: 'memory-agent', version: 'v2' }
+// Use the task ID returned by POST /evals/tasks and an installed agent’s ID.
+const { suite } = await evalRequest('/suites', 'POST', {
+  name: 'Memory recall', taskIds: [task.id],
 });
-
-// Create a suite
-const suite = await codebolt.eval.createEvalSuite({
-  subjectIds: [subject.id],
-  taskIds: ['recall-task-1', 'kg-task-2', 'rule-task-3']
+const { run } = await evalRequest('/runs', 'POST', {
+  suiteId: suite.id,
+  subjects: [{ type: 'agent', referenceId: agentId, name: 'Memory agent' }],
 });
+await evalRequest(`/runs/${run.id}/start`, 'POST');
 
-// Run it
-const run = await codebolt.eval.createEvalRun({ suiteId: suite.id });
-
-// Poll until complete
-let status = run.status;
-while (status === 'running') {
-  await new Promise(r => setTimeout(r, 5000));
-  const updated = await codebolt.eval.getEvalRun(run.id);
-  status = updated.status;
-}
-
-// Retrieve results
-const results = await codebolt.eval.getRunResults(run.id);
-for (const result of results) {
-  console.log(`Task ${result.taskId}: ${result.evaluatorResults.map(e => e.score).join(', ')}`);
-}
+// Run this again to check progress. Results belong to the run.
+const { run: latest } = await evalRequest(`/runs/${run.id}`);
+console.log(latest.status, latest.results);
 ```
-
----
 
 ## Optimization loop
 
@@ -194,7 +196,7 @@ Once you have eval tasks, the optimizer can automatically improve the agent's me
 
 ```typescript
 // Configure optimization on a task
-await codebolt.eval.updateEvalTask('recall-task-1', {
+await evalRequest(`/tasks/${task.id}`, 'PUT', {
   optimization: {
     enabled: true,
     optimizerType: 'agent',
@@ -231,40 +233,34 @@ For memory optimization, `config` is the most useful target — the optimizer ad
 ### Reading optimization history
 
 ```typescript
-const runs = await codebolt.eval.listOptimizationRuns();
-const run = runs[0];
-
-for (const iteration of run.iterations) {
-  console.log(`Iteration ${iteration.step}: score=${iteration.score}`);
-  console.log('Params:', iteration.params);
+const { run: current } = await evalRequest(`/runs/${run.id}`);
+for (const result of current.results) {
+  if (result.optimization) {
+    console.log(result.taskId, result.optimization.bestScore, result.optimization.iterations);
+  }
 }
-console.log('Best configuration:', run.currentBest);
 ```
-
----
 
 ## Evaluating action blocks directly
 
 The eval system also supports `action-block` as a subject type:
 
 ```typescript
-const abSubject = await codebolt.eval.createEvalSubject({
-  type: 'action-block',
-  name: 'memory-summarizer-v1',
-  config: { actionBlockId: 'memory-summarizer' }
+const { subject } = await evalRequest('/subjects', 'POST', {
+  type: 'action-block', referenceId: 'memory-summarizer', name: 'Memory summarizer',
 });
-
-await codebolt.eval.createEvalTask({
-  subjectType: 'action-block',
-  instructions: JSON.stringify({ memoryId: 'test-run-001' }),
-  evaluators: [{
-    type: 'script',
-    script: `RESULT="{{output}}"; if [ -n "$RESULT" ]; then echo "100"; else echo "0"; fi`
-  }]
+const { task: blockTask } = await evalRequest('/tasks', 'POST', {
+  name: 'Summarize a known memory', subjectType: 'action-block',
+  instruction: { type: 'text', textPrompt: JSON.stringify({ memoryId }) },
+  environment: { type: 'local' },
+  evaluators: [{ id: 'topic', name: 'Mentions the topic', type: 'expected-output',
+    weight: 1, expectedOutput: 'database', matchMode: 'contains' }],
 });
+const { run: blockRun } = await evalRequest('/runs', 'POST', {
+  taskId: blockTask.id, subjects: [subject],
+});
+await evalRequest(`/runs/${blockRun.id}/start`, 'POST');
 ```
-
----
 
 ## Viewing results in the UI
 

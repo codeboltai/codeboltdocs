@@ -73,7 +73,7 @@ import { codebolt } from './services/codebolt';
 
 // Tasks
 const result = await codebolt.tasks.search({ limit: 50 });
-console.log(result.tasks);
+console.log(result);
 
 // Projects
 const project = await codebolt.projects.getRoot();
@@ -83,13 +83,17 @@ const status = await codebolt.git.status();
 await codebolt.git.commit({ message: 'fix bug' });
 
 // Files
-const content = await codebolt.fileRead.readFile({ path: 'src/index.ts' });
+const content = await codebolt.fileRead.read({ path: 'src/index.ts' });
 
 // Agents
-const agents = await codebolt.agents.getInstalledAgents();
+const agents = await codebolt.agents.getInstalled();
 
 // Knowledge
-const collections = await codebolt.knowledge.getCollections();
+const collectionResponse: unknown = await codebolt.knowledge.listCollections();
+if (collectionResponse && typeof collectionResponse === 'object' && 'data' in collectionResponse
+    && Array.isArray(collectionResponse.data)) {
+  console.log(collectionResponse.data);
+}
 ```
 
 Every module is lazily initialized — `codebolt.git` only allocates resources when you first access it.
@@ -199,8 +203,10 @@ export function TaskList() {
 
   useEffect(() => {
     // Load tasks via HTTP
-    client.tasks.search({ limit: 50 }).then((result) => {
-      setTasks(result.tasks ?? []);
+    client.tasks.search({ limit: 50 }).then((result: unknown) => {
+      if (result && typeof result === 'object' && 'data' in result && Array.isArray(result.data)) {
+        setTasks(result.data);
+      }
     });
 
     // Live updates via WebSocket
@@ -308,7 +314,7 @@ The Client SDK gives you access to **72 HTTP API modules** and **34 WebSocket mo
 ## Where to next
 
 - **Full SDK reference** — see [Client SDK](./02_client-sdk.md) for all 72 HTTP modules and 34 WebSocket modules.
-- **Drop-in chat components** — see [Chat Widget](./04_chat-widget.md) for ready-made React chat components from `@codebolt/ui`.
+- **Drop-in chat components** — see [Chat Widget](./04_chat-widget.md) for ready-made React chat components from `@codebolt/chat-widget`.
 - **Embed UI inside the existing app** — see [Dynamic Panels](./05_dynamic-panels.md) for a different pattern where agents or plugins open panels inside Codebolt.
 - **Study existing UIs** — see [Existing UIs](./03_existing-uis.md) to understand how the desktop, web, and terminal clients are built.
 

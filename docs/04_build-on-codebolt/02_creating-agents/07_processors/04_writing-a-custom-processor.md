@@ -1,18 +1,18 @@
 ---
 sidebar_position: 4
 title: Writing a Custom Processor
-description: The current framework does not use the older modify(messages, ctx) shape. Custom processors should match the real interfaces from @codebolt/types/agent.
+description: Change the text your agent sends to the model and test the result in Chat.
 ---
 
 # Writing a Custom Processor
 
-The current framework does not use the older `modify(messages, ctx)` shape. Custom processors should match the real interfaces from `@codebolt/types/agent`.
+A processor lets you run your code at a particular point in an agent’s request. This example replaces email addresses in plain-text messages with `[redacted-email]` before the model sees them.
 
-Choose the slot that matches the behavior. A pre-inference processor can adjust the prompt immediately before the model call.
+Start with a [working custom agent](../02_quickstart.md). You’ll add one file and register the processor in the agent’s existing handler file.
 
-## Example: redact emails before inference
+## Write the processor {#example-redact-emails-before-inference}
 
-This processor runs after prompt assembly and before the LLM call.
+Create `src/processors/redact-emails.ts` inside your agent folder. The `modify` method below returns a copy of the prompt with the email addresses replaced.
 
 ```ts
 import type {
@@ -55,31 +55,46 @@ export class RedactEmailsProcessor implements PreInferenceProcessor {
 }
 ```
 
-## Wire it into an agent
+## Register it with your agent {#wire-it-into-an-agent}
+
+In `src/index.ts`, import the processor next to your existing imports.
 
 ```ts
-import { Agent } from "@codebolt/agent/unified";
-import { RedactEmailsProcessor } from "./processors/redact-emails";
+import { RedactEmailsProcessor } from './processors/redact-emails';
+```
 
-const agent = new Agent({
-  instructions: "Help with engineering tasks.",
+Add `preInferenceProcessors` to the configuration you pass to `createAgent`. Keep the instructions, tools, and message handler you already use.
+
+```ts
+const agent = createAgent({
+  systemPrompt,
   processors: {
     preInferenceProcessors: [new RedactEmailsProcessor()],
   },
 });
 ```
 
-The constructor merges the custom pre-inference processor into the pipeline. The event queue can inject events in the same slot.
+## Try it in Chat
+
+Run `npm run build` from the agent folder. In a new Chat tab, select your agent and send **Repeat this line exactly: Contact dev@example.com**. Look for `Contact [redacted-email]` in the reply. The processor changes the text sent to the model. The message you typed still appears in Chat.
 
 ## If you need a custom message modifier
 
-The constructor merges message modifiers by identity. Add your modifier alongside the defaults with this configuration.
+A message modifier transforms the prompt during assembly. The `RedactEmailsProcessor` above already implements the `modify(request, createdMessage)` method required by `MessageModifier`. To apply that transformation during prompt assembly, register it in the message modifier slot.
 
 ```ts
-processors: {
-  messageModifiers: [new MyModifier()],
-}
+import { createAgent } from '@codebolt/agent/unified';
+import { RedactEmailsProcessor } from './processors/redact-emails';
+
+const agent = createAgent({
+  systemPrompt: 'Help with engineering tasks.',
+  processors: {
+    messageModifiers: [new RedactEmailsProcessor()],
+  },
+});
 ```
+
+To test the modifier directly, pass its `modify` method a processed message whose transcript contains `Contact dev@example.com`. Check that the returned transcript contains `Contact [redacted-email]` and that the original transcript still contains the address.
 
 Set `includeDefaultModifiers: false` to provide the entire standard list yourself. The event queue remains controlled by `eventQueue`.
 

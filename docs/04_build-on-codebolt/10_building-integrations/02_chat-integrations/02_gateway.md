@@ -69,7 +69,7 @@ plugin.gateway.routeMessage({
 
 ```ts
 interface GatewayMessage {
-  source: 'channel' | 'hook' | 'webhook' | 'calendar';
+  source: 'channel';
   sourceId: string;              // plugin ID or webhook ID
   threadStrategy: ThreadStrategy;
   threadId?: string;             // set only when strategy is 'existing'
@@ -78,7 +78,7 @@ interface GatewayMessage {
   userId?: string;               // required for per-user strategy
   externalThreadId?: string;     // required for per-conversation strategy
   metadata?: Record<string, any>;
-  replyTo: {
+  replyTo?: {
     channelId: string;
     externalThreadId?: string;
     userId?: string;
@@ -90,18 +90,12 @@ interface GatewayMessage {
 
 ## RoutingResult
 
-Every `routeMessage()` call returns a `RoutingResult`:
+Read the routing outcome from `data` after checking the response.
 
 ```ts
-interface RoutingResult {
-  success: boolean;
-  action: 'routed-to-running' | 'spawned-new' | 'queued' | 'failed';
-  threadId: string;
-  agentId?: string;
-  instanceId?: string;
-  error?: string;
-  timestamp: string;
-}
+const result = await plugin.gateway.routeMessage(message);
+if (!result.success || !result.data) throw new Error(result.error || 'Routing failed');
+const { action, threadId } = result.data;
 ```
 
 - `spawned-new` — a new agent process was started for this thread
@@ -113,8 +107,7 @@ interface RoutingResult {
 Plugins register their channels with the Gateway so they appear in the Routing Rules UI:
 
 ```ts
-plugin.gateway.registerChannel({
-  channelId: 'my-discord-server',
+const registration = await plugin.gateway.registerChannel({
   name: 'Discord — My Server',
   platform: 'discord',
   agentId: config.agentId,
@@ -122,7 +115,7 @@ plugin.gateway.registerChannel({
 });
 ```
 
-Registration persists to `.codebolt/channels.json`. On disconnect, call `plugin.gateway.unregisterChannel(channelId)` to mark it as disconnected.
+Read the assigned channel ID from `registration.data?.channelId` after checking `registration.success`. Registration persists to `.codebolt/channels.json`. On disconnect, call `plugin.gateway.unregisterChannel()` to mark it as disconnected.
 
 ## Response routing
 
@@ -132,18 +125,13 @@ Listeners expire after 30 minutes of inactivity. The TTL resets each time a mess
 
 ## Proactive messages
 
-An agent can send a message to a channel without waiting for user input:
+Handle a proactive message in the channel plugin with `onMessageToChannel`. Forward the supplied target ID and text through the platform’s client.
 
 ```ts
-// In an agent handler
-await codebolt.channel.send({
-  channelId: 'registered-channel-uuid',
-  targetId: 'discord:channel-123',
-  text: 'Build finished successfully.',
+plugin.gateway.onMessageToChannel(({ targetId, text }) => {
+  platformApi.sendMessage(targetId, text);
 });
 ```
-
-The server looks up which plugin owns the channel and delivers the message via `gateway.messageToChannel`.
 
 ## See also
 

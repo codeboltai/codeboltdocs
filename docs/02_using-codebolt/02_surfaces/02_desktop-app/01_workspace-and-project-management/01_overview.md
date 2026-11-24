@@ -74,3 +74,5 @@ If the CLI is installed, Codebolt can open a folder passed from the command line
 - [Application Navigation](../02_application-navigation/01_panels.md)
 - [Settings](../Settings/01_overview.md)
 - [Environments](../03c_panels/04d_agent-orchestrations/03_environments.md)
+
+To reuse a project folder as the starting point for other projects, see [Project templates](../../../../04_build-on-codebolt/05b_templates/overview.md).

@@ -22,36 +22,45 @@ The Codebolt server exposes a full REST API. External systems can call it direct
 ### Start an agent
 
 ```bash
-curl -X POST http://localhost:2719/api/agent/startAgent \
+curl -X POST http://localhost:2719/agent/startAgent \
   -H "Content-Type: application/json" \
   -d '{
-    "agentId": "code-reviewer",
-    "task": "Review the latest PR"
+    "agentName": "code-reviewer"
   }'
+```
+
+### Send a prompt to an agent
+
+For a Chat request, use Codebolt Client CLI with the installed agent’s ID:
+
+```bash
+codebolt-client -p 2719 chat send --agent "$AGENT_ID" --message "Review the latest changes"
 ```
 
 ### Search tasks
 
 ```bash
-curl -X POST http://localhost:2719/api/tasks/search \
-  -H "Content-Type: application/json" \
-  -d '{"status": "pending", "limit": 10}'
+curl 'http://localhost:2719/tasks/search?status=pending&limit=10'
 ```
 
-### Get project info
+### Get project info and Git status
 
 ```bash
-curl http://localhost:2719/api/projects/root
+curl http://localhost:2719/project/
+curl -X POST http://localhost:2719/git/status \
+  -H 'Content-Type: application/json' \
+  -d '{"projectPath":"/absolute/path/to/project"}'
 ```
 
-### Git operations
+To commit selected files, send their paths and a message with the project path.
 
 ```bash
-curl http://localhost:2719/api/git/status
-curl -X POST http://localhost:2719/api/git/commit \
-  -H "Content-Type: application/json" \
-  -d '{"message": "automated commit"}'
+curl -X POST http://localhost:2719/git/commit \
+  -H 'Content-Type: application/json' \
+  -d '{"projectPath":"/absolute/path/to/project","filePaths":["README.md"],"message":"Update README"}'
 ```
+
+To inspect the open project, use the Client SDK’s `projects.getRoot()`.
 
 ## Approach: Client SDK Wrapper
 
@@ -66,26 +75,30 @@ const client = new CodeBoltClient({ host: 'localhost', port: 2719 });
 
 app.use(express.json());
 
-// Custom auth middleware
+const gatewayKey = process.env.API_KEY;
+if (!gatewayKey?.trim()) throw new Error('Set API_KEY before starting the gateway');
+
+// Require the configured credential on every request.
 app.use((req, res, next) => {
   const apiKey = req.headers['x-api-key'];
-  if (apiKey !== process.env.API_KEY) {
+  if (!apiKey || apiKey !== gatewayKey) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   next();
 });
 
-// Start an agent run
+// Start the named agent
 app.post('/api/run', async (req, res) => {
-  try {
-    const result = await client.agents.startAgent({
-      agentId: req.body.agentId,
-      task: req.body.task,
-    });
-    res.json({ success: true, result });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  const { agentName } = req.body ?? {};
+  if (typeof agentName !== 'string' || !agentName.trim()) {
+    return res.status(400).json({ error: 'agentName is required' });
   }
+  const upstream = await fetch('http://localhost:2719/agent/startAgent', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ agentName }),
+  });
+  res.status(upstream.status).send(await upstream.text());
 });
 
 // Get tasks

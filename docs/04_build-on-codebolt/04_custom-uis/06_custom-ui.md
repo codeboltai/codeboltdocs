@@ -54,10 +54,10 @@ const status = await codebolt.git.status();
 await codebolt.git.commit({ message: 'fix bug' });
 
 // Files
-const content = await codebolt.fileRead.readFile({ path: 'src/index.ts' });
+const content = await codebolt.fileRead.read({ path: 'src/index.ts' });
 
 // Agents
-const agents = await codebolt.agents.getInstalledAgents();
+const agents = await codebolt.agents.getInstalled();
 
 // Projects
 const project = await codebolt.projects.getRoot();

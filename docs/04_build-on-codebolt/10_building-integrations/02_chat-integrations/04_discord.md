@@ -100,13 +100,14 @@ export async function connect(plugin, config) {
   });
 
   // Register the channel with the gateway
-  await plugin.gateway.registerChannel({
-    channelId: 'my-discord',
+  const registration = await plugin.gateway.registerChannel({
     name: 'Discord',
     platform: 'discord',
     agentId: config.agentId,
     threadStrategy: config.threadStrategy ?? 'per-user',
   });
+  const channelId = registration.data?.channelId;
+  if (!registration.success || !channelId) throw new Error(registration.error || 'Channel registration failed');
 
   // Forward incoming messages
   client.on('messageCreate', async (message) => {
@@ -124,7 +125,7 @@ export async function connect(plugin, config) {
       externalThreadId: message.channelId,
       text: message.content.replace(/<@!?\d+>/g, '').trim(),
       replyTo: {
-        channelId: 'my-discord',
+        channelId,
         externalThreadId: message.channelId,
         userId: message.author.id,
       },
@@ -133,7 +134,8 @@ export async function connect(plugin, config) {
 
   // Send agent replies back to Discord
   plugin.gateway.onReply(async (reply) => {
-    const channel = await client.channels.fetch(reply.replyTo.externalThreadId!);
+    if (!reply.externalThreadId) return;
+    const channel = await client.channels.fetch(reply.externalThreadId);
     if (channel?.isTextBased()) {
       // Chunk at 2000 chars
       const chunks = reply.text.match(/.{1,2000}/gs) ?? [reply.text];

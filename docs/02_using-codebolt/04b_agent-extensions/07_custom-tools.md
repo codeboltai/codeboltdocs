@@ -78,7 +78,7 @@ Agent-specific tools are useful for:
 - typed wrappers around local agent logic
 - tools that depend on the agent's own memory, processors, or runtime state
 
-In framework agents, use the `Tool` class or `createTool` helper with schema validation. See [Framework Agents -> Creating custom tools](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md#creating-custom-tools).
+In framework agents, use the `Tool` class or `createTool` helper with schema validation. See [Write a custom agent tool](../../04_build-on-codebolt/02_creating-agents/12_custom-agent-tools.md).
 
 Keep agent-specific tools small. If multiple agents need the same action, promote it to a reusable custom tool or an MCP server.
 
@@ -132,7 +132,7 @@ Guardrails can still block a tool even when the agent allowlist permits it. Comm
 
 - To create a reusable custom tool, see [Creating Custom Tools](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/04_custom-tools.md).
 - To create a custom MCP server, see [Build Your First MCP Server](../../03_guides/05_mcp-and-tools/build-your-first-mcp-server.md).
-- To define private tools inside a framework agent, see [Framework Agents](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md#creating-custom-tools).
+- To define private tools inside a framework agent, see [Write a custom agent tool](../../04_build-on-codebolt/02_creating-agents/12_custom-agent-tools.md).
 - For built-in tool schemas and signatures, see [Reference -> Built-in Tools](../../05_reference/01_overview.md).
 
 ## See also
@@ -140,5 +140,5 @@ Guardrails can still block a tool even when the agent allowlist permits it. Comm
 - [MCP Server](./06_mcp-server.md)
 - [Capabilities](./02_capabilities.md)
 - [Creating Custom Tools](../../04_build-on-codebolt/03_agent-extensions/04_mcp-tools/04_custom-tools.md)
-- [Framework Agents](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md)
+- [Write a custom agent tool](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md)
 - [Reference -> Built-in Tools](../../05_reference/01_overview.md)

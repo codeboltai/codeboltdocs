@@ -294,6 +294,7 @@ const sidebars = {
     doc('Developer Overview', `${build}/overview`),
     group('Build Agents', [
       doc('Create Your First Agent', `${create}/quickstart`),
+      doc('Write a Custom Agent Tool', `${create}/custom-agent-tools`),
       doc('How Custom Agents Work', `${create}/overview`),
       group('Agent Types', [
         doc('Remix an Agent', `${create}/agent-types/level-3-remix`),
@@ -301,6 +302,7 @@ const sidebars = {
         ref('Build Visually with AgentFlow', visual),
         doc('Build with CodeBoltJS', `${create}/agent-types/level-1-codeboltjs`),
         doc('Use the WebSocket Protocol', `${create}/agent-types/level-0-raw-websocket`),
+        doc('Register a Remote Agent', `${create}/remote-agent`),
         ref('Connect an External Agent', `${create}/third-party-agents`),
       ]),
       group('Runtime & Configuration', [
@@ -323,10 +325,10 @@ const sidebars = {
         doc('Auto-Optimize Agents', `${create}/auto-optimize-agents`),
         doc('Publish an Agent', `${create}/publishing`),
       ]),
-      group('Agent Templates', [
-        doc('Agent Templates Overview', `${build}/05b_templates/overview`),
-        remaining(`${developerDocs}/05b_templates`),
-      ]),
+    ]),
+    group('Project Templates', [
+      doc('Project Templates Overview', `${build}/05b_templates/overview`),
+      remaining(`${developerDocs}/05b_templates`),
     ]),
     group('Visual Agent Builder', [
       doc('AgentFlow Overview', visual),

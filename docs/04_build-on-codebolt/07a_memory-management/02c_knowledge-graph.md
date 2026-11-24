@@ -196,8 +196,8 @@ The Knowledge Graph emits 20 event types for real-time UI updates:
 |--------|----------|-------------|
 | `POST` | `/kg/instance-templates` | Create a template |
 | `GET` | `/kg/instance-templates` | List all templates |
-| `PUT` | `/kg/instance-templates` | Update a template |
-| `DELETE` | `/kg/instance-templates` | Delete a template |
+| `PUT` | `/kg/instance-templates/:id` | Update a template |
+| `DELETE` | `/kg/instance-templates/:id` | Delete a template |
 
 ### Instances
 
@@ -205,7 +205,7 @@ The Knowledge Graph emits 20 event types for real-time UI updates:
 |--------|----------|-------------|
 | `POST` | `/kg/instances` | Create an instance |
 | `GET` | `/kg/instances` | List all instances |
-| `DELETE` | `/kg/instances` | Delete an instance |
+| `DELETE` | `/kg/instances/:id` | Delete an instance |
 
 ### Records (Nodes)
 
@@ -231,8 +231,8 @@ The Knowledge Graph emits 20 event types for real-time UI updates:
 |--------|----------|-------------|
 | `POST` | `/kg/view-templates` | Create a view template |
 | `GET` | `/kg/view-templates` | List view templates |
-| `PUT` | `/kg/view-templates` | Update a view template |
-| `DELETE` | `/kg/view-templates` | Delete a view template |
+| `PUT` | `/kg/view-templates/:id` | Update a view template |
+| `DELETE` | `/kg/view-templates/:id` | Delete a view template |
 
 ### Views
 
@@ -240,7 +240,7 @@ The Knowledge Graph emits 20 event types for real-time UI updates:
 |--------|----------|-------------|
 | `POST` | `/kg/views` | Create a view |
 | `GET` | `/kg/views` | List views |
-| `DELETE` | `/kg/views` | Delete a view |
+| `DELETE` | `/kg/views/:id` | Delete a view |
 | `GET` | `/kg/views/:id/execute` | Execute a view query |
 
 ### Graph Exploration

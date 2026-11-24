@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Level 3 — Remix Agents
+title: Level 0 — Remix
 description: "The lightest possible custom agent: take an existing one, override a few fields, give it a new name. No code. No dependencies. Pure config."
 ---
 
@@ -10,21 +10,25 @@ The lightest possible custom agent: take an existing one, override a few fields,
 
 If you can get what you want this way, do it this way. Remix agents inherit bug fixes and improvements from their parent every time the parent is updated — code-based agents don't.
 
+## Create and test a remix in Desktop
+
+### Create the remix {#step-1--create-the-remix}
+
+In the Chat agent picker, select **Create Agent → Remix Agent**, choose a base agent under **Remix From**, name it `my-reviewer`, and select **Create**.
+
+### Edit the instructions and check the reply {#edit-remix}
+
+1. Open `.codebolt/agents/remix/my-reviewer.md` in the project. The block between the first two `---` lines identifies the remix and its parent. The text **below the second line** contains its instructions.
+2. Replace that body text with the following instruction and save the file.
+
+   > When reviewing a code snippet, start your response with “Review note”. Explain one possible bug in one sentence.
+
+3. Open a new Chat tab, select **my-reviewer**, and send: **Review this JavaScript function: `function firstName(user) { return user.name.split(" ")[0]; }`**
+4. Look for a reply beginning with **Review note** that identifies a possible failure, such as a missing `name`. To try another edit, change “Review note” to “Finding”, save, and repeat in a new Chat tab.
+
 ## What you can override
 
-A remix can change any of the following:
-
-| Field | What it does |
-|---|---|
-| `system_prompt` | The agent's guiding prompt. The most common override. |
-| `model` | Use a different model for this remix. |
-| `tools.allow` / `tools.deny` | Constrain (or expand) the tool allowlist. |
-| `processors` | Add or remove processors from the pipeline. |
-| `default_temperature`, `max_tokens`, etc. | LLM parameters. |
-| `metadata` | Name, description, tags, marketplace fields. |
-| `limits` | Per-run budgets (token, time, tool-call count). |
-
-You **cannot** change the loop structure, add new phases, or change what the agent returns. For any of those, graduate to [level 1](./level-2-framework.md).
+The Markdown body contains the instructions added by the remix. In the YAML frontmatter, `name` and `description` identify the remix, `remixedFromId` identifies its parent, and `tools` accepts a string or list of tool names. Use the tool identifiers available in your project. For custom processors or tool implementations, use the [agent framework](./level-2-framework.md).
 
 ## The manifest
 
@@ -34,14 +38,13 @@ Remix agents are stored as markdown files with YAML frontmatter in `.codebolt/ag
 # .codebolt/agents/remix/my-reviewer.md
 ---
 name: my-reviewer
-description: A stricter code reviewer with write tools disabled.
+description: Review code for runtime errors.
 remixedFromId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
 remixedFromTitle: Act
 model: claude-sonnet-4-6
 tools:
   - codebolt_fs.read_file
   - codebolt_fs.search
-  - codebolt_codebase.*
   - codebolt_code.analyze_code
 version: 1.0.0
 type: remix
@@ -56,13 +59,7 @@ The YAML frontmatter holds configuration. The markdown body (after `---`) holds 
 
 ## How remix resolves at runtime
 
-When the agent runs, the server:
-
-1. Loads `generalist` (the parent).
-2. Applies the remix block on top: deep-merges `tools`, replaces scalar fields.
-3. Spawns a process with the merged manifest.
-
-There's no forked code. A bug fix to the parent's tool handling, an improvement to its default processors, a new safety feature — all of these automatically apply to your remix the next time the server loads it.
+The loader reads the frontmatter and Markdown body. It maps `tools` to required tools, preserves `remixedFromId`, and passes the body as custom instructions. The parent is the agent you chose under **Remix From**.
 
 ## Finding a parent to remix
 
@@ -96,11 +93,9 @@ The original has all tools, your remix has only a safe subset. Used for reviewer
 ### Domain specialist
 Same base agent, but with a system prompt that injects domain context: your company's coding conventions, your API style, your deployment rules. Often 10 lines of prompt that turn a generalist into a specialist for your codebase.
 
-### Fast variant
-Same as the parent but with a cheaper/faster model and tighter token limits. Good for high-volume use.
+### Review checklist
 
-### Strict variant
-Add extra processors (e.g. a `LoopDetectionModifier` with a lower threshold, a custom validation processor) without changing the rest.
+Give the parent agent a repeatable review task by listing the checks in the Markdown body and specifying how to report the findings.
 
 ## When to graduate to level 1
 

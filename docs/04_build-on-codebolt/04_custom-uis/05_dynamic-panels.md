@@ -25,17 +25,13 @@ Dynamic panels are driven by **agents** or **plugins** — they open a panel, se
 ## Panel Interface
 
 ```typescript
-interface DynamicPanelOptions {
-  panelId: string;              // Unique identifier
-  title: string;                // Panel title bar text
-  html: string;                 // HTML content to render
-  position?: 'left' | 'right' | 'bottom' | 'center';  // default: 'right'
-  width?: number;               // Panel width
-  height?: number;              // Panel height
-  waitForResponse?: boolean;    // Block until user responds
-  timeout?: number;             // Timeout for waitForResponse (ms)
+interface DynamicPanelOpenOptions {
+  waitForResponse?: boolean;
+  timeout?: number;
 }
 ```
+
+Pass the panel ID, title, and HTML as the first three arguments to `open`.
 
 ## Supported Actions
 
@@ -52,54 +48,19 @@ interface DynamicPanelOptions {
 Agents use the `codebolt.dynamicPanel` API:
 
 ```typescript
-// Open a panel
-await codebolt.dynamicPanel.open({
-  panelId: 'my-review-panel',
-  title: 'Code Review',
-  html: '<div id="review">Loading...</div>',
-  position: 'right',
-});
+const panelId = 'my-review-panel';
+await codebolt.dynamicPanel.open(panelId, 'Code Review', '<p>Loading…</p>');
+await codebolt.dynamicPanel.update(panelId, '<p>Review complete.</p>');
+codebolt.dynamicPanel.onMessage(panelId, data => console.log(data));
 
-// Update content
-codebolt.dynamicPanel.update({
-  panelId: 'my-review-panel',
-  html: '<div id="review"><h2>3 issues found</h2>...</div>',
-});
-
-// Listen for user interactions
-codebolt.dynamicPanel.onMessage('my-review-panel', (msg) => {
-  if (msg.type === 'approve') {
-    // User approved the review
-  }
-});
-
-// Close when done
-codebolt.dynamicPanel.close('my-review-panel');
+// When the review is finished:
+codebolt.dynamicPanel.offMessage(panelId);
+await codebolt.dynamicPanel.close(panelId);
 ```
 
 ### Request/Response Pattern
 
-Use `waitForResponse` to block the agent until the user interacts:
-
-```typescript
-const response = await codebolt.dynamicPanel.open({
-  panelId: 'confirm-deploy',
-  title: 'Confirm Deployment',
-  html: `
-    <div>
-      <p>Deploy to production?</p>
-      <button onclick="respond({ type: 'confirm' })">Yes</button>
-      <button onclick="respond({ type: 'cancel' })">No</button>
-    </div>
-  `,
-  waitForResponse: true,
-  timeout: 30000,
-});
-
-if (response?.type === 'confirm') {
-  // proceed with deployment
-}
-```
+For a panel that submits a response, pass `{ waitForResponse: true, timeout: 30000 }` as the fourth argument to `open`. Check the returned `success` flag and read the submitted data from `response.data?.data`.
 
 ## From a Plugin
 

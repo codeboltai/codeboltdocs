@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: Level 0 — Raw WebSocket
+title: Level 3 — Raw WebSocket
 description: Speak to Codebolt over WebSocket without @codebolt/codeboltjs. This is the escape hatch when your agent must run outside the JS SDK.
 ---
 
@@ -39,11 +39,23 @@ From the code in `remoteexecutor/updatedAgentServer`, provider clients, and tran
 - Registration messages such as `register` and acknowledgements such as `registered` are part of the current transport.
 - Some server paths auto-register a connection from URL/query parameters during connection establishment.
 
-Representative shapes from the repo today:
+For a Node.js transport using the `ws` package, build the connection URL from the launcher context. Give each connection a fresh ID and carry the supplied routing fields into the handshake.
 
-```text
-ws://localhost:${SOCKET_PORT}/codebolt?agentId=${agentId}&parentId=${parentId}
+```js
+import WebSocket from 'ws';
+import { randomUUID } from 'node:crypto';
+
+const env = process.env;
+const url = new URL(`ws://${env.CODEBOLT_SERVER_URL || 'localhost'}:${env.SOCKET_PORT || '12345'}/codebolt`);
+url.searchParams.set('id', randomUUID());
+for (const key of ['agentId', 'instanceId', 'parentId', 'parentAgentInstanceId', 'agentTask', 'threadToken', 'threadId']) {
+  if (env[key]) url.searchParams.set(key, env[key]);
+}
+if (env.Is_Dev) url.searchParams.set('dev', 'true');
+const socket = new WebSocket(url);
 ```
+
+Example registration frames from clients that use explicit registration:
 
 ```json
 {
@@ -76,7 +88,7 @@ read env:
   CODEBOLT_SERVER_URL (if provided)
 
 connect to:
-  ws://<server>:<port>/codebolt?agentId=<agentId>&parentId=<parentId>
+  the URL constructed above, including the connection ID and launcher context
 
 send a register message if your host expects it
 wait until the socket is registered/ready

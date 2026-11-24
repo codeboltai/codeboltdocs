@@ -79,13 +79,14 @@ export async function connect(plugin, config) {
   const bot = new Bot(config.botToken);
   const me = await bot.api.getMe();
 
-  await plugin.gateway.registerChannel({
-    channelId: 'my-telegram',
+  const registration = await plugin.gateway.registerChannel({
     name: 'Telegram',
     platform: 'telegram',
     agentId: config.agentId,
     threadStrategy: config.threadStrategy ?? 'per-conversation',
   });
+  const channelId = registration.data?.channelId;
+  if (!registration.success || !channelId) throw new Error(registration.error || 'Channel registration failed');
 
   bot.on('message:text', async (ctx) => {
     const isGroup = ctx.chat.type !== 'private';
@@ -108,7 +109,7 @@ export async function connect(plugin, config) {
         externalMessageId: String(ctx.message.message_id),
       },
       replyTo: {
-        channelId: 'my-telegram',
+        channelId,
         externalThreadId: String(ctx.chat.id),
         userId: String(ctx.from.id),
       },
@@ -116,7 +117,8 @@ export async function connect(plugin, config) {
   });
 
   plugin.gateway.onReply(async (reply) => {
-    const chatId = Number(reply.replyTo.externalThreadId);
+    if (!reply.externalThreadId) return;
+    const chatId = Number(reply.externalThreadId);
     try {
       await bot.api.sendMessage(chatId, reply.text, { parse_mode: 'HTML' });
     } catch {

@@ -1,46 +1,32 @@
 ---
 sidebar_position: 2
-title: Level 2 — Using Agent Framework
+title: Level 1 — Framework
 description: Write a code-based agent on top of @codebolt/agent
 ---
 
 # Level 1 — Framework
 
-Write a code-based agent on top of `@codebolt/agent`. In practice, level 1 today means the unified API in `@codebolt/agent/unified` plus reusable modifiers and processors from `@codebolt/agent/processor-pieces`.
+Use the Codebolt Agent Framework when you want to write your own instructions, tools, or message handling. The framework sends requests to the model, runs the tools it asks for, and passes the results back for the next turn.
 
-This is the default choice for real custom agents. You write TypeScript and customize the prompt and processor pipeline, while the framework handles the prompt -> LLM -> tool execution -> follow-up loop.
+If you haven’t built an agent yet, follow [Create your first custom agent](../02_quickstart.md) to get one running in Chat.
 
-## When level 1 is the right choice
+<span id="creating-custom-tools" />
+<span id="when-level-1-is-the-right-choice" />
 
-- You need custom code, not just a prompt remix.
-- You want to add, remove, or reorder context modifiers and processors.
-- You need loop detection, compaction, or tool-call hooks.
-- You want a normal Codebolt agent loop without hand-writing the whole thing.
-- [Level 0](./level-3-remix.md) is too limited, but [level 2](./level-1-codeboltjs.md) would be unnecessary control.
+## Choose what to customize
 
-If you need complete ownership of the loop and runtime wiring, skip to [level 2](./level-1-codeboltjs.md).
+| I want my agent to… | What to edit |
+| --- | --- |
+| Answer in a particular style or take on a role | Set `systemPrompt` in `src/index.ts`. [Change the agent’s instructions](../02_quickstart.md#edit-typescript). |
+| Perform an operation I write | Define a function as a tool and add it to `tools`. Your agent can call it alongside its available Codebolt tools. [Write and test a custom tool](../12_custom-agent-tools.md). |
+| Change the text the model receives | Add a message modifier while assembling the prompt, or a pre-inference processor just before the model call. [Write a processor and choose when it runs](../07_processors/04_writing-a-custom-processor.md). |
 
-## What the framework actually gives you
+<span id="what-the-framework-actually-gives-you" />
+<span id="the-normal-entry-point" />
 
-At the high level, `Agent.run()` does four things:
+## How a Chat message reaches your agent
 
-1. Builds the initial prompt with `InitialPromptGenerator`.
-2. Runs an LLM step with `AgentStep`.
-3. Executes tool calls and builds the next prompt with `ResponseExecutor`.
-4. Repeats until the run completes or `maxTurns` is hit.
-
-Optional runtime features in the current implementation:
-
-- Default message modifiers, merged with your custom modifiers.
-- Tool refresh when discovered or local tools are in use.
-- Per-run loop detection, enabled by default.
-- Prompt hydration from the server’s compacted thread context when available.
-
-The normal entry point registers a `codebolt.onMessage(...)` handler and calls `agent.run(...)` from it.
-
-## The normal entry point
-
-The `act-updated` sample uses `createAgent()` to set up the loop and calls `run()` inside `codebolt.onMessage()`.
+In `src/index.ts`, `createAgent()` configures your agent once. Each time someone sends it a Chat message, the handler passes the request to `agent.run()` and returns the reply. Here’s the pattern used by the `act-updated` sample.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
@@ -62,29 +48,11 @@ codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
 });
 ```
 
-`createAgent()` builds an `Agent` instance with the default pipeline and maps `systemPrompt` to `instructions` when needed.
-
-The [default message pipeline](../07_processors/03_built-in-processors.md#default-agent-message-pipeline) includes these modifiers:
-
-- `ChatHistoryMessageModifier`
-- `EnvironmentContextModifier`
-- `DirectoryContextModifier`
-- `IdeContextModifier`
-- `CoreSystemPromptModifier`
-- `ToolInjectionModifier`
-- `AtFileProcessorModifier`
+During a run, the framework prepares the prompt, calls the model, and executes any requested tools. It carries tool results into the next turn until the agent finishes or reaches its turn limit. The [built-in processors](../07_processors/03_built-in-processors.md#default-agent-message-pipeline) supply context such as chat history and open files.
 
 ## Customizing the pipeline
 
-`Agent` configuration is centered on `instructions` plus optional `context`, `allowedTools`, `enableLogging`, `maxTurns`, `eventQueue`, `loopDetectionService`, and `processors`.
-
-The real extension points live in `processors`:
-
-- `messageModifiers`
-- `preInferenceProcessors`
-- `postInferenceProcessors`
-- `preToolCallProcessors`
-- `postToolCallProcessors`
+To add a single modifier, register it in `processors.messageModifiers` alongside the defaults. For logic that should run immediately before or after a model call or tool call, choose the corresponding [processor type](../07_processors/02_processor-types.md).
 
 This variant supplies a smaller message pipeline.
 
@@ -288,38 +256,6 @@ const agent = new Agent({
 ```
 
 In this custom pipeline, events enter the prompt during initial assembly and after tool calls.
-
-## Creating custom tools
-
-Use the `Tool` class or `createTool` helper to define tools with Zod schema validation:
-
-```ts
-import { Tool, createTool } from '@codebolt/agent/unified';
-import { z } from 'zod';
-
-const myTool = createTool({
-  id: 'analyze-file',
-  description: 'Analyze a file and return a summary',
-  inputSchema: z.object({
-    filePath: z.string().describe('Path to the file'),
-    detailed: z.boolean().optional().describe('Include detailed analysis'),
-  }),
-  outputSchema: z.object({
-    summary: z.string(),
-    lineCount: z.number(),
-  }),
-  execute: async ({ input }) => {
-    // Your tool logic here
-    return { summary: 'File analysis complete', lineCount: 42 };
-  },
-});
-```
-
-The `Tool` class:
-- Validates inputs against `inputSchema` (Zod) before execution
-- Validates outputs against `outputSchema` (Zod) if provided
-- Converts to OpenAI function format via `toOpenAITool()`
-- Returns `{ success: boolean, result?, error? }` from `execute()`
 
 ## Building blocks API
 

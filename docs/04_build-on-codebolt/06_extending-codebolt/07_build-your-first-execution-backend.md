@@ -17,7 +17,7 @@ Create a custom execution backend (provider) that manages remote environments wh
 ```bash
 mkdir my-provider && cd my-provider
 npm init -y
-npm install @codebolt/codeboltjs @codebolt/provider
+npm install @codebolt/codeboltjs @codebolt/provider @codebolt/types
 npm install -D typescript
 ```
 
@@ -54,7 +54,7 @@ Create `src/MyProvider.ts`. Extend `BaseProvider` and implement the required abs
 
 ```typescript
 import { BaseProvider } from '@codebolt/provider';
-import type { ProviderInitVars, ProviderStartResult } from '@codebolt/provider';
+import type { ProviderInitVars } from '@codebolt/types/provider';
 
 export class MyProvider extends BaseProvider {
 

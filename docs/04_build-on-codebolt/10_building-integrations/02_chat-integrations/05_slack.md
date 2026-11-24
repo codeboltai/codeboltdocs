@@ -45,16 +45,16 @@ User in DM: summarise the PR
 
 ## Thread support
 
-The plugin preserves Slack's `thread_ts` so agent replies stay in the same thread:
+This example routes replies to the Slack channel identified by `externalThreadId`. For threaded replies, preserve the Slack channel and `thread_ts` together in your plugin’s reply routing data.
 
 ```ts
 // Reply arrives from agent
 plugin.gateway.onReply(async (reply) => {
+  if (!reply.externalThreadId) return;
   await app.client.chat.postMessage({
     token: botToken,
-    channel: reply.replyTo.externalThreadId,
+    channel: reply.externalThreadId,
     text: reply.text,
-    thread_ts: reply.metadata?.thread_ts,  // reply in thread if original was threaded
   });
 });
 ```
@@ -92,13 +92,14 @@ export async function connect(plugin, config) {
   const auth = await app.client.auth.test({ token: config.botToken });
   const botUserId = auth.user_id as string;
 
-  await plugin.gateway.registerChannel({
-    channelId: 'my-slack',
+  const registration = await plugin.gateway.registerChannel({
     name: 'Slack',
     platform: 'slack',
     agentId: config.agentId,
     threadStrategy: config.threadStrategy ?? 'per-user',
   });
+  const channelId = registration.data?.channelId;
+  if (!registration.success || !channelId) throw new Error(registration.error || 'Channel registration failed');
 
   const handleMessage = async ({ message, say }) => {
     if (message.bot_id || message.subtype) return;
@@ -113,7 +114,7 @@ export async function connect(plugin, config) {
       text: message.text ?? '',
       metadata: { thread_ts: message.thread_ts ?? message.ts },
       replyTo: {
-        channelId: 'my-slack',
+        channelId,
         externalThreadId: message.channel,
         userId: message.user,
       },
@@ -124,13 +125,13 @@ export async function connect(plugin, config) {
   app.event('app_mention', ({ event }) => handleMessage({ message: event, say: null }));
 
   plugin.gateway.onReply(async (reply) => {
+    if (!reply.externalThreadId) return;
     const chunks = reply.text.match(/.{1,4000}/gs) ?? [reply.text];
     for (const chunk of chunks) {
       await app.client.chat.postMessage({
         token: config.botToken,
-        channel: reply.replyTo.externalThreadId!,
+        channel: reply.externalThreadId,
         text: chunk,
-        thread_ts: reply.metadata?.thread_ts,
       });
     }
   });

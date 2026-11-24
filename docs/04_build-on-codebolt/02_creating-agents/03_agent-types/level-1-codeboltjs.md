@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: Level 1 — Using Codeboltjs
+title: Level 2 — CodeboltJS
 description: "Note: MockTransport and a codeboltjs/testing subpath export do not exist in"
 ---
 
@@ -69,6 +69,35 @@ codebolt.onMessage(async message => {
 ```
 
 Use the [Agent SDK](./level-2-framework.md) when you want helpers for tool calls and repeated turns.
+
+## Try a handler that replies without a model
+
+To try this alternate implementation in the `my-agent` project from the [custom agent quickstart](../02_quickstart.md), open `src/index.ts` and replace its contents with this smaller handler.
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onMessage(async (message) => {
+  const text = message.userMessage;
+  codebolt.chat.sendMessage(`You said: ${text}`);
+});
+```
+
+- `codebolt.onMessage` registers a handler the runtime calls for each incoming Chat message.
+- `message.userMessage` contains the text entered in Chat.
+- `codebolt.chat.sendMessage` sends a visible response back to Chat. This handler can reply without calling a model.
+
+### Run the echo handler {#step-3--build-and-run-in-chat}
+
+In a terminal at the project root, install the dependencies and compile the handler.
+
+```bash
+cd .codebolt/agents/my-agent
+npm install
+npm run build
+```
+
+Open a new Chat tab, select `my-agent` in the agent picker, and send `Hello from Codebolt`. The agent should reply `You said: Hello from Codebolt`.
 
 ## Manifest
 

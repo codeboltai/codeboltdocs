@@ -1,232 +1,93 @@
 ---
 sidebar_position: 2
-title: Custom Agent Quickstart
-description: Create an agent from the Codebolt desktop app, edit its TypeScript handler, and run it in Chat.
+title: Create Your First Custom Agent
+description: Create a Codebolt agent, give it instructions, and test its replies in Chat.
 ---
 
-# Custom Agent Quickstart
+# Create Your First Custom Agent
 
-Create an agent in Codebolt Desktop, then try a remix with your own instructions or build a TypeScript agent that replies to messages.
+Create a custom agent for your Codebolt project. You’ll choose what it should do, write the handler that runs when someone messages it, and test it in Chat.
 
-Open a project in Codebolt Desktop. Configure a model provider if your agent will call an LLM. For help getting set up, see [Get Started](../../01_get-started/03_quickstart.md).
+Already created your custom agent? [Edit its message handler](#edit-typescript).
 
-## Create an agent in the desktop app
+You’ll need Node.js, npm, and an open project with a model provider configured in Codebolt Desktop. [Set up Codebolt](../../01_get-started/03_quickstart.md).
 
-In Chat, open the agent picker in the composer and select **Create Agent**.
+<span id="part-2--framework-agent-level-1" />
+<span id="create-an-agent-in-the-desktop-app" />
 
-| Option | What it creates |
-|---|---|
-| **Remix Agent** | A project-specific version of an existing agent with your own instructions and settings. |
-| **Create Custom Agent** | A TypeScript agent project with a manifest and a starter message handler. |
-| **Create Flow Agent** | A manifest and an editable graph. See [Visual Agent Builder](./03_agent-types/level-4-flow-visual.md#creating-a-flow-agent). |
-| **Create Remote Agent** | A local registration for an agent process you already have. See [Remote agent](#part-3--remote-agent). |
+## 1. Create the agent in Desktop {#step-1--create-the-project}
 
-## Part 1 — Remix (level 0)
+In Chat, open the agent picker and select **Create Agent → Create Custom Agent**. Enter a name for your agent and select **Create Agent**. This guide uses `my-agent`. If you choose another name, use it in the paths and Chat picker below. Your agent’s files are in `.codebolt/agents/my-agent/`.
 
-Choose a remix when an existing agent already has the behavior you need and you want to tailor its instructions to your project.
+<details>
+<summary>Create the same agent from the CLI</summary>
 
-### Step 1 — create the remix
-
-Select **Remix Agent**, choose a base agent under **Remix From**, and enter a name such as `my-reviewer`. Add your prompt under **Custom Instructions**, then select **Create**.
-
-> Review the current diff for regressions. Cite the relevant files and lines. Leave the files as they are.
-
-To create the remix from a terminal in your project, use the interactive command.
+Run this command from your project root to create the agent.
 
 ```bash
-codebolt action agent create --remix
+codebolt action agent create --framework --name my-agent --path ./.codebolt/agents/my-agent
 ```
 
-This starts an interactive flow:
+</details>
 
-1. **Pick an agent** — you'll see a list of available agents. Select the one you want to remix (e.g. `Act`).
-2. **Name your remix** — enter a name (e.g. `my-reviewer`).
-3. **Description** — add a short description (optional).
-4. **Custom instructions** — enter any custom instructions for the agent (optional). For example: `You are a code reviewer focused on finding subtle bugs. Never suggest stylistic changes. Only flag things that could cause incorrect behaviour at runtime.`
+<details id="step-2--read-and-edit-the-generated-files">
+<summary>What’s in the generated project?</summary>
 
-The command creates a markdown file at `.codebolt/agents/remix/my-reviewer.md` with YAML frontmatter:
+| File | Purpose |
+| --- | --- |
+| `codeboltagent.yaml` | Sets the agent’s identity and title in the Chat picker. |
+| `src/index.ts` | Contains the handler you’ll edit in the next step. |
+| `package.json` | Lists the SDK dependencies, build script, and runtime entry point. |
+| `tsconfig.json` | Configures the TypeScript build from `src` to `dist`. |
 
-```yaml
----
-name: my-reviewer
-description: A focused code reviewer
-remixedFromId: c4d3fdb9-cf9e-4f82-8a1d-0160bbfc9ae9
-remixedFromTitle: Act
-version: 1.0.0
-type: remix
-createdAt: '2026-04-18T12:00:00.000Z'
-updatedAt: '2026-04-18T12:00:00.000Z'
----
+</details>
 
-You are a code reviewer focused on finding subtle bugs.
-Never suggest stylistic changes. Only flag things that
-could cause incorrect behaviour at runtime.
-```
+## 2. Define what your agent does {#edit-typescript}
 
-### Step 2 — customise further (optional)
-
-Open `.codebolt/agents/remix/my-reviewer.md` and edit directly. You can add fields like `model`, `provider`, `tools`, or update the custom instructions (the markdown body after `---`).
-
-### Step 3 — run it
-
-From the desktop app: new chat tab → pick `my-reviewer` from the agent dropdown → send a message.
-
-For a worked example with project-specific instructions, see [Build a review agent](../../03_guides/02_first-steps/build-your-first-agent.md).
-
-## When remix isn't enough
-
-Go to level 1 when:
-- You need behaviour that isn't just a different prompt (custom tool calling logic, specialised memory use, non-standard phases).
-- You want to compose multiple processors to shape the loop.
-- You need to emit structured output consumed by another agent or a flow.
-
-If none of those apply, stay at level 0.
-
-## Part 2 — Framework agent (level 1)
-
-Use a code agent when the behavior needs to be implemented in TypeScript. You'll need Node.js and npm to build it. This example sends a reply with the text received from Chat.
-
-### Step 1 — create the project
-
-In the Chat agent picker, select **Create Agent → Create Custom Agent**. Enter `my-echo-agent` and select **Create Agent**. Codebolt copies its bundled TypeScript template into `.codebolt/agents/my-echo-agent/`.
-
-To scaffold into the same project directory from the CLI, run this command from the project root.
-
-```bash
-codebolt action agent create --framework --name my-echo-agent --path ./.codebolt/agents/my-echo-agent
-```
-
-### Step 2 — read and edit the generated files
-
-| File | What it controls |
-|---|---|
-| `codeboltagent.yaml` | The agent's identity and settings. Codebolt reads `title` for the picker label and `unique_id` to identify the agent. |
-| `src/index.ts` | The TypeScript entry point. This is where the starter registers its Chat handler. |
-| `package.json` | The SDK dependencies, build command, and runtime entry point `dist/index.js`. |
-| `tsconfig.json` | The TypeScript build settings. The template compiles files from `src` to `dist`. |
-
-The bundled handler calls `InitialPromptGenerator` to combine the incoming message with the configured instructions and context. `AgentStep` calls the model. `ResponseExecutor` handles the model output and tool calls. The loop passes updated context into the next step until execution reports that it is complete.
-
-For a predictable first run, open `src/index.ts` and replace its contents with this smaller handler.
+Open `.codebolt/agents/my-agent/src/index.ts` and replace its contents with the handler below. Set `systemPrompt` to describe the task you want your agent to handle and what a useful response looks like. You can also keep the sample instructions for your first run.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
+import { createAgent } from '@codebolt/agent/unified';
+import type { FlatUserMessage } from '@codebolt/types/sdk';
 
-codebolt.onMessage(async (message) => {
-  const text = message.userMessage;
-  codebolt.chat.sendMessage(`You said: ${text}`);
+const systemPrompt = 'Answer the user’s question in one sentence.';
+
+const agent = createAgent({ systemPrompt });
+
+codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
+  const result = await agent.run(reqMessage);
+  if (!result.success) {
+    return result.error || 'Agent execution failed.';
+  }
+  return result.finalMessage || '';
 });
 ```
 
-- `codebolt.onMessage` registers a handler the runtime calls for each incoming Chat message.
-- `message.userMessage` contains the text entered in Chat.
-- `codebolt.chat.sendMessage` sends a visible response back to Chat. This handler can reply without calling a model.
+`createAgent({ systemPrompt })` creates the agent with your instructions. `codebolt.onMessage` registers the handler Codebolt calls for each incoming Chat message. The handler passes the request to `agent.run` and returns the final reply or an error message.
 
-### Step 3 — build and run in Chat
+## 3. Test it in Chat
 
-In a terminal at the project root, install the dependencies and compile the handler.
+From your project root, install the agent’s dependencies and build it.
 
 ```bash
-cd .codebolt/agents/my-echo-agent
+cd .codebolt/agents/my-agent
 npm install
 npm run build
 ```
 
-Open a new Chat tab, select `my-echo-agent` in the agent picker, and send `Hello from Codebolt`. The agent should reply `You said: Hello from Codebolt`.
+Open a new Chat tab, select **my-agent** in the agent picker, and send a request that matches the task you chose. If you kept the sample instructions, try “What is a unit test?” and check that the agent answers in one sentence.
 
-For an agent that calls a model and tools, follow the [Unified Agent walkthrough](./06_patterns/unified-agent.md#quick-start). It explains the `createAgent()` and `agent.run()` pattern used by the `act-updated` sample.
+## 4. Customize and test again
 
-## Part 3 — Remote agent
+Edit `systemPrompt` in `src/index.ts` to refine the agent’s instructions. For example, ask it to include a concrete example in each answer. To change how incoming messages are processed, edit the `onMessage` handler.
 
-A remote agent in Codebolt is an agent registered by reference. Codebolt keeps a small local manifest for it, but the actual agent code lives somewhere else or is started somewhere else.
+Save the file and run `npm run build` from the agent folder. In a new Chat tab, select your agent and repeat your earlier request. Check the reply against your updated instructions.
 
-That does **not** automatically mean another machine. In the common `codeboltExecuted` path, Codebolt still starts the agent as a local child process from the `remotePath` you provide. Another machine only enters the picture when you use `selfExecuted` and run the process yourself, or when your Codebolt server is itself running elsewhere.
+## Next steps
 
-When you create one from the desktop app, Codebolt does **not** copy the remote code into your project. It creates a small local manifest at `.codebolt/agents/<name>/codeboltagent.yaml` with `type: remoteAgent`, the selected `executionMode`, and, for CodeBolt-executed agents, the `remotePath`.
-
-There are two execution modes:
-
-### Remote agent vs remote execution
-
-- `remoteAgent` is an agent-registration mode in the app.
-- `codeboltExecuted` means Codebolt launches the process from an external filesystem path.
-- `selfExecuted` means Codebolt does not launch the process and waits for some outside process to connect back.
-- True cross-machine execution is a separate infrastructure topic. See [Remote Execution](../11_agent-infrastructure/09_remote-execution.md).
-
-### Option A — CodeBolt-executed
-
-Codebolt launches and manages the agent process for you. You provide the **full absolute path** to the agent on disk.
-
-**From the CLI:**
-
-```bash
-codebolt action agent create-remote --name my-remote-agent --execution-mode codeboltExecuted --remote-path /absolute/path/to/agent
-```
-
-**From the desktop app**, open the Chat agent picker and select **Create Agent → Create Remote Agent**. Enter a name, choose **Executed by CodeBolt**, provide the full absolute path to the agent, and click **Create Remote Agent**.
-
-How it works at runtime:
-
-- The UI requires `remotePath` before the create button is enabled.
-- Codebolt stores that path in the remote agent manifest it creates under `.codebolt/agents/<name>/`.
-- When you run the agent, Codebolt passes that path into the server process manager and starts a child process from that directory.
-- If your desktop app/server is running locally, that process runs on the same machine.
-- If the remote agent folder has a `package.json` with a `main` field, Codebolt uses that as the entrypoint. Otherwise it falls back to the default entrypoint resolution.
-
-### Option B — Self-executed
-
-You run the agent yourself from your own terminal, CI job, container, or another machine. Codebolt does not spawn a process for this mode. It waits for your external agent to connect back.
-
-**From the CLI:**
-
-```bash
-codebolt action agent create-remote --name my-remote-agent --execution-mode selfExecuted
-```
-
-**From the desktop app**, open the Chat agent picker and select **Create Agent → Create Remote Agent**. Enter a name, choose **Self-executed**, and click **Create Remote Agent**.
-
-How it works at runtime:
-
-- No `remotePath` is required in the creation form.
-- When you use the agent in a thread, Codebolt generates a thread token for that thread.
-- In the desktop app, selecting a self-executed remote agent shows a help icon near the model selector. That popover displays the current thread token and lets you copy it.
-- If there is no active thread yet, the UI shows `Start a chat to generate a token`.
-- When Codebolt attempts to start the self-executed agent, it does not launch a child process. Instead it waits for an external connection and emits a command snippet that sets both `threadToken` and `agentId`.
-- This mode can still run on the same machine. "Self-executed" only means Codebolt did not start it for you.
-
-If your external process uses `@codebolt/codeboltjs`, those environment variables are what let it connect back to the `/codebolt` WebSocket endpoint.
-
-### What the desktop flow stores
-
-The `Create Remote Agent` flow creates a local manifest record, not a new agent codebase. The stored manifest includes:
-
-- `type: remoteAgent`
-- `isRemoteAgent: true`
-- `executionMode: selfExecuted | codeboltExecuted`
-- `remotePath` for CodeBolt-executed agents
-
-That is why the same remote agent can appear in the normal agent picker even though its code lives elsewhere.
-
-### When to use remote agents
-
-- Your agent already lives in another folder and you want Codebolt to reference it instead of copying it into the project.
-- Your agent is written in a language Codebolt doesn't scaffold (Python, Go, Rust).
-- You want Codebolt to launch an external codebase from an absolute path.
-- You want to run the process yourself from another terminal, CI job, container, or another machine.
-- You want to wrap an existing tool (Claude Code, Codex, etc.) as a Codebolt agent — see [Third-Party Wrapping](./04_third-party-agents.md).
-
-## Where to go next
-
-- **Understand the creation levels fully** → [Creation levels](./03_agent-types/level-3-remix.md)
-- **Build without code using drag-and-drop** → [Flow — Visual Builder](./03_agent-types/level-4-flow-visual.md)
-- **Pick a pattern for non-trivial agents** → [Patterns overview](./06_patterns/overview.md)
-- **Add custom behaviour via processors** → [Processors](./07_processors/01_what-are-processors.md)
-- **Test your agent rigorously** → [Testing and debugging](./09_testing-and-debugging.md)
-- **Ship it** → [Publishing](./99_publishing.md)
-
-## Common pitfalls (first-time agent authors)
-
-- **Too broad tool allowlist.** Start restrictive. An agent with `allow: [*]` is hard to reason about.
-- **Chat-shaped agent for a pipeline slot.** If the agent is going to be a flow node, give it a typed `inputs` and `outputs` block — don't rely on free-form chat.
-- **Re-implementing planning.** The [planning hierarchy](../07b_subsystems/08_planning-hierarchy.md) already exists. Use it instead of rolling your own.
-- **No tests.** An agent without replay tests will silently regress when you change its prompt. Set up [testing](./09_testing-and-debugging.md) from day one.
+- [Write and use a custom tool in your agent](./12_custom-agent-tools.md).
+- [Write an echo handler that replies without a model](./03_agent-types/level-1-codeboltjs.md#try-a-handler-that-replies-without-a-model).
+- [Customize an existing agent with Remix](./03_agent-types/level-3-remix.md#create-and-test-a-remix-in-desktop).
+- [Register an agent from another folder or repository](./11_remote-agent.md).
+- [Explore the unified agent and its configuration](./06_patterns/unified-agent.md#quick-start).

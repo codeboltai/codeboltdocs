@@ -27,7 +27,7 @@ Plugin process                 Server (pluginSocket.ts)
     │◀── pluginStartMessage ────────│ sends manifest + config
     │                               │
     │── gateway.route ─────────────▶│ routeMessage()
-    │◀── gateway.routeAck ──────────│ RoutingResult
+    │◀── gatewayRouteResponse ──────────│ RoutingResult
     │                               │
     │── gateway.registerChannel ───▶│ ChannelStore.create()
     │◀── gateway.registerAck ───────│ channelId
@@ -50,8 +50,8 @@ All messages are JSON objects with a `type` field.
 |---|---|---|
 | `gateway.route` | `GatewayMessage` | Route an incoming platform message to an agent |
 | `gateway.registerChannel` | `ChannelConfig` | Register this plugin as a channel |
-| `gateway.unregisterChannel` | `{ channelId }` | Mark channel as disconnected |
-| `gateway.routeAck` | — | Acknowledge a received reply (internal) |
+| `gateway.unregisterChannel` | `{}` | Mark channel as disconnected |
+| `gatewayRouteResponse` | — | Acknowledge a received reply (internal) |
 
 ### Server → Plugin
 
@@ -60,52 +60,18 @@ All messages are JSON objects with a `type` field.
 | `pluginStartMessage` | manifest + config | Sent immediately after connect |
 | `gateway.reply` | `GatewayReply` | Agent reply for the plugin to forward to the platform |
 | `gateway.messageToChannel` | `{ targetId, text, metadata }` | Proactive message from an agent |
-| `gateway.routeAck` | `RoutingResult` | Result of a `gateway.route` call |
+| `gatewayRouteResponse` | `RoutingResult` | Result of a `gateway.route` call |
 
 ## GatewayReply format
 
-When the agent calls `sendMessage()`, the server delivers this to the plugin:
-
-```ts
-interface GatewayReply {
-  type: 'gateway.reply';
-  data: {
-    text: string;
-    replyTo: {
-      channelId: string;
-      externalThreadId?: string;
-      userId?: string;
-    };
-    metadata?: Record<string, any>;
-    attachments?: Array<{
-      type: 'image' | 'file';
-      url: string;
-      name?: string;
-    }>;
-    threadId: string;
-    instanceId: string;
-    timestamp: string;
-  };
-}
-```
-
-Your plugin's `plugin.gateway.onReply()` handler receives the `data` object.
+The SDK unwraps `gateway.reply` and passes `{ text, externalThreadId? }` to your callback.
 
 ## Receiving replies in your plugin
 
 ```ts
-plugin.gateway.onReply(async (reply) => {
-  const { text, replyTo, attachments } = reply;
-
-  // Send text back to the platform
-  await platformApi.sendMessage(replyTo.externalThreadId, text);
-
-  // Handle attachments if present
-  for (const attachment of attachments ?? []) {
-    if (attachment.type === 'image') {
-      await platformApi.sendPhoto(replyTo.externalThreadId, attachment.url);
-    }
-  }
+plugin.gateway.onReply(async ({ text, externalThreadId }) => {
+  if (!externalThreadId) return;
+  await platformApi.sendMessage(externalThreadId, text);
 });
 ```
 

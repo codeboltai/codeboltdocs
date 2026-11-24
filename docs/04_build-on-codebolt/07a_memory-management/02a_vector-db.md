@@ -190,8 +190,8 @@ The Vector DB emits real-time events over WebSocket:
 |---|---|---|
 | POST | `/vectorDB/collections` | Create a new collection |
 | GET | `/vectorDB/collections` | List all collections |
-| PUT | `/vectorDB/collections` | Update a collection |
-| DELETE | `/vectorDB/collections` | Delete a collection |
+| PUT | `/vectorDB/collections/:id` | Update a collection |
+| DELETE | `/vectorDB/collections/:id` | Delete a collection |
 
 ### Documents
 
@@ -226,56 +226,56 @@ The Vector DB emits real-time events over WebSocket:
 
 ## SDK Reference
 
-The `codebolt.vectordb` module exposes the following methods:
+In an agent, `codebolt.vectordb` provides `getVector(key)`, `addVectorItem(item)`, `queryVectorItem(key)`, and `queryVectorItems(items, dbPath)`. Use the server’s collection endpoints for document and chunk operations. The JavaScript examples below can run together in a client that has access to the local Codebolt server.
+
+```js
+async function collectionRequest(path, method = 'GET', body) {
+  const response = await fetch('http://localhost:2719/vectorDB/collections' + path, {
+    method, headers: { 'Content-Type': 'application/json' },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
+  if (!response.ok) throw new Error(await response.text());
+  return (await response.json()).data;
+}
+```
 
 ### Create a Collection
 
-```javascript
-const collection = await codebolt.vectordb.createCollection({
-  name: "my-docs",
-  embeddingModel: "all-MiniLM-L6-v2",
-  embeddingProvider: "local"
-});
+```js
+const collection = await collectionRequest('', 'POST', { name: 'project-notes' });
+const path = '/' + encodeURIComponent(collection.id);
 ```
 
 ### Upsert a Document
 
-```javascript
-await codebolt.vectordb.upsertDocument(collectionId, {
-  uri: "src/index.ts",
-  text: fileContents
+```js
+await collectionRequest(path + '/documents', 'POST', {
+  uri: 'note://architecture', text: 'The project uses an embedded graph database.',
 });
 ```
 
 ### Query Documents
 
-```javascript
-const results = await codebolt.vectordb.queryDocuments(collectionId, {
-  query: "authentication middleware",
-  topK: 5,
-  searchMode: "hybrid"
+```js
+const matches = await collectionRequest(path + '/query', 'POST', {
+  query: 'graph database', options: { maxDocuments: 5 },
 });
 ```
 
 ### Delete a Document
 
-```javascript
-await codebolt.vectordb.deleteDocument(collectionId, "src/index.ts");
+```js
+await collectionRequest(path + '/documents', 'DELETE', { uri: 'note://architecture' });
 ```
 
 ### Add a Chunk
 
-```javascript
-await codebolt.vectordb.addChunk(collectionId, {
-  documentId: docId,
-  chunkText: "function authenticate(req, res, next) { ... }",
-  startPos: 0,
-  endPos: 120
-});
+```js
+const chunk = await collectionRequest(path + '/chunks', 'POST', { content: 'Project note' });
 ```
 
 ### Delete a Chunk
 
-```javascript
-await codebolt.vectordb.deleteChunk(collectionId, chunkId);
+```js
+await collectionRequest(path + '/chunks/' + encodeURIComponent(chunk.id), 'DELETE');
 ```

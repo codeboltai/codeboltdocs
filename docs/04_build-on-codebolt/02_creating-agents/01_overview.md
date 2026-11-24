@@ -44,7 +44,7 @@ There are six ways to bring an agent into Codebolt, from lowest to highest autho
 
 | Path | What you write | Good for |
 |---|---|---|
-| **[Level 0 — Remix](./03_agent-types/level-3-remix.md)** | A YAML file overriding an existing agent's prompt, model, or tools | Most use cases. Start here. |
+| **[Level 0 — Remix](./03_agent-types/level-3-remix.md)** | A Markdown file with YAML frontmatter and custom instructions for an existing agent | Most use cases. Start here. |
 | **[Level 1 — Framework](./03_agent-types/level-2-framework.md)** | A small TypeScript file using the Codebolt agent framework | Custom behaviour with batteries included |
 | **[Level 2 — codeboltjs](./03_agent-types/level-1-codeboltjs.md)** | Code directly against the `codeboltjs` SDK | Non-standard loop shape |
 | **[Level 3 — Raw WebSocket](./03_agent-types/level-0-raw-websocket.md)** | The wire protocol directly | Languages the SDK doesn't cover |
@@ -108,7 +108,7 @@ At level 1 you write a small TypeScript file that:
 - Optionally uses `Agent` or `createAgent` from `@codebolt/agent/unified` (see [Patterns](./06_patterns/overview.md)) to get the full agent loop without writing boilerplate.
 - Optionally registers **processors** that modify the prompt assembly, tool calling, or response handling (see [Processors](./07_processors/01_what-are-processors.md)).
 
-The framework assembles the prompt, calls the model, executes tools, and carries the updated prompt into the next turn. Configure the instructions, tool implementations, and processors your agent needs.
+The framework assembles the prompt, calls the model, executes tools, and carries the updated prompt into the next turn. Configure the instructions, tool implementations, and processors your agent needs. [Write and use a custom tool in your agent](./12_custom-agent-tools.md).
 
 Then your agent consumes [Agent Extensions](../03_agent-extensions/01_overview.md) — skills, action blocks, MCP tools — the same way every other agent does.
 

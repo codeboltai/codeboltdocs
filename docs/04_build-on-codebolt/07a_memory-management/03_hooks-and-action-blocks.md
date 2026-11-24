@@ -48,11 +48,8 @@ metadata:
     - name: memoryId
       type: string
       required: true
-    - name: maxTokens
-      type: number
-      required: false
   outputs:
-    - name: noteId
+    - name: summary
       type: string
 ```
 
@@ -61,43 +58,28 @@ metadata:
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.app.onMessage(async (message) => {
-  const { memoryId, maxTokens = 2000 } = message.params;
-
-  // Query the episodic memory
-  const { events } = await codebolt.episodicMemory.queryEvents({
-    memoryId,
-    filters: { lastMinutes: 60 }
+codebolt.onActionBlockInvocation(async ({ params }) => {
+  const { memoryId } = params;
+  const response = await codebolt.episodicMemory.queryEvents({ memoryId, lastMinutes: 60 });
+  if (!response.success || !response.data) throw new Error('Could not read episodic events');
+  const { completion } = await codebolt.llm.inference({
+    input: [{ type: 'message', role: 'user',
+      content: 'Summarize these events as Markdown: ' + JSON.stringify(response.data.events) }],
   });
-
-  // Summarize with the LLM
-  const summary = await codebolt.llm.complete({
-    messages: [
-      { role: 'user', content: `Summarise these events into a concise markdown note:\n${JSON.stringify(events)}` }
-    ],
-    maxTokens
-  });
-
-  // Write to markdown memory
-  const note = await codebolt.memory.markdown.save(summary, { source: memoryId });
-
-  codebolt.app.sendMessage({ noteId: note.id });
+  if (!completion.output_text) throw new Error('The model returned no summary');
+  return { summary: completion.output_text };
 });
 ```
 
 ### Calling an action block from an agent
 
 ```typescript
-const result = await codebolt.actionBlock.execute({
-  actionBlockId: 'memory-summarizer',
-  params: { memoryId: 'run-2025-04-22', maxTokens: 1500 },
-  threadId: currentThreadId
+const response = await codebolt.actionBlock.start('memory-summarizer', { memoryId }, {
+  waitForCompletion: true,
 });
-
-console.log(result.noteId); // ID of the created note
+if (!response.success) throw new Error(response.error || 'Summarization failed');
+console.log(response.result);
 ```
-
----
 
 ## Hooks
 

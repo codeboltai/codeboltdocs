@@ -14,7 +14,7 @@ Practical recipes for keeping memory lean, relevant, and fast. These patterns co
 
 **Problem:** Episodic memory grows without bound across sessions. Older turns dilute context quality and slow retrieval.
 
-**Solution:** At the end of each thread, an action block summarizes the session's key decisions into a compact markdown note and embeddings, then archives the raw episodic record.
+**Solution:** At the end of each thread, an action block summarizes the session's key decisions into a compact markdown note and embeddings, and writes the summary through a configured ingestion pipeline. Supply `memoryId` and `pipelineId` as action-block parameters.
 
 **Hook:**
 
@@ -32,42 +32,22 @@ Practical recipes for keeping memory lean, relevant, and fast. These patterns co
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.app.onMessage(async ({ threadId }) => {
-  // Pull the last hour of episodic events
-  const memories = await codebolt.episodicMemory.listMemories();
-  const memory = memories.items.find(m => m.threadId === threadId);
-  if (!memory) return codebolt.app.sendMessage({ done: true });
-
-  const { events } = await codebolt.episodicMemory.queryEvents({
-    memoryId: memory.id,
-    filters: { lastMinutes: 120 }
+codebolt.onActionBlockInvocation(async ({ params }) => {
+  const { memoryId } = params;
+  const response = await codebolt.episodicMemory.queryEvents({ memoryId, lastMinutes: 60 });
+  if (!response.success || !response.data) throw new Error('Could not read episodic events');
+  const { completion } = await codebolt.llm.inference({
+    input: [{ type: 'message', role: 'user',
+      content: 'Summarize these events as Markdown: ' + JSON.stringify(response.data.events) }],
   });
-
-  // Summarize
-  const summary = await codebolt.llm.complete({
-    messages: [{
-      role: 'user',
-      content: `Summarise the key decisions and outcomes from these agent events into concise bullet points:\n${JSON.stringify(events, null, 2)}`
-    }]
+  if (!completion.output_text) throw new Error('The model returned no summary');
+  const write = await codebolt.memoryIngestion.execute({
+    pipelineId: params.pipelineId, payload: { text: completion.output_text, memoryId },
   });
-
-  // Write to markdown memory
-  await codebolt.memory.markdown.save(summary, { threadId, type: 'session-summary' });
-
-  // Embed the summary for future semantic recall
-  await codebolt.memoryIngestion.execute({
-    pipelineId: 'summary-embed',
-    payload: { text: summary, metadata: { threadId, type: 'session-summary' } }
-  });
-
-  // Archive the raw episodic record
-  await codebolt.episodicMemory.archiveMemory({ memoryId: memory.id });
-
-  codebolt.app.sendMessage({ done: true });
+  if (!write.success) throw new Error('Summary ingestion failed');
+  return { summary: completion.output_text };
 });
 ```
-
----
 
 ## Pattern 2 — Vector store pruning
 
@@ -80,20 +60,23 @@ codebolt.app.onMessage(async ({ threadId }) => {
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.app.onMessage(async ({ collectionId = 'task-history', maxAgeDays = 30 }) => {
-  const { documents } = await codebolt.vectordb.listDocuments(collectionId);
-  const cutoff = Date.now() - maxAgeDays * 24 * 60 * 60 * 1000;
-
-  let pruned = 0;
-  for (const doc of documents) {
-    const docDate = new Date(doc.metadata?.date ?? 0).getTime();
-    if (docDate < cutoff) {
-      await codebolt.vectordb.deleteDocument(collectionId, doc.uri);
-      pruned++;
+codebolt.onActionBlockInvocation(async ({ params }) => {
+  const url = 'http://localhost:2719/vectorDB/collections/' +
+    encodeURIComponent(params.collectionId) + '/documents';
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(await response.text());
+  const { data: documents } = await response.json();
+  const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  const candidates = documents.filter(doc => Date.parse(doc.metadata?.date) < cutoff);
+  // Inspect the candidates first. Set apply explicitly to delete these URIs.
+  if (params.apply === true) {
+    for (const { uri } of candidates) {
+      const removed = await fetch(url, { method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ uri }) });
+      if (!removed.ok) throw new Error(await removed.text());
     }
   }
-
-  codebolt.app.sendMessage({ pruned, remaining: documents.length - pruned });
+  return { candidates: candidates.map(doc => doc.uri) };
 });
 ```
 
@@ -122,14 +105,18 @@ codebolt.app.onMessage(async ({ collectionId = 'task-history', maxAgeDays = 30 }
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.app.onMessage(async ({ instanceId }) => {
+codebolt.onActionBlockInvocation(async ({ params: { instanceId } }) => {
   // Find all Function nodes
-  const { records } = await codebolt.knowledgeGraph.listMemoryRecords(instanceId, { kind: 'Function' });
+  const response = await codebolt.knowledgeGraph.listMemoryRecords(instanceId, { kind: 'Function' });
+
+  if (!response.success || !response.data) throw new Error("Could not list records");
+  const records = response.data;
 
   // Group by normalized name
   const groups = {};
   for (const record of records) {
-    const key = record.data.name?.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const key = record.attributes.name?.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!key) continue;
     if (!groups[key]) groups[key] = [];
     groups[key].push(record);
   }
@@ -146,7 +133,7 @@ codebolt.app.onMessage(async ({ instanceId }) => {
     }
   }
 
-  codebolt.app.sendMessage({ merged });
+  return { merged };
 });
 ```
 
@@ -159,25 +146,15 @@ codebolt.app.onMessage(async ({ instanceId }) => {
 **Solution:** An agent monitors its own context quality (via the assembly trace) and updates rules dynamically.
 
 ```typescript
-// Inside an agent's reasoning loop
-
-// Retrieve the last assembly trace
-const trace = await codebolt.contextAssembly.getLastTrace();
-
-// If knowledge section is being truncated more than 50% of turns,
-// cap a low-value source to free up budget
-if (trace.knowledgeTruncatedRatio > 0.5) {
-  const rules = await codebolt.contextRuleEngine.list();
-  const noisyRule = rules.items.find(r => r.name === 'always-include-full-history');
-  if (noisyRule) {
-    await codebolt.contextRuleEngine.update(noisyRule.id, {
-      actions: [{ type: 'cap', section: 'history', tokens: 800 }]
-    });
-  }
-}
+const response = await codebolt.contextAssembly.getContext({
+  scope_variables: { threadId }, input: 'Summarize the project architecture',
+  constraints: { max_tokens: 800 },
+});
+if (!response.success) throw new Error(response.error || 'Assembly failed');
+console.log(response.data?.context.total_tokens, response.data?.context.warnings);
 ```
 
----
+Repeat the request with a different token budget and compare the returned context.
 
 ## Pattern 5 — KV store cache invalidation
 
@@ -207,9 +184,9 @@ if (trace.knowledgeTruncatedRatio > 0.5) {
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.app.onMessage(async ({ instanceId }) => {
+codebolt.onActionBlockInvocation(async ({ params: { instanceId } }) => {
   await codebolt.kvStore.deleteNamespace(instanceId, 'schema-cache');
-  codebolt.app.sendMessage({ invalidated: 'schema-cache' });
+  return { invalidated: 'schema-cache' };
 });
 ```
 
@@ -222,39 +199,14 @@ codebolt.app.onMessage(async ({ instanceId }) => {
 **Solution:** Run an eval suite that measures retrieval quality, then let the optimizer adjust those parameters.
 
 ```typescript
-// 1. Create eval tasks that test specific recall scenarios
-const tasks = await Promise.all([
-  codebolt.eval.createEvalTask({
-    subjectType: 'agent',
-    instructions: 'How did we handle authentication token refresh?',
-    evaluators: [{ type: 'agent-judge', judgeAgentId: 'recall-judge', weight: 1,
-      judgePrompt: 'Did the answer show evidence of memory recall? Score 0-100.' }]
-  }),
-  // ... more tasks
-]);
-
-// 2. Create suite and run it as baseline
-const suite = await codebolt.eval.createEvalSuite({ subjectIds: ['agent-id'], taskIds: tasks.map(t => t.id) });
-const baselineRun = await codebolt.eval.createEvalRun({ suiteId: suite.id });
-
-// 3. Enable optimization targeting config parameters
-await codebolt.eval.updateEvalTask(tasks[0].id, {
-  optimization: {
-    enabled: true,
-    optimizerType: 'agent',
-    optimizerAgentId: 'memory-optimizer',
-    targets: ['config'],
-    maxIterations: 8,
-    targetScore: 80,
-    strategy: 'greedy'
-  }
+// Use evalRequest from the Memory Evaluation guide and an existing recall task.
+const { run } = await evalRequest('/runs', 'POST', {
+  taskId, subjects: [{ type: 'agent', name: 'Recall agent', referenceId: agentId }],
 });
-
-// The optimizer will adjust topK, minScore, and chunkSize
-// across iterations and report which values produced the best recall.
+await evalRequest(`/runs/${run.id}/start`, 'POST');
 ```
 
----
+Compare the scores for the same task before and after changing the retrieval settings. [Create a task and inspect optimization results](./05_memory-evaluation.md).
 
 ## Pattern 7 — Post-commit knowledge graph refresh
 
@@ -297,21 +249,22 @@ The action block reads the git diff, loops over changed `.ts` files, and calls `
 
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
-import { execSync } from 'child_process';
+import { execSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 
-codebolt.app.onMessage(async () => {
-  const diff = execSync('git diff --name-only HEAD~1 HEAD').toString().trim().split('\n');
+codebolt.onActionBlockInvocation(async () => {
+  const diff = execSync('git diff --diff-filter=ACM --name-only HEAD~1 HEAD').toString().trim().split('\n');
   const tsFiles = diff.filter(f => f.endsWith('.ts'));
 
   for (const file of tsFiles) {
-    const code = require('fs').readFileSync(file, 'utf-8');
+    const code = readFileSync(file, 'utf-8');
     await codebolt.memoryIngestion.execute({
       pipelineId: 'kg-refresh-pipeline',
       payload: { code, filePath: file }
     });
   }
 
-  codebolt.app.sendMessage({ refreshed: tsFiles.length });
+  return { refreshed: tsFiles.length };
 });
 ```
 

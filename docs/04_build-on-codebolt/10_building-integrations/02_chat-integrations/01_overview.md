@@ -53,12 +53,13 @@ plugin.gateway.routeMessage({
   userId: externalUserId,
   externalThreadId: externalChatId,
   text: messageText,
-  replyTo: { channelId, externalThreadId, userId },
+  replyTo: { channelId, externalThreadId: externalChatId, userId: externalUserId },
 });
 
 // Outgoing: receive agent reply → send to platform
 plugin.gateway.onReply((reply) => {
-  platformApi.send(reply.replyTo.externalThreadId, reply.text);
+  if (!reply.externalThreadId) return;
+  platformApi.send(reply.externalThreadId, reply.text);
 });
 ```
 

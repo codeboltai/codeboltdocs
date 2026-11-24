@@ -115,13 +115,16 @@ The Client SDK provides a `ThemesApi` for programmatic theme management:
 const themes = await codebolt.themes.getAll();
 
 // Get active theme
-const active = await codebolt.themes.getActive();
+const active = await fetch('http://localhost:2719/themes/active').then(res => res.json());
 
 // Create a theme
 await codebolt.themes.create({ name: 'My Theme', type: 'dark', colors: { ... } });
 
 // Set active theme
-await codebolt.themes.setActive({ themeId: 'my-theme-id' });
+await fetch('http://localhost:2719/themes/set-active', {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ themeId: 'my-theme-id' }),
+});
 ```
 
 ## Built-in Themes

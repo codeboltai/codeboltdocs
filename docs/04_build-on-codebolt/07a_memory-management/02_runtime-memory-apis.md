@@ -195,40 +195,13 @@ const { count } = await codebolt.kvStore.getRecordCount(instance.id, 'user');
 
 ## Vector Store — `codebolt.vectordb`
 
-Direct access to semantic embeddings. Most agents let the ingestion pipeline manage writes; direct writes are useful for one-off embeds or targeted deletions.
+Use `codebolt.vectordb` for vector-item operations inside an agent.
 
-```typescript
-// Upsert a document (chunked automatically by the store)
-await codebolt.vectordb.upsertDocument('my-collection', {
-  uri: 'note://architecture-decision-2',
-  text: 'We chose Kuzu as the graph database because it embeds cleanly and supports Cypher.',
-  metadata: { type: 'decision', date: '2025-04-22' }
-});
-
-// Semantic search
-const { results } = await codebolt.vectordb.queryDocuments('my-collection', {
-  query: 'why did we choose the graph database?',
-  topK: 5,
-  minScore: 0.75
-});
-
-// Delete a document by URI
-await codebolt.vectordb.deleteDocument('my-collection', 'note://architecture-decision-2');
-
-// Manage a chunk directly
-await codebolt.vectordb.addChunk('my-collection', { content: 'Raw chunk text', metadata: {} });
-await codebolt.vectordb.deleteChunk('my-collection', chunkId);
+```ts
+const vector = await codebolt.vectordb.getVector('architecture-decision');
 ```
 
-**Collection management:**
-
-```typescript
-await codebolt.vectordb.createCollection({ name: 'task-history', embeddingModel: 'default' });
-await codebolt.vectordb.updateCollection('task-history', { description: 'Completed task summaries' });
-await codebolt.vectordb.deleteCollection('task-history');
-```
-
----
+To manage a document collection, use the server’s `/vectorDB/collections` API. For example, to update a collection’s description, send `PUT /vectorDB/collections/:id` with `{"description":"Completed task summaries"}`. Delete a collection with `DELETE /vectorDB/collections/:id`. The [Vector DB examples](./02a_vector-db.md#sdk-reference) show how to create a collection, index and query documents, and add or remove chunks.
 
 ## Knowledge Graph — `codebolt.knowledgeGraph`
 
