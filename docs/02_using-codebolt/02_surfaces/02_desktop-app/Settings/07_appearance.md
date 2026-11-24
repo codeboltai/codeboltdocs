@@ -31,7 +31,7 @@ Open via: **Settings → Global Settings**
 
 ### CLI Setup
 
-The Codebolt CLI lets you interact with Codebolt from a terminal outside the desktop application — launching agents, running workflows, and querying project state.
+To open a folder in Codebolt Desktop from a terminal, select **Install CLI**. Open a terminal in your project folder and run `codebolt .`. For agent commands, see [Get started with the standalone CLI](../../04_cli/01_cli-interface/00_get-started.md).
 
 | Button | Action |
 |---|---|

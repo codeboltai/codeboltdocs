@@ -8,7 +8,11 @@ import CloudPlatformArchitecture from '@site/src/components/diagrams/CloudPlatfo
 
 # Cloud
 
-The Codebolt **Cloud** platform is the browser-based way to use Codebolt. There is nothing to install — sign in at [portal.codebolt.ai](https://portal.codebolt.ai) and you get a full agent environment in any modern browser. Behind the scenes it is the same agent runtime, the same plugin system, and the same CLI that power the desktop app — Cloud simply controls *where the runtime runs* (a managed sandbox or your own machine) and *how you interact with it* (a browser instead of a desktop window).
+**Before you begin.** You need a Codebolt account and access to an existing environment or an enabled cloud sandbox provider. [Runtimes & Providers](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/04_runtimes-and-providers.md)
+
+**Open Remote Chat.** Sign in to the [Codebolt portal](https://portal.codebolt.ai), then open **Agents → Remote Chat**. Start a conversation, select a project, environment, and agent, and send your first task. [Cloud Quickstart](../../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md)
+
+The Codebolt **Cloud** platform lets you work with an agent from your browser. Behind the scenes it is the same agent runtime, the same plugin system, and the same CLI that power the desktop app — Cloud simply controls *where the runtime runs* (a managed sandbox or your own machine) and *how you interact with it* (a browser instead of a desktop window).
 
 Cloud is unique among the four platforms because it offers **two execution models**:
 

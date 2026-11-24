@@ -14,7 +14,7 @@ Use the desktop **System** menu to open **Settings** for application defaults or
 
 ## Project Settings
 
-Use App Settings for the configuration of a particular project's Codebolt app. Use [Global Settings](./07_appearance.md) for personal editor and appearance options, and [LLM Settings](./02_llm-settings.md) for the application's default model and providers.
+Use App Settings for the configuration of a particular project's Codebolt app. Use [Global Settings](./07_appearance.md#global-settings) for personal editor and appearance options, and [LLM Settings](./02_llm-settings.md) for the application's default model and providers.
 
 ### Agent Defaults
 

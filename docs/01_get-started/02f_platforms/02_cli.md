@@ -8,7 +8,9 @@ description: The terminal entry point for Codebolt, including the interactive CL
 
 The `codebolt` CLI is the terminal entry point to Codebolt. It now groups the interactive CLI interface, command mode, headless server, and one-shot prompts in one place. Use it for scripting, CI, remote SSH, keyboard-first interactive work, and automation.
 
-See the [CLI Quickstart](../../02_using-codebolt/02_surfaces/04_cli/01_cli-interface/00_get-started.md) to install with npm or enable terminal access from the desktop app, then verify that `codebolt` is on your `PATH`.
+To run an agent in your terminal, install the standalone CLI with `npm install -g codebolt`. Run `codebolt --help` and look for `--server` and `--connect`. [CLI Quickstart](../../02_using-codebolt/02_surfaces/04_cli/01_cli-interface/00_get-started.md)
+
+To open a project folder in Desktop from your shell, enable **Open From Terminal** in Desktop and use `codebolt .`.
 
 ## How to launch
 

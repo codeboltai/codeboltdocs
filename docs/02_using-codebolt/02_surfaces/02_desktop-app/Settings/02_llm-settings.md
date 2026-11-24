@@ -16,7 +16,7 @@ The Default Settings section lets you choose which LLM and embedding model Codeb
 
 Select the provider and model that agents use when no agent-specific override is set.
 
-1. Choose a **Provider** from the dropdown — only providers with a valid API key appear here.
+1. Choose a **Provider** from the dropdown — the list shows configured providers. If yours is missing, open **Settings → LLMs** to configure it.
 2. Click the **Model** field to open the searchable model picker and select a model.
 3. Click **Update Settings** to save.
 
@@ -29,6 +29,12 @@ Select the provider and model used for vector embeddings (memory ingestion, know
 1. Choose a **Provider** — includes cloud providers and a built-in **Local** option.
 2. Select a **Model**. Local models show a **Download** button with size and progress indicator. A **Ready** badge appears once a model is downloaded; **Available** means it can be downloaded.
 3. Click **Update Settings** to save.
+
+### Choose models by role
+
+Open **Settings → Default Settings** and scroll to **CodeBolt Standard**. Each row represents a model role. Choose its provider, then its model. Use the **Custom roles** rows to assign models to any additional roles listed for your setup. Click **Update Settings** to save your selections.
+
+For a role used by one installed agent, see [Agent LLM Settings](./03_agent-settings.md#agent-llm-settings).
 
 ---
 

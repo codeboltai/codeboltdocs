@@ -32,6 +32,8 @@ Send the message when the connection shows **Live**. If you're starting a new sa
 
 ## Next steps
 
+**Recommended next step.** Find the environment you just used and inspect its status in [Environments](./04_running-agents/02_environments.md).
+
 - [Remote Chat](./04_running-agents/01_remote-chat.md) covers repository setup, threads, artifact previews, and stopping a sandbox.
 - [Cloud Platform](../../../01_get-started/02f_platforms/04_cloud.md) explains cloud sandboxes and connected runtimes.
 - [Marketplace Publishing](./03_registry/02_marketplace-publishing.md) covers publishing agents, plugins, and apps.

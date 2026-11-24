@@ -10,13 +10,13 @@ Codebolt brings coding agents, project tools, and execution environments into on
 
 ## Run your first task
 
-Start with the [Quickstart](./03_quickstart.md) to set up Codebolt Desktop, ask an agent about a project, and review a small change.
+Start with the [Desktop Quickstart](./03_quickstart.md) to set up Codebolt Desktop, ask an agent about a project, and review a small change.
 
 | Client | When to use it | First task |
 |---|---|---|
-| Desktop | Work in the editor with chat and visual diffs. | [Desktop Quickstart](./03_quickstart.md) |
-| CLI | Work from your terminal. | [CLI Quickstart](../02_using-codebolt/02_surfaces/04_cli/01_cli-interface/00_get-started.md) |
-| Cloud | Run an agent from your browser. | [Cloud Quickstart](../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md) |
+| Desktop | Work in the editor with chat and visual diffs. | Ask about your project and review a file change. [Desktop Quickstart](./03_quickstart.md) |
+| CLI | Work from your terminal. | Get an answer about your code in the terminal. [CLI Quickstart](../02_using-codebolt/02_surfaces/04_cli/01_cli-interface/00_get-started.md) |
+| Cloud | Run an agent from your browser. | Check which project files your remote agent can see. [Cloud Quickstart](../02_using-codebolt/02_surfaces/06_cloud/00_get-started.md) |
 
 ## Explore Codebolt
 

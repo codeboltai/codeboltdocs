@@ -6,6 +6,8 @@ description: Codebolt's full graphical client for daily coding — chat, multi-p
 
 # Desktop App
 
+Choose the installer for your operating system and processor. On macOS, choose `arm64` for Apple silicon or `x64` for Intel. [Download Codebolt Desktop](https://codebolt.ai/download/)
+
 The Codebolt **Desktop App** is the full graphical client. Install it on macOS, Windows, or Linux and you get a docked, multi-panel workspace for daily coding with agents. It is the richest surface: multi-tab chat, visual diffs, `@mentions`, inline editing, and the full panels ecosystem.
 
 Follow [Installation and Onboarding](../../02_using-codebolt/02_surfaces/02_desktop-app/01_onboarding.md) to install the app, sign in, and set up your model and workspace. Use the [Desktop Quickstart](../03_quickstart.md#open-a-project) to run your first agent task and review the change.
@@ -24,7 +26,7 @@ Follow [Installation and Onboarding](../../02_using-codebolt/02_surfaces/02_desk
 
 Some affordances only exist in the desktop client (see the [Platform Overview](../../02_using-codebolt/02_surfaces/01_overview.md) for what varies across clients):
 
-- `@mentions` and panel context pickers
+- Panel context pickers for attaching editor context to Chat
 - Ctrl+K inline editing
 - Multi-pane visual diffs
 - Multi-tab chat

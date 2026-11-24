@@ -1,16 +1,14 @@
 ---
 sidebar_position: 4
 title: Environment & Services
-description: This section verifies that required runtimes are installed on your machine and lets you store API keys for external services agents may need.
+description: Check the runtimes listed for your project and view or update its service settings.
 ---
 
 # Environment & Services
 
 ## Environment & Services
 
-This section verifies that required runtimes are installed on your machine and lets you store API keys for external services agents may need.
-
-### Environments
+Open **System → Settings → Environment and Services** to check the runtimes and services listed for your project.
 
 Each listed tool (e.g. Node.js, Python, Docker) shows a **Check** button. Click it to verify the tool is installed and available on your PATH. A checkmark appears when the check passes. Each entry also has a **How to Install** link pointing to the tool's official documentation.
 
@@ -19,12 +17,12 @@ Each listed tool (e.g. Node.js, Python, Docker) shows a **Check** button. Click 
 External services (APIs, SaaS tools) your agents may call are listed here. Each entry shows:
 
 - The service name and description
-- The environment variable name it maps to (e.g. `OPENAI_API_KEY`)
+- The environment variable name shown for the service (e.g. `OPENAI_API_KEY`)
 - A **Usage Instruction** link
 - A text input to enter the key or credential
 - A **Confirm** button to save
 
-Values are encrypted and injected into agent processes at runtime.
+**Confirm** saves the value in plain text in `appState.json`. Anyone who can read that file can read the saved value.
 
 ---
 
@@ -97,8 +95,12 @@ Controls how changes made inside an environment (e.g. files written by an agent 
 
 | Option | Behaviour |
 |---|---|
-| **Auto Merge** | Changes are merged automatically without review |
+| **Auto Merge** | Codebolt checks incoming provider pull requests for conflicts. When a request is conflict-free, Codebolt records an approval and attempts the merge. |
 | **Manual Merge** | You review and approve changes before they are applied |
+
+### Child Agent Review
+
+Choose **Parent reviews and merges** to let the parent agent decide whether to merge a child agent’s work. Choose **Another agent must approve before the parent merges** to require a separate reviewer.
 
 ### Conflict Resolution
 

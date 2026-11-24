@@ -77,7 +77,7 @@ const sidebars = {
       doc('CLI', 'get-started/02f_platforms/cli'),
       doc('Cloud', 'get-started/02f_platforms/cloud'),
     ]),
-    doc('Quickstart', 'get-started/quickstart'),
+    doc('Desktop Quickstart', 'get-started/quickstart'),
     group('Core Concepts', [
       doc('How Codebolt Works', 'get-started/core-concepts/how-it-works'),
       doc('What Is Codebolt?', 'get-started/what-is-codebolt'),
@@ -521,8 +521,9 @@ const sidebars = {
   configurationSidebar: [
     doc('Configuration Overview', 'configuration/overview'),
     group('Application & Project', [
-      doc('Global Settings', `${settings}/app-and-project-settings`),
-      jump('Project Settings', `${settings}/app-and-project-settings`, 'project-settings'),
+      jump('Global Settings', `${settings}/appearance`, 'global-settings'),
+      doc('Flags', 'configuration/application-and-project/flags'),
+      doc('Project Settings', `${settings}/app-and-project-settings`),
       jump('Default Agent', `${settings}/app-and-project-settings`, 'agent-defaults'),
       doc('Editor & Language Servers', `${settings}/language-servers`),
       doc('Appearance & Layouts', `${settings}/appearance`),
@@ -532,7 +533,7 @@ const sidebars = {
       doc('Model Connections', `${settings}/llm-settings`),
       doc('Local Models', `${use}/integrations/local-models`),
       doc('LLM Providers', `${use}/integrations/llm-providers`),
-      doc('AI Routing', `${build}/07b_subsystems/llm-and-inference`),
+      doc('AI Routing', 'configuration/models-and-inference/ai-routing'),
       doc('Plugin Model Providers', `${build}/plugins/custom-ai-providers/custom-llm-provider`),
       doc('Agent Behavior', `${settings}/agent-settings`),
       jump('Agent Steps', `${settings}/agent-settings`, 'agent-steps'),
@@ -542,7 +543,7 @@ const sidebars = {
     group('Execution & Services', [
       doc('Environments & Services', `${settings}/environment-services`),
       doc('Environment Provider Settings', `${environments}/configuring-environments`),
-      jump('Web Search Providers', `${use}/07z_plugins/installing-plugins`, 'after-install'),
+      doc('Web Search Providers', 'configuration/execution-and-services/web-search'),
     ]),
     group('Collaboration & Review', [
       ref('Swarm Configuration', `${collaboration}/swarm-management`),

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-24T09:25:48.879Z",
-  "sourceCount": 451,
+  "generatedAt": "2026-11-24T10:48:00.477Z",
+  "sourceCount": 454,
   "curatedCount": 73,
   "sections": [
     {
@@ -1791,7 +1791,7 @@
     },
     {
       "heading": "Optional",
-      "count": 15,
+      "count": 18,
       "order": 99,
       "files": [
         {
@@ -1816,7 +1816,7 @@
         },
         {
           "path": "get-started/quickstart.md",
-          "title": "Quickstart"
+          "title": "Desktop Quickstart"
         },
         {
           "path": "get-started/core-concepts/how-it-works.md",
@@ -1845,6 +1845,18 @@
         {
           "path": "get-started/core-concepts/cloud-scaling.md",
           "title": "Cloud Scaling"
+        },
+        {
+          "path": "configuration/application-and-project/flags.md",
+          "title": "Flags"
+        },
+        {
+          "path": "configuration/execution-and-services/web-search.md",
+          "title": "Web Search Providers"
+        },
+        {
+          "path": "configuration/models-and-inference/ai-routing.md",
+          "title": "AI Routing"
         },
         {
           "path": "configuration/overview.md",
