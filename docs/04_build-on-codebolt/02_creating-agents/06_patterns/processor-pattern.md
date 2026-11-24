@@ -1,12 +1,12 @@
 ---
 sidebar_position: 3
 title: Processor Pattern
-description: Customize the agent loop by plugging processors into CodeboltAgent's five pipeline slots
+description: Customize the agent loop by plugging processors into Agent's five pipeline slots
 ---
 
 # Processor Pattern
 
-Customize the agent loop by plugging processors into `CodeboltAgent`'s five pipeline slots. Every shipped processor lives in `@codebolt/agent/processor-pieces` — import the ones you need, wire them into the `processors` config, and the framework runs them at the right point in the loop.
+Customize the agent loop by plugging processors into `Agent`'s five pipeline slots. Every shipped processor lives in `@codebolt/agent/processor-pieces` — import the ones you need, wire them into the `processors` config, and the framework runs them at the right point in the loop.
 
 ## The five slots
 
@@ -38,17 +38,17 @@ Customize the agent loop by plugging processors into `CodeboltAgent`'s five pipe
 
 ## Minimal example
 
-Use `CodeboltAgent` defaults for message assembly but add compression, loop detection, and compaction:
+Use `Agent` defaults for message assembly but add compression, loop detection, and compaction:
 
 ```ts
-import { CodeboltAgent } from '@codebolt/agent/unified';
+import { Agent } from '@codebolt/agent/unified';
 import {
   ChatCompressionModifier,
   LoopDetectionModifier,
   ConversationCompactorModifier,
 } from '@codebolt/agent/processor-pieces';
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: 'Work carefully through larger coding tasks.',
   processors: {
     preInferenceProcessors: [
@@ -64,14 +64,14 @@ const agent = new CodeboltAgent({
 });
 ```
 
-Because `messageModifiers` is not set here, `CodeboltAgent` keeps its full default pipeline. The other three slots are additive — they default to empty, so you're only adding behaviour.
+This adds processors to the default pipeline. When two processors in a slot share an identity, the merged pipeline keeps a single entry.
 
 ## Replacing the default message pipeline
 
-When you set `processors.messageModifiers`, you replace the entire default pipeline. Include everything you need:
+Set `includeDefaultModifiers: false` to supply the message pipeline explicitly. Event-queue injection can be configured separately.
 
 ```ts
-import { CodeboltAgent } from '@codebolt/agent/unified';
+import { Agent } from '@codebolt/agent/unified';
 import {
   ChatHistoryMessageModifier,
   EnvironmentContextModifier,
@@ -83,8 +83,9 @@ import {
   ContextAssemblyModifier,
 } from '@codebolt/agent/processor-pieces';
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: 'A memory-aware assistant.',
+  includeDefaultModifiers: false,
   processors: {
     messageModifiers: [
       new ChatHistoryMessageModifier({ enableChatHistory: true }),
@@ -101,8 +102,7 @@ const agent = new CodeboltAgent({
       new AtFileProcessorModifier({ enableRecursiveSearch: true }),
       // Added: context assembly for memory integration
       new ContextAssemblyModifier({
-        scope: 'workspace',
-        includeMemory: true,
+        scopeVariables: { area: 'workspace' },
       }),
     ],
   },
@@ -179,7 +179,7 @@ Message, pre-inference, and post-inference processors always return a `Processed
 ## See also
 
 - [Patterns Overview](./overview.md)
-- [CodeboltAgent](./unified-agent.md)
+- [Unified Agent](./unified-agent.md)
 - [What are Processors](../07_processors/01_what-are-processors.md)
 - [Built-in Processors](../07_processors/03_built-in-processors.md) — detailed descriptions of each processor
 - [Writing a Custom Processor](../07_processors/04_writing-a-custom-processor.md)

@@ -1,22 +1,37 @@
 ---
 sidebar_position: 2
 title: Custom Agent Quickstart
-description: Build and run a minimal custom agent in ~15 minutes. Covers level 0 (remix), level 1 (framework), and remote agents
+description: Create an agent from the Codebolt desktop app, edit its TypeScript handler, and run it in Chat.
 ---
 
 # Custom Agent Quickstart
 
-Build and run a minimal custom agent in ~15 minutes. Covers level 0 (remix), level 1 (framework), and remote agents. For the full surface see [Overview](./01_overview.md) and the [creation levels](./03_agent-types/level-3-remix.md).
+Create an agent in Codebolt Desktop, then try a remix with your own instructions or build a TypeScript agent that replies to messages.
 
-**You'll need:** Codebolt installed, a provider configured, a project open. If any of that isn't true, do [Get Started](../../01_get-started/03_quickstart.md) first.
+Open a project in Codebolt Desktop. Configure a model provider if your agent will call an LLM. For help getting set up, see [Get Started](../../01_get-started/03_quickstart.md).
+
+## Create an agent in the desktop app
+
+In Chat, open the agent picker in the composer and select **Create Agent**.
+
+| Option | What it creates |
+|---|---|
+| **Remix Agent** | A project-specific version of an existing agent with your own instructions and settings. |
+| **Create Custom Agent** | A TypeScript agent project with a manifest and a starter message handler. |
+| **Create Flow Agent** | A manifest and an editable graph. See [Visual Agent Builder](./03_agent-types/level-4-flow-visual.md#creating-a-flow-agent). |
+| **Create Remote Agent** | A local registration for an agent process you already have. See [Remote agent](#part-3--remote-agent). |
 
 ## Part 1 — Remix (level 0)
 
-The cheapest thing that counts as a custom agent: take an existing one and change its prompt.
+Choose a remix when an existing agent already has the behavior you need and you want to tailor its instructions to your project.
 
 ### Step 1 — create the remix
 
-From a terminal in your project:
+Select **Remix Agent**, choose a base agent under **Remix From**, and enter a name such as `my-reviewer`. Add your prompt under **Custom Instructions**, then select **Create**.
+
+> Review the current diff for regressions. Cite the relevant files and lines. Leave the files as they are.
+
+To create the remix from a terminal in your project, use the interactive command.
 
 ```bash
 codebolt action agent create --remix
@@ -56,7 +71,7 @@ Open `.codebolt/agents/remix/my-reviewer.md` and edit directly. You can add fiel
 
 From the desktop app: new chat tab → pick `my-reviewer` from the agent dropdown → send a message.
 
-That's a custom agent. No code written. For many use cases, this is all you need.
+For a worked example with project-specific instructions, see [Build a review agent](../../03_guides/02_first-steps/build-your-first-agent.md).
 
 ## When remix isn't enough
 
@@ -69,34 +84,57 @@ If none of those apply, stay at level 0.
 
 ## Part 2 — Framework agent (level 1)
 
-When you need more than a prompt override — custom tool logic, structured output, or a non-standard loop — create a framework agent using the agent template.
+Use a code agent when the behavior needs to be implemented in TypeScript. You'll need Node.js and npm to build it. This example sends a reply with the text received from Chat.
 
-### Step 1 — scaffold
+### Step 1 — create the project
+
+In the Chat agent picker, select **Create Agent → Create Custom Agent**. Enter `my-echo-agent` and select **Create Agent**. Codebolt copies its bundled TypeScript template into `.codebolt/agents/my-echo-agent/`.
+
+To scaffold into the same project directory from the CLI, run this command from the project root.
 
 ```bash
-codebolt action agent create --framework --name my-planner
+codebolt action agent create --framework --name my-echo-agent --path ./.codebolt/agents/my-echo-agent
 ```
 
-The `--framework` flag tells the CLI to use the agent framework template from the Codebolt registry. It downloads the template and scaffolds a project with `codeboltagent.yaml` (manifest), `index.ts` (handler entry point), `package.json`, and `tsconfig.json`.
+### Step 2 — read and edit the generated files
 
-You can also pass `--description` and `--path` to customise:
+| File | What it controls |
+|---|---|
+| `codeboltagent.yaml` | The agent's identity and settings. Codebolt reads `title` for the picker label and `unique_id` to identify the agent. |
+| `src/index.ts` | The TypeScript entry point. This is where the starter registers its Chat handler. |
+| `package.json` | The SDK dependencies, build command, and runtime entry point `dist/index.js`. |
+| `tsconfig.json` | The TypeScript build settings. The template compiles files from `src` to `dist`. |
 
-```bash
-codebolt action agent create --framework --name my-planner --description "Produces a structured plan" --path ./my-planner
+The bundled handler calls `InitialPromptGenerator` to combine the incoming message with the configured instructions and context. `AgentStep` calls the model. `ResponseExecutor` handles the model output and tool calls. The loop passes updated context into the next step until execution reports that it is complete.
+
+For a predictable first run, open `src/index.ts` and replace its contents with this smaller handler.
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onMessage(async (message) => {
+  const text = message.userMessage;
+  codebolt.chat.sendMessage(`You said: ${text}`);
+});
 ```
 
-### Step 2 — customise the manifest and handler
+- `codebolt.onMessage` registers a handler the runtime calls for each incoming Chat message.
+- `message.userMessage` contains the text entered in Chat.
+- `codebolt.chat.sendMessage` sends a visible response back to Chat. This handler can reply without calling a model.
 
-Open the scaffolded `codeboltagent.yaml` to configure your agent's name, description, allowed tools, and model. Then edit `index.ts` to implement your agent's logic — this is where you handle incoming tasks, call LLMs, execute tools, and return results.
+### Step 3 — build and run in Chat
 
-### Step 3 — install and test
+In a terminal at the project root, install the dependencies and compile the handler.
 
 ```bash
-cd my-planner
+cd .codebolt/agents/my-echo-agent
 npm install
+npm run build
 ```
 
-Once installed, select your agent from the desktop app's agent dropdown and send it a task to verify it works.
+Open a new Chat tab, select `my-echo-agent` in the agent picker, and send `Hello from Codebolt`. The agent should reply `You said: Hello from Codebolt`.
+
+For an agent that calls a model and tools, follow the [Unified Agent walkthrough](./06_patterns/unified-agent.md#quick-start). It explains the `createAgent()` and `agent.run()` pattern used by the `act-updated` sample.
 
 ## Part 3 — Remote agent
 
@@ -125,7 +163,7 @@ Codebolt launches and manages the agent process for you. You provide the **full 
 codebolt action agent create-remote --name my-remote-agent --execution-mode codeboltExecuted --remote-path /absolute/path/to/agent
 ```
 
-**From the desktop app:** Open the agent creation panel → select `Create Remote Agent` → enter a name and description → choose `Executed by CodeBolt` → provide the full absolute path of the remote agent → click `Create Remote Agent`.
+**From the desktop app**, open the Chat agent picker and select **Create Agent → Create Remote Agent**. Enter a name, choose **Executed by CodeBolt**, provide the full absolute path to the agent, and click **Create Remote Agent**.
 
 How it works at runtime:
 
@@ -145,7 +183,7 @@ You run the agent yourself from your own terminal, CI job, container, or another
 codebolt action agent create-remote --name my-remote-agent --execution-mode selfExecuted
 ```
 
-**From the desktop app:** Open the agent creation panel → select `Create Remote Agent` → enter a name and description → choose `Self-executed` → click `Create Remote Agent`.
+**From the desktop app**, open the Chat agent picker and select **Create Agent → Create Remote Agent**. Enter a name, choose **Self-executed**, and click **Create Remote Agent**.
 
 How it works at runtime:
 

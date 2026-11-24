@@ -8,30 +8,35 @@ description: These are the processor pieces currently exported from @codebolt/ag
 
 These are the processor pieces currently exported from `@codebolt/agent/processor-pieces`.
 
-The most important distinction is:
+## Default `Agent` message pipeline
 
-- `CodeboltAgent` has a **default message-modifier pipeline**
-- all other processor families are **opt-in**
-
-## Default `CodeboltAgent` message pipeline
-
-When you construct `new CodeboltAgent(...)` without `processors.messageModifiers`, it creates this default pipeline in this exact order:
+`Agent` installs the standard modifiers in this order. On resumed runs it skips `ChatHistoryMessageModifier` and reuses the history in the supplied prompt.
 
 | Order | Class | What it does |
 |---|---|---|
-| 1 | `ChatHistoryMessageModifier` | Prepends prior thread history using `threadId`. If the previous conversation ended with unresolved tool calls, it injects synthetic tool-response messages so the new turn can continue safely. |
-| 2 | `EnvironmentContextModifier` | Adds date, platform, workspace path, and a directory listing. In the default agent it is created with `enableFullContext: true`, so it can also inline contents from many workspace files. |
-| 3 | `DirectoryContextModifier` | Adds a workspace tree for the current project, honoring `.gitignore` and common ignored folders. |
-| 4 | `IdeContextModifier` | Adds editor context such as active file and open files. First send is full JSON context; later sends can be incremental. |
-| 5 | `CoreSystemPromptModifier` | Sets the system prompt. If you do not provide `customSystemPrompt`, it falls back to the package's large built-in coding-agent prompt. |
-| 6 | `ToolInjectionModifier` | Fetches Codebolt tools plus any tools from mentioned MCP servers and injects them into `message.tools` by default. |
-| 7 | `AtFileProcessorModifier` | Reads `mentionedFiles` and `mentionedFolders`, then appends their contents and folder structures to the last user message. |
+| 1 | `ChatHistoryMessageModifier` | Loads thread history. |
+| 2 | `CapabilityContextModifier` | Adds selected capability context. |
+| 3 | `EnvironmentContextModifier` | Adds environment details with `enableFullContext: false`. |
+| 4 | `DirectoryContextModifier` | Adds the project’s directory structure. |
+| 5 | `IdeContextModifier` | Adds editor context such as open files and the cursor position. |
+| 6 | `CoreSystemPromptModifier` | Applies the agent’s instructions. |
+| 7 | `CodeboltCapabilitiesSummaryModifier` | Adds a summary of platform capabilities. |
+| 8 | `CodeboltPlatformKnowledgeRouterModifier` | Adds guidance for looking up relevant platform knowledge. |
+| 9 | `ToolInjectionModifier` | Populates the model’s available tools. |
+| 10 | `ConnectorMentionsModifier` | Adds context for mentioned connectors. |
+| 11 | `ToolGroupContextModifier` | Adds tool-group context. |
+| 12 | `AtFileProcessorModifier` | Resolves file and folder mentions. |
+| 13 | `VirtualWorkerContextModifier` | Adds virtual worker context when available. |
+| 14 | `ConversationContextModifier` | Adds conversation context. |
+| 15 | `ParticipantMentionsModifier` | Adds context for mentioned participants. |
 
-If you set `processors.messageModifiers` yourself, you replace this whole list.
+The constructor merges your processors into each slot by identity. Set `includeDefaultModifiers: false` to supply the message list explicitly.
+
+When `eventQueue` is enabled, the constructor also adds an event-queue modifier during prompt assembly and before inference, plus a post-tool-call queue processor. Tool-event guidance adds another post-tool-call processor. Both features default to enabled.
 
 ## Other shipped message modifiers
 
-These are exported, but they are **not** part of the default `CodeboltAgent` pipeline.
+These are exported, but they are **not** part of the default `Agent` pipeline.
 
 | Class | What it does | Notes |
 |---|---|---|
@@ -46,12 +51,13 @@ These are exported, but they are **not** part of the default `CodeboltAgent` pip
 
 | Class | Default? | What it does |
 |---|---|---|
+| `AgentEventQueueModifier` | Yes | Injects pending events before inference. |
 | `ChatCompressionModifier` | No | Estimates prompt size and summarizes older history when the prompt crosses a configured fraction of the model token limit. It writes compression metadata onto the prompt. |
 
 Notes:
 
 - This is an opt-in processor.
-- `CodeboltAgent` also has framework-level compaction via `CompactionOrchestrator`, which is separate from this processor.
+- When starting a run, `Agent` can load an existing compacted prompt from the server for the current thread.
 
 ## Post-inference processors
 
@@ -72,6 +78,8 @@ Those two classes exist in the package surface, but their core mutation/validati
 
 | Class | Default? | What it does |
 |---|---|---|
+| `AgentEventQueuePostToolCallProcessor` | Yes | Injects pending events after tool calls. |
+| `ToolEventGuidancePostToolCallProcessor` | Yes | Adds guidance for configured tool events. |
 | `ShellProcessorModifier` | No | Replaces `{{args}}` placeholders and optionally executes `!{...}` shell injections found in tool results or prompt messages. |
 | `ConversationCompactorModifier` | No | Counts tokens, truncates oversized tool output, deduplicates repeated file reads, and can compress older conversation history using `simple`, `smart`, or `summarize` strategies. |
 
@@ -83,14 +91,14 @@ Important details:
 ## A realistic opt-in example
 
 ```ts
-import { CodeboltAgent } from "@codebolt/agent/unified";
+import { Agent } from "@codebolt/agent/unified";
 import {
   ChatCompressionModifier,
   ConversationCompactorModifier,
   LoopDetectionModifier,
 } from "@codebolt/agent/processor-pieces";
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: "Work carefully through larger coding tasks.",
   processors: {
     preInferenceProcessors: [

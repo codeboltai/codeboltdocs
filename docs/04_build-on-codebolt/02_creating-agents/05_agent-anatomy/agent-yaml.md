@@ -147,7 +147,7 @@ LLM defaults. Can be overridden per-call from inside the handler.
 ### `tools.allow`, `tools.deny`
 Tool allowlist. Supports globs (`codebolt_fs.*`, `*.read_*`). `deny` always wins over `allow`. If `allow` is omitted, the agent inherits the project-default allowlist.
 ### `processors`
-Optional. Lets you attach processors at specific slots in the loop. If you're using `CodeboltAgent` (see [Patterns](../06_patterns/overview.md)), the framework wires defaults for you.
+Optional. Lets you attach processors at specific slots in the loop. If you're using `Agent` (see [Patterns](../06_patterns/overview.md)), the framework wires defaults for you.
 ### `inputs`, `outputs`
 The agent's typed contract when called as a flow node or from another agent. Optional for chat-only agents. Validated at invocation time — a malformed input is rejected before the agent even starts.
 

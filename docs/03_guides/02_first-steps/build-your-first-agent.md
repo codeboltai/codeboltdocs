@@ -1,116 +1,62 @@
 ---
 sidebar_position: 1
-title: Build your first agent
-description: Create a specialised agent for your project in ~20 minutes
+title: Build a review agent
+description: Remix an existing Codebolt agent in the desktop app and give it project-specific review instructions.
 ---
 
-# Build your first agent
+# Build a review agent
 
-Create a specialised agent for your project in ~20 minutes. Starts with the simplest possible version (level 0 remix) and graduates to level 1 framework code when you need it.
-
-**You'll need:** Codebolt installed and running, a provider configured, a project open, Node.js 18+ (only if you reach the level 1 part).
-
-## What we're building
-
-A **PR reviewer agent** tuned for your project's conventions. By the end you'll have:
-
-1. A level-0 remix of the default reviewer with your project-specific rules.
-2. A level-1 upgrade that adds a custom check (optional — do this part if level 0 isn't enough).
+Open a project in Codebolt Desktop with a configured model provider. You'll remix an existing agent and give it instructions for reviewing your project's changes.
 
 ## Part 1 — Level 0 remix
 
-### Step 1: scaffold
+### Step 1 — create the remix
 
-```bash
-cd /path/to/your/project
-codebolt action agent create --name my-pr-reviewer --template reviewer
+In Chat, open the agent picker and select **Create Agent → Remix Agent**. Under **Remix From**, choose an agent that can inspect your project's files and Git diff. Name the remix `my-pr-reviewer`.
+
+### Step 2 — add review instructions
+
+Paste these example rules into **Custom Instructions**. Replace the paths with the ones your project uses, then select **Create**.
+
+```text
+Review the staged changes for bugs and violations of these project conventions.
+
+- Keep database access in the repository layer under src/db/repos/.
+- Define public API types in src/types/api.ts.
+- Place tests under tests/ and mirror their source paths.
+
+Leave the files as they are. Report one finding per bullet with its file
+and line number. End with APPROVE, REQUEST_CHANGES, or NEEDS_DISCUSSION.
 ```
 
-This creates `.codebolt/agents/remix/my-pr-reviewer.md` — a Markdown file with YAML frontmatter.
+Codebolt saves the remix in `.codebolt/agents/remix/my-pr-reviewer.md`. The YAML front matter stores the base agent and settings. The Markdown body stores the instructions.
 
-### Step 2: write the remix
+### Step 3 — try a review
 
-Open `.codebolt/agents/remix/my-pr-reviewer.md` and edit:
+Open a Chat tab, select `my-pr-reviewer` in the agent picker, and send this message.
 
-```markdown
----
-name: my-pr-reviewer
-description: Reviews PRs for this project's conventions.
-model: claude-sonnet-4-6
-tools:
-  - codebolt_fs.read_file
-  - codebolt_fs.search_files
-  - codebolt_codebase.*
-  - codebolt_git.git_diff
-  - codebolt_git.git_status
-  - codebolt_git.git_logs
-remixedFromId: reviewer
-customInstructions: |
-  You are a code reviewer for the Acme project.
-
-  Project conventions you MUST enforce:
-  - All async functions must have explicit error handling; no bare `await` without try/catch.
-  - Database access only via the repository layer in src/db/repos/. Direct knex calls in other files are a bug.
-  - Public API types live in src/types/api.ts. Any new public type added elsewhere is a bug.
-  - Test files mirror source paths under tests/.
-
-  Focus on runtime bugs and convention violations. Do NOT comment on:
-  - Style (we have a formatter).
-  - Performance unless it's algorithmic (O(n²) where O(n) is possible).
-  - Variable naming preferences.
-
-  Be concise. One bullet per issue. Include file:line. End with a summary verdict:
-  "APPROVE", "REQUEST_CHANGES", or "NEEDS_DISCUSSION".
----
-```
-
-What changed from the default reviewer:
-
-- **Project-specific rules** in the custom instructions. The LLM will check for them.
-- **Explicit "do NOT comment on..."** clauses. This trims noise.
-- **Read-only tools.** The reviewer can't accidentally change files.
-- **Git read tools** so it can see the diff and history.
-- **A structured verdict** (APPROVE/REQUEST_CHANGES/NEEDS_DISCUSSION) that downstream tooling can parse.
-
-### Step 3: test it
-
-Restart Codebolt or reload the project. The new agent should appear in the agent picker.
-
-### Step 4: use it
-
-In the chat, pick `my-pr-reviewer` from the agent picker and send:
-
-```
+```text
 Review my current staged changes.
 ```
 
-Or from the CLI:
+Check the findings against the diff. To edit the prompt, open **Agents → Agents** from the bottom bar and use **Edit Remix** on the agent's row.
+
+You can also run the review from the CLI.
 
 ```bash
 codebolt --prompt "review the staged changes" --agent my-pr-reviewer
 ```
 
-### When level 0 is enough
-
-For most review agents it is. You get:
-
-- Custom rules in the instructions.
-- Read-only safety.
-- Project-specific model choice.
-
-All without writing code. Ship this, use it, see what breaks, iterate by editing the markdown file.
-
 ## Part 2 — Level 1 upgrade (optional)
 
 Do this part when your rules get complex enough that embedding them in instructions isn't enough — for example, if you want to mechanically verify something, not ask the LLM to check it.
 
-Level 1 agents are framework-based TypeScript projects. See [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md) for the full walkthrough on creating framework agents with custom logic, processors, and mechanical checks.
+The [Custom Agent Quickstart](../../04_build-on-codebolt/02_creating-agents/02_quickstart.md#part-2--framework-agent-level-1) explains the files Codebolt generates and shows how to implement, build, and test a TypeScript handler. See [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md) for the full walkthrough on creating framework agents with custom logic, processors, and mechanical checks.
 
 ## What you learned
 
 - **Start at level 0.** A remix is often enough.
 - **Graduate only when the instructions aren't sufficient.** "I want the LLM to definitely not miss X" often means X should be a mechanical check, not a prompt instruction.
-- **Read-only reviewers are safer.** Restrict tools the agent doesn't need.
 - **Iterate.** The first version won't be right. Test, edit, test again.
 
 ## Where to next

@@ -234,9 +234,8 @@ const sidebars = {
 
   buildSidebar: [
     doc('Developer Overview', `${build}/overview`),
-    doc('Development Setup', 'guides/first-steps/build-your-first-agent'),
     group('Build Agents', [
-      doc('Your First Custom Agent', `${create}/quickstart`),
+      doc('Create Your First Agent', `${create}/quickstart`),
       doc('Agent Runtime & Lifecycle', `${create}/agent-anatomy/lifecycle`),
       doc('Tools & Tool Access', `${extend}/mcp-tools/overview`),
       doc('Message Modifiers & Processors', `${create}/processors/what-are-processors`),

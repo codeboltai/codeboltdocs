@@ -30,7 +30,7 @@ Use these for:
 
 Important:
 
-- In `CodeboltAgent`, supplying `processors.messageModifiers` replaces the default message-modifier set.
+- `Agent` merges custom message modifiers with the defaults by processor identity. Set `includeDefaultModifiers: false` to supply your own default list.
 
 ## Family 2 — Pre-Inference Processors
 

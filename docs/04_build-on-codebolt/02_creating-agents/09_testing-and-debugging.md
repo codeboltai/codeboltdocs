@@ -77,23 +77,22 @@ Everything your agent writes to stdout/stderr appears in the debug panel:
 codebolt.onMessage(async (reqMessage) => {
   console.log('[my-agent] Received:', reqMessage.userMessage?.substring(0, 100));
 
-  const agent = new CodeboltAgent({
+  const agent = new Agent({
     instructions: systemPrompt,
-    enableLogging: true,  // Logs internal events (compaction, tool refresh, errors)
+    enableLogging: true,
   });
 
-  const result = await agent.processMessage(reqMessage);
+  const result = await agent.run(reqMessage);
   console.log('[my-agent] Done:', result.success ? 'success' : result.error);
 });
 ```
 
 ### enableLogging
 
-With `enableLogging: true` (the default), `CodeboltAgent` logs:
-- Compaction decisions and token savings
-- Tool refresh results
-- Error recovery attempts
+With `enableLogging: true` (the default), `Agent` logs:
 - Execution failures
+- Failures to refresh tools or load compacted thread context
+- Message start and finish when using `agent.start()`
 
 ### Prefix your logs
 

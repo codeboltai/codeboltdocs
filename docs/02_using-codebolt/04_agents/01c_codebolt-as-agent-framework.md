@@ -19,7 +19,7 @@ The difference is that Codebolt agents don't run *inside* your application proce
 
 | Package | What it is | Where it runs |
 |---|---|---|
-| **[`@codebolt/agent`](https://www.npmjs.com/package/@codebolt/agent)** | The unified agent framework — `CodeboltAgent`, `Agent`, `createTool`, `Workflow`, processors, compaction | Inside the Codebolt server (your laptop, a container, or a cloud sandbox) |
+| **[`@codebolt/agent`](https://www.npmjs.com/package/@codebolt/agent)** | The unified agent framework — `Agent`, `createAgent`, `createTool`, `Workflow`, processors, compaction | Inside the Codebolt server (your laptop, a container, or a cloud sandbox) |
 | **[`@codebolt/client-sdk`](https://www.npmjs.com/package/@codebolt/client-sdk)** | The client you call agents from — REST + WebSocket modules typed end-to-end, can also spawn the server as a child process | Your application (Next.js, Express, a CLI, a worker) |
 
 You can use them together (define agent + drive it from a Next.js app), or independently — every marketplace agent is built on `@codebolt/agent`, and the client SDK works against any Codebolt server regardless of which agents are installed.
@@ -65,7 +65,7 @@ const agent = createAgent({
 **Codebolt** (`@codebolt/agent/unified`)
 
 ```ts
-import { createCodeboltAgent, createTool } from '@codebolt/agent/unified';
+import { createAgent, createTool } from '@codebolt/agent/unified';
 import { z } from 'zod';
 
 const getWeather = createTool({
@@ -76,49 +76,43 @@ const getWeather = createTool({
   execute: async ({ input }) => ({ summary: `It's always sunny in ${input.city}!` }),
 });
 
-export const testAgent = createCodeboltAgent({
+export const testAgent = createAgent({
   systemPrompt: 'You are a helpful assistant.',
+  tools: [getWeather],
   allowedTools: ['get_weather'],
   maxTurns: 10,
 });
 
-const result = await testAgent.processMessage('What is the weather in New York?');
+const result = await testAgent.run('What is the weather in New York?');
 if (result.success) {
-  console.log(result.finalMessage ?? result.result);
+  console.log(result.finalMessage ?? result.state?.prompt);
 }
 ```
 
-If you have a Mastra or LangChain agent you want to port, the migration is largely the same primitives — `Agent` → `CodeboltAgent`, `tool(...)` → `createTool(...)`. The model is selected by your provider configuration in the server, so you don't pass it into the agent definition; instructions, tools, and turn limits are what you express in code.
+If you have a Mastra or LangChain agent you want to port, the migration is largely the same primitives — `Agent` → `Agent`, `tool(...)` → `createTool(...)`. The model is selected by your provider configuration in the server, so you don't pass it into the agent definition; instructions, tools, and turn limits are what you express in code.
 
-## Two entry points, one runtime
+## Agent configuration
 
-`@codebolt/agent/unified` exposes two entry points into the same pipeline. Pick by how much of the default behaviour you want.
-
-| Entry point | What you get | When to use |
-|---|---|---|
-| **`createCodeboltAgent({...})`** / **`new CodeboltAgent({...})`** | Codebolt-aware defaults: chat history, environment context, IDE context, system prompt, tool injection, `@file` resolution all wired in | Most agents — you only need to set instructions, tools, and turn limits |
-| **`new Agent({...})`** | The raw runtime — you pass every processor in `processors.*` yourself | Custom prompt assembly, headless / non-IDE agents, deliberation flows, anything where the defaults are noise |
-
-`CodeboltAgent` *is* an `Agent` underneath; the only difference is the seven default message modifiers it preinstalls (`ChatHistoryMessageModifier`, `EnvironmentContextModifier`, `DirectoryContextModifier`, `IdeContextModifier`, `CoreSystemPromptModifier`, `ToolInjectionModifier`, `AtFileProcessorModifier`). Override `processors.messageModifiers` and the defaults are dropped.
+`createAgent()` constructs the same `Agent` instance as the constructor. Both install the standard message modifiers by default. Custom processors merge into each slot by identity. Set `includeDefaultModifiers: false` to provide the standard message list yourself.
 
 ## The runtime pipeline
 
-Both entry points run the same pipeline per turn. Knowing it makes the processor hook points obvious.
+The pipeline runs prompt assembly, inference, and tool execution.
 
 <AgentPipeline />
 
 You inject behaviour by inserting processors into any of the five hook arrays:
 
 ```ts
+import { Agent } from '@codebolt/agent/unified';
 import {
-  CodeboltAgent,
   ChatCompressionModifier,
   LoopDetectionModifier,
   ToolValidationModifier,
   ShellProcessorModifier,
-} from '@codebolt/agent/unified';
+} from '@codebolt/agent/processor-pieces';
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: 'Help safely with repository maintenance.',
   processors: {
     preInferenceProcessors: [new ChatCompressionModifier()],
@@ -130,7 +124,7 @@ const agent = new CodeboltAgent({
 });
 ```
 
-The runtime also runs a layered **compaction pipeline** (`SnipCompact`, `MicroCompact`, `ContextCollapse`, `AutoCompact`, `ReactiveCompact`, `PostCompactCleanup`) to keep the transcript inside the model's token window across long runs. Reactive compaction can retry recoverable token-limit failures by shrinking the transcript and rerunning the step, so agents don't fail mid-task on overflow.
+The agent can load compacted context for the current thread from the server. See [Unified Agent](../../04_build-on-codebolt/02_creating-agents/06_patterns/unified-agent.md) for run results, state, and the default loop.
 
 ## Workflows
 

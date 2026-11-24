@@ -9,27 +9,27 @@ The `@codebolt/agent` package is the framework agents run on top of. It provides
 
 ## Package Exports
 
-The framework currently ships two sub-path exports:
+Import the agent loop and processors from these package entry points.
 
 | Export | Import | What it provides |
 |---|---|---|
-| **Unified** | `@codebolt/agent/unified` | Core agent classes: `CodeboltAgent`, `Agent`, `AgentStep`, `ResponseExecutor`, `InitialPromptGenerator`, `Tool`, `Workflow`, loop detection, compaction services |
+| **Unified** | `@codebolt/agent/unified` | `Agent`, `createAgent`, `AgentStep`, `ResponseExecutor`, `InitialPromptGenerator`, `Tool`, `Workflow`, and loop detection |
 | **Processor Pieces** | `@codebolt/agent/processor-pieces` | Reusable message modifiers and processors for the agent pipeline |
 
 ## Quick Start
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
-import { CodeboltAgent } from '@codebolt/agent/unified';
+import { Agent } from '@codebolt/agent/unified';
 import { FlatUserMessage } from '@codebolt/types/sdk';
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: 'You are a helpful coding assistant.',
   enableLogging: true,
 });
 
 codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
-  const result = await agent.processMessage(reqMessage);
+  const result = await agent.run(reqMessage);
 
   if (!result.success) {
     throw new Error(result.error ?? 'Agent failed');
@@ -47,7 +47,7 @@ codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
 
 ## See also
 
-- [codeboltjs Reference](../02_codeboltjs/01_overview.md) — `ctx.*` API methods agents call
+- [codeboltjs Reference](../02_codeboltjs/01_overview.md) — SDK methods agents call
 - [Creating Agents](../../04_build-on-codebolt/02_creating-agents/01_overview.md) — authoring guide
 - [Level 1 — Framework](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-2-framework.md) — how to build agents with the framework
 - [Processors](../../04_build-on-codebolt/02_creating-agents/07_processors/01_what-are-processors.md) — processor pipeline docs

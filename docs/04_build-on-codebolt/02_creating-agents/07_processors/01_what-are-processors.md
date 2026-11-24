@@ -8,11 +8,11 @@ description: Processors are typed hook points inside the @codebolt/agent loop
 
 Processors are typed hook points inside the `@codebolt/agent` loop. They let you change prompt assembly, LLM preparation, post-response handling, or tool execution without rewriting the whole agent.
 
-In the current framework, the reusable built-ins live in `@codebolt/agent/processor-pieces`, and `CodeboltAgent` consumes them through its `processors` config.
+In the current framework, the reusable built-ins live in `@codebolt/agent/processor-pieces`, and `Agent` consumes them through its `processors` config.
 
 ## Where processors run
 
-`CodeboltAgent` runs processors in this order:
+`Agent` runs processors in this order:
 
 1. `messageModifiers`
 2. `preInferenceProcessors`
@@ -54,7 +54,7 @@ If you need a new capability, build a tool. If you need a different loop, write 
 ## The real `processors` shape
 
 ```ts
-import { CodeboltAgent } from "@codebolt/agent/unified";
+import { Agent } from "@codebolt/agent/unified";
 import {
   AtFileProcessorModifier,
   ConversationCompactorModifier,
@@ -62,7 +62,7 @@ import {
   LoopDetectionModifier,
 } from "@codebolt/agent/processor-pieces";
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: "Help with repository maintenance.",
   processors: {
     messageModifiers: [
@@ -81,22 +81,12 @@ const agent = new CodeboltAgent({
 
 Two important details from the current implementation:
 
-- `processors.messageModifiers` **replaces** the default `CodeboltAgent` message pipeline.
-- The other processor arrays default to empty, so adding to them is additive.
+- The constructor merges each slot by processor identity. A custom processor with the same identity takes that processor’s place.
+- Set `includeDefaultModifiers: false` to omit the standard message list. The separately configured event queue and tool-event guidance can still add processors.
 
 ## Defaults vs opt-in processors
 
-Only `messageModifiers` have built-in defaults in `CodeboltAgent`. The default order is:
-
-1. `ChatHistoryMessageModifier`
-2. `EnvironmentContextModifier`
-3. `DirectoryContextModifier`
-4. `IdeContextModifier`
-5. `CoreSystemPromptModifier`
-6. `ToolInjectionModifier`
-7. `AtFileProcessorModifier`
-
-Everything else in `processor-pieces` is opt-in.
+See [Built-in Processors](./03_built-in-processors.md#default-agent-message-pipeline) for the ordered message pipeline and the event-queue and guidance processors that run by default.
 
 ## What processors are not
 

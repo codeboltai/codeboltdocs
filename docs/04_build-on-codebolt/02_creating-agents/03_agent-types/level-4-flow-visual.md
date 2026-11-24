@@ -25,17 +25,13 @@ Flow agents and code agents are fully interchangeable from the server's perspect
 
 ### From the desktop app
 
-1. Open **Agent Creator** panel (sidebar or `⌘ K` → "Create Agent").
-2. Select **Visual Flow Agent**.
-3. Codebolt scaffolds an `.agentflow` file at:
-   ```
-   agentflows/agentflow_{timestamp}_{random}.agentflow
-   ```
-4. The **Agent Flow Editor** opens automatically.
+1. Open your project. In the bottom bar, select **Agents → Agents**.
+2. In the **Customize** panel, select **Create → Flow Agent**. Enter a name and select **Create**.
+3. Find the agent in the list and select **Open Flow Editor**.
 
-### From the CLI
+You can also create the flow from the Chat picker under **Create Agent → Create Flow Agent**. Use **Open Flow Editor** in the **Agents** list to edit it.
 
-Create and edit visual flows in the desktop AgentFlow editor.
+Codebolt writes the graph to `.codebolt/agents/<name>/agent.agentflow` and saves the agent settings in `codeboltagent.yaml` alongside it. The starter graph contains an incoming-message node. Add and connect nodes to define what the agent does with that message.
 
 ## The editor
 
@@ -440,7 +436,7 @@ The Agent Flow system exposes a REST API at `/agentflow`:
 
 | Method | Path | Purpose |
 |---|---|---|
-| `POST` | `/agentflow/create` | Create a new empty `.agentflow` file |
+| `POST` | `/agentflow/create` | Create a project flow agent with a starter graph and manifest |
 | `GET` | `/agentflow/get?filePath=` | Load flow data from disk |
 | `PUT` | `/agentflow/update` | Save the current graph state to disk |
 | `GET` | `/agentflow/plugins` | List all installed agent node plugins |
@@ -449,12 +445,13 @@ The Agent Flow system exposes a REST API at `/agentflow`:
 **Create:**
 ```http
 POST /agentflow/create
-→ { success: true, filePath: "agentflows/agentflow_1714000000_abc.agentflow" }
+Body: { "agentName": "my-flow" }
+→ { success: true, filePath: "/path/to/project/.codebolt/agents/my-flow/agent.agentflow", ... }
 ```
 
 **Load:**
 ```http
-GET /agentflow/get?filePath=agentflows/agentflow_1714000000_abc.agentflow
+GET /agentflow/get?filePath=/path/to/project/.codebolt/agents/my-flow/agent.agentflow
 → { success: true, data: { ...LiteGraphData }, filePath: "..." }
 ```
 

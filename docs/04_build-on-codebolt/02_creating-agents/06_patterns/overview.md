@@ -10,37 +10,26 @@ The `@codebolt/agent` package provides two exports:
 
 | Export | When to use |
 |---|---|
-| **`@codebolt/agent/unified`** | Use the default agentic loop as-is — [CodeboltAgent](./unified-agent.md) |
+| **`@codebolt/agent/unified`** | Use the default agentic loop as-is — [Unified Agent](./unified-agent.md) |
 | **`@codebolt/agent/processor-pieces`** | Customize the loop by adding/swapping processors — [Processor Pattern](./processor-pattern.md) |
 
-## Picking one
+## Configure the unified agent
 
-- **Don't need to change the loop?** → Use [CodeboltAgent](./unified-agent.md). Provide `instructions`, call `processMessage`, done.
-- **Need to add processors, swap modifiers, or hook into specific phases?** → Use the [Processor Pattern](./processor-pattern.md). Same `CodeboltAgent` class, but you configure the `processors` slots.
-- **Need full control with no defaults?** → Use `Agent` (the bare class, see below).
+Use [Unified Agent](./unified-agent.md) to run the default loop. Set instructions through `createAgent()` or the `Agent` constructor, then call `agent.run()` from a Chat handler. Use the [Processor Pattern](./processor-pattern.md) to add or replace processors in the same loop.
 
-## The two classes
-
-### CodeboltAgent — use the loop as-is
-
-`CodeboltAgent` is the batteries-included agent class. Use it when you **don't need to change any logic in the agentic loop**. You provide instructions, the framework handles everything else — context assembly, LLM calls, tool execution, compaction, error recovery.
+### Default pipeline
 
 ```ts
-import { CodeboltAgent } from '@codebolt/agent/unified';
+import { createAgent } from '@codebolt/agent/unified';
 
-const agent = new CodeboltAgent({
-  instructions: 'You are a helpful coding assistant.',
+const agent = createAgent({
+  systemPrompt: 'You are a helpful coding assistant.',
 });
 ```
 
-Use `CodeboltAgent` when:
-- The default loop is exactly what you need.
-- You just want to set a system prompt and go.
-- You don't need custom processors, modifiers, or hooks.
+### Explicit message pipeline
 
-### Agent — the bare class
-
-`Agent` implements the same loop but with **no default message modifiers**. You supply everything yourself through the `processors` config.
+Set `includeDefaultModifiers: false` to supply the message pipeline explicitly. Event-queue injection and tool-event guidance have their own settings.
 
 ```ts
 import { Agent } from '@codebolt/agent/unified';
@@ -50,26 +39,24 @@ import {
   ToolInjectionModifier,
 } from '@codebolt/agent/processor-pieces';
 
+const systemPrompt = 'Help with the current project and cite the relevant files.';
+
 const agent = new Agent({
-  instructions: 'You are a specialist agent.',
+  instructions: systemPrompt,
+  includeDefaultModifiers: false,
   processors: {
     messageModifiers: [
       new DirectoryContextModifier(),
-      new CoreSystemPromptModifier({ customSystemPrompt: 'Custom prompt here.' }),
+      new CoreSystemPromptModifier({ customSystemPrompt: systemPrompt }),
       new ToolInjectionModifier({ includeToolDescriptions: true }),
     ],
   },
 });
 ```
 
-Use `Agent` when:
-- You need full control over which modifiers run.
-- You're building infrastructure that assembles agents from config.
-- The default `CodeboltAgent` pipeline includes modifiers you don't want.
-
 ## Building blocks
 
-Both classes are built from lower-level components you can also use directly:
+`Agent` composes the following components.
 
 | Component | What it does |
 |---|---|
@@ -79,9 +66,8 @@ Both classes are built from lower-level components you can also use directly:
 | `Tool` | Wraps a function with Zod input/output validation |
 | `Workflow` | Orchestrates multi-step processes with input/output schemas |
 | `LoopDetectionService` | Detects and breaks infinite loops |
-| `CompactionOrchestrator` | Multi-layer conversation compaction (snip, micro, context collapse, auto, reactive) |
 
-Use these directly when `CodeboltAgent`'s loop shape doesn't match your needs but you still want framework components instead of raw `@codebolt/codeboltjs`.
+Use these directly when `Agent`'s loop shape doesn't match your needs but you still want framework components instead of raw `@codebolt/codeboltjs`.
 
 ```ts
 const prompt = await promptGenerator.processMessage(reqMessage);
@@ -96,7 +82,7 @@ const execution = await responseExecutor.executeResponse({
 
 ## See also
 
-- [CodeboltAgent](./unified-agent.md) — detailed API reference
+- [Unified Agent](./unified-agent.md) — detailed API reference
 - [Processor Pattern](./processor-pattern.md) — customizing the pipeline with processor-pieces
 - [Level 1 — Framework](../03_agent-types/level-2-framework.md) — full walkthrough
 - [Processors](../07_processors/01_what-are-processors.md) — the modifier pipeline

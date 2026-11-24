@@ -10,6 +10,8 @@ This subsection is about *authoring* agents. If you want an AI specialised for y
 
 For *extending* existing agents without writing a new one, see [Agent Extensions](../03_agent-extensions/01_overview.md).
 
+To start from the desktop app, open the Chat agent picker and select **Create Agent**. The [Custom Agent Quickstart](./02_quickstart.md) walks through the creation menu, the files generated for a code agent, and a runnable TypeScript handler.
+
 ## What a custom agent is
 
 An agent is a program the server spawns when there's work to do. It:
@@ -81,18 +83,18 @@ Send any message from the chat — you'll see the echo in reply.
 
 `codebolt.onMessage()` is the standard entry point for all agents. It registers a handler that fires when the user sends a message. The WebSocket connection is handled automatically — you don't need to call any connection method yourself.
 
-For a real agent with LLM loop, use level 1 with `CodeboltAgent`:
+For a real agent with LLM loop, use level 1 with `Agent`:
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
-import { CodeboltAgent } from '@codebolt/agent/unified';
+import { Agent } from '@codebolt/agent/unified';
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: 'You are a helpful coding assistant.',
 });
 
 codebolt.onMessage(async (reqMessage) => {
-  const result = await agent.processMessage(reqMessage);
+  const result = await agent.run(reqMessage);
   return result.finalMessage;
 });
 ```
@@ -103,10 +105,10 @@ At level 1 you write a small TypeScript file that:
 
 - Declares a `codeboltagent.yaml` with metadata (name, description, default model, allowed tools).
 - Exports a handler that receives a typed input and returns a typed output.
-- Optionally uses `CodeboltAgent` or `Agent` from `@codebolt/agent/unified` (see [Patterns](./06_patterns/overview.md)) to get the full agent loop without writing boilerplate.
+- Optionally uses `Agent` or `createAgent` from `@codebolt/agent/unified` (see [Patterns](./06_patterns/overview.md)) to get the full agent loop without writing boilerplate.
 - Optionally registers **processors** that modify the prompt assembly, tool calling, or response handling (see [Processors](./07_processors/01_what-are-processors.md)).
 
-The framework handles: the agent loop, context assembly, tool validation, memory writes, event log integration, heartbeats. You handle: what makes your agent different from the default.
+The framework assembles the prompt, calls the model, executes tools, and carries the updated prompt into the next turn. Configure the instructions, tool implementations, and processors your agent needs.
 
 Then your agent consumes [Agent Extensions](../03_agent-extensions/01_overview.md) — skills, action blocks, MCP tools — the same way every other agent does.
 
@@ -114,12 +116,11 @@ Then your agent consumes [Agent Extensions](../03_agent-extensions/01_overview.m
 
 You don't write the agent loop from scratch at level 1. You pick a pattern:
 
-- **[CodeboltAgent](./06_patterns/unified-agent.md)** — the recommended default. Batteries-included with a default message modifier pipeline, compaction, and tool management. Start here.
-- **[Processor Pattern](./06_patterns/processor-pattern.md)** — customize the pipeline by plugging processors from `@codebolt/agent/processor-pieces` into CodeboltAgent's five slots.
-- **[Agent](./06_patterns/overview.md)** — the bare class with no default modifiers. Use when you need full control over which processors run.
+- **[Unified Agent](./06_patterns/unified-agent.md)** — run the default pipeline with `createAgent()` or `new Agent()`.
+- **[Processor Pattern](./06_patterns/processor-pattern.md)** — customize the pipeline by plugging processors from `@codebolt/agent/processor-pieces` into Agent's five slots.
 - **Building blocks** — `InitialPromptGenerator`, `AgentStep`, `ResponseExecutor` can be used directly when you need a custom loop shape.
 
-Pick `CodeboltAgent` unless you have a specific reason not to.
+Pick `Agent` unless you have a specific reason not to.
 
 ## The anatomy of an agent
 

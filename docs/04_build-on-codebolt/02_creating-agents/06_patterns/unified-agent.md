@@ -1,139 +1,96 @@
 ---
 sidebar_position: 2
-title: CodeboltAgent
-description: Use CodeboltAgent when you don't need to change any logic in the agentic loop
+title: Unified Agent
+description: Run the Codebolt agent loop with createAgent, as the Act sample does.
 ---
 
-# CodeboltAgent
+# Unified Agent
 
-Use `CodeboltAgent` when you don't need to change any logic in the agentic loop. You provide `instructions`, call `processMessage`, and the framework handles everything — context assembly, LLM calls, tool execution, compaction, and error recovery.
-
-If you need to customize the loop — add processors, swap modifiers, inject pre/post hooks — use the [Processor Pattern](./processor-pattern.md) instead.
-
-Source: `packages/agent/src/unified/agent/codeboltAgent.ts`
+`@codebolt/agent/unified` exports the `Agent` class and the `createAgent` factory. The factory constructs an `Agent` and uses `systemPrompt` as `instructions` when `instructions` is omitted.
 
 ## Quick start
 
+This is the entry point used by the `act-updated` sample, with a short prompt substituted for Act's prompt.
+
 ```ts
 import codebolt from '@codebolt/codeboltjs';
-import { CodeboltAgent } from '@codebolt/agent/unified';
-import { FlatUserMessage } from '@codebolt/types/sdk';
+import { createAgent } from '@codebolt/agent/unified';
+import type { FlatUserMessage } from '@codebolt/types/sdk';
 
-const agent = new CodeboltAgent({
-  instructions: 'You are a helpful coding assistant.',
+const systemPrompt = 'Help with the current project and explain your findings.';
+
+const agent = createAgent({
+  systemPrompt,
+  enableLogging: true,
+  structuredToolResults: true,
 });
 
 codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
-  const result = await agent.processMessage(reqMessage);
-
-  if (!result.success) {
-    throw new Error(result.error ?? 'Agent failed');
-  }
-
-  return result.finalMessage;
+  const result = await agent.run(reqMessage);
+  return result.success
+    ? result.finalMessage ?? ''
+    : result.error ?? 'Agent execution failed.';
 });
 ```
 
-## processMessage
+Create the agent once to set its instructions and configuration. The SDK registers the callback once the connection is ready. Codebolt calls it with the incoming Chat message, including its thread and attachments. `agent.run()` processes that request, and the callback returns the final text or error to Codebolt on completion.
 
-```ts
-const result = await agent.processMessage(message);
-const result = await agent.processMessage(message, context);
-```
+Act opts into `structuredToolResults`. This lets the response executor preserve structured tool outcomes and native screenshots when available.
 
-| Parameter | Type | Description |
-|---|---|---|
-| `message` | `string \| FlatUserMessage` | The user message. A plain string is auto-wrapped into a `FlatUserMessage` |
-| `context` | `ProcessedMessage` (optional) | Continue from a previous conversation state — skips initial prompt generation |
+## What it does under the hood
 
-### Return value
+1. `InitialPromptGenerator` prepares the prompt with message modifiers. The run also checks the server for compacted context for the current thread and merges it when available.
+2. Before each inference turn, `Agent` refreshes discovered tools when the prompt calls for tool refresh and merges any registered local tools.
+3. `AgentStep` applies the inference processors and calls the model.
+4. `ResponseExecutor` handles model output, sends assistant messages to Chat, and runs requested tools with the tool-call processors. It produces the next prompt, any tool results, and a completion status.
+5. The loop feeds the next prompt back into inference until the executor reports completion or failure, or the run reaches its turn limit.
 
-| Field | Type | Description |
-|---|---|---|
-| `success` | `boolean` | Whether the run completed without errors |
-| `result` | `ProcessedMessage \| null` | The final conversation state |
-| `context` | `ProcessedMessage \| null` | Same as `result` — pass to a follow-up call to continue |
-| `finalMessage` | `string \| undefined` | The agent's final text response |
-| `error` | `string \| undefined` | Error message (only when `success` is `false`) |
+## Calling the agent
+
+`agent.run(message, options?)` accepts a `FlatUserMessage` or a string. Use the incoming `FlatUserMessage` in a Chat handler to retain its thread ID and context. For direct calls, the library wraps a string as a new request.
+
+`agent.processMessage()` takes the same arguments and delegates to `run()`. To let the library register the Chat handler, call `agent.start()`.
+
+| Result field | Meaning |
+|---|---|
+| `success` | Whether the run completed successfully. |
+| `state` | The final prompt, exposed as `state.prompt` when available. |
+| `toolResults` | Tool results accumulated by the run. |
+| `finalMessage` | Final response text, when present. |
+| `error` | Failure details, when present. |
+
+The older `result` and `context` fields are deprecated aliases for the prompt.
 
 ## Continuing a conversation
 
-```ts
-const firstResult = await agent.processMessage(reqMessage);
-
-const secondResult = await agent.processMessage(
-  'Continue from the previous result.',
-  firstResult.context,
-);
-```
-
-Or create a new agent with the context:
+Pass the previous state explicitly. The library runs the resume modifiers against the supplied prompt and skips the chat-history modifier so it can reuse the history in that prompt.
 
 ```ts
-const followUpAgent = new CodeboltAgent({
-  instructions: 'Continue the previous task.',
-  context: firstResult.context ?? undefined,
-});
+const first = await agent.run(firstMessage);
 
-const secondResult = await followUpAgent.processMessage('What was the outcome?');
+if (first.success && first.state) {
+  const followUp = await agent.run(nextMessage, { state: first.state });
+  console.log(followUp.finalMessage ?? followUp.error);
+}
 ```
 
 ## Configuration
 
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `instructions` | `string` | `'Based on User Message send reply'` | System prompt |
-| `enableLogging` | `boolean` | `true` | Log execution events to console |
-| `maxTurns` | `number` | `25` | Maximum LLM turns before the agent throws |
-| `allowedTools` | `string[]` | all tools | Restrict available tools by name |
-| `context` | `ProcessedMessage` | — | Resume from a previous conversation |
-| `loopDetectionService` | `LoopDetectionService` | — | Detect and break infinite loops |
-| `compaction` | `CompactionOrchestratorOptions` | `{}` | Conversation compaction settings |
+| Option | Behavior |
+|---|---|
+| `instructions` | The system prompt. `createAgent()` also accepts `systemPrompt`. |
+| `maxTurns` | Defaults to 100 inference turns. A value of `0` removes the explicit turn limit. Hitting the limit returns a failure result. |
+| `loopDetectionService` | The library creates a detector per run by default. Pass `false` to disable it, or pass a configured detector. |
+| `allowedTools`, `tools` | Select available tool names and register local tool implementations, respectively. |
+| `processors` | Add message, inference, and tool-call processors. The library merges them by processor identity. |
+| `includeDefaultModifiers` | Set to `false` to supply your own message-modifier pipeline. Event-queue injection has its own setting. |
+| `eventQueue`, `toolEventGuidance` | Control the built-in event injection and post-tool guidance. Both are enabled by default. |
+| `structuredToolResults` | Opt in to structured tool outcomes and supported native screenshots. Defaults to `false`. |
 
-Need to customize the pipeline? See [Processor Pattern](./processor-pattern.md).
-
-## What it does under the hood
-
-Each turn:
-
-1. **Compaction** — compresses the conversation if it's getting long.
-2. **Tool refresh** — re-fetches available tools from MCP servers.
-3. **LLM call** — sends the prompt, gets back text or tool calls.
-4. **Tool execution** — runs any tool calls the LLM requested.
-5. **Check** — if the LLM produced a final answer, return. Otherwise, next turn.
-
-If the LLM hits a token limit, the agent automatically tries reactive compaction and retries.
-
-## Default message modifiers
-
-When you don't customize `processors.messageModifiers`, these run automatically:
-
-1. `ChatHistoryMessageModifier` — prior thread history
-2. `EnvironmentContextModifier` — date, platform, workspace path
-3. `DirectoryContextModifier` — workspace file tree
-4. `IdeContextModifier` — active file, open files, cursor, selection
-5. `CoreSystemPromptModifier` — your `instructions`
-6. `ToolInjectionModifier` — available tools from Codebolt + MCP servers
-7. `AtFileProcessorModifier` — resolves @file mentions
-
-To customize the pipeline, see [Processor Pattern](./processor-pattern.md).
-
-## createCodeboltAgent helper
-
-Maps `systemPrompt` to `instructions`:
-
-```ts
-import { createCodeboltAgent } from '@codebolt/agent/unified';
-
-const agent = createCodeboltAgent({
-  systemPrompt: 'You are a helpful assistant.',
-  maxTurns: 20,
-});
-```
+See [Built-in Processors](../07_processors/03_built-in-processors.md) for the default message pipeline and [Processor Pattern](./processor-pattern.md) for customization examples.
 
 ## See also
 
+- [Level 1 — Framework](../03_agent-types/level-2-framework.md)
+- [Custom Agent Quickstart](../02_quickstart.md)
 - [Patterns Overview](./overview.md)
-- [Processor Pattern](./processor-pattern.md) — customizing the pipeline
-- [Level 1 — Framework](../03_agent-types/level-2-framework.md) — project layout and build
-- [Built-in Processors](../07_processors/03_built-in-processors.md) — all shipped processors

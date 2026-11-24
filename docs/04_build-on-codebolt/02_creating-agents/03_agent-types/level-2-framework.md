@@ -22,7 +22,7 @@ If you need complete ownership of the loop and runtime wiring, skip to [level 2]
 
 ## What the framework actually gives you
 
-At the high level, `CodeboltAgent.processMessage()` does four things:
+At the high level, `Agent.run()` does four things:
 
 1. Builds the initial prompt with `InitialPromptGenerator`.
 2. Runs an LLM step with `AgentStep`.
@@ -31,41 +31,40 @@ At the high level, `CodeboltAgent.processMessage()` does four things:
 
 Optional runtime features in the current implementation:
 
-- Default message modifiers if you do not provide your own.
-- Tool refresh before each turn.
-- Loop detection via `LoopDetectionService`.
-- Conversation compaction and recovery via `compaction`.
+- Default message modifiers, merged with your custom modifiers.
+- Tool refresh when discovered or local tools are in use.
+- Per-run loop detection, enabled by default.
+- Prompt hydration from the server’s compacted thread context when available.
 
-This is a concrete runtime API, not a planned one. You do not `export default createCodeboltAgent(...)` as the agent contract. The normal pattern is to register a `codebolt.onMessage(...)` handler and call `processMessage(...)` inside it.
+The normal entry point registers a `codebolt.onMessage(...)` handler and calls `agent.run(...)` from it.
 
 ## The normal entry point
 
-A level-1 agent usually registers `codebolt.onMessage(...)` and delegates to `CodeboltAgent`. That is the pattern used by real agents such as `act-updated`.
+The `act-updated` sample uses `createAgent()` to set up the loop and calls `run()` inside `codebolt.onMessage()`.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
-import { CodeboltAgent } from '@codebolt/agent/unified';
-import { FlatUserMessage } from '@codebolt/types/sdk';
+import { createAgent } from '@codebolt/agent/unified';
+import type { FlatUserMessage } from '@codebolt/types/sdk';
 
-const agent = new CodeboltAgent({
-  instructions: 'You are a helpful coding assistant.',
+const agent = createAgent({
+  systemPrompt: 'Help with the current project and explain your findings.',
   enableLogging: true,
+  structuredToolResults: true,
 });
 
 codebolt.onMessage(async (reqMessage: FlatUserMessage) => {
-  const result = await agent.processMessage(reqMessage);
+  const result = await agent.run(reqMessage);
 
-  if (!result.success) {
-    throw new Error(result.error ?? 'Agent failed');
-  }
-
-  return result.finalMessage;
+  return result.success
+    ? result.finalMessage ?? ''
+    : result.error ?? 'Agent execution failed.';
 });
 ```
 
-The package also exports `createCodeboltAgent(...)`, but it is only a thin convenience wrapper around `new CodeboltAgent(...)`. For anything non-trivial, the class is the clearer surface.
+`createAgent()` builds an `Agent` instance with the default pipeline and maps `systemPrompt` to `instructions` when needed.
 
-If you do not supply custom `messageModifiers`, `CodeboltAgent` installs a default stack:
+The [default message pipeline](../07_processors/03_built-in-processors.md#default-agent-message-pipeline) includes these modifiers:
 
 - `ChatHistoryMessageModifier`
 - `EnvironmentContextModifier`
@@ -77,7 +76,7 @@ If you do not supply custom `messageModifiers`, `CodeboltAgent` installs a defau
 
 ## Customizing the pipeline
 
-`CodeboltAgent` configuration is centered on `instructions` plus optional `context`, `allowedTools`, `enableLogging`, `maxTurns`, `compaction`, `loopDetectionService`, and `processors`.
+`Agent` configuration is centered on `instructions` plus optional `context`, `allowedTools`, `enableLogging`, `maxTurns`, `eventQueue`, `loopDetectionService`, and `processors`.
 
 The real extension points live in `processors`:
 
@@ -87,11 +86,11 @@ The real extension points live in `processors`:
 - `preToolCallProcessors`
 - `postToolCallProcessors`
 
-A trimmed version of the `act-updated` agent looks like this:
+This variant supplies a smaller message pipeline.
 
 ```ts
 import {
-  CodeboltAgent,
+  Agent,
   LoopDetectionService,
 } from '@codebolt/agent/unified';
 import {
@@ -106,16 +105,12 @@ import {
 
 const loopDetectionService = new LoopDetectionService({ debug: true });
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: systemPrompt,
+  includeDefaultModifiers: false,
   enableLogging: true,
   loopDetectionService,
   maxTurns: 30,
-  compaction: {
-    enableLogging: true,
-    autoCompactEnabled: true,
-    contextCollapseEnabled: false,
-  },
   processors: {
     messageModifiers: [
       new ChatHistoryMessageModifier({ enableChatHistory: true }),
@@ -130,16 +125,14 @@ const agent = new CodeboltAgent({
       new CoreSystemPromptModifier({ customSystemPrompt: systemPrompt }),
       new ToolInjectionModifier({ includeToolDescriptions: true }),
       new AtFileProcessorModifier({ enableRecursiveSearch: true }),
-      externalEventProcessor,
     ],
-    postToolCallProcessors: [externalEventPostToolProcessor],
   },
 });
 ```
 
-This is the core level-1 pattern: keep the framework loop, but swap in your own prompt assembly and processing hooks. In `act-updated`, custom processors inject external steering and queued events between turns.
+The constructor keeps the inference and tool loop. The explicit modifiers assemble the prompt, and the built-in event queue can still inject queued messages.
 
-## When `CodeboltAgent` is not enough
+## When `Agent` is not enough
 
 You can drop one layer lower without leaving level 1. The framework exposes its building blocks directly:
 
@@ -164,24 +157,20 @@ If you need to own the entire loop, event wiring, or low-level SDK interaction y
 
 ## Carrying context across calls
 
-`processMessage()` returns the processed conversation context, so you can continue a run in a later call:
+`run()` returns the final prompt in `state`. Use it to continue in a later call.
 
 ```ts
-const firstResult = await agent.processMessage(reqMessage);
+const firstResult = await agent.run(reqMessage);
 
-const followUpAgent = new CodeboltAgent({
-  instructions: systemPrompt,
-  context: firstResult.context ?? undefined,
-});
-
-const secondResult = await followUpAgent.processMessage(
-  'Continue from the previous result.'
-);
+if (firstResult.success && firstResult.state) {
+  const secondResult = await agent.run(nextMessage, { state: firstResult.state });
+  console.log(secondResult.finalMessage ?? secondResult.error);
+}
 ```
 
 ## Processing external events
 
-While an agent is running, external events can arrive — steering instructions from the user, inter-agent messages, or background agent completions. Use `codebolt.agentEventQueue` to poll for these and inject them into the prompt so the LLM sees them on the next turn.
+The default event-queue processors pull in steering messages, inter-agent messages, and background completions. To take over that behavior with a custom processor, set `eventQueue: false` and use `codebolt.agentEventQueue` to read and inject the events.
 
 ### The event queue
 
@@ -256,7 +245,7 @@ function processExternalEvent(event: any, prompt: ProcessedMessage): ProcessedMe
 }
 ```
 
-### Wiring into CodeboltAgent
+### Wiring into Agent
 
 Register the processor in two slots so events are picked up both during initial prompt assembly and after tool calls:
 
@@ -283,8 +272,9 @@ const externalEventPostToolProcessor = {
   },
 };
 
-const agent = new CodeboltAgent({
+const agent = new Agent({
   instructions: systemPrompt,
+  eventQueue: false,
   processors: {
     messageModifiers: [
       // ... your other modifiers ...
@@ -297,7 +287,7 @@ const agent = new CodeboltAgent({
 });
 ```
 
-This gives the agent two chances to see external events per turn: once when the prompt is assembled and once after each tool call completes.
+In this custom pipeline, events enter the prompt during initial assembly and after tool calls.
 
 ## Creating custom tools
 
@@ -333,7 +323,7 @@ The `Tool` class:
 
 ## Building blocks API
 
-When `CodeboltAgent`'s loop doesn't fit your needs, use the building blocks directly:
+When `Agent`'s loop doesn't fit your needs, use the building blocks directly:
 
 ### InitialPromptGenerator
 

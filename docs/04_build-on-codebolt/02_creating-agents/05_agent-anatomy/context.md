@@ -127,7 +127,7 @@ outputs:
 Then your `ctx.input` is typed and your return value is validated:
 
 ```ts
-createCodeboltAgent({
+createAgent({
   async run(ctx, input: { task: string }) {
     // ctx.input.task is string, typed
     return { plan: { steps: ["..."] } };  // validated against outputs
