@@ -118,4 +118,4 @@ See [Project Tool Integration](./04_project-tool-integration.md) for this patter
 
 - [Client SDK](../04_custom-uis/02_client-sdk.md) — full API reference
 - [Chat Integrations](./02_chat-integrations/01_overview.md) — channel plugin pattern
-- [CI/CD Integration](./03_cicd-integration.md) — triggering from pipelines
+- [Headless Prompt](../../02_using-codebolt/02_surfaces/04_cli/03_cli-headless/03_headless-prompt.md#ci-and-automation) — run a Codebolt prompt from a pipeline job

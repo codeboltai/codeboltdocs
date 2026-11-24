@@ -83,13 +83,16 @@ codebolt --prompt "Review this service" \
 
 ## CI and automation
 
-Use Headless Prompt when a single prompt should own the whole lifecycle:
+Install the [Codebolt CLI](../01_cli-interface/00_get-started.md) on the runner, check out the repository, and configure a model provider in the job environment. For example, set `CODEBOLT_LLM_PROVIDER` and supply `CODEBOLT_API_KEY` from your CI secret store when the provider uses an API key.
+
+Run the prompt against the checkout. In a GitHub Actions job, use the workspace path.
 
 ```bash
-codebolt --prompt "Review the current repository" \
-  --project "$GITHUB_WORKSPACE" \
-  --agent generalist
+codebolt --prompt "Summarize the current repository" \
+  --project "$GITHUB_WORKSPACE"
 ```
+
+To use a particular agent, pass `--agent` with an agent available on the runner. The CLI streams the response into the job log and completes when the agent process stops. Treat the output as a report. The agent’s verdict does not determine the job’s exit status.
 
 ## Important limitations
 

@@ -45,7 +45,7 @@ Codebolt exposes these extension points. Agent customization now splits into two
 | **Multi-Agent Orchestration** | Multi-agent coordination design — swarms, flows, roles, and review patterns. | [Multi-Agent Orchestration](./08_multi-agent-orchestration/01_overview.md) |
 | **Multi-Environment Orchestration** | Provider-driven execution across remote or alternate environments. | [Multi-Environment Orchestration](./08a_multi-environment-orchestration/01_overview.md) |
 | **Internals** | How the server works — for devs who need to extend intelligently. | [Internals](./02_architecture/02_architecture-overview.md) |
-| **Building Integrations** | Connect Codebolt to chat apps, CI/CD, project tools, IDEs | [Building Integrations](./10_building-integrations/01_overview.md) |
+| **Building Integrations** | Connect Codebolt to chat apps and project tools | [Building Integrations](./10_building-integrations/01_overview.md) |
 | **Agent Infrastructure** | Run the server yourself — deployment, scaling, remote execution | [Agent Infrastructure](./11_agent-infrastructure/01_overview.md) |
 
 ## Which one do I need?
@@ -62,7 +62,7 @@ A decision guide:
 - **I want to intercept or modify application behaviour project-wide** (hooks, execution routing, provider registration). → [Plugins](./05_plugins/01_overview.md).
 - **I want to build my own UI on top of Codebolt.** → [Custom Interfaces](./04_custom-uis/01_overview.md).
 - **I want a product-specific app with its own UX and maybe a plugin backend.** → [Custom Agentic Applications](./04b_custom-agentic-applications/01_overview.md).
-- **I want to connect Codebolt to Telegram, Discord, Linear, or CI/CD.** → [Building Integrations](./10_building-integrations/01_overview.md).
+- **I want to connect Codebolt to Telegram, Discord, or Linear.** → [Building Integrations](./10_building-integrations/01_overview.md).
 - **I want to measure and tune my agent systematically.** → [Evaluation & Optimization](./07_eval-and-optimization/01_overview.md).
 - **I want several agents to cooperate on a task.** → [Multi-Agent Orchestration](./08_multi-agent-orchestration/01_overview.md). Read [When to use multi-agent](./08_multi-agent-orchestration/02_when-multi-agent.md) first.
 - **I want runs to cross into remote or alternate environments.** → [Multi-Environment Orchestration](./08a_multi-environment-orchestration/01_overview.md).

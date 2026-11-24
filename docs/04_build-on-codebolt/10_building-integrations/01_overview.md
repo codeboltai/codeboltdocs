@@ -15,9 +15,7 @@ This is distinct from [Extending Codebolt](../06_extending-codebolt/01_overview.
 | Pattern | Mechanism | Section |
 |---|---|---|
 | **Chat platform** (Telegram, Discord, Slack) | Channel plugin via plugin gateway | [Chat Integrations](./02_chat-integrations/01_overview.md) |
-| **CI/CD** (GitHub Actions, GitLab CI, Jenkins) | Hooks + plugin bus, or headless `clientsdk` | [CI/CD Integration](./03_cicd-integration.md) |
 | **Project management** (Linear, Jira, GitHub Issues) | Webhooks + plugin | [Project Tool Integration](./04_project-tool-integration.md) |
-| **IDE / editor** (VS Code, Neovim, JetBrains) | Custom client via `clientsdk` | [IDE Integration](./05_ide-integration.md) |
 | **Custom API gateway** | Plugin gateway hook | [API Gateway](./06_api-gateway.md) |
 
 ## Picking the right mechanism

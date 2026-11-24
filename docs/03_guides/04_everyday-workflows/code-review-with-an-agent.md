@@ -71,7 +71,7 @@ set -euo pipefail
 codebolt --prompt "review the diff against origin/main" --agent reviewer
 ```
 
-This gives you: every PR gets an automated review. For more advanced CI integration, see the CI/CD documentation.
+For runner setup and how Codebolt reports the result, see [Headless Prompt → CI and automation](../../02_using-codebolt/02_surfaces/04_cli/03_cli-headless/03_headless-prompt.md#ci-and-automation).
 
 ## Handling the comments
 

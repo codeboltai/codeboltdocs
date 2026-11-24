@@ -1,27 +1,11 @@
 ---
-sidebar_position: 5
-title: IDE Integration
-description: IDE integration (VS Code, JetBrains, Neovim extensions) is a planned feature. There is no IDE extension available yet.
+title: Codebolt Editor and Custom Interfaces
+description: Find the guide to Codebolt’s built-in editor and the tools for building a custom interface.
+unlisted: true
 ---
 
-# IDE Integration
+# Codebolt Editor and Custom Interfaces
 
-:::info Coming Soon
-IDE integration (VS Code, JetBrains, Neovim extensions) is a planned feature. There is no IDE extension available yet.
+The [Code Editor guide](../../02_using-codebolt/02_surfaces/02_desktop-app/03b_code-and-terminal/02_code-editor.md) covers editing files, splits, and reviewing changes in the Codebolt desktop app.
 
-This page will be updated when the feature ships.
-:::
-
-## Planned Capabilities
-
-- Run Codebolt agents from within your editor.
-- Show agent output inline (diffs, suggestions, explanations).
-- Stream real-time agent activity into an editor panel.
-
-## In the Meantime
-
-Codebolt runs as a standalone application — desktop app, web interface, or CLI. You can interact with the server programmatically using the [Client SDK](../04_custom-uis/02_client-sdk.md) from any Node.js environment.
-
-- [Custom UI](../04_custom-uis/06_custom-ui.md) — build standalone UIs with the Client SDK
-- [CI/CD Integration](./03_cicd-integration.md) — trigger agents from scripts and pipelines
-- [API Gateway](./06_api-gateway.md) — expose agents over HTTP
+To build your own interface on top of Codebolt, start with the [Custom Interfaces guide](../04_custom-uis/01_overview.md) and the [Client SDK](../04_custom-uis/02_client-sdk.md).

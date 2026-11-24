@@ -141,7 +141,7 @@ New to Codebolt? Start with the [quickstart](../01_get-started/03_quickstart.md)
 | [Message routing](08e_external-integrations/02_routing-gateway.md) | Route external messages and agent replies. | [Build](../04_build-on-codebolt/05_plugins/04_chat-gateway/01_overview.md) |
 | [Chat integrations](08e_external-integrations/03_chat-platforms.md) | Connect messaging services through channel plugins. | [Discord](../04_build-on-codebolt/10_building-integrations/02_chat-integrations/04_discord.md) · [Slack](../04_build-on-codebolt/10_building-integrations/02_chat-integrations/05_slack.md) · [Telegram](../04_build-on-codebolt/10_building-integrations/02_chat-integrations/06_telegram.md) |
 | [Project tool integrations](08e_external-integrations/04_project-tools.md) | Connect issue tracking and project workflows to agents. | [Build](../04_build-on-codebolt/10_building-integrations/04_project-tool-integration.md) |
-| [CI/CD integration](../04_build-on-codebolt/10_building-integrations/03_cicd-integration.md) | Trigger agent work from pipeline events. | — |
+| [Headless CLI in CI](02_surfaces/04_cli/03_cli-headless/03_headless-prompt.md#ci-and-automation) | Run a Codebolt prompt in a pipeline job. | — |
 | [HTTP agent gateway](../04_build-on-codebolt/10_building-integrations/06_api-gateway.md) | Expose agent runs to external systems through HTTP. | — |
 
 ## Environments
