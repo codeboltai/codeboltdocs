@@ -22,7 +22,7 @@ There is no visual skill builder in the UI — to create a new skill from scratc
 Create a skill programmatically using the REST API:
 
 ```
-POST /api/capability/create
+POST /capability/create
 ```
 
 With a JSON body matching the `CapabilityConfig` schema:
@@ -52,18 +52,20 @@ This creates a directory under `.codebolt/capabilities/skill/<name>/` containing
 └── index.js          # placeholder with execute() stub
 ```
 
+Add `SKILL.md` beside the generated files. The built-in executor reads this file when an agent invokes the skill.
+
 ## Creating manually
 
 You can also create a skill by hand — just create the directory and config file in one of the [discovery locations](./01_overview.md#how-skills-are-loaded):
 
 1. Create a directory: `.codebolt/capabilities/skill/<skill-name>/`
-2. Add a `capability.yaml` (see format below)
-3. Add your handler code (e.g., `index.js`)
-4. Refresh the registry: `POST /api/capability/refresh`
+2. Add a `SKILL.md` with a name, description, and instructions.
+3. Optionally add `capability.yaml` for registry metadata.
+4. Refresh the registry: `POST /capability/refresh`
 
 ## Configuration formats
 
-### `capability.yaml` (primary)
+### Registry metadata in `capability.yaml`
 
 Used for skills in `.codebolt/capabilities/skill/` directories. This is the full-featured format.
 
@@ -102,9 +104,9 @@ Each output supports: `name`, `type`, `description`.
 
 Both `capability.yaml` and `capability.yml` extensions are recognized.
 
-### `SKILL.md` (alternative)
+### Instructions in `SKILL.md`
 
-Used for skills in `.claude/skills/`, `.agents/skills/`, or `~/.gemini/antigravity/skills/` directories. Each skill is a subdirectory containing a `SKILL.md` file.
+Place this file in the skill directory. Codebolt also discovers skills in `.claude/skills/`, `.agents/skills/`, or `~/.gemini/antigravity/skills/` directories. Each skill is a subdirectory containing a `SKILL.md` file.
 
 ```
 .claude/skills/refactor-to-pattern/
@@ -121,8 +123,7 @@ description: Refactor a file to a named code pattern
 tags: [refactoring, patterns]
 ---
 
-Extended description goes here. If the `description` field is missing
-from frontmatter, the markdown body is used as the description instead.
+Refactor $ARGUMENTS. Explain the pattern you applied and summarize the changes.
 ```
 
 **Fallback behavior:** If the YAML parser fails (e.g., description contains `: `), a line-by-line fallback parser handles simple `key: value` pairs.
@@ -134,10 +135,10 @@ from frontmatter, the markdown body is used as the description instead.
 <project>/.codebolt/capabilities/skill/
 ├── refactor-to-pattern/
 │   ├── capability.yaml
-│   └── index.js
+│   └── SKILL.md
 └── generate-tests/
     ├── capability.yaml
-    └── index.js
+    └── SKILL.md
 ```
 
 **SKILL.md path:**
@@ -153,5 +154,5 @@ from frontmatter, the markdown body is used as the description instead.
 
 - Design the schema first. Most bad skills fail because the name is vague or the input/output contract is weak.
 - Use `capability.yaml` when you need typed inputs/outputs for downstream composition.
-- Use `SKILL.md` for lightweight skills where a description is sufficient.
+- Put the steps the agent should follow in the body of `SKILL.md`.
 - If a `capability.yaml` exists alongside a `SKILL.md`, the YAML config takes precedence but missing fields fall back to the frontmatter.

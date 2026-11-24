@@ -129,6 +129,10 @@ const sidebars = {
       ]),
       group('Workspace and Project Tasks', [
         remaining(`${desktopDocs}/01_workspace-and-project-management`),
+        group('Project Templates', [
+          doc('Project Templates Overview', `${build}/05b_templates/overview`),
+          remaining(`${developerDocs}/05b_templates`),
+        ]),
       ]),
       doc('Desktop Panel Selector', `${desktop}/application-navigation/panels`),
     ]),
@@ -326,10 +330,6 @@ const sidebars = {
         doc('Publish an Agent', `${create}/publishing`),
       ]),
     ]),
-    group('Project Templates', [
-      doc('Project Templates Overview', `${build}/05b_templates/overview`),
-      remaining(`${developerDocs}/05b_templates`),
-    ]),
     group('Visual Agent Builder', [
       doc('AgentFlow Overview', visual),
       jump('Create & Edit Flows', visual, 'creating-a-flow-agent'),
@@ -341,8 +341,9 @@ const sidebars = {
       doc('Extending Agents', `${extend}/overview`),
       group('Tools & MCP', [
         doc('Tools & Tool Access', `${extend}/mcp-tools/overview`),
-        doc('Create Custom Tools', `${extend}/mcp-tools/custom-tools`),
-        doc('MCP Integration', `${extend}/mcp-tools/quickstart-local-mcp`),
+        ref('Write a Tool for One Agent', `${create}/custom-agent-tools`),
+        doc('Build a CodeboltJS Tool', `${extend}/mcp-tools/custom-tools`),
+        doc('Build a Project MCP Tool', `${extend}/mcp-tools/quickstart-local-mcp`),
         remaining(`${extensionDocs}/04_mcp-tools`),
         doc('Tool Discovery', `${build}/07b_subsystems/mcp-and-tools`),
       ]),
@@ -382,7 +383,7 @@ const sidebars = {
         doc('Custom AI Providers', `${build}/plugins/custom-ai-providers/overview`),
         doc('Custom LLM Providers', `${build}/extending-codebolt/custom-llm-providers`),
         doc('Build an LLM Provider', `${build}/extending-codebolt/build-your-first-llm-provider`),
-        doc('Custom Embedding Provider', `${build}/plugins/custom-ai-providers/custom-embedding-provider`),
+        doc('Configure an Embedding Provider', `${build}/plugins/custom-ai-providers/custom-embedding-provider`),
       ]),
       group('Environment & Execution Providers', [
         doc('Environment Providers', `${build}/08a_multi-environment-orchestration/creating-a-custom-provider`),

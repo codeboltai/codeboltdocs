@@ -66,7 +66,7 @@ The SDK automatically:
 
 ## Step 4: Make HTTP API calls
 
-The SDK exposes 72 typed HTTP modules. Access them via `codebolt.<module>.<method>()`:
+The SDK exposes typed HTTP modules. Access them via `codebolt.<module>.<method>()`:
 
 ```typescript
 import { codebolt } from './services/codebolt';
@@ -79,8 +79,13 @@ console.log(result);
 const project = await codebolt.projects.getRoot();
 
 // Git
-const status = await codebolt.git.status();
-await codebolt.git.commit({ message: 'fix bug' });
+const projectPath = '/absolute/path/to/your/project';
+const status = await fetch('http://localhost:2719/git/status', {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ projectPath }),
+});
+if (!status.ok) throw new Error(await status.text());
+console.log(await status.json());
 
 // Files
 const content = await codebolt.fileRead.read({ path: 'src/index.ts' });
@@ -96,13 +101,23 @@ if (collectionResponse && typeof collectionResponse === 'object' && 'data' in co
 }
 ```
 
+Use the path of an open Git project and check the status response for changed files. When your interface offers a commit action, pass the selected files and the user’s message:
+
+```ts
+const response = await fetch('http://localhost:2719/git/commit', {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ projectPath, filePaths: selectedFiles, message: commitMessage }),
+});
+if (!response.ok) throw new Error(await response.text());
+```
+
 Every module is lazily initialized — `codebolt.git` only allocates resources when you first access it.
 
 ---
 
 ## Step 5: Listen for real-time events
 
-The SDK exposes 34 WebSocket modules via `codebolt.sockets.<module>`:
+The SDK exposes WebSocket modules via `codebolt.sockets.<module>`:
 
 ```typescript
 import { codebolt } from './services/codebolt';
@@ -122,7 +137,7 @@ codebolt.sockets.swarm.on('agent:status-changed', (data) => {
 });
 
 // System alerts
-codebolt.sockets.systemAlert.on('alert', (data) => {
+codebolt.sockets.systemAlert.on('system-alert:created', (data) => {
   console.log('Alert:', data);
 });
 
@@ -133,7 +148,7 @@ const unsub = codebolt.onAllEvents((event) => {
 
 // Filter specific events
 codebolt.onEvents(
-  { socketName: 'tasks', eventType: 'taskUpdated' },
+  { socket: 'tasks', event: 'taskUpdated' },
   (event) => console.log('Task updated:', event.data),
 );
 
@@ -294,7 +309,7 @@ One service file, one hook, and your components. The SDK handles everything else
 
 ## Available APIs
 
-The Client SDK gives you access to **72 HTTP API modules** and **34 WebSocket modules**. See the [Client SDK Reference](./02_client-sdk.md) for the full list.
+The Client SDK gives you access to **HTTP API modules** and **WebSocket modules**. See the [Client SDK Reference](./02_client-sdk.md) for the full list.
 
 - **HTTP modules** (`codebolt.<module>`) — [Core](./02_client-sdk.md#core-modules), [Agent & Orchestration](./02_client-sdk.md#agent--orchestration), [Knowledge & Memory](./02_client-sdk.md#knowledge--memory), [Code & Editor](./02_client-sdk.md#code--editor), [Context & Planning](./02_client-sdk.md#context--planning), [Browser & Terminal](./02_client-sdk.md#browser--terminal), [Infrastructure & System](./02_client-sdk.md#infrastructure--system), [Productivity](./02_client-sdk.md#productivity), [UI & Misc](./02_client-sdk.md#ui--misc)
 - **WebSocket modules** (`codebolt.sockets.<module>`) — [Full list](./02_client-sdk.md#websocket-modules)
@@ -313,7 +328,7 @@ The Client SDK gives you access to **72 HTTP API modules** and **34 WebSocket mo
 
 ## Where to next
 
-- **Full SDK reference** — see [Client SDK](./02_client-sdk.md) for all 72 HTTP modules and 34 WebSocket modules.
+- **Full SDK reference** — see [Client SDK](./02_client-sdk.md) for all HTTP modules and WebSocket modules.
 - **Drop-in chat components** — see [Chat Widget](./04_chat-widget.md) for ready-made React chat components from `@codebolt/chat-widget`.
 - **Embed UI inside the existing app** — see [Dynamic Panels](./05_dynamic-panels.md) for a different pattern where agents or plugins open panels inside Codebolt.
 - **Study existing UIs** — see [Existing UIs](./03_existing-uis.md) to understand how the desktop, web, and terminal clients are built.

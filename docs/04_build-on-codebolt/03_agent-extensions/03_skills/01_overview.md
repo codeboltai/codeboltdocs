@@ -1,19 +1,19 @@
 ---
 sidebar_position: 1
 title: Skills
-description: A skill is a named, reusable competency an agent can call for a narrow task. A tool does one mechanical thing. A skill does one cognitive thing.
+description: A skill packages reusable instructions for an agent.
 ---
 
 # Skills
 
-A **skill** is a named, reusable competency an agent can call for a narrow task. A tool does one mechanical thing. A skill does one cognitive thing.
+A **skill** packages reusable instructions for an agent in a file named `SKILL.md`.
 
 Skills are the right unit when you want a reusable agent behavior without creating a whole new agent.
 
 ## In This Section
 
 - [Creating a skill](./02_creating-a-skill.md)
-- [Handler types](./03_handler-types.md)
+- [How skills run](./03_handler-types.md)
 - [Testing and debugging](./04_testing-and-debugging.md)
 - [Publishing](./05_publishing.md)
 
@@ -33,8 +33,7 @@ import codebolt from '@codebolt/codeboltjs';
 
 // Start a skill by name
 const response = await codebolt.capability.startSkill("refactor-to-pattern", {
-  file: "src/handler.ts",
-  pattern: "adapter",
+  arguments: "Refactor src/handler.ts to use the adapter pattern",
 });
 
 // response.success — whether execution succeeded
@@ -52,7 +51,7 @@ const skills = await codebolt.capability.listSkills();
 const res = await codebolt.capability.startCapability(
   "refactor-to-pattern",  // name
   "skill",                // type
-  { file: "src/handler.ts", pattern: "adapter" },  // params
+  { arguments: "Refactor src/handler.ts to use the adapter pattern" },  // params
   30000                   // timeout in ms (optional)
 );
 
@@ -62,17 +61,6 @@ const status = await codebolt.capability.getExecutionStatus(res.executionId);
 // Stop a running capability
 await codebolt.capability.stopCapability(res.executionId);
 ```
-
-## Skill vs. tool vs. subagent
-
-| Axis | Tool | Skill | Subagent |
-|---|---|---|---|
-| **Granularity** | Atomic operation | Cognitive task | Full task |
-| **LLM involved** | No | Maybe | Yes |
-| **Own reasoning loop** | No | No unless implemented that way | Yes |
-| **Cost** | Low | Low-moderate | High |
-
-When in doubt, start with a skill. Promote to a subagent only when separate reasoning state is worth the cost.
 
 ## How skills are loaded
 
@@ -98,10 +86,10 @@ Additionally, skills are discovered from these special directories (added if no 
 
 ### Configuration formats
 
-Skills support two configuration formats depending on where they live:
+The registry uses metadata to discover skills. The built-in executor reads the instructions from `SKILL.md`.
 
 - **`capability.yaml`** — full config with inputs, outputs, author, tags. Used in `.codebolt/capabilities/` paths.
-- **`SKILL.md`** — YAML frontmatter with optional markdown body. Used in `.claude/skills/` and `.agents/skills/` paths.
+- **`SKILL.md`** — Markdown instructions with optional YAML frontmatter. Also discovered in `.claude/skills/` and `.agents/skills/` paths.
 
 See [Creating a skill](./02_creating-a-skill.md) for details on both formats.
 

@@ -11,10 +11,10 @@ description: "Publish a skill using the extension service REST API:"
 Publish a skill using the extension service REST API:
 
 ```
-POST /api/extension/publish
+POST /extensions/publish
 ```
 
-With the skill's folder path and type `skill` in the request body.
+Send the skill directory as `folderPath` and set `type` to `skill`.
 
 ## Install from marketplace
 
@@ -25,8 +25,10 @@ Users can install published skills from the Codebolt marketplace in two ways:
 **Via API:**
 
 ```
-POST /api/capability/download
+POST /capability/download
 ```
+
+Send the marketplace ID as `capabilityId` and set `capabilityType` to `skill`.
 
 Downloaded skills are extracted as zip archives into the project's `.codebolt/capabilities/skill/` directory and picked up on the next registry refresh.
 

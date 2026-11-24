@@ -71,7 +71,7 @@ When a capability or executor is installed from the marketplace:
 5. Emit WebSocket events (`capabilityChanged`/`executorChanged` + `registryRefreshed`)
 
 Installation can be triggered via:
-- The REST API (`POST /api/capability/download` or `/download-executor`)
+- The REST API (`POST /capability/download` or `/download-executor`)
 - The UI marketplace panel
 - Electron IPC (`capability:download`, `capability:downloadExecutor`)
 
@@ -108,8 +108,8 @@ codebolt action capability create --name frontend-refactor --description "Refact
 # Create in a specific directory
 codebolt action capability create --name my-skill --path ./my-extensions
 
-# Create from a template, skip npm install
-codebolt action capability create --name api-gen --template api-generator --skip-install
+# Skip dependency installation during scaffolding
+codebolt action capability create --name api-gen --skip-install
 ```
 
 This scaffolds a capability directory with `capability.yaml`, `package.json`, entry point, and all required files.
@@ -142,7 +142,7 @@ Lists all capabilities published to the Codebolt registry.
 ### Via REST API
 
 ```bash
-curl -X POST http://localhost:PORT/api/capability/create \
+curl -X POST http://localhost:PORT/capability/create \
   -H "Content-Type: application/json" \
   -d '{
     "name": "my-capability",
@@ -163,7 +163,7 @@ This creates:
 ### Via REST API (executors)
 
 ```bash
-curl -X POST http://localhost:PORT/api/capability/executors/create \
+curl -X POST http://localhost:PORT/capability/executors/create \
   -H "Content-Type: application/json" \
   -d '{
     "name": "my-executor",
@@ -190,7 +190,7 @@ mkdir -p .codebolt/capabilities/skill/my-skill
 Then create `capability.yaml` and your implementation files. Refresh the registry afterwards:
 
 ```bash
-curl -X POST http://localhost:PORT/api/capability/refresh
+curl -X POST http://localhost:PORT/capability/refresh
 ```
 
 ---

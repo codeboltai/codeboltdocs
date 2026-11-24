@@ -96,8 +96,8 @@ const client = new CodeBoltClient({
 
 The SDK has two communication layers:
 
-- **HTTP API modules** (72 modules) — request/response calls over REST
-- **WebSocket modules** (34 modules) — real-time bidirectional channels
+- **HTTP API modules** — request/response calls over REST
+- **WebSocket modules** — real-time bidirectional channels
 
 All modules are **lazily initialized** on first access, so unused modules don't allocate resources.
 
@@ -276,7 +276,7 @@ await client.removeConnections(['shell']);
 
 // Subscribe to filtered events
 const unsub = client.onEvents(
-  { socketName: 'chat', eventType: 'message' },
+  { socket: 'chat', event: 'message' },
   (event) => console.log(event),
 );
 

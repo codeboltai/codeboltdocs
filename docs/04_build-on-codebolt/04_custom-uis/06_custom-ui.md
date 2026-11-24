@@ -18,7 +18,7 @@ This is different from a [Dynamic Panel](./05_dynamic-panels.md), which injects 
 
 1. Start the Codebolt server with `codebolt --server` (by default the CLI listens on `localhost:2719`).
 2. Your app connects via the [Client SDK](./02_client-sdk.md).
-3. The SDK provides **72 HTTP API modules** for request/response calls and **34 WebSocket modules** for real-time events.
+3. The SDK provides **HTTP API modules** for request/response calls and **WebSocket modules** for real-time events.
 4. All modules are lazily initialized — unused modules cost nothing.
 
 ## Client SDK
@@ -43,15 +43,20 @@ const codebolt = new CodeBoltClient({
 
 ### HTTP API
 
-Access 72 typed modules via `codebolt.<module>`:
+Access typed modules via `codebolt.<module>`:
 
 ```typescript
 // Tasks
 const result = await codebolt.tasks.search({ limit: 50 });
 
 // Git
-const status = await codebolt.git.status();
-await codebolt.git.commit({ message: 'fix bug' });
+const projectPath = '/absolute/path/to/your/project';
+const status = await fetch('http://localhost:2719/git/status', {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ projectPath }),
+});
+if (!status.ok) throw new Error(await status.text());
+console.log(await status.json());
 
 // Files
 const content = await codebolt.fileRead.read({ path: 'src/index.ts' });
@@ -63,11 +68,21 @@ const agents = await codebolt.agents.getInstalled();
 const project = await codebolt.projects.getRoot();
 ```
 
+Use the path of an open Git project and check the status response for changed files. When your interface offers a commit action, pass the selected files and the user’s message:
+
+```ts
+const response = await fetch('http://localhost:2719/git/commit', {
+  method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ projectPath, filePaths: selectedFiles, message: commitMessage }),
+});
+if (!response.ok) throw new Error(await response.text());
+```
+
 See the full module list in the [API Reference](../../05_reference/04_client-sdk/02_api-reference/index.md).
 
 ### WebSocket Events
 
-Access 34 real-time modules via `codebolt.sockets.<module>`:
+Access real-time modules via `codebolt.sockets.<module>`:
 
 ```typescript
 // Task updates
@@ -85,7 +100,7 @@ codebolt.sockets.swarm.on('agent:status-changed', (data) => {
 });
 
 // System alerts
-codebolt.sockets.systemAlert.on('alert', (data) => {
+codebolt.sockets.systemAlert.on('system-alert:created', (data) => {
   console.log('Alert:', data);
 });
 
@@ -154,14 +169,14 @@ await codebolt.disconnectAll();
 | Standalone app, you own the entire UX | Embedded inside the existing Codebolt app |
 | Connects via Client SDK | Driven by a plugin or agent |
 | Any framework (React, Vue, CLI, mobile) | HTML rendered in an iframe |
-| Full access to all 72 HTTP + 34 WebSocket modules | Bidirectional messaging with the owning plugin/agent |
+| Full access to the HTTP and WebSocket modules | Bidirectional messaging with the owning plugin/agent |
 | For products, dashboards, custom workflows | For settings panels, confirmation dialogs, monitoring views |
 
 ## See Also
 
 - [Build Your First Custom UI](./06_build-your-first-custom-ui.md) — step-by-step tutorial
-- [API Reference](../../05_reference/04_client-sdk/02_api-reference/index.md) — all 72 HTTP API modules
-- [Event Reference](../../05_reference/04_client-sdk/03_event-reference/index.md) — all 34 WebSocket event modules
+- [API Reference](../../05_reference/04_client-sdk/02_api-reference/index.md) — all HTTP API modules
+- [Event Reference](../../05_reference/04_client-sdk/03_event-reference/index.md) — all WebSocket event modules
 - [Client SDK Overview](../../05_reference/04_client-sdk/01_overview.md) — SDK overview
 - [Existing UIs](./03_existing-uis.md) — reference implementations to study or fork
 - [Chat Widget](./04_chat-widget.md) — drop-in React chat components

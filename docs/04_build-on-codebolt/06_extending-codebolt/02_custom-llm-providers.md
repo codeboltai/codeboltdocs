@@ -82,7 +82,7 @@ await llmProvider.register({
   requiresKey: false,
   configFields: [
     { key: 'apiKey', label: 'API Key', type: 'password', required: false },
-    { key: 'apiUrl', label: 'API URL', type: 'text', required: false },
+    { key: 'apiUrl', label: 'API URL', type: 'url', required: false },
   ],
   models: [
     { id: 'my-model-v1', name: 'My Model v1' },

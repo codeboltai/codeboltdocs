@@ -17,7 +17,7 @@ Side executions are managed by the server's `SideExecutionManager` and exposed t
 - **Parallel work** — kick off multiple operations that don't need to block the main agent.
 - **Background processing** — long-running tasks like code analysis, plan generation, or task breakdown.
 
-If the agent **needs the result before proceeding**, it can `await` the side execution's completion (the manager provides a `waitForCompletion` mechanism).
+Both start methods return a promise. The server sends its response after the child finishes. Await the promise when you need the result, or keep it while the parent agent does other work.
 
 ## Two execution modes
 
@@ -37,17 +37,16 @@ const result = await codebolt.sideExecution.startWithActionBlock(
 
 ### 2. Inline code execution
 
-Run arbitrary JavaScript code in an isolated process:
+The server writes the supplied JavaScript to a temporary entry file and starts it as a child process. The child must connect to Codebolt. To try this with a working entry point, use a built, self-contained action block bundle that registers `onActionBlockInvocation`. Pass the parameters its handler expects.
 
 ```ts
-const result = await codebolt.sideExecution.startWithCode(
-  `
-  const data = await fetch('https://api.example.com/data');
-  return await data.json();
-  `,
-  { apiKey: 'xxx' },  // parameters available in execution context
-  30000                // timeout in ms (optional)
-);
+import { readFile } from 'node:fs/promises';
+import codebolt from '@codebolt/codeboltjs';
+
+const source = await readFile(bundlePath, 'utf8');
+const response = await codebolt.sideExecution.startWithCode(source, params);
+if (!response.success) throw new Error(response.error);
+console.log(response.result);
 ```
 
 ## Management APIs

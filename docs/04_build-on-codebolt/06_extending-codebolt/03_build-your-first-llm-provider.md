@@ -8,17 +8,19 @@ description: Create a plugin that registers a custom LLM provider in Codebolt
 
 Create a plugin that registers a custom LLM provider in Codebolt. Once registered, your models appear in the model picker and can be used by agents, chat, and any part of the application.
 
-**Prerequisites:** Codebolt installed and running, Node.js 18+, npm.
+You’ll need Codebolt, Node.js 18 or later, and an endpoint that accepts OpenAI-style chat completions. Replace `my-model-v1` with the model ID your endpoint serves.
 
 ---
 
 ## Step 1: Create the plugin project
 
 ```bash
-mkdir my-llm-provider && cd my-llm-provider
+# From the root of the project open in Codebolt:
+mkdir -p .codebolt/plugins/my-llm-provider
+cd .codebolt/plugins/my-llm-provider
 npm init -y
 npm install @codebolt/plugin-sdk
-npm install -D typescript
+npm install -D typescript @types/node
 ```
 
 Create `tsconfig.json`:
@@ -77,27 +79,27 @@ const PROVIDER_ID = 'my-provider';
 plugin.onStart(async (ctx: any) => {
   console.log('[MyProvider] Starting...');
 
-  await llmProvider.register({
+  const registration = await llmProvider.register({
     providerId: PROVIDER_ID,
     name: 'My LLM Provider',
     description: 'Custom model provider for my API',
-    capabilities: ['chat', 'streaming'],
+    capabilities: ['chat'],
     requiresKey: true,
     configFields: [
       { key: 'apiKey', label: 'API Key', type: 'password', required: true },
-      { key: 'apiUrl', label: 'API URL', type: 'text', required: false },
+      { key: 'apiUrl', label: 'API URL', type: 'url', required: true },
     ],
     models: [
       { id: 'my-model-v1', name: 'My Model v1' },
-      { id: 'my-model-fast', name: 'My Model (Fast)' },
     ],
   });
 
+  if (!registration.success) throw new Error(registration.error || 'Model registration failed');
   console.log('[MyProvider] Registered');
 });
 ```
 
-After registration, your models appear in the Codebolt model picker. The `configFields` are shown in the provider settings UI — users fill in their API key there.
+Set the provider’s API key and API base URL in Codebolt. The base URL should include the API version path when your endpoint requires one.
 
 ---
 
@@ -106,11 +108,25 @@ After registration, your models appear in the Codebolt model picker. The `config
 Register a handler for standard (non-streaming) completion requests:
 
 ```typescript
-llmProvider.onCompletionRequest(async (req: any) => {
+function resolveAuth(options: any) {
+  const config = options?.providerConfig || {};
+  const apiKey = config.apiKey?.trim();
+
+  if (!apiKey) {
+    throw new Error('API key is required. Set it in provider settings.');
+  }
+
+  if (!config.apiUrl?.trim()) throw new Error('Set the API base URL in provider settings.');
+  return {
+    bearer: apiKey,
+    baseUrl: config.apiUrl.trim().replace(/\/+$/, ''),
+  };
+}
+
+llmProvider.onCompletionRequest(async (req) => {
   try {
     const { requestId, options } = req;
-    const apiKey = options.apiKey || process.env.MY_API_KEY;
-    const baseUrl = options.apiUrl || 'https://api.example.com/v1';
+    const { bearer: apiKey, baseUrl } = resolveAuth(options);
 
     const response = await fetch(`${baseUrl}/chat/completions`, {
       method: 'POST',
@@ -128,6 +144,7 @@ llmProvider.onCompletionRequest(async (req: any) => {
       }),
     });
 
+    if (!response.ok) throw new Error(`Provider returned HTTP ${response.status}`);
     const data = await response.json();
     llmProvider.sendReply(requestId, data, true);
   } catch (error: any) {
@@ -140,16 +157,24 @@ llmProvider.onCompletionRequest(async (req: any) => {
 
 ---
 
-## Step 5: Handle streaming requests
+## Step 5: Build and try the provider
 
-For streaming, you read the response as an SSE stream and send each chunk back as it arrives:
+1. Run `npm run build` in `.codebolt/plugins/my-llm-provider/`.
+2. In the Desktop **Plugins** panel, click **Reload**, find your plugin, and click **Start**.
+3. In provider settings, enter the API key and base URL for your endpoint. Select your registered model for a non-streaming completion request and ask it to reply with “Hello from my provider”.
+4. Check that the reply contains the requested greeting. A missing model points to plugin startup or registration. An HTTP error in the handler points to the upstream endpoint, model ID, or credentials.
+
+For Chat configurations that request a streamed reply, add the handler below, rebuild, and repeat the test in Chat.
+
+## Optional: Handle streaming requests
+
+Add `streaming` to the registered `capabilities` array. For streaming, you read the response as an SSE stream and send each chunk back as it arrives:
 
 ```typescript
 llmProvider.onStreamRequest(async (req: any) => {
   try {
     const { requestId, options } = req;
-    const apiKey = options.apiKey || process.env.MY_API_KEY;
-    const baseUrl = options.apiUrl || 'https://api.example.com/v1';
+    const { bearer: apiKey, baseUrl } = resolveAuth(options);
 
     const response = await fetch(`${baseUrl}/chat/completions`, {
       method: 'POST',
@@ -168,7 +193,8 @@ llmProvider.onStreamRequest(async (req: any) => {
       }),
     });
 
-    const reader = response.body!.getReader();
+    if (!response.ok || !response.body) throw new Error(`Stream failed (HTTP ${response.status})`);
+    const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let buffer = '';
     let finalResponse: any = null;
@@ -196,10 +222,8 @@ llmProvider.onStreamRequest(async (req: any) => {
       }
     }
 
-    // Send the final aggregated response
-    if (finalResponse) {
-      llmProvider.sendReply(requestId, finalResponse, true);
-    }
+    if (!finalResponse) throw new Error('Provider returned an empty stream');
+    llmProvider.sendReply(requestId, finalResponse, true);
   } catch (error: any) {
     llmProvider.sendError(req.requestId, error.message);
   }
@@ -210,53 +234,11 @@ llmProvider.onStreamRequest(async (req: any) => {
 
 ---
 
-## Step 6: Add authentication
+## Optional: Support OAuth
 
 Most providers need an API key or OAuth token. The `configFields` you registered in Step 3 are available in `req.options.providerConfig` inside your request handlers.
 
-### API key authentication
-
-The simplest approach — the user enters an API key in the provider settings:
-
-```typescript
-function resolveAuth(options: any) {
-  const config = options?.providerConfig || {};
-  const apiKey = config.apiKey?.trim();
-
-  if (!apiKey) {
-    throw new Error('API key is required. Set it in provider settings.');
-  }
-
-  return {
-    bearer: apiKey,
-    baseUrl: (config.apiUrl || 'https://api.example.com/v1').replace(/\/+$/, ''),
-  };
-}
-```
-
-Use it in your request handlers:
-
-```typescript
-llmProvider.onCompletionRequest(async (req: any) => {
-  try {
-    const auth = resolveAuth(req.options);
-
-    const response = await fetch(`${auth.baseUrl}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${auth.bearer}`,
-      },
-      body: JSON.stringify(buildRequestBody(req.options)),
-    });
-
-    const data = await response.json();
-    llmProvider.sendReply(req.requestId, data, true);
-  } catch (error: any) {
-    llmProvider.sendError(req.requestId, error.message);
-  }
-});
-```
+The completion and streaming handlers both use `resolveAuth` from the first example. It reads the settings supplied with each request.
 
 ### OAuth authentication
 
@@ -341,7 +323,7 @@ async function resolveAuth(options: any) {
 
 ---
 
-## Step 7: Clean up on shutdown
+## Clean up on shutdown
 
 Unregister the provider when the plugin stops:
 
@@ -354,35 +336,7 @@ plugin.onStop(async () => {
 
 ---
 
-## Step 8: Build, install, and test
-
-### Build
-
-```bash
-npm run build
-```
-
-### Install locally
-
-Copy the plugin to one of the directories Codebolt scans:
-
-```bash
-# Option 1: Global plugins (available in all projects)
-cp -r my-llm-provider ~/.codebolt/plugins/my-llm-provider
-
-# Option 2: Per-project plugins (only this project, overrides global)
-cp -r my-llm-provider <your-project>/.codebolt/plugins/my-llm-provider
-```
-
-### Load and start
-
-1. Open the **Plugins panel** in Codebolt.
-2. Click **Reload** to rescan plugin directories.
-3. Your plugin appears in the list (state: "Loaded").
-4. Click **Start** to launch the plugin process.
-5. Your models now appear in the **model picker** across the application.
-
-If your plugin uses `triggers: [{ "type": "startup" }]`, it starts automatically on the next app launch.
+## Rebuild and troubleshoot
 
 ### Development loop
 
@@ -460,7 +414,7 @@ The `req.options` object your handlers receive contains:
 | `response_format` | `any?` | Response format constraint |
 | `stop` | `any?` | Stop sequences |
 
-Plus any values from your `configFields` (e.g., `apiKey`, `apiUrl`).
+Read saved credentials and the base URL from `req.options.providerConfig`. Additional saved configuration fields are under `providerConfig.custom`.
 
 ---
 

@@ -38,7 +38,7 @@ import codebolt from '@codebolt/codeboltjs';
 | `stopCapability(executionId)` | Stop a running execution |
 | `getExecutionStatus(executionId)` | Check execution status |
 
-> **Full API reference:** [Capability API](/docs/reference/codeboltjs/api-access/capability)
+> **Full API reference:** [Capability API](../../../05_reference/02_codeboltjs/10_api-access/capability/index.md)
 
 ---
 
@@ -61,22 +61,22 @@ The SDK also exposes capabilities as **agent tools** that LLMs can call directly
 
 ## REST API
 
-All endpoints are under `/api/capability/`.
+All endpoints are under `/capability/`.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/capability/list` | List capabilities (query: `type`, `tags`, `author`) |
-| GET | `/api/capability/detail/:name` | Get capability detail (query: `type`) |
-| GET | `/api/capability/types` | Get capability types in use |
-| POST | `/api/capability/create` | Create a new capability |
-| DELETE | `/api/capability/capability` | Delete a capability (body: `name`, `type`) |
-| GET | `/api/capability/executors` | List all executors |
-| POST | `/api/capability/executors/create` | Create a new executor |
-| DELETE | `/api/capability/executor` | Delete an executor (body: `name`) |
-| POST | `/api/capability/refresh` | Re-scan filesystem and refresh registry |
-| GET | `/api/capability/stats` | Get registry stats (counts, types, initialized) |
-| POST | `/api/capability/download` | Download capability from marketplace |
-| POST | `/api/capability/download-executor` | Download executor from marketplace |
+| GET | `/capability/list` | List capabilities (query: `type`, `tags`, `author`) |
+| GET | `/capability/detail/:name` | Get capability detail (query: `type`) |
+| GET | `/capability/types` | Get capability types in use |
+| POST | `/capability/create` | Create a new capability |
+| DELETE | `/capability/capability` | Delete a capability (body: `name`, `type`) |
+| GET | `/capability/executors` | List all executors |
+| POST | `/capability/executors/create` | Create a new executor |
+| DELETE | `/capability/executor` | Delete an executor (body: `name`) |
+| POST | `/capability/refresh` | Re-scan filesystem and refresh registry |
+| GET | `/capability/stats` | Get registry stats (counts, types, initialized) |
+| POST | `/capability/download` | Download capability from marketplace |
+| POST | `/capability/download-executor` | Download executor from marketplace |
 
 ---
 
@@ -111,8 +111,8 @@ Send a JSON message with an `action` field:
 
 ## See also
 
-- [Capability API Reference](/docs/reference/codeboltjs/api-access/capability) — full SDK method docs
-- [Side Execution API Reference](/docs/reference/codeboltjs/api-access/sideExecution) — side execution methods
+- [Capability API Reference](../../../05_reference/02_codeboltjs/10_api-access/capability/index.md) — full SDK method docs
+- [Side Execution API Reference](../../../05_reference/02_codeboltjs/10_api-access/sideExecution/index.md) — side execution methods
 - [Execution Flow](./03_activation.mdx)
 - [Capability Executors](./06_executors.mdx)
 - [Marketplace and Publishing](./05_publishing.md)

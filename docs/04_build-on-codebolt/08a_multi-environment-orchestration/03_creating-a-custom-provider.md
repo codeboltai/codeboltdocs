@@ -117,11 +117,10 @@ import { BaseProvider } from '@codebolt/provider';
 import type { ProviderInitVars } from '@codebolt/types/provider';
 
 class MyProviderService extends BaseProvider {
-  async resolveProjectContext(initVars: ProviderInitVars): Promise<any> {
-    return {
-      projectPath: initVars.projectPath,
-      projectName: initVars.projectName,
-    };
+  async resolveProjectContext(initVars: ProviderInitVars): Promise<void> {
+    const path = initVars.projectPath;
+    if (typeof path !== 'string' || !path) throw new Error('Expected a project path');
+    this.state.projectPath = path;
   }
 
   async setupEnvironment(initVars: ProviderInitVars): Promise<void> {

@@ -10,7 +10,7 @@ Build custom tools using the CodeboltJS tool framework and make them available t
 
 ## Tool architecture
 
-Every Codebolt tool has three layers:
+A declarative CodeboltJS tool has three parts:
 
 1. **Tool class** (`BaseDeclarativeTool`) — declares name, description, schema, and validation
 2. **Invocation class** (`BaseToolInvocation`) — holds validated params and runs the logic
@@ -171,7 +171,7 @@ import { WordCountTool } from './tools/word-count';
 defaultRegistry.registerTool(new WordCountTool());
 ```
 
-Once registered, the tool is available to all agents via `codebolt.tools.executeTool('word_count', params)`.
+This registers the tool in the current process. For a function used by one framework agent, follow [Write a custom agent tool](../../02_creating-agents/12_custom-agent-tools.md). For other agents to discover it, expose it through a project MCP server.
 
 ### Option B: Register as a local project tool
 
@@ -193,13 +193,13 @@ version: 1.0.0
 description: Count words in text, with optional stopword exclusion
 ```
 
-Codebolt scans this directory on startup and registers the tool automatically. See [Quickstart](./02_quickstart-local-mcp.md) for the full local tool setup.
+Implement the MCP list-tools and call-tool handlers in `index.js` so the server advertises `word_count` and invokes your word counter. See [Quickstart](./02_quickstart-local-mcp.md) for the full local tool setup.
 
 ---
 
 ## Step 3 — Use the tool from an agent
 
-### Direct execution via SDK
+### Call the project tool from another agent
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
@@ -217,18 +217,14 @@ console.log(result);
 
 ### Restrict tools available to an agent
 
-Use `allowedTools` to control which tools an agent can access:
+Use the model-facing name in `allowedTools`. For example, a tool with the catalog name `local/word_count--word_count` is exposed to the model as `local_word_count--word_count`.
 
 ```ts
-import { CodeboltAgent } from '@codebolt/agent';
+import { createAgent } from '@codebolt/agent/unified';
 
-const agent = new CodeboltAgent({
-  instructions: 'You are a text analysis assistant.',
-  allowedTools: [
-    'codebolt--word_count',
-    'codebolt--read_file',
-    'codebolt--search',
-  ],
+const agent = createAgent({
+  systemPrompt: 'You are a text analysis assistant.',
+  allowedTools: ['local_word_count--word_count'],
 });
 ```
 
@@ -334,10 +330,10 @@ Agents can intercept tool calls before and after execution using processors:
 Runs before each tool executes. Use for validation, logging, or tool interception:
 
 ```ts
-import { BasePreToolCallProcessor } from '@codebolt/agent';
+import type { PreToolCallProcessor, PreToolCallProcessorInput } from '@codebolt/types/agent';
 
-class MyToolValidator extends BasePreToolCallProcessor {
-  async modify(input) {
+class MyToolValidator implements PreToolCallProcessor {
+  async modify(input: PreToolCallProcessorInput) {
     // Inspect or modify the prompt before tool execution
     return {
       nextPrompt: input.nextPrompt,
@@ -352,10 +348,10 @@ class MyToolValidator extends BasePreToolCallProcessor {
 Runs after tool results are collected. Use for result transformation or conversation compaction:
 
 ```ts
-import { BasePostToolCallProcessor } from '@codebolt/agent';
+import type { PostToolCallProcessor, PostToolCallProcessorInput } from '@codebolt/types/agent';
 
-class MyResultLogger extends BasePostToolCallProcessor {
-  async modify(input) {
+class MyResultLogger implements PostToolCallProcessor {
+  async modify(input: PostToolCallProcessorInput) {
     console.log('Tool results:', input.toolResults);
     return {
       nextPrompt: input.nextPrompt,
@@ -368,12 +364,10 @@ class MyResultLogger extends BasePostToolCallProcessor {
 ### Wire processors into the agent
 
 ```ts
-const agent = new CodeboltAgent({
-  instructions: 'You are a helpful assistant.',
-  processors: {
-    preToolCallProcessors: [new MyToolValidator()],
-    postToolCallProcessors: [new MyResultLogger()],
-  },
+const agent = createAgent({
+  systemPrompt: 'You are a helpful assistant.',
+  preToolCallProcessors: [new MyToolValidator()],
+  postToolCallProcessors: [new MyResultLogger()],
 });
 ```
 
@@ -381,7 +375,7 @@ const agent = new CodeboltAgent({
 
 ## Complete example
 
-A full custom tool from definition to agent usage:
+A timestamp tool with three output formats, registered in the current process:
 
 ```ts
 // 1. Define and register the tool
@@ -439,13 +433,9 @@ class TimestampTool extends BaseDeclarativeTool<TimestampParams, ToolResult> {
 
 defaultRegistry.registerTool(new TimestampTool());
 
-// 2. Use from an agent
-import { CodeboltAgent } from '@codebolt/agent';
-
-const agent = new CodeboltAgent({
-  instructions: 'You are a helpful assistant with access to a timestamp tool.',
-  allowedTools: ['codebolt--current_timestamp', 'codebolt--read_file'],
-});
+// Check the registration in this process
+const timestamp = defaultRegistry.getTool(TimestampTool.Name);
+if (!timestamp) throw new Error('Timestamp tool was not registered');
 ```
 
 ## See also

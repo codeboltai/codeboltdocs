@@ -1,110 +1,41 @@
 ---
 sidebar_position: 4
 title: Project Tool Integration
-description: Connect Codebolt to project management tools like Linear, Jira, or GitHub Issues. Route tickets to agents, post results back, and keep project state in sync.
+description: Follow a Linear agent session through the Linear Agent plugin and its worker.
 ---
 
 # Project Tool Integration
 
-Connect Codebolt to project management tools like Linear, Jira, or GitHub Issues. Route tickets to agents, post results back, and keep project state in sync.
+The Linear Agent plugin connects Codebolt to a worker that receives Linear agent sessions. The worker delivers issue context to the plugin and sends progress and response activities back to the same Linear session.
 
-## When to Use
+## Connect the plugin
 
-- Automatically triage incoming tickets with an agent.
-- Run an agent when a ticket is assigned or status changes.
-- Post agent results (code review, test results, deployment status) as comments on tickets.
-- Sync task state between Codebolt and your project tool.
+1. Start the `linear-agent-plugin` and open its configuration panel.
+2. Enter the worker's WebSocket URL and app token. Save the settings and enable the connection.
+3. Check the connection status in the panel. **Test Connection** checks whether the worker's health endpoint is reachable. A connected WebSocket is required to receive sessions.
+4. Start a Linear agent session on a test issue. Look for plan updates and a response in that session.
 
-## Architecture
+## Follow a session in the code
 
-```
-Project Tool (Linear, Jira, etc.)
-  │
-  │ Webhook / WebSocket
-  ▼
-Channel Plugin (your plugin)
-  │
-  │ plugin.gateway.routeMessage()
-  ▼
-Codebolt Gateway → Agent
-  │
-  │ Agent completes task
-  ▼
-plugin.gateway.onReply() → Post back to project tool API
-```
+In the plugin's `src/index.ts`, the worker client forwards new sessions and follow-up messages to the session handler. The following excerpt shows the two events to handle when modifying the integration.
 
-## How It Works
-
-Project tool integrations follow the same **channel plugin** pattern as chat integrations:
-
-1. **Receive events** from the project tool (via webhook or WebSocket).
-2. **Route to an agent** using `plugin.gateway.routeMessage()`.
-3. **Listen for replies** via `plugin.gateway.onReply()`.
-4. **Post results** back to the project tool using its API.
-
-### Example: Linear integration pattern
-
-The `linear-agent-plugin` connects to Linear via a Cloudflare Worker that receives Linear webhooks and forwards them over WebSocket:
-
-```
-Linear → Webhook → Cloudflare Worker → WebSocket → Plugin → Gateway → Agent
-                                                                         │
-Agent reply → Plugin → Linear API (post comment, update issue)
-```
-
-The plugin:
-- Connects to an external WebSocket endpoint that receives webhooks.
-- Parses incoming events (issue created, comment added, etc.).
-- Routes them as messages to the configured agent.
-- Posts agent responses back via the Linear API.
-
-### Plugin SDK APIs used
-
-```typescript
-import plugin from '@codebolt/plugin-sdk';
-
-// Route incoming project tool event to an agent
-await plugin.gateway.routeMessage({
-  source: 'channel',
-  sourceId: 'plugin-linear',
-  threadStrategy: 'per-conversation',
-  agentId: config.agentId,
-  text: issue.description,
-  userId: issue.creatorId,
-  externalThreadId: issue.id,
-  replyTo: {
-    channelId: 'linear',
-    externalThreadId: issue.id,
-    userId: issue.creatorId,
-  },
-  metadata: { issueId: issue.id, issueTitle: issue.title },
-  timestamp: new Date().toISOString(),
+```ts
+workerClient.on('session:new', (event) => {
+  handler.handleNewSession(event).catch(console.error);
 });
 
-// Handle agent replies
-plugin.gateway.onReply(async (reply) => {
-  // Post reply back to the project tool
-  await linearClient.commentCreate({
-    issueId: reply.metadata?.issueId,
-    body: reply.text,
-  });
+workerClient.on('session:prompted', (event) => {
+  handler.handlePrompted(event.sessionId, event.message).catch(console.error);
 });
 ```
 
-## Building Your Own
+In `src/session/handler.ts`, the handler builds a prompt from the issue and sends it to Codebolt Chat. It reports progress through the worker. The final activity uses the session ID so that Linear can associate the response with the original request.
 
-To integrate a new project tool:
+```ts
+workerClient.sendActivity(sessionId, { type: 'response', body: agentResult });
+workerClient.sendStateUpdate(sessionId, 'complete');
+```
 
-1. Create a channel plugin (type: `channel` in `package.json`).
-2. Set up a way to receive events — webhook endpoint, polling, or WebSocket.
-3. Parse events and call `plugin.gateway.routeMessage()` to send them to agents.
-4. Handle replies via `plugin.gateway.onReply()` and post back using the tool's API.
-5. Add a UI panel for configuration (API keys, project selection, agent mapping).
+The handler can generate a fallback status message when Chat returns no reply text. A completed Linear session alone does not confirm that an agent performed work on the issue.
 
-See [Chat Integrations](./02_chat-integrations/01_overview.md) for the full channel plugin pattern — project tools follow the same architecture.
-
-## See Also
-
-- [Chat Integrations](./02_chat-integrations/01_overview.md) — the channel plugin pattern
-- [Gateway](./02_chat-integrations/02_gateway.md) — message routing and thread management
-- [Build Your First Dynamic Panel](../04_custom-uis/07_build-your-first-dynamic-panel.md) — add a config UI
+For integrations that route incoming messages to a selected agent and deliver replies through a registered channel, follow [Build a channel plugin](../05_plugins/04_chat-gateway/03_custom-channel-plugins.md).

@@ -90,7 +90,7 @@ Direct runtime modules for server operations. These use the `/plugin` WebSocket 
 | **Data & State** | `knowledge`, `vectordb`, `kvStore`, `memory`, `cbstate` |
 | **Tasks & Work** | `task`, `thread`, `todo`, `job` |
 | **UI** | `dynamicPanel` |
-| **Integrations** | `calendar`, `mail`, `mcp`, `hook`, `eventLog` |
+| **Integrations** | `calendar`, `mail`, `mcp`, `hooks`, `eventLog` |
 | **Plugin-specific** | `gateway`, `executionGateway`, `llmProvider` |
 | **Debugging** | `debug` |
 
@@ -103,10 +103,7 @@ const content = await plugin.fs.readFile('/path/to/file');
 const result = await plugin.terminal.executeCommand('npm test');
 
 // Store persistent config
-await plugin.kvStore.set('config', JSON.stringify(myConfig), {
-  instanceId: 'my-plugin',
-  namespace: 'config'
-});
+await plugin.kvStore.set(plugin.pluginId, 'settings', 'enabled', true, true);
 ```
 
 ### 2. HTTP APIs
@@ -130,15 +127,14 @@ REST-style wrappers for stable CRUD operations:
 | `kvStoreApi` | Key-value store |
 | `vectordbApi` | Vector database |
 | `todosApi` | Todo items |
-| `hooksApi` | Hook management |
 
 Example:
 ```ts
 // Create a task via HTTP API
-await plugin.tasksApi.create({ title: 'My Task', status: 'open' });
+await plugin.tasksApi.create({ title: 'My Task', priority: 'medium' });
 
 // Get project info
-const project = await plugin.projectsApi.getActive();
+const project = await plugin.projectsApi.getRoot();
 ```
 
 ### 3. Multiplexed Sockets (Real-time Push)
@@ -172,24 +168,24 @@ plugin.sockets.chat.on('message', (msg) => {
 });
 
 // Subscribe to task updates
-plugin.sockets.tasks.on('update', (task) => {
+plugin.sockets.tasks.on('taskUpdated', (task) => {
   console.log('Task updated:', task);
 });
 ```
 
 ## Notifications
 
-The SDK provides notification helpers:
+Use the system notification helpers to report the start and completion of agent work.
 
 ```ts
-plugin.notify.info('Plugin connected successfully');
-plugin.notify.error('Failed to connect to external API');
-plugin.notify.warn('Rate limit approaching');
+plugin.notify.system.AgentInitNotify();
+// After the agent finishes:
+plugin.notify.system.AgentCompletionNotify('Analysis complete');
 ```
 
 ## Plugin-Specific Modules
 
-These modules are unique to plugins (not available to agents):
+Use these modules when implementing a channel, execution backend, model provider, or panel.
 
 ### Gateway (Chat Gateway Plugins)
 ```ts
@@ -222,14 +218,6 @@ plugin.llmProvider.sendReply(requestId, response)
 plugin.llmProvider.sendError(requestId, error)
 ```
 
-### Narrative (Workspace Sync)
-```ts
-plugin.narrative.importUnifiedBundle(params)   // Import .tar.gz workspace bundle
-plugin.narrative.exportUnifiedBundle(params)   // Export workspace as bundle
-plugin.narrative.createSnapshot(params)        // Snapshot current state
-plugin.narrative.checkoutSnapshot(params)      // Restore from snapshot
-```
-
 ### Dynamic Panel
 ```ts
 plugin.dynamicPanel.open(panelId, title, html, opts?)
@@ -248,7 +236,7 @@ plugin.dynamicPanel.offMessage(panelId)
 | **Purpose** | Build standalone UIs | Extend the application runtime |
 | **Runs** | In browser/electron renderer | As a server-side child process |
 | **Connection** | Connects as a client | Connects as a trusted extension |
-| **Access** | Limited to client-facing APIs | Full access to all server subsystems |
+| **Access** | Limited to client-facing APIs | Runtime modules, HTTP APIs, and plugin registration methods |
 
 ## Triggers and Startup
 
@@ -262,4 +250,3 @@ plugin.dynamicPanel.offMessage(panelId)
 
 - [Packaging and Publishing Plugins](./99_packaging-and-publishing.md)
 - [Major Functionalities Available to Plugins](./03_functionalities.md)
-- [Packaging and Publishing Plugins](./99_packaging-and-publishing.md)

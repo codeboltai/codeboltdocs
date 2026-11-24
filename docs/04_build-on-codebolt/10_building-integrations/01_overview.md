@@ -6,31 +6,14 @@ description: "Patterns for connecting Codebolt to external services and platform
 
 # Building Integrations
 
-Patterns for connecting Codebolt to external services and platforms. Each pattern covers: which mechanism to use, how it's wired, and a minimal working example.
+Start with the event that should reach Codebolt. Follow it through to a result you can check in the originating application.
 
-This is distinct from [Extending Codebolt](../06_extending-codebolt/01_overview.md) (adding features *inside* the Codebolt app) and from [Plugins](../05_plugins/01_overview.md) (the SDK reference). This section is about *what to build* when you need Codebolt to talk to the outside world.
-
-## Integration patterns
-
-| Pattern | Mechanism | Section |
-|---|---|---|
-| **Chat platform** (Telegram, Discord, Slack) | Channel plugin via plugin gateway | [Chat Integrations](./02_chat-integrations/01_overview.md) |
-| **Project management** (Linear, Jira, GitHub Issues) | Webhooks + plugin | [Project Tool Integration](./04_project-tool-integration.md) |
-| **Custom API gateway** | Plugin gateway hook | [API Gateway](./06_api-gateway.md) |
-
-## Picking the right mechanism
-
-```
-Does your integration drive agent runs from outside Codebolt?
-  → Custom client (clientsdk). You own the interface; the server handles the run.
-
-Does your integration react to agent events or intercept them?
-  → Plugin hook. Lightweight, event-driven, stays inside the server's lifecycle.
-
-Does your integration expose Codebolt over a new protocol or platform?
-  → Custom client + gateway plugin. The client translates the platform protocol;
-    the plugin handles auth and routing inside the server.
-```
+| What you want to do | Where to start |
+| --- | --- |
+| Receive a Discord, Slack, or Telegram message | [Connect a chat platform](./02_chat-integrations/01_overview.md). Send a message and look for the reply in that conversation. |
+| Connect a Linear agent session | [Connect a project tool](./04_project-tool-integration.md). Start a session on a test issue and check its activities in Linear. |
+| Send a request from a script or backend service | [Use the API gateway guide](./06_api-gateway.md) for lifecycle requests, task queries, and sending a Chat prompt from the Client CLI. |
+| Expose Codebolt to an external MCP client | [Configure Codebolt as an MCP server](../03_agent-extensions/04_mcp-tools/02_quickstart-local-mcp.md#approach-2-mcp-server-via-codeboltjs-api), then inspect the available tools in the client. |
 
 ## See also
 

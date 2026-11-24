@@ -93,8 +93,11 @@ const response = await codebolt.thread.createThreadInBackground({
 Before starting a sub-agent, you can discover available agents:
 
 ```ts
-// Find an agent suitable for a task (uses vector DB matching)
-const match = await codebolt.agent.findAgent('analyze code dependencies');
+import { AgentLocation, FilterUsing } from '@codebolt/types/enum';
+
+const match = await codebolt.agent.findAgent(
+  'analyze code dependencies', 1, [], AgentLocation.ALL, FilterUsing.USE_VECTOR_DB,
+);
 
 // List all downloaded agents
 const agents = await codebolt.agent.getAgentsList();

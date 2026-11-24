@@ -50,7 +50,7 @@ Add a build script to `package.json`:
 
 ## Step 2: Extend BaseProvider
 
-Create `src/MyProvider.ts`. Extend `BaseProvider` and implement the required abstract methods:
+Create `src/MyProvider.ts`. The skeleton below shows where your environment code belongs. Implement provisioning, diff retrieval, and the agent server connection for your backend before testing it.
 
 ```typescript
 import { BaseProvider } from '@codebolt/provider';
@@ -72,17 +72,13 @@ export class MyProvider extends BaseProvider {
   }
 
   // Resolve project paths and metadata
-  async resolveProjectContext(initVars: ProviderInitVars): Promise<any> {
-    return {
-      projectPath: initVars.projectPath,
-      projectName: initVars.projectPath?.split('/').pop() || 'project',
-    };
+  async resolveProjectContext(initVars: ProviderInitVars): Promise<void> {
+    const path = initVars.projectPath;
+    if (typeof path !== 'string' || !path) throw new Error('Expected a project path');
+    this.state.projectPath = path;
   }
 
-  // Resolve the workspace directory in the remote environment
-  async resolveWorkspacePath(initVars: ProviderInitVars): Promise<string> {
-    return initVars.projectPath || '/workspace';
-  }
+  // BaseProvider resolves the workspace from this.state.projectPath.
 
   // Return file changes in the environment
   async onGetDiffFiles(): Promise<any> {
@@ -145,57 +141,29 @@ codebolt.onCloseSignal(handlers.onCloseSignal);
 codebolt.onRawMessage(handlers.onRawMessage);
 codebolt.onGetDiffFiles(handlers.onGetDiffFiles);
 
-// Register file operation handlers
-codebolt.onReadFile(provider.onReadFile.bind(provider));
-codebolt.onWriteFile(provider.onWriteFile.bind(provider));
-codebolt.onDeleteFile(provider.onDeleteFile.bind(provider));
-codebolt.onDeleteFolder(provider.onDeleteFolder.bind(provider));
-codebolt.onRenameItem(provider.onRenameItem.bind(provider));
-codebolt.onCreateFolder(provider.onCreateFolder.bind(provider));
-codebolt.onCopyFile(provider.onCopyFile.bind(provider));
-codebolt.onCopyFolder(provider.onCopyFolder.bind(provider));
-codebolt.onGetTreeChildren(provider.onGetProject.bind(provider));
-codebolt.onGetFullProject(provider.onGetFullProject.bind(provider));
 ```
-
----
 
 ## Step 4: Implement file operations
 
-If your environment needs custom file handling (e.g., files live in a remote sandbox), override the file operation methods:
+Register each file operation your provider implements. A read callback receives the path and returns text. A write callback receives the path and content as separate arguments. The provider supplies the filesystem implementation.
 
 ```typescript
-export class MyProvider extends BaseProvider {
-  // ... lifecycle methods ...
+codebolt.onReadFile(provider.onReadFile.bind(provider));
+codebolt.onWriteFile(provider.onWriteFile.bind(provider));
+```
 
-  async onReadFile(params: any): Promise<any> {
-    // Read file from remote environment
-    // Example: execute 'cat <path>' in sandbox, or use an API
-    const content = await this.remoteExec(`cat ${params.path}`);
-    return { content };
-  }
+For example, the Daytona provider resolves the editor path inside its sandbox and reads the file through the sandbox filesystem API. This excerpt uses the sandbox and path resolver initialized by that provider.
 
-  async onWriteFile(params: any): Promise<any> {
-    // Write file to remote environment
-    await this.remoteWrite(params.path, params.content);
-    return { success: true };
-  }
-
-  async onDeleteFile(params: any): Promise<any> {
-    await this.remoteExec(`rm ${params.path}`);
-    return { success: true };
-  }
-
-  async onCreateFolder(params: any): Promise<any> {
-    await this.remoteExec(`mkdir -p ${params.path}`);
-    return { success: true };
-  }
+```typescript
+async onReadFile(filePath: string): Promise<string> {
+  if (!this.sandbox) throw new Error('No sandbox available');
+  const sandboxPath = this.resolveSandboxPath(filePath);
+  const buffer = await this.sandbox.fs.downloadFile(sandboxPath);
+  return buffer.toString('utf-8');
 }
 ```
 
-If your environment uses the local filesystem (e.g., git worktree), you can skip these — BaseProvider provides default implementations.
-
----
+Its write handler creates the parent directory and uploads the content with `sandbox.fs.uploadFile`. The Git worktree provider implements the same callbacks using Node's filesystem API in its worktree.
 
 ## Step 5: Build and install
 
@@ -203,6 +171,17 @@ If your environment uses the local filesystem (e.g., git worktree), you can skip
 
 ```bash
 npm run build
+```
+
+Add `codeboltprovider.yaml` at the package root so Codebolt can discover the built entry point.
+
+```yaml
+name: my-provider
+unique_id: my-provider
+version: 1.0.0
+type: provider
+entrypoint: dist/index.js
+runtime: node
 ```
 
 ### Install
@@ -214,7 +193,7 @@ Providers can be installed from the marketplace (UI) or locally:
 cp -r my-provider ~/.codebolt/providers/my-provider
 ```
 
-Or install via the server API:
+To create an installed-provider record for a provider that is already available, send its metadata to the server:
 
 ```bash
 curl -X POST http://localhost:2719/environments/installed-providers \
@@ -236,7 +215,7 @@ curl -X POST http://localhost:2719/environments/installed-providers \
 
 ### Test
 
-1. Create a new environment using your provider.
+1. Start the provider with a known project. Check that the `workspacePath` in the start result points to the expected directory. For a remote mount, store the path visible inside that environment.
 2. Run an agent — it should execute in your remote environment.
 3. Check that file operations work (read, write, create folder).
 4. Verify the agent can communicate back to the local platform.
@@ -276,6 +255,7 @@ You don't need to implement these — they're built into BaseProvider:
 
 ```
 my-provider/
+├── codeboltprovider.yaml
 ├── package.json
 ├── tsconfig.json
 ├── src/

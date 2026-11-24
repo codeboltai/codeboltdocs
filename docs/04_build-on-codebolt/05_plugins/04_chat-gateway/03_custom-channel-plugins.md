@@ -40,6 +40,7 @@ import plugin from '@codebolt/plugin-sdk';
 
 plugin.onStart(async () => {
   plugin.gateway.onReply(async (reply) => {
+    if (!reply.externalThreadId) return;
     await sendReplyToPlatform(reply.externalThreadId, reply.text);
   });
 
@@ -50,14 +51,17 @@ plugin.onStart(async () => {
 
 async function connect(config: {
   agentId: string;
-  threadStrategy: 'single' | 'per-user' | 'per-conversation' | 'per-message' | 'existing';
+  threadStrategy: 'single' | 'per-user' | 'per-conversation' | 'per-message';
 }) {
-  await plugin.gateway.registerChannel({
+  const registration = await plugin.gateway.registerChannel({
     name: 'My Platform',
     platform: 'my-platform',
     agentId: config.agentId,
     threadStrategy: config.threadStrategy,
   });
+
+  const channelId = registration.data?.channelId;
+  if (!registration.success || !channelId) throw new Error(registration.error || "Registration failed");
 
   platformClient.onMessage(async (incoming) => {
     await plugin.gateway.routeMessage({
@@ -69,7 +73,7 @@ async function connect(config: {
       userId: incoming.userId,
       externalThreadId: incoming.threadId,
       replyTo: {
-        channelId: 'my-platform',
+        channelId,
         externalThreadId: incoming.threadId,
         userId: incoming.userId,
       },

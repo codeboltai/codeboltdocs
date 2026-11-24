@@ -245,14 +245,12 @@ export class MyVendorDispatcher extends BaseDispatcher {
         break;
 
       case 'result':
-        codebolt.notify.system.AgentCompletionNotify({
-          usage: message.usage,
-        });
+        codebolt.notify.system.AgentCompletionNotify(message.text ?? 'Run complete');
         break;
 
       case 'error':
         codebolt.notify.chat.AgentTextResponseNotify(message.text ?? '', true);
-        codebolt.notify.system.AgentCompletionNotify({ error: true });
+        codebolt.notify.system.AgentCompletionNotify(message.text ?? 'Run failed');
         break;
     }
   }

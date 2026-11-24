@@ -49,9 +49,9 @@ codebolt.onActionBlockInvocation(async (threadContext: any, metadata: any) => {
 
     // Your logic here — can use LLM, Codebolt APIs, etc.
     const { completion } = await codebolt.llm.inference({
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: `Analyze this task: ${task.description}` },
+      input: [
+        { type: 'message', role: 'system', content: 'You are a helpful assistant.' },
+        { type: 'message', role: 'user', content: `Analyze this task: ${task.description}` },
       ],
     });
 
@@ -61,7 +61,7 @@ codebolt.onActionBlockInvocation(async (threadContext: any, metadata: any) => {
     // Return structured result
     return {
       success: true,
-      result: completion?.choices?.[0]?.message?.content,
+      result: completion.output_text,
     };
   } catch (error) {
     return {

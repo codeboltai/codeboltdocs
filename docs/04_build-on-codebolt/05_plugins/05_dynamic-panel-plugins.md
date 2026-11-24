@@ -75,10 +75,7 @@ plugin.onStart(async (ctx) => {
   plugin.dynamicPanel.onMessage('plugin-ui-my-plugin', async (data) => {
     switch (data.type) {
       case 'save':
-        await plugin.kvStore.set('config', JSON.stringify(data.config), {
-          instanceId: ctx.pluginId,
-          namespace: 'config'
-        });
+        await plugin.kvStore.set(ctx.pluginId, 'settings', 'config', data.config, true);
         await plugin.dynamicPanel.send('plugin-ui-my-plugin', {
           type: 'saved',
           success: true
@@ -86,13 +83,10 @@ plugin.onStart(async (ctx) => {
         break;
 
       case 'load':
-        const config = await plugin.kvStore.get('config', {
-          instanceId: ctx.pluginId,
-          namespace: 'config'
-        });
+        const config = await plugin.kvStore.get(ctx.pluginId, 'settings', 'config');
         await plugin.dynamicPanel.send('plugin-ui-my-plugin', {
           type: 'config',
-          data: config ? JSON.parse(config) : null
+          data: config.data?.value ?? null
         });
         break;
     }

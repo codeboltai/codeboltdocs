@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: Testing And Debugging
-description: 1. Create the skill in your project (.codebolt/capabilities/skill/ /)
+description: Check skill discovery, refresh the registry, and diagnose configuration errors.
 ---
 
 # Testing And Debugging
@@ -36,10 +36,10 @@ If your skill doesn't appear after creation, force a registry refresh:
 POST /capability/refresh
 ```
 
-Or use the CLI:
+After refreshing, query the running server for locally discovered skills.
 
-```bash
-codebolt action skill list
+```http
+GET /capability/list?type=skill
 ```
 
 ## Debugging checklist

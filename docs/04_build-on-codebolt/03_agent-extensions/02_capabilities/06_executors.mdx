@@ -345,15 +345,15 @@ const content = await codebolt.fs.readFile('src/App.tsx');
 const files = await codebolt.fs.readManyFiles(['src/a.ts', 'src/b.ts']);
 
 // Write files
-await codebolt.fs.createFile('src/NewComponent.tsx', componentCode);
-await codebolt.fs.updateFile('src/App.tsx', updatedCode);
+await codebolt.fs.createFile('NewComponent.tsx', componentCode, 'src');
+await codebolt.fs.updateFile('App.tsx', 'src', updatedCode);
 
 // Delete
-await codebolt.fs.deleteFile('src/old.ts');
-await codebolt.fs.deleteFolder('src/deprecated/');
+await codebolt.fs.deleteFile('old.ts', 'src');
+await codebolt.fs.deleteFolder('deprecated', 'src');
 
 // Search
-const matches = await codebolt.fs.searchFiles('TODO', 'src/');
+const matches = await codebolt.fs.searchFiles('src', 'TODO', '*.ts');
 const grepResults = await codebolt.fs.grepSearch('console\\.log', 'src/');
 ```
 
@@ -615,13 +615,13 @@ cp -r my-executor/ ~/.codebolt/capabilities/executors/my-executor/
 
 Then refresh the registry:
 ```bash
-curl -X POST http://localhost:PORT/api/capability/refresh
+curl -X POST http://localhost:PORT/capability/refresh
 ```
 
 ### Via REST API
 
 ```bash
-curl -X POST http://localhost:PORT/api/capability/executors/create \
+curl -X POST http://localhost:PORT/capability/executors/create \
   -H "Content-Type: application/json" \
   -d '{
     "name": "my-executor",
@@ -637,7 +637,7 @@ This creates a scaffold with placeholder code. Replace `dist/index.js` with your
 ### From marketplace
 
 ```bash
-curl -X POST http://localhost:PORT/api/capability/download-executor \
+curl -X POST http://localhost:PORT/capability/download-executor \
   -H "Content-Type: application/json" \
   -d '{ "executorId": "executor-id-from-marketplace" }'
 ```
@@ -696,7 +696,7 @@ Invalid executors are logged as warnings and excluded from the registry. They do
 **Check active executions:**
 - SDK: `await codebolt.capability.getExecutionStatus(executionId)`
 - WebSocket: send `{ action: 'getActiveExecutions' }`
-- REST: `GET /api/capability/stats`
+- REST: `GET /capability/stats`
 
 ---
 

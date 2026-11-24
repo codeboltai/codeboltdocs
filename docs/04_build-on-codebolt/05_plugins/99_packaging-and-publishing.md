@@ -27,7 +27,7 @@ When your plugin is ready to share, follow this checklist and publish it to the 
 
 **Chat gateway plugins (`"type": "channel"`):**
 - Document the external platform setup (bot tokens, webhook URLs)
-- Use `kvStore` for configuration persistence (not filesystem)
+- Document where the plugin saves its connection settings
 - Provide a UI panel for connection configuration
 - Document supported thread strategies
 
@@ -68,7 +68,7 @@ codebolt action plugin list
 |---|---|
 | Missing `codebolt.plugin` in package.json | Server won't recognize as a plugin |
 | Forgetting to build `dist/index.js` | Always `npm run build` before loading |
-| Storing config in filesystem | Use `plugin.kvStore` for persistence |
+| Settings disappear on restart | Load saved settings on startup using the same location or key used when saving |
 | Not handling `onStop()` cleanup | Leads to dangling connections, leaked subscriptions |
 | Using `startup` trigger for chat gateway plugins that need config | Use `manual` — auto-load saved config in `onStart` |
 | Using `@codebolt/client-sdk` instead of `@codebolt/plugin-sdk` | Client SDK is for standalone UIs, plugin SDK is for server extensions |

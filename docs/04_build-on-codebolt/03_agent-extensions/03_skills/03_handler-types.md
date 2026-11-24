@@ -1,72 +1,36 @@
 ---
 sidebar_position: 3
-title: Handler Types
-description: "Three common skill handler shapes:"
+title: How Skills Run
+description: How the built-in skill executor loads SKILL.md and prepares instructions for an agent.
 ---
 
-# Handler Types
+# How Skills Run
 
-Three common skill handler shapes:
+When an agent starts a skill, Codebolt looks up the skill by name and selects the registered executor for the `skill` capability type. The built-in executor reads the instructions from the skill’s `SKILL.md` file and returns a prompt for the agent. You can change what the skill asks the agent to do by editing that file.
 
-| Handler kind | What it is | When to use |
-|---|---|---|
-| **Inline function** | Local handler code | Logic-heavy skills with validation or tool orchestration |
-| **Sub-agent** | Delegate to another agent | When the skill needs a separate reasoning loop |
-| **Prompt template** | Prompt-only transformation | Cheap, stateless competencies |
+## Pass arguments to a skill
 
-Pick by cost:
+For a skill named `review-change`, put these instructions in `SKILL.md`:
 
-- prompt template: cheapest
-- inline function: moderate
-- subagent: most expensive
+```markdown
+---
+name: review-change
+description: Review a proposed change for compatibility issues.
+---
 
-Start with the cheapest shape that gives the behavior you need.
-
-## Default handler scaffold
-
-When you create a skill via the CLI or API, Codebolt generates an `index.js` placeholder:
-
-```js
-// refactor-to-pattern capability
-// Type: skill
-// Add your capability logic here
-
-module.exports = {
-  execute: async (params) => {
-    // Implement capability logic
-    return { success: true };
-  }
-};
+Review $ARGUMENTS. Identify any compatibility issues and explain who would be affected.
 ```
 
-The `params` object contains the input values defined in your `capability.yaml` inputs schema.
+Start it from an agent:
 
-## How executors run skills
+```ts
+import codebolt from '@codebolt/codeboltjs';
 
-Skills don't run themselves — they are executed by an **executor**. The capability registry maps each capability type (e.g., `skill`) to an executor.
-
-Executors are discovered from:
-- `{appRoot}/.codebolt/capabilities/executors/` (built-in)
-- `~/.codebolt/capabilities/executors/` (global)
-- `<project>/.codebolt/capabilities/executors/` (project, highest priority)
-
-Each executor has an `executor.yaml`:
-
-```yaml
-name: skill-executor
-version: 1.0.0
-description: Executes skill capabilities
-supportedTypes: [skill]
-entryPoint: dist/index.js
+const response = await codebolt.capability.startSkill('review-change', {
+  arguments: 'the changes in src/settings.ts',
+});
 ```
 
-The executor's entry point (defaults to `dist/index.js`) receives the capability path, context, and parameters, then manages the execution lifecycle.
+The executor replaces `$ARGUMENTS` with `the changes in src/settings.ts`, adds the skill’s base directory to the prompt, and returns the prepared instructions. If the executor cannot find `SKILL.md`, it reports the paths it searched.
 
-## Execution lifecycle
-
-1. A request to run a skill arrives (via API or agent call)
-2. The **CapabilityManager** looks up the skill in the registry
-3. It finds the appropriate executor for the `skill` type
-4. The executor runs as a side execution within the thread context
-5. Status updates are broadcast via WebSocket (`starting` → `running` → `completed`/`failed`/`timeout`)
-6. The result event is emitted back to the caller
+See [Creating a skill](./02_creating-a-skill.md) for the project layout and [Executors](../02_capabilities/06_executors.mdx) for custom executor development.

@@ -135,7 +135,7 @@ export async function connect(plugin, config) {
 The first-party plugin saves its config to the KV store on successful connect:
 
 ```ts
-await plugin.kvStore.set('config', config);
+await plugin.kvStore.set('telegram-channel-plugin', 'config', 'connection', config, true);
 ```
 
 On plugin startup, it reads this config and reconnects automatically — no manual intervention needed after a server restart.

@@ -349,6 +349,7 @@ plugin.onStart(async (ctx) => {
 
   // Handle agent replies → send back to external platform
   plugin.gateway.onReply(async (reply) => {
+    if (!reply.externalThreadId) return;
     await sendToExternalPlatform(reply.externalThreadId, reply.text);
   });
 });
@@ -356,12 +357,15 @@ plugin.onStart(async (ctx) => {
 async function connect(config: any) {
   botConnection = await createBotConnection(config.botToken);
 
-  await plugin.gateway.registerChannel({
+  const registration = await plugin.gateway.registerChannel({
     name: 'My Channel',
     platform: 'my-platform',
     agentId: config.agentId || 'default',
     threadStrategy: config.threadStrategy || 'per-user',
   });
+
+  const channelId = registration.data?.channelId;
+  if (!registration.success || !channelId) throw new Error(registration.error || "Registration failed");
 
   botConnection.onMessage(async (msg: any) => {
     await plugin.gateway.routeMessage({
@@ -372,7 +376,7 @@ async function connect(config: any) {
       userId: msg.userId,
       externalThreadId: msg.chatId,
       replyTo: {
-        channelId: 'my-channel-plugin',
+        channelId,
         externalThreadId: msg.chatId,
         userId: msg.userId,
       },
@@ -581,14 +585,14 @@ Every plugin (regardless of type) has access to these modules:
 | **Storage** | |
 | `plugin.kvStore` | Persistent key-value storage with namespaces |
 | `plugin.vectordb` | Vector database operations |
-| `plugin.dbmemory` | Memory operations |
+| `plugin.memory` | Memory operations |
 | `plugin.knowledge` | Knowledge base operations |
 | **UI** | |
 | `plugin.dynamicPanel` | Open, update, close UI panels |
 | **Project** | |
 | `plugin.project` | Project info and paths |
-| `plugin.environment` | Environment variables |
-| `plugin.state` | State management |
+| `plugin.environment` | List and manage execution environments |
+| `plugin.cbstate` | State management |
 | `plugin.codebaseSearch` | Semantic code search |
 | `plugin.codemap` | Code structure map |
 | **Tasks & Threads** | |
@@ -601,9 +605,8 @@ Every plugin (regardless of type) has access to these modules:
 | `plugin.calendar` | Calendar operations |
 | `plugin.browser` | Browser automation |
 | **System** | |
-| `plugin.hook` | Hook into application events |
+| `plugin.hooks` | Create, list, enable, or disable hooks |
 | `plugin.agentEvents` | Listen for dynamic events emitted by agents |
-| `plugin.narrative` | Narrative context |
 | `plugin.eventLog` | Event logging |
 | `plugin.debug` | Debug utilities |
 
@@ -613,21 +616,13 @@ Every plugin (regardless of type) has access to these modules:
 
 ```json
 {
+  "name": "my-channel",
+  "main": "dist/index.js",
   "codebolt": {
     "plugin": {
-      "type": "llmProvider | channel | execution",
-      "triggers": [
-        { "type": "startup" },
-        { "type": "manual" },
-        { "type": "event", "eventTypes": ["CHAT_MESSAGE_SENT"] }
-      ],
-      "gateway": {
-        "claimsExecutionGateway": true
-      },
-      "ui": {
-        "path": "src/ui/index.html"
-      },
-      "entryPoint": "index.js"
+      "type": "channel",
+      "triggers": [{ "type": "manual" }],
+      "ui": { "path": "ui/default/index.html" }
     }
   }
 }
@@ -639,9 +634,9 @@ Every plugin (regardless of type) has access to these modules:
 | `triggers` | When the plugin starts |
 | `triggers[].type` | `"startup"`, `"manual"`, or `"event"` |
 | `triggers[].eventTypes` | For event triggers — which events to listen for |
-| `gateway.claimsExecutionGateway` | For execution plugins — claim exclusive control |
+| `gateway.claimsExecutionGateway` | Execution-plugin manifest setting. Call `plugin.executionGateway.claim()` at startup to request control |
 | `ui.path` | Path to HTML file for the plugin's UI panel |
-| `entryPoint` | Override the `main` field for plugin process entry |
+| `main` (package root) | JavaScript entry point the server starts |
 
 ---
 
