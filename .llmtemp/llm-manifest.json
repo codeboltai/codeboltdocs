@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-30T13:40:57.173Z",
-  "sourceCount": 443,
-  "curatedCount": 71,
+  "generatedAt": "2026-11-24T09:25:48.879Z",
+  "sourceCount": 451,
+  "curatedCount": 73,
   "sections": [
     {
       "heading": "Start Here",
@@ -16,9 +16,13 @@
     },
     {
       "heading": "Using Codebolt",
-      "count": 210,
+      "count": 212,
       "order": 1,
       "files": [
+        {
+          "path": "using-codebolt/features-overview.md",
+          "title": "Features overview"
+        },
         {
           "path": "using-codebolt/surfaces/overview.md",
           "title": "Platform Overview"
@@ -29,11 +33,11 @@
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/onboarding.md",
-          "title": "Installation and  Onboarding"
+          "title": "Installation and Onboarding"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/workspace-and-project-management/overview.md",
-          "title": "Workspace and Project"
+          "title": "Workspace and Project Management"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/workspace-and-project-management/workspaces.md",
@@ -185,7 +189,7 @@
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/orchestrator-management.md",
-          "title": "Orchestrator Management"
+          "title": "Thread Coordination"
         },
         {
           "path": "using-codebolt/surfaces/desktop-app/panels/agent-management-features/eval.md",
@@ -696,6 +700,10 @@
           "title": "Sub Agent"
         },
         {
+          "path": "using-codebolt/parallel-agents/virtual-workers.md",
+          "title": "Virtual Workers"
+        },
+        {
           "path": "using-codebolt/agent-coordination/overview.md",
           "title": "Overview"
         },
@@ -717,7 +725,7 @@
         },
         {
           "path": "using-codebolt/agent-coordination/orchestrator-management.md",
-          "title": "Orchestrator Management"
+          "title": "Orchestrators"
         },
         {
           "path": "using-codebolt/stigmergic-coordination/overview.md",
@@ -947,7 +955,7 @@
         },
         {
           "path": "guides/first-steps/build-your-first-agent.md",
-          "title": "Build your first agent"
+          "title": "Build a review agent"
         },
         {
           "path": "guides/first-steps/build-your-first-custom-ui.md",
@@ -1059,11 +1067,11 @@
         },
         {
           "path": "guides/advanced/replay-an-agent-run.md",
-          "title": "Replay an Agent Run"
+          "title": "Repeat an Agent Prompt"
         },
         {
           "path": "guides/advanced/self-host-for-a-team.md",
-          "title": "Self-Host for a Team"
+          "title": "Run a CodeBolt Runtime for a Team"
         },
         {
           "path": "guides/trubleshooting/environment-debug.md",
@@ -1073,12 +1081,12 @@
     },
     {
       "heading": "Build on Codebolt",
-      "count": 162,
+      "count": 166,
       "order": 4,
       "files": [
         {
           "path": "build-on-codebolt/overview.md",
-          "title": "Build on Codebolt"
+          "title": "Build with Agents"
         },
         {
           "path": "build-on-codebolt/architecture/architecture-for-builders.md",
@@ -1114,23 +1122,23 @@
         },
         {
           "path": "build-on-codebolt/creating-agents/quickstart.md",
-          "title": "Custom Agent Quickstart"
+          "title": "Create Your First Custom Agent"
         },
         {
           "path": "build-on-codebolt/creating-agents/agent-types/level-0-raw-websocket.md",
-          "title": "Level 0 — Raw WebSocket"
+          "title": "Level 3 — Raw WebSocket"
         },
         {
           "path": "build-on-codebolt/creating-agents/agent-types/level-1-codeboltjs.md",
-          "title": "Level 1 — Using Codeboltjs"
+          "title": "Level 2 — CodeboltJS"
         },
         {
           "path": "build-on-codebolt/creating-agents/agent-types/level-2-framework.md",
-          "title": "Level 2 — Using Agent Framework"
+          "title": "Level 1 — Framework"
         },
         {
           "path": "build-on-codebolt/creating-agents/agent-types/level-3-remix.md",
-          "title": "Level 3 — Remix Agents"
+          "title": "Level 0 — Remix"
         },
         {
           "path": "build-on-codebolt/creating-agents/agent-types/level-4-flow-visual.md",
@@ -1150,7 +1158,7 @@
         },
         {
           "path": "build-on-codebolt/creating-agents/agent-anatomy/lifecycle.md",
-          "title": "Lifecycle"
+          "title": "Agent Lifecycle"
         },
         {
           "path": "build-on-codebolt/creating-agents/patterns/overview.md",
@@ -1162,7 +1170,7 @@
         },
         {
           "path": "build-on-codebolt/creating-agents/patterns/unified-agent.md",
-          "title": "CodeboltAgent"
+          "title": "Unified Agent"
         },
         {
           "path": "build-on-codebolt/creating-agents/processors/what-are-processors.md",
@@ -1193,6 +1201,14 @@
           "title": "Auto-Optimize Agents"
         },
         {
+          "path": "build-on-codebolt/creating-agents/remote-agent.md",
+          "title": "Register a Remote Agent"
+        },
+        {
+          "path": "build-on-codebolt/creating-agents/custom-agent-tools.md",
+          "title": "Write a Custom Agent Tool"
+        },
+        {
           "path": "build-on-codebolt/creating-agents/publishing.md",
           "title": "Publishing"
         },
@@ -1218,7 +1234,7 @@
         },
         {
           "path": "build-on-codebolt/agent-extensions/capabilities/publishing.md",
-          "title": "Marketplace and Publishing"
+          "title": "Publish a capability"
         },
         {
           "path": "build-on-codebolt/agent-extensions/capabilities/executors.md",
@@ -1234,7 +1250,7 @@
         },
         {
           "path": "build-on-codebolt/agent-extensions/skills/handler-types.md",
-          "title": "Handler Types"
+          "title": "How Skills Run"
         },
         {
           "path": "build-on-codebolt/agent-extensions/skills/testing-and-debugging.md",
@@ -1242,7 +1258,7 @@
         },
         {
           "path": "build-on-codebolt/agent-extensions/skills/publishing.md",
-          "title": "Publishing"
+          "title": "Publish a skill"
         },
         {
           "path": "build-on-codebolt/agent-extensions/mcp-tools/overview.md",
@@ -1282,7 +1298,7 @@
         },
         {
           "path": "build-on-codebolt/agent-extensions/action-blocks/publishing.md",
-          "title": "Publishing"
+          "title": "Publish an action block"
         },
         {
           "path": "build-on-codebolt/agent-extensions/side-execution.md",
@@ -1341,6 +1357,10 @@
           "title": "Plugin-Backed UIs"
         },
         {
+          "path": "build-on-codebolt/custom-agentic-applications/mini-apps.md",
+          "title": "Mini Apps"
+        },
+        {
           "path": "build-on-codebolt/plugins/overview.md",
           "title": "Plugins Overview"
         },
@@ -1382,7 +1402,7 @@
         },
         {
           "path": "build-on-codebolt/plugins/custom-ai-providers/custom-embedding-provider.md",
-          "title": "Custom Embedding Provider"
+          "title": "Configure an Embedding Provider"
         },
         {
           "path": "build-on-codebolt/plugins/proxy-execution-gateway/overview.md",
@@ -1501,6 +1521,10 @@
           "title": "Context Assembly"
         },
         {
+          "path": "build-on-codebolt/memory-management/context-compaction.md",
+          "title": "Context Compaction"
+        },
+        {
           "path": "build-on-codebolt/memory-management/hooks-and-action-blocks.md",
           "title": "Hooks and Action Blocks"
         },
@@ -1602,7 +1626,7 @@
         },
         {
           "path": "build-on-codebolt/multi-agent-orchestration/drift-detection.md",
-          "title": "Drift Detection"
+          "title": "Keep Agent Work in Scope"
         },
         {
           "path": "build-on-codebolt/multi-agent-orchestration/review-and-merge-design.md",
@@ -1674,7 +1698,7 @@
         },
         {
           "path": "build-on-codebolt/building-integrations/cicd-integration.md",
-          "title": "CI/CD Integration"
+          "title": "Running Codebolt in CI"
         },
         {
           "path": "build-on-codebolt/building-integrations/project-tool-integration.md",
@@ -1682,7 +1706,7 @@
         },
         {
           "path": "build-on-codebolt/building-integrations/ide-integration.md",
-          "title": "IDE Integration"
+          "title": "Codebolt Editor and Custom Interfaces"
         },
         {
           "path": "build-on-codebolt/building-integrations/api-gateway.md",
@@ -1690,7 +1714,7 @@
         },
         {
           "path": "build-on-codebolt/agent-infrastructure/overview.md",
-          "title": "Self-Hosting Overview"
+          "title": "Agent Infrastructure"
         },
         {
           "path": "build-on-codebolt/agent-infrastructure/running-the-server.md",
@@ -1718,7 +1742,7 @@
         },
         {
           "path": "build-on-codebolt/agent-infrastructure/upgrade-guide.md",
-          "title": "Upgrade Guide"
+          "title": "Upgrade a CodeBolt Runtime"
         },
         {
           "path": "build-on-codebolt/agent-infrastructure/remote-execution.md",
@@ -1767,12 +1791,12 @@
     },
     {
       "heading": "Optional",
-      "count": 13,
+      "count": 15,
       "order": 99,
       "files": [
         {
           "path": "get-started/overview.md",
-          "title": "Overview"
+          "title": "Get Started"
         },
         {
           "path": "get-started/what-is-codebolt.md",
@@ -1792,7 +1816,7 @@
         },
         {
           "path": "get-started/quickstart.md",
-          "title": "Get Started"
+          "title": "Quickstart"
         },
         {
           "path": "get-started/core-concepts/how-it-works.md",
@@ -1821,6 +1845,14 @@
         {
           "path": "get-started/core-concepts/cloud-scaling.md",
           "title": "Cloud Scaling"
+        },
+        {
+          "path": "configuration/overview.md",
+          "title": "Configuration Overview"
+        },
+        {
+          "path": "scaling-agents/overview.md",
+          "title": "Scaling Agents Overview"
         }
       ]
     }

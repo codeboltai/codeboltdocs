@@ -29,7 +29,7 @@ import SystemArchitecture from '@site/src/components/diagrams/SystemArchitecture
 
 ## Browse all topics {#the-extension-surface-at-a-glance}
 
-Open a group to see its guides. **Tools & Extensions** covers skills, capabilities, action blocks, and subagents. **Custom Interfaces** covers standalone apps and desktop panels. Memory, evaluations, and server internals are under **Advanced Topics**.
+Open a group to see its guides. **Tools & Extensions** covers skills, capabilities, action blocks, and subagents. **Custom Interfaces** covers standalone apps and desktop panels. Under **Advanced Topics**, learn how to manage agent memory and context or evaluate changes to an agent.
 
 <BuildTopicIndex />
 

@@ -30,7 +30,7 @@ Every assembly call begins with a request object:
 
 ```typescript
 {
-  scope_variables: ScopeVariables,          // REQUIRED — all scope vars
+  scope_variables: ScopeVariables,          // supply the scopes your definitions use
   additional_variables?: AdditionalVariables, // phase, query, custom
   input?: { text?: string },                // semantic search text
   explicit_memory?: string[],               // specific memory type IDs to include
@@ -94,7 +94,7 @@ The assembly process runs through seven sequential stages:
 
 6. enforceBudget(sections, constraints)
    ├─ If max_tokens set: estimate tokens per section
-   ├─ Truncate lowest-priority sections first until under budget
+   ├─ Add items in section order until the next item exceeds the budget
    └─ Return { sections, truncated: boolean, tokenEstimate }
 
 7. Return AssembledContext
@@ -129,7 +129,7 @@ Within each section, items are sorted by priority weight:
 ### Token Budget Enforcement
 
 - **Estimation**: `estimateTokens()` uses a simple heuristic of `string length / 4`.
-- **Truncation**: When a `max_tokens` constraint is set and the assembled context exceeds it, items are removed starting from the lowest-priority sections first.
+- **Truncation**: When a `max_tokens` constraint is set and the assembled context exceeds it, assembly stops at the first item that would exceed the budget. That item and all later items are omitted, even if a later item would fit.
 - **Metadata**: When truncation occurs, the response `meta` object sets `truncated: true`.
 
 ---
@@ -278,10 +278,13 @@ Assembly progress is reported via WebSocket events:
 
 ```typescript
 // Assemble context for the current scope
-const result = await codebolt.contextAssembly.getContext({
-  scope_variables: { /* ... */ },
+const request = {
+  scope_variables: { thread: { thread_id: threadId } },
+  explicit_memory: [memoryId],
   constraints: { max_tokens: 8000 }
-});
+};
+const result = await codebolt.contextAssembly.getContext(request);
+if (result.success) console.log(result.data.context.trace);
 
 // Validate a request before executing
 const validation = await codebolt.contextAssembly.validate(request);
@@ -311,7 +314,7 @@ const engine = await codebolt.contextRuleEngine.create({
       when: [
         { field: "addVar.phase", operator: "eq", value: "planning" }
       ],
-      then: { add_memories: ["architecture-docs", "project-conventions"] }
+      then: { add_memories: [memoryId] }
     }
   ]
 });

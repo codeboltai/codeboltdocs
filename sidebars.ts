@@ -440,10 +440,6 @@ const sidebars = {
         doc('Evaluation Overview', `${build}/eval-and-optimization/overview`),
         remaining(`${developerDocs}/07_eval-and-optimization`),
       ]),
-      group('Architecture & Internals', [
-        remaining(`${developerDocs}/02_architecture`),
-        group('Server Subsystems', [remaining(`${developerDocs}/07b_subsystems`)]),
-      ]),
     ]),
   ],
 

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 5
 title: Memory Evaluation
-description: Evaluating memory means measuring whether agents are retrieving the right information at the right time and whether the pipeline that writes to storage is.
+description: Test whether an agent retrieves and uses a known project record.
 ---
 
 # Memory Evaluation
 
-Evaluating memory means measuring whether agents are retrieving the right information at the right time and whether the pipeline that writes to storage is producing quality embeddings and knowledge graph entries. Codebolt's eval system can evaluate both — and then run an optimizer to improve the configuration automatically.
+Evaluating memory means measuring whether agents are retrieving the right information at the right time and whether the pipeline that writes to storage is producing quality embeddings and knowledge graph entries. Use a known record and an expected answer to measure recall.
 
 ## The eval model
 
@@ -47,7 +47,7 @@ Compare the agent's response against a reference answer. Match modes:
 | `exact` | Response equals expected exactly |
 | `contains` | Response includes the expected substring |
 | `regex` | Response matches a regular expression |
-| `semantic` | Response is semantically equivalent (embedding similarity) |
+| `semantic` | Response contains the expected text, ignoring case |
 
 ```typescript
 const { task } = await evalRequest('/tasks', 'POST', {
@@ -66,12 +66,12 @@ const { task } = await evalRequest('/tasks', 'POST', {
 });
 ```
 
-Use `semantic` mode to test memory recall without requiring word-for-word matches:
+Use `semantic` mode when capitalization may differ:
 
 ```typescript
 {
   type: 'expected-output',
-  expectedOutput: 'The knowledge graph uses an embedded Kuzu database.',
+  expectedOutput: 'kuzu',
   matchMode: 'semantic'
 }
 ```
@@ -103,7 +103,7 @@ const scriptEvaluator = {
 
 ### `deliberation`
 
-Multiple judge agents discuss the output and vote on a score. Use when a single judge may be biased.
+The evaluator opens a deliberation with the listed agents and immediately requests the winning option. If no winner is available yet, it uses a score of 50.
 
 ```typescript
 {
@@ -192,54 +192,7 @@ console.log(latest.status, latest.results);
 
 ## Optimization loop
 
-Once you have eval tasks, the optimizer can automatically improve the agent's memory configuration by adjusting its instructions, context rules, or ingestion pipeline parameters.
-
-```typescript
-// Configure optimization on a task
-await evalRequest(`/tasks/${task.id}`, 'PUT', {
-  optimization: {
-    enabled: true,
-    optimizerType: 'agent',
-    optimizerAgentId: 'memory-optimizer',
-    targets: ['instructions', 'config'],
-    maxIterations: 10,
-    targetScore: 85,
-    improvementThreshold: 2,
-    strategy: 'greedy'
-  }
-});
-```
-
-### Optimization strategies
-
-| Strategy | How it works | Best for |
-|---|---|---|
-| `greedy` | Accept any improvement, continue from best | Fast convergence on a clear optimum |
-| `best-of-n` | Try N variations in parallel, keep the best | Avoiding local optima |
-| `annealing` | Accept some regressions early, tighten later | Complex parameter spaces |
-
-### Optimization targets
-
-| Target | What the optimizer modifies |
-|---|---|
-| `instructions` | Agent system prompt / instructions |
-| `prompts` | LLM prompts used inside retrievers |
-| `tools` | Which tools the agent is allowed to use |
-| `config` | Agent configuration parameters |
-| `code` | Agent source code (advanced) |
-
-For memory optimization, `config` is the most useful target — the optimizer adjusts parameters like `topK`, `minScore`, and `chunkSize` based on which values produce better eval scores.
-
-### Reading optimization history
-
-```typescript
-const { run: current } = await evalRequest(`/runs/${run.id}`);
-for (const result of current.results) {
-  if (result.optimization) {
-    console.log(result.taskId, result.optimization.bestScore, result.optimization.iterations);
-  }
-}
-```
+Run the same suite against the same agent and stored records before and after changing one retrieval setting. Save the two run IDs and compare their task scores and answers. Use the context assembly trace to check whether the expected record reached the agent.
 
 ## Evaluating action blocks directly
 
@@ -264,14 +217,7 @@ await evalRequest(`/runs/${blockRun.id}/start`, 'POST');
 
 ## Viewing results in the UI
 
-The **Eval** panel in the Codebolt desktop app shows:
-
-- Pass/fail and score per task per run
-- Per-evaluator breakdown with reasoning
-- Score trend across optimization iterations
-- Diff of what the optimizer changed between iterations
-
-Use the evaluator reasoning column to understand *why* a retrieval failed — whether the vector search returned irrelevant results, the context rule suppressed the right source, or the knowledge graph had stale data.
+Open the **Eval** panel and select the run to inspect its results. An evaluator scores the subject's output. To investigate a low score, compare that output with the memory records and the [assembly trace](./02g_context-assembly.md).
 
 ## See also
 

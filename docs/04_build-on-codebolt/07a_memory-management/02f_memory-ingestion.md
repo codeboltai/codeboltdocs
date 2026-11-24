@@ -36,7 +36,7 @@ routing: RoutingRule[]
 
 ## Trigger Types
 
-Codebolt supports eight trigger types that determine when a pipeline executes:
+The trigger picker includes application events and manual execution. Common triggers include the following.
 
 | Trigger | Fires when |
 |---|---|
@@ -73,7 +73,7 @@ The `memoryIngestionEventBridge` connects the Application Event Bus to pipelines
 
 ### 1. blob_store (Storage)
 
-Stores raw data with a bucket/key reference.
+Produces a reference with a bucket and key. The processor does not persist the raw bytes.
 
 - **Returns:** `{ ref: { bucket, key, timestamp, size } }`
 - **Params:** `bucket`, `metadata`
@@ -87,7 +87,7 @@ Splits text into chunks with overlap. Handles strings, arrays of strings, and ob
 
 ### 3. vector_embed (Transform)
 
-Generates vector embeddings for chunks.
+Produces random 384-dimensional vectors. For similarity search, route the source text to a vector collection so the Vector DB can index it with its embedding provider.
 
 - **Params:** `model`, `batch_size`
 
@@ -107,9 +107,9 @@ Extracts entities for the Knowledge Base with optional Knowledge Graph template 
 
 ### 6. parser (Transform)
 
-Parses structured data formats. Supports JSON with optional path extraction via jq-style paths.
+Parses JSON strings. To select a nested value after parsing, use a path such as `event.payload.review.id`.
 
-- **Params:** `format` (json/xml/yaml), `path`
+- **Params:** `format` (JSON parsing is implemented), `path`
 
 ### 7. normalizer (Transform)
 
@@ -123,12 +123,6 @@ Cleans and normalizes data. Operations include lowercasing strings, trimming whi
 The custom processor is registered as a type but all three execution modes are currently stubbed out in the ingestion pipeline — they log a message and return an empty object. Custom steps **do** work in [Persistent Memory](./02d_persistent-memory.md) retrieval pipelines (actionBlockPath and inlineCode via SideExecutionManager).
 :::
 
-Planned execution modes:
-
-- **`inlineCode`** — JavaScript evaluated in a sandbox.
-- **`actionBlockPath`** — Executed via SideExecutionManager.
-- **`handler`** — Named registered handler function.
-
 ## Routing Engine
 
 After processors complete, routing rules direct outputs to storage destinations.
@@ -139,7 +133,7 @@ After processors complete, routing rules direct outputs to storage destinations.
 {
   from: string,          // processor output name
   foreach?: boolean,     // iterate over array items
-  condition?: string,    // optional condition expression
+  condition?: string,    // recorded but not evaluated
   write_to: WriteDestination
 }
 ```
@@ -152,7 +146,7 @@ Resolves an instance by name or ID. Handles both single records and arrays. For 
 
 #### 2. vector (Vector Database)
 
-Resolves a collection by name or ID. Upserts a document with a URI generated from the event type and timestamp, text from the content/text field, and metadata from the data object.
+Resolves a collection by name or ID. Upserts a document using the item’s `id` or `uri`, or a generated UUID, text from the content/text field, and metadata from the data object.
 
 #### 3. kv (Key-Value Store)
 
@@ -181,7 +175,7 @@ Resolves an instance by name or ID (auto-creates via `ensureInstance`). Appends 
 4. Execute routing rules:
    a. For each rule: get data from outputs[rule.from]
    b. If foreach: iterate items, write each
-   c. If condition: evaluate before writing
+   c. Routing proceeds even when a condition is supplied
    d. Call writeToDestination()
 5. Return PipelineExecutionResult with processor results,
    routing results, and timing

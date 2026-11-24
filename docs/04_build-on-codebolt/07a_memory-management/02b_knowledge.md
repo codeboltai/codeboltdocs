@@ -85,7 +85,7 @@ Groups content by paragraph and sentence boundaries as a proxy for semantic simi
 |-----------|---------|-------------|
 | `maxChunkSize` | 1000 | Maximum characters per chunk |
 | `minChunkSize` | 100 | Minimum characters per chunk |
-| `similarityThreshold` | — | Threshold for grouping (simplified; true semantic chunking requires embeddings) |
+| `similarityThreshold` | — | Reserved setting. Paragraph and sentence boundaries determine the chunks. |
 
 This is a simplified implementation that uses structural boundaries rather than embedding-based similarity.
 

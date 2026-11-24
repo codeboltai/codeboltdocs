@@ -1,6 +1,6 @@
 # Context Compaction
 
-Inspect and update compaction state and related context.
+Use `codebolt.contextCompaction` in a connected agent to read project profiles, preview changes to a context thread, or apply a saved profile.
 
 ## SDK methods
 
@@ -14,7 +14,7 @@ codebolt.contextCompaction.getConfig(): Promise<ContextCompactionConfigResponse>
 
 ### updateConfig
 
-Update the context compaction configuration.
+Save a complete project configuration. Read the current configuration from `getConfig()` under `data.config` before editing its profiles.
 
 ```text
 codebolt.contextCompaction.updateConfig(config: ContextCompactionConfig): Promise<ContextCompactionConfigResponse>
@@ -22,7 +22,7 @@ codebolt.contextCompaction.updateConfig(config: ContextCompactionConfig): Promis
 
 ### validateConfig
 
-Validate a context compaction configuration without saving it.
+Inspect `data.validation.valid`, `errors`, and `warnings` before saving.
 
 ```text
 codebolt.contextCompaction.validateConfig(config: Partial<ContextCompactionConfig>): Promise<ContextCompactionValidationResponse>
@@ -30,7 +30,7 @@ codebolt.contextCompaction.validateConfig(config: Partial<ContextCompactionConfi
 
 ### getStepSpecs
 
-Get available context compaction workflow step specifications.
+Read `data.specs` for the available workflow steps, their labels, and their parameters.
 
 ```text
 codebolt.contextCompaction.getStepSpecs(): Promise<ContextCompactionStepSpecsResponse>
@@ -38,7 +38,7 @@ codebolt.contextCompaction.getStepSpecs(): Promise<ContextCompactionStepSpecsRes
 
 ### run
 
-Run context compaction for a thread.
+Pass `threadId` to select a context thread and optionally `profileId` to select a saved profile. If you omit `threadId`, the server tries to resolve it from the current message. Check both the response’s `success` and `data.result.success`. When `data.result.deferred` is true, inspect `deferredReason` before treating the run as complete.
 
 ```text
 codebolt.contextCompaction.run(request?: ContextCompactionRunRequest): Promise<ContextCompactionRunResponse>
@@ -46,8 +46,10 @@ codebolt.contextCompaction.run(request?: ContextCompactionRunRequest): Promise<C
 
 ### dryRun
 
-Preview context compaction for a thread without saving changes.
+Execute the workflow without writing its result to the thread. A completed preview returns `data.result.preview`, `stats`, and `stepResults` inside the run result.
 
 ```text
 codebolt.contextCompaction.dryRun(request?: Omit<ContextCompactionRunRequest, "dryRun">): Promise<ContextCompactionRunResponse>
 ```
+
+See the [agent preview example](../../../../04_build-on-codebolt/07a_memory-management/02h_context-compaction.md) for result handling.

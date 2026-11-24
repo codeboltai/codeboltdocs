@@ -16,7 +16,7 @@ Choose one trigger for each pipeline. The picker shows available conversation, t
 
 ## Processors
 
-Give each processor an input and a named output. For example, use **Parser** to read JSON input, **Normalizer** to trim text, or **Chunker** before **Vector Embed** for a document. A later processor can read an earlier processor's named output.
+Give each processor an input and a named output. For example, use **Parser** to read JSON input, **Normalizer** to trim text, or **Chunker** to split text. To index text for similarity search, route it to a vector collection. The ingestion **Vector Embed** processor currently generates placeholder vectors. A later processor can read an earlier processor's named output.
 
 ## Routing rules
 
@@ -27,7 +27,7 @@ Choose the processor output to route and a destination. Supported writes include
 1. Choose **Create Pipeline** and select the manual trigger.
 2. Add a **Parser** with `event.payload.record` as its input and `parsed_record` as its output.
 3. Add a route from `parsed_record` to a key-value destination. Enter a namespace such as `reviews`. The record's `id` supplies the key if you leave the key template blank.
-4. Save the pipeline. Paste the JSON below into **Test Execution**, run it, and inspect the processor and routing results.
+4. Save and activate the pipeline. Paste the JSON below into **Test Execution**, run it, and inspect the processor and routing results.
 
    ```json
    {

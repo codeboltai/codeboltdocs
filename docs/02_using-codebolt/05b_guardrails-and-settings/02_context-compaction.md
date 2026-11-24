@@ -6,15 +6,23 @@ description: Context Compaction lets you define when and how long-running thread
 
 # Context Compaction
 
-Context Compaction lets you define rules for shrinking long-running thread context while preserving enough history for an agent to continue working. It is useful when a run has accumulated many messages, large tool outputs, repeated context, or bulky fields that would otherwise push the next LLM request toward the model's context limit.
+Use compaction when you want to continue a long conversation with less history in the next model request. The default profile preserves recent context, summarizes older work, and replaces the older entries with a continuation summary. That summary carries forward details such as decisions, files changed, blockers, and the next action.
+
+## Compact the current conversation
+
+In Chat, send `/compact`. To tell Codebolt which details matter for your next turn, add instructions on the same line. For example:
+
+```text
+/compact Keep the failing test name, the files we changed, and the next debugging step.
+```
+
+Chat runs the saved default profile on the current thread and displays **Conversation context compacted.** when it finishes. If a model or tool round is still being recorded, Chat can report that compaction is queued. To preview the effect before applying it, use **Dry Run** in the panel.
 
 ![Context Compaction](/productImages/guardrails/context-compaction.png)
 
-
-
 ## What you configure
 
-Compaction is profile-based. A profile defines:
+Open **Context → Context Compaction** and select an **Active profile**. Saving this selection makes it the project default. A profile has three parts.
 
 - **Auto trigger**: when compaction should be considered.
 - **Workflow steps**: the ordered operations used to compact context.
@@ -39,9 +47,9 @@ In the **Auto Trigger** section, you can set:
 | Thread id filter | Optional thread id restriction |
 | Debounce ms | Delay used to collapse repeated trigger events into one run |
 | Minimum messages | Number of new messages required since the last compaction |
-| Minimum estimated tokens | Estimated token threshold required since the last compaction |
+| Minimum estimated tokens | Token threshold used when checking whether compaction is due |
 
-Codebolt also checks compaction during LLM execution. If the prompt payload is over budget, the server can run the selected compaction profile before enforcing the final payload budget. LLM responses also return whether compaction is required so the runtime and UI can surface that state.
+The message and token thresholds are alternatives. Codebolt also checks the available model context and can request compaction before sending an over-budget prompt. The built-in default listens for `context:added` and sets **Minimum messages** to 80. Your saved profile can use different values.
 
 ## Workflow steps
 
@@ -68,13 +76,13 @@ Supported step types:
 | Step | What it does |
 |---|---|
 | `preserve_recent` | Protects the newest messages, turns, or LLM requests from later steps |
-| `remove_tool_calls` | Deletes matching unprotected tool-call or LLM-request entries |
+| `remove_tool_calls` | Removes matching unprotected entries when a summary exists or lossy removal is enabled. Otherwise it compacts them to metadata and a preview. |
 | `compact_tool_calls` | Replaces matching tool calls with compact metadata and a short preview |
 | `truncate_large_fields` | Truncates oversized string fields such as `stdout`, `stderr`, `content`, `diff`, or `result` |
 | `dedupe_repeated_context` | Removes duplicate unprotected entries after normalization |
 | `llm_summarize` | Summarizes selected older context using the configured LLM |
 | `replace_with_summary` | Replaces selected messages with one synthetic summary message |
-| `budget_enforce` | Drops oldest unprotected messages until the estimated token budget is met |
+| `budget_enforce` | Tries to meet the budget by compacting eligible tool entries. It can remove unprotected entries when a summary exists or lossy removal is enabled. |
 
 Put `preserve_recent` early in the workflow when you want newer conversation turns protected before destructive or summarizing steps run.
 
@@ -95,12 +103,12 @@ Dry runs return a preview and step results without persisting changes.
 
 ## Running compaction manually
 
-Use **Run Now** when you want to test or force a profile on a specific thread.
+Under **Auto Trigger**, fill in **Thread id filter** with an existing context thread ID. This field also supplies the target for **Run Now**. If you changed the workflow or output policy, select **Validate**, review the result, and select **Save** so the run uses those changes. Saving the thread filter also restricts automatic triggers to that thread.
 
 - **Dry Run** shows the projected result and step stats without changing stored context.
 - **Run** applies the selected profile and persists according to the output policy.
 
-The result includes before/after message counts, compacted message count, removed message count, estimated token counts, and per-step stats.
+In **Last Result**, compare **Before** and **After**, check **Compacted** and **Dry run**, and expand your investigation using the step results shown underneath.
 
 ## Related panels
 

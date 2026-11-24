@@ -254,11 +254,11 @@ The Knowledge Graph emits 20 event types for real-time UI updates:
 
 ### Create an Instance
 
-```typescript
+```js
 import codebolt from '@codebolt/codeboltjs';
 
 // Create the template first
-const template = await codebolt.knowledgeGraph.createInstanceTemplate({
+const { data: template } = await codebolt.knowledgeGraph.createInstanceTemplate({
   name: 'codebase-map',
   record_kinds: {
     Module: {
@@ -281,7 +281,7 @@ const template = await codebolt.knowledgeGraph.createInstanceTemplate({
 });
 
 // Create an instance from the template
-const instance = await codebolt.knowledgeGraph.createInstance({
+const { data: instance } = await codebolt.knowledgeGraph.createInstance({
   name: 'my-project-map',
   templateId: template.id
 });
@@ -289,15 +289,15 @@ const instance = await codebolt.knowledgeGraph.createInstance({
 
 ### Add Records and Edges
 
-```typescript
+```js
 // Add nodes
-const moduleNode = await codebolt.knowledgeGraph.addMemoryRecord(instance.id, {
+const { data: moduleNode } = await codebolt.knowledgeGraph.addMemoryRecord(instance.id, {
   name: 'auth-module',
   kind: 'Module',
   attributes: { path: 'src/auth/index.ts', language: 'typescript' }
 });
 
-const funcNode = await codebolt.knowledgeGraph.addMemoryRecord(instance.id, {
+const { data: funcNode } = await codebolt.knowledgeGraph.addMemoryRecord(instance.id, {
   name: 'validateToken',
   kind: 'Function',
   attributes: { name: 'validateToken', lineNumber: 42 }
@@ -313,24 +313,25 @@ await codebolt.knowledgeGraph.addEdge(instance.id, {
 
 ### Create and Execute a View
 
-```typescript
+```js
 // Define a reusable query
-const viewTemplate = await codebolt.knowledgeGraph.createViewTemplate({
+const { data: viewTemplate } = await codebolt.knowledgeGraph.createViewTemplate({
   name: 'all-functions-in-module',
   applicable_template_ids: [template.id],
   match: { alias: 'm', recordKind: 'Module' },
   patterns: [
-    { from: 'm', edge: 'CONTAINS', to: { alias: 'f', recordKind: 'Function' }, direction: 'outgoing' }
+    { edge: 'CONTAINS', targetAlias: 'f', targetKind: 'Function', direction: 'outgoing' }
   ],
   return: [
-    { expression: 'm.name', alias: 'module' },
-    { expression: 'f.name', alias: 'function' }
+    { field: 'm.name', alias: 'module' },
+    { field: 'f.name', alias: 'function' }
   ]
 });
 
 // Bind it to an instance
-const view = await codebolt.knowledgeGraph.createView({
-  viewTemplateId: viewTemplate.id,
+const { data: view } = await codebolt.knowledgeGraph.createView({
+  name: 'module-functions',
+  templateId: viewTemplate.id,
   instanceId: instance.id
 });
 
@@ -340,6 +341,6 @@ const results = await codebolt.knowledgeGraph.executeView(view.id);
 
 ### Delete a Record
 
-```typescript
+```js
 await codebolt.knowledgeGraph.deleteMemoryRecord(instance.id, recordId);
 ```

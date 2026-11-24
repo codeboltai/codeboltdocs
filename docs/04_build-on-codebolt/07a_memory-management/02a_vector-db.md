@@ -59,14 +59,15 @@ Five migrations run in order:
 Embedding converts text into fixed-dimension vectors. The Vector DB routes embedding requests to one of several providers:
 
 - **Local ONNX model** — `all-MiniLM-L6-v2`, dimension 384
-- **Cloud providers** — OpenAI (dimension 1536), Voyage, and others
+- **Cloud providers** — OpenAI and Voyage, with dimensions determined by the selected model
 
 The provider and model are selected from project settings. Different models produce different embedding dimensions:
 
 | Model | Dimension |
 |---|---|
 | all-MiniLM-L6-v2 (local) | 384 |
-| OpenAI | 1536 |
+| text-embedding-3-small | 1536 |
+| text-embedding-3-large | 3072 |
 
 The default dimension is **1536** when no model is explicitly configured.
 

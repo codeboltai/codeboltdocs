@@ -31,11 +31,11 @@ Agents can read and write entries through the [KV Store API](../../05_reference/
 
 ## JSON store
 
-Save a structured record with `codebolt.memory.json.save(data)`. Use the returned memory ID to update or delete it.
+Create a JSON memory thread and update its data using the thread ID. See the [thread API examples](../../04_build-on-codebolt/07a_memory-management/02_runtime-memory-apis.md).
 
 ## Markdown notes
 
-Save readable notes with `codebolt.memory.markdown.save(text, metadata)`. The Markdown memory service manages records in per-thread JSON files. For project-authored Markdown files, use the editor or file tools.
+Create a Markdown thread for a note and update its content using the thread ID. The Markdown memory service manages records in per-thread JSON files. For project-authored Markdown files, use the editor or file tools.
 
 ## Knowledge graph
 

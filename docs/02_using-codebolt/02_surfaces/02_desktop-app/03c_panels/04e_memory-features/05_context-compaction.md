@@ -6,16 +6,16 @@ description: Use Context Compaction to manage workflow-driven compaction for lon
 
 # Context Compaction
 
-Context Compaction reduces long-running thread context into smaller layers that agents can continue from. Use it when a conversation or workflow is getting too large but still needs useful history.
+Open **Context → Context Compaction** to edit a project profile or preview what it would do to a thread. For the current conversation, you can also send `/compact` directly in Chat.
 
-Open via: **Context menu -> Context Compaction**, the panel-header **+** menu, or the Panel Selector.
+## Preview a saved profile
 
-## What you can do
+1. Select the **Active profile**. Under **Workflow Steps**, expand a step to inspect its scope and parameters. If you edit the profile, use **Validate** and **Save** before testing it.
+2. Under **Auto Trigger**, enter the existing context thread ID in **Thread id filter**. **Run Now** shows the target as **Runs on** followed by the ID. Saving this filter also limits the profile’s automatic triggers to that thread.
+3. In **Run Now**, select **Dry Run**. In **Last Result**, compare the before and after message counts and read the per-step results. A preview can call the configured model if the workflow includes summarization.
+4. To apply the saved workflow to that thread, select **Run**. The **Output** settings determine which changes are written back.
 
-- Configure compaction behavior for thread context.
-- Inspect compaction runs and failures.
-- Review what context was retained after compaction.
-- Coordinate compaction with memory and context assembly settings.
+See [Context Compaction settings](../../../../05b_guardrails-and-settings/02_context-compaction.md) for the Chat command, trigger rules, and workflow steps.
 
 ## See also
 

@@ -192,10 +192,9 @@ All mutations emit events so that connected clients (e.g., the UI panel) can upd
 ### Create an Instance
 
 ```typescript
-const instance = await codebolt.kvStore.createInstance({
-  name: "my-agent-state",
-  description: "Persisted state for my agent"
-});
+const created = await codebolt.kvStore.createInstance("my-agent-state", "Persisted state for my agent");
+if (!created.success) throw new Error(created.error);
+const instance = created.data.instance;
 ```
 
 ### Set a Value
@@ -208,7 +207,7 @@ await codebolt.kvStore.set(instance.id, "config", "theme", "dark");
 
 ```typescript
 const theme = await codebolt.kvStore.get(instance.id, "config", "theme");
-// "dark"
+if (theme.data?.exists) console.log(theme.data.value); // "dark"
 ```
 
 ### Delete a Value
@@ -220,19 +219,20 @@ await codebolt.kvStore.delete(instance.id, "config", "theme");
 ### Delete a Namespace
 
 ```typescript
-const deletedCount = await codebolt.kvStore.deleteNamespace(instance.id, "config");
+const cleared = await codebolt.kvStore.deleteNamespace(instance.id, "config");
+console.log(cleared.data?.deletedCount);
 ```
 
 ### Query Records
 
-```typescript
+```js
 const results = await codebolt.kvStore.query({
   instance: instance.id,
   namespace: "user-prefs",
   where: [
-    { field: "key", operator: "starts_with", value: "ui." }
+    { field: "key", op: "starts_with", value: "ui." }
   ],
-  order: { field: "updated_at", direction: "desc" },
+  order: { by: "updated_at", dir: "desc" },
   limit: 50
 });
 ```
@@ -241,7 +241,7 @@ const results = await codebolt.kvStore.query({
 
 ```typescript
 const namespaces = await codebolt.kvStore.getNamespaces(instance.id);
-// ["config", "user-prefs"]
+console.log(namespaces.data?.namespaces);
 ```
 
 ### Get Record Count

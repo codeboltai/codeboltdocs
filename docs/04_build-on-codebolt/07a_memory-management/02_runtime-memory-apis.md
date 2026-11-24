@@ -1,197 +1,102 @@
 ---
 sidebar_position: 2
 title: Runtime Memory APIs
-description: Every memory store and configuration layer is accessible via the codeboltjs SDK
+description: Read, write, and retrieve project memory from a Codebolt agent.
 ---
 
 # Runtime Memory APIs
 
-Every memory store and configuration layer is accessible via the `codeboltjs` SDK. Agents can call these APIs inside their own execution loop — reading from storage, writing to it, and reconfiguring the pipelines that govern what they know.
+These examples run inside a connected agent or action block. Use IDs from the current project.
 
-Import the SDK in any agent or action block:
-
-```typescript
+```js
 import codebolt from '@codebolt/codeboltjs';
 ```
 
----
-
 ## Memory Ingestion — `codebolt.memoryIngestion`
 
-Full CRUD control over ingestion pipelines at runtime. An agent can create a new pipeline in response to what it learns, activate or disable existing ones, and trigger manual ingestion runs.
+Create a manual pipeline once, or use the ID of an existing active pipeline with the same inputs. This example saves review decisions by ID in the KV store.
 
-```typescript
-// Create a pipeline that embeds every completed task
-const pipeline = await codebolt.memoryIngestion.create({
-  id: 'task-completion-embed',
-  label: 'Embed task completions',
-  trigger: 'onTaskCompleted',
-  processors: [
-    { id: 'c1', type: 'chunker', input: 'payload.summary', output: 'chunks', chunk_size: 400, overlap: 50 },
-    { id: 'e1', type: 'vector_embed', input: 'chunks', output: 'embedded', model: 'default' }
-  ],
-  routing: [{ foreach: 'chunk', write_to: 'vector://task-history' }]
+```js
+const created = await codebolt.memoryIngestion.create({
+  id: 'review-decisions', label: 'Review decisions', trigger: 'manual',
+  processors: [{
+    id: 'parse', type: 'parser', input: 'event.payload.record',
+    output: 'record', params: { format: 'json' },
+  }],
+  routing: [{ from: 'record', write_to: { type: 'kv', instanceId: 'reviews', namespace: 'decisions' } }],
 });
-
-// List all active pipelines
-const { pipelines } = await codebolt.memoryIngestion.list({ activeOnly: true });
-
-// Update a pipeline's chunk size
-await codebolt.memoryIngestion.update('task-completion-embed', {
-  processors: [{ id: 'c1', chunk_size: 256 }]
-});
-
-// Activate / disable
-await codebolt.memoryIngestion.activate('task-completion-embed');
-await codebolt.memoryIngestion.disable('task-completion-embed');
-
-// Trigger manually with a payload
-await codebolt.memoryIngestion.execute({
-  pipelineId: 'task-completion-embed',
-  payload: { summary: 'Implemented OAuth2 login flow using Passport.js' }
-});
-
-// Duplicate a pipeline with a new ID
-await codebolt.memoryIngestion.duplicate('task-completion-embed', 'session-completion-embed', 'Embed session completions');
-
-// Validate configuration before saving
-const { valid, errors } = await codebolt.memoryIngestion.validate(draftConfig);
+if (!created.success) throw new Error(created.error);
+const pipelineId = created.data.pipeline.id;
+const active = await codebolt.memoryIngestion.activate(pipelineId);
+if (!active.success) throw new Error(active.error);
 ```
 
-**Get processor specs** (what processor types are available and their parameter schemas):
+Send the same payload you would use in the [desktop ingestion example](../../02_using-codebolt/05d_memory/06_memory-ingestion.md).
 
-```typescript
-const { specs } = await codebolt.memoryIngestion.getProcessorSpecs();
+```js
+const write = await codebolt.memoryIngestion.execute({
+  pipelineId, payload: { record: JSON.stringify({ id: 'review-1', decision: 'accepted' }) },
+});
+if (!write.success) throw new Error(write.error);
+console.log(write.data.result);
 ```
 
----
+Use `list()` to find pipelines under `data.pipelines`. See [Memory Ingestion](./02f_memory-ingestion.md) for triggers and destinations.
 
 ## Persistent Memory — `codebolt.persistentMemory`
 
-Create and modify retrieval definitions that context assembly can select for a request.
+Run a configured retrieval pipeline by its memory definition ID. Supply the variables that definition expects.
 
-```typescript
-// Define a new retrieval pipeline
-await codebolt.persistentMemory.create({
-  id: 'recent-errors',
-  name: 'Recent error context',
-  enabled: true,
-  inputScope: 'task',
-  pipeline: [
-    { step: 'derive_query', from: 'task.text', method: 'keyword_extract' },
-    { step: 'log_search', eventType: 'error', since: '-24h', limit: 10 },
-    { step: 'format', template: '## Recent errors\n{{#each results}}\n- {{this.payload}}\n{{/each}}' }
-  ]
+```js
+const read = await codebolt.persistentMemory.executeRetrieval(memoryId, {
+  query: 'Which review decisions were accepted?',
 });
-
-// Activate / update a retrieval pipeline
-await codebolt.persistentMemory.update('recent-errors', { enabled: false });
-
-// Trigger retrieval outside the normal assembly cycle
-const { result } = await codebolt.persistentMemory.executeRetrieval('recent-errors', {
-  task: { text: 'Fix the authentication bug' }
-});
-
-// Discover available step types
-const { specs } = await codebolt.persistentMemory.getStepSpecs();
+if (!read.success) throw new Error(read.error);
+console.log(read.data.result);
 ```
 
----
+Use `list()` to find definitions under `data.memories`. See [Persistent Memory](./02d_persistent-memory.md) for retrieval steps.
 
 ## Context Rule Engine — `codebolt.contextRuleEngine`
 
-Add, update, and evaluate context rules at runtime. Rules take effect on the next turn.
+Test the rules for a planning request before running retrieval.
 
-```typescript
-// Create a rule that injects style guide when task mentions "PR"
-await codebolt.contextRuleEngine.create({
-  name: 'pr-style-guide',
-  enabled: true,
-  conditions: [{ field: 'task.text', op: 'contains', value: 'PR' }],
-  actions: [{ type: 'include', reference: 'markdown://style-guide' }]
+```js
+const rules = await codebolt.contextRuleEngine.evaluate({
+  scope_variables: {}, additional_variables: { phase: 'planning' },
 });
-
-// Update an existing rule
-await codebolt.contextRuleEngine.update('pr-style-guide', {
-  conditions: [
-    { field: 'task.text', op: 'contains', value: 'PR' },
-    { field: 'task.text', op: 'contains', value: 'review' }
-  ]
-});
-
-// Test rules against a hypothetical context without affecting live assembly
-const { matches } = await codebolt.contextRuleEngine.evaluate({
-  rules: ['pr-style-guide'],
-  variables: { task: { text: 'Please review this PR' } }
-});
-
-// Find out what variables rules can reference
-const { variables } = await codebolt.contextRuleEngine.getPossibleVariables();
+if (!rules.success) throw new Error(rules.error);
+console.log(rules.data);
 ```
-
----
 
 ## Context Assembly — `codebolt.contextAssembly`
 
-Assemble context on demand, test it, or inspect what memory types are available.
+Use the thread ID and a persistent memory definition ID from your project.
 
-```typescript
-// Assemble context for an arbitrary query
-const { context } = await codebolt.contextAssembly.getContext({
-  task: { text: 'How does the payment flow work?' },
-  memoryNames: ['recent-decisions', 'code-context-recall'],
-  tokenBudget: 4000
+```js
+const response = await codebolt.contextAssembly.getContext({
+  scope_variables: { thread: { thread_id: threadId } },
+  explicit_memory: [memoryId],
+  constraints: { max_tokens: 800 },
 });
-
-// Validate a request before running
-const { valid, errors } = await codebolt.contextAssembly.validate(request);
-
-// List all available memory types
-const { memoryTypes } = await codebolt.contextAssembly.listMemoryTypes();
-
-// Test which rules match without doing full retrieval
-const { matched } = await codebolt.contextAssembly.evaluateRules(request, ['pr-style-guide']);
-
-// Find what scope variables a set of memory definitions requires
-const { required } = await codebolt.contextAssembly.getRequiredVariables(['recent-errors', 'code-context-recall']);
+if (!response.success) throw new Error(response.error);
+const assembled = response.data.context;
+console.log(assembled.context, assembled.trace, assembled.meta);
 ```
 
----
+See [Context Assembly](./02g_context-assembly.md) for rule-based selection and [Context Compaction](./02h_context-compaction.md) for reducing conversation history.
 
 ## KV Store — `codebolt.kvStore`
 
-Namespaced key-value storage. Agents use this to persist small values that must survive across runs.
+Store a preference under a key in an existing instance.
 
-```typescript
-// Create a named instance (or use an existing one)
-const instance = await codebolt.kvStore.createInstance('agent-prefs', 'Agent preferences');
-
-// Write a value
-await codebolt.kvStore.set(instance.id, 'user', 'preferred_language', 'TypeScript', true);
-// true = auto-create instance if it doesn't exist
-
-// Read a value
-const { value } = await codebolt.kvStore.get(instance.id, 'user', 'preferred_language');
-
-// Delete a single key
-await codebolt.kvStore.delete(instance.id, 'user', 'preferred_language');
-
-// Wipe an entire namespace
-await codebolt.kvStore.deleteNamespace(instance.id, 'session-cache');
-
-// Query with a DSL
-const { records } = await codebolt.kvStore.query({
-  instanceId: instance.id,
-  namespace: 'user',
-  filter: { key: { startsWith: 'preferred_' } }
-});
-
-// Inspect store shape
-const { namespaces } = await codebolt.kvStore.getNamespaces(instance.id);
-const { count } = await codebolt.kvStore.getRecordCount(instance.id, 'user');
+```js
+await codebolt.kvStore.set(instanceId, 'preferences', 'theme', 'dark');
+const saved = await codebolt.kvStore.get(instanceId, 'preferences', 'theme');
+if (saved.data?.exists) console.log(saved.data.value);
 ```
 
----
+See [KV Store](./02e_kv-store.md#sdk-reference) to create an instance and query records.
 
 ## Vector Store — `codebolt.vectordb`
 
@@ -205,89 +110,61 @@ To manage a document collection, use the server’s `/vectorDB/collections` API.
 
 ## Knowledge Graph — `codebolt.knowledgeGraph`
 
-Full CRUD on nodes (memory records), edges (relationships), templates, and Cypher views.
+List records of a kind defined by your graph's instance template.
 
-```typescript
-// Create a graph instance from a schema template
-const instance = await codebolt.knowledgeGraph.createInstance({
-  name: 'project-entities',
-  templateId: 'code-entities-template'
-});
-
-// Add nodes
-await codebolt.knowledgeGraph.addMemoryRecord(instance.id, {
-  kind: 'Function',
-  data: { name: 'processPayment', signature: 'async (amount: number) => Promise<Receipt>' }
-});
-
-// Add relationships
-await codebolt.knowledgeGraph.addEdge(instance.id, {
-  type: 'CALLS',
-  fromRecordId: 'fn-processPayment',
-  toRecordId: 'fn-chargeStripe'
-});
-
-// Create and execute a saved Cypher view
-await codebolt.knowledgeGraph.createView({
-  instanceId: instance.id,
-  name: 'payment-call-chain',
-  query: 'MATCH p=(f:Function)-[:CALLS*]->(g:Function {name: "chargeStripe"}) RETURN p'
-});
-const { rows } = await codebolt.knowledgeGraph.executeView('payment-call-chain');
-
-// Delete stale records
-await codebolt.knowledgeGraph.deleteMemoryRecord(instance.id, 'fn-legacyCharge');
+```js
+const records = await codebolt.knowledgeGraph.listMemoryRecords(instanceId, { kind: 'Module' });
+if (!records.success) throw new Error(records.error);
+console.log(records.data);
 ```
 
----
+See [Knowledge Graph](./02c_knowledge-graph.md#sdk-reference) to define a template, add records and edges, and query a view.
 
 ## Episodic Memory — `codebolt.episodicMemory`
 
-Append structured events to an immutable timeline. Useful for agents that need to log their own reasoning or actions for later retrieval.
+Create a memory thread, append a decision, and read it back.
 
-```typescript
-// Create a memory container for this run
-const memory = await codebolt.episodicMemory.createMemory({ title: 'Refactor run 2025-04-22' });
-
-// Append events
-await codebolt.episodicMemory.appendEvent({
-  memoryId: memory.id,
-  event: {
-    event_type: 'decision',
-    emitting_agent_id: 'refactor-agent',
-    tags: ['architecture', 'payment'],
-    payload: { decision: 'Extract PaymentService to its own module', rationale: 'SRP' }
-  }
+```js
+const created = await codebolt.episodicMemory.createMemory({ title: 'Payment module decisions' });
+if (!created.success) throw new Error(created.error);
+const memoryId = created.data.id;
+const appended = await codebolt.episodicMemory.appendEvent({
+  memoryId, event_type: 'decision', emitting_agent_id: agentId,
+  payload: { decision: 'Extract PaymentService' },
 });
-
-// Query by type, tag, or time window
-const { events } = await codebolt.episodicMemory.queryEvents({
-  memoryId: memory.id,
-  filters: { event_type: 'decision', tags: ['payment'], lastMinutes: 60 }
-});
-
-// Archive old runs
-await codebolt.episodicMemory.archiveMemory({ memoryId: memory.id });
+if (!appended.success) throw new Error(appended.error);
+const recent = await codebolt.episodicMemory.queryEvents({ memoryId, event_type: 'decision', lastCount: 10 });
+if (recent.success) console.log(recent.data.events);
 ```
 
----
+Use `archiveMemory({ memoryId })` when you want to archive this thread.
 
 ## Markdown & JSON Memory — `codebolt.memory`
 
-Human-readable notes and structured JSON records.
+The application manages Markdown and JSON as memory threads. The example below uses the desktop server's thread endpoints. Set the server address to the one serving your project.
 
-```typescript
-// Markdown — save and update long-form notes
-const note = await codebolt.memory.markdown.save(
-  '## Payment module decisions\n\nWe extracted PaymentService for SRP...',
-  { tags: ['architecture', 'payment'] }
-);
-await codebolt.memory.markdown.update(note.id, '## Updated notes\n...', { tags: ['architecture'] });
+```js
+const base = 'http://localhost:2719/memories';
+async function writeMemory(path, method, body) {
+  const response = await fetch(base + path, {
+    method, headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) throw new Error(await response.text());
+  return (await response.json()).thread;
+}
 
-// JSON — save structured state
-const record = await codebolt.memory.json.save({ completedModules: ['auth', 'payment'], currentModule: 'notifications' });
-await codebolt.memory.json.update(record.id, { currentModule: 'reporting' });
+const noteId = crypto.randomUUID();
+await writeMemory('/markdown/threads', 'POST', { threadId: noteId, title: 'Payment decisions' });
+await writeMemory('/markdown/threads/' + noteId + '/content', 'PUT', {
+  content: '## Decision\nExtract PaymentService.',
+});
 
-// List with filters
-const notes = await codebolt.memory.markdown.list({ tags: ['architecture'] });
+const recordId = crypto.randomUUID();
+await writeMemory('/json/threads', 'POST', { threadId: recordId, title: 'Module status' });
+await writeMemory('/json/threads/' + recordId + '/data', 'PUT', {
+  data: { module: 'payments', status: 'reviewed' },
+});
 ```
+
+Reuse the thread ID to update its contents. To list thread types, including to-do and context threads, use `GET /memories/threads`.

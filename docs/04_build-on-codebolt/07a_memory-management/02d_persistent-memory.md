@@ -123,7 +123,7 @@ There are **21 pipeline step types** organized into 8 categories.
 | Step | Description |
 |------|-------------|
 | `filter` | Filters items by field/operator/value. **Operators:** `eq`, `neq`, `gt`, `lt`, `gte`, `lte`, `contains`, `startsWith`, `endsWith`, `in`, `exists`. Gets source data from a previous step. |
-| `deduplicate` | Removes duplicates by field value. Uses a Map to track seen values. |
+| `deduplicate` | With `by: "exact"` and a `field`, keeps the first item for each field value. Semantic deduplication currently passes the input through. |
 
 ### Aggregation (3 steps)
 
