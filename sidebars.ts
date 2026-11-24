@@ -284,7 +284,7 @@ const sidebars = {
       doc('Level 2 Separate App with Local Server', `${apps}/standalone-server-connected-apps`),
       ref('Level 3 Hosted Runtimes', `${build}/08b_cloud/intro-to-cloud`),
       doc('Choosing the Right Architecture', `${apps}/application-shapes`),
-      doc('Mini Apps', `${apps}/mini-apps`),
+      doc('MiniApps', `${apps}/mini-apps`),
     ]),
     group('Plugins', [
       doc('What Are Plugins?', `${use}/07z_plugins/overview`),

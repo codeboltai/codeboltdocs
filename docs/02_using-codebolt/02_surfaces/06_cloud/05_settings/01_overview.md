@@ -12,7 +12,7 @@ The **Settings** tab is the third top-level tab of the cloud portal. It groups e
 |---|---|
 | **General** | Your profile snapshot — name, username, email, user ID, plan |
 | **Subscription** | [Plans](./08_subscription-plans-usage-billing.md), [Usage](./08_subscription-plans-usage-billing.md), [Billing](./08_subscription-plans-usage-billing.md) |
-| **Agent Settings** | [Login Tokens](./07_login-tokens.md), [Remote Sandboxes](./03_remote-sandboxes.md), [Thread Runtime Providers](./04_thread-runtime-providers.md), [Connectors](./02_connectors.md), [LLM Provider Settings](./05_llm-provider-settings.md), [Preview Provider Settings](./06_preview-provider-settings.md) |
+| **Agent Settings** | [Login Tokens](./07_login-tokens.md), [Remote Sandboxes](./03_remote-sandboxes.md), [Thread Runtime Providers](./04_thread-runtime-providers.md), AI Routing, Routing Profiles, [AI Configuration](./05_llm-provider-settings.md), [Preview Provider Settings](./06_preview-provider-settings.md) |
 | **Team Settings** | [Team General & Members](./09_team-settings.md) |
 
 A separate **Account Settings** page (`/settings`) holds the older Profile / Password / Notification / Integration / Billing forms — see [Account Settings](./10_account-settings.md).
@@ -38,9 +38,12 @@ This is where you configure how cloud agents authenticate, where they run, and w
 - [**Login Tokens**](./07_login-tokens.md) — personal access tokens for the CLI and HTTP API.
 - [**Remote Sandboxes**](./03_remote-sandboxes.md) — bring-your-own-key for E2B, Daytona, Runloop, Sprites, and Modal.
 - [**Thread Runtime Providers**](./04_thread-runtime-providers.md) — enable which sandbox providers can host chat/issue threads.
-- [**Connectors**](./02_connectors.md) — GitHub App integration for clone, push, and PR creation.
-- [**LLM Provider Settings**](./05_llm-provider-settings.md) — which LLM providers and models your cloud agents can use.
+- **AI Routing** — choose a primary model and, in fallback mode, a fallback model.
+- **Routing Profiles** — configure how incoming work selects an environment and thread.
+- [**AI Configuration**](./05_llm-provider-settings.md) — which LLM providers and models your cloud agents can use.
 - [**Preview Provider Settings**](./06_preview-provider-settings.md) — manage providers that serve live artifact previews.
+
+Find [Connectors](./02_connectors.md) under **Agents → Automation**.
 
 ## Team Settings
 

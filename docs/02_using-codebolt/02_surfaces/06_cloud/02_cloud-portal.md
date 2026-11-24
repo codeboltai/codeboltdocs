@@ -30,12 +30,13 @@ The Registry tab is where you browse everything publishable. Each entity type ha
 | **Executors** | Runtime executors (Node, Python, shell) | Manage your executors |
 | **Templates** | Project templates | Manage your templates |
 | **Apps** | Packaged apps | Manage your apps |
+| **[MiniApps](../../../04_build-on-codebolt/04b_custom-agentic-applications/05_mini-apps.md)** | Search and install MiniApps into your workspace | View your MiniApps |
 
 See [Marketplace Publishing](./03_registry/02_marketplace-publishing.md) for the publishing flow. The Registry also hosts [AI Models](./03_registry/03_ai-models.md) (the CodeLoom Model entry) and [Profiles](./03_registry/04_profiles.md) (developer pages available after sign-in).
 
 ## Agents — run and iterate
 
-The Agents tab is where you actually *use* the cloud runtime.
+Open **Agents** to work with cloud runtimes. **Home**, **Remote Chat**, and **Cloud Chat** are top-level entries. **Execution** groups Projects, Environments, and Runner Nodes. Under **Automation**, you’ll find Virtual Workers, Chat Links, Trigger Tasks, Scheduled Tasks, and [Connectors](./05_settings/02_connectors.md). **Tools** contains Installed MiniApps, Inbox, Tasks, and Review Merge.
 
 | Page | Purpose |
 |---|---|
@@ -52,7 +53,7 @@ The Agents tab is where you actually *use* the cloud runtime.
 The Settings tab collects everything configuration-related. See the [Settings Overview](./05_settings/01_overview.md) for the full map.
 
 ### General Settings
-Profile info, display preferences, theme, and account-wide defaults. See [General Settings](./05_settings/01_overview.md) and [Account Settings](./05_settings/10_account-settings.md).
+View your name, username, email, user ID, and current plan. See [General Settings](./05_settings/01_overview.md) and [Account Settings](./05_settings/10_account-settings.md).
 
 ### Subscription
 - **Plans** — browse and upgrade / downgrade your subscription. Pulls from `/users/plan` on the API.
@@ -65,8 +66,8 @@ See [Plans, Usage & Billing](./05_settings/08_subscription-plans-usage-billing.m
 - **Login Tokens** — personal access tokens you can paste into the CLI, HTTP API, or runner daemon. Create with a name and expiry (30 d / 90 d / 1 year / no expiry). See [Login Tokens](./05_settings/07_login-tokens.md).
 - **Remote Sandboxes** — bring-your-own-key for [E2B](https://e2b.dev), [Daytona](https://daytona.io), Runloop, Sprites, and Modal. The portal saves credentials locally and syncs them to account settings. See [Remote Sandboxes](./05_settings/03_remote-sandboxes.md).
 - **Thread Runtime Providers** — enable which sandbox providers can host chat and issue threads. See [Thread Runtime Providers](./05_settings/04_thread-runtime-providers.md).
-- **Connectors** — GitHub App integration for clone, push, and PR creation. See [Connectors](./05_settings/02_connectors.md).
-- **LLM Provider Settings** — configure which LLM providers and models are available to your cloud agents. Same format as the desktop app's provider settings — the portal writes them into the sandbox's `settings.json` when a runtime starts. See [LLM Provider Settings](./05_settings/05_llm-provider-settings.md).
+- **AI Configuration** — select cloud chat and embedding models. See [LLM Provider Settings](./05_settings/05_llm-provider-settings.md).
+- **AI Routing** — choose a primary model and optionally a fallback. **Routing Profiles** define which environments and threads are used for incoming work.
 - **Preview Provider Settings** — manage providers serving live artifact previews. See [Preview Provider Settings](./05_settings/06_preview-provider-settings.md).
 
 ### Team Settings

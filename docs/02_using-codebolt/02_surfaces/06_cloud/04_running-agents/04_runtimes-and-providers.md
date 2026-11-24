@@ -10,7 +10,7 @@ A **runtime** in the cloud portal is a running instance of the CodeBolt server i
 
 ## The Environments page
 
-**Agents → Environments** is the control center for every runtime tied to your account. It has two tabs:
+**Agents → Execution → Environments** is the control center for every runtime tied to your account. It has two tabs:
 
 - **Execution Environments** — running CodeBolt server instances (your agents live here)
 - **Preview Environments** — live preview sessions of artifacts the agent is building (websites, apps)
@@ -53,26 +53,24 @@ Stop a runtime with the **Stop** button — for E2B sandboxes this destroys the 
 | **`runner`** | A machine connected via the runner daemon | `Runner` | Driving your own hardware remotely — see [Runner Nodes](./05_runner-nodes.md) |
 | **`custom`** | A provider you implemented against the provider SDK | `Cloud` | Any sandbox backend the built-ins don't cover |
 
-All types share the same runtime surface — chat, threads, agent lifecycle — regardless of where the sandbox lives. E2B, Docker, Daytona, Runloop and custom providers are **single-action**: one task at a time. `local` and `runner` can host multiple concurrent threads.
+When assigning a new task, the portal checks that the runtime is online and compatible with the selected workspace. A local runtime can accept additional threads. For other runtime types, including a runner-hosted runtime, the portal offers it for a new assignment when its active thread count is zero.
 
 ## Runtime lifecycle
 
 ```
 create  →  starting  →  online  →  (optional) stop  →  terminated
-                          │
-                          └── E2B/Docker/Daytona: auto-terminate after 1 hour idle
 ```
 
 - **Create** happens implicitly when Remote Chat picks **New**, explicitly via the CLI, or when a Runner Node launches a runtime.
 - **Starting**: the portal clones the repo (if any), installs the CodeBolt CLI into the sandbox (if not pre-baked into the template), copies your settings, and runs `codebolt --server --port 3100 --project <path>`.
 - **Online**: the runtime's outbound WebSocket to the proxy is connected and chats can attach.
-- **Idle timeout** (cloud sandboxes only): ~1 hour with no active WebSocket triggers automatic cleanup. Runner and local runtimes have no timeout.
+- **Timeout:** Remote Chat requests a one-hour timeout when creating an E2B sandbox through the E2B SDK. Other providers manage their own runtime lifetimes.
 
 ### What happens during sandbox startup
 
-When you create a new cloud sandbox with a repo, the portal runs this sequence inside the sandbox — each step reports progress back to the chat:
+For an E2B sandbox created from Remote Chat with a Git repository, the portal reports progress through these steps:
 
-1. **Create** — spin up the E2B / Daytona / Docker sandbox from the configured template.
+1. **Create** — create the E2B sandbox from the configured template.
 2. **Clone** — `git clone <repo>` into `/home/user/<repo-name>`. Uses a GitHub App token or your installation token for private repos. Clones the default branch first, then checks out your requested branch if different.
 3. **Install** — install the CodeBolt CLI at the pinned version (skipped if the template already has it). Uses a memory-conscious install strategy to avoid OOM on small sandboxes.
 4. **Copy settings** — write your `settings.json` (user profile, LLM providers, default agent) into `~/.codebolt/`.

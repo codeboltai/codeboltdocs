@@ -1,12 +1,26 @@
 ---
-title: Mini Apps
-description: Package a web interface and agent-callable tools into an installable CodeBolt app.
+title: MiniApps
+description: Install a MiniApp, open it in Codebolt Desktop or Cloud, and choose which tools agents can use.
 ---
 
-A Mini App bundles a web interface with server routes and tools that CodeBolt agents can call. Author it as a Nitro app with `@codebolt/miniapp`. The build produces a manifest that describes the app and its tool surface.
+A MiniApp is an installable web app that can expose tools to Codebolt agents.
 
-Publishing makes the app available in the registry. Installing it creates the runtime that users open and agents call. In CodeBolt Cloud, browse **Registry → MiniApps**, install the app, and open it from **Agents → Installed MiniApps**.
+## Use a MiniApp on desktop
 
-In the desktop app, open **Marketplace → MiniApps** to browse and install apps. Open **Memory → Mini Apps** in the panel selector to see available local and cloud Mini Apps.
+1. Open **Marketplace → MiniApps → All MiniApps**. Search for an app and select **Install** on its card.
+2. From the bottom bar, open **Context → MiniApps**. The panel lists local and cloud apps. Select **Refresh** if the app you just installed is missing.
+3. On the app card, select **Preview in Browser panel** to use it inside Codebolt, or **Open externally** to open it in your browser.
 
-For other ways to build a CodeBolt-connected app, see [Application Shapes](./02_application-shapes.md).
+If the app exposes tools, use the checkbox beside each tool to enable or disable it for agents. Local apps also have a **Reload MiniApp** control.
+
+## Use a MiniApp in Codebolt Cloud
+
+1. Sign in and open **Registry → MiniApps → All MiniApps**. Find the app and select **Install**.
+2. Open **Agents → Tools → Installed MiniApps** to find the installation in your workspace.
+3. Select **Open** to launch the app in a new tab. This button becomes available when the installation has a runtime URL. To remove the installation, select **Uninstall** and confirm.
+
+To find apps you’ve published, open **Registry → MiniApps → My MiniApps**.
+
+## Build a MiniApp
+
+Author a MiniApp as a Nitro app with `@codebolt/miniapp`. The build produces a manifest describing the app and the tools it exposes. For other ways to build a Codebolt-connected application, see [Application Shapes](./02_application-shapes.md).

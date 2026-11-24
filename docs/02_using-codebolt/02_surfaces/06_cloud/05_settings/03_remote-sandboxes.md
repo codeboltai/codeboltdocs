@@ -8,7 +8,7 @@ description: Bring your own API keys for E2B, Daytona, Runloop, Sprites, and Mod
 
 **Remote Sandboxes** (`/settings/remotesandboxes`) is where you bring your own credentials for the sandbox providers Codebolt Cloud can spin up. Supplying a key means sandbox usage **bills to your account** with that provider, not the hosted Codebolt tier.
 
-This page is the single source of credentials for two downstream features:
+Provider credentials are used by the following features:
 
 - **Runtimes** — sandboxes created in Remote Chat and [Runtimes & Providers](../04_running-agents/04_runtimes-and-providers.md)
 - **Thread Runtime Providers** — see [Thread Runtime Providers](./04_thread-runtime-providers.md), which consume these credentials to enable per-thread runtimes
@@ -35,8 +35,8 @@ When Remote Chat creates an E2B sandbox with your key, the portal passes the key
 ## Setting a credential
 
 1. Open the provider's panel.
-2. Paste the key (and server URL for Daytona) into the masked fields.
-3. Save. The provider shows **credentials set** and becomes available wherever runtime/preview providers are selected.
+2. Paste the key (and server URL for Daytona) into the corresponding fields.
+3. Select **Save** for each field. A checkmark indicates that at least one field has a saved value. For a thread runtime, also check that the provider is enabled in [Thread Runtime Providers](./04_thread-runtime-providers.md).
 
 ## Related
 

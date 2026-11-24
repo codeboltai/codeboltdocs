@@ -21,7 +21,7 @@ These are sandboxes the **portal** created for you on a managed provider (E2B, D
 - Spawned from a template (E2B) or a provider workspace (Daytona / Runloop).
 - Project path is usually `/home/user/<repo-name>`.
 - Changes sync back via **Git** (clone → work → push) or **Review Merge Requests**.
-- Auto-terminate after ~1 hour idle.
+- Remote Chat requests a one-hour timeout for E2B sandboxes created with the E2B SDK. Check the provider’s runtime settings for other sandbox types.
 
 ### Self Started Environments
 

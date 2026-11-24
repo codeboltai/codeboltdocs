@@ -6,15 +6,13 @@ description: The Registry is the cloud portal's marketplace — browse, publish,
 
 # Registry Overview
 
-The **Registry** is the first tab of the cloud portal and Codebolt's central marketplace. Everything publishable — agents, MCPs, providers, skills, action blocks, capabilities, plugins, executors, templates, and apps — lives here. Each entity type has an **All** view (the public marketplace, for discovery) and a **My** view (what you've published, for management).
-
-If you've used the desktop app's marketplace, the Registry is the same catalog, served from the cloud and reachable from any browser.
+Sign in to the cloud portal and open **Registry**. Choose **All** to browse a catalog or **My** to find your listings.
 
 ## The entity types
 
 | Type | All view | My view | Detail |
 |---|---|---|---|
-| **Agents** | `/agents/list` | `/myAgents` | `/agents/agentDetails/:id` |
+| **Agents** | `/agents/list` | `/myAgents` | `/agents/agentDetails/:agent_id` |
 | **MCPs** | `/mcp/all` | `/mcp/mymcp` | `/mcps/details/:id` |
 | **Providers** | `/providers/all` | `/providers/my` | `/providers/detail/:id` |
 | **Skills** | `/skills/all` | `/skills/my` | `/skills/detail/:id` |
@@ -24,13 +22,13 @@ If you've used the desktop app's marketplace, the Registry is the same catalog, 
 | **Executors** | `/executors/all` | `/executors/my` | `/executors/detail/:id` |
 | **Templates** | `/templates/all` | `/templates` | `/templates/detail/:id/:source` |
 | **Apps** | `/apps/all` | `/apps/my` | `/apps/detail/:id/:source` |
+| **[MiniApps](../../../../04_build-on-codebolt/04b_custom-agentic-applications/05_mini-apps.md)** | `/miniapps/all` | `/miniapps/my` | Install from the catalog card |
 
-## Browse vs publish
+## Browse a catalog
 
-- **Browse** (the **All** view) — search, filter by tags/categories, read descriptions, check ratings and download counts, and install an item into your desktop app or cloud runtime.
-- **Publish** (the **My** view) — create a new listing, upload a new version, edit metadata, deprecate, or delete your published items.
+Open **Skills**, for example, to search the catalog and open a skill’s details. Skill cards can show ratings, review counts, and downloads. Under **All MiniApps**, search for an app and select **Install** to add it to your workspace. Find it again under **Agents → Tools → Installed MiniApps**.
 
-For the full publishing flow — manifests, CLI commands, visibility, pricing, and versioning — see [Marketplace Publishing](./02_marketplace-publishing.md).
+For instructions on publishing an item, see [Marketplace Publishing](./02_marketplace-publishing.md).
 
 ## What else lives in the Registry
 
@@ -38,17 +36,6 @@ Beyond the marketplace entities, the Registry tab area includes:
 
 - **AI Models** (`/aiModels`) — view the CodeLoom Model entry. See [AI Models](./03_ai-models.md).
 - **People / Developer Profiles** (`/people/:username`) — sign in to see what a developer has published (agents, MCPs, templates, apps). See [Profiles](./04_profiles.md).
-
-## Discoverability
-
-Listings are surfaced by:
-
-- **Search** — full-text over name and description
-- **Tags / categories** — applied at publish time
-- **Ratings** — community ratings feed ranking
-- **Downloads / usage stats** — per version
-
-Unlisted items (visibility `unlisted`) are only installable by direct URL — good for team-private distributions.
 
 ## Related
 

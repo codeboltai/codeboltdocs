@@ -1,29 +1,20 @@
 ---
 sidebar_position: 5
 title: LLM Provider Settings
-description: Configure which LLM providers and models are available to your cloud agents, written into each sandbox's settings.json.
+description: Configure which LLM providers and models your cloud agents use for chat and embeddings.
 ---
 
 # LLM Provider Settings
 
-**LLM Provider Settings** (`/settings/providers`) controls which LLM providers and models your **cloud** agents can use. It mirrors the provider settings format from the desktop app, and the portal writes your configuration into each sandbox's `settings.json` when a runtime starts.
+Open **Settings → Agent Settings → AI Configuration** (`/settings/ai`) to choose the models your cloud agents use. The older `/settings/providers` route opens the same page.
 
-## What it governs
+## Configure a provider and choose models
 
-When a cloud runtime boots, the portal copies your LLM provider keys, selected default model, and agent into `/home/user/.codebolt/settings.json` before launching the Codebolt server. This page is where that provider/model configuration is authored.
+1. Under **Cloud BYOK Keys**, add a provider if you want to use your own key. Enter the credentials requested for that provider. The portal fetches its model list.
+2. Under **Default Cloud Chat Model**, select a provider, then a model. **CodeBolt AI** also appears as a provider when it is enabled for your account.
+3. To configure embeddings, use **Default Cloud Embedding**. Select a provider you configured with your own credentials, then choose its model.
 
-- **Providers** — add an LLM provider (OpenAI, Anthropic, a custom endpoint, etc.) with its API key and base URL.
-- **Models** — choose which models from each provider are offered.
-- **Default** — set the default model a new chat uses.
-
-## Relationship to Remote Sandboxes
-
-Don't confuse LLM providers (this page — *models/inference*) with [Remote Sandboxes](./03_remote-sandboxes.md) (*compute sandboxes*). They're independent:
-
-- **Remote Sandboxes** — where the agent *runs* (E2B, Daytona, etc.)
-- **LLM Provider Settings** — which models the agent *thinks with* (OpenAI, Anthropic, etc.)
-
-A cloud agent needs both: a sandbox to execute in and an LLM provider to reason with.
+Use the refresh control beside a configured provider to fetch its model list again. The **CodeBolt AI** section shows account availability and the models supplied by your plan.
 
 ## Security
 

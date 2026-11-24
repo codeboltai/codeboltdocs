@@ -15,7 +15,7 @@ Runner nodes show up in the portal at **Agents → Runner Nodes** and the runtim
 - **Work on local repositories** — the agent operates on your real working tree, no clone round-trip.
 - **Use local-only tooling** — Docker, GPUs, databases, VPN-locked services that a cloud sandbox can't reach.
 - **Keep data on your hardware** — nothing leaves your machine unless an agent explicitly writes or uploads it.
-- **Long-lived, no idle timeout** — a runner stays alive as long as the daemon runs, unlike cloud sandboxes which auto-terminate after ~1 hour.
+- **Long-lived, no idle timeout** — the runner remains connected while its daemon is running and the machine is online.
 
 The connection is **outbound only**. The runner establishes a WebSocket to Cloudflare's relay infrastructure (the Wrangler server). No inbound ports are opened on your machine.
 
