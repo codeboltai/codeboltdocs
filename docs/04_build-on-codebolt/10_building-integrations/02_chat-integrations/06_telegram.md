@@ -6,7 +6,7 @@ description: The telegram-channel plugin connects a Telegram bot to Codebolt usi
 
 # Telegram Integration
 
-The `telegram-channel` plugin connects a Telegram bot to Codebolt using [`grammy`](https://grammy.dev). It supports text messages, photos, documents, voice, and video — with optional group filtering and config persistence for auto-reconnect.
+The `telegram-channel` plugin connects a Telegram bot to Codebolt using [`grammy`](https://grammy.dev). It supports text messages, photos, documents, voice, and video — with mention filtering for group text messages and saved connection settings.
 
 ## Prerequisites
 
@@ -23,16 +23,16 @@ Open **Marketplace → Plugins** and select the Telegram channel plugin if it is
 | Field | Required | Description |
 |---|---|---|
 | `botToken` | Yes | Token from `@BotFather` |
-| `agentId` | No | Default agent. Uses project default if omitted. |
-| `threadStrategy` | No | `per-conversation` (default) · `per-user` · `per-message` · `single` |
+| `agentId` | No | Agent ID to pass to the gateway when routing messages. |
+| `threadStrategy` | No | The panel initially selects `per-user`. Alternatives are `per-conversation`, `per-message`, and `single`. |
 
-The plugin persists config to the KV store and **auto-reconnects** on server restart if a valid config was previously saved.
+Start the plugin and click **Connect** after entering the bot token. It saves the connection settings in the KV store.
 
 ## Message routing
 
-**Groups and supergroups**: Only messages that `@mention` the bot by username are forwarded. Other messages are ignored.
+**Groups and supergroups**: Only text messages that `@mention` the bot by username are forwarded. Other messages are ignored.
 
-**Private chats (DMs)**: All messages are forwarded.
+**Private chats (DMs)**: Text messages do not require a mention.
 
 ```
 User in group: @MyBot what's the weather?
@@ -47,14 +47,14 @@ User in private chat: what's the weather?
 
 ## Media support
 
-The plugin forwards media messages as attachment metadata:
+The media handler forwards the caption, or a short attachment label, along with attachment metadata. It leaves the URL empty and does not apply the group-text mention filter.
 
 | Media type | Forwarded as |
 |---|---|
-| Photo | `{ type: 'image', url: fileUrl }` |
-| Document | `{ type: 'file', url: fileUrl, name: fileName }` |
-| Voice | `{ type: 'file', url: fileUrl }` |
-| Video | `{ type: 'file', url: fileUrl }` |
+| Photo | `{ type: 'image', url: '' }` |
+| Document | `{ type: 'file', url: '', name: fileName }` |
+| Voice | `{ type: 'file', url: '' }` |
+| Video | `{ type: 'file', url: '' }` |
 
 Agent replies with image attachments are sent via `bot.api.sendPhoto()`. File attachments are sent via `bot.api.sendDocument()`.
 
@@ -138,7 +138,7 @@ The first-party plugin saves its config to the KV store on successful connect:
 await plugin.kvStore.set('telegram-channel-plugin', 'config', 'connection', config, true);
 ```
 
-On plugin startup, it reads this config and reconnects automatically — no manual intervention needed after a server restart.
+The plugin has a manual start trigger. When you start it again, it reads the saved settings and tries to reconnect to Telegram.
 
 ## See also
 

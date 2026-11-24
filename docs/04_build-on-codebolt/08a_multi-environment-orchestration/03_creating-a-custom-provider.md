@@ -14,7 +14,7 @@ A provider bridges Codebolt to a remote execution environment such as an E2B san
 
 ## The BaseProvider Class
 
-All providers extend `BaseProvider` from `@codebolt/provider`. It handles lifecycle wiring, WebSocket transport, reconnection, heartbeats, request queueing, and message forwarding. Your provider implements the environment-specific parts.
+The providers in this guide extend `BaseProvider` from `@codebolt/provider`. It handles lifecycle wiring, WebSocket transport, reconnection, heartbeats, request queueing, and message forwarding. Your provider implements the environment-specific parts.
 
 ### Abstract Methods
 

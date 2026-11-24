@@ -1,21 +1,16 @@
 ---
 sidebar_position: 2
 title: Creating A Skill
-description: The Codebolt desktop app provides a Capability Panel where you can browse and manage skills
+description: Create a skill from a Marketplace template or add SKILL.md to a project.
 ---
 
-# Creating A Skill
+# Creating a Skill
 
 ## Creating from the Codebolt UI
 
-The Codebolt desktop app provides a **Capability Panel** where you can browse and manage skills. To access it, open **Settings → Extensions** or use the Capability Panel in the sidebar.
-
-From the UI you can:
-- **Browse installed skills** — the Installed tab lists all locally discovered capabilities with type badges and source indicators
-- **Install from the marketplace** — the Marketplace tab lets you search, filter, and install published skills directly (see [The Marketplace](../../../02_using-codebolt/04_agents/04_the-marketplace.md))
-- **Manage extensions** — enable/disable installed extensions from the Extensions panel (see [App and Project Settings](../../../02_using-codebolt/02_surfaces/02_desktop-app/Settings/02_app-and-project-settings.md))
-
-There is no visual skill builder in the UI — to create a new skill from scratch, use the API or manual method below.
+1. Open **Marketplace**, select **Skill**, and click **Create Skill** (the plus button).
+2. Select an available template, enter a **Name** and **Target Path**, then click **Create skill**. You can also set a unique ID and description.
+3. Open the directory shown in the success message. Edit `SKILL.md` to describe what the agent should do. If the template did not create this file, add it.
 
 ## Creating via API
 

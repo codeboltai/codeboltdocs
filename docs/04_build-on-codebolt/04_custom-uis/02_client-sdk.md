@@ -1,12 +1,12 @@
 ---
 sidebar_position: 2
 title: Client SDK
-description: "@codebolt/client-sdk is a typed TypeScript client for all Codebolt HTTP routes and WebSocket channels"
+description: "@codebolt/client-sdk is a typed TypeScript client for Codebolt HTTP APIs and WebSocket channels"
 ---
 
 # Client SDK
 
-`@codebolt/client-sdk` is a typed TypeScript client for all Codebolt HTTP routes and WebSocket channels. It lives in `packages/clientsdk` and is the primary entry point for building custom UIs on top of Codebolt.
+`@codebolt/client-sdk` is a typed TypeScript client for Codebolt HTTP APIs and WebSocket channels. It lives in `sdks/clientsdk` and is the primary entry point for building custom UIs on top of Codebolt.
 
 ## Backend Setup
 
@@ -32,15 +32,15 @@ import { CodeBoltClient } from '@codebolt/client-sdk';
 // Create a client (connects automatically by default)
 const client = new CodeBoltClient({
   host: 'localhost',
-  port: 12345,
+  port: 2719, // Match the port used by the server above.
 });
 
 // HTTP API usage
 const threads = await client.chat.getThreadsInfo();
-await client.git.commit({ message: 'fix bug' });
 const tasks = await client.tasks.search({ status: 'pending' });
 
 // WebSocket usage
+await client.addConnections(['shell']);
 client.sockets.shell.on('output', (data) => console.log(data));
 client.sockets.shell.send('ls -la');
 

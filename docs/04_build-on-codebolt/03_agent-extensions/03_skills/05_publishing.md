@@ -1,44 +1,32 @@
 ---
 sidebar_position: 5
-title: Publishing
-description: "Publish a skill using the extension service REST API:"
+title: Publish a skill
+description: Publish a skill from Codebolt Marketplace or the CLI.
 ---
 
-# Publishing
+# Publish a skill
 
-## Publish via API
+Keep your instructions in `SKILL.md`. Set `unique_id`, `name`, and `version` in its YAML frontmatter. If the folder also contains `codeboltskill.yaml`, put the publishing metadata there because the publisher reads that file first.
 
-Publish a skill using the extension service REST API:
+## Publish from Codebolt
 
-```
-POST /extensions/publish
-```
+1. Sign in to Codebolt and open **Marketplace**.
+2. Select **Skill** and click the **Publish Skill** upload button.
+3. Choose your local skill from the dropdown and check its ID and version.
+4. Click **Publish**. The success message shows the published ID.
 
-Send the skill directory as `folderPath` and set `type` to `skill`.
+## Publish from the CLI
 
-## Install from marketplace
+If your skill folder is outside the locations listed in the dialog, pass its path directly:
 
-Users can install published skills from the Codebolt marketplace in two ways:
-
-**From the UI:** Open the Capability Panel's **Marketplace** tab or go to **Settings → Marketplace** to browse, search, and install skills directly. See [The Marketplace](../../../02_using-codebolt/04_agents/04_the-marketplace.md) for details.
-
-**Via API:**
-
-```
-POST /capability/download
+```bash
+codebolt action skill publish --path ./review-change
 ```
 
-Send the marketplace ID as `capabilityId` and set `capabilityType` to `skill`.
+To list published skills:
 
-Downloaded skills are extracted as zip archives into the project's `.codebolt/capabilities/skill/` directory and picked up on the next registry refresh.
+```bash
+codebolt action skill list
+```
 
-## Standalone vs. bundled
-
-Publish standalone if the skill is useful on its own. If it only makes sense together with prompts, tools, and conventions, ship it inside a [capability](../02_capabilities/01_overview.md).
-
-## Common mistakes
-
-- A skill that is really just one tool call — use a tool instead
-- A skill so broad it becomes a second system prompt — break it down
-- Unstructured outputs where downstream callers need fields — define typed outputs in `capability.yaml`
-- Missing `type: skill` in `capability.yaml` — the registry uses directory structure to infer type, but being explicit avoids confusion
+To install a published skill, open **Marketplace**, select **Skill**, and find it on the **Marketplace** tab. The **Installed** tab shows installed skills.

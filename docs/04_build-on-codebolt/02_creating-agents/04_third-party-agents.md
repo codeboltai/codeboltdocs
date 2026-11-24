@@ -10,7 +10,7 @@ Run an external CLI agent (Claude Code, Codex, Gemini, Cursor, etc.) inside Code
 
 ## Architecture
 
-Every third-party agent follows the same pipeline:
+The adapters in `@codebolt/thirdpartyagents` use this pipeline:
 
 ```
 User message
@@ -55,7 +55,6 @@ codebolt.onMessage(async (reqMessage) => {
   const handle = ThirdPartyAgents.claude(prompt, {
     codebolt: codebolt as any,
     cwd: projectPath || process.cwd(),
-    permissionMode: 'bypassPermissions',
   });
 
   for await (const _message of handle.execute()) {

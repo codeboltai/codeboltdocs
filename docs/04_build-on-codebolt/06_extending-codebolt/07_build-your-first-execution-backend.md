@@ -228,13 +228,12 @@ The server passes these environment variables when spawning your provider:
 
 | Variable | Description |
 |---|---|
-| `PROVIDER_ID` | Unique provider instance ID |
+| `providerId` | Provider identifier |
 | `ENVIRONMENT_NAME` | Name of the environment |
-| `PROJECT_PATH` | Local project path |
+| `ENVIRONMENT_ID` | ID of this environment |
 | `ENVIRONMENT_CONFIG` | JSON string with provider-specific config |
-| `REMOTE_EXECUTION_PORT` | Port for the agent server (default: 3100) |
 
-Your provider reads these from `process.env` or receives them in `initVars`.
+Read these variables from `process.env`. During provider startup, read the project path from `initVars.projectPath`.
 
 ---
 

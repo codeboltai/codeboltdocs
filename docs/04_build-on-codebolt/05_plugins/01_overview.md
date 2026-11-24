@@ -207,7 +207,9 @@ plugin.onStart(async () => {
   plugin.llmProvider.onCompletionRequest(async (req) => {
     try {
       const apiKey = req.options.providerConfig?.apiKey;
-      const response = await fetch('https://api.example.com/v1/chat', {
+      const baseUrl = req.options.providerConfig?.apiUrl;
+      if (!baseUrl) throw new Error('Configure the API base URL');
+      const response = await fetch(baseUrl.replace(/\/$/, '') + '/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${apiKey}`,
@@ -218,6 +220,7 @@ plugin.onStart(async () => {
           messages: req.options.messages,
         }),
       });
+      if (!response.ok) throw new Error(`Completion failed (HTTP ${response.status})`);
       const result = await response.json();
       plugin.llmProvider.sendReply(req.requestId, result, true);
     } catch (error) {
@@ -225,7 +228,7 @@ plugin.onStart(async () => {
     }
   });
 
-  // 3. Handle streaming requests
+  // 3. Handle a provider endpoint that streams plain UTF-8 text
   plugin.llmProvider.onStreamRequest(async (req) => {
     try {
       const apiKey = req.options.providerConfig?.apiKey;
@@ -242,20 +245,26 @@ plugin.onStart(async () => {
         }),
       });
 
-      const reader = response.body!.getReader();
+      if (!response.ok || !response.body) throw new Error(`Stream failed (HTTP ${response.status})`);
+      const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let fullContent = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        const chunk = decoder.decode(value);
+        const chunk = decoder.decode(value, { stream: true });
         plugin.llmProvider.sendChunk(req.requestId, {
           choices: [{ delta: { content: chunk } }],
         });
         fullContent += chunk;
       }
 
+      const tail = decoder.decode();
+      if (tail) {
+        fullContent += tail;
+        plugin.llmProvider.sendChunk(req.requestId, { choices: [{ delta: { content: tail } }] });
+      }
       plugin.llmProvider.sendReply(req.requestId, {
         choices: [{ message: { content: fullContent, role: 'assistant' } }],
       }, true);
@@ -418,7 +427,7 @@ plugin.onStop(async () => {
 
 ## Creating an Execution Plugin
 
-Intercepts all code execution and routes it to a remote environment.
+An execution plugin claims the execution gateway and handles requests forwarded to it.
 
 ### package.json
 
@@ -453,7 +462,7 @@ plugin.onStart(async () => {
     return;
   }
 
-  // All execution requests now come here instead of running locally
+  // Handle the request forwarded by the execution gateway.
   plugin.executionGateway.onRequest(async (request) => {
     try {
       const result = await fetch('https://my-remote-server.com/execute', {

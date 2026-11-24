@@ -32,6 +32,12 @@ npm install @codebolt/client-sdk
 
 ---
 
+The SDK reads `process.env.SOCKET_PORT` when loading its defaults. For a browser build, add this entry to the existing `defineConfig` options in `vite.config.ts`:
+
+```ts
+define: { 'process.env.SOCKET_PORT': JSON.stringify('2719') },
+```
+
 ## Step 3: Create the Codebolt client
 
 Create a single shared client instance for your entire app.
@@ -189,53 +195,38 @@ try {
 
 ## Step 7: Use in React components
 
-Wrap the client in a hook and use it in components:
-
-```typescript
-// src/hooks/useCodebolt.ts
-import { useEffect } from 'react';
-import { codebolt } from '../services/codebolt';
-
-export function useCodebolt() {
-  useEffect(() => {
-    return () => {
-      codebolt.disconnectAll();
-    };
-  }, []);
-
-  return codebolt;
-}
-```
+Import the shared client into the task list. Each mounted list owns its event listeners.
 
 ```tsx
 // src/components/TaskList.tsx
 import { useEffect, useState } from 'react';
-import { useCodebolt } from '../hooks/useCodebolt';
+import { codebolt as client } from '../services/codebolt';
 
 export function TaskList() {
-  const client = useCodebolt();
   const [tasks, setTasks] = useState<any[]>([]);
 
   useEffect(() => {
-    // Load tasks via HTTP
-    client.tasks.search({ limit: 50 }).then((result: unknown) => {
-      if (result && typeof result === 'object' && 'data' in result && Array.isArray(result.data)) {
-        setTasks(result.data);
+    let active = true;
+    let latestRequest = 0;
+    async function reload() {
+      const request = ++latestRequest;
+      try {
+        const result: unknown = await client.tasks.search({ limit: 50 });
+        if (active && request === latestRequest && result && typeof result === 'object'
+          && 'data' in result && Array.isArray(result.data)) {
+          setTasks(result.data);
+        }
+      } catch (error) {
+        if (active) console.error('Could not load tasks', error);
       }
-    });
-
-    // Live updates via WebSocket
-    client.sockets.tasks.on('taskAdded', (task) => {
-      setTasks((prev) => [...prev, task]);
-    });
-
-    client.sockets.tasks.on('taskUpdated', (task) => {
-      setTasks((prev) => prev.map((t) => (t.id === task.id ? { ...t, ...task } : t)));
-    });
-
-    client.sockets.tasks.on('taskDeleted', (data) => {
-      setTasks((prev) => prev.filter((t) => t.id !== (data.id ?? data.taskId)));
-    });
+    }
+    const socket = client.sockets.tasks;
+    socket.on('taskAdded', reload).on('taskUpdated', reload).on('taskDeleted', reload);
+    void reload();
+    return () => {
+      active = false;
+      socket.off('taskAdded', reload).off('taskUpdated', reload).off('taskDeleted', reload);
+    };
   }, []);
 
   return (
@@ -260,7 +251,7 @@ npm run dev
 
 ## Step 8: Cleanup
 
-Always disconnect when the app unmounts:
+The root component owns the shared connection. Subscribe when it mounts and disconnect when it unmounts:
 
 ```tsx
 // src/App.tsx
@@ -270,8 +261,9 @@ import { TaskList } from './components/TaskList';
 
 export default function App() {
   useEffect(() => {
+    void codebolt.addConnections(['tasks']);
     return () => {
-      codebolt.disconnectAll();
+      void codebolt.disconnectAll();
     };
   }, []);
 
@@ -295,15 +287,13 @@ my-codebolt-ui/
 │   ├── App.tsx
 │   ├── components/
 │   │   └── TaskList.tsx
-│   ├── hooks/
-│   │   └── useCodebolt.ts
 │   └── services/
 │       └── codebolt.ts
 ├── vite.config.ts
 └── package.json
 ```
 
-One service file, one hook, and your components. The SDK handles everything else.
+The service exports the client shared by the root component and task list.
 
 ---
 

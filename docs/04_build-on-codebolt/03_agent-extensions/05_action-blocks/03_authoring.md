@@ -40,10 +40,10 @@ import codebolt from '@codebolt/codeboltjs';
 codebolt.onActionBlockInvocation(async (threadContext: any, metadata: any) => {
   try {
     const params = threadContext?.params || {};
-    const { plan, task } = params;
+    const { task } = params;
 
     // Validate inputs
-    if (!plan || !task) {
+    if (!task?.description) {
       return { success: false, error: 'Missing required parameters' };
     }
 
@@ -92,8 +92,7 @@ Test your action block by calling it from an agent:
 
 ```ts
 const result = await codebolt.actionBlock.start('my-action-block', {
-  param1: 'value1',
-  param2: 'value2',
+  task: { description: 'List the files involved in loading a skill.' },
 });
 
 if (result.success) {

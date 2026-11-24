@@ -1,14 +1,12 @@
 ---
 sidebar_position: 2
 title: Custom LLM Providers
-description: Add any LLM backend — a cloud API, a local model, a fine-tuned endpoint, or a provider Codebolt doesn't ship with — and make it available as a first-class model.
+description: Connect a hosted or local model to Codebolt using a provider plugin.
 ---
 
 # Custom LLM Providers
 
-Add any LLM backend — a cloud API, a local model, a fine-tuned endpoint, or a provider Codebolt doesn't ship with — and make it available as a first-class model choice across the entire application.
-
-Once registered, your provider's models appear in the model picker everywhere: agent manifests, the chat panel, and optimization runs.
+A provider plugin registers model IDs with Codebolt and handles completion requests for those models. Use it to connect a hosted API or a local model server.
 
 ## When to Write a Custom LLM Provider
 
@@ -97,7 +95,7 @@ await llmProvider.register({
 | `name` | Display name in the model picker |
 | `capabilities` | What the provider supports: `chat`, `tools`, `streaming` |
 | `requiresKey` | Whether an API key is mandatory |
-| `configFields` | User-facing configuration fields (shown in settings) |
+| `configFields` | Additional configuration field definitions in the provider manifest |
 | `models` | List of models this provider offers |
 
 ### Request Handlers

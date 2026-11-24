@@ -47,7 +47,7 @@ GET /capability/list?type=skill
 - **Skill not discovered?** Verify the directory is in a scanned location (see [Overview](./01_overview.md#how-skills-are-loaded)).
 - **Name collision?** Skills are keyed by `type:name`. A project-level skill overrides a global one with the same name.
 - **Config not loading?** Ensure `capability.yaml` is valid YAML. Test with `yaml.load()` or a YAML linter.
-- **SKILL.md not parsed?** Check that frontmatter is between `---` delimiters. If your description contains `: `, the parser falls back to manual line-by-line parsing.
+- **SKILL.md not parsed?** Check that frontmatter is between `---` delimiters. Quote descriptions containing a colon followed by a space. The discovery parser has a fallback, but the built-in executor parses the frontmatter as YAML when the skill runs.
 
 ## Quality checklist
 

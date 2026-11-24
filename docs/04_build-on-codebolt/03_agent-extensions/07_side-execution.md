@@ -75,9 +75,9 @@ STARTING → RUNNING → COMPLETED
 
 | State | Description |
 |---|---|
-| `STARTING` | Process spawned, waiting for WebSocket connection (30s timeout) |
-| `RUNNING` | WebSocket connected, execution in progress |
-| `STOPPING` | Stop requested, waiting for graceful shutdown (5s before force kill) |
+| `STARTING` | The manager is preparing the execution |
+| `RUNNING` | The child process has started |
+| `STOPPING` | Stop requested. The manager waits up to five seconds for the process to close. |
 | `COMPLETED` | Execution finished successfully with a result |
 | `FAILED` | Execution encountered an error |
 | `TIMEOUT` | Execution exceeded the configured timeout |
@@ -97,11 +97,11 @@ Agents can use these tools to manage side executions during their reasoning loop
 
 | Tool | Description |
 |---|---|
-| `SideExecutionStartActionBlockTool` | Start a side execution with an action block path |
-| `SideExecutionStartCodeTool` | Start a side execution with inline JavaScript |
-| `SideExecutionStopTool` | Stop a running side execution by ID |
-| `SideExecutionListActionBlocksTool` | List available action blocks |
-| `SideExecutionGetStatusTool` | Get status of a side execution by ID |
+| `side_execution_start_action_block` | Start a side execution with an action block path |
+| `side_execution_start_code` | Start a side execution with inline JavaScript |
+| `side_execution_stop` | Stop a running side execution by ID |
+| `side_execution_list_action_blocks` | List available action blocks |
+| `side_execution_get_status` | Get status of a side execution by ID |
 
 ## Side execution vs. subagent
 

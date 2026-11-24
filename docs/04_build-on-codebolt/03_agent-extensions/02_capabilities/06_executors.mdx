@@ -146,13 +146,7 @@ author: my-team
 
 ### Type-to-executor mapping
 
-Each executor declares which capability types it supports via `supportedTypes`. The registry builds a mapping:
-
-```text
-type "skill"  →  skill-executor
-type "power"  →  skill-executor    (same executor can handle multiple types)
-type "talent" →  talent-executor   (different executor for different type)
-```
+Each executor declares which capability types it supports via `supportedTypes`. The bundled `skill-executor` declares `supportedTypes: [skill]`. When a caller starts a skill, the registry uses the executor registered for that type.
 
 A single executor can handle multiple types. If multiple executors declare the same type, the last one registered wins (project-level overrides global, which overrides built-in).
 
@@ -335,7 +329,7 @@ return {
 
 ## Codebolt APIs available inside executors
 
-Executors have access to **all Codebolt APIs** through the SDK. The executor runs with the same permissions as the parent agent and operates in the same thread context.
+The server starts the executor in the requesting thread and passes its thread context to the invocation handler. The examples below use the CodeboltJS SDK from that handler.
 
 ### File system
 
@@ -354,7 +348,7 @@ await codebolt.fs.deleteFolder('deprecated', 'src');
 
 // Search
 const matches = await codebolt.fs.searchFiles('src', 'TODO', '*.ts');
-const grepResults = await codebolt.fs.grepSearch('console\\.log', 'src/');
+const grepResults = await codebolt.fs.grepSearch('src', 'console.log');
 ```
 
 ### Terminal
@@ -381,44 +375,33 @@ await codebolt.terminal.sendManualInterrupt();
 ### Other capabilities
 
 ```ts
-// Start nested capabilities from within an executor
-const lintResult = await codebolt.capability.startSkill('lint-check', { files });
-const analysisResult = await codebolt.capability.startPower('deep-analysis');
+// Use the name of a skill installed in the current project.
+const skillResult = await codebolt.capability.startSkill(skillName, { arguments: task });
 
-// Start side executions
-await codebolt.sideExecution.startWithActionBlock('my-action-block', params);
+// Use the path to a built action block.
+const blockResult = await codebolt.sideExecution.startWithActionBlock(actionBlockPath, params);
 ```
 
-### Full module list
+### SDK module examples
 
 | Module | Examples |
 |--------|---------|
 | `codebolt.fs` | `readFile`, `createFile`, `updateFile`, `deleteFile`, `searchFiles`, `grepSearch` |
 | `codebolt.terminal` | `executeCommand`, `listCommands`, `readCommandOutput`, `stopCommand`, `sendManualInterrupt` |
-| `codebolt.project` | `getProjectPath`, `getProjectFiles` |
-| `codebolt.chat` | `sendMessage`, `waitForReply` |
-| `codebolt.browser` | `openUrl`, `screenshot`, `click` |
+| `codebolt.project` | `getProjectPath`, `getRepoMap` |
+| `codebolt.chat` | `sendMessage`, `waitforReply` |
+| `codebolt.browser` | `goToUrl`, `screenshot`, `click` |
 | `codebolt.capability` | `listSkills`, `startCapability`, `stopCapability` |
 | `codebolt.sideExecution` | `startWithActionBlock`, `startWithCode`, `stop`, `getStatus` |
-| `codebolt.search` | `searchCodebase`, `searchWeb` |
-| `codebolt.task` | `createTask`, `updateTask`, `listTasks` |
-| `codebolt.thread` | `getThread`, `listThreads` |
-| `codebolt.llm` | `chat`, `complete` |
-| `codebolt.rag` | `query`, `index` |
+| `codebolt.search` | `init`, `search` |
+| `codebolt.task` | `createTask`, `updateTask`, `getTaskList` |
+| `codebolt.thread` | `getThreadDetail`, `getThreadList` |
+| `codebolt.llm` | `inference`, `getModelConfig` |
+| `codebolt.rag` | `add_file`, `retrieve_related_knowledge` |
 
-### Executors vs regular agents: API differences
+### Executor entry point
 
-| Feature | Executor | Regular Agent |
-|---------|----------|---------------|
-| Entry point | `codebolt.onActionBlockInvocation()` | `codebolt.onMessage()` / `codebolt.getMessage()` |
-| Receives | `threadContext` + `metadata` from parent | User messages independently |
-| Thread | Runs in parent agent's thread | Has its own thread |
-| All Codebolt APIs | Yes | Yes |
-| Can start nested capabilities | Yes (`codebolt.capability.*`) | Yes |
-| Can start side executions | Yes (`codebolt.sideExecution.*`) | Yes |
-| Can receive user messages | No — only receives invocation | Yes |
-| Can spawn child agents | No | Yes |
-| Project scope | Inherits parent's project path | Own project scope |
+Use `codebolt.onActionBlockInvocation()` to receive the calling thread’s context, execution metadata, and parameters. An agent’s chat entry point is `codebolt.onMessage()`.
 
 ---
 
@@ -426,91 +409,43 @@ await codebolt.sideExecution.startWithActionBlock('my-action-block', params);
 
 ### Example: File processing executor
 
-Handles `analyze` and `format` operations on files:
+Read a text file and return its line count. The SDK returns the file text in the response’s `content` field.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.onActionBlockInvocation(async (threadContext, metadata) => {
-  const { filePath, operation } = threadContext.params;
-
-  if (!filePath) {
-    throw new Error("filePath parameter is required");
-  }
-
-  switch (operation) {
-    case 'analyze': {
-      const content = await codebolt.fs.readFile(filePath);
-      const lines = content.toString().split('\n').length;
-      return { filePath, lines, size: content.length };
-    }
-
-    case 'format': {
-      await codebolt.terminal.executeCommand(`npx prettier --write "${filePath}"`);
-      const formatted = await codebolt.fs.readFile(filePath);
-      return { filePath, formatted: true, content: formatted };
-    }
-
-    default:
-      throw new Error(`Unknown operation: ${operation}`);
-  }
+codebolt.onActionBlockInvocation(async ({ params }) => {
+  const { filePath } = params;
+  if (typeof filePath !== 'string') throw new Error('Expected a file path');
+  const file = await codebolt.fs.readFile(filePath);
+  if (typeof file.content !== 'string') throw new Error('Could not read text from the file');
+  return { filePath, lines: file.content ? file.content.split(/\r?\n/).length : 0 };
 });
 ```
 
 ### Example: Test runner executor
 
-Runs tests and returns structured results:
+For a project with an npm test script, return the terminal response to the caller.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.onActionBlockInvocation(async (threadContext, metadata) => {
-  const { testCommand, testFile } = threadContext.params;
-  const command = testCommand || (testFile ? `npm test -- ${testFile}` : 'npm test');
-
-  const result = await codebolt.terminal.executeCommand(command);
-
-  return {
-    success: result.exitCode === 0,
-    command,
-    output: result.stdout,
-    errors: result.stderr,
-    exitCode: result.exitCode
-  };
+codebolt.onActionBlockInvocation(async () => {
+  return codebolt.terminal.executeCommand('npm test');
 });
 ```
 
-### Example: Capability chaining executor
+### Example: Calling a skill from an executor
 
-Orchestrates multiple capabilities together:
+Pass an installed skill’s name and arguments to the built-in skill executor. The response contains its prepared instructions. To run project checks, invoke the project’s test or lint command separately.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.onActionBlockInvocation(async (threadContext, metadata) => {
-  const { files } = threadContext.params;
-
-  // Step 1: Run lint check
-  const lintResult = await codebolt.capability.startSkill('lint-check', { files });
-
-  if (!lintResult.success || !lintResult.result?.errors?.length) {
-    return { clean: true, message: "No lint errors found" };
-  }
-
-  // Step 2: Auto-fix lint errors
-  const fixResult = await codebolt.capability.startSkill('auto-fix', {
-    errors: lintResult.result.errors
-  });
-
-  // Step 3: Re-check
-  const recheckResult = await codebolt.capability.startSkill('lint-check', { files });
-
-  return {
-    autoFixed: true,
-    originalErrors: lintResult.result.errors.length,
-    fixesApplied: fixResult.result?.fixCount || 0,
-    remainingErrors: recheckResult.result?.errors?.length || 0
-  };
+codebolt.onActionBlockInvocation(async ({ params }) => {
+  const { skillName, arguments: input } = params;
+  if (typeof skillName !== 'string') throw new Error('Expected an installed skill name');
+  return codebolt.capability.startSkill(skillName, { arguments: input });
 });
 ```
 
@@ -562,20 +497,11 @@ codebolt.onActionBlockInvocation(async (threadContext, metadata) => {
 | Timeout | Duration | Description |
 |---------|----------|-------------|
 | Connection timeout | 30 seconds | Executor must connect via WebSocket within this window |
-| Execution timeout | Configurable | Set per-execution via `timeout` parameter (no default limit) |
-| Force kill timeout | 3 seconds | After SIGTERM, process is force-killed if still running |
-| Shutdown timeout | 5 seconds | Total graceful shutdown window |
+| Stop timeout | 5 seconds | The manager requests termination, then retries and cleans up if the process has not closed. |
 
 ### Process termination
 
-When an execution completes or is stopped:
-
-1. **SIGTERM** sent to the child process
-2. Wait up to 5 seconds for graceful shutdown
-3. **SIGKILL** if process is still alive after 3 seconds
-4. Temp files cleaned up (for runtime code executions)
-5. Execution metadata removed from tracking maps
-6. Events emitted (`capabilityCompleted`, `capabilityFailed`, or `capabilityTimeout`)
+When an executor completes, the manager records the outcome and schedules cleanup. When a stop is requested, it asks the child to terminate. If the child has not closed after five seconds, the manager retries termination and cleans up its tracking state.
 
 ### Error handling
 

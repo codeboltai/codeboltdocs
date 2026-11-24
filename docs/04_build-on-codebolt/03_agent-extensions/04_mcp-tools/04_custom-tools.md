@@ -143,20 +143,16 @@ export class WordCountTool extends BaseDeclarativeTool<WordCountParams, ToolResu
 | `name` | The LLM calls the tool by this string. Use `snake_case`. |
 | `displayName` | Shown in the UI. Use `PascalCase`. |
 | `description` | The LLM reads this to decide when to call the tool. Be specific. |
-| `kind` | Category for permissions and concurrency: `Read`, `Edit`, `Execute`, etc. |
+| `kind` | Category of operation: `Read`, `Edit`, `Execute`, etc. |
 | `parameterSchema` | JSON Schema describing the tool's inputs. |
 
 ### Kind values
 
-| Kind | Meaning | Concurrency |
-|---|---|---|
-| `Read` | Read-only operations | Runs in parallel with other reads |
-| `Edit` | Modifies files or content | Runs sequentially |
-| `Delete` | Deletion operations | Runs sequentially |
-| `Execute` | Runs commands or processes | Runs sequentially |
-| `Search` | Search operations | Runs in parallel |
-| `Fetch` | External network requests | Runs in parallel |
-| `Other` | Miscellaneous | Runs sequentially |
+| Kind | Typical use |
+|---|---|
+| `Read`, `Search`, `Fetch` | Read files, look for matches, or retrieve external data |
+| `Edit`, `Delete`, `Move`, `FileSystem` | Work with files and directories |
+| `Execute`, `Think`, `Other` | Run commands, reason about a task, or describe another operation |
 
 ---
 
@@ -248,31 +244,26 @@ When the LLM responds with a tool call:
 3. Returns the result to the LLM as a tool response message
 4. The LLM continues reasoning with the tool result
 
-Read-only tools (`Kind.Read`, `Kind.Search`, `Kind.Fetch`) run in parallel when multiple are called at once. Mutating tools (`Kind.Edit`, `Kind.Execute`, `Kind.Delete`) run sequentially.
+The unified agent awaits each tool call in the model response before it starts the next.
 
 ---
 
 ## Step 4 — Add user confirmation (optional)
 
-For tools that modify state, implement `shouldConfirmExecute()` on the invocation class to prompt the user before execution:
+A tool invocation can return confirmation details from `shouldConfirmExecute`. When calling the process-local registry directly, use `executeToolWithConfirmation` and supply the function that asks for approval. The registry calls that function when the invocation requests confirmation and returns a cancellation error if it declines.
 
 ```ts
-class DangerousToolInvocation extends BaseToolInvocation<MyParams, ToolResult> {
-  override async shouldConfirmExecute(): Promise<ToolCallConfirmationDetails | false> {
-    return {
-      type: 'exec',
-      title: 'Confirm execution',
-      message: `This will delete ${this.params.targetPath}. Continue?`,
-    };
-  }
+import { defaultRegistry, type ToolCallConfirmationDetails } from '@codebolt/codeboltjs/tools';
 
-  async execute(): Promise<ToolResult> {
-    // runs only after user confirms
-  }
+async function runWithApproval(
+  name: string,
+  params: object,
+  signal: AbortSignal,
+  askUser: (details: ToolCallConfirmationDetails) => Promise<boolean>,
+) {
+  return defaultRegistry.executeToolWithConfirmation(name, params, signal, askUser);
 }
 ```
-
-The execution result includes a `[didUserReject, result]` tuple — if the user rejects, the agent handles it gracefully without retrying.
 
 ---
 

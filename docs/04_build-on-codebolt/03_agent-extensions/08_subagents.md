@@ -32,12 +32,12 @@ Use this when:
 
 ### 2. New thread — `codebolt.thread.createAndStartThread()`
 
-Creates a **new thread** with its own execution context and starts an agent in it. The child gets its own messages, file changes, and status �� fully isolated from the parent thread.
+Creates a **new thread** with its own execution context and starts an agent in it. The child has its own conversation history. When both threads use the same workspace, they can edit the same files.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-// Create a new thread and start an agent in it (blocking until done)
+// Start a child thread and receive its start response
 const result = await codebolt.thread.createAndStartThread({
   agentId: 'code-reviewer',
   userMessage: 'Review the authentication module for security issues',
@@ -47,6 +47,8 @@ const result = await codebolt.thread.createAndStartThread({
 
 console.log('Thread started:', result.threadId);
 ```
+
+To wait for the child’s final result, call `createAndStartThreadAndWait()` with the same options.
 
 ### 3. Background thread — `codebolt.thread.createThreadInBackground()`
 
@@ -82,11 +84,11 @@ const response = await codebolt.thread.createThreadInBackground({
 | Aspect | Same Thread (`startAgent`) | New Thread (`createAndStartThread`) |
 |---|---|---|
 | **Execution context** | Shares parent's thread | Own thread with own context |
-| **Blocking** | Yes — blocks until done | Yes (or non-blocking with `createThreadInBackground`) |
+| **Blocking** | Yes — blocks until done | Returns a start response by default. Use `createAndStartThreadAndWait` to wait for completion. |
 | **Messages** | Part of parent's conversation | Own message history |
 | **File changes** | Tracked under parent thread | Tracked independently |
 | **Remote environment** | No | Yes (`remoteEnv: true`) |
-| **Use case** | Focused sub-task in current flow | Parallel/isolated work |
+| **Use case** | Focused sub-task in current flow | Work in a separate conversation |
 
 ## Agent discovery
 
@@ -169,7 +171,7 @@ await codebolt.thread.deleteThread(threadId);
 | Need | Use |
 |---|---|
 | Focused sub-task, need result immediately | `codebolt.agent.startAgent()` |
-| Isolated execution with own context | `codebolt.thread.createAndStartThread()` |
+| Separate conversation with its own history | `codebolt.thread.createAndStartThread()` |
 | Background/parallel work | `codebolt.thread.createThreadInBackground()` |
 | One-shot operation, no reasoning needed | [Action Block](./05_action-blocks/01_overview.md) |
 | Background side-task with inline code | [Side Execution](./07_side-execution.md) |

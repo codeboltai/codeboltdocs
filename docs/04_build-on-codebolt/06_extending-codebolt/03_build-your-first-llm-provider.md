@@ -6,7 +6,7 @@ description: Create a plugin that registers a custom LLM provider in Codebolt
 
 # Build Your First LLM Provider
 
-Create a plugin that registers a custom LLM provider in Codebolt. Once registered, your models appear in the model picker and can be used by agents, chat, and any part of the application.
+Create a plugin that registers a custom LLM provider in Codebolt. The plugin declares the model IDs it serves and handles completion requests for those models.
 
 You’ll need Codebolt, Node.js 18 or later, and an endpoint that accepts OpenAI-style chat completions. Replace `my-model-v1` with the model ID your endpoint serves.
 
@@ -197,7 +197,8 @@ llmProvider.onStreamRequest(async (req: any) => {
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     let buffer = '';
-    let finalResponse: any = null;
+    let lastChunk: any;
+    let content = '';
 
     while (true) {
       const { done, value } = await reader.read();
@@ -215,111 +216,49 @@ llmProvider.onStreamRequest(async (req: any) => {
         try {
           const chunk = JSON.parse(data);
           llmProvider.sendChunk(requestId, chunk);
-          finalResponse = chunk;
+          lastChunk = chunk;
+          content += chunk.choices?.[0]?.delta?.content ?? '';
         } catch {
           // Skip malformed chunks
         }
       }
     }
 
-    if (!finalResponse) throw new Error('Provider returned an empty stream');
-    llmProvider.sendReply(requestId, finalResponse, true);
+    if (!lastChunk) throw new Error('Provider returned an empty stream');
+    llmProvider.sendReply(requestId, {
+      id: lastChunk.id,
+      model: lastChunk.model,
+      choices: [{ index: 0, message: { role: 'assistant', content }, finish_reason: 'stop' }],
+    }, true);
   } catch (error: any) {
     llmProvider.sendError(req.requestId, error.message);
   }
 });
 ```
 
-`sendChunk(requestId, chunk)` sends each streaming chunk to the application in real time. After the stream ends, `sendReply()` sends the final response.
+`sendChunk(requestId, chunk)` sends each streaming chunk to the application in real time. This example combines text deltas into the final assistant message. A provider that offers streamed tool calls must also assemble their arguments before sending the final reply.
 
 ---
 
 ## Optional: Support OAuth
 
-Most providers need an API key or OAuth token. The `configFields` you registered in Step 3 are available in `req.options.providerConfig` inside your request handlers.
+For an API-key provider, use the saved key and base URL in `req.options.providerConfig` as shown above. For an OAuth provider, register a login handler. The plugin implements the vendor-specific sign-in, credential storage, and refresh steps.
 
-The completion and streaming handlers both use `resolveAuth` from the first example. It reads the settings supplied with each request.
-
-### OAuth authentication
-
-For providers that use OAuth (e.g., ChatGPT), you can implement a PKCE flow:
-
-1. **Start a local callback server** on a fixed port (e.g., `localhost:1455/auth/callback`).
-2. **Open the browser** to the provider's authorization URL with a PKCE challenge.
-3. **Wait for the callback** with the authorization code.
-4. **Exchange the code** for access and refresh tokens.
-5. **Store tokens** persistently (e.g., `~/.codebolt/plugins/your-plugin/auth.json`).
-6. **Auto-refresh** before expiry on subsequent requests.
+The Anthropic plugin handles a login request by obtaining valid credentials and registering its models. The two functions in this excerpt belong to that plugin.
 
 ```typescript
-// Simplified OAuth flow
-async function getAccessToken(): Promise<string> {
-  // 1. Check for stored credentials
-  const stored = loadCredentials();
-  if (stored && stored.expires_at > Date.now() + 60000) {
-    return stored.access_token;
-  }
-
-  // 2. If expired, refresh
-  if (stored?.refresh_token) {
-    const refreshed = await refreshToken(stored.refresh_token);
-    saveCredentials(refreshed);
-    return refreshed.access_token;
-  }
-
-  // 3. No credentials — run full login flow
-  const creds = await runLoginFlow();
-  saveCredentials(creds);
-  return creds.access_token;
-}
-```
-
-### Handling 401 errors
-
-Wrap your API calls with a retry that re-authenticates on 401:
-
-```typescript
-async function withAuthRetry(options: any, run: (auth: any) => Promise<any>) {
-  let auth = resolveAuth(options);
+llmProvider.onLoginRequest(async (req) => {
   try {
-    return await run(auth);
-  } catch (err: any) {
-    if (!/401/.test(String(err?.message))) throw err;
-    // Clear credentials and re-authenticate
-    clearCredentials();
-    auth = resolveAuth(options);
-    return await run(auth);
+    await getValidCredentials(notifyChat);
+    await registerProviderWithModels();
+    llmProvider.sendReply(req.requestId, { authenticated: true }, true);
+  } catch (error) {
+    llmProvider.sendError(req.requestId, error instanceof Error ? error.message : 'Login failed');
   }
-}
+});
 ```
 
-### Dual mode (API key + OAuth fallback)
-
-Support both modes — use API key when provided, fall back to OAuth when not:
-
-```typescript
-async function resolveAuth(options: any) {
-  const config = options?.providerConfig || {};
-  const apiKey = config.apiKey?.trim();
-
-  // API key mode (takes precedence)
-  if (apiKey) {
-    return {
-      bearer: apiKey,
-      baseUrl: config.apiUrl || 'https://api.openai.com/v1',
-      mode: 'api-key',
-    };
-  }
-
-  // OAuth mode (fallback)
-  const token = await getAccessToken();
-  return {
-    bearer: token,
-    baseUrl: config.apiUrl || 'https://chatgpt.com/backend-api',
-    mode: 'oauth',
-  };
-}
-```
+The Codex plugin also supports returning a sign-in URL. When the caller requests a URL and there are no saved credentials, it starts its login flow and replies with `authenticated: false`, `pending: true`, and the authorization URL in `authUrl`. After sign-in completes, the plugin registers its models.
 
 ---
 
@@ -372,15 +311,12 @@ curl http://localhost:2719/plugins/my-llm-provider
 
 ### Verify your models are registered
 
-After starting the plugin, check the model picker in:
-- The **Chat panel** — your models should appear in the model dropdown.
-- **Agent manifests** — you can reference your model ID in the `model` field.
+After starting the plugin, check the registration result. Select a registered model in Chat, send a short message, and verify that your handler receives the request and returns a reply.
 
 ### Where plugins are discovered
 
 | Directory | Scope |
 |---|---|
-| Built-in plugins (shipped with Codebolt) | All projects |
 | `~/.codebolt/plugins/` | All projects (global) |
 | `<project>/.codebolt/plugins/` | Current project only (overrides global) |
 

@@ -37,7 +37,7 @@ Then communicate between the iframe UI and the plugin process.
 
 ```html
 <script>
-  window.codeboltPlugin.sendMessage({ type: 'save', data: { key: 'value' } });
+  window.codeboltPlugin.sendMessage({ type: 'save', config: { key: 'value' } });
 
   window.codeboltPlugin.onMessage((data) => {
     console.log('From plugin:', data);
