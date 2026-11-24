@@ -1,131 +1,178 @@
 ---
 sidebar_position: 4
 title: Agent Flows
-description: "Source code: services/agentFlowService, services/agentFlowRuntimeService, services/agentFlowPluginService."
+description: Edit a visual agent graph and follow its messages in Chat.
 ---
 
 # Agent Flows
 
-The graph runtime for fixed, reusable orchestration patterns. When you've worked out a pattern ([pipeline](./03_patterns/pipeline.md), [plan-execute-review](./03_patterns/plan-execute-review.md), a specific map-reduce shape) and you want to run it repeatedly, you express it as a flow.
+Use a visual flow when you can describe the steps and connections in advance. A flow agent stores its graph in a JSON `.agentflow` file. To delegate based on what an agent discovers during a run, see [Manager–Worker](./03_patterns/manager-worker.md).
 
-> **Source code:** `services/agentFlowService`, `services/agentFlowRuntimeService`, `services/agentFlowPluginService`.
+## Open and edit a flow
 
-## What a flow is
+1. Open **Agents**, filter for **Flow** agents, and choose **Open Flow Editor** on the agent you want to edit.
+2. Inspect the nodes and the connections between their inputs and outputs. Use the node palette to add a step and connect the ports on the canvas.
+3. Select **Save**, choose the flow agent in Chat, and send a message to exercise the graph.
 
-A **flow** is a graph:
+## Example graph
 
-- **Nodes** are agent steps, tool calls, or control operations (branch, loop, wait).
-- **Edges** are messages — the output of a node becomes the input of the next.
-- **The graph is declarative.** You write it once; the runtime executes it.
+The basic message example in Codebolt’s application tests has three nodes. When the agent receives a message, it sends a fixed reply to Chat. To try the same behavior, connect the following ports in the editor.
 
-This is different from agents *dynamically* delegating to each other at runtime. Flows are for when you already know the shape.
+| From | To | Purpose |
+|---|---|---|
+| `events/onmessage` → `message_received` | `codebolt/chat/sendmessage` → `onTrigger` | Run the send step when a message arrives |
+| `basic/const_string` → `value` | `codebolt/chat/sendmessage` → `message` | Supply the reply text |
 
-## When to use a flow vs an orchestrator agent
+Set the string value to `agentflow-basic-smoke-ok`, save, and send a message to the agent. Look for that text in Chat. Change the value, save again, and send another message to verify the edit.
 
-| Use a flow when... | Use an orchestrator agent when... |
-|---|---|
-| The shape is known and stable | The shape depends on runtime information |
-| You want to run the same pattern repeatedly | Each invocation is different |
-| The shape should be visible to reviewers/auditors | Visibility matters less than flexibility |
-| You want declarative debugging / replay | Decisions happen mid-run and need an LLM |
+<details>
+<summary>View the example .agentflow file</summary>
 
-A flow can contain orchestrator agents as nodes (and often does). "Fixed pipeline containing a dynamic sub-step" is normal.
-
-## Anatomy
-
-A minimal flow definition:
-
-```yaml
-name: plan-execute-review
-version: 1
-inputs:
-  task: string
-nodes:
-  - id: plan
-    agent: planner
-    input: { task: "{{inputs.task}}" }
-    output: plan_doc
-  - id: execute
-    agent: coder
-    input: { plan: "{{plan.output}}" }
-    output: diff
-  - id: review
-    agent: reviewer
-    input:
-      plan: "{{plan.output}}"
-      diff: "{{execute.output}}"
-    output: verdict
-edges:
-  - from: plan
-    to: execute
-  - from: execute
-    to: review
-  - from: review
-    to: execute
-    when: "{{review.output.status == 'reject'}}"
-    max_iterations: 3
-outputs:
-  plan: "{{plan.output}}"
-  diff: "{{execute.output}}"
-  verdict: "{{review.output}}"
+```json
+{
+  "id": "basic-message-smoke",
+  "revision": 0,
+  "last_node_id": 3,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "events/onmessage",
+      "pos": [
+        40,
+        120
+      ],
+      "size": [
+        210,
+        78
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "message_received",
+          "type": -1,
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "message",
+          "type": "object",
+          "links": null
+        }
+      ],
+      "properties": {
+        "showSplitOutputs": false,
+        "message": null
+      }
+    },
+    {
+      "id": 2,
+      "type": "basic/const_string",
+      "pos": [
+        300,
+        230
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "value",
+          "type": "string",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "value": "agentflow-basic-smoke-ok"
+      }
+    },
+    {
+      "id": 3,
+      "type": "codebolt/chat/sendmessage",
+      "pos": [
+        620,
+        120
+      ],
+      "size": [
+        220,
+        100
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 3,
+      "inputs": [
+        {
+          "name": "onTrigger",
+          "type": -1,
+          "link": 1
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "messageSent",
+          "type": -1,
+          "links": []
+        },
+        {
+          "name": "success",
+          "type": "boolean",
+          "links": null
+        }
+      ],
+      "properties": {}
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      3,
+      0,
+      -1
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      1,
+      "string"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        0,
+        0
+      ]
+    }
+  },
+  "version": 0.4
+}
 ```
 
-Three nodes, one conditional back-edge, one iteration cap. This is the plan-execute-review pattern as a flow.
+</details>
 
-## What the runtime gives you
+## Follow a run
 
-`agentFlowRuntimeService` is the interpreter. It handles:
-
-- **Sequencing** — deciding which node runs next based on edges.
-- **Input binding** — templating values from previous nodes.
-- **Concurrency** — if two nodes have no dependency between them, they run in parallel.
-- **Iteration caps** — enforced at the edge level; a loop without a cap is rejected at load time.
-- **Error handling** — a node failure triggers the edge's error path or aborts the flow.
-- **Replay** — the full flow execution is in the event log; you can replay a run step by step.
-- **Pause / resume** — a long-running flow can be paused and resumed, including across server restarts.
-
-## Nodes beyond "run an agent"
-
-Flow nodes can also be:
-
-| Node kind | Purpose |
-|---|---|
-| `tool` | Call a single tool directly (no agent) |
-| `branch` | Conditional split to one of N next nodes |
-| `join` | Wait for multiple parallel branches to complete |
-| `human` | Pause for explicit human input via `reviewMergeRequestService` |
-| `subflow` | Invoke another flow as a node |
-
-Subflows are the composition primitive: a "feature development" flow can be built from a "understand" subflow + a "plan-execute-review" subflow + a "deploy" subflow.
-
-## Flow plugins
-
-`agentFlowPluginService` lets extensions register custom node types. An MCP server or a capability can declare "I provide a `stripe.charge` node" and flows in any project can use it. This is how domain-specific orchestrations get packaged and shared.
-
-## Authoring a flow
-
-1. Write the YAML (or use the flow editor UI, which produces the same YAML).
-2. Validate with `codebolt flow validate <path>`. The runtime's validator checks for unreachable nodes, unbounded loops, type mismatches at input bindings.
-3. Test with `codebolt flow run <path> --inputs ...`.
-4. Commit the flow file to your project under `.codebolt/flows/`.
-5. The flow is now invocable as an agent by any consumer.
-
-## Debugging
-
-- `codebolt flow trace <run_id>` shows the full execution tree.
-- The UI's flow view renders the graph with per-node status, input/output, and timing — rebuilt from the event log.
-- Any node can be re-run in isolation using its recorded input — fast feedback loop for iterating on a single stage.
-
-## Pitfalls
-
-- **Flows that should be agents.** If every run takes a different path through the graph, you don't have a flow — you have an orchestrator agent. Move the decisions into an LLM and simplify.
-- **Agents that should be flows.** The inverse: if your orchestrator agent always takes the same path, freeze it as a flow and gain visibility, replay, and concurrency for free.
-- **No iteration caps.** The runtime rejects these at load time, but people work around it with nested edges. Don't.
-- **Too-fine-grained nodes.** Five-node flows are fine; 50-node flows become unmaintainable. Group related work into subflows.
-
-## See also
-
-- [Plan-Execute-Review](./03_patterns/plan-execute-review.md) — the canonical flow shape
-- [Pipeline](./03_patterns/pipeline.md)
-- [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md)
-- [Guide: build a plan-execute-review flow](../../03_guides/06_multi-agent/build-a-plan-execute-review-flow.md)
+Use the Chat thread to read the agent’s replies. For recorded activity or process logs, use the Thread Panel or Agent Debug. [Reading a Flow](../../02_using-codebolt/07_multi-agent-usage/03_reading-a-flow.md)

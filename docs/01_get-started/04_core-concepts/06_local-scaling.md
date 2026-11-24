@@ -59,7 +59,7 @@ Local scaling also means coordinating concurrent work:
 - use swarm and orchestrator surfaces when work needs multiple agents
 - use action blocks for focused side executions
 - use checkpoints before large edits
-- isolate work by thread or branch
+- use separate threads for independent conversations. Agents in the same working directory can edit the same files. For overlapping edits, use separate working directories or [child environments](../../02_using-codebolt/08a_environments/01_overview.md)
 - keep guardrails strict around destructive commands
 - use memory and event logs to inspect what happened
 - prefer specialized agents over one overloaded general agent

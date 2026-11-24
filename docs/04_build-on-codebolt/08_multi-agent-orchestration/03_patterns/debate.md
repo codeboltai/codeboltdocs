@@ -64,10 +64,7 @@ N is usually 2 or 3. More rounds rarely add information; they just restate.
 
 ## Implementation notes
 
-- Spawn Pro and Con with `agentService.startRun` in parallel, with the same parent run ID (the orchestrator).
-- Each round is a separate message exchange via the inbox channel. Don't put both agents in the same thread — they'll see each other's reasoning too early.
-- The judge should be a **different model family** from Pro and Con if possible. Same-family judges tend to agree with whichever side used the most similar reasoning style.
-- Record the full transcript in the event log with causal links, so the verdict can be audited later. This is what `eventLogDataService` is for.
+Start each participant in its own child thread with the same question and its assigned position. The [parallel child-thread example](./map-reduce.md#implementation) shows how to collect independent replies. For a rebuttal, give each participant the other’s argument. Send both final positions and your decision criteria to the judge. The parent controls how many rounds to run and how to report the verdict.
 
 ## Variations
 

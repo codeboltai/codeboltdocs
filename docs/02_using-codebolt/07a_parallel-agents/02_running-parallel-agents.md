@@ -20,15 +20,9 @@ Choose a parent agent that supports delegation. In Chat, ask it to hand a specif
 
 See [Subagents](./05_sub-agent.md) for prompts to try in Chat and where to check that the parent started the delegated work.
 
-## Swarms — dynamic cooperation
+## Start workers in a swarm
 
-A swarm is a group of agents that share a common goal, communicate through a shared memory space, and divide work dynamically without a fixed graph. Agents in a swarm pick up tasks from a shared queue rather than being explicitly assigned them.
-
-Open **Execution → Distributed Swarm Management**. Choose the agents and the number of workers for the swarm.
-
-**Use this when:** the work is large, exploratory, or hard to decompose upfront. See [Running a swarm](../07_multi-agent-usage/02_running-a-swarm.md).
-
----
+Use a swarm when several instances of configured agents should work on a shared job group. Ask an agent with swarm tools to start the swarm from Chat, or start it yourself from **Execution → Distributed Swarm Management**. Supply an initial prompt or a job before starting its workers. Open **Workers** to follow an individual worker’s thread and **Jobs** to see the group’s work. [Running a Swarm](../07_multi-agent-usage/02_running-a-swarm.md)
 
 ## Monitoring concurrent runs
 
@@ -44,7 +38,7 @@ See [Background Agent](./04_background-agent.md) for when runs move into this pa
 
 ## Limits
 
-For a swarm, set the worker count and concurrency limit in its configuration. The start dialog checks those limits before launching the workers.
+For a swarm, set the worker count and concurrency limit in its configuration. The server rejects starts that exceed the per-agent or swarm limits.
 
 ## Stopping parallel runs
 

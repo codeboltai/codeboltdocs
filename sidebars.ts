@@ -457,8 +457,8 @@ const sidebars = {
     group('Multi-agent Collaboration', [
       doc('Swarms', `${use}/multi-agent-usage/running-a-swarm`),
       doc('Swarm Configuration', `${collaboration}/swarm-management`),
-      jump('Teams & Roles', `${collaboration}/swarm-management`, 'role-management'),
-      jump('Vacancies & Worker Requests', `${collaboration}/swarm-management`, 'swarm-detail'),
+      jump('Teams & Roles', `${collaboration}/swarm-management`, 'teams-and-roles'),
+      jump('Vacancies & Worker Requests', `${collaboration}/swarm-management`, 'vacancies-and-worker-requests'),
       jump('Thread Coordination', `${collaboration}/orchestrator-management`, 'follow-delegated-work'),
       doc('Jobs & Job Groups', `${collaboration}/jobs`),
       jump('Job Coordination', `${collaboration}/jobs`, 'how-agents-interact-with-jobs'),

@@ -24,7 +24,7 @@ Running agents sequentially — one finishes, then the next starts — works fin
 | **Tabs** | Open multiple chat tabs; each runs its own agent independently | Ad-hoc parallel work, comparing outputs |
 | **Subagents and child threads** | In Chat, ask an agent that supports delegation to hand off part of the work | Delegate a focused check or give the work a linked conversation |
 | **Virtual Workers** | Route messages to an agent identity with configured thread and environment policies | Reuse a worker for incoming work |
-| **Swarms** | A dynamic group of cooperating agents sharing memory and tasks | Large, exploratory, or open-ended work |
+| **Swarms** | Configured worker instances coordinate through the swarm’s job group | Large, exploratory, or open-ended work |
 
 ## In this section
 

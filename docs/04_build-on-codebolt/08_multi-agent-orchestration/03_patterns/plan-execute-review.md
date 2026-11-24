@@ -88,10 +88,9 @@ When review rejects, you have three options:
 
 ## Implementation in Codebolt
 
-- The whole pattern is naturally expressed as an [agent flow](../04_agent-flows.md) with three nodes and one conditional edge (review → execute on reject).
-- Alternatively, an orchestrator agent can start each stage manually via `codebolt_agent.start`.
-- Every stage is a child run under the orchestrator; the event log shows the full plan → execute → review → verdict trace.
-- `reviewMergeRequestService` can wrap the review stage if you also want human-in-the-loop before the change actually commits.
+Have the parent request a plan, pass the approved plan to an executor, and send the plan and the resulting changes to a reviewer. For a same-thread handoff, call `codebolt.agent.startAgent(agentId, task)` with the installed agent’s ID. If the reviewer asks for changes, pass that feedback to the executor. Set a limit on revision attempts in the parent’s workflow.
+
+For a user-reviewed change, open the [Review and Merge](../../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge.md) request to inspect feedback, check conflicts, and merge an eligible request.
 
 ## Pitfalls
 

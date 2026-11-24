@@ -34,12 +34,7 @@ A single agent can do all four stages. The reasons to split them:
 
 ## How it works in Codebolt
 
-- An orchestrator (which itself may just be the agent flow runtime) starts each stage as a child run via `agentService.startRun`.
-- The output of each stage is structured — usually a JSON document with the fields the next stage expects. The output is stored in `jsonMemoryService` or passed directly as the next run's input.
-- Stages run sequentially; the orchestrator blocks on each before starting the next.
-- If a stage fails, the orchestrator consults the [planning hierarchy](../../07b_subsystems/08_planning-hierarchy.md) to decide: retry this stage, replan from the previous stage, or fail the whole pipeline.
-
-This is what the [agent flow runtime](../04_agent-flows.md) was built for — a fixed pipeline expressed as a graph with one path.
+The parent agent can call `codebolt.thread.createAndStartThreadAndWait()` for each stage, passing the previous stage’s output in the next task. Check the completion response before advancing. Your workflow decides whether to retry a failed stage or return the error. See [child thread APIs](../../03_agent-extensions/08_subagents.md) for the arguments and [Agent Flows](../04_agent-flows.md) for visual authoring.
 
 ## Example: plan → code → test → review
 
