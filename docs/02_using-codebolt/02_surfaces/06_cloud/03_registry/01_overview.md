@@ -36,8 +36,8 @@ For the full publishing flow — manifests, CLI commands, visibility, pricing, a
 
 Beyond the marketplace entities, the Registry tab area includes:
 
-- **AI Models** (`/aiModels`) — toggle which models are available to your agents. See [AI Models](./03_ai-models.md).
-- **People / Developer Profiles** (`/people/:username`) — public profiles showing what a developer has published (agents, MCPs, templates, apps). See [Profiles](./04_profiles.md).
+- **AI Models** (`/aiModels`) — view the CodeLoom Model entry. See [AI Models](./03_ai-models.md).
+- **People / Developer Profiles** (`/people/:username`) — sign in to see what a developer has published (agents, MCPs, templates, apps). See [Profiles](./04_profiles.md).
 
 ## Discoverability
 

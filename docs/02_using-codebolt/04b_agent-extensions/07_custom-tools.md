@@ -104,19 +104,22 @@ Agents can access tools in several ways:
 
 ## Tool access and guardrails
 
-Agents declare which tools they can use in `tools.allow`. `deny` rules always win.
+For a framework agent, set `allowedTools` in `createAgent` to choose which tools to offer the model. Use the exact tool names. A nonempty list filters both the agent’s own tools and the Codebolt tools available to it.
 
-```yaml
-tools:
-  allow:
-    - codebolt_fs.*
-    - codebolt_git.read_*
-    - codebolt_browser.browser_action
-  deny:
-    - codebolt_fs.write_file
+For example, after defining the [word-count tool](../../04_build-on-codebolt/02_creating-agents/12_custom-agent-tools.md), you can offer just that tool:
+
+```ts
+import { createAgent } from '@codebolt/agent/unified';
+import { countWords } from './count-words';
+
+const agent = createAgent({
+  systemPrompt: 'Use the word counter when asked for a count.',
+  tools: [countWords],
+  allowedTools: ['count_words'],
+});
 ```
 
-Guardrails can still block a tool even when the agent allowlist permits it. Common restrictions include protected git branches, writes outside the workspace root, and writes to protected directories such as `.git/`, `.codebolt/shadow-git/`, or `node_modules/`.
+To offer the word counter alongside the default tools available to the agent, omit `allowedTools`. The active policy profile can still deny a tool request or require approval. For example, a profile can deny file writes even when a file tool is available to the agent. See [Guardrails](../05b_guardrails-and-settings/01_guardrails.md).
 
 ## Choosing the right tool type
 

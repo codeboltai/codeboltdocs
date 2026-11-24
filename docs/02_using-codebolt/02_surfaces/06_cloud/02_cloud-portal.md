@@ -31,7 +31,7 @@ The Registry tab is where you browse everything publishable. Each entity type ha
 | **Templates** | Project templates | Manage your templates |
 | **Apps** | Packaged apps | Manage your apps |
 
-See [Marketplace Publishing](./03_registry/02_marketplace-publishing.md) for the publishing flow. The Registry also hosts [AI Models](./03_registry/03_ai-models.md) (toggle model availability) and [Profiles](./03_registry/04_profiles.md) (public developer pages).
+See [Marketplace Publishing](./03_registry/02_marketplace-publishing.md) for the publishing flow. The Registry also hosts [AI Models](./03_registry/03_ai-models.md) (the CodeLoom Model entry) and [Profiles](./03_registry/04_profiles.md) (developer pages available after sign-in).
 
 ## Agents — run and iterate
 
@@ -63,7 +63,7 @@ See [Plans, Usage & Billing](./05_settings/08_subscription-plans-usage-billing.m
 
 ### Agent Settings
 - **Login Tokens** — personal access tokens you can paste into the CLI, HTTP API, or runner daemon. Create with a name and expiry (30 d / 90 d / 1 year / no expiry). See [Login Tokens](./05_settings/07_login-tokens.md).
-- **Remote Sandboxes** — bring-your-own-key for [E2B](https://e2b.dev), [Daytona](https://daytona.io), Runloop, Sprites, and Modal. Stored in your browser's local storage, never transmitted to the portal backend. See [Remote Sandboxes](./05_settings/03_remote-sandboxes.md).
+- **Remote Sandboxes** — bring-your-own-key for [E2B](https://e2b.dev), [Daytona](https://daytona.io), Runloop, Sprites, and Modal. The portal saves credentials locally and syncs them to account settings. See [Remote Sandboxes](./05_settings/03_remote-sandboxes.md).
 - **Thread Runtime Providers** — enable which sandbox providers can host chat and issue threads. See [Thread Runtime Providers](./05_settings/04_thread-runtime-providers.md).
 - **Connectors** — GitHub App integration for clone, push, and PR creation. See [Connectors](./05_settings/02_connectors.md).
 - **LLM Provider Settings** — configure which LLM providers and models are available to your cloud agents. Same format as the desktop app's provider settings — the portal writes them into the sandbox's `settings.json` when a runtime starts. See [LLM Provider Settings](./05_settings/05_llm-provider-settings.md).

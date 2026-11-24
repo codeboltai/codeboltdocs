@@ -15,7 +15,8 @@ A webhook routes an incoming HTTP request to a specific agent. Open **System →
 1. Select **Add Webhook**. Enter a name, select an agent, and choose a **Thread Strategy**.
 2. Leave **Target URL** blank for one-way delivery, or enter a callback endpoint you control to receive agent replies.
 3. Select **Create**. Copy the endpoint path from the webhook card and append it to your Codebolt API base URL.
-4. Configure the sender to POST JSON with the webhook's shared secret in the `X-Webhook-Secret` header.
+4. Retrieve the full secret from the webhook detail endpoint. For a card path of `/gateway/webhook/abc123`, request `GET /gateway/webhooks/abc123` on the same API base URL and read `webhook.secret` from the JSON response.
+5. Configure the sender to POST JSON to the copied card endpoint with the full secret in the `X-Webhook-Secret` header.
 
 A request with a valid secret receives HTTP `202 Accepted` before routing finishes. Check **Activity Log** for the routing outcome.
 
@@ -30,7 +31,7 @@ A request with a valid secret receives HTTP `202 Accepted` before routing finish
 
 ## Webhook security
 
-Use **Show** on the webhook card to reveal the secret. **Regenerate** replaces it, so update the sender after rotating it. If the event source cannot attach a custom header, use an integration that can receive the event and forward an authenticated request to Codebolt.
+The card’s **Show** and **Copy** controls display a shortened secret. Use the full value from the detail endpoint for requests. **Regenerate** replaces the secret. After rotating it, retrieve the new value and update the sender. If the event source cannot attach a custom header, use an integration that can receive the event and forward an authenticated request to Codebolt.
 
 ## Payload format
 

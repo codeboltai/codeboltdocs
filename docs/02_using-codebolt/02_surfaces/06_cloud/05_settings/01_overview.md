@@ -15,11 +15,11 @@ The **Settings** tab is the third top-level tab of the cloud portal. It groups e
 | **Agent Settings** | [Login Tokens](./07_login-tokens.md), [Remote Sandboxes](./03_remote-sandboxes.md), [Thread Runtime Providers](./04_thread-runtime-providers.md), [Connectors](./02_connectors.md), [LLM Provider Settings](./05_llm-provider-settings.md), [Preview Provider Settings](./06_preview-provider-settings.md) |
 | **Team Settings** | [Team General & Members](./09_team-settings.md) |
 
-A separate **Account Settings** page (`/settings`) holds the older Profile / Password / Notification / Integration / Billing tabbed editor — see [Account Settings](./10_account-settings.md).
+A separate **Account Settings** page (`/settings`) holds the older Profile / Password / Notification / Integration / Billing forms — see [Account Settings](./10_account-settings.md).
 
 ## General Settings
 
-`/settings/general` shows a read-only snapshot of your account: avatar, full name, username, email, user ID, and current plan. To edit these fields, use [Account Settings](./10_account-settings.md).
+`/settings/general` shows a read-only snapshot of your account: avatar, full name, username, email, user ID, and current plan.
 
 ## Subscription
 

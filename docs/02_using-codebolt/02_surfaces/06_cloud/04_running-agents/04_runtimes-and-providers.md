@@ -91,7 +91,7 @@ Under **Settings → Remote Sandboxes** you can supply your own credentials so s
 | **Sprites** | Sprites API token | Stateful app and static site previews |
 | **Modal** | Modal token ID + secret | Reserved for future Modal sandbox previews |
 
-Credentials are stored **in your browser's local storage** and sent directly from the browser to the provider when creating/stopping a sandbox. They are **never transmitted to or stored on the portal backend**. If you don't supply a key, the hosted tier is used instead. See [Remote Sandboxes](../05_settings/03_remote-sandboxes.md) for the full provider list and field reference.
+The portal saves provider credentials in browser storage and syncs them to your account settings. See [Remote Sandboxes](../05_settings/03_remote-sandboxes.md) for the full provider list and field reference.
 
 :::note
 Stopping an E2B sandbox you own requires the same E2B API key that created it. If the key is missing from local storage, the portal sends a graceful stop request but cannot destroy the sandbox directly.

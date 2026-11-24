@@ -16,13 +16,6 @@ When a cloud runtime boots, the portal copies your LLM provider keys, selected d
 - **Models** — choose which models from each provider are offered.
 - **Default** — set the default model a new chat uses.
 
-## How it differs from AI Models
-
-- [AI Models](../03_registry/03_ai-models.md) is a simple on/off toggle over the models already configured.
-- **LLM Provider Settings** is where you actually add providers and keys.
-
-Both interact: a model toggled off in AI Models won't appear in selectors even if its provider is configured here.
-
 ## Relationship to Remote Sandboxes
 
 Don't confuse LLM providers (this page — *models/inference*) with [Remote Sandboxes](./03_remote-sandboxes.md) (*compute sandboxes*). They're independent:
@@ -34,10 +27,10 @@ A cloud agent needs both: a sandbox to execute in and an LLM provider to reason 
 
 ## Security
 
-Like Remote Sandbox credentials, LLM provider keys you enter here are kept in your browser's local storage and written into the sandbox at startup — they are not persisted on the portal backend.
+The portal stores configured providers and their keys in browser storage and sends the configuration to your account settings. Cloud runtimes use the provider configuration when starting a sandbox.
 
 ## See also
 
-- [AI Models](../03_registry/03_ai-models.md) — toggling model availability
+- [AI Models](../03_registry/03_ai-models.md) — the Registry’s CodeLoom Model entry
 - [Remote Sandboxes](./03_remote-sandboxes.md) — compute (not model) providers
 - [Remote Chat](../04_running-agents/01_remote-chat.md) — where settings.json gets written at startup

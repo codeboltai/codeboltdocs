@@ -26,16 +26,10 @@ This page is the single source of credentials for two downstream features:
 
 ## Where credentials live
 
-Credentials are stored **in your browser's local storage** under your account settings, and sent directly from the browser to the provider when creating or stopping a sandbox. They are **never transmitted to or stored on the portal backend**.
-
-Consequences:
-
-- Keys are **per-browser** — set them in each browser you use, or they won't be available there.
-- Clearing browser storage removes them; re-enter to restore.
-- The hosted Codebolt tier is used automatically when a key is absent.
+Saving a field updates browser storage and sends the value to your account settings. When you open the field again, the portal loads the saved account value. If sync fails, the portal displays **Saved locally**. To remove a saved credential, use **Clear** on its field.
 
 :::note
-Stopping an E2B sandbox you own requires the same E2B API key that created it. If the key is missing from local storage, the portal sends a graceful stop request but cannot destroy the sandbox directly.
+When Remote Chat creates an E2B sandbox with your key, the portal passes the key to the E2B SDK. Stopping an E2B sandbox you own requires the same E2B API key that created it. If the key is missing from local storage, the portal sends a graceful stop request but cannot destroy the sandbox directly.
 :::
 
 ## Setting a credential
