@@ -89,47 +89,37 @@ await server.connect(new StdioServerTransport());
 
 ### Step 4 — How discovery works
 
-Codebolt automatically discovers your tool:
-
-1. **toolService** scans `.codebolt/tools/` for subdirectories containing `codebolttool.yaml`
-2. Parses the YAML and generates an MCP server config:
-   ```json
-   {
-     "greet": {
-       "command": "node",
-       "args": ["/path/to/project/.codebolt/tools/greet/index.js"]
-     }
-   }
-   ```
-3. Registers the server in `mcp_servers.json`
-4. **mcpService** connects via `StdioClientTransport` and lists the tools
-5. Tools appear in the agent's tool namespace
+Codebolt scans the open project's `.codebolt/tools/` directory for a `codebolttool.yaml` and an `index.js`. For this project it builds a Node.js launch configuration for `greet`, connects to the server, and reads its tool list. The runtime catalog exposes the greeting as `local/greet--hello`.
 
 ### Step 5 — Use from an agent
 
-List the available tools and select the greeting tool by its catalog name. Pass the catalog's source ID so the runtime routes the call to the correct server.
+Look up the greeting in the project-local catalog and execute it by its qualified name. The server returns a pair in `data`: an error flag and the tool response.
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';
 
 codebolt.onMessage(async () => {
-  const { data } = await codebolt.tools.listRuntimeTools();
-  const greeting = data.tools.find(tool => tool.toolName === 'hello');
+  const { data } = await codebolt.tools.listExternalTools({ sourceType: 'project-local' });
+  const greeting = data.tools.find(tool => tool.name === 'local/greet--hello');
 
   if (!greeting) {
     throw new Error('The hello tool is not available in the current project.');
   }
 
-  const result = await codebolt.tools.execute(greeting.name, { name: 'Alice' }, {
-    sourceId: greeting.sourceId
-  });
-  return result.success ? String(result.result ?? '') : result.error || 'The greeting tool failed.';
+  const result = await codebolt.tools.execute(greeting.name, { name: 'Alice' });
+  if (!Array.isArray(result.data)) throw new Error('Unexpected tool response');
+  const [failed, reply] = result.data;
+  if (failed) throw new Error(String(reply));
+
+  const text = reply.content?.find((block: { type: string }) => block.type === 'text')?.text;
+  if (reply.isError || !text) throw new Error(text || 'The greeting tool returned no text.');
+  return text;
 });
 ```
 
 ### Step 6 — Test from chat
 
-Open a chat tab and ask the agent to use the greeting tool. Inspect the tool result in the conversation.
+Open a chat tab and ask the agent to use the greeting tool. With the handler above, the reply should be `Hello, Alice!`.
 
 ## Approach 2 — Expose CodeBolt as an MCP server {#approach-2-mcp-server-via-codeboltjs-api}
 

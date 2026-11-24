@@ -16,13 +16,8 @@ This placeholder accepts a file name and path and returns `void`. The SDK perfor
 
 ## Example
 
-### Search indexed project files for context
-
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.onReady(async () => {
-  const matches = await codebolt.codebaseSearch.search('Where does the application load project settings?');
-  console.log(matches);
-});
+codebolt.rag.add_file('README.md', './README.md');
 ```

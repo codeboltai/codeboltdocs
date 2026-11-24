@@ -11,17 +11,19 @@ data:
 
 # updateStatus
 
+**Default server support.** The SDK declares these methods, but the default application server has no handler for the `groupfeedback.*` requests. A caller can wait without receiving a response. To collect responses from agents in the application, use [Agent Deliberation](../agentDeliberation/index.md).
+
 ```text
 codebolt.groupFeedback.updateStatus(params: IUpdateStatusParams): Promise<IUpdateStatusResponse>
 ```
 
 Updates the status of a feedback session to control its lifecycle.
 
-## When to use it
+## Intended use
 
 Move a feedback request to the appropriate workflow state after its discussion or review finishes.
 
-## Example
+## Request examples for a compatible server
 
 ```typescript
 import codebolt from '@codebolt/codeboltjs';

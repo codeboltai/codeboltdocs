@@ -99,7 +99,7 @@ codebolt.thread.getThreadCoordination(options: GetThreadCoordinationOptions): Pr
 
 ### startThread
 
-[`startThread`](startThread.md) · Starts a thread.
+[`startThread`](startThread.md) · The default server expects a different request field. To launch an agent, use `createAndStartThread`.
 
 ### updateThread
 
@@ -130,6 +130,8 @@ codebolt.thread.getThreadContext(options: GetThreadContextOptions): Promise<GetT
 ```
 
 ### getThreadContextCompacted
+
+Reads the stored compacted context. When none is available, the server returns `{ status: "placeholder" }` for `compactedContext`. The separate `compaction` field currently contains a placeholder status and a null result.
 
 ```text
 codebolt.thread.getThreadContextCompacted(options: GetThreadContextCompactedOptions): Promise<GetThreadContextCompactedResponse>

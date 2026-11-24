@@ -6,189 +6,67 @@ The current API is [Execution Plan](../executionPlan/index.md). Use `codebolt.ex
 
 For a workflow with parallel or sequential dependencies, create an execution plan and use its readiness methods to decide what agents can claim next.
 
-## Examples
+## Create a plan and read its tasks
 
-### Basic Action Plan Workflow
-
-```javascript
-import codebolt from '@codebolt/codeboltjs';
-
-async function quickStart() {
-  try {
-    // Step 1: Create a new action plan
-    const plan = await codebolt.executionPlan.createExecutionPlan({
-      name: 'API Development Plan',
-      description: 'Build a complete REST API with authentication',
-      agentId: 'my-agent-id',
-      status: 'active'
-    });
-
-    console.log('Created plan:', plan.planId);
-
-    // Step 2: Add tasks to the plan
-    await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, {
-      name: 'Setup Express Server',
-      description: 'Initialize Express.js application',
-      priority: 'high',
-      taskType: 'setup'
-    });
-
-    await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, {
-      name: 'Create Authentication Routes',
-      description: 'Implement login and registration endpoints',
-      priority: 'high',
-      taskType: 'development'
-    });
-
-    // Step 3: Execute tasks
-    const planDetails = await codebolt.executionPlan.getPlanDetail(plan.planId);
-    for (const task of planDetails.tasks) {
-      const result = await codebolt.executionPlan.startTaskStep(
-        plan.planId,
-        task.id
-      );
-      console.log(`Task ${task.name} completed:`, result.success);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-```
-
-### Minimal Example
+This example creates a plan with a single top-level task. The create and detail responses both contain an `executionPlan` record. Its `planId` identifies the plan and its `items` array contains the tasks and groups.
 
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.onReady(async () => {
-  // Create and execute a simple action plan
-  const plan = await codebolt.executionPlan.createExecutionPlan({
-    name: 'Quick Task',
-    description: 'Simple one-task plan'
+codebolt.onMessage(async () => {
+  const created = await codebolt.executionPlan.createExecutionPlan({
+    name: 'README review',
+    description: 'Check the project setup instructions.',
   });
+  if (!created.success) throw new Error(created.error);
 
-  await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, {
-    name: 'Generate README',
-    description: 'Create project documentation'
+  const { planId } = created.executionPlan;
+  const added = await codebolt.executionPlan.addTaskToExecutionPlan(planId, {
+    name: 'Review setup steps',
+    description: 'Check that the README explains how to open the project.',
   });
+  if (!added.success) throw new Error(added.error);
 
-  const details = await codebolt.executionPlan.getPlanDetail(plan.planId);
-  await codebolt.executionPlan.startTaskStep(plan.planId, details.tasks[0].id);
+  const details = await codebolt.executionPlan.getPlanDetail(planId);
+  if (!details.success) throw new Error(details.error);
+  return details.executionPlan.items.map(item => item.name).join(', ');
 });
 ```
 
-### Workflow 1: Sequential Task Execution
+## Organize sequential work
+
+For a migration plan, add the tasks in the order the agent should perform them. In this example, `planId` comes from the create response above.
 
 ```javascript
-import codebolt from '@codebolt/codeboltjs';
-
-async function sequentialWorkflow() {
-  // Create plan
-  const plan = await codebolt.executionPlan.createExecutionPlan({
-    name: 'Database Migration',
-    description: 'Step-by-step database setup'
-  });
-
-  // Add sequential tasks
-  const tasks = [
-    { name: 'Backup Database', description: 'Create backup before migration' },
-    { name: 'Run Migrations', description: 'Execute migration scripts' },
-    { name: 'Verify Data', description: 'Check data integrity' },
-    { name: 'Update Indexes', description: 'Rebuild database indexes' }
-  ];
-
-  for (const task of tasks) {
-    await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, task);
-  }
-
-  // Execute tasks in sequence
-  const planDetails = await codebolt.executionPlan.getPlanDetail(plan.planId);
-
-  for (const task of planDetails.tasks) {
-    console.log(`Starting: ${task.name}`);
-    const result = await codebolt.executionPlan.startTaskStep(plan.planId, task.id);
-
-    if (!result.success) {
-      console.error(`Task failed: ${task.name}`);
-      break; // Stop on first failure
-    }
-
-    console.log(`Completed: ${task.name}`);
-  }
+for (const name of ['Back up the database', 'Run migrations', 'Verify data integrity']) {
+  const added = await codebolt.executionPlan.addTaskToExecutionPlan(planId, { name });
+  if (!added.success) throw new Error(added.error);
 }
 ```
 
-### Workflow 5: Wait Until Condition
+## Add a health-check group
+
+Use a wait group to record the checks required after deployment. The agent performing the work must run the checks and report their outcomes.
 
 ```javascript
-import codebolt from '@codebolt/codeboltjs';
-
-async function waitWorkflow() {
-  const plan = await codebolt.executionPlan.createExecutionPlan({
-    name: 'Deployment with Health Check',
-    description: 'Deploy and wait for service to be healthy'
-  });
-
-  // Add deployment task
-  await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, {
-    name: 'Deploy Service',
-    description: 'Deploy the application'
-  });
-
-  // Add wait group
-  await codebolt.executionPlan.addGroupToExecutionPlan(plan.planId, {
-    type: 'waitUntilGroup',
-    name: 'Wait for Health Check',
-    waitTasks: [
-      {
-        name: 'Check Service Health',
-        description: 'Wait until service responds with 200 OK',
-        condition: 'serviceHealthy === true',
-        timeout: 300000, // 5 minutes
-        checkInterval: 5000 // Check every 5 seconds
-      }
-    ]
-  });
-
-  // Execute plan
-  const details = await codebolt.executionPlan.getPlanDetail(plan.planId);
-  for (const task of details.tasks) {
-    await codebolt.executionPlan.startTaskStep(plan.planId, task.id);
-  }
-}
-```
-
-### Plan Organization
-
-```javascript
-import codebolt from '@codebolt/codeboltjs';
-
-codebolt.onReady(async () => {
-  // Good: Well-structured plan with clear task hierarchy
-  const plan = await codebolt.executionPlan.createExecutionPlan({
-    name: 'Feature Development',
-    description: 'Implement user authentication feature',
-    agentId: 'dev-agent',
-    metadata: {
-      feature: 'authentication',
-      sprint: 'sprint-23',
-      priority: 'high'
-    }
-  });
-
-  // Add tasks in logical order
-  await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, {
-    name: 'Design Database Schema',
-    description: 'Create user and session tables',
-    priority: 'high',
-    taskType: 'design'
-  });
-
-  await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, {
-    name: 'Implement Authentication Logic',
-    description: 'Create login/signup functions',
-    priority: 'high',
-    taskType: 'development'
-  });
+const added = await codebolt.executionPlan.addGroupToExecutionPlan(planId, {
+  type: 'waitUntilGroup',
+  name: 'Deployment health',
+  waitSteps: ['Service responds to its health endpoint'],
+  waitTasks: [{
+    type: 'task',
+    task: { name: 'Check service health', description: 'Query the health endpoint.' },
+  }],
 });
+if (!added.success) throw new Error(added.error);
+```
+
+## Find the next task
+
+`getReadyTasks` lists eligible work. To take ownership of a task, use `acquireNextTask`. Use the returned lease to start the task and call `completeTask` or `failTask` after the agent has performed the work. See [Execution Plan](../executionPlan/index.md) for the method signatures.
+
+```javascript
+const ready = await codebolt.executionPlan.getReadyTasks(planId);
+if (!ready.success) throw new Error(ready.error);
+for (const task of ready.tasks) console.log(task.taskId, task.name);
 ```

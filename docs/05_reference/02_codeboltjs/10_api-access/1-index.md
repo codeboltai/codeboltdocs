@@ -78,7 +78,6 @@ Use [MCP](./mcp/index.md) to find and configure MCP servers. Use [Runtime Tools]
 - [`mail`](./mail/index.md) — Send and manage messages within Codebolt’s agent mail service.
 - [`recipients`](./recipients/index.md) — List, inspect, and validate recipients for automation actions.
 - [`namedTag`](./namedTag/index.md) — List named tags and send a message to a named recipient.
-- [`groupFeedback`](./groupFeedback/index.md) — Manage feedback groups and their responses.
 - [`dynamicPanel`](./dynamicPanel/index.md) — Open, update, and close HTML panels in Codebolt.
 - [`artifact`](./artifact/index.md) — Create, list, update, and delete artifacts.
 - [`canvas`](./canvas/index.md) — Create canvases and manage their content and artifact links.
@@ -93,11 +92,9 @@ Use [MCP](./mcp/index.md) to find and configure MCP servers. Use [Runtime Tools]
 - [`tokenizer`](./tokenizer/index.md) — Tokenize text and count tokens.
 - [`chatSummary`](./history/index.md) — Summarize chat message arrays.
 - [`dbmemory`](./dbmemory/index.md) — Store and retrieve values in the application memory database.
-- [`memory`](./memory/index.md) — Store, update, and list JSON, Markdown, and todo memory records.
 - [`persistentMemory`](./persistentMemory/index.md) — Create and query persistent memory stores.
 - [`episodicMemory`](./episodicMemory/index.md) — Store and retrieve episodes and their events.
 - [`knowledgeGraph`](./knowledgeGraph/index.md) — Manage graph records and query relationships.
-- [`memoryIngestion`](./memoryIngestion/index.md) — Manage memory ingestion pipelines and run processors.
 - [`contextAssembly`](./contextAssembly/index.md) — Assemble context for an application request.
 - [`contextRuleEngine`](./contextRuleEngine/index.md) — Manage context rules and evaluate conditions.
 - [`contextCompaction`](./contextCompaction/index.md) — Inspect and update compaction state and related context.
@@ -119,9 +116,17 @@ Use [MCP](./mcp/index.md) to find and configure MCP servers. Use [Runtime Tools]
 - [`crawler`](./crawler/index.md) — Send crawl start, navigation, scroll, and screenshot events, and await click results.
 - [`outputparsers`](./outputparsers/index.md) — Parse structured output formats.
 - [`debug`](./debug/index.md) — Send debug messages to the application.
-- [`utils`](./utils/index.md) — Apply an edit and diff through the SDK.
 
 For web queries, use the built-in [Web Search tool](./webSearch/index.md) through `codebolt.tools`.
+
+### Requests without a default server handler
+
+These SDK requests are unavailable through the default agent connection.
+
+- [`memory`](./memory/index.md) — JSON, Markdown, and todo record requests.
+- [`groupFeedback`](./groupFeedback/index.md) — Structured feedback requests.
+- [`memoryIngestion`](./memoryIngestion/index.md) — Ingestion pipeline requests.
+- [`utils`](./utils/index.md) — AI-assisted diff requests.
 
 ### Legacy SDK entries
 

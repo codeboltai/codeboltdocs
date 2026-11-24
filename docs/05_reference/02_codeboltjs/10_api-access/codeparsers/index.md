@@ -2,9 +2,7 @@
 
 The SDK instance has no `codebolt.codeparsers` module. Use [List Code Definition Names](../fs/listCodeDefinitionNames.md) for names identified in workspace files or [Code Utilities](../codeutils/index.md) for the SDK’s source collection and matching methods.
 
-## Example
-
-### List definition names in workspace source files
+## List definition names with `codebolt.fs`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

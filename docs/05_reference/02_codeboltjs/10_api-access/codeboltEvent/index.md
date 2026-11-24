@@ -87,39 +87,44 @@ codebolt.onReady(() => {
 });
 ```
 
-### With Action Plan Module
+### Delegate a plan task and record the outcome
+
+This example uses an existing plan with ready work. Pass its ID and the ID of an installed reviewer agent. A lease identifies the task, and the child thread reports the result of the review.
 
 ```javascript
 import codebolt from '@codebolt/codeboltjs';
 
-async function actionPlanWithEvents() {
-  const plan = await codebolt.executionPlan.createExecutionPlan({
-    name: 'Event-Driven Plan'
-  });
+async function reviewNextTask(planId, reviewerAgentId) {
+  const acquired = await codebolt.executionPlan.acquireNextTask(planId, { maxTasks: 1 });
+  if (!acquired.success) throw new Error(acquired.error);
+  const lease = acquired.leases[0];
+  if (!lease) return 'No task is ready.';
 
-  // Add tasks
-  await codebolt.executionPlan.addTaskToExecutionPlan(plan.planId, {
-    name: 'Background Task',
-    description: 'Run in background'
-  });
-
-  // Execute with event monitoring
-  const details = await codebolt.executionPlan.getPlanDetail(plan.planId);
-
-  for (const task of details.tasks) {
-    const result = await codebolt.executionPlan.startTaskStep(plan.planId, task.id);
-
-    if (result.background) {
-      codebolt.backgroundChildThreads.addRunningAgent(result.threadId, {
-        planId: plan.planId,
-        taskId: task.id
-      });
-    }
+  const { taskId, leaseId } = lease;
+  const started = await codebolt.executionPlan.startTask(planId, taskId, { leaseId });
+  if (!started.success) {
+    await codebolt.executionPlan.releaseTask(planId, taskId, leaseId);
+    throw new Error(started.error);
   }
 
-  // Wait for background tasks
-  while (codebolt.backgroundChildThreads.getRunningAgentCount() > 0) {
-    await codebolt.backgroundChildThreads.onBackgroundAgentCompletion();
+  let output;
+  try {
+    const task = acquired.tasks.find(item => item.taskId === taskId);
+    const review = await codebolt.thread.createAndStartThreadAndWait({
+      agentId: reviewerAgentId,
+      title: task.name,
+      userMessage: task.description || task.name,
+    });
+    if (!review.success) throw new Error(review.error || 'Review failed');
+    output = review.output;
+  } catch (error) {
+    const failed = await codebolt.executionPlan.failTask(planId, taskId, String(error));
+    if (!failed.success) throw new Error(failed.error);
+    throw error;
   }
+
+  const completed = await codebolt.executionPlan.completeTask(planId, taskId, output);
+  if (!completed.success) throw new Error(completed.error);
+  return output;
 }
 ```

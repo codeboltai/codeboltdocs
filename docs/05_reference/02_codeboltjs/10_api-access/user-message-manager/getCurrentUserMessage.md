@@ -6,7 +6,7 @@ Call [`codebolt.userMessage.getCurrent()`](../user-message-utilities/getCurrent.
 import codebolt from '@codebolt/codeboltjs';
 
 codebolt.onMessage(() => {
-  const text = codebolt.userMessage.getCurrent();
-  console.log(text);
+  const message = codebolt.userMessage.getCurrent();
+  console.log(message);
 });
 ```

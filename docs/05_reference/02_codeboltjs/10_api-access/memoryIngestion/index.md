@@ -1,10 +1,12 @@
 # Memory Ingestion
 
+**Default server support.** The application has an ingestion service, but the default agent WebSocket dispatcher does not forward `memoryIngestion.*` requests to it. A caller can wait without receiving a response. For storing and retrieving individual values from an agent, see [DB Memory](../dbmemory/index.md).
+
 Manage memory ingestion pipelines and run processors.
 
-## Example
+## Request examples for a compatible server
 
-### Quick Start Example
+### Request format
 
 ```js
 import codebolt from '@codebolt/codeboltjs';

@@ -1,14 +1,29 @@
 # Memory
 
+**Default server support.** The SDK sends `saveMemory`, `updateMemory`, `deleteMemory`, and `listMemory` as memory events. The default server routes these events to its key-value handler, which accepts `get` and `set`. Record requests return an unknown-action error. For key-value storage, use [DB Memory](../dbmemory/index.md).
+
 Store, update, and list JSON, Markdown, and todo memory records.
 
 Choose the format by namespace. Each namespace exposes `save`, `update`, `delete`, and `list`.
 
-## When to use it
+## Store a value with the default server
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const saved = await codebolt.dbmemory.addKnowledge('docs:language', 'en');
+  if (!saved.success) throw new Error(saved.error ?? 'Could not save the value');
+  const read = await codebolt.dbmemory.getKnowledge('docs:language');
+  if (read.success) console.log(read.value);
+});
+```
+
+## Intended use
 
 Choose JSON for structured data, Markdown for readable notes, and todo memory for task lists you need to retrieve later.
 
-## Examples
+## Request examples for a compatible server
 
 ### Save JSON Data
 

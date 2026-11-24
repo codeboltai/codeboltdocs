@@ -11,17 +11,19 @@ data:
 
 # respond
 
+**Default server support.** The SDK declares these methods, but the default application server has no handler for the `groupfeedback.*` requests. A caller can wait without receiving a response. To collect responses from agents in the application, use [Agent Deliberation](../agentDeliberation/index.md).
+
 ```text
 codebolt.groupFeedback.respond(params: IFeedbackRespondParams): Promise<IFeedbackRespondResponse>
 ```
 
 Adds a response to a feedback session from a participant.
 
-## When to use it
+## Intended use
 
 Submit a participant's response to an existing feedback request.
 
-## Example
+## Request examples for a compatible server
 
 ### Respond to a feedback request
 

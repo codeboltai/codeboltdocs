@@ -1,8 +1,8 @@
 ---
 name: getMcpList
-description: Gets the list of available MCP servers.
+description: SDK request for the MCP server catalog.
 cbbaseinfo:
-  description: Gets the list of available MCP servers.
+  description: SDK request for the MCP server catalog.
 data:
   name: getMcpList
   category: mcp
@@ -15,33 +15,26 @@ data:
 codebolt.mcp.getMcpList(): Promise<GetMcpListResponse>
 ```
 
-Gets the list of available MCP servers.
+The default server returns an unknown-action error for the SDK’s `getMcpList` request. To list configured servers, call `searchAvailableMCPServers('')`. The empty query matches every server name. The response’s `data` object is keyed by server name.
 
-## Example
-
-### Get All Available MCP Servers
-
-```js
-import codebolt from '@codebolt/codeboltjs';
-
-codebolt.onReady(async () => {
-  // Get list of all available MCP servers
-  const serverList = await codebolt.mcp.getMcpList();
-  console.log('Available MCP servers:', serverList);
-
-  // }
-});
-```
-
-## Inspect server names for a picker
+## List configured server names
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
 codebolt.onReady(async () => {
-  const response = await codebolt.mcp.getMcpList();
-  for (const server of response.data ?? []) {
-    console.log(server.name, server.enabled);
-  }
+  const response = await codebolt.mcp.searchAvailableMCPServers('');
+  console.log(Object.keys(response.data ?? {}));
+});
+```
+
+## List enabled server names
+
+```ts
+import codebolt from '@codebolt/codeboltjs';
+
+codebolt.onReady(async () => {
+  const response = await codebolt.mcp.getEnabledMCPServers();
+  console.log(Object.keys(response.data ?? {}));
 });
 ```

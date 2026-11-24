@@ -2,9 +2,7 @@
 
 The SDK’s current entry point is [`tools.listExternalTools`](../tools/index.md#listexternaltools). See [Runtime Tools](../tools/index.md) for the gateway methods and [MCP](../mcp/index.md) for server lifecycle operations.
 
-## Example
-
-### List callable MCP tools from the runtime catalog
+## List callable MCP tools with `codebolt.tools.listExternalTools`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

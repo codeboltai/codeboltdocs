@@ -2,9 +2,7 @@
 
 Use [Runtime Tools](../tools/index.md) to discover or execute tools. Use [MCP](../mcp/index.md) for MCP server configuration.
 
-## Example
-
-### List callable MCP tools from the runtime catalog
+## List callable MCP tools with `codebolt.tools.listExternalTools`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

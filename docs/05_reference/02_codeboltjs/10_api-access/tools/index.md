@@ -34,7 +34,12 @@ codebolt.onMessage(async () => {
     { name: 'Ada' },
     { sourceId: greeting.sourceId },
   );
-  console.log(response.success ? response.result : response.error);
+  if (Array.isArray(response.data)) {
+    const [failed, value] = response.data;
+    if (failed) throw new Error(String(value));
+    return value;
+  }
+  throw new Error(response.error ?? 'Unexpected MCP tool response');
 });
 ```
 

@@ -27,6 +27,8 @@ codebolt.onReady(async () => {
 
 ### getLocalMCPServers
 
+Returns a single list containing the tools contributed by locally configured MCP servers.
+
 ```text
 codebolt.mcp.getLocalMCPServers(): Promise<GetLocalToolBoxesResponse>
 ```
@@ -41,6 +43,8 @@ The current server returns its MCP catalog for this request. For the names menti
 
 ### searchAvailableMCPServers
 
+Matches configured server names and descriptions, ignoring case. Pass an empty string to list every configured server. Read the names with `Object.keys(response.data ?? {})`.
+
 ```text
 codebolt.mcp.searchAvailableMCPServers(query: string): Promise<SearchAvailableToolBoxesResponse>
 ```
@@ -51,9 +55,11 @@ codebolt.mcp.searchAvailableMCPServers(query: string): Promise<SearchAvailableTo
 
 ### getMcpList
 
-[`getMcpList`](getMcpList.md)
+The default server returns an unknown-action error. See [getMcpList](getMcpList.md) for a working catalog query.
 
 ### getEnabledMcps
+
+The default server does not handle this SDK action. Use [getEnabledMCPServers](getEnabledMCPServers.md) to list enabled servers.
 
 ```text
 codebolt.mcp.getEnabledMcps(): Promise<GetEnabledMCPSResponse>

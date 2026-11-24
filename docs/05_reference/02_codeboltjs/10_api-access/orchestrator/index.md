@@ -2,9 +2,7 @@
 
 The SDK has no `codebolt.orchestrator` API. Use [Thread](../thread/index.md) to start child threads, [Swarm](../swarm/index.md) to coordinate teams, and [Execution Plan](../executionPlan/index.md) to coordinate planned work.
 
-## Example
-
-### Delegate a review to a child thread and wait for it
+## Delegate a review with `codebolt.thread`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

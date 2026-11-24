@@ -200,15 +200,18 @@ Implement the MCP list-tools and call-tool handlers in `index.js` so the server 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-const { data } = await codebolt.tools.listRuntimeTools();
-const tool = data.tools.find(item => item.toolName === 'word_count');
+const { data } = await codebolt.tools.listExternalTools({ sourceType: 'project-local' });
+const tool = data.tools.find(item => item.name === 'local/word_count--word_count');
 if (!tool) throw new Error('The word_count tool is not available.');
 
 const result = await codebolt.tools.execute(tool.name, {
   text: 'Hello world this is a test',
   exclude_stopwords: true,
-}, { sourceId: tool.sourceId });
-console.log(result);
+});
+if (!Array.isArray(result.data)) throw new Error('Unexpected tool response');
+const [failed, reply] = result.data;
+if (failed) throw new Error(String(reply));
+console.log(reply);
 ```
 
 ### Restrict tools available to an agent

@@ -1,8 +1,8 @@
 ---
 name: startThread
-description: Starts a thread.
+description: Existing-thread start request and the supported way to launch an agent.
 cbbaseinfo:
-  description: Starts a thread.
+  description: Existing-thread start request and the supported way to launch an agent.
 data:
   name: startThread
   category: thread
@@ -15,7 +15,7 @@ data:
 codebolt.thread.startThread(threadId: string): Promise<StartThreadResponse>
 ```
 
-Starts a thread.
+Requests startup for an existing thread. The default server rejects the ID field sent by this SDK method.
 
 ## Parameters
 

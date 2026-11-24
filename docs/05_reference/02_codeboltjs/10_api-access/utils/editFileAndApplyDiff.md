@@ -11,11 +11,13 @@ data:
 
 # editFileAndApplyDiff
 
+**Default server support.** The SDK sends the filesystem action `edit_file_and_apply_diff`. The default application server does not register that action, so this helper cannot apply the edit. For a targeted text change, see [File System](../fs/index.md).
+
 ```text
 codebolt.utils.editFileAndApplyDiff(filePath: string, diff: string, diffIdentifier: string, prompt: string, applyModel?: string): Promise<FsEditFileAndApplyDiffResponse>
 ```
 
-Edits a file and applies a diff with AI assistance.
+For an example using the default server, see [Replace text in a file](./index.md#replace-text-in-a-file).
 
 ## Parameters
 
@@ -29,7 +31,7 @@ Edits a file and applies a diff with AI assistance.
 
 A promise that resolves with the edit response.
 
-## Example
+## Request examples for a compatible server
 
 ```js
 import codebolt from '@codebolt/codeboltjs';
@@ -58,7 +60,7 @@ codebolt.onReady(async () => {
 });
 ```
 
-## More examples
+## Additional request example
 
 ### Basic File Edit with Diff
 

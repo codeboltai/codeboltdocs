@@ -2,9 +2,7 @@
 
 Use [`codebolt.userMessage`](../user-message-utilities/index.md) to read the active message and session data.
 
-## Example
-
-### Read the current user message and its file mentions
+## Read text and file mentions with `codebolt.userMessage`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

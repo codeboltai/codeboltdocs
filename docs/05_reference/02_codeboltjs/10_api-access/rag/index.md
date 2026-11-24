@@ -4,18 +4,7 @@ The SDK exports the RAG method names as placeholders. Their implementations perf
 
 Use [Knowledge Graph](../knowledgeGraph/index.md), [Persistent Memory](../persistentMemory/index.md), or [Vector Database](../vectordb/index.md) for implemented storage and query methods.
 
-## Example
-
-### Search indexed project files for context
-
-```ts
-import codebolt from '@codebolt/codeboltjs';
-
-codebolt.onReady(async () => {
-  const matches = await codebolt.codebaseSearch.search('Where does the application load project settings?');
-  console.log(matches);
-});
-```
+To search indexed project files, see [Codebase Search](../codebaseSearch/index.md).
 
 ## SDK methods
 

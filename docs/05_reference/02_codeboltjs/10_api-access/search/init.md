@@ -16,14 +16,8 @@ This compatibility function accepts an engine name and returns `void`. The imple
 
 ## Example
 
-### Initialize with Default Engine
-
-```js
+```ts
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.onReady(async () => {
-  // Initialize with default Bing search engine
-  await codebolt.search.init();
-  console.log('Search module initialized with Bing');
-});
+codebolt.search.init('bing'); // Returns undefined. No search provider is configured.
 ```

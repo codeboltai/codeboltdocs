@@ -2,9 +2,7 @@
 
 Read MCP names mentioned in the active user message with [`codebolt.userMessage.getMentionedMCPs()`](../user-message-utilities/index.md#getmentionedmcps).
 
-## Example
-
-### Read MCP mentions from the active message
+## Read MCP mentions with `codebolt.userMessage.getMentionedMCPs`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

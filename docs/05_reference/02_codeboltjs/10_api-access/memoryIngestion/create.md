@@ -11,6 +11,8 @@ data:
 
 # create
 
+**Default server support.** The application has an ingestion service, but the default agent WebSocket dispatcher does not forward `memoryIngestion.*` requests to it. A caller can wait without receiving a response. For storing and retrieving individual values from an agent, see [DB Memory](../dbmemory/index.md).
+
 ```text
 codebolt.memoryIngestion.create(config: CreateIngestionPipelineParams): Promise<IngestionPipelineResponse>
 ```
@@ -21,11 +23,11 @@ Create a new ingestion pipeline
 
 - `config` — Pipeline configuration
 
-## When to use it
+## Intended use
 
 Create a pipeline that describes how incoming content should be transformed or stored.
 
-## Examples
+## Request examples for a compatible server
 
 ### Create Basic Pipeline
 

@@ -2,7 +2,7 @@
 
 The SDK’s current entry point is [`tools.getRuntimeTool`](../tools/index.md#getruntimetool). See [Runtime Tools](../tools/index.md) for the gateway methods and [MCP](../mcp/index.md) for server lifecycle operations.
 
-## Get one tool's input schema
+## Inspect a tool’s input schema with `codebolt.tools.getRuntimeTool`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

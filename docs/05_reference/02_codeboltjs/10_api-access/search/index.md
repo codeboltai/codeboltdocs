@@ -4,19 +4,16 @@ The legacy search object returns placeholder strings. Use Web Search for real qu
 
 Use the built-in [Web Search](../webSearch/index.md) tool for web results, or [Codebase Search](../codebaseSearch/index.md) for project files.
 
-## Run a web search
+## What the SDK returns
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
-codebolt.onReady(async () => {
-  const result = await codebolt.tools.execute(
-    'search_web',
-    { query: 'TypeScript handbook', count: 3 },
-    { sourceId: 'codebolt' },
-  );
-  console.log(result.success ? result.result : result.error);
-});
+const result = await codebolt.search.search('release notes');
+console.log(result); // Search Results for release notes
+
+const link = await codebolt.search.get_first_link('release notes');
+console.log(link); // First Link for release notes
 ```
 
 ## SDK methods

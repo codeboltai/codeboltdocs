@@ -1,16 +1,14 @@
 # getAvailableToolBoxes
 
-Use [`codebolt.mcp.getMcpList()`](../mcp/getMcpList.md) to list available MCP servers.
+Use `codebolt.mcp.searchAvailableMCPServers('')` to list all configured servers. To narrow the results, pass part of a server name or description.
 
-## Example
-
-### Read available MCP servers
+## List configured servers
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';
 
 codebolt.onReady(async () => {
-  const response = await codebolt.mcp.getMcpList();
-  console.log(response.data ?? []);
+  const { data } = await codebolt.mcp.searchAvailableMCPServers('');
+  console.log(Object.keys(data ?? {}));
 });
 ```

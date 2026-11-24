@@ -86,20 +86,23 @@ Use `codebolt.mcp` to work with MCP server configuration and `codebolt.tools` to
 import codebolt from '@codebolt/codeboltjs';
 
 codebolt.onReady(async () => {
-  const servers = await codebolt.mcp.getEnabledMCPServers();
+  const enabled = await codebolt.mcp.getEnabledMCPServers();
   const { data } = await codebolt.tools.listRuntimeTools();
-  console.log(servers, data.tools);
+  console.log('Enabled servers:', Object.keys(enabled.data ?? {}));
+  console.log('Callable tools:', data.tools);
 });
 ```
 
 ## Tool execution flow
 
-Select a tool from the returned catalog and use its name and source ID. Supply the arguments defined by its input schema.
+Select a project MCP tool from the catalog and pass its qualified name and the arguments defined by its input schema. For example, `local/greet--hello` identifies the `hello` tool from the project’s `greet` server.
 
 ```typescript
-const result = await codebolt.tools.execute(tool.name, args, {
-  sourceId: tool.sourceId
-});
+const result = await codebolt.tools.execute(tool.name, args);
+if (!Array.isArray(result.data)) throw new Error('Unexpected tool response');
+const [failed, reply] = result.data;
+if (failed) throw new Error(String(reply));
+console.log(reply);
 ```
 
 ## Creating an MCP server with CodeBolt

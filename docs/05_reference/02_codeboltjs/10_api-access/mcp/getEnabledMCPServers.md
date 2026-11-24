@@ -15,7 +15,7 @@ data:
 codebolt.mcp.getEnabledMCPServers(): Promise<GetEnabledToolBoxesResponse>
 ```
 
-Gets the list of currently enabled MCP servers.
+The default server returns an object in `data` keyed by enabled server name. Use `Object.keys` to read just the names.
 
 ## Example
 
@@ -36,10 +36,7 @@ codebolt.onReady(async () => {
 import codebolt from '@codebolt/codeboltjs';
 
 codebolt.onReady(async () => {
-  // Get list of enabled MCP servers
-  const enabledServers = await codebolt.mcp.getEnabledMCPServers();
-  console.log('Enabled MCP servers:', enabledServers);
-
-  // }
+  const { data } = await codebolt.mcp.getEnabledMCPServers();
+  console.log('Enabled MCP servers:', Object.keys(data ?? {}));
 });
 ```

@@ -1,16 +1,3 @@
 # getClassesInFile
 
-The SDK instance has no `codebolt.codeparsers` module. Use [List Code Definition Names](../fs/listCodeDefinitionNames.md) for names identified in workspace files or [Code Utilities](../codeutils/index.md) for the SDK’s source collection and matching methods.
-
-## Example
-
-### List definition names in workspace source files
-
-```ts
-import codebolt from '@codebolt/codeboltjs';
-
-codebolt.onReady(async () => {
-  const result = await codebolt.fs.listCodeDefinitionNames('./src');
-  if (result.success) console.log(result.definitions ?? result.result);
-});
-```
+The SDK has no `codebolt.codeparsers.getClassesInFile` method. For general definition names in workspace source files, see [listCodeDefinitionNames](../fs/listCodeDefinitionNames.md). Its results can include definitions other than classes.

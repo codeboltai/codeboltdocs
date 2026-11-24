@@ -11,6 +11,8 @@ data:
 
 # execute
 
+**Default server support.** The application has an ingestion service, but the default agent WebSocket dispatcher does not forward `memoryIngestion.*` requests to it. A caller can wait without receiving a response. For storing and retrieving individual values from an agent, see [DB Memory](../dbmemory/index.md).
+
 ```text
 codebolt.memoryIngestion.execute(params: ExecuteIngestionParams): Promise<IngestionExecuteResponse>
 ```
@@ -21,11 +23,11 @@ Execute an ingestion pipeline
 
 - `params` — Execution parameters
 
-## When to use it
+## Intended use
 
 Run an existing pipeline on input data after choosing the appropriate processing configuration.
 
-## Examples
+## Request examples for a compatible server
 
 ### Basic Pipeline Execution
 

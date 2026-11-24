@@ -2,9 +2,9 @@
 
 The SDK’s current entry point is [`mcp.configureMCPServer`](../mcp/configureMCPServer.md). See [Runtime Tools](../tools/index.md) for the gateway methods and [MCP](../mcp/index.md) for server lifecycle operations.
 
-## Example
+## Configure a server with `codebolt.mcp.configureMCPServer`
 
-### Configure an existing MCP server
+Replace `your-installed-server` with the name of an existing MCP server. Saving its configuration also enables the server.
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

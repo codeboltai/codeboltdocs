@@ -2,7 +2,7 @@
 
 The SDK’s current entry point is [`tools.listToolsBySource`](../tools/index.md#listtoolsbysource). See [Runtime Tools](../tools/index.md) for the gateway methods and [MCP](../mcp/index.md) for server lifecycle operations.
 
-## List tools from one MCP server
+## List tools from one server with `codebolt.tools.listToolsBySource`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

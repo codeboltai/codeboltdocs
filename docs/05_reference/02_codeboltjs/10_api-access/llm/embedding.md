@@ -2,7 +2,7 @@
 
 `codebolt.llm` exposes [inference](./inference.md) and model configuration. The SDK does not expose an embeddings method on this module. Use [getVector](../vectordb/getVector.md) to generate an embedding with the configured embedding model.
 
-## Generate an embedding
+## Generate an embedding with `codebolt.vectordb.getVector`
 
 ```ts
 import codebolt from '@codebolt/codeboltjs';

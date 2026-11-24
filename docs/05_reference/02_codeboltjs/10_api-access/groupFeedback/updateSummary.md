@@ -17,6 +17,8 @@ data:
 ---
 # updateSummary
 
+**Default server support.** The SDK declares these methods, but the default application server has no handler for the `groupfeedback.*` requests. A caller can wait without receiving a response. To collect responses from agents in the application, use [Agent Deliberation](../agentDeliberation/index.md).
+
 ```typescript
 codebolt.groupFeedback.updateSummary(params: IUpdateSummaryParams): Promise<IUpdateSummaryResponse>
 ```
@@ -30,7 +32,7 @@ Updates the summary of a feedback session, consolidating key points and action i
 
 - **`Promise<[IUpdateSummaryResponse](/docs/reference/codeboltjs/type-reference/codeboltjs/interfaces/IUpdateSummaryResponse)>`**: A promise that resolves with the updated summary.
 
-### Examples
+### Request examples for a compatible server
 
 #### Example 1: Update Feedback Summary
 
