@@ -445,11 +445,11 @@ div[class*="searchResults"] {
 .theme-doc-sidebar-container {
   background-color: transparent !important;
   border-right: 1px solid var(--cb-border) !important;
-  padding: 0 0.75rem 0.75rem 1rem !important;
 }
 
 @media (min-width: 997px) {
   .theme-doc-sidebar-container nav.menu {
+    padding: 0.5rem 0.75rem 0.75rem 1rem !important;
     max-height: calc(100vh - var(--ifm-navbar-height));
     overflow-y: auto;
     overflow-x: hidden;
@@ -565,43 +565,31 @@ div[class*="searchResults"] {
   margin-top: 0.1rem;
 }
 
-/* ── Caret (expand/collapse arrow) ── */
-.menu__list-item--collapsible .menu__caret {
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  width: 1.6rem !important;
-  height: auto !important;
-  min-width: 1.6rem !important;
-  flex: 0 0 1.6rem;
-  display: flex;
-  align-items: center;
+/* Docusaurus adds a separate caret button for categories with a landing page. */
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible {
+  --sidebar-caret-size: 1.25rem;
+  flex-wrap: nowrap;
+  padding-inline-end: 0.5rem;
+}
+
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__caret {
+  flex: 0 0 var(--sidebar-caret-size);
   justify-content: center;
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  cursor: pointer;
+  padding: 0;
 }
 
-.menu__list-item--collapsible .menu__caret:hover {
-  background: none !important;
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link--sublist-caret {
+  padding-inline-end: 0 !important;
 }
 
-.menu__list-item--collapsible .menu__caret:before {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 4px solid var(--cb-muted);
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  transition: transform 0.2s ease;
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link--sublist-caret::after {
+  flex: 0 0 var(--sidebar-caret-size);
+  margin-inline-start: 0.35rem;
+  pointer-events: none;
 }
 
-.menu__list-item--collapsible .menu__list-item-collapsible--active .menu__caret:before {
-  transform: rotate(90deg);
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__caret:focus-visible {
+  outline-offset: -2px;
 }
 
 .menu__list-item--collapsible .menu__link {
@@ -617,7 +605,6 @@ div[class*="searchResults"] {
 .menu__list-item-collapsible > .menu__link {
   flex: 1 1 auto;
   min-width: 0;
-  max-width: calc(100% - 1.6rem);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
