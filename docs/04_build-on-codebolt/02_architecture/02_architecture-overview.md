@@ -61,7 +61,7 @@ A full annotated walkthrough lives at [Chat message end-to-end](./04_data-flow-w
 
 ## Where to go next
 
-- **Just want to use Codebolt?** Skip this section — head to the [What is Codebolt](../../01_get-started/02_what-is-codebolt.md) docs.
+- **Just want to use Codebolt?** Skip this section — head to the [Introduction](../../01_get-started/01_overview.md).
 - **Want to understand a specific subsystem?** Jump into [Subsystems](../07b_subsystems/01_agent-subsystem.md).
 - **Building a custom agent?** Read [Agent Subsystem](../07b_subsystems/01_agent-subsystem.md), then go to [Creating Agents](../02_creating-agents/01_overview.md).
 - **Self-hosting?** Read this page + [The Server](./03_process-model.md), then [Self-Hosting](../11_agent-infrastructure/01_overview.md).

@@ -73,7 +73,7 @@ const extensionDocs = `${developerDocs}/03_agent-extensions`;
 const sidebars = {
   getStartedSidebar: [
     doc('Introduction', 'get-started/overview'),
-    doc('What Is Codebolt?', 'get-started/what-is-codebolt'),
+    doc('Installation', 'get-started/installation'),
     doc('Quickstart', 'get-started/quickstart'),
     {
       type: 'category',

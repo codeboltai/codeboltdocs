@@ -73,7 +73,6 @@ function isCuratedForIndex(relativePath) {
   if (/^quickstart/i.test(slugName)) return true;
 
   const curated = [
-    'what-is-codebolt',
     'what-is-an-agent',
     'architecture',
     'architecture-for-builders',

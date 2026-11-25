@@ -24,7 +24,6 @@ Pages sharing a destination are review candidates, not confirmed duplicates. Sur
 | Existing page | Proposed destination | Migration action |
 |---|---|---|
 | [Get Started](<../docs/01_get-started/01_overview.md>) | Get Started / Introduction | Maintain first-task path and shared feature overview link |
-| [What is Codebolt](<../docs/01_get-started/02_what-is-codebolt.md>) | Get Started / First run and essential concepts | Review onboarding scope |
 | [Desktop App](<../docs/01_get-started/02f_platforms/01_desktop.md>) | Get Started / First run and essential concepts | Review onboarding scope |
 | [CLI](<../docs/01_get-started/02f_platforms/02_cli.md>) | Get Started / First run and essential concepts | Review onboarding scope |
 | [Cloud](<../docs/01_get-started/02f_platforms/04_cloud.md>) | Get Started / First run and essential concepts | Review onboarding scope |
