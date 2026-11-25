@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 11
 title: Multi-Agent Patterns
 description: When one agent isn't enough. Five recurring shapes for getting agents to work together.

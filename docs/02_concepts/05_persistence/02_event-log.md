@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 9
 title: Event Log
 description: Understand the structured activity recorded in a CodeBolt Event Log instance.

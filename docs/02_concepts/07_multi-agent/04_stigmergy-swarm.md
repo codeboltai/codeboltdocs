@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 4
 title: Stigmergy Swarm
 description: Coordinate swarm workers through shared jobs, signals, and reservations.

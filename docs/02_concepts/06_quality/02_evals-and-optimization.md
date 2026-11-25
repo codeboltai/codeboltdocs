@@ -1,7 +1,8 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 2
 title: Evals and Optimization
-description: Agents don't stay good on their own. A prompt tweak that wins one task silently breaks another
+description: Compare agent responses and action-block runs using repeatable tasks and scoring criteria
 ---
 
 import EvalAnatomy from '@site/src/components/diagrams/EvalAnatomy';
@@ -9,11 +10,7 @@ import OptimizationLoop from '@site/src/components/diagrams/OptimizationLoop';
 
 # Evals and Optimization
 
-Agents don't stay good on their own. A prompt tweak that wins one task silently breaks another. A model upgrade that's better on average is worse on your specific workload. A capability added last month now degrades runs it used to help.
-
-**Evals** measure that. **Optimization** closes the loop — using what evals find to iteratively improve the subject.
-
-Codebolt's eval system is built as a **pluggable execution engine**, not a hard-coded pipeline. The engine doesn't care *what* you're evaluating, *how* the task input is produced, *where* it runs, or *how* it's scored — each of those dimensions is a registry you extend.
+Use an eval to check how a change to an agent affects its answers. Give the agent a task and choose how to score the response. You can repeat the task after changing its instructions, tools or model.
 
 ## The anatomy of an eval task
 
@@ -23,23 +20,20 @@ An **eval task** has four pluggable dimensions plus an optional optimization goa
 
 | Dimension | What it decides | Built-in strategies |
 |---|---|---|
-| **Subject** | *What* is being evaluated | `agent`, `action-block` (future: `skill`, `capability`, `mcp`) |
+| **Subject** | *What* is being evaluated | `agent`, `action-block` |
 | **Instruction** | *How* the task input is produced | `text`, `script`, `hybrid` |
 | **Environment** | *Where* it runs | `local`, `remote`, `provider` |
 | **Evaluator** | *How* the output is scored | `expected-output`, `script`, `agent-judge`, `deliberation` |
-| **Optimizer** (optional) | *How* the subject is improved when scores disappoint | `agent` (future: `deliberation`, `self`) |
+| **Optimizer** (optional) | *How* the subject is improved when scores disappoint | `agent` |
 
-Each dimension is a registry of strategies. You pick one per task, or register your own.
+Choose one subject type, instruction and environment for a task. You can apply several evaluators to the same output.
 
 ## Subjects: what gets evaluated
 
 The **subject executor** knows how to run the thing under test and capture its output.
 
-- **`agent`** — starts a full agent thread, sends the instruction as the user message, waits for the run to complete, captures the final output.
-- **`action-block`** — invokes a single action block with typed inputs, captures its output.
-- **Future:** skill, capability, and MCP evaluators (the registry is already set up for them).
-
-You're not limited to evaluating whole agents. Targeting a single action block in isolation is faster and more focused when you're iterating on one component.
+- **`agent`** starts a thread with the selected agent, sends the task instruction and reads the thread for the agent’s reply.
+- **`action-block`** starts an `actionblockoptimizer` agent thread and asks that agent to use the named action block. Evaluators receive the last agent reply from the thread, so the score reflects how the agent reports the result.
 
 ## Instructions: how the task input is produced
 
@@ -73,11 +67,7 @@ Run a custom scoring script against the subject's output. The script returns a n
 Start a **judge agent** whose job is to read the subject's output and return a JSON `{score, reasoning}`. Use when correctness is subjective or nuanced and a single human-quality judgement is needed but a human isn't scalable.
 
 ### `deliberation`
-Create a **multi-agent deliberation** where a panel of agents debate the quality of the output and vote on a score bucket (0-25 poor, 26-50 below average, 51-75 good, 76-100 excellent). The winning bucket's midpoint becomes the score.
-
-Deliberation is the most expensive evaluator (N agents × multiple rounds) but the most robust against single-judge bias. It's also how eval ties into the [Dispute Resolution](../07_multi-agent/03_dispute-resolution.md) framework — the same deliberation primitive, applied to a scoring decision.
-
-A single task can run **multiple evaluators** against the same output, scoring it from several angles at once.
+The evaluator opens a deliberation with the configured agent IDs and four score ranges. It immediately queries the winner. If a winning range is available, it uses the rounded midpoint. If the query returns no winning range, the score defaults to **50**. A score of 50 alone does not establish that the participants voted. See [Dispute Resolution](../07_multi-agent/03_dispute-resolution.md) for how votes are counted.
 
 ## Optimization: closing the loop
 
@@ -111,12 +101,6 @@ await evalService.createTask({
 ```
 
 To compare results, run the same task against another agent. To evaluate several criteria together, add evaluators with their own IDs and weights.
-
-## Why this shape
-
-Most eval systems lock you into one opinionated pipeline: a fixed record/replay loop, a single judge, a single optimization strategy. That works until your task doesn't fit the pipeline, at which point you're stuck forking it.
-
-Codebolt's registry-based design treats every dimension — subject, instruction, environment, evaluator, optimizer — as independently extensible. New subject type? Register a subject executor. New scoring strategy? Register an evaluator. New optimization algorithm? Register an optimizer. The rest of the engine doesn't know or care.
 
 ## See also
 

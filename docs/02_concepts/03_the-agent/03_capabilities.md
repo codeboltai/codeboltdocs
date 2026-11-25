@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 5
 title: Capabilities
 description: Discover a capability, identify its executor, and call it from an agent.

@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 3
 title: Run It Longer
 description: "How Codebolt supports longer work through loops, delegation, deposition, auto testing, guardrails, memory, and checkpoints."
@@ -46,13 +47,13 @@ Longer runs need memory beyond the current context window:
 | **Persistent memory** | Stores facts and preferences that should survive across runs. |
 | **Vector memory** | Retrieves relevant documents, code chunks, and previous work by meaning. |
 | **Knowledge graph** | Captures structured relationships in a project or domain. |
-| **Event log** | Records what happened so runs can be inspected and evaluated. |
+| **Event log** | Stores the events an agent or workflow explicitly records. |
 
 Memory should be treated as working state, not magic. The agent still needs good instructions about what to store, retrieve, and trust.
 
 ## Checkpoints and rollback
 
-Longer runs need recovery points. Codebolt records file-changing work so users can roll back a bad turn without treating the real git history as the only undo mechanism.
+When Desktop Chat saves a checkpoint for a user message, you can restore the captured project files from that message. Codebolt creates a backup of the current files before restoring the snapshot.
 
 Checkpoints make it practical to let an agent attempt larger changes, inspect the result, and return to a known state if the direction is wrong.
 

@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 6
 title: Hooks and Processors
 description: Choose a project hook for a runtime event or an Agent SDK processor for a stage of a framework agent.

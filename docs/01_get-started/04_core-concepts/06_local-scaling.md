@@ -52,7 +52,9 @@ This matters because agent quality depends heavily on whether tools run in a pre
 
 ## Local coordination surfaces
 
-Local scaling also means coordinating concurrent work:
+For recurring requests, a [Virtual Worker](../../02_using-codebolt/07a_parallel-agents/06_virtual-workers.md) gives users and integrations a named agent with a configured execution location. Its routing profile groups incoming messages so follow-ups can reach the same work thread.
+
+For concurrent work:
 
 - run background agents for independent tasks
 - track jobs and job groups instead of relying only on chat messages

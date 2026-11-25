@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 6
 title: Execution Phase
 description: A live, agent-set label for what the running agent is currently doing — read by guardrails, context assembly, and the thread UI.

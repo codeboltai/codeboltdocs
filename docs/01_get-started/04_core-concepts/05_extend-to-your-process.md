@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 5
 title: Extend To Your Process
 description: "When to use custom plugins, custom clients, and custom agentic applications on top of Codebolt."

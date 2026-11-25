@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 4
 title: Customize Process
 description: "Shape Codebolt behavior with custom agents, MCP servers, capabilities, skills, hooks, and action blocks."

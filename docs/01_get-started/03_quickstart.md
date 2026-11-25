@@ -4,7 +4,7 @@ title: Quickstart
 description: Set up Codebolt Desktop, run your first agent task, and review the resulting change.
 ---
 
-Install Codebolt Desktop, open a project, and ask an agent how your code works. Then try an optional edit and review the agent’s changes in Source Control.
+Install Codebolt Desktop, open a project, and ask an agent how your code works. If you’d like to try an edit, ask the agent to update your README, then review the change in Source Control.
 
 Already have a project open? [Ask your first question](#run-your-first-agent).
 

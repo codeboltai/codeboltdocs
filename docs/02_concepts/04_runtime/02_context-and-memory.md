@@ -37,7 +37,7 @@ Stores recorded events in a named episodic memory so the agent can retrieve earl
 
 ### Persistent KV store
 
-Key → value storage backed by a simple JSON file. Suited to small, frequently-read values: user preferences, feature flags, counters, state that must survive across runs. The entire store is loaded eagerly into context whenever a context rule references it.
+Store small values such as preferences or counters under named keys. A `kv_get` retrieval step reads the keys listed in the step from its selected instance and namespace. For example, a step that requests only a project's preferred test command retrieves that setting.
 
 ### Persistent JSON store
 
@@ -120,18 +120,7 @@ To share a memory configuration through Git, review the project’s ignore rules
 
 ## Observability
 
-The Context Assembly Engine emits structured WebSocket events during assembly. Each event carries:
-
-- which memory sources were queried
-- how many tokens each contributed
-- which sections were truncated and why
-- the total assembly latency
-
-These events are surfaced in the Codebolt UI as an "assembly trace" alongside the turn — useful for diagnosing why an agent made an unexpected decision.
-
-## Why this matters
-
-Bad context = bad answers. A confused agent is almost always a context problem — too much, too little, or the wrong information at the wrong moment. The fix is rarely the prompt; it's usually the context rules or the ingestion pipeline. Understanding the read/write duality gives you the right lever to pull.
+Open **Context → Context Assembly** to inspect a request. The trace records memory calls, rule evaluations and variables used or missing. The response also reports the overall estimated token count, item count, duration and whether the result was truncated. If an expected memory is missing, check whether its rule matched and whether the retrieval step returned any items.
 
 ## See also
 

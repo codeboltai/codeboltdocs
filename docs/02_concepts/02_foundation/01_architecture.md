@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 2
 title: Architecture
 description: Follow a request through the Codebolt runtime and agent.

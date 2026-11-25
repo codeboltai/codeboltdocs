@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 1
 title: The Planning System
 description: Choose a roadmap, note, canvas, feature plan, execution plan or task for project work.

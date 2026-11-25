@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 13
 title: Dispute Resolution
 description: Choose how to isolate edits, coordinate shared files and resolve competing proposals.

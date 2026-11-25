@@ -1,4 +1,5 @@
 ---
+displayed_sidebar: getStartedSidebar
 sidebar_position: 12
 title: Orchestration Flows
 description: Follow the nodes and connections in a Codebolt visual flow agent.
