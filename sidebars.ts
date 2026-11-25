@@ -352,6 +352,10 @@ const sidebars = {
 
   buildSidebar: [
     doc('Developer Overview', `${build}/overview`),
+    {
+      type: 'html',
+      value: '<div class="sidebar-heading-label" role="heading" aria-level="2">Build and Extend Agent</div>',
+    },
     group('Build Agents', [
       doc('Create Your First Agent', `${create}/quickstart`),
       doc('Write a Custom Agent Tool', `${create}/custom-agent-tools`),
@@ -384,6 +388,10 @@ const sidebars = {
         doc('Test and Debug Custom Agents', `${create}/testing-and-debugging`),
         doc('Auto-Optimize Agents', `${create}/auto-optimize-agents`),
         doc('Publish an Agent', `${create}/publishing`),
+      ]),
+      group('Evaluation & Optimization', [
+        doc('Evaluation Overview', `${build}/eval-and-optimization/overview`),
+        remaining(`${developerDocs}/07_eval-and-optimization`),
       ]),
     ]),
     group('Visual Agent Builder', [
@@ -425,6 +433,10 @@ const sidebars = {
         doc('Side Execution', `${extend}/side-execution`),
       ]),
     ]),
+    {
+      type: 'html',
+      value: '<div class="sidebar-heading-label" role="heading" aria-level="2">Extend Application</div>',
+    },
     group('Plugins & Providers', [
       doc('Extending Codebolt', `${build}/extending-codebolt/overview`),
       group('Build Plugins', [
@@ -467,6 +479,10 @@ const sidebars = {
         doc('Develop Themes', `${build}/extending-codebolt/themes`),
       ]),
     ]),
+    {
+      type: 'html',
+      value: '<div class="sidebar-heading-label" role="heading" aria-level="2">Integrations</div>',
+    },
     group('External Integrations', [
       doc('External Integrations Overview', `${build}/building-integrations/overview`),
       doc('Connect External Agents', `${create}/third-party-agents`),
@@ -486,16 +502,6 @@ const sidebars = {
         ref('Cloud SDK Integration', 'reference/cloud-sdk/overview'),
       ]),
       remaining(`${developerDocs}/10_building-integrations`),
-    ]),
-    group('Advanced Topics', [
-      group('Memory & Context', [
-        doc('Memory Management Overview', `${build}/07a_memory-management/overview`),
-        remaining(`${developerDocs}/07a_memory-management`),
-      ]),
-      group('Evaluation & Optimization', [
-        doc('Evaluation Overview', `${build}/eval-and-optimization/overview`),
-        remaining(`${developerDocs}/07_eval-and-optimization`),
-      ]),
     ]),
   ],
 
@@ -626,10 +632,14 @@ const sidebars = {
       ]),
       doc('MCP Server Commands', `${cli}/tool-commands`),
     ]),
+    group('Memory & Context', [
+      doc('Memory Management Overview', `${build}/07a_memory-management/overview`),
+      remaining(`${developerDocs}/07a_memory-management`),
+    ]),
   ],
 
   guidesSidebar: [
-    group('Guides', [remaining('03_guides')]),
+    doc('Overview', 'guides/overview'),
   ],
 } satisfies SidebarsConfig;
 
