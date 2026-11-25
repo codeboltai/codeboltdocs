@@ -195,7 +195,7 @@ const config: Config = {
       items: [
         { type: 'docSidebar', sidebarId: 'getStartedSidebar', label: 'Get Started', position: 'left' },
         { type: 'docSidebar', sidebarId: 'usingCodeboltSidebar', label: 'Using Codebolt', position: 'left' },
-        { type: 'docSidebar', sidebarId: 'buildSidebar', label: 'Build with Agents', position: 'left' },
+        { type: 'docSidebar', sidebarId: 'buildSidebar', label: 'Extend', position: 'left' },
         { type: 'docSidebar', sidebarId: 'scalingSidebar', label: 'Scaling Agents', position: 'left' },
         { type: 'docSidebar', sidebarId: 'configurationSidebar', label: 'Configuration', position: 'left' },
         { type: 'docSidebar', sidebarId: 'referenceSidebar', label: 'Reference', position: 'left' },

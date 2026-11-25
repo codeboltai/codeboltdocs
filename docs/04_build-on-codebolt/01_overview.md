@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: Build with Agents
+title: Extend
 description: Create your first Codebolt agent, choose an approach, and find guides for tools, plugins, interfaces, integrations, and agent internals.
 ---
 

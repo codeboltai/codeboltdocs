@@ -21,7 +21,7 @@ const sections = [
   },
   {
     label: 'BUILD',
-    title: 'Build with Agents',
+    title: 'Extend',
     description: 'Build custom agents, visual flows, tools, plugins, and providers.',
     link: '/docs/build-on-codebolt/overview',
   },

@@ -74,10 +74,24 @@ const sidebars = {
     doc('Introduction', 'get-started/overview'),
     doc('Installation', 'get-started/installation'),
     doc('Quickstart', 'get-started/quickstart'),
+  
     {
+      type: 'category',
+      label: 'Core Concepts',
+      collapsible: false,
+      className: 'sidebar-category-heading',
+      items: [
+        doc('Core Concepts Overview', 'concepts/overview'),
+        doc('How Codebolt Works', 'get-started/core-concepts/how-it-works'),
+        doc('Threads, Agents, Models and Tools', 'get-started/core-concepts/start-simple'),
+        remaining('02_concepts'),
+      ],
+    },
+      {
       type: 'category',
       label: 'Platforms',
       collapsible: false,
+      className: 'sidebar-category-heading',
       items: [
         ref('Platforms Overview', `${use}/surfaces/overview`),
         group('Desktop App', [
@@ -112,20 +126,15 @@ const sidebars = {
         doc('Cloud', 'get-started/02f_platforms/cloud'),
       ],
     },
-    {
-      type: 'category',
-      label: 'Core Concepts',
-      collapsible: false,
-      items: [
-        doc('Core Concepts Overview', 'concepts/overview'),
-        doc('How Codebolt Works', 'get-started/core-concepts/how-it-works'),
-        doc('Threads, Agents, Models and Tools', 'get-started/core-concepts/start-simple'),
-        remaining('02_concepts'),
-      ],
-    },
   ],
 
   usingCodeboltSidebar: [
+     doc('Overview', `${use}/application-features`),
+    {
+      type: 'html',
+      value: '<div class="sidebar-heading-label" role="heading" aria-level="2">Basic Features</div>',
+    },
+   
     group('Chat', [
       doc('Chat Overview', `${chat}/overview`),
       doc('Tabs and History', `${chat}/tabs-and-history`),
@@ -186,6 +195,55 @@ const sidebars = {
         doc('Change Summaries', `${deposition}/changes-summary`),
       ]),
     ]),
+      group('Planning', [
+      doc('Planning', `${use}/planning/overview`),
+      doc('Roadmap', `${use}/planning/roadmap`),
+      doc('Specs', `${use}/planning/specs`),
+      doc('UI Flow', `${use}/planning/ui-flow`),
+      doc('Requirement Plan', `${use}/planning/requirement-plan`),
+      doc('Action Plan', `${use}/planning/action-plan`),
+      doc('Tasks', `${use}/planning/tasks`),
+      jump('Feature Plans', `${use}/planning/overview`, 'feature-plans'),
+      doc('Execution Plans', `${panels}/04a_application-planning-features/action-plans`),
+      jump('Notes & Canvas', `${use}/planning/overview`, 'notes--canvas'),
+      group('Project Structure & Update Requests', [
+        doc('Project Structure', `${panels}/04a_application-planning-features/project-structure`),
+        doc('Project Structure Update Requests', `${deposition}/update-project-structure-request`),
+      ]),
+      group('Desktop Planning Panels', [
+        remaining(`${desktopPanelDocs}/04a_application-planning-features`),
+        doc('Kanban Board Panel', `${agentPanels}/kanban-board`),
+      ]),
+
+    ]),
+      group('Memory & Context', [
+      doc('Memory & Context Overview', `${memory}/overview`),
+      doc('Memory Layers', `${memory}/memory-layers`),
+      doc('Context Assembly', `${memory}/context-assembly`),
+      doc('Context Rules', `${memory}/context-rules`),
+      doc('Persistent Memory', `${memory}/persistent-memory`),
+      doc('Memory Ingestion', `${memory}/memory-ingestion`),
+      doc('Event Log', `${memory}/event-log`),
+      ref('Conversation Context', `${chat}/context-and-at-mentions`),
+      doc('Context Compaction', compaction),
+      doc('Memory Threads', `${memoryPanels}/memory`),
+      doc('Knowledge Sources', `${memoryPanels}/knowledge`),
+      doc('Knowledge Graphs', `${memoryPanels}/knowledge-graph`),
+      doc('Vector Database', `${memoryPanels}/vector-db`),
+      doc('Key-Value Store', `${memoryPanels}/kv-store`),
+      group('Desktop Memory Panels', [
+        remaining(`${desktopPanelDocs}/04e_memory-features`),
+        doc('Event Log Panel', `${deposition}/event-log`),
+      ]),
+    ]),
+      group('Artifacts', [
+      doc('Artifacts Overview', `${use}/06b_deposition-features/artifact`),
+      doc('Artifacts Panel', `${deposition}/artifacts`),
+    ]),
+     {
+      type: 'html',
+      value: '<div class="sidebar-heading-label" role="heading" aria-level="2">Work With Agents</div>',
+    },
     group('Agents', [
       doc('What Is an Agent?', `${use}/agents/what-is-an-agent`),
       doc('Built-in Agents', `${use}/agents/built-in-agents`),
@@ -233,46 +291,8 @@ const sidebars = {
       doc('Guardrails Panel', `${agentPanels}/guardrails`),
       doc('Routing Gateway Panel', `${panels}/04d_agent-orchestrations/routing-gateway`),
     ]),
-    group('Memory & Context', [
-      doc('Memory & Context Overview', `${memory}/overview`),
-      doc('Memory Layers', `${memory}/memory-layers`),
-      doc('Context Assembly', `${memory}/context-assembly`),
-      doc('Context Rules', `${memory}/context-rules`),
-      doc('Persistent Memory', `${memory}/persistent-memory`),
-      doc('Memory Ingestion', `${memory}/memory-ingestion`),
-      doc('Event Log', `${memory}/event-log`),
-      ref('Conversation Context', `${chat}/context-and-at-mentions`),
-      doc('Context Compaction', compaction),
-      doc('Memory Threads', `${memoryPanels}/memory`),
-      doc('Knowledge Sources', `${memoryPanels}/knowledge`),
-      doc('Knowledge Graphs', `${memoryPanels}/knowledge-graph`),
-      doc('Vector Database', `${memoryPanels}/vector-db`),
-      doc('Key-Value Store', `${memoryPanels}/kv-store`),
-      group('Desktop Memory Panels', [
-        remaining(`${desktopPanelDocs}/04e_memory-features`),
-        doc('Event Log Panel', `${deposition}/event-log`),
-      ]),
-    ]),
-    group('Planning', [
-      doc('Planning', `${use}/planning/overview`),
-      doc('Roadmap', `${use}/planning/roadmap`),
-      doc('Specs', `${use}/planning/specs`),
-      doc('UI Flow', `${use}/planning/ui-flow`),
-      doc('Requirement Plan', `${use}/planning/requirement-plan`),
-      doc('Action Plan', `${use}/planning/action-plan`),
-      doc('Tasks', `${use}/planning/tasks`),
-      jump('Feature Plans', `${use}/planning/overview`, 'feature-plans'),
-      doc('Execution Plans', `${panels}/04a_application-planning-features/action-plans`),
-      jump('Notes & Canvas', `${use}/planning/overview`, 'notes--canvas'),
-      group('Project Structure & Update Requests', [
-        doc('Project Structure', `${panels}/04a_application-planning-features/project-structure`),
-        doc('Project Structure Update Requests', `${deposition}/update-project-structure-request`),
-      ]),
-      group('Desktop Planning Panels', [
-        remaining(`${desktopPanelDocs}/04a_application-planning-features`),
-        doc('Kanban Board Panel', `${agentPanels}/kanban-board`),
-      ]),
-    ]),
+  
+  
     group('Automation', [
       doc('Automation Overview', `${automation}/overview`),
       doc('Webhooks', `${automation}/webhooks`),
@@ -313,10 +333,7 @@ const sidebars = {
       remaining('02_using-codebolt/08e_external-integrations'),
       doc('Chat Widget', `${use}/integrations/chat-widget`),
     ]),
-    group('Artifacts', [
-      doc('Artifacts Overview', `${use}/06b_deposition-features/artifact`),
-      doc('Artifacts Panel', `${deposition}/artifacts`),
-    ]),
+  
     group('Custom Agentic Application', [
       doc('Custom Agentic Application Overview', `${apps}/overview`),
       doc('Level 1 Inside Codebolt', `${apps}/plugin-backed-uis`),

@@ -490,6 +490,31 @@ div[class*="searchResults"] {
   margin-top: 0.04rem;
 }
 
+.theme-doc-sidebar-item-category.sidebar-category-heading {
+  margin-top: 0.9rem;
+}
+
+.sidebar-heading-label,
+.sidebar-category-heading > .menu__list-item-collapsible > .menu__link {
+  padding: 0.25rem 0.65rem !important;
+  color: var(--ifm-heading-color) !important;
+  background-color: var(--cb-surface) !important;
+  border-left: 0 !important;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600 !important;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.sidebar-heading-label {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-category-heading > .menu__list-item-collapsible > .menu__link {
+  pointer-events: none;
+}
+
 /* Sidebar item sizing — nested levels */
 .theme-doc-sidebar-item-link-level-1,
 .theme-doc-sidebar-item-category-level-1 {
