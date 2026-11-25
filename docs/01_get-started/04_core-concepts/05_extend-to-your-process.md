@@ -57,6 +57,7 @@ The right shape depends on who the users are, where data must live, and how much
 
 | Need | Choose |
 |---|---|
+| Package an installable web interface with agent-callable tools | [MiniApp](../../04_build-on-codebolt/04b_custom-agentic-applications/05_mini-apps.md) |
 | Add a panel or workflow to Codebolt | Custom plugin |
 | Start Codebolt work from another product | Custom client |
 | Package a repeated agent behavior | Custom agent or capability |

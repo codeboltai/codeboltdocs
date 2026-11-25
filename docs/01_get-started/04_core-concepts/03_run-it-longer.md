@@ -32,16 +32,9 @@ As work gets longer, the agent should not keep everything in a single private sc
 
 ## Guardrails
 
-Guardrails matter more as runs get longer. They can:
+The active policy profile controls tool requests. For example, a file-write request can require approval even when the agent has access to the tool. A denied request blocks that action.
 
-- block dangerous tool calls
-- rewrite unsafe paths or arguments
-- pause for human approval
-- enforce budget limits
-- detect repetitive loops
-- prevent edits outside the intended scope
-
-Guardrails are how Codebolt lets agents work for longer without silently expanding the blast radius.
+The agent loop controls how long the run continues. For a framework agent, set `maxTurns` in `createAgent` to bound the number of turns.
 
 ## Memory
 

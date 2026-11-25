@@ -7,11 +7,11 @@ import './diagrams.css';
  */
 
 const PHASES = [
-  { x: 60, label: 'before_llm_call' },
-  { x: 200, label: 'after_llm_call' },
-  { x: 340, label: 'before_tool_call' },
-  { x: 480, label: 'after_tool_call' },
-  { x: 600, label: 'before_finalize' },
+  { x: 60, label: 'userPromptSubmit' },
+  { x: 200, label: 'agentSessionStart' },
+  { x: 340, label: 'preToolUse' },
+  { x: 480, label: 'postToolUse' },
+  { x: 600, label: 'agentSessionEnd' },
 ];
 
 export default function HookPhases() {
@@ -22,14 +22,14 @@ export default function HookPhases() {
   return (
     <div className="cb-diagram cb-diagram--hooks">
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-labelledby="hook-phases-title">
-        <title id="hook-phases-title">Hook tap points across an agent turn</title>
+        <title id="hook-phases-title">Example runtime events during a session</title>
 
         {/* baseline track */}
         <line x1="40" y1={trackY} x2={W - 40} y2={trackY} className="cb-track" />
         <path d={`M ${W - 48} ${trackY - 5} L ${W - 40} ${trackY} L ${W - 48} ${trackY + 5}`} className="cb-arrowhead" />
 
         {/* turn label */}
-        <text x="40" y="40" className="cb-section-label">ONE AGENT TURN</text>
+        <text x="40" y="40" className="cb-section-label">EXAMPLE SESSION EVENTS</text>
         <text x={W - 40} y={trackY + 30} textAnchor="end" className="cb-axis-label">time →</text>
 
         {/* phase ticks */}
@@ -51,7 +51,7 @@ export default function HookPhases() {
           <circle cx="0" cy="0" r="3" className="cb-phase-dot" />
           <text x="10" y="4" className="cb-legend">phase</text>
           <rect x="80" y="-8" width="22" height="14" rx="2" className="cb-hook-box" />
-          <text x="108" y="4" className="cb-legend">hook can: observe · mutate · veto</text>
+          <text x="108" y="4" className="cb-legend">handler behavior depends on the event</text>
         </g>
       </svg>
     </div>

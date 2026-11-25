@@ -9,9 +9,9 @@ import './diagrams.css';
 const W = 860;
 const H = 360;
 
-const TRIGGERS = ['onConversationEnd', 'onTaskCompleted', 'onTaskFailure', 'onAction', 'manual'];
-const PROCESSORS = ['chunker', 'vector_embed', 'llm_extract', 'normalizer', 'custom'];
-const DESTINATIONS = ['Knowledge Graph', 'Vector DB', 'KV Store', 'Event Log', 'Blob'];
+const TRIGGERS = ['conversation events', 'task events', 'job events', 'file events', 'manual'];
+const PROCESSORS = ['parser', 'normalizer', 'chunker'];
+const DESTINATIONS = ['Knowledge Graph', 'Vector DB', 'KV Store', 'Event Log'];
 
 const COL1 = 40;   // triggers left edge
 const COL2 = 260;  // pipeline left edge

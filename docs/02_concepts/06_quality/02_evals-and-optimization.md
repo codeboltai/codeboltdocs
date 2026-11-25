@@ -55,7 +55,7 @@ This is what lets evals work across the spectrum from deterministic ("given exac
 
 - **`local`** — the eval runs on the same machine as the Codebolt server. Fastest, easiest, default.
 - **`remote`** — the eval runs on a remote executor.
-- **`provider`** — the eval runs against a specific LLM provider configuration, useful for comparing providers head-to-head.
+- **`provider`** — the resolver accepts an environment provider ID and passes it to execution. An optional provider setup script runs in the active project directory.
 
 Environment is orthogonal to subject: the same agent can be evaluated locally *and* remotely from the same task definition.
 
@@ -64,7 +64,7 @@ Environment is orthogonal to subject: the same agent can be evaluated locally *a
 This is where most of the flexibility lives. Four built-in evaluators:
 
 ### `expected-output`
-The classic. Compare the subject's output to a stored expected value — exact match, substring, or fuzzy. Best for deterministic tasks where "right" has one shape.
+The classic. Compare the subject's output to a stored expected value — exact match, substring, regular expression, or case-insensitive substring (`semantic` mode). Best for deterministic tasks where "right" has one shape.
 
 ### `script`
 Run a custom scoring script against the subject's output. The script returns a numeric score and a reasoning string. Use when correctness is computable but not a simple string comparison — e.g. "does this JSON parse and satisfy this schema?"
@@ -85,51 +85,32 @@ An eval by itself just tells you a score. **Optimization** uses that score to *i
 
 <OptimizationLoop />
 
-The built-in optimizer is an **agent optimizer**. Given a subject (e.g. a coding agent), the latest eval score, the task, and the history of previous iterations, the optimizer agent:
+The agent optimizer works on a copy of the subject. Each iteration records the changes, evaluator scores and whether the copy was kept. With the greedy strategy, improvement or a successful change with an unchanged score can be kept. Best-of-N compares independent variants. Annealing can also keep a lower-scoring iteration.
 
-1. Reads the subject's current code / prompt / configuration from disk.
-2. Decides *what* to change, targeting a specific component (e.g. `instructions`, `system prompt`, tool allowlist).
-3. Proposes a structured modification: `{target, description, diff, reasoning}`.
-4. The engine applies the modification and re-runs the eval.
-5. **Kept or reverted:** if the new score is better, the iteration is kept. If worse, it's reverted and its failure recorded so the optimizer can avoid the same dead end next iteration.
+## Example: create an eval task
 
-Each iteration is logged with: the modification, the before/after scores, the evaluator results, whether it was kept, and the optimizer's reasoning. Over time you get a directed walk through the solution space, guided by the eval signal.
+Run this inside a connected code agent. It creates a task with a text instruction and one evaluator. Choose the agent to evaluate when you run the task.
 
-### Why an agent optimizer (and not gradient descent)
+```ts
+import { evalService } from '@codebolt/codeboltjs';
 
-The modification space for an agent isn't differentiable. You can't take a derivative of "this system prompt" with respect to "task success rate". But you *can* hand the current state, the score, and the history to another agent and ask "what would you change?" — and that agent can reason about it.
-
-The optimizer agent is itself configurable. You pick which agent plays the optimizer role; it reads the target's code path directly, decides the change, and outputs structured JSON that the engine applies. Previous iterations — including failed ones — are in its prompt so the optimizer doesn't repeat mistakes.
-
-## Putting it together
-
-A typical eval task looks like:
-
-```yaml
-name: coding-agent-qa
-subject:
-  type: agent
-  referenceId: my-coding-agent
-instruction:
-  type: text
-  textPrompt: "Implement a rate limiter for the Express API in src/api/"
-environment:
-  type: local
-evaluators:
-  - type: expected-output
-    expectedOutput: "passes tests in tests/rate-limiter.test.ts"
-  - type: agent-judge
-    judgeAgentId: code-review-judge
-  - type: deliberation
-    deliberationAgentIds: [senior-dev-1, senior-dev-2, security-reviewer]
-    deliberationRounds: 2
-optimization:
-  optimizerAgentId: prompt-optimizer
-  targets: [instructions]
-  maxIterations: 5
+await evalService.createTask({
+  name: 'Single-word reply',
+  subjectType: 'agent',
+  instruction: { type: 'text', textPrompt: 'Reply with only the word ready.' },
+  environment: { type: 'local' },
+  evaluators: [{
+    id: 'reply-check',
+    name: 'Exact reply',
+    type: 'expected-output',
+    weight: 1,
+    matchMode: 'exact',
+    expectedOutput: 'ready',
+  }],
+});
 ```
 
-Three evaluators scoring the same run from three angles. An optimizer that runs up to 5 iterations, keeping the best. All pluggable, all registered — no code changes to the engine itself.
+To compare results, run the same task against another agent. To evaluate several criteria together, add evaluators with their own IDs and weights.
 
 ## Why this shape
 
@@ -141,5 +122,5 @@ Codebolt's registry-based design treats every dimension — subject, instruction
 
 - [Dispute Resolution](../07_multi-agent/03_dispute-resolution.md) — the deliberation primitive reused by the deliberation evaluator
 - [Guardrails](./01_guardrails.md) — runtime guardrails (complementary to offline evals)
-- [Event Log](../05_persistence/02_event-log.md) — where every eval run and iteration is recorded
+- [Event Log](../05_persistence/02_event-log.md) — inspect events explicitly recorded by a workflow
 - [Replay an agent run (guide)](../../03_guides/08_advanced/replay-an-agent-run.md)

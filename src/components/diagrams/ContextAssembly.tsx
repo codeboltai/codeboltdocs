@@ -6,8 +6,8 @@ import './diagrams.css';
  * LLM consumes the result.
  */
 
-const SOURCES = ['system prompt', 'memory: KG', 'memory: vector', 'episodic', 'task input'];
-const PROCESSORS = ['compact', 'redact', 'rerank', 'loop-detect'];
+const SOURCES = ['request input', 'scopes', 'memory names', 'rule engines'];
+const PROCESSORS = ['select memories', 'run pipelines', 'deduplicate + group', 'apply token budget'];
 
 export default function ContextAssembly() {
   const W = 720;
@@ -36,7 +36,7 @@ export default function ContextAssembly() {
         })}
 
         {/* processor pipeline */}
-        <text x={procX + 95} y="30" textAnchor="middle" className="cb-section-label">PROCESSORS</text>
+        <text x={procX + 95} y="30" textAnchor="middle" className="cb-section-label">ASSEMBLY</text>
         <rect x={procX} y={70} width={190} height={180} rx="3" className="cb-box cb-box--accent" />
         {PROCESSORS.map((p, i) => {
           const y = 92 + i * 38;
@@ -56,9 +56,9 @@ export default function ContextAssembly() {
         <path d={`M ${llmX - 8} ${H / 2 - 4} L ${llmX} ${H / 2} L ${llmX - 8} ${H / 2 + 4}`} className="cb-arrowhead" />
 
         {/* LLM */}
-        <text x={llmX + 50} y="30" textAnchor="middle" className="cb-section-label">LLM</text>
+        <text x={llmX + 50} y="30" textAnchor="middle" className="cb-section-label">RESULT</text>
         <rect x={llmX} y={H / 2 - 28} width={110} height={56} rx="3" className="cb-box" />
-        <text x={llmX + 55} y={H / 2 + 4} textAnchor="middle" className="cb-box-title">CALL</text>
+        <text x={llmX + 55} y={H / 2 + 4} textAnchor="middle" className="cb-box-title">Context + trace</text>
       </svg>
     </div>
   );

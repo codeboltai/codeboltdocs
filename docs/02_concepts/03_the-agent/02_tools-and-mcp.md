@@ -20,40 +20,24 @@ Tools come from three sources:
 
 1. **Built-in tools** — `codebolt_fs`, `codebolt_terminal`, `codebolt_git`, `codebolt_browser`, etc. Shipped with Codebolt.
 2. **MCP servers** — external tool providers speaking the Model Context Protocol. Installed from the marketplace or pointed at directly.
-3. **Custom tools** — your own MCP server or a local tool plugin.
+3. **Agent-specific tools** — define a local function with `createTool` and register it in the framework agent’s `tools` array.
 
-## What MCP is
+## What MCP provides
 
-The **Model Context Protocol** is a standard for letting LLM agents talk to external tool providers. An MCP server is a process that exposes a set of tools (and optionally resources and prompts) over a small JSON-RPC protocol.
+An MCP server supplies named tools and their input schemas. Configure the server in Codebolt to make its tools available. See [MCP Server](../../02_using-codebolt/04b_agent-extensions/06_mcp-server.md) for setup.
 
-Why it matters:
-- One tool, many runtimes — write a GitHub MCP server once, use it from any MCP-aware agent.
-- Sandboxed — tool servers run in their own process, can be killed, restarted, sandboxed.
-- Versionable — install `marketplace/github-mcp@1.2.3` like a package.
+## Choose which tools the model sees
 
-Codebolt is MCP-native: built-in tools are exposed as MCP tools internally, and external MCP servers are first-class.
+The framework combines available Codebolt tools with the local tools registered on the agent. A nonempty `allowedTools` list filters those tools by their exact function names. For example, after defining the word counter in [Write a Custom Agent Tool](../../04_build-on-codebolt/02_creating-agents/12_custom-agent-tools.md), configure the agent like this:
 
-## How tools get to agents
-
-```
-Agent manifest declares:    tools.allow: [codebolt_fs.*, github.create_pr]
-                                       │
-                                       ▼
-Tool runtime resolves:      built-in fs + github MCP server
-                                       │
-                                       ▼
-Agent's LLM sees:           an OpenAI-style tools array
-                                       │
-                                       ▼
-LLM calls:                  github.create_pr({...})
-                                       │
-                                       ▼
-Guardrails vet, runtime executes, result returned
+```ts
+const agent = createAgent({
+  tools: [countWords],
+  allowedTools: ['count_words'],
+});
 ```
 
-## Allowlists, not blocklists
-
-Agents declare which tools they're allowed to call. The default is **deny**. This is the single most important safety property — an agent can't call a tool you didn't grant it.
+Omit the list to offer the local word counter alongside the other available tools. When an agent requests a runtime tool, the active policy profile governs execution. See [Guardrails](../06_quality/01_guardrails.md).
 
 ## See also
 

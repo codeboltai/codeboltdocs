@@ -1,91 +1,26 @@
 ---
 sidebar_position: 13
 title: Dispute Resolution
-description: When many agents share a codebase, conflicts are inevitable. Two agents edit the same file. A refactor and a feature touch the same type
+description: Choose how to isolate edits, coordinate shared files and resolve competing proposals.
 ---
-
-import ConflictLayers from '@site/src/components/diagrams/ConflictLayers';
 
 # Dispute Resolution
 
-When many agents share a codebase, conflicts are inevitable. Two agents edit the same file. A refactor and a feature touch the same type. A security fix contradicts a perf fix. Someone has to decide.
+Two agents working in the same directory can edit the same file. Choose a coordination mechanism based on what they share and which decision you need to make.
 
-Codebolt handles this with a **four-layer conflict management framework**. Each layer catches a different *kind* of conflict; together they cover the spectrum from "two agents touching the same byte" to "two agents holding incompatible opinions".
-
-<ConflictLayers />
-
-## The four layers
-
-### Layer 0 — Isolation (prevention by separation)
-
-Each agent runs inside its own **environment** — an isolated filesystem snapshot of the project. Agents never write directly to the shared tree; they write to their environment, and changes land through a merge-request workflow.
-
-- **Catches:** file-level data races. Two agents can never overwrite each other's bytes because they're literally not writing to the same place.
-- **Guarantee:** no two agents can simultaneously modify the same file.
-
-### Layer 1 — Structural Coordination (PSUR)
-
-For changes that affect the project's **shape** — schemas, interfaces, package boundaries, shared types — a **Project Structure Update Request** (PSUR) is required. PSURs serialize architectural changes through a central protocol so that no two agents simultaneously drift the same contract.
-
-- **Catches:** semantic conflicts. Agent A renames a type; Agent B uses the old name — without PSUR, both merge cleanly but the build breaks.
-- **Guarantee:** architectural integrity is preserved across concurrent work.
-
-### Layer 2 — Intent-Based Prevention
-
-Before making a change, an agent declares its **intent** — what it's about to do, at what priority level (L1–L4). Higher-priority intents block lower ones from touching the same files; conflicts are caught *before* work is wasted.
-
-- **Intent levels:**
-  - **L1 — Read** (observe only)
-  - **L2 — Soft write** (edit, yield on contention)
-  - **L3 — Hard write** (edit, preempt lower priorities)
-  - **L4 — Exclusive** (lock the file; mutual exclusion guaranteed)
-- **Catches:** coordination conflicts — two agents both planning to change the same function, both unaware of each other.
-- **Guarantee:** L4 intents ensure mutual exclusion; all intents are processed in finite time (liveness).
-
-### Layer 3 — Deliberation-Based Resolution
-
-When conflict is genuine — two agents have incompatible changes that both seem right — the system invokes **deliberation**. Agents (or panels of them) argue their positions and reach a decision via one of several strategies:
-
-- **Weighted voting** — each agent's vote is weighted by its historical reputation (see [Evals and Optimization](../06_quality/02_evals-and-optimization.md)). Past correctness matters.
-- **Feedback loop** — agents critique each other's proposals and revise.
-- **Adversarial critique** — a red-team agent actively tries to falsify each proposal; proposals that survive win.
-- **Q&A** — agents answer targeted questions posed by a judge agent or a human reviewer.
-
-Deliberation converges to a single decision for every dispute (proved formally as "deliberation convergence"). The winning proposal is merged; the losing one is recorded in the event log with its rationale.
-
-## How the layers compose
-
-Conflicts flow through the layers top-down, and each layer is cheaper and faster than the one below it:
-
-- **Isolation** costs nothing at runtime — it's structural.
-- **PSUR** costs one round-trip to the structure service.
-- **Intents** cost a fast lookup and a short wait.
-- **Deliberation** costs N LLM calls.
-
-Catching a conflict early — ideally at isolation or intent time — is orders of magnitude cheaper than running a full deliberation. The framework is designed so that only *genuine* disputes reach layer 3.
-
-## When to think about which layer
-
-| You're worried about… | The layer that catches it |
+| Situation | How to handle it |
 |---|---|
-| Two agents overwriting each other's files | Isolation |
-| A schema change breaking a consumer | PSUR |
-| Two agents planning the same refactor | Intents |
-| Two agents disagreeing about the *right* fix | Deliberation |
+| Two implementations should be reviewed independently | Give the agents separate working directories or child environments. Review the changes before merging. |
+| A proposed change affects a shared interface or project structure | Open a project structure update request so collaborators can review the proposal. |
+| Agents plan to touch overlapping files | Declare file update intents and inspect the conflicting paths and intent levels. |
+| Agents disagree about the approach | Collect responses in a deliberation, review the votes or feedback, then decide what to implement. |
 
-## Production results
+## File update intents
 
-From the reference deployment (100+ agents):
+The application defines four levels: **Advisory/Notification** (announce planned work), **Soft Reservation** (ask others to avoid overlap), **Priority-Based** (resolve contention by priority), and **Hard Lock** (request exclusive access). For example, use an advisory intent to tell another agent that you plan to inspect a file. See [File Update Intents](../../02_using-codebolt/07d_stigmergic-coordination/04_file-update-intents.md).
 
-- **Isolation:** 100% elimination of file-level data races.
-- **PSUR:** 84.6% reduction in semantic conflicts.
-- **Intents:** 66.7% reduction in coordination conflicts.
-- **Deliberation:** 89% of decisions accepted by humans reviewing them, 81% improvement in downstream quality vs. single-agent decisions.
-- **Overall:** 94% task success rate in a multi-agent swarm.
+## Deliberation and merge
 
-## See also
+For a voting deliberation, each recorded vote counts once for its response. The service returns the response with the highest count and can return no winner when there are no votes. A decision and a code merge are separate operations. Review the selected change and use the project’s merge workflow to apply it.
 
-- [Multi-Agent Patterns](../07_multi-agent/01_multi-agent-patterns.md) — the patterns that generate disputes in the first place
-- [Evals and Optimization](../06_quality/02_evals-and-optimization.md) — where reputation weights come from
-- [Debate pattern (guide)](../../03_guides/06_multi-agent/design-a-debate-pattern.md) — hands-on deliberation
-- [Multi-Agent Orchestration](../../04_build-on-codebolt/08_multi-agent-orchestration/01_overview.md)
+See [Agent Deliberation](../../02_using-codebolt/07c_agent-coordination/04_agent-deliberation.md), [Environments](../../02_using-codebolt/08a_environments/01_overview.md), and [Review and Merge](../../02_using-codebolt/07_multi-agent-usage/04_review-and-merge.md).

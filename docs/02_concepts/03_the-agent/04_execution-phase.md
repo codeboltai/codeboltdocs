@@ -1,12 +1,12 @@
 ---
 sidebar_position: 6
 title: Execution Phase
-description: A live, agent-set label for what the running agent is currently doing — read by guardrails, context assembly, hooks, and surfaced on the thread.
+description: A live, agent-set label for what the running agent is currently doing — read by guardrails, context assembly, and the thread UI.
 ---
 
 # Execution Phase
 
-Most agent loops have an internal lifecycle even if they don't advertise it: there's a moment where the agent is *figuring out what to do*, a moment where it's *changing files*, a moment where it's *checking what it changed*. These moments often need different context, different guardrails, and different hooks — but the agent loop itself has no way to label which moment it's in.
+Most agent loops have an internal lifecycle even if they don't advertise it: there's a moment where the agent is *figuring out what to do*, a moment where it's *changing files*, a moment where it's *checking what it changed*. These moments often need different context, different guardrails and context rules — but the agent loop itself has no way to label which moment it's in.
 
 **Execution phase** is that label. An agent declares its current phase from inside its code:
 
@@ -43,11 +43,9 @@ Setting a phase is only useful because other systems can react to it.
 
 **Context Assembly.** When an agent requests context (memories, rules, etc.) for the next turn, the assembler reads `thread.phase` and injects it as `additional_variables.phase` if the caller didn't already provide one. Rule engines can then branch on `addVar.phase == 'verification'` to load test-output memories instead of plan memories, for example.
 
-**Hooks.** Each `set` fires the `agentPhaseChanged` hook event with `{ agentId, agentInstanceId, threadId, phase, previousPhase }`. Hooks can run when the agent enters or leaves a specific phase — e.g. *"when phase becomes `verification`, kick off the test runner"*.
-
 **The application event bus.** A typed `agent:phase:changed` event is published with `{ phase, previousPhase, isNew, emittedAt }` in the payload and the usual source breadcrumb (`agentId`, `threadId`, etc.). Anything subscribed to the bus, including memory ingestion pipelines and plugins, can react.
 
-All five integrations share one source of truth: `thread.phase`. There is no parallel state to keep in sync.
+Use the application event for phase-change subscriptions. The Hooks panel accepts its own list of [project hook events](../../02_using-codebolt/08d_auto-interactivity/04_hooks.md#trigger-events).
 
 ## Caller override semantics
 
@@ -74,8 +72,6 @@ Adding a phase here is **not required** for an agent to use it — `set('anythin
 **Phase-scoped rules.** Define a guardrail rule with `appliesTo.executionPhases: ['verification']` so the rule only fires when the agent is verifying. Useful for "during verification, all tool calls require human approval".
 
 **Phase-scoped memories.** In a context rule engine, condition a memory on `addVar.phase == 'planning'` so plan-relevant memories surface only when the agent is planning, and test-relevant memories surface only during `verification`.
-
-**Phase observability.** Hook on `agentPhaseChanged` to write each transition to an event log or to call a webhook — this gives you a per-thread timeline of "what the agent thought it was doing" without changing the agent code.
 
 ## See also
 

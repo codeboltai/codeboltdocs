@@ -32,7 +32,7 @@ const PLANES = [
   {
     id: 'guardrails',
     title: 'GUARDRAILS',
-    sub: 'hooks · evals · loop detection',
+    sub: 'policy profiles · approvals',
   },
   {
     id: 'storage',

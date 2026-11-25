@@ -1,50 +1,25 @@
 ---
 sidebar_position: 6
 title: Hooks and Processors
-description: Two related but distinct mechanisms for intercepting and transforming what flows through an agent.
+description: Choose a project hook for a runtime event or an Agent SDK processor for a stage of a framework agent.
 ---
 
 import HookPhases from '@site/src/components/diagrams/HookPhases';
 
 # Hooks and Processors
 
-Two related but distinct mechanisms for **intercepting** and **transforming** what flows through an agent.
+Use a project hook when you want Codebolt to run a handler at a supported runtime event. Use a processor when you are writing a framework agent and want to change how that agent handles a model call or tool request.
+
+## Project hooks
+
+For example, a `preToolUse` hook can inspect a requested tool before it runs. A `postToolUse` hook receives its outcome. Other supported events include `userPromptSubmit`, `agentSessionStart`, `agentSessionEnd`, and the compaction and subprocess events.
 
 <HookPhases />
 
-## Hooks
+Open **Agents → Hooks** to create a handler and test it with sample input. See [Hooks](../../02_using-codebolt/08d_auto-interactivity/04_hooks.md) for the complete event list and [Write a Simple Hook](../../03_guides/05_mcp-and-tools/write-a-simple-hook.md) for a working example.
 
-A **hook** is a function that runs at a defined **phase** of the agent loop and can:
-- **observe** what's happening (logging, metrics)
-- **mutate** the data (rewrite a prompt, redact a secret)
-- **veto** the action (deny a tool call, abort a turn)
+## Framework processors
 
-Hook phases include `before_llm_call`, `after_llm_call`, `before_tool_call`, `after_tool_call`, `on_error`, `before_finalize`, etc.
+In `createAgent`, register processors in the slot for the work they perform. Use `preInferenceProcessors` or `postInferenceProcessors` around a model call, and `preToolCallProcessors` or `postToolCallProcessors` around a tool call. For example, a post-tool processor can inspect the result before the agent continues.
 
-Hooks are how guardrails are enforced. They're also how you add cross-cutting behaviour (audit logging, custom rate limiting) without modifying agent code.
-
-## Processors
-
-A **processor** is a transformation in the **context assembly** pipeline. Where a hook intercepts a single event, a processor walks over a stream of context items and rewrites them.
-
-Common processors:
-- **Compaction** — summarize old turns when context gets too large
-- **Redaction** — strip secrets, PII, credentials before they reach the LLM
-- **Reranking** — reorder retrieved chunks by relevance to the current query
-- **Loop detection** — notice when the agent is calling the same tool with the same args repeatedly
-
-Processors run in a defined order (a pipeline) every time context is assembled for an LLM call.
-
-## Hook vs processor — when to use which
-
-| Use a hook when… | Use a processor when… |
-|---|---|
-| You want to react to a specific event (`tool.call`, `llm.response`) | You want to transform the context fed into every LLM call |
-| You need to allow/deny | You need to compress or filter |
-| The behaviour is per-turn | The behaviour is per-context-assembly |
-
-## See also
-
-- [Hooks overview (build)](../../04_build-on-codebolt/05_plugins/01_overview.md)
-- [Processors (build)](../../04_build-on-codebolt/02_creating-agents/07_processors/01_what-are-processors.md)
-- [Guardrails](../06_quality/01_guardrails.md)
+See [Processors](../../04_build-on-codebolt/02_creating-agents/07_processors/01_what-are-processors.md) for the framework interfaces. For project and thread tool permissions, see [Guardrails](../06_quality/01_guardrails.md).

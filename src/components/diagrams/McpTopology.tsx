@@ -20,7 +20,7 @@ export default function McpTopology() {
           <rect x="40" y="120" width="140" height="80" rx="3" className="cb-box" />
           <text x="110" y="150" textAnchor="middle" className="cb-box-title">AGENT</text>
           <text x="110" y="170" textAnchor="middle" className="cb-box-sub">deliberation loop</text>
-          <text x="110" y="186" textAnchor="middle" className="cb-box-sub">tools.allow: [...]</text>
+          <text x="110" y="186" textAnchor="middle" className="cb-box-sub">allowedTools</text>
         </g>
 
         {/* Arrow agent → runtime */}

@@ -41,7 +41,7 @@ Agents leave traces in shared memory; later agents react to those traces. No dir
 **Use for:** open-ended exploration where the right path emerges from accumulated work.
 
 ### 5. Reputation
-Multiple agent variants compete; the system tracks which produces good results and routes future work to them.
+An orchestrator can compare the results of agent variants and use those scores when choosing an agent for future tasks. Define the selection policy in the orchestrator.
 **Use for:** A/B testing prompts and models in production.
 
 ## What pattern selection depends on
@@ -54,7 +54,7 @@ Multiple agent variants compete; the system tracks which produces good results a
 
 ## Cost discipline
 
-Multi-agent multiplies LLM calls. Budget accordingly. A 5-agent swarm runs 5x the calls of a single agent — if quality doesn't improve 5x, just use one.
+Multi-agent multiplies LLM calls. Budget accordingly. Compare the total model calls and run time for your task. Workers may take different numbers of turns, and review can add another run.
 
 ## See also
 

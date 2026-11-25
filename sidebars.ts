@@ -72,16 +72,17 @@ const extensionDocs = `${developerDocs}/03_agent-extensions`;
 const sidebars = {
   getStartedSidebar: [
     doc('Introduction', 'get-started/overview'),
-    group('Installation', [
-      doc('Desktop', 'get-started/02f_platforms/desktop'),
-      doc('CLI', 'get-started/02f_platforms/cli'),
-      doc('Cloud', 'get-started/02f_platforms/cloud'),
-    ]),
-    doc('Desktop Quickstart', 'get-started/quickstart'),
+    doc('Quickstart', 'get-started/quickstart'),
     group('Core Concepts', [
-      doc('How Codebolt Works', 'get-started/core-concepts/how-it-works'),
       doc('What Is Codebolt?', 'get-started/what-is-codebolt'),
+      doc('How Codebolt Works', 'get-started/core-concepts/how-it-works'),
+      doc('Threads, Agents, Models and Tools', 'get-started/core-concepts/start-simple'),
+      doc('Context and Memory', 'concepts/runtime/context-and-memory'),
+      doc('Guardrails', 'concepts/quality/guardrails'),
+      doc('Shadow Git and Checkpoints', 'concepts/persistence/shadow-git-and-checkpoints'),
       remaining('01_get-started/04_core-concepts'),
+      ref('Local Scaling', 'get-started/core-concepts/local-scaling'),
+      ref('Cloud Scaling', 'get-started/core-concepts/cloud-scaling'),
       remaining('02_concepts'),
     ]),
   ],

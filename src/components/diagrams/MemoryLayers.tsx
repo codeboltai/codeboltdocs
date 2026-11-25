@@ -8,12 +8,12 @@ import './diagrams.css';
 
 const LAYERS = [
   { name: 'WORKING', lifetime: 'one turn', use: 'scratchpad' },
-  { name: 'EPISODIC', lifetime: 'one run', use: 'turn history' },
-  { name: 'KV', lifetime: 'forever', use: 'small key→value' },
-  { name: 'JSON', lifetime: 'forever', use: 'structured records' },
-  { name: 'MARKDOWN', lifetime: 'forever', use: 'human-editable notes' },
-  { name: 'KNOWLEDGE GRAPH', lifetime: 'forever', use: 'entities + relations' },
-  { name: 'VECTOR', lifetime: 'forever', use: 'semantic search' },
+  { name: 'EPISODIC', lifetime: 'persistent', use: 'recorded events' },
+  { name: 'KV', lifetime: 'persistent', use: 'small key→value' },
+  { name: 'JSON', lifetime: 'persistent', use: 'structured records' },
+  { name: 'MARKDOWN', lifetime: 'persistent', use: 'formatted text' },
+  { name: 'KNOWLEDGE GRAPH', lifetime: 'persistent', use: 'entities + relations' },
+  { name: 'VECTOR', lifetime: 'persistent', use: 'semantic search' },
 ];
 
 export default function MemoryLayers() {

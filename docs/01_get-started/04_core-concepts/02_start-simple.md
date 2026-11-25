@@ -30,7 +30,7 @@ Steering is how you guide work without starting a separate conversation. A steer
 
 An agent can also branch work. It can start a sub-agent as a child run under the same parent agent instance, or start a child/background thread when the delegated work needs its own thread, environment, or lifecycle.
 
-Threads matter because they make work durable. You can come back to a task, inspect what happened, continue from the current state, or roll back to an earlier checkpoint.
+Threads matter because they make work durable. You can come back to a task, inspect what happened, continue from the current state, or restore captured project files from a message checkpoint.
 
 Related details: [Chat Overview](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/01_overview.md), [Tabs and History](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/02_tabs-and-history.md), [Running Parallel Agents](../../02_using-codebolt/07a_parallel-agents/02_running-parallel-agents.md), [Sub Agent](../../02_using-codebolt/07a_parallel-agents/05_sub-agent.md), [Background Agent](../../02_using-codebolt/07a_parallel-agents/04_background-agent.md), and [Thread Panel](../../02_using-codebolt/04_agents/08_thread-panel.md).
 

@@ -7,7 +7,7 @@ import './diagrams.css';
  */
 
 const LEVELS = [
-  { tier: 0, name: 'REMIX', sub: 'inherit + override', example: 'agent.yaml only' },
+  { tier: 0, name: 'REMIX', sub: 'inherit + override', example: 'Markdown + frontmatter' },
   { tier: 1, name: 'FRAMEWORK', sub: 'manifest + handler fn', example: 'agent framework' },
   { tier: 2, name: 'CODEBOLTJS', sub: 'sdk-direct loop', example: '@codebolt/codeboltjs' },
   { tier: 3, name: 'RAW PROTOCOL', sub: 'speak the wire', example: 'WebSocket JSON-RPC' },

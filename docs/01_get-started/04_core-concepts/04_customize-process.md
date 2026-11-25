@@ -21,7 +21,7 @@ Use a custom agent when you want consistent behavior for a recurring job:
 - support triage
 - release preparation
 
-Start by remixing an existing agent when the behavior is mostly prompt and permission changes. Build a deeper custom agent when you need custom runtime logic.
+To create a new agent, follow the [Custom Agent Quickstart](../../04_build-on-codebolt/02_creating-agents/02_quickstart.md). To adapt an existing agent’s instructions, see [Remix](../../04_build-on-codebolt/02_creating-agents/03_agent-types/level-3-remix.md).
 
 ## MCP servers
 
@@ -31,15 +31,7 @@ Use MCP when the agent needs to do something outside the built-in Codebolt tool 
 
 ## Capabilities
 
-A **capability** is a packaged ability that can combine tools, prompts, skills, and configuration. Capabilities are useful when you want to grant a coherent behavior rather than a loose list of tools.
-
-For example, a "release management" capability might include:
-
-- access to the git and terminal tools
-- an MCP server for the issue tracker
-- release-note writing instructions
-- guardrails around protected branches
-- a checklist skill for versioning and verification
+A capability is a named behavior that an executor can run. For example, the built-in skill executor loads instructions from a skill. If your release process needs an issue-tracker tool or protected-branch policy, configure the MCP server and policy profile separately. See [Capabilities](../../02_concepts/03_the-agent/03_capabilities.md).
 
 ## Hooks, skills, and action blocks
 

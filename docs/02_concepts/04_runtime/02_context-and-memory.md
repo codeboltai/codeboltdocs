@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: Context and Memory
-description: The single most important question for an agent is what does it know right now? That answer is rebuilt from scratch every turn by the Context Assembly Engine —.
+description: Understand what an agent puts in a prompt and how it can retrieve and store project knowledge.
 ---
 
 import MemoryLayers from '@site/src/components/diagrams/MemoryLayers';
@@ -10,14 +10,7 @@ import MemoryIngestion from '@site/src/components/diagrams/MemoryIngestion';
 
 # Context and Memory
 
-The single most important question for an agent is **what does it know right now?** That answer is rebuilt from scratch every turn by the **Context Assembly Engine** — a pipeline that selects, ranks, and token-budgets information from up to nine distinct memory stores before handing the final prompt to the LLM.
-
-Codebolt treats memory as a **two-sided system**:
-
-- **Read path** — the Context Assembly Engine pulls from storage and composes a bounded context window each turn.
-- **Write path** — the Memory Ingestion pipeline listens for lifecycle events, processes raw data through a sequence of processors, and routes the results to one or more storage backends.
-
-Both sides share the same storage layer; they just move in opposite directions.
+Context is the information the agent supplies for a particular model call. Memory lets the agent store information and retrieve it for later tasks. For example, an agent can retrieve a project decision before proposing changes and record the outcome when the work is reviewed.
 
 <MemoryLayers />
 
@@ -40,7 +33,7 @@ A per-turn scratchpad. The agent can write intermediate notes or partial results
 
 ### Episodic memory
 
-Stores every turn of the current agent run — what the LLM said, what tools were called, what came back. The episodic record is what lets an agent say "three steps ago I fetched this file." It is bounded to the lifetime of a single run and is the primary source of short-term coherence.
+Stores recorded events in a named episodic memory so the agent can retrieve earlier observations.
 
 ### Persistent KV store
 
@@ -52,7 +45,7 @@ Structured JSON documents with a named schema. Larger and more complex than KV. 
 
 ### Markdown notes
 
-Human-editable `.md` files that both the agent and the developer can read and write. Useful for long-form notes, decisions, or shared knowledge that benefits from being readable without tooling. Notes live inside `.codebolt/memory/` and are versioned with the project.
+Markdown memory stores text for a thread in `.codebolt/memory/markdown/<threadId>.json`. Use it for notes and decisions that benefit from readable formatting.
 
 ### Knowledge graph (Kuzu)
 
@@ -66,7 +59,7 @@ Semantic embeddings stored at `.codebolt/vectordb/`. Any text — code chunks, c
 
 ### Event log
 
-An append-only structured log of every significant event in the agent's lifetime: tool calls, errors, user messages, task transitions, memory writes. Used primarily for auditing and for `log_search` queries in retrieval pipelines. Also the source that drives the ingestion pipeline's `onAction` trigger.
+An Event Log instance contains structured entries appended by an agent or workflow. Query the instance to inspect the recorded payloads and timestamps.
 
 ### Persistent memory (declarative retrieval)
 
@@ -85,142 +78,45 @@ Each definition contains a pipeline of typed steps:
 | `rank` | Re-orders results by relevance score |
 | `format` | Renders results into a string for inclusion in context |
 
-The Context Assembly Engine discovers all persistent memory definitions, executes their pipelines concurrently, and merges the formatted outputs into the context window. This makes it easy to add a new class of recalled knowledge without touching the assembly engine itself — just add a definition file.
-
 ## The read path: Context Assembly Engine
 
 <ContextAssembly />
 
-The assembly pipeline runs once per turn, before the LLM call:
+An assembly request supplies input, scope variables, and memory definitions or rule engines. Matching rules add memory definitions to the request. Codebolt runs the selected retrieval pipelines, merges duplicate results, groups items by section, and applies a token budget if one was supplied. The caller receives the context and an assembly trace.
 
-### 1 — Validate
-
-The incoming task and any explicit `@mention` references are parsed and validated. Invalid memory references are surfaced as warnings rather than silently dropped so the agent knows its context is incomplete.
-
-### 2 — Evaluate context rules
-
-Context rules are JSON documents in `.codebolt/ContextRuleEngine/`. Each rule is a condition → action pair: if the condition matches the current task, the action adds or suppresses specific memory references.
-
-Rules are evaluated with a small DSL that supports 12 operators:
-
-| Operator | Matches when… |
-|---|---|
-| `contains` | Field string contains the value |
-| `startsWith` | Field string starts with the value |
-| `endsWith` | Field string ends with the value |
-| `matches` | Field matches a regex |
-| `equals` | Field equals the value exactly |
-| `not_equals` | Field does not equal the value |
-| `in` | Field value is in a set |
-| `not_in` | Field value is not in a set |
-| `gt` / `lt` / `gte` / `lte` | Numeric comparison |
-| `exists` | Field is present |
-
-Multiple conditions within a rule combine with AND logic. Rules are evaluated in definition order; the first matching rule wins.
-
-Example: a rule that injects the project's architecture notes whenever the task mentions "refactor":
+For example, if you have a Persistent Memory definition named `architecture-notes`, this rule selects it when a request mentions a refactor:
 
 ```json
 {
-  "condition": { "field": "task.text", "op": "contains", "value": "refactor" },
-  "action": { "include": "markdown://architecture-notes" }
+  "id": "include-architecture-notes",
+  "when": [{ "field": "input.text", "operator": "contains", "value": "refactor" }],
+  "add": ["architecture-notes"]
 }
 ```
 
-### 3 — Execute persistent memory pipelines
-
-All enabled persistent memory definitions are executed concurrently. Each pipeline resolves its steps against the current query derived from the task, returning a ranked, formatted list of relevant chunks. Steps like `vector_search` and `graph_view_read` can be expensive; results are cached with a short TTL so repeated turns on the same topic don't re-run identical queries.
-
-### 4 — Merge and deduplicate
-
-Outputs from all persistent memory pipelines, plus explicitly-included KV/JSON/Markdown references, are merged. Duplicate content (same chunk appearing in both a vector search result and an explicit `@mention`) is deduplicated by content hash.
-
-### 5 — Apply contribution rules
-
-Each memory source has a maximum contribution — a cap on how many tokens it can contribute to the final context. Contribution rules prevent a single noisy source (e.g., a verbose event log) from crowding out everything else. The rules are also stored in `.codebolt/ContextRuleEngine/`.
-
-### 6 — Enforce token budget
-
-The merged context is ordered by a fixed section priority:
-
-```
-state → warnings → constraints → knowledge → history → suggestions → working_memory
-```
-
-Sections are packed into the budget in order. If the budget is exhausted before all sections are included, lower-priority sections (suggestions, working_memory) are truncated first. The assembly engine emits a structured trace of which sections were included, how many tokens each consumed, and which were truncated — visible via WebSocket assembly events.
-
-### 7 — Hand off to LLM
-
-The packed context window is passed to the LLM along with the current turn's user message.
+In **Context → Context Assembly**, run the rule engine with sample input and inspect which rules matched. Use [AI Requests](../../02_using-codebolt/02_surfaces/02_desktop-app/03_chat/08_ai-requests.md) to inspect the messages sent to a model.
 
 ## The write path: Memory Ingestion
 
 <MemoryIngestion />
 
-Memory is written by the **Ingestion Pipeline** — a configurable sequence of processors triggered by agent lifecycle events and routed to one or more storage backends.
-
-### Triggers
-
-| Trigger | Fires when… |
-|---|---|
-| `onConversationEnd` | The agent's current conversation completes |
-| `onTaskCompleted` | A task transitions to the completed state |
-| `onTaskFailure` | A task fails or times out |
-| `onAction` | A tool call or significant action is logged |
-| `manual` | An agent or human explicitly calls the ingestion API |
-
-Multiple triggers can activate the same pipeline. Triggers are defined in `.codebolt/MemoryIngestion/` alongside the pipeline configuration.
-
-### Processors
-
-Once triggered, the raw input passes through a sequence of processors in order. Each processor transforms or augments the data:
-
-| Processor | What it does |
-|---|---|
-| `chunker` | Splits large inputs into overlapping chunks of a configured token size |
-| `vector_embed` | Embeds each chunk and writes the embeddings to the vector store |
-| `llm_extract` | Calls the LLM to extract structured entities and relationships; writes to the knowledge graph |
-| `normalizer` | Cleans, trims, and standardises text (whitespace, encoding, PII redaction) |
-| `parser` | Parses structured input formats (code AST, JSON, Markdown) into normalised records |
-| `custom` | An arbitrary TypeScript function registered via the SDK — full access to the pipeline context |
-
-Processors run **in sequence**; later processors see the output of earlier ones. A pipeline that both embeds and graph-extracts will run `chunker → normalizer → vector_embed → llm_extract` so the graph extractor operates on already-normalised chunks.
-
-### Routing rules
-
-After processing, routing rules decide where to write. A routing rule is a `foreach · condition · write_to` triple:
-
-- `foreach` — iterate over items (e.g., each chunk produced by the chunker)
-- `condition` — only write if a predicate is true (e.g., `score > 0.7`)
-- `write_to` — a destination reference with optional template variables resolved at runtime (e.g., `kv://sessions/{{sessionId}}`)
-
-One pipeline run can write to multiple destinations simultaneously.
-
-### Destinations
-
-| Destination | Storage backend |
-|---|---|
-| **Knowledge Graph** | Kuzu embedded graph (`graph://`) |
-| **Vector DB** | Vector store (`vector://`) |
-| **KV Store** | Key-value store (`kv://`) |
-| **Event Log** | Append-only event log (`log://`) |
-| **Blob** | Raw file storage (`blob://`) |
+An ingestion pipeline has one trigger, ordered processors and routing rules. For example, a manual pipeline can parse a JSON record, then route its named output to a key-value store. Other routes can write to a vector collection, knowledge graph or event log. See [Memory Ingestion](../../02_using-codebolt/05d_memory/06_memory-ingestion.md) for the sample payload and test steps.
 
 ## Storage locations on disk
 
-All memory configuration and data lives inside the project's `.codebolt/` directory:
+These are examples of project memory locations:
 
 | Path | Contents |
 |---|---|
 | `.codebolt/PersistentMemory/` | Declarative retrieval pipeline definitions |
 | `.codebolt/MemoryIngestion/` | Ingestion pipeline and trigger configuration |
 | `.codebolt/ContextRuleEngine/` | Context rules (conditions, contribution caps) |
-| `.codebolt/memory/episodic/` | Per-run turn history |
+| `.codebolt/memory/episodic/` | Recorded episodic events |
 | `.codebolt/memory/context/` | Assembled context snapshots (debug) |
 | `.codebolt/vectordb/` | Vector embeddings |
 | `.codebolt/knowledgegraph/kuzu/` | Kuzu graph database |
 
-Because everything is inside the project directory, memory configuration is **version-controlled** alongside code. Checking out a branch gives you that branch's memory rules, ingestion pipelines, and persistent memory definitions — not just its code.
+To share a memory configuration through Git, review the project’s ignore rules and commit the intended files.
 
 ## Observability
 

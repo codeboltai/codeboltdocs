@@ -32,7 +32,7 @@ Model providers decide where inference happens and what tradeoffs you accept. Th
 | **Hosted model provider** | You want strong models with minimal local setup. |
 | **Local model provider** | You need local-only execution, lower marginal cost, or offline development. |
 | **Bring-your-own provider** | Your team already has an internal gateway or provider contract. |
-| **Routing gateway** | You need policy-based routing across models and providers. |
+| **AI Routing in the cloud portal** | You want a primary model and an optional fallback. |
 
 At local scale, provider choice is usually about cost, latency, privacy, and model fit.
 
@@ -98,7 +98,7 @@ If you need multiple machines, managed sandboxes, team-visible runtimes, or remo
 - [Environments](../../02_using-codebolt/08a_environments/01_overview.md)
 - [Environment providers](../../02_using-codebolt/08a_environments/03_environment-providers.md)
 - [Local models](../../02_using-codebolt/08_integrations/02_local-models.md)
-- [Routing gateway](../../02_using-codebolt/08e_external-integrations/02_routing-gateway.md)
+- [Cloud AI settings](../../02_using-codebolt/02_surfaces/06_cloud/05_settings/01_overview.md)
 - [Background Agents](../../02_using-codebolt/07a_parallel-agents/04_background-agent.md)
 - [Event Log](../../02_using-codebolt/05d_memory/07_event-log.md)
 - [Run It Longer](./03_run-it-longer.md)

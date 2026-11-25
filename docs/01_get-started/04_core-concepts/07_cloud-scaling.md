@@ -6,9 +6,7 @@ description: "How Codebolt scales through cloud environments, providers, runtime
 
 # Cloud Scaling
 
-Cloud scaling moves selected parts of Codebolt from one local workspace into shared, hosted, or remotely accessible infrastructure. The server package still runs as a standalone HTTP/WebSocket server, but it can be scoped to a cloud workspace, synchronize environment providers, and register itself with Cloud as a runtime gateway.
-
-The goal is not to make every workflow cloud-only. The goal is to decide which environments should run locally, which should run in managed cloud sandboxes, and which should be reachable by a team, a customer-facing app, or long-running automation.
+Use a cloud sandbox to run work on a configured provider, or a runner node to run it on your own hardware. For each task, choose where the project files should live, which machine needs to stay online, and how you want changes to return. A runner-hosted task depends on the machine running the daemon. See [Where an Environment Runs](../../02_using-codebolt/08a_environments/06_architecture.md).
 
 ## Environment is the scaling unit
 
@@ -84,17 +82,9 @@ Hosted runtimes are useful when agents need to run:
 
 Hosted runtimes should still use the same concepts: agents, tools, guardrails, memory, event logs, providers, and environments. The cloud runtime is the execution target, but the environment record is what lets Codebolt show it, route messages to it, track status, synchronize files, and stop it.
 
-## Cloudprovider-owned runtime discovery
+## Connecting an environment
 
-The current server delegates cloud runtime provider discovery and runtime sync to the `cloudprovider`. The local environment routes still own local and runner environment operations, but direct cloud runtime discovery returns `410` because that ownership moved out of the generic server route.
-
-The server can start or reconnect the cloudprovider automatically through `startCloudProviderAutoSync()`. Provider lazy requests use the active provider connection, and if the default `cloudprovider` is missing the server tries to start the auto sync path before failing.
-
-In practice:
-
-- use local environment APIs for local and runner providers
-- use the cloudprovider path for cloud runtime lists, schemas, and synchronization
-- treat cloud runtimes as provider-managed environments rather than records the generic server invents itself
+Open [Cloud Environments](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/02_environments.md) to choose a connected runtime or create one with a provider. For your own machine, follow [Runner Nodes](../../02_using-codebolt/02_surfaces/06_cloud/04_running-agents/05_runner-nodes.md).
 
 ## Marketplace and distribution
 

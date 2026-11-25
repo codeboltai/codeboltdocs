@@ -12,7 +12,7 @@ const STEPS = [
   { id: 'vet', label: 'VET', sub: 'guardrails' },
   { id: 'tools', label: 'EXECUTE', sub: 'tools' },
   { id: 'observe', label: 'OBSERVE', sub: 'results' },
-  { id: 'record', label: 'RECORD', sub: 'event log' },
+  { id: 'record', label: 'CONTINUE?', sub: 'check result' },
 ];
 
 export default function AgentLoop() {
