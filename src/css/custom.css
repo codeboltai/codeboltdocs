@@ -496,9 +496,9 @@ div[class*="searchResults"] {
 
 .sidebar-heading-label,
 .sidebar-category-heading > .menu__list-item-collapsible > .menu__link {
-  padding: 0.25rem 0.65rem !important;
+  padding: 0.3rem 0.65rem !important;
   color: var(--ifm-heading-color) !important;
-  background-color: var(--cb-surface) !important;
+  background-color: transparent !important;
   border-left: 0 !important;
   font-family: inherit;
   font-size: 0.9rem;
