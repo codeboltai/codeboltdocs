@@ -1,80 +1,62 @@
 ---
-sidebar_position: 5
-title: Remote Use, Direct gotui, and Requirements
-description: "If you want the interactive CLI interface on a remote machine, the simplest path is still:"
+sidebar_position: 7
+title: Remote Use and Requirements
+description: Run the Codebolt terminal interface over SSH or connect it directly to an existing server.
 ---
 
-# Remote Use, Direct `gotui`, and Requirements
+# Remote Use and Requirements {#remote-use-direct-gotui-and-requirements}
 
 ## Remote and SSH workflows
 
-If you want the interactive CLI interface on a remote machine, the simplest path is still:
+Connect over SSH and run Codebolt on the machine that holds your project checkout. This gives the terminal interface access to the repository for the **Git** tab.
 
 ```bash
-codebolt
+codebolt --project /path/to/project
 ```
 
-Run that on the remote box after connecting over SSH.
-
-If you already have a running Codebolt server, you can connect the CLI interface to it:
+If a Codebolt server is already running on that machine, attach to its port from the SSH session.
 
 ```bash
 codebolt --connect 2719
 ```
 
-That tells Codebolt to launch the CLI interface against an existing server instead of starting a new one.
+`codebolt --connect` uses localhost on the machine where you run the command. Replace `2719` with the server’s port.
 
-## Running `gotui` directly
+## Connect to a server by host and port {#running-gotui-directly}
 
-The direct binary is useful mostly for development, debugging, or custom launch flows.
-
-Examples:
+If you have the standalone `gotui` executable, pass a host and port to connect to an existing Codebolt server.
 
 ```bash
-gotui
 gotui -host localhost -port 2719
 gotui -host remote-server -port 3001
 ```
 
-Important detail:
-
-- when launched directly, `gotui` itself defaults to `localhost` and port `12345`
-- when launched through `codebolt`, the CLI overrides connection settings by passing `AGENT_SERVER_HOST` and `AGENT_SERVER_PORT`
+The direct binary defaults to `localhost:12345`. If set, `AGENT_SERVER_HOST` and `AGENT_SERVER_PORT` take precedence over the flags. Set `AGENT_SERVER_PROTOCOL=https` for a server using HTTPS.
 
 ## Project path handoff
 
-When Codebolt launches the CLI interface, it also passes `CURRENT_PROJECT_PATH`. The CLI interface prefers that environment value over other fallbacks when choosing the active project path.
+Codebolt passes the project path in `CURRENT_PROJECT_PATH`. When launched directly, the terminal interface uses that variable if set, then the server’s project path if available, then the current directory.
+
+The **Files** tab reads from the connected server. The **Git** tab runs Git at the project path on the machine running the terminal interface. If you connect directly to a remote server and want to inspect a local checkout, set `CURRENT_PROJECT_PATH` to that checkout.
 
 ## Terminal requirements
 
-The `gotui` README recommends:
+Use a terminal that supports the alternate screen and mouse input. A size of `50×15` characters or larger and a terminal type such as `xterm-256color` are recommended.
 
-- a terminal of at least roughly `50x15`
-- a terminal type like `xterm-256color`
-- a terminal that supports alternate screen and mouse events
-
-The CLI interface also forces true-color mode where possible and uses the alternate screen for the full-screen interface.
+If your terminal intercepts a shortcut, use a tab icon or an available [leader chord](./02_navigation-and-keybindings.md#leader-key).
 
 ## Troubleshooting signals
 
-If the CLI interface fails to render or exits unexpectedly, the implementation writes debug logs to the OS temp directory:
+If the interface is open, check the **Logs** tab for connection and server messages. For startup or rendering failures, look for these files in the operating system’s temp directory.
 
 - `gotui-debug.log`
 - `gotui-channels.log`
 
-These are the first places to inspect for terminal rendering or startup issues.
+When the `codebolt` launcher starts a local server, it also writes `.codebolt.log` in the project directory.
 
 ## Practical limitations
 
-The current CLI interface focuses on terminal-native surfaces:
-
-- Chat
-- Logs
-- Git
-- Files
-- dialogs and pickers around those areas
-
-If you need the fullest panel ecosystem or richer visual UI affordances, the desktop app remains the broader surface.
+On a narrow terminal, switch to **Single Chat** with `Ctrl+T` to give the conversation more room. For scripts and CI, use [Command Mode](../02_cli-commands/01_overview.md) or [Headless CLI](../03_cli-headless/01_overview.md).
 
 ## See also
 

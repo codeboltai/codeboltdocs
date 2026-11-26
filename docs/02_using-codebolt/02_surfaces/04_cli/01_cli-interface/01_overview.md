@@ -2,26 +2,22 @@
 sidebar_position: 1
 sidebar_label: Overview
 title: Overview
-description: Codebolt's terminal UI is powered by @codebolt/gotui
+description: Find your way around the Codebolt terminal interface, from Chat and conversations to Logs, Git, and Files.
 ---
 
 # Overview
 
-Codebolt's terminal UI is powered by `@codebolt/gotui`. It gives you an interactive full-screen interface for chat, logs, git status, and file browsing without leaving the terminal.
-
-Use the CLI interface when you want an interactive surface but you are working over SSH, in a terminal-only environment, or simply prefer a keyboard-first workflow.
+Use the Codebolt terminal interface to work with agents, switch between conversations, and check your project from a local terminal or an SSH session.
 
 ## How it launches
 
-For most users, the CLI interface is launched by the main Codebolt command:
+Run `codebolt` in your project directory to start a local Codebolt server and open the terminal interface.
 
 ```bash
 codebolt
 ```
 
-When you run `codebolt` with no flags, Codebolt starts the server and then launches `gotui`, passing the server host, port, and current project path into the CLI interface process.
-
-You can also start it against a specific project:
+Use `--project` to open a different folder.
 
 ```bash
 codebolt --project /path/to/project
@@ -29,46 +25,37 @@ codebolt --project /path/to/project
 
 ## What the CLI interface contains
 
-The current CLI interface is organized around four top-level tabs:
+Click a tab icon in the top bar, or use `Ctrl+]` and `Ctrl+[` to switch tabs.
 
 | Tab | Purpose |
 |---|---|
-| **Chat** | Main conversation surface, conversation switching, context sidebars, dialogs |
-| **Logs** | Connection status, interface logs, and server logs |
-| **Git** | Working tree status and recent commits |
-| **Files** | File tree plus text preview |
+| **Chat** | Send prompts, review approval requests, and switch conversations or layouts. |
+| **Logs** | Check connection status and read TUI and server logs. |
+| **Git** | View the working tree status and the five most recent commits. |
+| **Files** | Browse the project tree and preview files from the server. |
 
-This is different from the desktop app layout. The desktop app is a docked multi-panel GUI; the CLI interface is a tabbed terminal interface built around these four areas.
+In **Chat**, the top bar also shows open conversations. The status bar shows the current layout and shortcut hints. Press `Ctrl+E` to open **Conversations**, or type `/` in the composer to find commands.
 
 ## Startup behavior
 
-On startup, the CLI interface:
-
-- reads the server host and port from CLI-provided environment variables when launched through `codebolt`
-- fetches project and default model/agent information from the running server
-- connects to the server over WebSocket
-- enters onboarding if login or default model/agent setup is still incomplete
+The terminal interface loads your project and defaults from the server. It opens [onboarding](./04_onboarding-and-settings.md) if you’re signed out or if neither a default model nor a default agent is configured.
 
 ## Rendering model
 
-The CLI interface runs in the terminal alternate screen, enables mouse support, and requests true-color rendering. It is designed for a real terminal session rather than plain line-by-line shell output.
+The interface uses the terminal’s alternate screen and supports mouse input and true color. To select and copy terminal text, press `Ctrl+B` then `m` to switch to **Text Mode**. Repeat the shortcut to return to **Click Mode**.
 
-## Direct `gotui` execution
+## Connect to an existing server {#direct-gotui-execution}
 
-Most people should use `codebolt`, not `gotui`, because the CLI handles server startup and passes the right connection environment automatically.
+Use `codebolt --connect 2719` to use a server already running on your machine. Replace `2719` with the server’s port.
 
-If you run `gotui` directly, it can connect to an existing server:
-
-```bash
-gotui -host localhost -port 2719
-```
-
-The direct binary also has its own built-in defaults, which are documented in [Remote Use, Direct `gotui`, and Requirements](./05_remote-and-requirements.md).
+For SSH and explicit server host settings, see [Remote Use and Requirements](./05_remote-and-requirements.md).
 
 ## See also
 
 - [Navigation and Keybindings](./02_navigation-and-keybindings.md)
 - [Tabs, Panels, and Layout Modes](./03_tabs-and-panels.md)
+- [Chat, Attachments & Approvals](./06_chat-attachments-and-approvals.md)
+- [Conversations & Slash Commands](./07_conversations-and-slash-commands.md)
 - [Onboarding and Settings](./04_onboarding-and-settings.md)
-- [Remote Use, Direct `gotui`, and Requirements](./05_remote-and-requirements.md)
+- [Remote Use and Requirements](./05_remote-and-requirements.md)
 - [Command Mode Overview](../02_cli-commands/01_overview.md)

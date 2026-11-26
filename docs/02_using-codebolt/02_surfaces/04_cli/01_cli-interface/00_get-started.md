@@ -37,14 +37,14 @@ The terminal interface opens after the local server starts. Follow any prompts t
 
 ## 3. Send a first task
 
-In the **Chat** tab, enter this prompt and send it.
+In the **Chat** tab, type this prompt and press `Enter`.
 
 ```text
 Explain how this project starts and name the main files I should read. Do not modify files.
 ```
 
-Look for the agent's answer in Chat and check that the files it names are in your project.
+Check the agent's answer against your project. Open **Files** from the top bar to preview a file it names. To refer to that file in a follow-up, type `@` in Chat and choose the file from the suggestions.
 
 If you already have a Codebolt server running on the same machine, you can attach with `codebolt --connect 2719`. Replace `2719` with its port.
 
-**Recommended next step.** Learn to move between tabs and use shortcuts in [Navigation & Keybindings](./02_navigation-and-keybindings.md). For a tour of the interface, see [Overview](./01_overview.md).
+See [Chat, Attachments & Approvals](./06_chat-attachments-and-approvals.md) for more ways to work with the agent, or open the [Terminal Interface Overview](./01_overview.md) for a tour.

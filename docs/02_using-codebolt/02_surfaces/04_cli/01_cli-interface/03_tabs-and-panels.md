@@ -1,104 +1,74 @@
 ---
 sidebar_position: 3
 title: Tabs, Panels, and Layout Modes
-description: The CLI interface is built around four top-level tabs defined in packages/gotui/internal/app/app_model.go.
+description: Arrange conversations in the Codebolt terminal interface and use the Chat, Logs, Git, and Files tabs.
 ---
 
 # Tabs, Panels, and Layout Modes
 
-The CLI interface is built around four top-level tabs defined in `packages/gotui/internal/app/app_model.go`.
+Use the four tab icons in the top bar to move between **Chat**, **Logs**, **Git**, and **Files**. Press `Ctrl+]` or `Ctrl+[` to switch tabs from the keyboard.
 
 ## Chat tab
 
-The Chat tab is the primary interactive surface.
+In **Chat**, click a conversation in the top bar or press `Ctrl+E` to select one from **Conversations**. To open a new conversation, press `Ctrl+N`.
 
-It contains:
+### Context drawer {#right-sidebar-panels}
 
-- the main chat area
-- the conversation bar
-- dialogs such as the conversation tree, keybindings, settings, and pickers
-- optional sidebar panels on the right
-
-### Right sidebar panels
-
-The Chat tab currently wires in these sidebar panels:
-
-| Panel | Purpose |
-|---|---|
-| **Subagents** | Running or related sub-agent context |
-| **Todo** | Task checklist / todo context |
-| **MCP** | MCP-related status |
-| **Modified Files** | Changed file summary |
-| **Next Scheduled Tasks** | Upcoming tasks |
-| **Context** | Context/token-related status |
+Press `Ctrl+S` to toggle the **Context** drawer at the bottom of Chat. Its panels currently display sample data. To see the active thread’s steps or todos, press `Ctrl+B` then `d` for **Steps** or `o` for **Todos**. Open **Git** to check which files have changed.
 
 ### Conversation tree
 
-The conversation tree dialog supports two modes:
+In **Single Chat**, select a conversation with `Up` or `Down` and press `Enter`. In **Orchestrator**, choosing a parent thread sets it as the base conversation.
 
-- single-select behavior in the normal chat layout
-- multi-select behavior in window mode
-
-In multi-select mode, the tree allows toggling multiple conversations before confirming.
+In **Window Mode**, highlight a conversation and press `Space` to toggle its selection, or press `A` to toggle all. Press `Enter` to show the selected conversations or `Esc` to close the picker.
 
 ### Layout modes
 
-The Chat tab supports more than one layout mode:
+Press `Ctrl+T` in Chat to cycle through these layouts. The status bar shows the current mode.
 
-- default panel-oriented chat layout
-- window mode
-- orchestrator mode
-
-Window mode is managed by the internal window manager. When it is active, auto-tiling can be toggled to keep conversation windows arranged automatically.
+| Mode | How it arranges conversations |
+|---|---|
+| **Single Chat** | Shows one conversation at a time. This is the default on launch. |
+| **Window Mode** | Shows multiple conversations in separate windows. Codebolt tiles them automatically when you first enter the mode. Press `Ctrl+U` to turn off auto-tiling and arrange the windows by dragging their title bars. |
+| **Orchestrator** | Shows the base conversation on the left and its child conversations on the right so you can follow their progress together. |
 
 ## Logs tab
 
-The Logs tab is a three-panel status surface:
-
-| Panel | Purpose |
+| Panel | What you can see |
 |---|---|
-| **Connection** | Host, port, retry state, last error |
-| **CLI Interface Logs** | Client-side log output and UI/system messages |
-| **Server Logs** | Server-side log stream |
+| **Connection** | Server host and port, connection state, retries, and the last error. |
+| **TUI Logs** | Terminal interface activity. |
+| **Server Logs** | Log output from the connected Codebolt server. |
 
-This is the best place to diagnose connection problems, retry loops, or startup issues.
+Open **Logs** to diagnose a startup or connection problem. Press `Ctrl+R` to retry the connection.
 
 ## Git tab
 
-The Git tab is split into two stacked panels:
+Open **Git** after an agent changes files to check the working tree. The tab refreshes when you enter it.
 
-| Panel | Purpose |
+| Panel | What you can see |
 |---|---|
-| **Status** | Current git working tree state |
-| **Commits** | Recent commit history |
+| **Status** | Current branch and working tree status for the project. |
+| **Commits** | Up to five recent commits. |
 
-When you switch to the Git tab, the CLI interface refreshes git status and fetches the latest short log view from the current project.
+Git runs on the machine where the terminal interface is running. See [Remote and SSH workflows](./05_remote-and-requirements.md#remote-and-ssh-workflows) when working on a remote checkout.
 
 ## Files tab
 
-The Files tab is a two-pane layout:
+Select a directory in the tree and press `Enter` or `Right` to expand it. Select a file and press `Enter` to load it from the connected server into the read-only preview. Scroll the preview with the mouse wheel.
 
-| Pane | Purpose |
-|---|---|
-| **Tree** | Lazy-loaded file tree backed by server requests |
-| **Preview** | File content preview |
-
-Behavior:
-
-- the root tree is loaded on first entry to the Files tab
-- directories are expanded lazily
-- opening a file fetches file content from the server
-- both mouse and keyboard navigation are supported
+To send a file reference to an agent, use an [@-mention in Chat](./06_chat-attachments-and-approvals.md#reference-a-file).
 
 ## Top bar and status bars
 
-The CLI interface renders a top tab bar and per-tab status bars. The active tab changes the central content region, but the overall shell remains the same.
+The top bar shows tab icons and, in Chat, open conversations. Look at the bottom status bar for shortcuts for the active view.
 
 ## Relationship to the desktop app
 
-The desktop app exposes a richer docked surface model. The CLI interface does not mirror that exact panel layout. Instead, it concentrates the terminal experience into the Chat, Logs, Git, and Files tabs and uses dialogs and sidebars where a full GUI would use additional panels.
+For desktop projects and docked panels, see the [Desktop workspace overview](../../02_desktop-app/01_workspace-and-project-management/01_overview.md).
 
 ## See also
 
 - [Navigation and Keybindings](./02_navigation-and-keybindings.md)
+- [Conversations & Slash Commands](./07_conversations-and-slash-commands.md)
 - [Onboarding and Settings](./04_onboarding-and-settings.md)

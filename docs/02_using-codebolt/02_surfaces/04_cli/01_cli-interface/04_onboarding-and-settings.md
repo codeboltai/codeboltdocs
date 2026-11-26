@@ -1,91 +1,54 @@
 ---
-sidebar_position: 4
+sidebar_position: 6
 title: Onboarding and Settings
-description: The CLI interface includes a full onboarding flow plus in-app dialogs for defaults, providers, themes, and keybindings.
+description: Set up the Codebolt terminal interface and change your default model, agent, theme, and keybindings.
 ---
 
 # Onboarding and Settings
 
-The CLI interface includes a full onboarding flow plus in-app dialogs for defaults, providers, themes, and keybindings.
+Set up your account, model, and agent when you first launch the terminal interface. Use **Settings** later to change your defaults.
 
 ## When onboarding appears
 
-On first launch, onboarding is shown when either of these is true:
-
-- the user is not logged in
-- there is no default model and no default agent configured
-
-This logic comes from `packages/gotui/internal/app/app_model.go`.
+Onboarding opens at startup if you’re signed out or if neither a default model nor a default agent is configured.
 
 ## Onboarding flow
 
-The onboarding flow is implemented in `packages/gotui/internal/flows/onboarding`.
-
-The sequence is:
-
-1. Login, if needed
-2. Theme selection
-3. Provider selection and key validation
-4. Model selection
-5. Agent selection
+1. Sign in if prompted.
+2. Choose a theme.
+3. Select a provider and configure access if prompted.
+4. Choose a model.
+5. Choose an agent.
 
 ## Login behavior
 
-When login is required, the CLI interface:
-
-- creates a portal login token
-- builds a Codebolt portal URL
-- copies that URL to the clipboard
-- attempts to open it in the browser
-- polls for the completed login token
-- creates or validates the local user against the running server
-
-After successful login, the CLI interface fetches providers, models, and agents.
+Complete sign-in in your browser, then return to the terminal. If the browser fails to open, copy the sign-in URL shown in the terminal and open it manually.
 
 ## Provider and model setup
 
-During onboarding, provider configuration is not just cosmetic:
-
-- provider API keys can be validated
-- validated providers can return their available models
-- the selected model is then stored as the default model on the server
+For a provider that requires an API key, enter the key when prompted and wait for validation. Select one of the available models to save it as the default.
 
 ## Application settings dialog
 
-The application settings dialog currently has these categories:
+In Chat, press `Ctrl+P`, select `/settings`, and press `Enter`.
 
 | Category | Purpose |
 |---|---|
-| **Default Settings** | Change default model and default agent |
-| **LLM Providers** | Review providers and save API keys |
+| **Default Settings** | Change the default model and agent |
+| **LLM Providers** | Review providers, save API keys, or sign in and out for supported provider plugins |
 | **Agents** | Change the default agent |
-| **Appearance** | Change theme |
-| **About** | Show project/server/interface metadata |
+| **Appearance** | Change the theme |
+| **About** | View the active project and server details |
 
-The Providers page supports inline API-key editing, and the About page exposes the active project and server identity details.
+For a one-off change in your current conversation, use [`/models` or `/agents`](./07_conversations-and-slash-commands.md#switch-models-and-agents).
 
 ## Keybindings dialog
 
-The keybindings dialog:
-
-- lists bindings grouped by category
-- includes leader-only chord actions in the displayed list
-- lets you rebind the selected action with `Enter`
-- lets you reset the selected binding to default with `D`
-
-Overrides are persisted to the user config directory.
+Press `Ctrl+O` to open **Keybindings**. Select an action and press `Enter` to rebind it, or `D` to restore its default. Your changes are saved in your user config directory.
 
 ## Pickers and dialogs
 
-The CLI interface codebase also includes dialogs and pickers for:
-
-- agents
-- models
-- providers
-- themes
-- conversation tree navigation
-- slash-command support
-- steps and todo side panels
+Use the [Command Palette](./07_conversations-and-slash-commands.md#open-the-command-palette) to open the model, agent, theme, and guardrail pickers from Chat. Press `Ctrl+E` to open **Conversations**.
 
 ## See also
 

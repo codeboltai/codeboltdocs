@@ -107,6 +107,8 @@ const sidebars = {
             {type: 'link', label: 'Terminal Interface Overview', href: `/docs/${use}/surfaces/cli/cli-interface/overview`},
             ref('Navigation and Keybindings', `${use}/surfaces/cli/cli-interface/navigation-and-keybindings`),
             ref('Tabs, Panels, and Layout Modes', `${use}/surfaces/cli/cli-interface/tabs-and-panels`),
+            ref('Chat, Attachments & Approvals', `${use}/surfaces/cli/cli-interface/chat-attachments-and-approvals`),
+            ref('Conversations & Slash Commands', `${use}/surfaces/cli/cli-interface/conversations-and-slash-commands`),
             ref('Onboarding and Settings', `${use}/surfaces/cli/cli-interface/onboarding-and-settings`),
             ref('Remote Use and Requirements', `${use}/surfaces/cli/cli-interface/remote-and-requirements`),
           ]),
