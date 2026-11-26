@@ -6,7 +6,7 @@ description: The Code panel is a full Monaco-based editor — the same engine th
 
 # Code Editor
 
-![Code Editor](/productImages/editor/codeEditor.png)
+![Code Editor with the project file tree on the left, README.md and index.js tabs, and syntax-highlighted JavaScript](/img/desktop/code-editor.webp)
 
 The Code panel is a full Monaco-based editor — the same engine that powers VS Code. It supports syntax highlighting for all common languages, multi-cursor editing, inline diffs, and direct integration with agent actions.
 
