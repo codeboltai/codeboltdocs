@@ -75,19 +75,8 @@ const sidebars = {
     doc('Installation', 'get-started/installation'),
     doc('Quickstart', 'get-started/quickstart'),
   
+    
     {
-      type: 'category',
-      label: 'Core Concepts',
-      collapsible: false,
-      className: 'sidebar-category-heading',
-      items: [
-        doc('Core Concepts Overview', 'concepts/overview'),
-        doc('How Codebolt Works', 'get-started/core-concepts/how-it-works'),
-        doc('Threads, Agents, Models and Tools', 'get-started/core-concepts/start-simple'),
-        remaining('02_concepts'),
-      ],
-    },
-      {
       type: 'category',
       label: 'Platforms',
       collapsible: false,
@@ -124,6 +113,18 @@ const sidebars = {
           {type: 'link', label: 'Headless Mode', href: `/docs/${use}/surfaces/cli/cli-headless/overview`},
         ]),
         doc('Cloud', 'get-started/02f_platforms/cloud'),
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Core Concepts',
+      collapsible: false,
+      className: 'sidebar-category-heading',
+      items: [
+        doc('Core Concepts Overview', 'concepts/overview'),
+        doc('How Codebolt Works', 'get-started/core-concepts/how-it-works'),
+        doc('Threads, Agents, Models and Tools', 'get-started/core-concepts/start-simple'),
+        remaining('02_concepts'),
       ],
     },
   ],
