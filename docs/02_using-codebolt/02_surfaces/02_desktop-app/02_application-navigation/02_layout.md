@@ -1,12 +1,60 @@
 ---
 sidebar_position: 2
-title: Layout
-description: "Create, save, switch, and manage panel layouts in the Codebolt desktop app."
+title: Layout Modes and Presets
+description: Switch between Docked and Focus, apply an existing layout, and save a new layout in Codebolt Desktop.
 ---
 
-# Layout
+# Layout Modes and Presets
 
-Codebolt's desktop workspace is a Dockview layout. Panels can be opened as tabs, split into separate groups, resized, and saved as named layouts.
+Use the mode switch in the top bar to choose how you work with panels. In **Docked**, use **Change Layout** to apply or save a named arrangement.
+
+## Switch between Docked and Focus
+
+| Mode | When to use it |
+|---|---|
+| **Docked** | Keep multiple panels in view, such as Code beside Chat and Terminal below them. Group panels as tabs, split them, or resize them. |
+| **Focus** | Give the current section the workspace. Use the left panel rail to switch sections. |
+
+1. To enter **Focus**, select the panel you want to work in and click **Docked** in the top bar. Codebolt opens that panel in a focused section.
+2. To return to the docked workspace, click **Focus** in the top bar. **Change Layout** appears beside the switch.
+
+## Apply an existing layout {#switch-layouts}
+
+1. Switch to **Docked**.
+2. Click the current layout name or its arrow in the top bar. This is the **Change Layout** control.
+3. Under **Select Layout**, choose a built-in preset or a layout you saved. Codebolt applies that arrangement and shows its name in the top bar.
+
+### Available layouts
+
+| Layout | What opens |
+|---|---|
+| **Develop Mode** | Code beside Chat. |
+| **Agent Mode** | The thread list, a thread detail pane, and Environment. |
+| **Chat Mode** | Chat with the side pane closed. |
+| **Orchestrator Mode** | Chat with the side pane already open. |
+| **Terminal Mode** | Three terminal panels. |
+| **Chat Canvas Mode** | Chat Canvas. |
+| **Plan Mode** | Roadmap, Project Structure, Feature Plan, Notes, Canvas, and Chat. |
+| **Agent Builder Mode** | Customize, Policy Profiles, Proxy Execution, Agent Flow, Code, Evaluation, and Chat. |
+| **Normal Mode** | Code beside Chat. This layout may carry over from an earlier version. |
+| **Task Mode** | Tasks beside Chat. This layout may carry over from an earlier version. |
+
+### Default layout
+
+**Develop Mode** is the default on a fresh install. In app mode, the default workspace opens **Chat** on the left and **Preview** on the right.
+
+## Create and save a layout {#create-a-layout}
+
+1. In **Docked**, open the panels you want in your layout. For example, start with **Develop Mode**, then open **New Panel Selection → Free → Bottom** and select **Terminal**.
+2. Drag tabs to move them into groups or create splits. Drag the dividers to resize the groups.
+3. Open **Change Layout** in the top bar and select **Save Current**.
+4. Enter a new **Layout Name**, then click **Add**.
+
+The new layout becomes active and appears in **Select Layout**. You can apply it again after restarting Codebolt.
+
+### Update a saved layout {#save-a-layout}
+
+Apply the saved layout, rearrange its panels, then select **Save Current** and enter the same name. Clicking **Add** replaces the saved arrangement with your current one.
 
 ## Workspace zones
 
@@ -30,47 +78,6 @@ Codebolt's desktop interface is divided into three persistent zones:
 | **Top Navbar** | Back navigation, edge sidebar toggles, layout picker, project name, settings, project settings, command palette, panel picker, user menu, update chip, and OS window controls where applicable. |
 | **Main Workspace** | Dockview panel groups, tabs, splits, and resizable panes. |
 | **Bottom Bar** | Quick panel launchers and grouped panel menus for tools, agents, planning, execution, debugging, context, and settings. |
-
-## Default layout
-
-When you open a project, the normal development layout starts with:
-
-- **Code** — the editor surface for project files.
-- **Chat** — the agent conversation panel.
-
-Panels are docked, so you can resize them by dragging panel borders and place newly opened panels beside existing ones.
-
-In app mode, when running a published agent app, the default workspace opens **Chat** on the left and **Preview** on the right.
-
-## Create a layout
-
-Create a layout by arranging panels in the workspace:
-
-1. Open the panels you need.
-2. Drag panel tabs into the positions you want.
-3. Resize panes by dragging the borders between groups.
-4. Keep related panels as tabs in the same group, or split them into separate groups when you need to see them side by side.
-
-## Save a layout
-
-Use the layout control in the top navigation to switch between saved layouts or save the current panel arrangement:
-
-![Layout Selection](/productImages/applicationfeatures/layout.png)
-
-To save the current arrangement:
-
-1. Open the layout picker in the top navigation.
-2. Click **Save Current**.
-3. Enter a layout name.
-4. Click **Add**.
-
-Codebolt serializes the Dockview layout and stores it in application state as a named layout. The same control also sets the saved layout as the active layout.
-
-## Switch layouts
-
-To switch layouts, open the layout picker in the top navigation and select a saved layout name. Codebolt reapplies the saved Dockview layout and updates the active layout.
-
-The server persists layout state through the application state endpoints, so saved layouts survive app restarts.
 
 ## Managing panel views with drag and drop
 

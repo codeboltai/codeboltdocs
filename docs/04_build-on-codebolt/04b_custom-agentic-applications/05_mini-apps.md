@@ -23,4 +23,4 @@ To find apps you’ve published, open **Registry → MiniApps → My MiniApps**.
 
 ## Build a MiniApp
 
-Author a MiniApp as a Nitro app with `@codebolt/miniapp`. The build produces a manifest describing the app and the tools it exposes. For other ways to build a Codebolt-connected application, see [Application Shapes](./02_application-shapes.md).
+To create a MiniApp and open it in your project, follow [Build a MiniApp](./06_build-a-miniapp.md).

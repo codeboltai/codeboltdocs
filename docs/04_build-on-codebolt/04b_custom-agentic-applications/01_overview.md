@@ -65,6 +65,7 @@ This documentation is based on three concrete examples:
 - [Application Shapes](./02_application-shapes.md) compares the main ways to structure these apps
 - [Standalone Server-Connected Apps](./03_standalone-server-connected-apps.md) explains the `simpleui` pattern
 - [Plugin-Backed UIs](./04_plugin-backed-uis.md) explains the plugin bridge pattern used by `feedback-form-plugin` and `simpleui-plugin`
+- [Build a MiniApp](./06_build-a-miniapp.md) walks through building a web app that opens in Codebolt and can expose tools to agents
 
 ## See Also
 
