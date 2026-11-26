@@ -24,6 +24,8 @@ Use the mode switch in the top bar to choose how you work with panels. In **Dock
 2. Click the current layout name or its arrow in the top bar. This is the **Change Layout** control.
 3. Under **Select Layout**, choose a built-in preset or a layout you saved. Codebolt applies that arrangement and shows its name in the top bar.
 
+![Select Layout menu in Docked mode with the preset list and the Save Current button](/img/desktop/layout-menu.png)
+
 ### Available layouts
 
 | Layout | What opens |

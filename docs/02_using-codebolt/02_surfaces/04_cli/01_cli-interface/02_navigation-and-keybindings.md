@@ -8,6 +8,8 @@ description: Open menus, switch tabs, and use the default keyboard shortcuts in 
 
 Press `Ctrl+O` in Chat to see your current keybindings. The shortcuts below are the defaults.
 
+![Keybindings dialog showing shortcuts for input, navigation, and panels](/img/terminal-interface/keybindings.png)
+
 ## Menus and pickers
 
 | To open | Use |

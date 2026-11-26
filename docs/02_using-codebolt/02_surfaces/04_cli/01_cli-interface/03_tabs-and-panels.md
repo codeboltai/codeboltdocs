@@ -32,6 +32,8 @@ Press `Ctrl+T` in Chat to cycle through these layouts. The status bar shows the 
 | **Window Mode** | Shows multiple conversations in separate windows. Codebolt tiles them automatically when you first enter the mode. Press `Ctrl+U` to turn off auto-tiling and arrange the windows by dragging their title bars. |
 | **Orchestrator** | Shows the base conversation on the left and its child conversations on the right so you can follow their progress together. |
 
+![Window Mode with two conversations tiled side by side](/img/terminal-interface/window-mode.png)
+
 ## Logs tab
 
 | Panel | What you can see |
@@ -51,11 +53,15 @@ Open **Git** after an agent changes files to check the working tree. The tab ref
 | **Status** | Current branch and working tree status for the project. |
 | **Commits** | Up to five recent commits. |
 
+![Git tab with the working tree status above the recent commits](/img/terminal-interface/git.png)
+
 Git runs on the machine where the terminal interface is running. See [Remote and SSH workflows](./05_remote-and-requirements.md#remote-and-ssh-workflows) when working on a remote checkout.
 
 ## Files tab
 
 Select a directory in the tree and press `Enter` or `Right` to expand it. Select a file and press `Enter` to load it from the connected server into the read-only preview. Scroll the preview with the mouse wheel.
+
+![Files tab with README.md selected in the file tree and open in the preview](/img/terminal-interface/files.png)
 
 To send a file reference to an agent, use an [@-mention in Chat](./06_chat-attachments-and-approvals.md#reference-a-file).
 

@@ -6,7 +6,9 @@ description: "Create empty projects, open existing folders, or create a project 
 
 # Creating Projects
 
-The project dashboard exposes three project entry points:
+Choose a project action from the Codebolt Desktop dashboard.
+
+![Project dashboard buttons for Open project, Quick Create, and Create via Template](/img/desktop/project-actions.png)
 
 | Action | What it does |
 |---|---|
@@ -16,19 +18,15 @@ The project dashboard exposes three project entry points:
 
 ## Open Project
 
-Use **Open project** when you already have a project folder on disk.
-
-![Open project](/img/open-project.png)
-
-Select the folder you want to open. Codebolt registers it as a project and opens it in the desktop workspace.
+Click **Open project**, then select an existing folder. Codebolt registers it as a project and opens it in the desktop workspace.
 
 ## Quick Create
 
-Use **Quick Create** when you want an empty project folder.
+To start with an empty folder, select a **Local workspace** on the dashboard and click **Quick Create**.
 
-![Quick Create](/img/quick-create.png)
+![Quick Create dialog showing the project title field and the Create Project button](/img/desktop/quick-create.png)
 
-Enter a project name, choose the workspace, and create the project.
+Enter a project name and click **Create Project**.
 
 The new folder includes Codebolt's local project metadata so the app can remember the project and keep agent state separate from your source files.
 
@@ -38,7 +36,7 @@ Use **Create via Template** when you want a starter project.
 
 To prepare your own starter project, see [Creating a Template](/docs/04_build-on-codebolt/05b_templates/04_creating-a-template.md).
 
-![Create via Template](/img/template.png)
+![Template picker with Templates and My Templates tabs, a search field, and the Create Project form](/img/desktop/template-picker.png)
 
 The modal has two tabs:
 

@@ -43,6 +43,8 @@ In the **Chat** tab, type this prompt and press `Enter`.
 Explain how this project starts and name the main files I should read. Do not modify files.
 ```
 
+![Codebolt in Single Chat mode with the prompt box at the bottom](/img/terminal-interface/chat.png)
+
 Check the agent's answer against your project. Open **Files** from the top bar to preview a file it names. To refer to that file in a follow-up, type `@` in Chat and choose the file from the suggestions.
 
 If you already have a Codebolt server running on the same machine, you can attach with `codebolt --connect 2719`. Replace `2719` with its port.

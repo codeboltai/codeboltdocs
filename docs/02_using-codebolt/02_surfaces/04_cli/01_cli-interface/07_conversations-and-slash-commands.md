@@ -17,11 +17,15 @@ Use **Conversations** to pick up an existing thread and the **Command Palette** 
 | Find a conversation | Press `Ctrl+E` to open **Conversations**. Highlight a thread and press `Enter`. |
 | Close the current conversation | Press `Ctrl+W` when more than one conversation is open. |
 
+![Conversations picker listing two threads and marking the active conversation](/img/terminal-interface/conversations.png)
+
 In [Window Mode](./03_tabs-and-panels.md#conversation-tree), use **Conversations** to pick several threads to display together. In **Orchestrator**, use it to choose the parent thread whose children you want to see.
 
 ## Open the Command Palette
 
 Press `Ctrl+P` in Chat to open the palette. You can also type `/` at the start of the composer to see inline suggestions. Type to filter, use the arrow keys to highlight a command, then press `Enter` to select it. Press `Esc` to close the menu.
+
+![Command Palette in Chat with commands for models, agents, guardrails, and settings](/img/terminal-interface/commands.png)
 
 | Command | What it opens |
 |---|---|

@@ -85,9 +85,9 @@ The selector closes itself and opens the chosen panel in the same Dockview group
 
 ## Command palette
 
-`Ctrl+Shift+P` / `Cmd+Shift+P` opens the command palette. Use it for editor and agent actions when you prefer keyboard-driven navigation.
+`Ctrl+Shift+P` / `Cmd+Shift+P` opens the Command Palette. Search for an editor action such as **Format Document** or **Toggle Line Comment**.
 
-![Command Palette](/layout/command_Palette.png)
+![Command Palette search field and editor actions with their keyboard shortcuts](/img/desktop/command-palette.png)
 
 `Ctrl+P` / `Cmd+P` opens the quick file picker.
 
