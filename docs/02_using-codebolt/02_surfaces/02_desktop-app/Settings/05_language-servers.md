@@ -6,7 +6,7 @@ description: Language Server Protocol (LSP) servers provide code intelligence �
 
 # Language Servers
 
-![Language Servers](/productImages/applicationfeatures/language_server.png)
+![Language Server Protocol settings with notification controls and installed language servers](/img/desktop/language-server-settings.webp)
 
 Language Server Protocol (LSP) servers provide code intelligence — completions, diagnostics, go-to-definition, and inline error highlighting — for specific languages inside the Codebolt code editor.
 

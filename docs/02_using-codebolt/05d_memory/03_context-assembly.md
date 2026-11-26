@@ -8,7 +8,7 @@ description: Run a context assembly request and review its memory and rule trace
 
 Context Assembly combines requested Persistent Memory definitions with definitions selected by context rules. The result contains grouped context items and a trace of the assembly request.
 
-![Context Assembly Engine](/productImages/memorycontext/contextAssemblyEngine.png)
+![Context Assembly Engine showing the Rule Engines list and the New Engine control](/img/desktop/context-assembly.webp)
 
 ## What gets assembled
 

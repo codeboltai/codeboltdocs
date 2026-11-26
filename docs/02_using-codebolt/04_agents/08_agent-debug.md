@@ -10,7 +10,7 @@ Open **Debug → Agent Debug** to inspect output captured from agents that Codeb
 
 ## Agent Debug Panel
 
-![Agent Debug Panel](/productImages/agentobservability/agentDegug.png)
+![Agent Debug showing demo agent instances in the history list](/img/desktop/agent-debug-instances.webp)
 
 1. Find the instance under **Running** or **History**. Use **Status** and **Type** to narrow the list.
 2. Select the instance to show its captured output in the terminal pane. A running instance can continue adding output there.

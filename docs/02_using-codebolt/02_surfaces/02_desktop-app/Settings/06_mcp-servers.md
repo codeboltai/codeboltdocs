@@ -6,7 +6,7 @@ description: Configure installed MCP servers from the Agents menu.
 
 # MCP Servers
 
-![MCP Servers](/productImages/applicationfeatures/mcpServer.png)
+![MCP Servers in Customize with the Installed list and search field](/img/desktop/mcp-servers.webp)
 
 Open **Agents → MCP** from the desktop bottom bar to manage installed servers.
 

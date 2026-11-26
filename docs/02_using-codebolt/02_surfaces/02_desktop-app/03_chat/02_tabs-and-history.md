@@ -14,6 +14,8 @@ Select **New Chat** in the Chat header to create a thread. Use the tab strip or 
 
 Independent threads let you work on several requests at once. Threads in the same project may still change the same files.
 
+![Threads picker listing two open conversations and their idle status](/img/desktop/chat-thread-picker.webp)
+
 ## History
 
 Open **History** in the Chat header and use **Search conversations** to find an earlier thread. Select the conversation to reopen it.

@@ -6,7 +6,7 @@ description: The Terminal panel gives you a full shell session inside the Codebo
 
 # Terminal
 
-![Terminal](/productImages/editor/terminal.png)
+![Terminal beside Code, showing the demo JavaScript command and its output](/img/desktop/terminal-demo.webp)
 
 The Terminal panel gives you a full shell session inside the Codebolt workspace. Agents use the terminal to run commands, and you can use it directly in parallel. Multiple terminal instances can be open at once, each in its own tab.
 

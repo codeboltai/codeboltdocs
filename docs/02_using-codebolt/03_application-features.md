@@ -11,6 +11,8 @@ In Codebolt Desktop, you can edit files, work with agents in Chat, and run comma
 
 Open a project to follow along. If you’re new to Codebolt Desktop, the Quickstart walks through setup and your first agent task. [Desktop Quickstart](../01_get-started/03_quickstart.md)
 
+![Docked Codebolt workspace showing the top bar, left panel rail, Code and Chat panels, and bottom bar](/img/desktop/workspace.webp)
+
 | Area | Use it to |
 |---|---|
 | **Top bar** | Switch between Docked and Focus, choose a layout, search for a panel, or open settings. |

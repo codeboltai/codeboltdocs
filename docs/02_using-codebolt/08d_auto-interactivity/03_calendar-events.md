@@ -6,7 +6,7 @@ description: View project events and scheduled automation occurrences in the des
 
 # Calendar & Scheduled Events
 
-![Calendar and Scheduled Events](/productImages/aultiagentcoordination/calenderevents.png)
+![Calendar panel with the date navigation, event filters, and schedule](/img/desktop/calendar-events.webp)
 
 Open **Tools → Calendar** to view project events and scheduled automation occurrences.
 

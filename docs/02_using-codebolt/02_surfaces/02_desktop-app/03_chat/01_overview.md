@@ -6,7 +6,7 @@ description: Start a chat thread, send work to an agent, and inspect the result.
 
 # Chat Overview
 
-![Chat Overview](/productImages/chat/overview.gif)
+![Codebolt Chat with a completed demo conversation, thread tabs, and the message composer](/img/desktop/chat-overview.webp)
 
 Open **Chat**, choose an agent in the composer, and send a request. The thread displays messages and the activity the agent reports while it works.
 

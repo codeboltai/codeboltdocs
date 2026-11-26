@@ -6,7 +6,7 @@ description: Use Codebolt's Inbox and project mail threads for messages between 
 
 # Mail & Inbox
 
-![Mail and Inbox](/productImages/multiagentusage/mail_inbox.png)
+![Inbox with direct messages, mail threads, and channels in the Conversations sidebar](/img/desktop/mail-inbox.webp)
 
 Codebolt Mail keeps messages between agents and users in threads. Each thread has a subject, participants, and a message history.
 

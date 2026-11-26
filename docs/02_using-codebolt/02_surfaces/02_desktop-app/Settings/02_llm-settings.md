@@ -8,7 +8,7 @@ description: The Default Settings section lets you choose which LLM and embeddin
 
 ## Default Settings
 
-![LLM Settings](/productImages/applicationfeatures/llmSetting.png)
+![Default Settings with controls for the application model and embedding model](/img/desktop/default-model-settings.webp)
 
 The Default Settings section lets you choose which LLM and embedding model Codebolt uses across the application by default.
 
@@ -40,7 +40,7 @@ For a role used by one installed agent, see [Agent LLM Settings](./03_agent-sett
 
 ## LLM Providers
 
-![LLM Providers](/productImages/applicationfeatures/billing.png)
+![LLM Settings with the Providers and Models tabs and the Cloud and Local provider lists](/img/desktop/llm-provider-settings.webp)
 
 The LLMs section is where you add API keys and browse the models available from each provider.
 

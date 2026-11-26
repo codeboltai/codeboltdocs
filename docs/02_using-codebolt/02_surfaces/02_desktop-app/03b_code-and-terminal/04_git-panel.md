@@ -6,8 +6,6 @@ description: The Git panel gives you a visual interface for staging, committing,
 
 # Git Panel
 
-![Git Panel](/productImages/editor/gitpanel.png)
-
 The Git panel gives you a visual interface for staging, committing, branching, and reviewing history — without leaving Codebolt. The bottom bar always shows the current branch name and sync status.
 
 ## The bottom bar Git section
@@ -29,6 +27,8 @@ Click the branch icon in the editor's file sidebar to open **Source Control**. M
 - **Staged Changes** contains files included in your next commit.
 - **Changes** contains edits you can review and stage.
 
+![Source Control with README.md staged and the unstaged index.js diff open](/img/desktop/source-control-diff.webp)
+
 Click the **+** next to a file to stage it, or **–** to unstage. Use **Stage All** / **Unstage All** at the top to act on all files at once.
 
 Type your commit message in the text field at the bottom of the panel, then press **Commit** (or `Ctrl Enter`). The commit is created locally; use **Sync** or **Push** to send it to the remote.
@@ -48,13 +48,15 @@ Open the **Branches** tab to see all local and remote branches. From here you ca
 
 ## Commit history (Git Graph)
 
-Click **Git Graph** in the bottom bar to open the history visualisation. The graph shows:
+Click **Graph** in the bottom bar to open **Git Graph**. The graph shows:
 
 - Commits as nodes, ordered by time
 - Branches as coloured lanes
 - Merge commits with multiple parents shown as convergence points
 
 Click any commit to see its message, author, date, and the full list of changed files. Click a changed file to open that commit's diff.
+
+![Git Graph with a selected commit, its details, and index.html in the changed-files list](/img/desktop/git-graph-commit.webp)
 
 ## Shadow git and checkpoints
 

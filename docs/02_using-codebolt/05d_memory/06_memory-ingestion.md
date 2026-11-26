@@ -8,7 +8,7 @@ description: Process event data and route the results to project memory stores.
 
 Open **Context → Memory Ingestion** to set up a pipeline that processes event data and routes it to a project store.
 
-![Memory Ingestion](/productImages/memorycontext/memoryingestion.png)
+![Memory Ingestion showing trigger filters and the Create Pipeline control](/img/desktop/memory-ingestion.webp)
 
 ## Triggers
 

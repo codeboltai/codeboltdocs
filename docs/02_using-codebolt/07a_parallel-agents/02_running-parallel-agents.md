@@ -26,6 +26,8 @@ Use a swarm when several instances of configured agents should work on a shared 
 
 ## Monitoring concurrent runs
 
+![Threads picker showing two demo conversations running at the same time](/img/desktop/parallel-chat-runs.webp)
+
 ### Running Agent panel
 
 Open **Execution → Running Agent** in the bottom bar to check run status. Use **Hierarchy View** to inspect parent and child agent executions.

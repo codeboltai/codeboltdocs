@@ -13,7 +13,7 @@ Open **System → Routing Gateway** to view how webhooks and channel plugins rou
 ### Routing Rules tab
 
 A unified view of every active integration — webhooks and channel plugins side by side. Each row shows:
-![Routing Gateway](/productImages/externalintegrations/routinggateway.png)
+![Routing Gateway with the Routing Rules, Webhooks, and Activity Log tabs](/img/desktop/routing-gateway.webp)
 
 | Column | Description |
 |---|---|

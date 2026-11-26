@@ -8,7 +8,7 @@ description: Define a retrieval pipeline that context assembly can select and ru
 
 A Persistent Memory definition tells CodeBolt what information to retrieve and how to include it in assembled context. A definition can read from sources such as the vector database, knowledge graph, KV store, or Event Log.
 
-![Persistent Memory](/productImages/memorycontext/persistentMemory.png)
+![Persistent Memory showing scope filters and the option to add a memory](/img/desktop/persistent-memory.webp)
 
 ## Define a pipeline
 

@@ -58,6 +58,8 @@ The menu hides panels that are already open, except for multi-instance panels su
 
 The top navigation includes a panel picker button. Use it when you want more control over where a panel opens.
 
+![Panel picker filtered to Terminal with Free placement and Bottom selected](/img/desktop/panel-selector-terminal.webp)
+
 The picker has:
 
 | Control | What it does |

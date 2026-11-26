@@ -27,6 +27,8 @@ Use the Marketplace to install agents and extensions, connect external services,
 
 The tabs from **Agent** through **Bundle** have two views. Open **Marketplace** to browse published items. **All** shows the catalog and **My** shows your published items. Open **Installed** to see what you've added to the app or the current project.
 
+![Marketplace catalog with the extension tabs and Project selected under Install to](/img/desktop/marketplace-install-scope.webp)
+
 1. Choose the type of extension you want, then open **Marketplace** and select **All**.
 2. Search by name and review the description and publisher.
 3. In **Install to**, choose **App** to use the extension across projects on this machine, or **Project** to install it in the project you have open.

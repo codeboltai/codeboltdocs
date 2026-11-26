@@ -18,7 +18,7 @@ In Chat, send `/compact`. To tell Codebolt which details matter for your next tu
 
 Chat runs the saved default profile on the current thread and displays **Conversation context compacted.** when it finishes. If a model or tool round is still being recorded, Chat can report that compaction is queued. To preview the effect before applying it, use **Dry Run** in the panel.
 
-![Context Compaction](/productImages/guardrails/context-compaction.png)
+![Context Compaction settings with the active profile, auto-trigger options, and workflow steps](/img/desktop/context-compaction.webp)
 
 ## What you configure
 
